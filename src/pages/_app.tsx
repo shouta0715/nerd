@@ -17,6 +17,21 @@ const App = ({ Component, pageProps }: AppProps) => {
         theme={{
           /** Put your mantine theme override here */
           colorScheme: "light",
+          colors: {
+            grape: [
+              "#f0f5ff",
+              "#eef2ff",
+              "#e0e7ff",
+              "#c7d2fe",
+              "#a5b4fc",
+              "#818cf8",
+              "#6366f1",
+              "#4f46e5",
+              "#4338ca",
+              "#3730a3",
+            ],
+          },
+          primaryColor: "grape",
         }}
       >
         <Component {...pageProps} />
