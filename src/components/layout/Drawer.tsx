@@ -9,7 +9,12 @@ export const Drawer = () => {
   );
 
   return (
-    <MDrawer onClose={changeIsOpenBurger} opened={isOpenBurger}>
+    <MDrawer
+      overlayOpacity={0.55}
+      overlayBlur={3}
+      onClose={changeIsOpenBurger}
+      opened={isOpenBurger}
+    >
       Drawer
     </MDrawer>
   );
