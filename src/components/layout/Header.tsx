@@ -6,9 +6,10 @@ export const Header: FC = () => (
     <div className="container mx-auto h-full border-b border-l-0 border-t-0 border-r-0 border-none border-gray-200 md:border-solid">
       <form className="flex h-full items-center justify-center space-x-4">
         <Autocomplete
-          className="w-64 text-base"
+          className="w-64"
           placeholder="検索する"
           data={["test"]}
+          size="md"
         />
         <Button>検索</Button>
       </form>
