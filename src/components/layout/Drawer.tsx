@@ -14,6 +14,7 @@ export const Drawer = () => {
       overlayBlur={3}
       onClose={changeIsOpenBurger}
       opened={isOpenBurger}
+      size="75%"
     >
       Drawer
     </MDrawer>
