@@ -27,7 +27,7 @@ export const Nav: FC = () => {
             onClick={changeIsOpenBurger}
           />
           <HomeIcon className="h-10 w-10  cursor-pointer stroke-[0.5px] transition-all active:scale-90" />
-          <ThemeIcon className="order-1 h-14 w-14 rounded-full transition-all active:scale-90">
+          <ThemeIcon className="order-1 h-14 w-14 cursor-pointer rounded-full transition-all active:scale-90">
             <PlusIcon className=" h-10 w-10 stroke-[1.5px]" />
           </ThemeIcon>
           <BellIcon className="h-10 w-10 cursor-pointer stroke-[0.5px] transition-all active:scale-90" />
