@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import { Autocomplete, ThemeIcon } from "@mantine/core";
-import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
-import { IconSearch } from "@tabler/icons";
+import { IconAdjustmentsHorizontal, IconSearch } from "@tabler/icons";
 
 export const Header: FC = () => (
   <header className="fixed top-0 h-16  w-full border-b border-l-0 border-t-0 border-r-0 border-solid border-gray-200   shadow-sm md:border-none">
@@ -20,7 +19,7 @@ export const Header: FC = () => (
           variant="light"
           className="cursor-pointer active:scale-90"
         >
-          <AdjustmentsHorizontalIcon />
+          <IconAdjustmentsHorizontal size={20} />
         </ThemeIcon>
       </form>
     </div>
