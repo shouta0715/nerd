@@ -17,7 +17,7 @@ export const Header: FC = () => (
         <ThemeIcon
           color="green"
           variant="light"
-          className="cursor-pointer active:scale-90"
+          className="cursor-pointer transition-transform active:scale-90"
         >
           <IconAdjustmentsHorizontal size={20} />
         </ThemeIcon>
