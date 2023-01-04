@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Autocomplete, ThemeIcon } from "@mantine/core";
 import { IconAdjustmentsHorizontal, IconSearch } from "@tabler/icons";
+import { toast } from "react-toastify";
 
 export const Header: FC = () => (
   <header className="md:shadow-non fixed top-0  h-16 w-full border-b border-l-0 border-t-0 border-r-0 border-solid  border-gray-200  md:border-none">
@@ -17,6 +18,9 @@ export const Header: FC = () => (
             icon={<IconSearch size={20} />}
           />
           <ThemeIcon
+            onClick={() => {
+              toast.error("エラーが発生しました");
+            }}
             color="green"
             variant="light"
             className="cursor-pointer transition-transform active:scale-90"

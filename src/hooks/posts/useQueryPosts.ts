@@ -11,8 +11,7 @@ const fetchPosts = async (): Promise<Posts> => {
 };
 
 export const useQueryPosts = () =>
-  useQuery<Posts>({
+  useQuery<Posts, Error>({
     queryKey: ["posts"],
     queryFn: fetchPosts,
-    onError: (error) => {},
   });

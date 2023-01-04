@@ -4,7 +4,9 @@ import { useState } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { MantineProvider } from "@mantine/core";
+import { ToastContainer } from "react-toastify";
 import queryClient from "../libs/queryClient";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
@@ -34,6 +36,15 @@ const App = ({ Component, pageProps }: AppProps) => {
           primaryColor: "grape",
         }}
       >
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Component {...pageProps} />
         <ReactQueryDevtools initialIsOpen={false} />
       </MantineProvider>
