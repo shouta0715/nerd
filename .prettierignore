@@ -6,3 +6,4 @@ package-lock.json
 public
 tailwind.config.js
 tsconfig.json
+generated
