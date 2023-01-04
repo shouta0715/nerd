@@ -8,19 +8,21 @@ export const Header: FC = () => (
       <div className=" flex h-full items-center justify-center border-b border-l-0 border-t-0 border-r-0 border-none border-gray-200 md:border-solid md:pl-[10%] lg:pr-[33.3333%]">
         <form className="flex h-full items-center justify-center space-x-4">
           <Autocomplete
-            className="w-64 text-2xl"
+            className=" w-72 text-2xl"
             placeholder="キーワードで検索"
             data={["test"]}
-            size="xs"
+            size="md"
             radius="xl"
-            icon={<IconSearch size={14} />}
+            icon={<IconSearch size={20} />}
           />
           <ThemeIcon
             color="green"
             variant="light"
             className="cursor-pointer transition-transform active:scale-90"
+            size={36}
+            radius="md"
           >
-            <IconAdjustmentsHorizontal size={20} />
+            <IconAdjustmentsHorizontal size={24} />
           </ThemeIcon>
         </form>
       </div>
