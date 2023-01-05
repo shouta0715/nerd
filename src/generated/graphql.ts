@@ -1,8 +1,19 @@
+import { GraphQLClient } from 'graphql-request';
+import { RequestInit } from 'graphql-request/dist/types.dom';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
+function fetcher<TData, TVariables extends { [key: string]: any }>(client: GraphQLClient, query: string, variables?: TVariables, requestHeaders?: RequestInit['headers']) {
+  return async (): Promise<TData> => client.request({
+    document: query,
+    variables,
+    requestHeaders
+  });
+}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1348,3 +1359,74 @@ export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time: any, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null }> };
+
+export type GetPostQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time: any, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null } | null };
+
+
+export const GetPostsDocument = `
+    query GetPosts {
+  posts {
+    title
+    user_id
+    sub_title
+    start_time
+    spoiler
+    is_write_anonymous
+    id
+    created_at
+    content
+    category
+    author_name
+  }
+}
+    `;
+export const useGetPostsQuery = <
+      TData = GetPostsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetPostsQueryVariables,
+      options?: UseQueryOptions<GetPostsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetPostsQuery, TError, TData>(
+      variables === undefined ? ['GetPosts'] : ['GetPosts', variables],
+      fetcher<GetPostsQuery, GetPostsQueryVariables>(client, GetPostsDocument, variables, headers),
+      options
+    );
+export const GetPostDocument = `
+    query GetPost($id: uuid!) {
+  posts_by_pk(id: $id) {
+    title
+    user_id
+    sub_title
+    start_time
+    spoiler
+    is_write_anonymous
+    id
+    created_at
+    content
+    category
+    author_name
+  }
+}
+    `;
+export const useGetPostQuery = <
+      TData = GetPostQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetPostQueryVariables,
+      options?: UseQueryOptions<GetPostQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetPostQuery, TError, TData>(
+      ['GetPost', variables],
+      fetcher<GetPostQuery, GetPostQueryVariables>(client, GetPostDocument, variables, headers),
+      options
+    );

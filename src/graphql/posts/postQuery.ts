@@ -17,3 +17,22 @@ export const GET_POSTS = gql`
     }
   }
 `;
+
+export const GET_POST = gql`
+  query GetPost($id: uuid!) {
+    posts_by_pk(id: $id) {
+      title
+      user_id
+      sub_title
+      start_time
+      spoiler
+      is_write_anonymous
+      id
+      created_at
+
+      content
+      category
+      author_name
+    }
+  }
+`;

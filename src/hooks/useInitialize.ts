@@ -43,5 +43,5 @@ export const useInitialize = () => {
       // unSub();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setClient]);
+  }, []);
 };
