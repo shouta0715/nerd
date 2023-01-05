@@ -36,3 +36,8 @@ yarn-error.log*
 next-env.d.ts
 
 .env
+
+lib/**/*.js
+lib/**/*.js.map
+
+secrets.json
