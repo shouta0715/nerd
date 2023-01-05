@@ -1,5 +1,4 @@
 import { GetPostsQuery, useGetPostsQuery } from "../../generated/graphql";
-import { GET_POSTS } from "../../graphql/posts/postQuery";
 import { useGlobalStore } from "../../store/global/globalStore";
 
 export const useQueryPosts = () => {
