@@ -1,8 +1,8 @@
+import { NextPage } from "next";
 import Head from "next/head";
 import { Layout } from "../components/layout/Layout";
-import { useQueryPosts } from "../hooks/posts/useQueryPosts";
 
-const Home = () => (
+const Home: NextPage = () => (
   <Layout>
     <Head>
       <title>Create Next App</title>
