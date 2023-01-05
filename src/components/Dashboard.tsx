@@ -5,6 +5,7 @@ import { Post } from "./posts/Post";
 
 export const Dashboard: FC = () => {
   const user = useUserStore((state) => state.user);
+  console.log(user);
 
   return (
     <div>

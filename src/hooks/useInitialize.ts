@@ -16,24 +16,23 @@ export const useInitialize = () => {
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        const token = await user.getIdToken();
-        const idTokenResult = await user.getIdTokenResult();
+        const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
 
-        if (token && isHasClaims) {
-          const client = createClient(token);
+        if (idTokenResult.token && isHasClaims) {
+          const client = createClient(idTokenResult.token);
 
           setClient(client);
           setUser(user);
         } else {
           const userRef = doc(db, "user_meta", user.uid);
           unSub = onSnapshot(userRef, async () => {
-            const tokenSnap = await user.getIdToken();
             const idTokenResultSnap = await user.getIdTokenResult(true);
             const isHasClaimsSnap = idTokenResultSnap.claims[TOKEN_KEY];
 
-            if (tokenSnap && isHasClaimsSnap) {
-              const client = createClient(tokenSnap);
+            if (idTokenResultSnap.token && isHasClaimsSnap) {
+              const client = createClient(idTokenResultSnap.token);
+
               setClient(client);
               setUser(user);
             }
