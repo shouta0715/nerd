@@ -6,6 +6,8 @@ generates:
     plugins:
       - "typescript"
       - "typescript-operations"
+      - "typescript-graphql-request"
+      - "typescript-react-query"
     config:
       fetcher: graphql-request
       exposeQueryKeys: true
