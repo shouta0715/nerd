@@ -7,8 +7,8 @@ export const setCustomClaims = functions.auth.user().onCreate(async (user) => {
   console.log(user);
   const customClaims = {
     "https://hasura.io/jwt/claims": {
-      "x-hasura-default-role": "staff",
-      "x-hasura-allowed-roles": ["staff"],
+      "x-hasura-default-role": "admin",
+      "x-hasura-allowed-roles": ["admin"],
       "x-hasura-user-id": user.uid,
     },
   };
@@ -21,11 +21,3 @@ export const setCustomClaims = functions.auth.user().onCreate(async (user) => {
     console.log(e);
   }
 });
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
