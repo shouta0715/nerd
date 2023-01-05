@@ -1,17 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
-import { request } from "graphql-request";
-import { Posts } from "../../generated/graphql";
-import { GET_POSTS } from "../../graphql/posts/postQuery";
+// import { request } from "graphql-request";
+// import { Posts } from "../../generated/graphql";
+// import { GET_POSTS } from "../../graphql/posts/postQuery";
+// import { useGlobalStore } from "../../store/global/globalStore";
 
-const fetchPosts = async (): Promise<Posts> => {
-  const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
-  const data = await request<Posts>(endpoint, GET_POSTS);
+const fetchPosts = async () => {
+  // const request = useGlobalStore((state) => state.client);
+  // const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
+  // const data = await request<Posts>(endpoint, GET_POSTS);
+  console.log("fetchPosts");
 
-  return data;
+  return null;
 };
 
 export const useQueryPosts = () =>
-  useQuery<Posts, Error>({
+  useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
   });
