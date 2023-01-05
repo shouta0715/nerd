@@ -16,6 +16,7 @@ export const useInitialize = () => {
         const token = await user.getIdToken();
         const idTokenResult = await user.getIdTokenResult();
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
+
         if (token && isHasClaims) {
           const client = createClient(token);
           setClient(client);

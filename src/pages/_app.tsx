@@ -7,9 +7,11 @@ import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
 import queryClient from "../libs/queryClient";
 import "react-toastify/dist/ReactToastify.css";
+import { useInitialize } from "../hooks/useInitialize";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
+  useInitialize();
 
   return (
     <QueryClientProvider client={client}>
