@@ -1,14 +1,17 @@
+import { signInAnonymously } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { auth, db } from "../libs/firebase";
 import { createClient } from "../libs/graphqlClient";
 import { useGlobalStore } from "../store/global/globalStore";
+import { useUserStore } from "../store/user/userState";
 
 let unSub: () => void;
 
 export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setClient = useGlobalStore((state) => state.setClient);
+  const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -19,21 +22,28 @@ export const useInitialize = () => {
 
         if (token && isHasClaims) {
           const client = createClient(token);
+
           setClient(client);
+          setUser(user);
         } else {
           const userRef = doc(db, "user_meta", user.uid);
-
           unSub = onSnapshot(userRef, async () => {
             const tokenSnap = await user.getIdToken();
-            const idTokenResultSnap = await user.getIdTokenResult();
+            const idTokenResultSnap = await user.getIdTokenResult(true);
             const isHasClaimsSnap = idTokenResultSnap.claims[TOKEN_KEY];
 
             if (tokenSnap && isHasClaimsSnap) {
               const client = createClient(tokenSnap);
               setClient(client);
+              setUser(user);
             }
           });
         }
+      } else {
+        const createGustUser = async () => {
+          await signInAnonymously(auth).then((result) => result.user);
+        };
+        createGustUser();
       }
     });
 

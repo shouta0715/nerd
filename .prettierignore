@@ -7,3 +7,4 @@ public
 tailwind.config.js
 tsconfig.json
 generated
+functions
