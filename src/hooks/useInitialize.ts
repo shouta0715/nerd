@@ -21,7 +21,6 @@ export const useInitialize = () => {
 
         if (idTokenResult.token && isHasClaims) {
           const client = createClient(idTokenResult.token);
-
           setClient(client);
           setUser(user);
         } else {
