@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import { Badge, Title } from "@mantine/core";
+import Link from "next/link";
 import React, { FC, memo } from "react";
 import { GetPostsQuery } from "../../../generated/graphql";
 import { useTimer } from "../../../hooks/time/useTimer";
@@ -11,17 +12,19 @@ type Props = {
 export const PostItem: FC<Props> = memo(({ post }) => {
   const { time } = useTimer(post.start_time);
   const startTime = new Date(post.start_time).toString();
-  console.log("PostItem rendered", post.title);
 
   return (
-    <li className=" h-full flex-1 border-y border-x-0 border-t-0 border-solid border-gray-300 py-2 first:pt-0 md:py-4">
-      <div className="text-center">
+    <Link
+      href="/"
+      className=" group block h-full flex-1 border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0"
+    >
+      <div className="rounded-md  p-4 text-center transition-colors group-hover:bg-gray-50">
         <Title
-          className=" mx-auto mb-4 flex flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
+          className="mx-auto mb-4 flex flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
           order={2}
         >
           <Badge
-            className="mb-2 self-start"
+            className="self-start"
             color={post.category === "Anime" ? "grape" : "green"}
           >
             {post.category}
@@ -38,6 +41,6 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           </p>
         </div>
       </div>
-    </li>
+    </Link>
   );
 });
