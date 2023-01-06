@@ -23,7 +23,6 @@ export type Scalars = {
   Float: number;
   name: any;
   timestamptz: any;
-  timetz: any;
   uuid: any;
 };
 
@@ -494,7 +493,7 @@ export type Posts = {
   /** An aggregate relationship */
   profiles_aggregate: Profiles_Aggregate;
   spoiler: Scalars['Boolean'];
-  start_time: Scalars['timetz'];
+  start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   updated_at: Scalars['timestamptz'];
@@ -599,7 +598,7 @@ export type Posts_Bool_Exp = {
   profiles?: InputMaybe<Profiles_Bool_Exp>;
   profiles_aggregate?: InputMaybe<Profiles_Aggregate_Bool_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
-  start_time?: InputMaybe<Timetz_Comparison_Exp>;
+  start_time?: InputMaybe<Timestamptz_Comparison_Exp>;
   sub_title?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -623,7 +622,7 @@ export type Posts_Insert_Input = {
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   profiles?: InputMaybe<Profiles_Arr_Rel_Insert_Input>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['timetz']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -637,7 +636,7 @@ export type Posts_Max_Fields = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  start_time?: Maybe<Scalars['timetz']>;
+  start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -664,7 +663,7 @@ export type Posts_Min_Fields = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  start_time?: Maybe<Scalars['timetz']>;
+  start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -783,7 +782,7 @@ export type Posts_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['timetz']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -807,7 +806,7 @@ export type Posts_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['timetz']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1329,19 +1328,6 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-/** Boolean expression to compare columns of type "timetz". All fields are combined with logical 'AND'. */
-export type Timetz_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['timetz']>;
-  _gt?: InputMaybe<Scalars['timetz']>;
-  _gte?: InputMaybe<Scalars['timetz']>;
-  _in?: InputMaybe<Array<Scalars['timetz']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['timetz']>;
-  _lte?: InputMaybe<Scalars['timetz']>;
-  _neq?: InputMaybe<Scalars['timetz']>;
-  _nin?: InputMaybe<Array<Scalars['timetz']>>;
-};
-
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uuid']>;
@@ -1358,14 +1344,14 @@ export type Uuid_Comparison_Exp = {
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time: any, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null }> };
+export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null }> };
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time: any, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null } | null };
+export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null } | null };
 
 
 export const GetPostsDocument = `
