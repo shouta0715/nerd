@@ -18,9 +18,9 @@ export const PostItem: FC<Props> = memo(({ post }) => {
       href="/"
       className=" group block h-full flex-1 border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0"
     >
-      <div className="rounded-md  p-4 text-center transition-colors group-hover:bg-gray-50">
+      <div className="flex  flex-col items-center justify-center rounded-md p-4 transition-colors group-hover:bg-gray-50">
         <Title
-          className="mx-auto mb-4 flex flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
+          className="mx-auto mb-4 flex w-full flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
           order={2}
         >
           <Badge
@@ -31,7 +31,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           </Badge>
           <span>{post.title}</span>
         </Title>
-        <div>
+        <div className="w-full">
           <Title className="font-medium" order={4}>
             {post.sub_title}
           </Title>
