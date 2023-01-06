@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React from "react";
 
-import { SignIn } from "../../components/pages/auth/SignIn";
+import { SignIn } from "../../components/templates/auth/SignIn";
 
 const Login: NextPage = () => (
   <div className=" h-screen w-screen">

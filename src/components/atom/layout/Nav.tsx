@@ -12,8 +12,8 @@ import {
 } from "@mantine/core";
 import Link from "next/link";
 import React, { FC } from "react";
-import { useGlobalStore } from "../../store/global/globalStore";
-import { useUserStore } from "../../store/user/userState";
+import { useGlobalStore } from "../../../store/global/globalStore";
+import { useUserStore } from "../../../store/user/userState";
 
 export const Nav: FC = () => {
   const isOpenBurger = useGlobalStore((state) => state.isOpenBurger);

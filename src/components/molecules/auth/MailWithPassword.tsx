@@ -1,7 +1,7 @@
 import { Autocomplete, Button, PasswordInput } from "@mantine/core";
 import React, { FC } from "react";
-import { useEmailSignIn } from "../../hooks/auth/useEmailSignIn";
-import { useUserAuthInputStore } from "../../store/user/userState";
+import { useEmailSignIn } from "../../../hooks/auth/useEmailSignIn";
+import { useUserAuthInputStore } from "../../../store/user/userState";
 
 export const MailWithPassword: FC = () => {
   const { handleSubmit } = useEmailSignIn();

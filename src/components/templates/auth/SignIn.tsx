@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 import { GoogleSignIn } from "../../atom/GoogleSignIn";
-import { MailWithPassword } from "../../organism/MailWithPassword";
+import { MailWithPassword } from "../../molecules/auth/MailWithPassword";
 
 export const SignIn: FC = () => (
   <ScrollArea className="h-screen max-h-full w-screen max-w-full rounded-lg bg-white md:h-[800px]  md:w-[700px] md:shadow-2xl">

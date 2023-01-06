@@ -3,9 +3,9 @@ import { Avatar, Burger, Flex, Indicator, ThemeIcon } from "@mantine/core";
 import { BellIcon, HomeIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useGlobalStore } from "../../store/global/globalStore";
+import { useGlobalStore } from "../../../store/global/globalStore";
 import { Drawer } from "./Drawer";
-import { useUserStore } from "../../store/user/userState";
+import { useUserStore } from "../../../store/user/userState";
 
 export const Footer: FC = () => {
   const isOpenBurger = useGlobalStore((state) => state.isOpenBurger);

@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Dashboard } from "../components/pages/Dashboard";
-import { Layout } from "../components/layout/Layout";
+import { Dashboard } from "../components/organism/Dashboard";
+import { Layout } from "../components/templates/layout/Layout";
 // import { useGlobalStore } from "../store/global/globalStore";
 
 const Home: NextPage = () => (
