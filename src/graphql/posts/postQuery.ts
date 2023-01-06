@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 export const GET_POSTS = gql`
   query GetPosts {
-    posts {
+    posts(order_by: { created_at: asc }) {
       title
       user_id
       sub_title

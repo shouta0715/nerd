@@ -15,7 +15,5 @@ export const useQueryPosts = () => {
     }
   );
 
-  console.log(data);
-
-  return { data };
+  return { posts: data?.posts };
 };

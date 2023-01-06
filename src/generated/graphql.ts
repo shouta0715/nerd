@@ -1370,7 +1370,7 @@ export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typena
 
 export const GetPostsDocument = `
     query GetPosts {
-  posts {
+  posts(order_by: {created_at: asc}) {
     title
     user_id
     sub_title
