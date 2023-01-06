@@ -1,7 +1,7 @@
 import { ScrollArea, Title } from "@mantine/core";
 import React, { FC } from "react";
-import { GoogleSignIn } from "../atom/GoogleSignIn";
-import { MailWithPassword } from "../organism/MailWithPassword";
+import { GoogleSignIn } from "../../atom/GoogleSignIn";
+import { MailWithPassword } from "../../organism/MailWithPassword";
 
 export const SignIn: FC = () => (
   <ScrollArea className="h-full max-h-full w-full max-w-full rounded-lg bg-white md:h-[800px]  md:w-[700px] md:shadow-2xl">

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Autocomplete, ThemeIcon } from "@mantine/core";
-import { IconAdjustmentsHorizontal, IconSearch } from "@tabler/icons";
+import { IconAdjustments, IconSearch } from "@tabler/icons";
 import { toast } from "react-toastify";
 
 export const Header: FC = () => (
@@ -27,7 +27,7 @@ export const Header: FC = () => (
             size={36}
             radius="md"
           >
-            <IconAdjustmentsHorizontal size={24} />
+            <IconAdjustments size={24} />
           </ThemeIcon>
         </form>
       </div>

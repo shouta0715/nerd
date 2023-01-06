@@ -1,7 +1,15 @@
 import { BellIcon, HomeIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import { Burger, Flex, ScrollArea, ThemeIcon, Tooltip } from "@mantine/core";
+import {
+  Avatar,
+  Burger,
+  Flex,
+  Indicator,
+  ScrollArea,
+  ThemeIcon,
+  Tooltip,
+} from "@mantine/core";
 import Link from "next/link";
 import React, { FC } from "react";
 import { useGlobalStore } from "../../store/global/globalStore";
@@ -24,17 +32,13 @@ export const Nav: FC = () => {
           direction="column"
           className="h-full w-full space-y-10 "
         >
-          <Link
-            href="/auth/login"
-            className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100"
-          />
           <Burger
             opened={isOpenBurger}
             size={36}
             onClick={changeIsOpenBurger}
           />
           <Link
-            href="/auth/login"
+            href="/"
             className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100"
           >
             <Tooltip
@@ -90,7 +94,14 @@ export const Nav: FC = () => {
               href="/auth/login"
               className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100"
             >
-              <UserCircleIcon className="h-10 w-10 cursor-pointer rounded-full  text-center text-gray-500 transition-all active:scale-90" />
+              <Indicator size={14} offset={5} withBorder color="teal">
+                <Avatar
+                  src={user?.photoURL}
+                  color={user?.photoURL ? "transparent" : "grape"}
+                  variant="light"
+                  className="h-10 w-10 cursor-pointer rounded-full  text-center text-gray-500 transition-all active:scale-90"
+                />
+              </Indicator>
             </Link>
           )}
         </Flex>
