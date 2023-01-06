@@ -24,7 +24,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           order={2}
         >
           <Badge
-            className="self-start"
+            className="mb-2 self-start"
             color={post.category === "Anime" ? "grape" : "green"}
           >
             {post.category}
