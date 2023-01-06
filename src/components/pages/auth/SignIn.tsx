@@ -23,7 +23,7 @@ export const SignIn: FC = () => (
       <Title order={1}>Login</Title>
       <div className="mt-10">
         <GoogleSignIn />
-        <p className="my-10 flex w-full items-center justify-center text-center  text-sm text-indigo-500 before:mr-4 before:inline-block before:h-[1px] before:w-[150px] before:bg-indigo-400 before:content-[''] after:ml-4 after:inline-block after:h-[1px] after:w-[150px] after:bg-indigo-400 after:content-[''] md:text-base  ">
+        <p className="my-10 flex w-full items-center justify-center text-center  text-sm text-indigo-500 before:mr-4 before:inline-block before:h-[1px] before:w-[120px] before:bg-indigo-400 before:content-[''] after:ml-4 after:inline-block after:h-[1px] after:w-[120px] after:bg-indigo-400 after:content-[''] md:text-base md:before:w-[150px] md:after:w-[150px]  ">
           または
         </p>
         <MailWithPassword />
