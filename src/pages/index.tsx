@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import { Dashboard } from "../components/Dashboard";
+import { Dashboard } from "../components/pages/Dashboard";
 import { Layout } from "../components/layout/Layout";
 // import { useGlobalStore } from "../store/global/globalStore";
 
