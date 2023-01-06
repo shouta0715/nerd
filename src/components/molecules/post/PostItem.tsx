@@ -14,19 +14,19 @@ export const PostItem: FC<Props> = memo(({ post }) => {
   console.log("PostItem rendered", post.title);
 
   return (
-    <li className=" h-full border-y  border-x-0 border-t-0 border-solid border-gray-300 py-2 first:pt-0 md:py-4">
+    <li className=" h-full flex-1 border-y border-x-0 border-t-0 border-solid border-gray-300 py-2 first:pt-0 md:py-4">
       <div className="text-center">
         <Title
-          className="relative mb-4 flex items-center  justify-center text-xl md:text-2xl"
+          className=" mx-auto mb-4 flex flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
           order={2}
         >
-          <span>{post.title}</span>
           <Badge
-            className="absolute right-0"
+            className="mb-2 self-start"
             color={post.category === "Anime" ? "grape" : "green"}
           >
             {post.category}
           </Badge>
+          <span>{post.title}</span>
         </Title>
         <div>
           <Title className="font-medium" order={4}>
