@@ -5,7 +5,6 @@ import { MainPost } from "./posts/MainPost";
 
 export const Dashboard: FC = () => {
   const user = useUserStore((state) => state.user);
-  console.log(user);
 
   return (
     <div>

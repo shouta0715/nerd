@@ -97,5 +97,6 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": "off",
     "react/button-has-type": "off",
+    camelcase: "off",
   },
 };

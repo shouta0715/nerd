@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { FC, memo } from "react";
 import { GetPostsQuery } from "../../../generated/graphql";
 import { useTimer } from "../../../hooks/time/useTimer";
+import { useCategoryToJa } from "../../../hooks/utils/useCategoryToJa";
 
 type Props = {
   post: GetPostsQuery["posts"][0];
@@ -12,6 +13,7 @@ type Props = {
 export const PostItem: FC<Props> = memo(({ post }) => {
   const { time } = useTimer(post.start_time);
   const startTime = new Date(post.start_time).toString();
+  const { categoryToJa } = useCategoryToJa();
 
   return (
     <Link
@@ -27,7 +29,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
             className="mb-2 self-start"
             color={post.category === "Anime" ? "grape" : "green"}
           >
-            {post.category}
+            {categoryToJa(post.category)}
           </Badge>
           <span>{post.title}</span>
         </Title>

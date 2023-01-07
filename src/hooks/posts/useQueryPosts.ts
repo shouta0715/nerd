@@ -3,7 +3,6 @@ import { useGlobalStore } from "../../store/global/globalStore";
 
 export const useQueryPosts = () => {
   const client = useGlobalStore((state) => state.client);
-  console.log(client);
 
   const { data } = useGetPostsQuery<GetPostsQuery, Error>(
     client,
