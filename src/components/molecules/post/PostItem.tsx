@@ -17,9 +17,9 @@ export const PostItem: FC<Props> = memo(({ post }) => {
   return (
     <Link
       href="/"
-      className=" group block h-full flex-1 border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0"
+      className=" group block h-full flex-1 overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0"
     >
-      <div className="flex  flex-col items-center justify-center rounded-md p-4 transition-colors group-hover:bg-gray-50">
+      <div className="flex flex-col items-center justify-center rounded-md p-2 transition-colors group-hover:bg-gray-50 md:p-4">
         <Title
           className="mx-auto mb-4 flex w-full flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
           order={2}
