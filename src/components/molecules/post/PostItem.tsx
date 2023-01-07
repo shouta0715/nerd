@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
-import { Badge, Title } from "@mantine/core";
+import { Avatar, Badge, Title } from "@mantine/core";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 import { GetPostsQuery } from "../../../generated/graphql";
 import { useTimer } from "../../../hooks/time/useTimer";
+import { useQueryUser } from "../../../hooks/users/useQueryUser";
 import { useCategoryToJa } from "../../../hooks/utils/useCategoryToJa";
 
 type Props = {
@@ -14,6 +15,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
   const { time } = useTimer(post.start_time);
   const startTime = new Date(post.start_time).toString();
   const { categoryToJa } = useCategoryToJa();
+  const { data: user } = useQueryUser(post.user_id);
 
   return (
     <Link
@@ -25,12 +27,12 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           className="mx-auto mb-4 flex w-full flex-1 shrink flex-col items-center justify-center text-xl md:text-2xl "
           order={2}
         >
-          <Badge
-            className="mb-2 self-start"
-            color={post.category === "Anime" ? "grape" : "green"}
-          >
-            {categoryToJa(post.category)}
-          </Badge>
+          <div className="mb-2 flex  w-full items-center justify-between">
+            <Avatar radius="xl" src={user?.userPhotoURL} />
+            <Badge color={post.category === "Anime" ? "grape" : "green"}>
+              {categoryToJa(post.category)}
+            </Badge>
+          </div>
           <span>{post.title}</span>
         </Title>
         <div className="w-full">
