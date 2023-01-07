@@ -8,7 +8,7 @@ export const MainPost: FC = () => {
 
   return (
     <div className="">
-      <ul className="p-6 py-4">
+      <ul className="p-4 py-4 md:p-6">
         <ErrorBoundary fallback={<div>error</div>}>
           <Suspense fallback={<div>loading</div>}>
             {posts?.map((post) => (
