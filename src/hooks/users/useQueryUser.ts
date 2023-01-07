@@ -17,4 +17,5 @@ export const useQueryUser = (uid: string) =>
     enabled: !!uid,
     staleTime: Infinity,
     cacheTime: Infinity,
+    suspense: false,
   });
