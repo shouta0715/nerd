@@ -14,6 +14,7 @@ export const GET_POSTS = gql`
       content
       category
       author_name
+      number
     }
   }
 `;
@@ -29,7 +30,7 @@ export const GET_POST = gql`
       is_write_anonymous
       id
       created_at
-
+      number
       content
       category
       author_name
