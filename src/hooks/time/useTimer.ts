@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export const useTimer = (startTime: string) => {
   const [time, setTime] = useState({
-    days: 0,
+    day: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -16,28 +16,28 @@ export const useTimer = (startTime: string) => {
     const start = new Date(japanTime);
 
     const diff = start.getTime() - now.getTime();
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const day = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
     if (diff < 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      return { day: 0, hours: 0, minutes: 0, seconds: 0 };
     }
 
-    return { days, hours, minutes, seconds };
+    return { day, hours, minutes, seconds };
   }, []);
 
   useEffect(() => {
-    const { days, hours, minutes, seconds } = calcTimeToStart();
+    const { day, hours, minutes, seconds } = calcTimeToStart();
 
-    setTime({ days, hours, minutes, seconds });
+    setTime({ day, hours, minutes, seconds });
 
     const countDown = setInterval(() => {
       setTime((prevTime) => ({
-        days:
-          prevTime.hours === 0 && prevTime.days > 0
-            ? prevTime.days - 1
-            : prevTime.days,
+        day:
+          prevTime.hours === 0 && prevTime.day > 0
+            ? prevTime.day - 1
+            : prevTime.day,
         hours:
           prevTime.minutes === 0 && prevTime.hours > 0
             ? prevTime.hours - 1
@@ -49,7 +49,7 @@ export const useTimer = (startTime: string) => {
     }, 1000);
 
     if (
-      time.days === 0 &&
+      time.day === 0 &&
       time.hours === 0 &&
       time.minutes === 0 &&
       time.seconds === 0
@@ -60,7 +60,7 @@ export const useTimer = (startTime: string) => {
     return () => {
       clearInterval(countDown);
     };
-  }, [calcTimeToStart, time.days, time.hours, time.minutes, time.seconds]);
+  }, [calcTimeToStart, time.day, time.hours, time.minutes, time.seconds]);
 
   return { time };
 };

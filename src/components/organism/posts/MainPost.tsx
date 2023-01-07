@@ -9,13 +9,13 @@ export const MainPost: FC = () => {
   return (
     <div className="">
       <ul className="p-6 py-4">
-        {posts?.map((post) => (
-          <ErrorBoundary key={post.id} fallback={<div>error</div>}>
-            <Suspense fallback={<div>loading</div>}>
-              <PostItem post={post} />{" "}
-            </Suspense>
-          </ErrorBoundary>
-        ))}
+        <ErrorBoundary fallback={<div>error</div>}>
+          <Suspense fallback={<div>loading</div>}>
+            {posts?.map((post) => (
+              <PostItem key={post.id} post={post} />
+            ))}
+          </Suspense>
+        </ErrorBoundary>
       </ul>
     </div>
   );

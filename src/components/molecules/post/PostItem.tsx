@@ -1,20 +1,17 @@
 /* eslint-disable react/display-name */
-import { Avatar, Badge, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 import { GetPostsQuery } from "../../../generated/graphql";
-import { useTimer } from "../../../hooks/time/useTimer";
 import { useQueryUser } from "../../../hooks/users/useQueryUser";
-import { useCategoryToJa } from "../../../hooks/utils/useCategoryToJa";
+import { PostTimer } from "../../atom/posts/PostTimer";
+import { PostTop } from "../../atom/posts/PostTop";
 
 type Props = {
   post: GetPostsQuery["posts"][0];
 };
 
 export const PostItem: FC<Props> = memo(({ post }) => {
-  const { time } = useTimer(post.start_time);
-  const startTime = new Date(post.start_time).toString();
-  const { categoryToJa } = useCategoryToJa();
   const { data: user } = useQueryUser(post.user_id);
 
   return (
@@ -28,10 +25,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           order={2}
         >
           <div className="mb-2 flex  w-full items-center justify-between">
-            <Avatar radius="xl" src={user?.userPhotoURL} />
-            <Badge color={post.category === "Anime" ? "grape" : "green"}>
-              {categoryToJa(post.category)}
-            </Badge>
+            <PostTop category={post.category} user={user} />
           </div>
           <span>{post.title}</span>
         </Title>
@@ -39,10 +33,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           <Title className="font-medium" order={4}>
             {post.sub_title}
           </Title>
-          <p>{startTime}</p>
-          <p>
-            {`開始まであと${time.days}日${time.hours}時間${time.minutes}分${time.seconds}秒`}
-          </p>
+          <PostTimer start_time={post.start_time} />
         </div>
       </div>
     </Link>

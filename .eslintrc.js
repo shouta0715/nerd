@@ -98,5 +98,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react/button-has-type": "off",
     camelcase: "off",
+    "react/display-name": "off",
   },
 };
