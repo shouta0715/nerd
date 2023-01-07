@@ -481,9 +481,9 @@ export enum Order_By {
 export type Posts = {
   __typename?: 'posts';
   author_name?: Maybe<Scalars['String']>;
-  category?: Maybe<Categories_Enum>;
+  category: Categories_Enum;
   /** An object relationship */
-  categoryByCategory?: Maybe<Categories>;
+  categoryByCategory: Categories;
   content?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
@@ -1344,14 +1344,14 @@ export type Uuid_Comparison_Exp = {
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null }> };
+export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null }> };
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category?: Categories_Enum | null, author_name?: string | null } | null };
+export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
 
 
 export const GetPostsDocument = `
