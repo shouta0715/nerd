@@ -16,7 +16,9 @@ export const PostItem: FC<Props> = memo(({ post }) => {
 
   return (
     <Link
-      href="/"
+      href={{
+        pathname: `/post/${post.category}/${post.id}`,
+      }}
       className=" group block h-full flex-1 overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0"
     >
       <div className="flex flex-col items-center justify-center rounded-md p-2 transition-colors group-hover:bg-gray-50 md:p-4">
