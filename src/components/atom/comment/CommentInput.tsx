@@ -30,7 +30,6 @@ export const CommentInput: FC = () => {
         </div>
         <form className="flex w-full items-center justify-center px-4 md:px-6">
           <Textarea
-            maxLength={100}
             value={message}
             onChange={(e) =>
               setMessage(e.target.value.length > 100 ? message : e.target.value)
@@ -40,7 +39,7 @@ export const CommentInput: FC = () => {
             className="h-full flex-1 text-lg"
             classNames={{
               input:
-                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-[16px]",
+                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-[18px]",
             }}
           />
           <button className="group ml-2 flex cursor-pointer items-center justify-center self-end border-none bg-transparent p-1 transition-transform active:scale-90">
