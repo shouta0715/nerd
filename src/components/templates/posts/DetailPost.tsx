@@ -16,7 +16,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   const router = useRouter();
 
   return (
-    <div className="relative flex h-[calc(100dvh-64px-56px-70px)] flex-col pt-4 md:h-[calc(100dvh-64px)] md:pt-6">
+    <div className="n relative flex h-[calc(100dvh-64px-56px-70px)]  flex-col pt-4 md:h-[calc(100dvh-64px)] md:pt-6">
       <ActionIcon
         onClick={() => router.back()}
         className="absolute left-2 z-[10]"
@@ -35,13 +35,8 @@ export const DetailPost: FC<Props> = ({ postId }) => {
           {post && <PostTimer start_time={post?.start_time} />}
         </div>
       </div>
-      <div className="relative flex flex-1 flex-col">
-        <ScrollArea className="flex-1 px-6 md:pb-0">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
-          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
-          magnam maiores?
-        </ScrollArea>
+      <div className="relative flex flex-1 flex-col  overflow-hidden">
+        <ScrollArea className="h-full px-6 md:pb-0">a</ScrollArea>
         <CommentInput />
       </div>
     </div>
