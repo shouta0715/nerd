@@ -36,7 +36,55 @@ export const DetailPost: FC<Props> = ({ postId }) => {
         </div>
       </div>
       <div className="relative flex flex-1 flex-col  overflow-hidden">
-        <ScrollArea className="h-full px-6 md:pb-0">a</ScrollArea>
+        <ScrollArea className="h-full px-6 md:pb-0">
+          {" "}
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
+          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
+          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
+          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
+          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
+          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
+          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
+          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
+          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
+          sit amet consectetur adipisicing elit. Possimus accusantium ad
+          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
+          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
+          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
+          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
+          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
+          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
+          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
+          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
+          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
+          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
+          sit amet consectetur adipisicing elit. Possimus accusantium ad
+          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
+          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
+          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
+          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
+          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
+          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
+          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
+          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
+          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
+          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
+          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
+          sit amet consectetur adipisicing elit. Possimus accusantium ad
+          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
+          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
+          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
+          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
+          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
+          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
+          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
+          voluptate quas magnam maiores?
+        </ScrollArea>
         <CommentInput />
       </div>
     </div>
