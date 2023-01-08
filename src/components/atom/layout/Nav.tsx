@@ -91,7 +91,7 @@ export const Nav: FC = () => {
             </Link>
           ) : (
             <Link
-              href="/auth/login"
+              href={`/user/${user?.uid}`}
               className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-gray-100"
             >
               <Indicator size={14} offset={5} withBorder color="teal">

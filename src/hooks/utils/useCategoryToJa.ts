@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Categories_Enum } from "../../generated/graphql";
 
 export const useCategoryToJa = () => {
-  const categoryToJa = useCallback((category: Categories_Enum | null) => {
+  const categoryToJa = useCallback((category?: Categories_Enum | null) => {
     switch (category) {
       case Categories_Enum.Anime:
         return "アニメ";

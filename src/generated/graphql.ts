@@ -411,6 +411,7 @@ export type Mutation_RootUpdate_Categories_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_PostsArgs = {
+  _inc?: InputMaybe<Posts_Inc_Input>;
   _set?: InputMaybe<Posts_Set_Input>;
   where: Posts_Bool_Exp;
 };
@@ -418,6 +419,7 @@ export type Mutation_RootUpdate_PostsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Posts_By_PkArgs = {
+  _inc?: InputMaybe<Posts_Inc_Input>;
   _set?: InputMaybe<Posts_Set_Input>;
   pk_columns: Posts_Pk_Columns_Input;
 };
@@ -488,6 +490,7 @@ export type Posts = {
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   is_write_anonymous: Scalars['Boolean'];
+  number: Scalars['Int'];
   /** An array relationship */
   profiles: Array<Profiles>;
   /** An aggregate relationship */
@@ -557,9 +560,17 @@ export type Posts_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "posts" */
 export type Posts_Aggregate_Fields = {
   __typename?: 'posts_aggregate_fields';
+  avg?: Maybe<Posts_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Posts_Max_Fields>;
   min?: Maybe<Posts_Min_Fields>;
+  stddev?: Maybe<Posts_Stddev_Fields>;
+  stddev_pop?: Maybe<Posts_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Posts_Stddev_Samp_Fields>;
+  sum?: Maybe<Posts_Sum_Fields>;
+  var_pop?: Maybe<Posts_Var_Pop_Fields>;
+  var_samp?: Maybe<Posts_Var_Samp_Fields>;
+  variance?: Maybe<Posts_Variance_Fields>;
 };
 
 
@@ -571,9 +582,17 @@ export type Posts_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "posts" */
 export type Posts_Aggregate_Order_By = {
+  avg?: InputMaybe<Posts_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Posts_Max_Order_By>;
   min?: InputMaybe<Posts_Min_Order_By>;
+  stddev?: InputMaybe<Posts_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Posts_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Posts_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Posts_Sum_Order_By>;
+  var_pop?: InputMaybe<Posts_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Posts_Var_Samp_Order_By>;
+  variance?: InputMaybe<Posts_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "posts" */
@@ -581,6 +600,17 @@ export type Posts_Arr_Rel_Insert_Input = {
   data: Array<Posts_Insert_Input>;
   /** upsert condition */
   on_conflict?: InputMaybe<Posts_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Posts_Avg_Fields = {
+  __typename?: 'posts_avg_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "posts" */
+export type Posts_Avg_Order_By = {
+  number?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "posts". All fields are combined with a logical 'AND'. */
@@ -595,6 +625,7 @@ export type Posts_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_write_anonymous?: InputMaybe<Boolean_Comparison_Exp>;
+  number?: InputMaybe<Int_Comparison_Exp>;
   profiles?: InputMaybe<Profiles_Bool_Exp>;
   profiles_aggregate?: InputMaybe<Profiles_Aggregate_Bool_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
@@ -607,9 +638,16 @@ export type Posts_Bool_Exp = {
 
 /** unique or primary key constraints on table "posts" */
 export enum Posts_Constraint {
+  /** unique or primary key constraint on columns "number" */
+  PostsPostNumberKey = 'posts_post_number_key',
   /** unique or primary key constraint on columns "id" */
   RecruitmentsPkey = 'recruitments_pkey'
 }
+
+/** input type for incrementing numeric columns in table "posts" */
+export type Posts_Inc_Input = {
+  number?: InputMaybe<Scalars['Int']>;
+};
 
 /** input type for inserting data into table "posts" */
 export type Posts_Insert_Input = {
@@ -620,6 +658,7 @@ export type Posts_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
+  number?: InputMaybe<Scalars['Int']>;
   profiles?: InputMaybe<Profiles_Arr_Rel_Insert_Input>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
   start_time?: InputMaybe<Scalars['timestamptz']>;
@@ -636,6 +675,7 @@ export type Posts_Max_Fields = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  number?: Maybe<Scalars['Int']>;
   start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -649,6 +689,7 @@ export type Posts_Max_Order_By = {
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -663,6 +704,7 @@ export type Posts_Min_Fields = {
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  number?: Maybe<Scalars['Int']>;
   start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
@@ -676,6 +718,7 @@ export type Posts_Min_Order_By = {
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -715,6 +758,7 @@ export type Posts_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_write_anonymous?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
   profiles_aggregate?: InputMaybe<Profiles_Aggregate_Order_By>;
   spoiler?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
@@ -743,6 +787,8 @@ export enum Posts_Select_Column {
   Id = 'id',
   /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
+  /** column name */
+  Number = 'number',
   /** column name */
   Spoiler = 'spoiler',
   /** column name */
@@ -781,12 +827,46 @@ export type Posts_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
+  number?: InputMaybe<Scalars['Int']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Posts_Stddev_Fields = {
+  __typename?: 'posts_stddev_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "posts" */
+export type Posts_Stddev_Order_By = {
+  number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Posts_Stddev_Pop_Fields = {
+  __typename?: 'posts_stddev_pop_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "posts" */
+export type Posts_Stddev_Pop_Order_By = {
+  number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Posts_Stddev_Samp_Fields = {
+  __typename?: 'posts_stddev_samp_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "posts" */
+export type Posts_Stddev_Samp_Order_By = {
+  number?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "posts" */
@@ -805,12 +885,24 @@ export type Posts_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
+  number?: InputMaybe<Scalars['Int']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Posts_Sum_Fields = {
+  __typename?: 'posts_sum_fields';
+  number?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "posts" */
+export type Posts_Sum_Order_By = {
+  number?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "posts" */
@@ -828,6 +920,8 @@ export enum Posts_Update_Column {
   /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
   /** column name */
+  Number = 'number',
+  /** column name */
   Spoiler = 'spoiler',
   /** column name */
   StartTime = 'start_time',
@@ -842,9 +936,44 @@ export enum Posts_Update_Column {
 }
 
 export type Posts_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Posts_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Posts_Set_Input>;
   where: Posts_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Posts_Var_Pop_Fields = {
+  __typename?: 'posts_var_pop_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "posts" */
+export type Posts_Var_Pop_Order_By = {
+  number?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Posts_Var_Samp_Fields = {
+  __typename?: 'posts_var_samp_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "posts" */
+export type Posts_Var_Samp_Order_By = {
+  number?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Posts_Variance_Fields = {
+  __typename?: 'posts_variance_fields';
+  number?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "posts" */
+export type Posts_Variance_Order_By = {
+  number?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "profiles" */
@@ -1344,14 +1473,14 @@ export type Uuid_Comparison_Exp = {
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null }> };
+export type GetPostsQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null, number: number }> };
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
+export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, number: number, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
 
 
 export const GetPostsDocument = `
@@ -1368,6 +1497,7 @@ export const GetPostsDocument = `
     content
     category
     author_name
+    number
   }
 }
     `;
@@ -1396,6 +1526,7 @@ export const GetPostDocument = `
     is_write_anonymous
     id
     created_at
+    number
     content
     category
     author_name

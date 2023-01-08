@@ -15,7 +15,7 @@ export const PostTimer: FC<Props> = ({ start_time }) => {
 
   return (
     <div className="my-4 flex w-full flex-col items-center justify-center">
-      <p className="m-0 mb-2.5  px-10 text-sm font-bold text-indigo-500">
+      <p className="m-0 mb-2.5  px-10 text-lg font-bold text-indigo-500">
         開始まで
       </p>
       <div className="flex w-full justify-center space-x-4 md:space-x-6">
