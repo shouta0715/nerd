@@ -10,7 +10,7 @@ export const CommentInput: FC = () => {
   const setMessage = useCommentInputStore((state) => state.setMessage);
 
   return (
-    <div className="border-x-0 border-b-0 border-t border-solid border-gray-200 py-6">
+    <div className="border-x-0 border-b-0 border-t border-solid border-gray-200 py-2 md:py-6">
       <div className="flex items-center md:flex-col md:items-start  md:space-y-4">
         <div className="flex flex-col items-center pl-6 md:flex-row md:space-x-4">
           <Avatar className="mb-2 md:mb-0" src={user?.photoURL} radius="lg" />

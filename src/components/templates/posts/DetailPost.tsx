@@ -16,7 +16,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   const router = useRouter();
 
   return (
-    <div className="relative flex h-[calc(100svh-64px-55px)] flex-col pt-4 md:h-[calc(100svh-64px)] md:pt-6">
+    <div className="relative flex h-[calc(100dvh-64px-55px)] flex-col pt-4 md:h-[calc(100dvh-64px)] md:pt-6">
       <ActionIcon
         onClick={() => router.back()}
         className="absolute left-2  md:hidden"
