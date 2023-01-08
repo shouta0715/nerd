@@ -16,7 +16,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   const router = useRouter();
 
   return (
-    <div className="n relative flex h-[calc(100svh-64px-56px-70px)]  flex-col pt-4 md:h-[calc(100svh-64px)] md:pt-6">
+    <div className="container relative mx-auto flex h-[100svh] flex-col pt-4 md:pt-6">
       <ActionIcon
         onClick={() => router.back()}
         className="absolute left-2 z-[10]"
@@ -36,54 +36,14 @@ export const DetailPost: FC<Props> = ({ postId }) => {
         </div>
       </div>
       <div className="relative flex flex-1 flex-col  overflow-hidden">
-        <ScrollArea className="h-full px-6 md:pb-0">
-          {" "}
+        <ScrollArea
+          classNames={{
+            thumb: "bg-indigo-500",
+          }}
+          className=" px-6 pb-20 md:pb-44"
+          scrollbarSize={10}
+        >
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
-          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
-          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
-          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
-          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
-          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
-          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
-          sit amet consectetur adipisicing elit. Possimus accusantium ad
-          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
-          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
-          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
-          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
-          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
-          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
-          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
-          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
-          sit amet consectetur adipisicing elit. Possimus accusantium ad
-          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
-          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
-          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
-          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
-          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
-          voluptate quas magnam maiores? Lorem ipsum dolor, sit amet consectetur
-          adipisicing elit. Possimus accusantium ad repudiandae! Quidem maiores
-          sed impedit incidunt natus. Sed omnis repellat id fugiat ab
-          dignissimos velit voluptate quas magnam maiores? Lorem ipsum dolor,
-          sit amet consectetur adipisicing elit. Possimus accusantium ad
-          repudiandae! Quidem maiores sed impedit incidunt natus. Sed omnis
-          repellat id fugiat ab dignissimos velit voluptate quas magnam maiores?
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
-          accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
-          Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
-          magnam maiores? Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Possimus accusantium ad repudiandae! Quidem maiores sed impedit
-          incidunt natus. Sed omnis repellat id fugiat ab dignissimos velit
-          voluptate quas magnam maiores?
         </ScrollArea>
         <CommentInput />
       </div>
