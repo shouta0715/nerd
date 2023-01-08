@@ -15,10 +15,10 @@ export const PostTop: FC<Props> = memo(({ category, user }) => {
   const router = useRouter();
 
   return (
-    <div className="mb-2 flex  w-full items-center justify-between">
+    <div className=" mb-2 flex  w-full items-center justify-between">
       <button
-        onClick={() => router.push(`/users/${user?.userName}`)}
-        className="cursor-pointer border-0 bg-white"
+        onClick={() => router.push(`/user/${user?.userName}`)}
+        className="z-[30] cursor-pointer border-0 bg-transparent"
       >
         <Avatar radius="xl" src={user?.userPhotoURL} />
       </button>
