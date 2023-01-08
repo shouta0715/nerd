@@ -40,7 +40,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
           classNames={{
             thumb: "bg-indigo-500",
           }}
-          className=" px-6 pb-20 md:pb-44"
+          className=" px-6 pb-32 md:pb-44"
           scrollbarSize={10}
         >
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus

@@ -1,5 +1,4 @@
 import { Avatar, Textarea, ThemeIcon } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { IconSend } from "@tabler/icons";
 import React, { FC } from "react";
 import { useCommentInputStore } from "../../../store/comment/commentType";
@@ -9,14 +8,13 @@ export const CommentInput: FC = () => {
   const user = useUserStore((state) => state.user);
   const message = useCommentInputStore((state) => state.message);
   const setMessage = useCommentInputStore((state) => state.setMessage);
-  const match = useMediaQuery("(min-width: 768px)");
 
   return (
-    <div className="fixed bottom-0 left-0 h-16 w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:h-40  md:py-6">
+    <div className="h-30 fixed bottom-0 left-0 w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:h-40  md:py-6">
       <div className="flex items-center md:flex-col md:items-start  md:space-y-4">
         <div className="flex flex-col items-center pl-6 md:flex-row md:space-x-4">
           <Avatar
-            size={match ? "md" : "sm"}
+            size="md"
             className="mb-2 md:mb-0"
             src={user?.photoURL}
             radius="xl"
@@ -42,7 +40,7 @@ export const CommentInput: FC = () => {
             className="h-full flex-1 text-lg"
             classNames={{
               input:
-                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-base",
+                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-[16px]",
             }}
           />
           <button className="group ml-2 flex cursor-pointer items-center justify-center self-end border-none bg-transparent p-1 transition-transform active:scale-90">
