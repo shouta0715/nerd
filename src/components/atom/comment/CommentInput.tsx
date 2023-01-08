@@ -25,7 +25,7 @@ export const CommentInput: FC = () => {
             {user?.displayName}
           </span>
           <span
-            className={`w-[58px] pl-2 text-xs font-semibold text-indigo-500 md:pl-0 ${
+            className={`w-[58px]  text-center text-xs font-semibold text-indigo-500 md:pl-0 ${
               message.length === 100 ? "text-red-500" : ""
             }`}
           >{`${message.length}/100`}</span>
