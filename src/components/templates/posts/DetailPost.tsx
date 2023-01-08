@@ -1,4 +1,4 @@
-import { ActionIcon, ScrollArea, Title } from "@mantine/core";
+import { ActionIcon, ScrollArea, ThemeIcon, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
@@ -16,10 +16,10 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   const router = useRouter();
 
   return (
-    <div className="relative flex h-[calc(100dvh-64px-55px)] flex-col pt-4 md:h-[calc(100dvh-64px)] md:pt-6">
+    <div className="relative flex h-[calc(100dvh-64px-56px)] flex-col overflow-hidden pt-4 md:h-[calc(100dvh-64px)] md:pt-6">
       <ActionIcon
         onClick={() => router.back()}
-        className="absolute left-2  md:hidden"
+        className="absolute left-2 z-[10] md:hidden"
         color="dark"
         size="md"
         radius="lg"
