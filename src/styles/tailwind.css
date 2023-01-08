@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply fixed inset-0 overflow-hidden tracking-wide;
+  }
+
+  html {
+    @apply h-screen;
+  }
   li {
     @apply m-0 list-none p-0;
   }
