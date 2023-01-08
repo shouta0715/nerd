@@ -10,7 +10,6 @@ export const useQueryComments = (id: string) => {
       post_id: id,
     },
     {
-      suspense: false,
       enabled: !!id,
       onError: (error: Error) => {
         toast.error(error.message);

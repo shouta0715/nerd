@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useUserStore } from "../../store/user/userState";
-import { MainPost } from "./posts/MainPost";
+import { MainPost } from "../organism/posts/MainPost";
 
 export const Dashboard: FC = () => {
   const user = useUserStore((state) => state.user);
