@@ -255,6 +255,275 @@ export type Categories_Updates = {
   where: Categories_Bool_Exp;
 };
 
+/** columns and relationships of "comments" */
+export type Comments = {
+  __typename?: 'comments';
+  content: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  /** An object relationship */
+  post: Posts;
+  post_id: Scalars['uuid'];
+  spoiler: Scalars['Boolean'];
+  updated_at: Scalars['timestamptz'];
+  user_id: Scalars['String'];
+};
+
+/** aggregated selection of "comments" */
+export type Comments_Aggregate = {
+  __typename?: 'comments_aggregate';
+  aggregate?: Maybe<Comments_Aggregate_Fields>;
+  nodes: Array<Comments>;
+};
+
+export type Comments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Comments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Comments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Comments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "comments" */
+export type Comments_Aggregate_Fields = {
+  __typename?: 'comments_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Comments_Max_Fields>;
+  min?: Maybe<Comments_Min_Fields>;
+};
+
+
+/** aggregate fields of "comments" */
+export type Comments_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "comments" */
+export type Comments_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Comments_Max_Order_By>;
+  min?: InputMaybe<Comments_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "comments" */
+export type Comments_Arr_Rel_Insert_Input = {
+  data: Array<Comments_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Comments_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'. */
+export type Comments_Bool_Exp = {
+  _and?: InputMaybe<Array<Comments_Bool_Exp>>;
+  _not?: InputMaybe<Comments_Bool_Exp>;
+  _or?: InputMaybe<Array<Comments_Bool_Exp>>;
+  content?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  post?: InputMaybe<Posts_Bool_Exp>;
+  post_id?: InputMaybe<Uuid_Comparison_Exp>;
+  spoiler?: InputMaybe<Boolean_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "comments" */
+export enum Comments_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CommentPkey = 'comment_pkey'
+}
+
+/** input type for inserting data into table "comments" */
+export type Comments_Insert_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  post?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
+  post_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Comments_Max_Fields = {
+  __typename?: 'comments_max_fields';
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  post_id?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "comments" */
+export type Comments_Max_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Comments_Min_Fields = {
+  __typename?: 'comments_min_fields';
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  post_id?: Maybe<Scalars['uuid']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "comments" */
+export type Comments_Min_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "comments" */
+export type Comments_Mutation_Response = {
+  __typename?: 'comments_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Comments>;
+};
+
+/** on_conflict condition type for table "comments" */
+export type Comments_On_Conflict = {
+  constraint: Comments_Constraint;
+  update_columns?: Array<Comments_Update_Column>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "comments". */
+export type Comments_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  post?: InputMaybe<Posts_Order_By>;
+  post_id?: InputMaybe<Order_By>;
+  spoiler?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: comments */
+export type Comments_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "comments" */
+export enum Comments_Select_Column {
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PostId = 'post_id',
+  /** column name */
+  Spoiler = 'spoiler',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** select "comments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "comments" */
+export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Spoiler = 'spoiler'
+}
+
+/** select "comments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "comments" */
+export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  Spoiler = 'spoiler'
+}
+
+/** input type for updating data in table "comments" */
+export type Comments_Set_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  post_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "comments" */
+export type Comments_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Comments_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Comments_Stream_Cursor_Value_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  post_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "comments" */
+export enum Comments_Update_Column {
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PostId = 'post_id',
+  /** column name */
+  Spoiler = 'spoiler',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Comments_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Comments_Set_Input>;
+  where: Comments_Bool_Exp;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -270,6 +539,10 @@ export type Mutation_Root = {
   delete_categories?: Maybe<Categories_Mutation_Response>;
   /** delete single row from the table: "categories" */
   delete_categories_by_pk?: Maybe<Categories>;
+  /** delete data from the table: "comments" */
+  delete_comments?: Maybe<Comments_Mutation_Response>;
+  /** delete single row from the table: "comments" */
+  delete_comments_by_pk?: Maybe<Comments>;
   /** delete data from the table: "posts" */
   delete_posts?: Maybe<Posts_Mutation_Response>;
   /** delete single row from the table: "posts" */
@@ -282,6 +555,10 @@ export type Mutation_Root = {
   insert_categories?: Maybe<Categories_Mutation_Response>;
   /** insert a single row into the table: "categories" */
   insert_categories_one?: Maybe<Categories>;
+  /** insert data into the table: "comments" */
+  insert_comments?: Maybe<Comments_Mutation_Response>;
+  /** insert a single row into the table: "comments" */
+  insert_comments_one?: Maybe<Comments>;
   /** insert data into the table: "posts" */
   insert_posts?: Maybe<Posts_Mutation_Response>;
   /** insert a single row into the table: "posts" */
@@ -296,6 +573,12 @@ export type Mutation_Root = {
   update_categories_by_pk?: Maybe<Categories>;
   /** update multiples rows of table: "categories" */
   update_categories_many?: Maybe<Array<Maybe<Categories_Mutation_Response>>>;
+  /** update data of the table: "comments" */
+  update_comments?: Maybe<Comments_Mutation_Response>;
+  /** update single row of the table: "comments" */
+  update_comments_by_pk?: Maybe<Comments>;
+  /** update multiples rows of table: "comments" */
+  update_comments_many?: Maybe<Array<Maybe<Comments_Mutation_Response>>>;
   /** update data of the table: "posts" */
   update_posts?: Maybe<Posts_Mutation_Response>;
   /** update single row of the table: "posts" */
@@ -320,6 +603,18 @@ export type Mutation_RootDelete_CategoriesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Categories_By_PkArgs = {
   key: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CommentsArgs = {
+  where: Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -358,6 +653,20 @@ export type Mutation_RootInsert_CategoriesArgs = {
 export type Mutation_RootInsert_Categories_OneArgs = {
   object: Categories_Insert_Input;
   on_conflict?: InputMaybe<Categories_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CommentsArgs = {
+  objects: Array<Comments_Insert_Input>;
+  on_conflict?: InputMaybe<Comments_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Comments_OneArgs = {
+  object: Comments_Insert_Input;
+  on_conflict?: InputMaybe<Comments_On_Conflict>;
 };
 
 
@@ -406,6 +715,26 @@ export type Mutation_RootUpdate_Categories_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Categories_ManyArgs = {
   updates: Array<Categories_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CommentsArgs = {
+  _set?: InputMaybe<Comments_Set_Input>;
+  where: Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Comments_By_PkArgs = {
+  _set?: InputMaybe<Comments_Set_Input>;
+  pk_columns: Comments_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Comments_ManyArgs = {
+  updates: Array<Comments_Updates>;
 };
 
 
@@ -486,15 +815,15 @@ export type Posts = {
   category: Categories_Enum;
   /** An object relationship */
   categoryByCategory: Categories;
+  /** An array relationship */
+  comments: Array<Comments>;
+  /** An aggregate relationship */
+  comments_aggregate: Comments_Aggregate;
   content?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   is_write_anonymous: Scalars['Boolean'];
   number: Scalars['Int'];
-  /** An array relationship */
-  profiles: Array<Profiles>;
-  /** An aggregate relationship */
-  profiles_aggregate: Profiles_Aggregate;
   spoiler: Scalars['Boolean'];
   start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
@@ -505,22 +834,22 @@ export type Posts = {
 
 
 /** columns and relationships of "posts" */
-export type PostsProfilesArgs = {
-  distinct_on?: InputMaybe<Array<Profiles_Select_Column>>;
+export type PostsCommentsArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Profiles_Order_By>>;
-  where?: InputMaybe<Profiles_Bool_Exp>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
 };
 
 
 /** columns and relationships of "posts" */
-export type PostsProfiles_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Profiles_Select_Column>>;
+export type PostsComments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Profiles_Order_By>>;
-  where?: InputMaybe<Profiles_Bool_Exp>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
 };
 
 /** aggregated selection of "posts" */
@@ -621,13 +950,13 @@ export type Posts_Bool_Exp = {
   author_name?: InputMaybe<String_Comparison_Exp>;
   category?: InputMaybe<Categories_Enum_Comparison_Exp>;
   categoryByCategory?: InputMaybe<Categories_Bool_Exp>;
+  comments?: InputMaybe<Comments_Bool_Exp>;
+  comments_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   is_write_anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   number?: InputMaybe<Int_Comparison_Exp>;
-  profiles?: InputMaybe<Profiles_Bool_Exp>;
-  profiles_aggregate?: InputMaybe<Profiles_Aggregate_Bool_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
   start_time?: InputMaybe<Timestamptz_Comparison_Exp>;
   sub_title?: InputMaybe<String_Comparison_Exp>;
@@ -639,7 +968,7 @@ export type Posts_Bool_Exp = {
 /** unique or primary key constraints on table "posts" */
 export enum Posts_Constraint {
   /** unique or primary key constraint on columns "number" */
-  PostsPostNumberKey = 'posts_post_number_key',
+  PostsNumberKey = 'posts_number_key',
   /** unique or primary key constraint on columns "id" */
   RecruitmentsPkey = 'recruitments_pkey'
 }
@@ -654,12 +983,12 @@ export type Posts_Insert_Input = {
   author_name?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<Categories_Enum>;
   categoryByCategory?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
+  comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   number?: InputMaybe<Scalars['Int']>;
-  profiles?: InputMaybe<Profiles_Arr_Rel_Insert_Input>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
@@ -754,12 +1083,12 @@ export type Posts_Order_By = {
   author_name?: InputMaybe<Order_By>;
   category?: InputMaybe<Order_By>;
   categoryByCategory?: InputMaybe<Categories_Order_By>;
+  comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_write_anonymous?: InputMaybe<Order_By>;
   number?: InputMaybe<Order_By>;
-  profiles_aggregate?: InputMaybe<Profiles_Aggregate_Order_By>;
   spoiler?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
@@ -982,9 +1311,6 @@ export type Profiles = {
   bio?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
-  post_id?: Maybe<Scalars['uuid']>;
-  /** An object relationship */
-  recruitment?: Maybe<Posts>;
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['String'];
   username: Scalars['name'];
@@ -996,17 +1322,6 @@ export type Profiles_Aggregate = {
   __typename?: 'profiles_aggregate';
   aggregate?: Maybe<Profiles_Aggregate_Fields>;
   nodes: Array<Profiles>;
-};
-
-export type Profiles_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Profiles_Aggregate_Bool_Exp_Count>;
-};
-
-export type Profiles_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Profiles_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-  filter?: InputMaybe<Profiles_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "profiles" */
@@ -1024,20 +1339,6 @@ export type Profiles_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "profiles" */
-export type Profiles_Aggregate_Order_By = {
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Profiles_Max_Order_By>;
-  min?: InputMaybe<Profiles_Min_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "profiles" */
-export type Profiles_Arr_Rel_Insert_Input = {
-  data: Array<Profiles_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Profiles_On_Conflict>;
-};
-
 /** Boolean expression to filter rows from the table "profiles". All fields are combined with a logical 'AND'. */
 export type Profiles_Bool_Exp = {
   _and?: InputMaybe<Array<Profiles_Bool_Exp>>;
@@ -1046,8 +1347,6 @@ export type Profiles_Bool_Exp = {
   bio?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  post_id?: InputMaybe<Uuid_Comparison_Exp>;
-  recruitment?: InputMaybe<Posts_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
   username?: InputMaybe<Name_Comparison_Exp>;
@@ -1069,8 +1368,6 @@ export type Profiles_Insert_Input = {
   bio?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
-  post_id?: InputMaybe<Scalars['uuid']>;
-  recruitment?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['name']>;
@@ -1083,21 +1380,9 @@ export type Profiles_Max_Fields = {
   bio?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  post_id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
-};
-
-/** order by max() on columns of table "profiles" */
-export type Profiles_Max_Order_By = {
-  bio?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-  website?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -1106,21 +1391,9 @@ export type Profiles_Min_Fields = {
   bio?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  post_id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
-};
-
-/** order by min() on columns of table "profiles" */
-export type Profiles_Min_Order_By = {
-  bio?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
-  website?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "profiles" */
@@ -1144,8 +1417,6 @@ export type Profiles_Order_By = {
   bio?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  post_id?: InputMaybe<Order_By>;
-  recruitment?: InputMaybe<Posts_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   username?: InputMaybe<Order_By>;
@@ -1166,8 +1437,6 @@ export enum Profiles_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  PostId = 'post_id',
-  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id',
@@ -1182,7 +1451,6 @@ export type Profiles_Set_Input = {
   bio?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
-  post_id?: InputMaybe<Scalars['uuid']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['name']>;
@@ -1202,7 +1470,6 @@ export type Profiles_Stream_Cursor_Value_Input = {
   bio?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
-  post_id?: InputMaybe<Scalars['uuid']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
   username?: InputMaybe<Scalars['name']>;
@@ -1217,8 +1484,6 @@ export enum Profiles_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
-  /** column name */
-  PostId = 'post_id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -1243,15 +1508,21 @@ export type Query_Root = {
   categories_aggregate: Categories_Aggregate;
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>;
+  /** An array relationship */
+  comments: Array<Comments>;
+  /** An aggregate relationship */
+  comments_aggregate: Comments_Aggregate;
+  /** fetch data from the table: "comments" using primary key columns */
+  comments_by_pk?: Maybe<Comments>;
   /** fetch data from the table: "posts" */
   posts: Array<Posts>;
   /** fetch aggregated fields from the table: "posts" */
   posts_aggregate: Posts_Aggregate;
   /** fetch data from the table: "posts" using primary key columns */
   posts_by_pk?: Maybe<Posts>;
-  /** An array relationship */
+  /** fetch data from the table: "profiles" */
   profiles: Array<Profiles>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "profiles" */
   profiles_aggregate: Profiles_Aggregate;
   /** fetch data from the table: "profiles" using primary key columns */
   profiles_by_pk?: Maybe<Profiles>;
@@ -1278,6 +1549,29 @@ export type Query_RootCategories_AggregateArgs = {
 
 export type Query_RootCategories_By_PkArgs = {
   key: Scalars['String'];
+};
+
+
+export type Query_RootCommentsArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Query_RootComments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Query_RootComments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -1336,6 +1630,14 @@ export type Subscription_Root = {
   categories_by_pk?: Maybe<Categories>;
   /** fetch data from the table in a streaming manner: "categories" */
   categories_stream: Array<Categories>;
+  /** An array relationship */
+  comments: Array<Comments>;
+  /** An aggregate relationship */
+  comments_aggregate: Comments_Aggregate;
+  /** fetch data from the table: "comments" using primary key columns */
+  comments_by_pk?: Maybe<Comments>;
+  /** fetch data from the table in a streaming manner: "comments" */
+  comments_stream: Array<Comments>;
   /** fetch data from the table: "posts" */
   posts: Array<Posts>;
   /** fetch aggregated fields from the table: "posts" */
@@ -1344,9 +1646,9 @@ export type Subscription_Root = {
   posts_by_pk?: Maybe<Posts>;
   /** fetch data from the table in a streaming manner: "posts" */
   posts_stream: Array<Posts>;
-  /** An array relationship */
+  /** fetch data from the table: "profiles" */
   profiles: Array<Profiles>;
-  /** An aggregate relationship */
+  /** fetch aggregated fields from the table: "profiles" */
   profiles_aggregate: Profiles_Aggregate;
   /** fetch data from the table: "profiles" using primary key columns */
   profiles_by_pk?: Maybe<Profiles>;
@@ -1382,6 +1684,36 @@ export type Subscription_RootCategories_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Categories_Stream_Cursor_Input>>;
   where?: InputMaybe<Categories_Bool_Exp>;
+};
+
+
+export type Subscription_RootCommentsArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootComments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootComments_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootComments_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Comments_Stream_Cursor_Input>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
 };
 
 
@@ -1470,6 +1802,13 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetCommentsQueryVariables = Exact<{
+  post_id: Scalars['uuid'];
+}>;
+
+
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, created_at: any, content: string, id: any }> };
+
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1483,6 +1822,31 @@ export type GetPostQueryVariables = Exact<{
 export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, number: number, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
 
 
+export const GetCommentsDocument = `
+    query GetComments($post_id: uuid!) {
+  comments(where: {post_id: {_eq: $post_id}}) {
+    user_id
+    spoiler
+    created_at
+    content
+    id
+  }
+}
+    `;
+export const useGetCommentsQuery = <
+      TData = GetCommentsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCommentsQueryVariables,
+      options?: UseQueryOptions<GetCommentsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCommentsQuery, TError, TData>(
+      ['GetComments', variables],
+      fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers),
+      options
+    );
 export const GetPostsDocument = `
     query GetPosts {
   posts(order_by: {created_at: asc}) {
