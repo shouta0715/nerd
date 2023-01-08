@@ -35,8 +35,8 @@ export const DetailPost: FC<Props> = ({ postId }) => {
           {post && <PostTimer start_time={post?.start_time} />}
         </div>
       </div>
-      <div className="flex flex-1 flex-col">
-        <ScrollArea className="flex-1 px-6">
+      <div className="relative flex flex-1 flex-col">
+        <ScrollArea className="flex-1 px-6 md:pb-0">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
           accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
           Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
