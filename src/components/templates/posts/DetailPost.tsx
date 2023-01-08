@@ -36,7 +36,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
         </div>
       </div>
       <div className="flex flex-1 flex-col">
-        <ScrollArea className="flex-1 ">
+        <ScrollArea className="flex-1 px-6">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
           accusantium ad repudiandae! Quidem maiores sed impedit incidunt natus.
           Sed omnis repellat id fugiat ab dignissimos velit voluptate quas
