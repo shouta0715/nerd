@@ -16,7 +16,6 @@ export const useQueryPost = (id: string) => {
       onError: (error: Error) => {
         console.log(error);
       },
-      suspense: false,
     }
   );
 
