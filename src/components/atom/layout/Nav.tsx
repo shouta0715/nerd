@@ -23,7 +23,7 @@ export const Nav: FC = () => {
   const user = useUserStore((state) => state.user);
 
   return (
-    <div className="z-50 hidden h-screen w-[12%] flex-col items-center justify-around border-r border-l-0 border-t-0 border-b-0 border-solid border-gray-200 bg-white pt-16 md:flex">
+    <div className="fixed top-0 z-50 hidden h-screen w-[12%] flex-col items-center justify-around border-r border-l-0 border-t-0 border-b-0 border-solid border-gray-200 bg-white pt-16 md:flex">
       <div className="mb-10 hidden  md:block">ICON</div>
       <ScrollArea className="w-full">
         <Flex
