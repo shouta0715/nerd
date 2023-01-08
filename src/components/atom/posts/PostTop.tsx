@@ -13,11 +13,14 @@ type Props = {
 export const PostTop: FC<Props> = memo(({ category, user }) => {
   const { categoryToJa } = useCategoryToJa();
   const router = useRouter();
+  const replaceUsername = user?.userName?.replace(/\//, "");
+
+  console.log(replaceUsername);
 
   return (
     <div className=" mb-2 flex  w-full items-center justify-between">
       <button
-        onClick={() => router.push(`/user/${user?.userName}`)}
+        onClick={() => router.push(`/user/${replaceUsername}`)}
         className="z-[30] cursor-pointer border-0 bg-transparent"
       >
         <Avatar radius="xl" src={user?.userPhotoURL} />

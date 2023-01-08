@@ -20,7 +20,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
     <div className="relative p-6 md:p-10">
       <ActionIcon
         onClick={() => router.back()}
-        className="absolute left-2 md:hidden"
+        className="absolute left-2  md:hidden"
         color="dark"
         size="md"
         radius="lg"
