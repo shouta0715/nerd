@@ -1,4 +1,4 @@
-import { ActionIcon, ScrollArea, ThemeIcon, Title } from "@mantine/core";
+import { ActionIcon, ScrollArea, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
