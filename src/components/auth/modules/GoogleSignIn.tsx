@@ -1,7 +1,7 @@
 import { Text } from "@mantine/core";
 import Image from "next/image";
 import React, { FC } from "react";
-import { useGoogleSignIn } from "../../hooks/auth/useGoogleSignIn";
+import { useGoogleSignIn } from "../../../hooks/auth/useGoogleSignIn";
 
 export const GoogleSignIn: FC = () => {
   const signInGoogle = useGoogleSignIn();

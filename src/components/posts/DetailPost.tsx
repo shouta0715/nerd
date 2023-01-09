@@ -2,11 +2,11 @@ import { ActionIcon, ScrollArea, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { useQueryComments } from "../../../hooks/comments/useQueryComments";
-import { useSubscriptionComment } from "../../../hooks/comments/useSubscriptionComment";
-import { useQueryPost } from "../../../hooks/posts/useQueryPost";
-import { CommentInput } from "../../atom/comment/CommentInput";
-import { PostTimer } from "../../atom/posts/PostTimer";
+import { useQueryComments } from "../../hooks/comments/useQueryComments";
+import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComment";
+import { useQueryPost } from "../../hooks/posts/useQueryPost";
+import { CommentInput } from "../comments/modules/CommentInput";
+import { PostTimer } from "./modules/PostTimer";
 
 type Props = {
   postId: string;

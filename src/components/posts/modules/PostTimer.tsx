@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from "react";
 import { useTimer } from "../../../hooks/time/useTimer";
-import { Panel } from "../Panel";
+import { Panel } from "./Panel";
 
 type Props = {
   start_time: string;
