@@ -5,10 +5,6 @@ import { Layout } from "../components/layouts/Layout";
 // import { useGlobalStore } from "../store/global/globalStore";
 
 const Home: NextPage = () => (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const client = useGlobalStore((state) => state.client);
-  // const { data } = useQueryPosts();
-
   <Layout>
     <Head>
       <title>Create Next App</title>
