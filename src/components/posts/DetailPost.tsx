@@ -54,7 +54,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
             <li key={comment.id}>{comment.content}</li>
           ))}
         </ScrollArea>
-        <CommentInput />
+        <CommentInput postId={postId} />
       </div>
     </div>
   );
