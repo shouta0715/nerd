@@ -3,6 +3,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { auth, db } from "../libs/firebase";
 import { createClient } from "../libs/graphqlClient";
+import { createWsClient } from "../libs/wsClient";
 import { useGlobalStore } from "../store/global/globalStore";
 import { useUserStore } from "../store/user/userState";
 
@@ -13,6 +14,8 @@ export const useInitialize = () => {
   const setClient = useGlobalStore((state) => state.setClient);
   const setUser = useUserStore((state) => state.setUser);
   const setIsClient = useGlobalStore((state) => state.setIsClient);
+  const setIsWsClient = useGlobalStore((state) => state.setIsWsClient);
+  const setWsClient = useGlobalStore((state) => state.setWsClient);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -23,8 +26,11 @@ export const useInitialize = () => {
         if (idTokenResult.token && isHasClaims) {
           const client = createClient(idTokenResult.token);
           setClient(client);
+          const wsClient = createWsClient(idTokenResult.token);
+          setWsClient(wsClient);
           setUser(user);
           setIsClient(true);
+          setIsWsClient(true);
         } else {
           const userRef = doc(db, "user_meta", user.uid);
           unSub = onSnapshot(userRef, async () => {
@@ -33,10 +39,12 @@ export const useInitialize = () => {
 
             if (idTokenResultSnap.token && isHasClaimsSnap) {
               const client = createClient(idTokenResultSnap.token);
-
+              const wsClient = createWsClient(idTokenResultSnap.token);
               setClient(client);
+              setWsClient(wsClient);
               setUser(user);
               setIsClient(true);
+              setIsWsClient(true);
             }
           });
         }

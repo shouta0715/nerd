@@ -15,8 +15,6 @@ export const PostTop: FC<Props> = memo(({ category, user }) => {
   const router = useRouter();
   const replaceUsername = user?.userName?.replace(/\//, "");
 
-  console.log(replaceUsername);
-
   return (
     <div className=" mb-2 flex  w-full items-center justify-between">
       <button
