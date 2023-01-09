@@ -34,12 +34,6 @@ export const GET_POST = gql`
       content
       category
       author_name
-      comments {
-        spoiler
-        id
-        created_at
-        content
-      }
     }
   }
 `;

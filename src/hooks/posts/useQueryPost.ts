@@ -11,11 +11,12 @@ export const useQueryPost = (id: string) => {
       id,
     },
     {
-      suspense: false,
-      enabled: isClient,
       onError: (error: Error) => {
         console.log(error);
       },
+      suspense: false,
+      enabled: isClient,
+      staleTime: 1000 * 60 * 5,
     }
   );
 

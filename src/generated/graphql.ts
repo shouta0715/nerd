@@ -1833,7 +1833,7 @@ export type GetPostQueryVariables = Exact<{
 }>;
 
 
-export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, number: number, content?: string | null, category: Categories_Enum, author_name?: string | null, comments: Array<{ __typename?: 'comments', spoiler: boolean, id: any, created_at: any, content: string }> } | null };
+export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, number: number, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
 
 
 export const GetCommentsDocument = `
@@ -1946,12 +1946,6 @@ export const GetPostDocument = `
     content
     category
     author_name
-    comments {
-      spoiler
-      id
-      created_at
-      content
-    }
   }
 }
     `;
