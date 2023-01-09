@@ -1,10 +1,9 @@
 import { GetPostQuery, useGetPostQuery } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
-import { useUserStore } from "../../store/user/userState";
 
 export const useQueryPost = (id: string) => {
   const client = useGlobalStore((state) => state.client);
-  const user = useUserStore((state) => state.user);
+  const isClient = useGlobalStore((state) => state.isClient);
 
   const { data, isLoading, isError } = useGetPostQuery<GetPostQuery, Error>(
     client,
@@ -13,7 +12,7 @@ export const useQueryPost = (id: string) => {
     },
     {
       suspense: false,
-      enabled: !!user,
+      enabled: isClient,
       onError: (error: Error) => {
         console.log(error);
       },

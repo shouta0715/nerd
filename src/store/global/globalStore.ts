@@ -6,6 +6,8 @@ type GlobalState = {
   changeIsOpenBurger: () => void;
   client: GraphQLClient;
   setClient: (client: GraphQLClient) => void;
+  isClient: boolean;
+  setIsClient: (isClient: boolean) => void;
 };
 
 export const useGlobalStore = create<GlobalState>((set) => ({
@@ -14,4 +16,6 @@ export const useGlobalStore = create<GlobalState>((set) => ({
     set((state) => ({ isOpenBurger: !state.isOpenBurger })),
   client: new GraphQLClient(""),
   setClient: (client) => set(() => ({ client })),
+  isClient: false,
+  setIsClient: (isClient) => set(() => ({ isClient })),
 }));
