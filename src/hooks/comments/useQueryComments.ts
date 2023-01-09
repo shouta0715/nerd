@@ -1,23 +1,27 @@
+import { useQuery } from "@tanstack/react-query";
+import { GraphQLClient } from "graphql-request";
 import { toast } from "react-toastify";
-import { useGetCommentsQuery } from "../../generated/graphql";
+import { GET_COMMENTS } from "../../graphql/comments/commentQuery";
 import { useGlobalStore } from "../../store/global/globalStore";
+import { Comment } from "../../types/commentType";
+
+const fetchComments = async (
+  client: GraphQLClient,
+  id: string
+): Promise<Comment[]> => {
+  const { comments } = await client.request(GET_COMMENTS, { post_id: id });
+
+  return comments;
+};
 
 export const useQueryComments = (id: string) => {
   const client = useGlobalStore((state) => state.client);
-  const { data } = useGetCommentsQuery(
-    client,
-    {
-      post_id: id,
-    },
-    {
-      enabled: !!id,
-      onError: (error: Error) => {
-        toast.error(error.message);
-      },
-    }
-  );
+  const isClient = useGlobalStore((state) => state.isClient);
 
-  return {
-    comments: data?.comments,
-  };
+  return useQuery<Comment[], Error>({
+    queryKey: [id, "comments"],
+    queryFn: () => fetchComments(client, id),
+    onError: (error) => toast.error(error.message),
+    enabled: !!isClient && !!id,
+  });
 };
