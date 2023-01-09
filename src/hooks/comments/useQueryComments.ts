@@ -9,7 +9,9 @@ const fetchComments = async (
   client: GraphQLClient,
   id: string
 ): Promise<Comment[]> => {
+  console.log(id);
   const { comments } = await client.request(GET_COMMENTS, { post_id: id });
+  console.log(comments);
 
   return comments;
 };

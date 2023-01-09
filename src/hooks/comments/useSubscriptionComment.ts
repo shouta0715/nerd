@@ -23,7 +23,7 @@ export const useSubscriptionComment = (postId: string) => {
       {
         query: SUBSCRIPTION_COMMENTS,
         variables: {
-          post_id: "4c436ad6-0ce0-4a24-8f63-f352f916c64f",
+          post_id: postId,
         },
       },
       {
