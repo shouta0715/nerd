@@ -1,13 +1,19 @@
 import { Avatar, Textarea, ThemeIcon } from "@mantine/core";
 import { IconSend } from "@tabler/icons";
 import React, { FC } from "react";
+import { useCommentHandler } from "../../../hooks/handler/useCommentHandler";
 import { useCommentInputStore } from "../../../store/comment/commentType";
 import { useUserStore } from "../../../store/user/userState";
 
-export const CommentInput: FC = () => {
+type Props = {
+  postId: string;
+};
+
+export const CommentInput: FC<Props> = ({ postId }) => {
   const user = useUserStore((state) => state.user);
-  const message = useCommentInputStore((state) => state.message);
-  const setMessage = useCommentInputStore((state) => state.setMessage);
+  const comment = useCommentInputStore((state) => state.comment);
+  const setComment = useCommentInputStore((state) => state.setComment);
+  const handleSubmit = useCommentHandler(postId);
 
   return (
     <div className="h-30 fixed bottom-0 left-0 w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:h-40  md:py-6">
@@ -24,22 +30,28 @@ export const CommentInput: FC = () => {
           </span>
           <span
             className={`w-[58px]  text-center text-xs font-semibold text-indigo-500 md:pl-0 ${
-              message.length === 100 ? "text-red-500" : ""
+              comment.content.length === 100 ? "text-red-500" : ""
             }`}
-          >{`${message.length}/100`}</span>
+          >{`${comment.content.length}/100`}</span>
         </div>
-        <form className="flex w-full items-center justify-center px-4 md:px-6">
+        <form
+          onSubmit={(e) => handleSubmit(e, comment)}
+          className="flex w-full items-center justify-center px-4 md:px-6"
+        >
           <Textarea
-            value={message}
+            value={comment.content}
             onChange={(e) =>
-              setMessage(e.target.value.length > 100 ? message : e.target.value)
+              setComment({
+                ...comment,
+                content: e.currentTarget.value,
+              })
             }
             autosize
             placeholder="コメントを入力してください"
             className="h-full flex-1 text-lg"
             classNames={{
               input:
-                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-[18px]",
+                "w-full border-0 px-2  border-b-2 rounded-none p-0 h-full border-indigo-500 text-[16px]",
             }}
           />
           <button className="group ml-2 flex cursor-pointer items-center justify-center self-end border-none bg-transparent p-1 transition-transform active:scale-90">

@@ -25,3 +25,16 @@ export const SUBSCRIPTION_COMMENTS = gql`
     }
   }
 `;
+
+export const INSERT_COMMENT = gql`
+  mutation InsertComment($object: comments_insert_input!) {
+    insert_comments_one(object: $object) {
+      user_id
+      spoiler
+      post_id
+      id
+      created_at
+      content
+    }
+  }
+`;

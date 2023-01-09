@@ -6,3 +6,8 @@ export type Comment = {
   post_id: string;
   user_id: string;
 };
+
+export type CommentInput = {
+  content: string;
+  spoiler: boolean;
+};

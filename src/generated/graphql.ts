@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -1807,14 +1807,21 @@ export type GetCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, created_at: any, content: string, id: any }> };
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, created_at: any, content: string, id: any, post_id: any }> };
 
 export type SubscriptionCommentsSubscriptionVariables = Exact<{
   post_id: Scalars['uuid'];
 }>;
 
 
-export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, spoiler: boolean, post_id: any, id: any, content: string, created_at: any }> };
+export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, post_id: any, id: any, content: string, created_at: any }> };
+
+export type InsertCommentMutationVariables = Exact<{
+  object: Comments_Insert_Input;
+}>;
+
+
+export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', user_id: string, spoiler: boolean, post_id: any, id: any, created_at: any, content: string } | null };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1837,6 +1844,7 @@ export const GetCommentsDocument = `
     created_at
     content
     id
+    post_id
   }
 }
     `;
@@ -1858,7 +1866,6 @@ export const SubscriptionCommentsDocument = `
     subscription SubscriptionComments($post_id: uuid!) {
   comments(where: {post_id: {_eq: $post_id}}) {
     user_id
-    updated_at
     spoiler
     post_id
     id
@@ -1867,6 +1874,31 @@ export const SubscriptionCommentsDocument = `
   }
 }
     `;
+export const InsertCommentDocument = `
+    mutation InsertComment($object: comments_insert_input!) {
+  insert_comments_one(object: $object) {
+    user_id
+    spoiler
+    post_id
+    id
+    created_at
+    content
+  }
+}
+    `;
+export const useInsertCommentMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>(
+      ['InsertComment'],
+      (variables?: InsertCommentMutationVariables) => fetcher<InsertCommentMutation, InsertCommentMutationVariables>(client, InsertCommentDocument, variables, headers)(),
+      options
+    );
 export const GetPostsDocument = `
     query GetPosts {
   posts(order_by: {created_at: asc}) {
