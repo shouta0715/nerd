@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { useUserStore } from "../../store/user/userState";
-import { MainPost } from "../organism/posts/MainPost";
+import { useUserStore } from "../store/user/userState";
+import { MainPost } from "./posts/MainPost";
 
 export const Dashboard: FC = () => {
   const user = useUserStore((state) => state.user);

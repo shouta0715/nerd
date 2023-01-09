@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { useQueryPosts } from "../../../hooks/posts/useQueryPosts";
-import { PostItem } from "../../molecules/post/PostItem";
+import { useQueryPosts } from "../../hooks/posts/useQueryPosts";
+import { PostItem } from "./PostItem";
 
 export const MainPost: FC = () => {
   const { posts } = useQueryPosts();

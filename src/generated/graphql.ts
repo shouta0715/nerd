@@ -1809,6 +1809,13 @@ export type GetCommentsQueryVariables = Exact<{
 
 export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, created_at: any, content: string, id: any }> };
 
+export type SubscriptionCommentsSubscriptionVariables = Exact<{
+  post_id: Scalars['uuid'];
+}>;
+
+
+export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, spoiler: boolean, post_id: any, id: any, content: string, created_at: any }> };
+
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1847,6 +1854,19 @@ export const useGetCommentsQuery = <
       fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers),
       options
     );
+export const SubscriptionCommentsDocument = `
+    subscription SubscriptionComments($post_id: uuid!) {
+  comments(where: {post_id: {_eq: $post_id}}) {
+    user_id
+    updated_at
+    spoiler
+    post_id
+    id
+    content
+    created_at
+  }
+}
+    `;
 export const GetPostsDocument = `
     query GetPosts {
   posts(order_by: {created_at: asc}) {

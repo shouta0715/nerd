@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { DetailPost } from "../../../components/templates/posts/DetailPost";
+import { DetailPost } from "../../../components/posts/DetailPost";
 
 const Detail: NextPage = () => {
   const router = useRouter();

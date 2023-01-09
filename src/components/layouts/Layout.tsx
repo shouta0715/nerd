@@ -1,9 +1,10 @@
 import { ScrollArea } from "@mantine/core";
 import React, { FC, ReactNode } from "react";
-import { Nav } from "../../atom/layout/Nav";
-import { Footer } from "../../atom/layout/Footer";
-import { Header } from "../../atom/layout/Header";
-import { Aside } from "../../atom/layout/Aside";
+
+import { Aside } from "./modules/Aside";
+import { Header } from "./modules/Header";
+import { Footer } from "./modules/Footer";
+import { Nav } from "./modules/Nav";
 
 type Props = {
   children: ReactNode;

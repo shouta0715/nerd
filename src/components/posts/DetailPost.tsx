@@ -2,9 +2,11 @@ import { ActionIcon, ScrollArea, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { useQueryPost } from "../../../hooks/posts/useQueryPost";
-import { CommentInput } from "../../atom/comment/CommentInput";
-import { PostTimer } from "../../atom/posts/PostTimer";
+import { useQueryComments } from "../../hooks/comments/useQueryComments";
+import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComment";
+import { useQueryPost } from "../../hooks/posts/useQueryPost";
+import { CommentInput } from "../comments/modules/CommentInput";
+import { PostTimer } from "./modules/PostTimer";
 
 type Props = {
   postId: string;
@@ -12,8 +14,13 @@ type Props = {
 
 export const DetailPost: FC<Props> = ({ postId }) => {
   const { post } = useQueryPost(postId);
-
+  const { data: comments, isLoading } = useQueryComments(postId);
   const router = useRouter();
+  useSubscriptionComment(postId);
+
+  if (isLoading) {
+    return <div>loading</div>;
+  }
 
   return (
     <div className="container relative mx-auto flex h-[100svh] flex-col pt-4 md:pt-6">
@@ -43,7 +50,9 @@ export const DetailPost: FC<Props> = ({ postId }) => {
           className=" px-6 pb-32 md:pb-44"
           scrollbarSize={10}
         >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus
+          {comments?.map((comment) => (
+            <li key={comment.id}>{comment.content}</li>
+          ))}
         </ScrollArea>
         <CommentInput />
       </div>

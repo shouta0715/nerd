@@ -12,6 +12,7 @@ export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setClient = useGlobalStore((state) => state.setClient);
   const setUser = useUserStore((state) => state.setUser);
+  const setIsClient = useGlobalStore((state) => state.setIsClient);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -23,6 +24,7 @@ export const useInitialize = () => {
           const client = createClient(idTokenResult.token);
           setClient(client);
           setUser(user);
+          setIsClient(true);
         } else {
           const userRef = doc(db, "user_meta", user.uid);
           unSub = onSnapshot(userRef, async () => {
@@ -34,6 +36,7 @@ export const useInitialize = () => {
 
               setClient(client);
               setUser(user);
+              setIsClient(true);
             }
           });
         }

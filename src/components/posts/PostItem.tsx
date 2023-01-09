@@ -2,10 +2,10 @@
 import { Title } from "@mantine/core";
 import Link from "next/link";
 import React, { FC, memo } from "react";
-import { GetPostsQuery } from "../../../generated/graphql";
-import { useQueryUser } from "../../../hooks/users/useQueryUser";
-import { PostTimer } from "../../atom/posts/PostTimer";
-import { PostTop } from "../../atom/posts/PostTop";
+import { GetPostsQuery } from "../../generated/graphql";
+import { useQueryUser } from "../../hooks/users/useQueryUser";
+import { PostTimer } from "./modules/PostTimer";
+import { PostTop } from "./modules/PostTop";
 
 type Props = {
   post: GetPostsQuery["posts"][0];
