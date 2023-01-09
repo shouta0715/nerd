@@ -1,4 +1,5 @@
 import { GraphQLClient } from "graphql-request";
+import { Client } from "graphql-ws";
 import create from "zustand";
 
 type GlobalState = {
@@ -8,6 +9,10 @@ type GlobalState = {
   setClient: (client: GraphQLClient) => void;
   isClient: boolean;
   setIsClient: (isClient: boolean) => void;
+  wsClient: Client | null;
+  setWsClient: (wsClient: Client) => void;
+  isWsClient: boolean;
+  setIsWsClient: (isWsClient: boolean) => void;
 };
 
 export const useGlobalStore = create<GlobalState>((set) => ({
@@ -18,4 +23,8 @@ export const useGlobalStore = create<GlobalState>((set) => ({
   setClient: (client) => set(() => ({ client })),
   isClient: false,
   setIsClient: (isClient) => set(() => ({ isClient })),
+  wsClient: null,
+  setWsClient: (wsClient) => set(() => ({ wsClient })),
+  isWsClient: false,
+  setIsWsClient: (isWsClient) => set(() => ({ isWsClient })),
 }));

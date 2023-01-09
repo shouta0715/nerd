@@ -2,11 +2,11 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 import { useQueryClient } from "@tanstack/react-query";
-import { createClient } from "graphql-ws";
 import { useEffect } from "react";
 import { ExecutionResult } from "graphql";
 import { SUBSCRIPTION_COMMENTS } from "../../graphql/comments/commentQuery";
 import { Comment } from "../../types/commentType";
+import { useGlobalStore } from "../../store/global/globalStore";
 
 interface Payload extends ExecutionResult {
   data: {
@@ -16,17 +16,10 @@ interface Payload extends ExecutionResult {
 
 export const useSubscriptionComment = (postId: string) => {
   const queryClient = useQueryClient();
+  const wsClient = useGlobalStore((state) => state.wsClient);
   useEffect(() => {
-    const client = createClient({
-      url: "wss://anime-app-plus.hasura.app/v1/graphql",
-      connectionParams: () => ({
-        headers: {
-          "x-hasura-admin-secret": "L5ssVV2nfL9FXd3",
-        },
-      }),
-    });
-
-    const unSubscription = client.subscribe(
+    if (wsClient === null) return;
+    const unSubscription = wsClient.subscribe(
       {
         query: SUBSCRIPTION_COMMENTS,
         variables: {
@@ -45,9 +38,10 @@ export const useSubscriptionComment = (postId: string) => {
       }
     );
 
+    // eslint-disable-next-line consistent-return
     return () => {
       unSubscription();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [wsClient]);
 };
