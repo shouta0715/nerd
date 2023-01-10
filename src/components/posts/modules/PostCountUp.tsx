@@ -1,32 +1,21 @@
 /* eslint-disable react/no-array-index-key */
+import { Button } from "@mantine/core";
 import React, { FC } from "react";
-import { useTimer } from "../../../hooks/time/useTimer";
+import { useCountUp } from "../../../hooks/time/useCountUp";
 import { Panel } from "./Panel";
 
-type Props = {
-  start_time: string;
-  post_id: string;
-  parent: "post" | "comment";
-};
-
-export const PostTimer: FC<Props> = ({ start_time, post_id, parent }) => {
-  const { time } = useTimer(start_time);
-  const hours = time.hours.toString().padStart(2, "0");
-  const minutes = time.minutes.toString().padStart(2, "0");
-  const seconds = time.seconds.toString().padStart(2, "0");
+export const PostCountUp: FC = () => {
+  const { seconds, minutes, hours, interval } = useCountUp();
 
   return (
-    <div className="my-4 flex w-full flex-col items-center justify-center">
-      <p className="m-0 mb-2.5  px-10 text-lg font-bold text-indigo-500">
-        開始まで
-      </p>
+    <div className="my-4">
       <div className="flex w-full justify-center space-x-4 md:space-x-6">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
             {hours.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-hours-${character}-${index}-${post_id}`}
+                key={`hours-${character}-${index}`}
               />
             ))}
           </div>
@@ -37,7 +26,7 @@ export const PostTimer: FC<Props> = ({ start_time, post_id, parent }) => {
             {minutes.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-minutes-${character}-${index}-${post_id}`}
+                key={`minutes-${character}-${index}`}
               />
             ))}
           </div>
@@ -48,13 +37,16 @@ export const PostTimer: FC<Props> = ({ start_time, post_id, parent }) => {
             {seconds.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-seconds-${character}-${index}-${post_id}`}
+                key={`seconds-${character}-${index}`}
               />
             ))}
           </div>
           <span className="text-sm font-bold md:text-sm ">秒</span>
         </div>
       </div>
+      <Button onClick={() => interval.toggle()}>
+        {interval.active ? "止める" : "始める"}
+      </Button>
     </div>
   );
 };

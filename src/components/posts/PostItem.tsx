@@ -33,7 +33,11 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           <Title className="font-medium" order={4}>
             {post.sub_title}
           </Title>
-          <PostTimer start_time={post.start_time} />
+          <PostTimer
+            parent="post"
+            post_id={post.id}
+            start_time={post.start_time}
+          />
         </div>
       </div>
     </div>

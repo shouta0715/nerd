@@ -255,9 +255,202 @@ export type Categories_Updates = {
   where: Categories_Bool_Exp;
 };
 
+/** columns and relationships of "comment_likes" */
+export type Comment_Likes = {
+  __typename?: 'comment_likes';
+  /** An object relationship */
+  comment: Comments;
+  comment_id: Scalars['uuid'];
+  id: Scalars['uuid'];
+  user_id: Scalars['String'];
+};
+
+/** aggregated selection of "comment_likes" */
+export type Comment_Likes_Aggregate = {
+  __typename?: 'comment_likes_aggregate';
+  aggregate?: Maybe<Comment_Likes_Aggregate_Fields>;
+  nodes: Array<Comment_Likes>;
+};
+
+export type Comment_Likes_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Comment_Likes_Aggregate_Bool_Exp_Count>;
+};
+
+export type Comment_Likes_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comment_Likes_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "comment_likes" */
+export type Comment_Likes_Aggregate_Fields = {
+  __typename?: 'comment_likes_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Comment_Likes_Max_Fields>;
+  min?: Maybe<Comment_Likes_Min_Fields>;
+};
+
+
+/** aggregate fields of "comment_likes" */
+export type Comment_Likes_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "comment_likes" */
+export type Comment_Likes_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Comment_Likes_Max_Order_By>;
+  min?: InputMaybe<Comment_Likes_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "comment_likes" */
+export type Comment_Likes_Arr_Rel_Insert_Input = {
+  data: Array<Comment_Likes_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Comment_Likes_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "comment_likes". All fields are combined with a logical 'AND'. */
+export type Comment_Likes_Bool_Exp = {
+  _and?: InputMaybe<Array<Comment_Likes_Bool_Exp>>;
+  _not?: InputMaybe<Comment_Likes_Bool_Exp>;
+  _or?: InputMaybe<Array<Comment_Likes_Bool_Exp>>;
+  comment?: InputMaybe<Comments_Bool_Exp>;
+  comment_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "comment_likes" */
+export enum Comment_Likes_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  CommentLikesPkey = 'comment_likes_pkey'
+}
+
+/** input type for inserting data into table "comment_likes" */
+export type Comment_Likes_Insert_Input = {
+  comment?: InputMaybe<Comments_Obj_Rel_Insert_Input>;
+  comment_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Comment_Likes_Max_Fields = {
+  __typename?: 'comment_likes_max_fields';
+  comment_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "comment_likes" */
+export type Comment_Likes_Max_Order_By = {
+  comment_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Comment_Likes_Min_Fields = {
+  __typename?: 'comment_likes_min_fields';
+  comment_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "comment_likes" */
+export type Comment_Likes_Min_Order_By = {
+  comment_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "comment_likes" */
+export type Comment_Likes_Mutation_Response = {
+  __typename?: 'comment_likes_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Comment_Likes>;
+};
+
+/** on_conflict condition type for table "comment_likes" */
+export type Comment_Likes_On_Conflict = {
+  constraint: Comment_Likes_Constraint;
+  update_columns?: Array<Comment_Likes_Update_Column>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "comment_likes". */
+export type Comment_Likes_Order_By = {
+  comment?: InputMaybe<Comments_Order_By>;
+  comment_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: comment_likes */
+export type Comment_Likes_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "comment_likes" */
+export enum Comment_Likes_Select_Column {
+  /** column name */
+  CommentId = 'comment_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "comment_likes" */
+export type Comment_Likes_Set_Input = {
+  comment_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "comment_likes" */
+export type Comment_Likes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Comment_Likes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Comment_Likes_Stream_Cursor_Value_Input = {
+  comment_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "comment_likes" */
+export enum Comment_Likes_Update_Column {
+  /** column name */
+  CommentId = 'comment_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Comment_Likes_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Comment_Likes_Set_Input>;
+  where: Comment_Likes_Bool_Exp;
+};
+
 /** columns and relationships of "comments" */
 export type Comments = {
   __typename?: 'comments';
+  /** An array relationship */
+  comment_likes: Array<Comment_Likes>;
+  /** An aggregate relationship */
+  comment_likes_aggregate: Comment_Likes_Aggregate;
   content: Scalars['String'];
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
@@ -265,8 +458,29 @@ export type Comments = {
   post: Posts;
   post_id: Scalars['uuid'];
   spoiler: Scalars['Boolean'];
+  time: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
   user_id: Scalars['String'];
+};
+
+
+/** columns and relationships of "comments" */
+export type CommentsComment_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "comments" */
+export type CommentsComment_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
 };
 
 /** aggregated selection of "comments" */
@@ -306,9 +520,17 @@ export type Comments_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "comments" */
 export type Comments_Aggregate_Fields = {
   __typename?: 'comments_aggregate_fields';
+  avg?: Maybe<Comments_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Comments_Max_Fields>;
   min?: Maybe<Comments_Min_Fields>;
+  stddev?: Maybe<Comments_Stddev_Fields>;
+  stddev_pop?: Maybe<Comments_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Comments_Stddev_Samp_Fields>;
+  sum?: Maybe<Comments_Sum_Fields>;
+  var_pop?: Maybe<Comments_Var_Pop_Fields>;
+  var_samp?: Maybe<Comments_Var_Samp_Fields>;
+  variance?: Maybe<Comments_Variance_Fields>;
 };
 
 
@@ -320,9 +542,17 @@ export type Comments_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "comments" */
 export type Comments_Aggregate_Order_By = {
+  avg?: InputMaybe<Comments_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Comments_Max_Order_By>;
   min?: InputMaybe<Comments_Min_Order_By>;
+  stddev?: InputMaybe<Comments_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Comments_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Comments_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Comments_Sum_Order_By>;
+  var_pop?: InputMaybe<Comments_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Comments_Var_Samp_Order_By>;
+  variance?: InputMaybe<Comments_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "comments" */
@@ -332,17 +562,31 @@ export type Comments_Arr_Rel_Insert_Input = {
   on_conflict?: InputMaybe<Comments_On_Conflict>;
 };
 
+/** aggregate avg on columns */
+export type Comments_Avg_Fields = {
+  __typename?: 'comments_avg_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "comments" */
+export type Comments_Avg_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'. */
 export type Comments_Bool_Exp = {
   _and?: InputMaybe<Array<Comments_Bool_Exp>>;
   _not?: InputMaybe<Comments_Bool_Exp>;
   _or?: InputMaybe<Array<Comments_Bool_Exp>>;
+  comment_likes?: InputMaybe<Comment_Likes_Bool_Exp>;
+  comment_likes_aggregate?: InputMaybe<Comment_Likes_Aggregate_Bool_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   post?: InputMaybe<Posts_Bool_Exp>;
   post_id?: InputMaybe<Uuid_Comparison_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
+  time?: InputMaybe<Int_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
 };
@@ -353,14 +597,21 @@ export enum Comments_Constraint {
   CommentPkey = 'comment_pkey'
 }
 
+/** input type for incrementing numeric columns in table "comments" */
+export type Comments_Inc_Input = {
+  time?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "comments" */
 export type Comments_Insert_Input = {
+  comment_likes?: InputMaybe<Comment_Likes_Arr_Rel_Insert_Input>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   post?: InputMaybe<Posts_Obj_Rel_Insert_Input>;
   post_id?: InputMaybe<Scalars['uuid']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
 };
@@ -372,6 +623,7 @@ export type Comments_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   post_id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -382,6 +634,7 @@ export type Comments_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   post_id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
@@ -393,6 +646,7 @@ export type Comments_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   post_id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -403,6 +657,7 @@ export type Comments_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   post_id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
@@ -416,6 +671,13 @@ export type Comments_Mutation_Response = {
   returning: Array<Comments>;
 };
 
+/** input type for inserting object relation for remote table "comments" */
+export type Comments_Obj_Rel_Insert_Input = {
+  data: Comments_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Comments_On_Conflict>;
+};
+
 /** on_conflict condition type for table "comments" */
 export type Comments_On_Conflict = {
   constraint: Comments_Constraint;
@@ -425,12 +687,14 @@ export type Comments_On_Conflict = {
 
 /** Ordering options when selecting data from "comments". */
 export type Comments_Order_By = {
+  comment_likes_aggregate?: InputMaybe<Comment_Likes_Aggregate_Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   post?: InputMaybe<Posts_Order_By>;
   post_id?: InputMaybe<Order_By>;
   spoiler?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
@@ -452,6 +716,8 @@ export enum Comments_Select_Column {
   PostId = 'post_id',
   /** column name */
   Spoiler = 'spoiler',
+  /** column name */
+  Time = 'time',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -477,8 +743,42 @@ export type Comments_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   post_id?: InputMaybe<Scalars['uuid']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Comments_Stddev_Fields = {
+  __typename?: 'comments_stddev_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "comments" */
+export type Comments_Stddev_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Comments_Stddev_Pop_Fields = {
+  __typename?: 'comments_stddev_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "comments" */
+export type Comments_Stddev_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Comments_Stddev_Samp_Fields = {
+  __typename?: 'comments_stddev_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "comments" */
+export type Comments_Stddev_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "comments" */
@@ -496,8 +796,20 @@ export type Comments_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   post_id?: InputMaybe<Scalars['uuid']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Comments_Sum_Fields = {
+  __typename?: 'comments_sum_fields';
+  time?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "comments" */
+export type Comments_Sum_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "comments" */
@@ -513,15 +825,52 @@ export enum Comments_Update_Column {
   /** column name */
   Spoiler = 'spoiler',
   /** column name */
+  Time = 'time',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
 }
 
 export type Comments_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Comments_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Comments_Set_Input>;
   where: Comments_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Comments_Var_Pop_Fields = {
+  __typename?: 'comments_var_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "comments" */
+export type Comments_Var_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Comments_Var_Samp_Fields = {
+  __typename?: 'comments_var_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "comments" */
+export type Comments_Var_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Comments_Variance_Fields = {
+  __typename?: 'comments_variance_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "comments" */
+export type Comments_Variance_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** ordering argument of a cursor */
@@ -539,6 +888,10 @@ export type Mutation_Root = {
   delete_categories?: Maybe<Categories_Mutation_Response>;
   /** delete single row from the table: "categories" */
   delete_categories_by_pk?: Maybe<Categories>;
+  /** delete data from the table: "comment_likes" */
+  delete_comment_likes?: Maybe<Comment_Likes_Mutation_Response>;
+  /** delete single row from the table: "comment_likes" */
+  delete_comment_likes_by_pk?: Maybe<Comment_Likes>;
   /** delete data from the table: "comments" */
   delete_comments?: Maybe<Comments_Mutation_Response>;
   /** delete single row from the table: "comments" */
@@ -555,6 +908,10 @@ export type Mutation_Root = {
   insert_categories?: Maybe<Categories_Mutation_Response>;
   /** insert a single row into the table: "categories" */
   insert_categories_one?: Maybe<Categories>;
+  /** insert data into the table: "comment_likes" */
+  insert_comment_likes?: Maybe<Comment_Likes_Mutation_Response>;
+  /** insert a single row into the table: "comment_likes" */
+  insert_comment_likes_one?: Maybe<Comment_Likes>;
   /** insert data into the table: "comments" */
   insert_comments?: Maybe<Comments_Mutation_Response>;
   /** insert a single row into the table: "comments" */
@@ -573,6 +930,12 @@ export type Mutation_Root = {
   update_categories_by_pk?: Maybe<Categories>;
   /** update multiples rows of table: "categories" */
   update_categories_many?: Maybe<Array<Maybe<Categories_Mutation_Response>>>;
+  /** update data of the table: "comment_likes" */
+  update_comment_likes?: Maybe<Comment_Likes_Mutation_Response>;
+  /** update single row of the table: "comment_likes" */
+  update_comment_likes_by_pk?: Maybe<Comment_Likes>;
+  /** update multiples rows of table: "comment_likes" */
+  update_comment_likes_many?: Maybe<Array<Maybe<Comment_Likes_Mutation_Response>>>;
   /** update data of the table: "comments" */
   update_comments?: Maybe<Comments_Mutation_Response>;
   /** update single row of the table: "comments" */
@@ -603,6 +966,18 @@ export type Mutation_RootDelete_CategoriesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Categories_By_PkArgs = {
   key: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Comment_LikesArgs = {
+  where: Comment_Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Comment_Likes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -653,6 +1028,20 @@ export type Mutation_RootInsert_CategoriesArgs = {
 export type Mutation_RootInsert_Categories_OneArgs = {
   object: Categories_Insert_Input;
   on_conflict?: InputMaybe<Categories_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Comment_LikesArgs = {
+  objects: Array<Comment_Likes_Insert_Input>;
+  on_conflict?: InputMaybe<Comment_Likes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Comment_Likes_OneArgs = {
+  object: Comment_Likes_Insert_Input;
+  on_conflict?: InputMaybe<Comment_Likes_On_Conflict>;
 };
 
 
@@ -719,7 +1108,28 @@ export type Mutation_RootUpdate_Categories_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Comment_LikesArgs = {
+  _set?: InputMaybe<Comment_Likes_Set_Input>;
+  where: Comment_Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Comment_Likes_By_PkArgs = {
+  _set?: InputMaybe<Comment_Likes_Set_Input>;
+  pk_columns: Comment_Likes_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Comment_Likes_ManyArgs = {
+  updates: Array<Comment_Likes_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_CommentsArgs = {
+  _inc?: InputMaybe<Comments_Inc_Input>;
   _set?: InputMaybe<Comments_Set_Input>;
   where: Comments_Bool_Exp;
 };
@@ -727,6 +1137,7 @@ export type Mutation_RootUpdate_CommentsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Comments_By_PkArgs = {
+  _inc?: InputMaybe<Comments_Inc_Input>;
   _set?: InputMaybe<Comments_Set_Input>;
   pk_columns: Comments_Pk_Columns_Input;
 };
@@ -822,6 +1233,8 @@ export type Posts = {
   content?: Maybe<Scalars['String']>;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
+  is_finished: Scalars['Boolean'];
+  is_start: Scalars['Boolean'];
   is_write_anonymous: Scalars['Boolean'];
   number: Scalars['Int'];
   spoiler: Scalars['Boolean'];
@@ -955,6 +1368,8 @@ export type Posts_Bool_Exp = {
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  is_finished?: InputMaybe<Boolean_Comparison_Exp>;
+  is_start?: InputMaybe<Boolean_Comparison_Exp>;
   is_write_anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   number?: InputMaybe<Int_Comparison_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
@@ -987,6 +1402,8 @@ export type Posts_Insert_Input = {
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_finished?: InputMaybe<Scalars['Boolean']>;
+  is_start?: InputMaybe<Scalars['Boolean']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   number?: InputMaybe<Scalars['Int']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
@@ -1087,6 +1504,8 @@ export type Posts_Order_By = {
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  is_finished?: InputMaybe<Order_By>;
+  is_start?: InputMaybe<Order_By>;
   is_write_anonymous?: InputMaybe<Order_By>;
   number?: InputMaybe<Order_By>;
   spoiler?: InputMaybe<Order_By>;
@@ -1115,6 +1534,10 @@ export enum Posts_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  IsFinished = 'is_finished',
+  /** column name */
+  IsStart = 'is_start',
+  /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
   /** column name */
   Number = 'number',
@@ -1135,6 +1558,10 @@ export enum Posts_Select_Column {
 /** select "posts_aggregate_bool_exp_bool_and_arguments_columns" columns of table "posts" */
 export enum Posts_Select_Column_Posts_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
   /** column name */
+  IsFinished = 'is_finished',
+  /** column name */
+  IsStart = 'is_start',
+  /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
   /** column name */
   Spoiler = 'spoiler'
@@ -1142,6 +1569,10 @@ export enum Posts_Select_Column_Posts_Aggregate_Bool_Exp_Bool_And_Arguments_Colu
 
 /** select "posts_aggregate_bool_exp_bool_or_arguments_columns" columns of table "posts" */
 export enum Posts_Select_Column_Posts_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  IsFinished = 'is_finished',
+  /** column name */
+  IsStart = 'is_start',
   /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
   /** column name */
@@ -1155,6 +1586,8 @@ export type Posts_Set_Input = {
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_finished?: InputMaybe<Scalars['Boolean']>;
+  is_start?: InputMaybe<Scalars['Boolean']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   number?: InputMaybe<Scalars['Int']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
@@ -1213,6 +1646,8 @@ export type Posts_Stream_Cursor_Value_Input = {
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
+  is_finished?: InputMaybe<Scalars['Boolean']>;
+  is_start?: InputMaybe<Scalars['Boolean']>;
   is_write_anonymous?: InputMaybe<Scalars['Boolean']>;
   number?: InputMaybe<Scalars['Int']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
@@ -1246,6 +1681,10 @@ export enum Posts_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  IsFinished = 'is_finished',
+  /** column name */
+  IsStart = 'is_start',
   /** column name */
   IsWriteAnonymous = 'is_write_anonymous',
   /** column name */
@@ -1509,6 +1948,12 @@ export type Query_Root = {
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>;
   /** An array relationship */
+  comment_likes: Array<Comment_Likes>;
+  /** An aggregate relationship */
+  comment_likes_aggregate: Comment_Likes_Aggregate;
+  /** fetch data from the table: "comment_likes" using primary key columns */
+  comment_likes_by_pk?: Maybe<Comment_Likes>;
+  /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
   comments_aggregate: Comments_Aggregate;
@@ -1549,6 +1994,29 @@ export type Query_RootCategories_AggregateArgs = {
 
 export type Query_RootCategories_By_PkArgs = {
   key: Scalars['String'];
+};
+
+
+export type Query_RootComment_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+
+export type Query_RootComment_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+
+export type Query_RootComment_Likes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -1631,6 +2099,14 @@ export type Subscription_Root = {
   /** fetch data from the table in a streaming manner: "categories" */
   categories_stream: Array<Categories>;
   /** An array relationship */
+  comment_likes: Array<Comment_Likes>;
+  /** An aggregate relationship */
+  comment_likes_aggregate: Comment_Likes_Aggregate;
+  /** fetch data from the table: "comment_likes" using primary key columns */
+  comment_likes_by_pk?: Maybe<Comment_Likes>;
+  /** fetch data from the table in a streaming manner: "comment_likes" */
+  comment_likes_stream: Array<Comment_Likes>;
+  /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
   comments_aggregate: Comments_Aggregate;
@@ -1684,6 +2160,36 @@ export type Subscription_RootCategories_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Categories_Stream_Cursor_Input>>;
   where?: InputMaybe<Categories_Bool_Exp>;
+};
+
+
+export type Subscription_RootComment_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootComment_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Comment_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comment_Likes_Order_By>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootComment_Likes_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootComment_Likes_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Comment_Likes_Stream_Cursor_Input>>;
+  where?: InputMaybe<Comment_Likes_Bool_Exp>;
 };
 
 

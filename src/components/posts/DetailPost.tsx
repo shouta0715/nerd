@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { ActionIcon, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
@@ -6,6 +7,7 @@ import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComm
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
 import { changeTimeToJa } from "../../hooks/utils/changeTimeToJa";
 import { MainComment } from "../comments/MainComment";
+import { PostCountUp } from "./modules/PostCountUp";
 import { PostTimer } from "./modules/PostTimer";
 
 type Props = {
@@ -13,13 +15,11 @@ type Props = {
 };
 
 export const DetailPost: FC<Props> = ({ postId }) => {
-  const { post } = useQueryPost(postId);
+  const { post, isPostLoading } = useQueryPost(postId);
   const router = useRouter();
   useSubscriptionComment(postId);
   const isStart =
     new Date().getTime() - changeTimeToJa(post?.start_time).getTime() > 0;
-
-  console.log(isStart);
 
   return (
     <div className=" font-semibold">
@@ -39,7 +39,17 @@ export const DetailPost: FC<Props> = ({ postId }) => {
             {post?.title}
           </Title>
           <div className="w-full border-x-0 border-y-0 border-b border-solid border-gray-200">
-            {post && <PostTimer start_time={post?.start_time} />}
+            {isPostLoading ? (
+              <div>loading...</div>
+            ) : isStart ? (
+              <PostCountUp />
+            ) : (
+              <PostTimer
+                parent="comment"
+                post_id={postId}
+                start_time={post?.start_time}
+              />
+            )}
           </div>
         </div>
         <MainComment postId={postId} />
