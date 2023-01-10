@@ -7,6 +7,7 @@ import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComm
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
 import { changeTimeToJa } from "../../hooks/utils/changeTimeToJa";
 import { MainComment } from "../comments/MainComment";
+import { Spinner } from "../loading/Spinner";
 import { PostCountUp } from "./modules/PostCountUp";
 import { PostTimer } from "./modules/PostTimer";
 
@@ -20,6 +21,13 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   useSubscriptionComment(postId);
   const isStart =
     new Date().getTime() - changeTimeToJa(post?.start_time).getTime() > 0;
+
+  if (isPostLoading)
+    return (
+      <div className="fixed inset-0 z-[999] h-screen w-screen bg-gray-400/70">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className=" font-semibold">
