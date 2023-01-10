@@ -5,6 +5,7 @@ import {
   useCommentTimeStore,
 } from "../../store/comment/commentType";
 import { useMutateComment } from "../comments/useMutateComment";
+import { timeProcessing } from "../utils/timeProcessing";
 
 export const useCommentHandler = (post_id: string) => {
   const mutateComment = useMutateComment();
@@ -16,10 +17,13 @@ export const useCommentHandler = (post_id: string) => {
       e.preventDefault();
 
       if (!object.content?.trim()) return;
-      const { minutes, hours, seconds } = getTime();
-      const sumSeconds = hours * 3600 + minutes * 60 + seconds;
-      mutateComment.mutate({
-        object: { ...object, post_id, time: sumSeconds },
+      const { timeToSecond } = timeProcessing();
+      mutateComment.mutateAsync({
+        object: {
+          ...object,
+          post_id,
+          time: timeToSecond(getTime()),
+        },
       });
       resetComment();
     },
