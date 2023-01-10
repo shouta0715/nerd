@@ -10,7 +10,7 @@ export const useCommentHandler = (post_id: string) => {
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>, object: Comments_Insert_Input) => {
       e.preventDefault();
-      if (!object.content) return;
+      if (!object.content?.trim()) return;
       mutateComment.mutate({
         object: { ...object, post_id },
       });

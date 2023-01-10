@@ -17,7 +17,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   useSubscriptionComment(postId);
 
   return (
-    <div className="font-semibold">
+    <div className=" font-semibold">
       <div className="container relative mx-auto flex h-[100svh] flex-col  pt-4 md:pt-6">
         <ActionIcon
           onClick={() => router.back()}
@@ -29,7 +29,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
         >
           <IconArrowNarrowLeft size={34} />
         </ActionIcon>
-        <div className="relative mx-auto mb-4 flex w-full shrink flex-col items-center justify-center">
+        <div className="relative mx-auto flex w-full shrink flex-col items-center justify-center">
           <Title order={2} className="pl-2 text-2xl md:text-3xl">
             {post?.title}
           </Title>
