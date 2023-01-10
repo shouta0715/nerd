@@ -2313,21 +2313,21 @@ export type GetCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, created_at: any, content: string, id: any, post_id: any }> };
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, time: number, spoiler: boolean, post_id: any, id: any, created_at: any, content: string }> };
 
 export type SubscriptionCommentsSubscriptionVariables = Exact<{
   post_id: Scalars['uuid'];
 }>;
 
 
-export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, spoiler: boolean, post_id: any, id: any, content: string, created_at: any }> };
+export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, time: number, spoiler: boolean, post_id: any, id: any, created_at: any, content: string }> };
 
 export type InsertCommentMutationVariables = Exact<{
   object: Comments_Insert_Input;
 }>;
 
 
-export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', user_id: string, spoiler: boolean, post_id: any, id: any, created_at: any, content: string } | null };
+export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', user_id: string, time: number, spoiler: boolean, post_id: any, id: any, created_at: any, content: string } | null };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2344,13 +2344,14 @@ export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typena
 
 export const GetCommentsDocument = `
     query GetComments($post_id: uuid!) {
-  comments(where: {post_id: {_eq: $post_id}}) {
+  comments(order_by: {time: desc}, where: {post_id: {_eq: $post_id}}) {
     user_id
+    time
     spoiler
+    post_id
+    id
     created_at
     content
-    id
-    post_id
   }
 }
     `;
@@ -2372,11 +2373,12 @@ export const SubscriptionCommentsDocument = `
     subscription SubscriptionComments($post_id: uuid!) {
   comments(where: {post_id: {_eq: $post_id}}) {
     user_id
+    time
     spoiler
     post_id
     id
-    content
     created_at
+    content
   }
 }
     `;
@@ -2384,6 +2386,7 @@ export const InsertCommentDocument = `
     mutation InsertComment($object: comments_insert_input!) {
   insert_comments_one(object: $object) {
     user_id
+    time
     spoiler
     post_id
     id

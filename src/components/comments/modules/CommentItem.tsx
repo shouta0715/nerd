@@ -1,6 +1,7 @@
-import { Avatar } from "@mantine/core";
-import React, { FC } from "react";
+import { Avatar, Text } from "@mantine/core";
+import React, { FC, memo } from "react";
 import { useQueryUser } from "../../../hooks/users/useQueryUser";
+import { timeProcessing } from "../../../hooks/utils/timeProcessing";
 import { useUserStore } from "../../../store/user/userState";
 import { Comment } from "../../../types/commentType";
 
@@ -8,9 +9,10 @@ type Props = {
   comment: Comment;
 };
 
-export const CommentItem: FC<Props> = ({ comment }) => {
+export const CommentItem: FC<Props> = memo(({ comment }) => {
   const user = useUserStore((state) => state.user);
   const { data: commentUser } = useQueryUser(comment.user_id);
+  const { timeCommented } = timeProcessing();
 
   return (
     <li>
@@ -49,9 +51,12 @@ export const CommentItem: FC<Props> = ({ comment }) => {
                 >
                   {commentUser?.userName ?? "匿名"}
                 </span>
-                <div className="rounded-md bg-[#deffe7] px-4 py-2 font-normal">
-                  {comment.content}
+                <div className="w-fit self-end rounded-md bg-[#deffe7] px-4 py-2 font-normal ">
+                  <Text>{comment.content}</Text>
                 </div>
+                <Text className="self-end px-2" color="gray" size="xs">
+                  {timeCommented(comment.time)}
+                </Text>
               </div>
             </div>
           </div>
@@ -59,4 +64,4 @@ export const CommentItem: FC<Props> = ({ comment }) => {
       </div>
     </li>
   );
-};
+});

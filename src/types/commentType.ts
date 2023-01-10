@@ -1,11 +1,6 @@
-export type Comment = {
-  id: string;
-  content: string;
-  spoiler: boolean;
-  created_at: string;
-  post_id: string;
-  user_id: string;
-};
+import { GetCommentsQuery } from "../generated/graphql";
+
+export type Comment = GetCommentsQuery["comments"][0];
 
 export type CommentInput = {
   content: string;
