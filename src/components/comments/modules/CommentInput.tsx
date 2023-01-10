@@ -16,7 +16,7 @@ export const CommentInput: FC<Props> = ({ postId }) => {
   const handleSubmit = useCommentHandler(postId);
 
   return (
-    <div className="fixed bottom-0 left-0 h-20 w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:h-40  md:py-6">
+    <div className="fixed bottom-0 left-0 min-h-[5rem] w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:min-h-[10rem]  md:py-6">
       <div className="flex items-center md:flex-col md:items-start  md:space-y-4">
         <div className="flex flex-col items-center pl-6 md:flex-row md:space-x-4">
           <Avatar

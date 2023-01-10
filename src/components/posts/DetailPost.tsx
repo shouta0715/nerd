@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComment";
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
+import { changeTimeToJa } from "../../hooks/utils/changeTimeToJa";
 import { MainComment } from "../comments/MainComment";
 import { PostTimer } from "./modules/PostTimer";
 
@@ -15,6 +16,10 @@ export const DetailPost: FC<Props> = ({ postId }) => {
   const { post } = useQueryPost(postId);
   const router = useRouter();
   useSubscriptionComment(postId);
+  const isStart =
+    new Date().getTime() - changeTimeToJa(post?.start_time).getTime() > 0;
+
+  console.log(isStart);
 
   return (
     <div className=" font-semibold">

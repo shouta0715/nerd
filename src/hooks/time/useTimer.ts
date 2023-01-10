@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { changeTimeToJa } from "../utils/changeTimeToJa";
 
 export const useTimer = (startTime: string) => {
   const [time, setTime] = useState({
@@ -7,13 +9,9 @@ export const useTimer = (startTime: string) => {
     minutes: 0,
     seconds: 0,
   });
-  const calcTimeToStart = useCallback(() => {
-    const UTCTime = new Date(startTime);
-    const japanTime = UTCTime.toLocaleString("ja-JP", {
-      timeZone: "Europe/London",
-    });
+  const calcTimeToStart = () => {
     const now = new Date();
-    const start = new Date(japanTime);
+    const start = changeTimeToJa(startTime);
 
     const diff = start.getTime() - now.getTime();
     const day = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -25,7 +23,7 @@ export const useTimer = (startTime: string) => {
     }
 
     return { day, hours, minutes, seconds };
-  }, []);
+  };
 
   useEffect(() => {
     const { day, hours, minutes, seconds } = calcTimeToStart();
@@ -60,7 +58,7 @@ export const useTimer = (startTime: string) => {
     return () => {
       clearInterval(countDown);
     };
-  }, [calcTimeToStart, time.day, time.hours, time.minutes, time.seconds]);
+  }, [time.day, time.hours, time.minutes, time.seconds]);
 
   return { time };
 };
