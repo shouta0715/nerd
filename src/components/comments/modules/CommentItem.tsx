@@ -43,7 +43,7 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
                   radius="xl"
                 />
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col space-y-1">
                 <span
                   className={`flex h-[38px] items-center  overflow-hidden ${
                     comment.user_id === user?.uid ? "self-end" : ""
@@ -51,10 +51,20 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
                 >
                   {commentUser?.userName ?? "匿名"}
                 </span>
-                <div className="w-fit self-end rounded-md bg-[#deffe7] px-4 py-2 font-normal ">
+                <div
+                  className={`w-fit rounded-md bg-[#deffe7] px-4 py-2 font-normal ${
+                    comment.user_id === user?.uid ? "self-end" : ""
+                  } `}
+                >
                   <Text>{comment.content}</Text>
                 </div>
-                <Text className="self-end px-2" color="gray" size="xs">
+                <Text
+                  className={`px-2 ${
+                    comment.user_id === user?.uid ? "self-end" : ""
+                  }`}
+                  color="gray"
+                  size="xs"
+                >
                   {timeCommented(comment.time)}
                 </Text>
               </div>
