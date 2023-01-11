@@ -3,6 +3,8 @@ import React, { FC } from "react";
 import { useQueryComments } from "../../hooks/comments/useQueryComments";
 import { CommentItem } from "./modules/CommentItem";
 import { CommentInput } from "./modules/CommentInput";
+import { useCommentTimeStore } from "../../store/comment/commentType";
+import { timeProcessing } from "../../hooks/utils/timeProcessing";
 
 type Props = {
   postId: string;
@@ -10,6 +12,8 @@ type Props = {
 
 export const MainComment: FC<Props> = ({ postId }) => {
   const { data: comments } = useQueryComments(postId);
+  const timer = useCommentTimeStore((state) => state.time);
+  const { timeToSecond } = timeProcessing();
 
   return (
     <div className="relative top-0 flex flex-1 flex-col overflow-hidden">
@@ -21,9 +25,11 @@ export const MainComment: FC<Props> = ({ postId }) => {
         scrollbarSize={10}
       >
         <ul className="w-full space-y-4  py-4">
-          {comments?.map((comment) => (
-            <CommentItem key={comment.id} comment={comment} />
-          ))}
+          {comments
+            ?.filter((comment) => comment.time <= timeToSecond(timer))
+            .map((comment) => (
+              <CommentItem key={comment.id} comment={comment} />
+            ))}
         </ul>
       </ScrollArea>
       <CommentInput postId={postId} />
