@@ -26,7 +26,7 @@ export const CommentInput: FC<Props> = ({ postId }) => {
             radius="xl"
           />
           <span className="hidden font-bold md:inline-block">
-            {user?.displayName}
+            {user?.displayName ?? "匿名"}
           </span>
           <span
             className={`w-[58px]  text-center text-xs font-semibold text-indigo-500 md:pl-0 ${

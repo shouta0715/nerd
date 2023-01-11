@@ -13,8 +13,10 @@ export const useGoogleSignIn = () => {
       );
       router.push("/");
       toast.success(`ようこそ ${user?.displayName}!`);
-    } catch (error) {
-      toast.error("ログインに失敗しました。もう一度やり直してください。");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (!(error.message === "Firebase: Error (auth/popup-closed-by-user)."))
+        toast.error("ログインに失敗しました。もう一度やり直してください。");
     }
   };
 

@@ -51,7 +51,7 @@ export const MainComment: FC<Props> = ({ postId }) => {
           <button
             onClick={useScrollBottom}
             color="blue"
-            className="absolute bottom-0 left-1/2 m-0 flex h-8 w-8 -translate-x-1/2 animate-bounce cursor-pointer  items-center justify-center rounded-full border-none bg-indigo-500  p-0 text-white"
+            className="absolute bottom-10 left-1/2 m-0 flex h-8 w-8 -translate-x-1/2 animate-bounce cursor-pointer  items-center justify-center rounded-full border-none bg-indigo-500  p-0 text-white"
           >
             <IconArrowBigDown className="fill-white" />
           </button>
