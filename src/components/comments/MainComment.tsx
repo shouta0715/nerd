@@ -65,7 +65,7 @@ export const MainComment: FC<Props> = ({ postId }) => {
       </ScrollArea>
       <ActionIcon
         onClick={() => interval.toggle()}
-        className="absolute right-3 bottom-24 border-2 border-solid border-orange-300"
+        className="absolute right-3 bottom-24 border-2 border-solid border-orange-300 md:bottom-44"
         size="xl"
         color="orange"
         variant="filled"
