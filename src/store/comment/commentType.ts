@@ -61,3 +61,13 @@ export const useCommentTimeStore = create<CommentTimeStore>((set, get) => ({
   setPostId: (postId: string) => set({ postId }),
   restPostId: () => set({ postId: "" }),
 }));
+
+type CommentScrollStore = {
+  isScroll: boolean;
+  setIsScroll: (isScroll: boolean) => void;
+};
+
+export const useCommentScrollStore = create<CommentScrollStore>((set) => ({
+  isScroll: false,
+  setIsScroll: (isScroll: boolean) => set({ isScroll }),
+}));
