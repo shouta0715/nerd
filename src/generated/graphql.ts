@@ -2344,7 +2344,7 @@ export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typena
 
 export const GetCommentsDocument = `
     query GetComments($post_id: uuid!) {
-  comments(order_by: {time: desc}, where: {post_id: {_eq: $post_id}}) {
+  comments(order_by: {time: asc}, where: {post_id: {_eq: $post_id}}) {
     user_id
     time
     spoiler
@@ -2371,7 +2371,10 @@ export const useGetCommentsQuery = <
     );
 export const SubscriptionCommentsDocument = `
     subscription SubscriptionComments($post_id: uuid!) {
-  comments(where: {post_id: {_eq: $post_id}}) {
+  comments(
+    order_by: {time: asc, created_at: asc}
+    where: {post_id: {_eq: $post_id}}
+  ) {
     user_id
     time
     spoiler

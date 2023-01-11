@@ -16,7 +16,10 @@ export const GET_COMMENTS = gql`
 
 export const SUBSCRIPTION_COMMENTS = gql`
   subscription SubscriptionComments($post_id: uuid!) {
-    comments(order_by: { time: asc }, where: { post_id: { _eq: $post_id } }) {
+    comments(
+      order_by: { time: asc, created_at: asc }
+      where: { post_id: { _eq: $post_id } }
+    ) {
       user_id
       time
       spoiler
