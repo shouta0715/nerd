@@ -44,7 +44,7 @@ export const MainComment: FC<Props> = ({ postId }) => {
         classNames={{
           thumb: "bg-indigo-500",
         }}
-        className=" mb-20  px-6 md:mb-44"
+        className=" mb-20 px-2  md:mb-44 md:px-6"
         scrollbarSize={10}
         onScrollPositionChange={onScrollPositionChange}
       >
