@@ -35,5 +35,12 @@ export const useScrollTrigger = ({ commentLength, ref }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentLength, ref]);
 
-  return { onScrollPositionChange };
+  const useScrollBottom = (): void => {
+    ref.current?.scrollTo({
+      top: ref.current?.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+  return { onScrollPositionChange, useScrollBottom };
 };
