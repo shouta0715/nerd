@@ -1,7 +1,11 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { ScrollArea } from "@mantine/core";
+import { ActionIcon, ScrollArea } from "@mantine/core";
 import React, { FC, useRef } from "react";
-import { IconArrowBigDown } from "@tabler/icons";
+import {
+  IconArrowBigDown,
+  IconPlayerPause,
+  IconPlayerPlay,
+} from "@tabler/icons";
 import { useQueryComments } from "../../hooks/comments/useQueryComments";
 import { CommentItem } from "./modules/CommentItem";
 import { CommentInput } from "./modules/CommentInput";
@@ -11,6 +15,7 @@ import {
 } from "../../store/comment/commentType";
 import { timeProcessing } from "../../hooks/utils/timeProcessing";
 import { useScrollTrigger } from "../../hooks/utils/useScrollTrigger";
+import { useGlobalTimerStore } from "../../store/global/globalStore";
 
 type Props = {
   postId: string;
@@ -29,6 +34,7 @@ export const MainComment: FC<Props> = ({ postId }) => {
     ref,
   });
 
+  const interval = useGlobalTimerStore((state) => state.interval);
   const isScroll = useCommentScrollStore((state) => state.isScroll);
 
   return (
@@ -56,6 +62,20 @@ export const MainComment: FC<Props> = ({ postId }) => {
             <IconArrowBigDown className="fill-white" />
           </button>
         )}
+        <ActionIcon
+          onClick={() => interval.toggle()}
+          className="absolute right-4 bottom-6 border-2 border-solid border-orange-300"
+          size="xl"
+          color="orange"
+          variant="filled"
+          radius="xl"
+        >
+          {interval.active ? (
+            <IconPlayerPause className="fill-white" />
+          ) : (
+            <IconPlayerPlay className="fill-white" />
+          )}
+        </ActionIcon>
       </ScrollArea>
 
       <CommentInput postId={postId} />
