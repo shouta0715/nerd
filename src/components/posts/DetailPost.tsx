@@ -3,9 +3,9 @@ import { ActionIcon, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { useSubscriptionComment } from "../../hooks/comments/useSubscriptionComment";
+
+import { useEnteredPost } from "../../hooks/posts/useEnteredPost";
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
-import { changeTimeToJa } from "../../hooks/utils/changeTimeToJa";
 import { MainComment } from "../comments/MainComment";
 import { Spinner } from "../loading/Spinner";
 import { PostCountUp } from "./modules/PostCountUp";
@@ -18,9 +18,7 @@ type Props = {
 export const DetailPost: FC<Props> = ({ postId }) => {
   const { post, isPostLoading } = useQueryPost(postId);
   const router = useRouter();
-  useSubscriptionComment(postId);
-  const isStart =
-    new Date().getTime() - changeTimeToJa(post?.start_time).getTime() > 0;
+  const isStart = useEnteredPost(postId, post?.start_time);
 
   if (isPostLoading)
     return (
