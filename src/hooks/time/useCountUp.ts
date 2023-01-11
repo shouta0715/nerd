@@ -1,12 +1,14 @@
 import { useInterval } from "@mantine/hooks";
 import { useEffect } from "react";
 import { useCommentTimeStore } from "../../store/comment/commentType";
+import { useGlobalTimerStore } from "../../store/global/globalStore";
 
 export const useCountUp = () => {
   const setTimer = useCommentTimeStore((state) => state.setTime);
   const time = useCommentTimeStore((state) => state.time);
-
+  const setInterval = useGlobalTimerStore((state) => state.setInterval);
   const interval = useInterval(setTimer, 1000);
+  setInterval(interval);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => interval.stop(), []);

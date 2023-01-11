@@ -1,11 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import { Button } from "@mantine/core";
 import React, { FC } from "react";
 import { useCountUp } from "../../../hooks/time/useCountUp";
 import { Panel } from "./Panel";
 
 export const PostCountUp: FC = () => {
-  const { seconds, minutes, hours, interval } = useCountUp();
+  const { seconds, minutes, hours } = useCountUp();
 
   return (
     <div className="my-4">
@@ -44,9 +43,6 @@ export const PostCountUp: FC = () => {
           <span className="text-sm font-bold md:text-sm ">秒</span>
         </div>
       </div>
-      <Button onClick={() => interval.toggle()}>
-        {interval.active ? "止める" : "始める"}
-      </Button>
     </div>
   );
 };
