@@ -62,21 +62,21 @@ export const MainComment: FC<Props> = ({ postId }) => {
             <IconArrowBigDown className="fill-white" />
           </button>
         )}
-        <ActionIcon
-          onClick={() => interval.toggle()}
-          className="absolute right-4 bottom-6 border-2 border-solid border-orange-300"
-          size="xl"
-          color="orange"
-          variant="filled"
-          radius="xl"
-        >
-          {interval.active ? (
-            <IconPlayerPause className="fill-white" />
-          ) : (
-            <IconPlayerPlay className="fill-white" />
-          )}
-        </ActionIcon>
       </ScrollArea>
+      <ActionIcon
+        onClick={() => interval.toggle()}
+        className="absolute right-3 bottom-24 border-2 border-solid border-orange-300"
+        size="xl"
+        color="orange"
+        variant="filled"
+        radius="xl"
+      >
+        {interval.active ? (
+          <IconPlayerPause className="fill-white" />
+        ) : (
+          <IconPlayerPlay className="fill-white" />
+        )}
+      </ActionIcon>
 
       <CommentInput postId={postId} />
     </div>
