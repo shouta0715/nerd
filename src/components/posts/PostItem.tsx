@@ -18,7 +18,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
     <div className=" group relative block h-full flex-1 overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0">
       <Link
         href={{
-          pathname: `/post/${post.category}/${post.id}`,
+          pathname: `/category/${post.category}/${post.id}`,
         }}
         className="absolute inset-0"
       />
