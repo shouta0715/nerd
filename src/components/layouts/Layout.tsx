@@ -5,6 +5,7 @@ import { Aside } from "./modules/Aside";
 import { Header } from "./modules/Header";
 import { Footer } from "./modules/Footer";
 import { Nav } from "./modules/Nav";
+import { CategoryNav } from "./modules/CategoryNav";
 
 type Props = {
   children: ReactNode;
@@ -12,14 +13,15 @@ type Props = {
 
 export const Layout: FC<Props> = ({ children }) => (
   <div className="min-w-screen min-h-screen ">
-    <Header />
-    <main className=" container  mx-auto  flex h-full w-full">
+    <div className=" container  mx-auto  flex h-full w-full">
       <Nav />
-      <ScrollArea className=" mt-16 mb-14 w-full flex-1 md:mb-0">
-        {children}
-      </ScrollArea>
+      <section className="mb-14 w-full flex-1 md:mb-0">
+        <Header />
+        <CategoryNav />
+        <ScrollArea>{children}</ScrollArea>
+      </section>
       <Aside />
-    </main>
+    </div>
     <Footer />
   </div>
 );

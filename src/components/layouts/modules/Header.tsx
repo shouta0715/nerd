@@ -1,36 +1,46 @@
+import { Avatar, Button, Indicator } from "@mantine/core";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { Autocomplete, ThemeIcon } from "@mantine/core";
-import { IconAdjustments, IconSearch } from "@tabler/icons";
-import { toast } from "react-toastify";
+import { useUserStore } from "../../../store/user/userState";
 
-export const Header: FC = () => (
-  <header className="md:shadow-non fixed top-0  z-50 h-16 w-full border-b border-l-0 border-t-0 border-r-0 border-solid   border-gray-200  md:border-none">
-    <div className="container mx-auto h-full bg-white">
-      <div className=" flex h-full items-center justify-center border-b border-l-0 border-t-0 border-r-0 border-none border-gray-200  shadow-sm md:ml-[12%] md:border-solid lg:mr-[33.3333%]">
-        <form className="flex h-full items-center justify-center space-x-4">
-          <Autocomplete
-            className=" w-72 text-2xl"
-            color="green"
-            placeholder="キーワードで検索"
-            data={["test"]}
-            size="md"
-            radius="xl"
-            icon={<IconSearch size={20} />}
+export const Header: FC = () => {
+  const user = useUserStore((state) => state.user);
+  const router = useRouter();
+
+  return (
+    <header className="w-full ">
+      <div className="flex items-center justify-between px-6 py-2  md:px-10">
+        <figure className="relative m-0 h-10 w-20 ">
+          <Image
+            className="h-full w-full object-contain"
+            src="/vercel.svg"
+            fill
+            alt="icon"
           />
-          <ThemeIcon
-            onClick={() => {
-              toast.error("エラーが発生しました");
-            }}
-            color="green"
-            variant="light"
-            className="cursor-pointer transition-transform active:scale-90"
-            size={36}
-            radius="md"
-          >
-            <IconAdjustments size={24} />
-          </ThemeIcon>
-        </form>
+        </figure>
+        <div>
+          {user && !user.isAnonymous ? (
+            <Indicator size={14} offset={5} withBorder color="teal">
+              <Avatar
+                src={user?.photoURL}
+                radius="xl"
+                size="md"
+                className="cursor-pointer"
+              />
+            </Indicator>
+          ) : (
+            <Button
+              onClick={() => router.push("/auth/login")}
+              size="xs"
+              radius="xl"
+              classNames={{}}
+            >
+              ログイン
+            </Button>
+          )}
+        </div>
       </div>
-    </div>
-  </header>
-);
+    </header>
+  );
+};
