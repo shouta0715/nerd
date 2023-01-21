@@ -6,7 +6,7 @@ export const PostLoading: FC = () => (
     {Array.from({ length: 4 }).map((_, i) => (
       <li
         key={`skelton-${i}`}
-        className="w-full animate-pulse border-x-0 border-y-0 border-b border-solid border-slate-200 p-2 md:p-4"
+        className="animate-pulse overflow-x-hidden border-x-0 border-y-0 border-b border-solid border-slate-200 p-2  md:p-4"
       >
         <div className="flex h-12 w-full items-center justify-between">
           <div className="h-10 w-10 rounded-full bg-slate-200" />
@@ -24,16 +24,16 @@ export const PostLoading: FC = () => (
         <div className="mx-auto mb-2 h-2 w-1/4 rounded bg-slate-200" />
         <div className="mb-6 flex items-center justify-center">
           <div className="mr-6 flex">
-            <div className="mr-2 h-[55px] w-[50px] rounded bg-slate-200" />
-            <div className="h-[55px] w-[50px] rounded bg-slate-200" />
+            <div className="mr-2 h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
+            <div className="h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
           </div>
           <div className="mr-6 flex ">
-            <div className="mr-2 h-[55px] w-[50px] rounded bg-slate-200" />
-            <div className="h-[55px] w-[50px] rounded bg-slate-200" />
+            <div className="mr-2 h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
+            <div className="h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
           </div>
           <div className=" flex">
-            <div className="mr-2 h-[55px] w-[50px] rounded bg-slate-200" />
-            <div className="h-[55px] w-[50px] rounded bg-slate-200" />
+            <div className="mr-2 h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
+            <div className="h-[46px] w-[40px] rounded bg-slate-200 md:h-[55px] md:w-[50px]" />
           </div>
         </div>
       </li>

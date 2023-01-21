@@ -15,7 +15,7 @@ export const PostItem: FC<Props> = memo(({ post }) => {
   const { data: user } = useQueryUser(post.user_id);
 
   return (
-    <div className=" group relative block h-full flex-1 overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0">
+    <li className=" group relative block h-full overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0">
       <Link
         href={{
           pathname: `/category/${post.category}/${post.id}`,
@@ -40,6 +40,6 @@ export const PostItem: FC<Props> = memo(({ post }) => {
           />
         </div>
       </div>
-    </div>
+    </li>
   );
 });
