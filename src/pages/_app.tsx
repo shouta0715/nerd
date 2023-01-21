@@ -16,7 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   useInitialize();
 
   return (
-    <ErrorBoundary fallback={<Error />}>
+    <ErrorBoundary FallbackComponent={Error}>
       <QueryClientProvider client={client}>
         <MantineProvider
           withGlobalStyles

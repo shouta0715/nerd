@@ -14,7 +14,7 @@ export const useQueryPost = (id: string) => {
       onError: (error: Error) => {
         console.log(error);
       },
-      enabled: isClient,
+      enabled: isClient && !!id,
       staleTime: 1000 * 60 * 5,
     }
   );
