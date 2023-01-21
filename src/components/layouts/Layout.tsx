@@ -1,6 +1,5 @@
 import { ScrollArea } from "@mantine/core";
 import React, { FC, ReactNode } from "react";
-
 import { Aside } from "./modules/Aside";
 import { Header } from "./modules/Header";
 import { Footer } from "./modules/Footer";

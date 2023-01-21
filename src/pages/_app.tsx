@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "react-error-boundary";
+import Head from "next/head";
 import queryClient from "../libs/queryClient";
 import "react-toastify/dist/ReactToastify.css";
 import { useInitialize } from "../hooks/useInitialize";
@@ -50,6 +51,9 @@ const App = ({ Component, pageProps }: AppProps) => {
             draggable
             pauseOnHover
           />
+          <Head>
+            <title>Anime</title>
+          </Head>
           <Component {...pageProps} />
           <ReactQueryDevtools initialIsOpen={false} />
         </MantineProvider>

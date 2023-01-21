@@ -1,4 +1,4 @@
-import { Anchor, Button, Paper, Text } from "@mantine/core";
+import { Button, Paper, Text } from "@mantine/core";
 import Link from "next/link";
 import React, { Dispatch, FC, memo } from "react";
 import { useGoogleSignIn } from "../../../hooks/auth/useGoogleSignIn";
@@ -17,9 +17,9 @@ export const ModalContent: FC<Props> = memo(({ setOpened }) => {
       <Text color="dimmed" size="sm" className="font-medium">
         ログインをすると他の人をフォローしたり、自分の投稿を保存することができます。
         <Link href="/">
-          <Anchor underline size="sm">
+          <Text underline size="sm" className="inline-block text-indigo-500">
             詳しくはこちら
-          </Anchor>
+          </Text>
         </Link>
       </Text>
       <Button
@@ -50,15 +50,17 @@ export const ModalContent: FC<Props> = memo(({ setOpened }) => {
       </Button>
       <Text color="dimmed" size="sm" className="font-medium">
         <Link href="/">
-          <Anchor size="sm" underline>
+          <Text underline size="sm" className="inline-block text-indigo-500">
             利用規約
-          </Anchor>
-          、
-          <Anchor size="sm" underline>
-            プライバシーポリシー
-          </Anchor>
-          を確認の上、ご利用ください。
+          </Text>
         </Link>
+        、
+        <Link href="/">
+          <Text underline size="sm" className="inline-block text-indigo-500">
+            プライバシーポリシー
+          </Text>
+        </Link>
+        を確認の上、ご利用ください。
       </Text>
     </Paper>
   );
