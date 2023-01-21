@@ -252,6 +252,7 @@ export enum Categories_Update_Column {
 export type Categories_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Categories_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Categories_Bool_Exp;
 };
 
@@ -441,6 +442,7 @@ export enum Comment_Likes_Update_Column {
 export type Comment_Likes_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Comment_Likes_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Comment_Likes_Bool_Exp;
 };
 
@@ -837,6 +839,7 @@ export type Comments_Updates = {
   _inc?: InputMaybe<Comments_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Comments_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Comments_Bool_Exp;
 };
 
@@ -1708,6 +1711,7 @@ export type Posts_Updates = {
   _inc?: InputMaybe<Posts_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Posts_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Posts_Bool_Exp;
 };
 
@@ -1936,6 +1940,7 @@ export enum Profiles_Update_Column {
 export type Profiles_Updates = {
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Profiles_Set_Input>;
+  /** filter the rows which have to be updated */
   where: Profiles_Bool_Exp;
 };
 
@@ -2341,10 +2346,20 @@ export type GetPostQueryVariables = Exact<{
 
 export type GetPostQuery = { __typename?: 'query_root', posts_by_pk?: { __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, number: number, content?: string | null, category: Categories_Enum, author_name?: string | null } | null };
 
+export type GetPostByCategoryQueryVariables = Exact<{
+  category: Categories_Enum;
+}>;
+
+
+export type GetPostByCategoryQuery = { __typename?: 'query_root', posts: Array<{ __typename?: 'posts', title: string, user_id: string, sub_title?: string | null, start_time?: any | null, spoiler: boolean, is_write_anonymous: boolean, id: any, created_at: any, content?: string | null, category: Categories_Enum, author_name?: string | null, number: number }> };
+
 
 export const GetCommentsDocument = `
     query GetComments($post_id: uuid!) {
-  comments(order_by: {time: asc}, where: {post_id: {_eq: $post_id}}) {
+  comments(
+    order_by: {time: asc, created_at: asc}
+    where: {post_id: {_eq: $post_id}}
+  ) {
     user_id
     time
     spoiler
@@ -2473,5 +2488,37 @@ export const useGetPostQuery = <
     useQuery<GetPostQuery, TError, TData>(
       ['GetPost', variables],
       fetcher<GetPostQuery, GetPostQueryVariables>(client, GetPostDocument, variables, headers),
+      options
+    );
+export const GetPostByCategoryDocument = `
+    query GetPostByCategory($category: categories_enum!) {
+  posts(where: {category: {_eq: $category}}) {
+    title
+    user_id
+    sub_title
+    start_time
+    spoiler
+    is_write_anonymous
+    id
+    created_at
+    content
+    category
+    author_name
+    number
+  }
+}
+    `;
+export const useGetPostByCategoryQuery = <
+      TData = GetPostByCategoryQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetPostByCategoryQueryVariables,
+      options?: UseQueryOptions<GetPostByCategoryQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetPostByCategoryQuery, TError, TData>(
+      ['GetPostByCategory', variables],
+      fetcher<GetPostByCategoryQuery, GetPostByCategoryQueryVariables>(client, GetPostByCategoryDocument, variables, headers),
       options
     );
