@@ -7,6 +7,7 @@ import React, { FC } from "react";
 import { useEnteredPost } from "../../hooks/posts/useEnteredPost";
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
 import { MainComment } from "../comments/MainComment";
+import { Spinner } from "../layouts/loading/Spinner";
 
 import { PostCountUp } from "./modules/PostCountUp";
 import { PostTimer } from "./modules/PostTimer";
@@ -16,9 +17,17 @@ type Props = {
 };
 
 export const DetailPost: FC<Props> = ({ postId }) => {
-  const { post } = useQueryPost(postId);
+  const { post, isLoading } = useQueryPost(postId);
   const router = useRouter();
-  const isStart = useEnteredPost(postId, post?.start_time);
+  const { isStart } = useEnteredPost(postId, post?.start_time);
+
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[999] h-screen w-screen bg-white">
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className=" font-semibold">

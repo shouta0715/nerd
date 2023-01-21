@@ -5,7 +5,7 @@ export const useQueryPost = (id: string) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data } = useGetPostQuery<GetPostQuery, Error>(
+  const { data, isLoading } = useGetPostQuery<GetPostQuery, Error>(
     client,
     {
       id,
@@ -21,5 +21,6 @@ export const useQueryPost = (id: string) => {
 
   return {
     post: data?.posts_by_pk,
+    isLoading,
   };
 };
