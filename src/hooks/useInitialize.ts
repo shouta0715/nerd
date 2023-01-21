@@ -16,6 +16,7 @@ export const useInitialize = () => {
   const setIsClient = useGlobalStore((state) => state.setIsClient);
   const setIsWsClient = useGlobalStore((state) => state.setIsWsClient);
   const setWsClient = useGlobalStore((state) => state.setWsClient);
+  const setAuthLoading = useGlobalStore((state) => state.setAuthLoading);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -31,6 +32,7 @@ export const useInitialize = () => {
           setUser(user);
           setIsClient(true);
           setIsWsClient(true);
+          setAuthLoading(false);
         } else {
           const userRef = doc(db, "user_meta", user.uid);
           unSub = onSnapshot(userRef, async () => {
@@ -45,6 +47,7 @@ export const useInitialize = () => {
               setUser(user);
               setIsClient(true);
               setIsWsClient(true);
+              setAuthLoading(false);
             }
           });
         }

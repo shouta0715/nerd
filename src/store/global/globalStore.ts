@@ -14,6 +14,8 @@ type GlobalState = {
   setWsClient: (wsClient: Client) => void;
   isWsClient: boolean;
   setIsWsClient: (isWsClient: boolean) => void;
+  authLoading: boolean;
+  setAuthLoading: (authLoading: boolean) => void;
 };
 
 export const useGlobalStore = create<GlobalState>((set) => ({
@@ -28,6 +30,8 @@ export const useGlobalStore = create<GlobalState>((set) => ({
   setWsClient: (wsClient) => set(() => ({ wsClient })),
   isWsClient: false,
   setIsWsClient: (isWsClient) => set(() => ({ isWsClient })),
+  authLoading: true,
+  setAuthLoading: (authLoading) => set(() => ({ authLoading })),
 }));
 
 type interval = {
