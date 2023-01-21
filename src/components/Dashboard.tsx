@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { useUserStore } from "../store/user/userState";
+import { PostLoading } from "./layouts/loading/PostLoading";
 import { Spinner } from "./loading/Spinner";
 import { MainPost } from "./posts/MainPost";
 
@@ -9,9 +10,11 @@ export const Dashboard: FC = () => {
   return (
     <div>
       {user ? (
-        <MainPost />
+        <Suspense fallback={<PostLoading />}>
+          <MainPost />
+        </Suspense>
       ) : (
-        <div className="fixed inset-0 z-[999] h-screen w-screen bg-gray-400/70">
+        <div className="fixed inset-0 z-[999] h-screen w-screen bg-white">
           <Spinner />
         </div>
       )}

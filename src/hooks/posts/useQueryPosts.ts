@@ -5,7 +5,7 @@ import { useGlobalStore } from "../../store/global/globalStore";
 export const useQueryPosts = () => {
   const client = useGlobalStore((state) => state.client);
 
-  const { data, isLoading } = useGetPostsQuery<GetPostsQuery, Error>(
+  const { data } = useGetPostsQuery<GetPostsQuery, Error>(
     client,
     {},
     {
@@ -15,5 +15,5 @@ export const useQueryPosts = () => {
     }
   );
 
-  return { posts: data?.posts, isLoading };
+  return { posts: data?.posts };
 };
