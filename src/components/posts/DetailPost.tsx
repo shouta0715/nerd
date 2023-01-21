@@ -7,6 +7,7 @@ import React, { FC } from "react";
 import { useEnteredPost } from "../../hooks/posts/useEnteredPost";
 import { useQueryPost } from "../../hooks/posts/useQueryPost";
 import { MainComment } from "../comments/MainComment";
+
 import { PostCountUp } from "./modules/PostCountUp";
 import { PostTimer } from "./modules/PostTimer";
 
@@ -48,6 +49,7 @@ export const DetailPost: FC<Props> = ({ postId }) => {
             )}
           </div>
         </div>
+
         <MainComment postId={postId} />
       </div>
     </div>

@@ -12,6 +12,7 @@ export const useQueryPosts = () => {
       onError: (error: Error) => {
         toast.error(error.message);
       },
+      suspense: true,
     }
   );
 

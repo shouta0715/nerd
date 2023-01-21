@@ -7,6 +7,7 @@ import {
   Container,
   Group,
 } from "@mantine/core";
+import { useRouter } from "next/router";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -51,6 +52,7 @@ const useStyles = createStyles((theme) => ({
 
 export const Error: FC = () => {
   const { classes } = useStyles();
+  const router = useRouter();
 
   return (
     <Container className={classes.root}>
@@ -66,7 +68,14 @@ export const Error: FC = () => {
         address, or the page has been moved to another URL.
       </Text>
       <Group position="center">
-        <Button variant="subtle" size="md">
+        <Button
+          onClick={async () => {
+            await router.push("/");
+            router.reload();
+          }}
+          variant="subtle"
+          size="md"
+        >
           Take me back to home page
         </Button>
       </Group>
