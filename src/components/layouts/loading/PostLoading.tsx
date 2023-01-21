@@ -3,7 +3,7 @@ import React, { FC } from "react";
 
 export const PostLoading: FC = () => (
   <ul className="w-full p-4 md:p-6">
-    {Array.from({ length: 10 }).map((_, i) => (
+    {Array.from({ length: 4 }).map((_, i) => (
       <li
         key={`skelton-${i}`}
         className="animate-pulse border-x-0 border-y-0 border-b border-solid border-slate-200 p-2 md:p-4"

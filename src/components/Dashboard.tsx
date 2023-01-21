@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { useUserStore } from "../store/user/userState";
 import { PostLoading } from "./layouts/loading/PostLoading";
-import { Spinner } from "./loading/Spinner";
+import { Spinner } from "./layouts/loading/Spinner";
 import { MainPost } from "./posts/MainPost";
 
 export const Dashboard: FC = () => {
