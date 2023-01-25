@@ -14,7 +14,7 @@ export const useQueryUser = (uid: string) =>
   useQuery<User, Error>({
     queryKey: ["user", uid],
     queryFn: () => getUser(uid),
-    enabled: !!uid,
+    enabled: false,
     staleTime: Infinity,
     cacheTime: Infinity,
   });

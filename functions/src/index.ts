@@ -19,10 +19,6 @@ export const setCustomClaims = functions.auth.user().onCreate(async (user) => {
     await admin.auth().setCustomUserClaims(user.uid, customClaims);
     await admin.firestore().collection("user_meta").doc(user.uid).create({
       refreshTime: admin.firestore.FieldValue.serverTimestamp(),
-      userId: user.uid,
-      userPhotoURL: user.photoURL,
-      userName: user.displayName,
-      userIsAnonymous: user.providerData.length? false : true,
     });
   } catch (e) {
     console.log(e);
