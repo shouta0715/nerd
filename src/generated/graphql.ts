@@ -3205,7 +3205,10 @@ export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Ar
 
 export const GetCommentsDocument = `
     query GetComments($invite_id: uuid!) {
-  comments(where: {invite_id: {_eq: $invite_id}}) {
+  comments(
+    where: {invite_id: {_eq: $invite_id}}
+    order_by: {time: asc, created_at: asc}
+  ) {
     user_id
     updated_at
     time
@@ -3272,7 +3275,10 @@ export const useInsertCommentMutation = <
 useInsertCommentMutation.fetcher = (client: GraphQLClient, variables: InsertCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertCommentMutation, InsertCommentMutationVariables>(client, InsertCommentDocument, variables, headers);
 export const SubscriptionCommentsDocument = `
     subscription SubscriptionComments($invite_id: uuid!) {
-  comments(where: {invite_id: {_eq: $invite_id}}) {
+  comments(
+    where: {invite_id: {_eq: $invite_id}}
+    order_by: {time: asc, created_at: asc}
+  ) {
     user_id
     updated_at
     time
@@ -3289,7 +3295,7 @@ export const SubscriptionCommentsDocument = `
     `;
 export const GetInvitesDocument = `
     query GetInvites {
-  invites {
+  invites(order_by: {created_at: desc}) {
     id
     user_id
     anonymous

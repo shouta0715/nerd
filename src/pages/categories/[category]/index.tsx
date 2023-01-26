@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { InviteItem } from "../../../components/invites/InviteItem";
@@ -37,7 +37,7 @@ const Index: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
   const queryKey = useGetInvitesByCategoryQuery.getKey({
     category:
@@ -59,6 +59,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
+    revalidate: 5,
   };
 };
 

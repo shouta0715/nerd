@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 
 export const GET_INVITES = gql`
   query GetInvites {
-    invites {
+    invites(order_by: { created_at: desc }) {
       id
       user_id
       anonymous

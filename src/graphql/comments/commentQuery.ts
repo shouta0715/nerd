@@ -2,7 +2,10 @@ import { gql } from "graphql-request";
 
 export const GET_COMMENTS = gql`
   query GetComments($invite_id: uuid!) {
-    comments(where: { invite_id: { _eq: $invite_id } }) {
+    comments(
+      where: { invite_id: { _eq: $invite_id } }
+      order_by: { time: asc, created_at: asc }
+    ) {
       user_id
       updated_at
       time
@@ -38,7 +41,10 @@ export const INSERT_COMMENT = gql`
 
 export const SUBSCRIPTION_COMMENTS = gql`
   subscription SubscriptionComments($invite_id: uuid!) {
-    comments(where: { invite_id: { _eq: $invite_id } }) {
+    comments(
+      where: { invite_id: { _eq: $invite_id } }
+      order_by: { time: asc, created_at: asc }
+    ) {
       user_id
       updated_at
       time
