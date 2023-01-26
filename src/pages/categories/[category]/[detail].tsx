@@ -7,7 +7,7 @@ const Detail: NextPage = () => {
   const router = useRouter();
   const { detail } = router.query as { detail: string };
 
-  return <DetailInvite postId={detail} />;
+  return <DetailInvite invite_id={detail} />;
 };
 
 export default Detail;

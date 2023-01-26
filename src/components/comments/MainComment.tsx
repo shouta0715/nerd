@@ -18,11 +18,11 @@ import { useScrollTrigger } from "../../hooks/utils/useScrollTrigger";
 import { useGlobalTimerStore } from "../../store/global/globalStore";
 
 type Props = {
-  postId: string;
+  invite_id: string;
 };
 
-export const MainComment: FC<Props> = ({ postId }) => {
-  const { data: comments } = useQueryComments(postId);
+export const MainComment: FC<Props> = ({ invite_id }) => {
+  const { data: comments } = useQueryComments(invite_id);
   const timer = useCommentTimeStore((state) => state.time);
   const { timeToSecond } = timeProcessing();
   const ref = useRef<HTMLDivElement>(null);
@@ -78,7 +78,7 @@ export const MainComment: FC<Props> = ({ postId }) => {
         )}
       </ActionIcon>
 
-      <CommentInput postId={postId} />
+      <CommentInput invite_id={invite_id} />
     </div>
   );
 };

@@ -5,11 +5,11 @@ import { Panel } from "./Panel";
 
 type Props = {
   start_time: string;
-  post_id: string;
+  invite_id: string;
   parent: "post" | "comment";
 };
 
-export const InviteTimer: FC<Props> = ({ start_time, post_id, parent }) => {
+export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
   const { time } = useTimer(start_time);
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");
@@ -26,7 +26,7 @@ export const InviteTimer: FC<Props> = ({ start_time, post_id, parent }) => {
             {hours.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-hours-${character}-${index}-${post_id}`}
+                key={`${parent}-hours-${character}-${index}-${invite_id}`}
               />
             ))}
           </div>
@@ -37,7 +37,7 @@ export const InviteTimer: FC<Props> = ({ start_time, post_id, parent }) => {
             {minutes.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-minutes-${character}-${index}-${post_id}`}
+                key={`${parent}-minutes-${character}-${index}-${invite_id}`}
               />
             ))}
           </div>
@@ -48,7 +48,7 @@ export const InviteTimer: FC<Props> = ({ start_time, post_id, parent }) => {
             {seconds.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-seconds-${character}-${index}-${post_id}`}
+                key={`${parent}-seconds-${character}-${index}-${invite_id}`}
               />
             ))}
           </div>

@@ -3167,21 +3167,21 @@ export type GetCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string }> };
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 export type InsertCommentMutationVariables = Exact<{
   object: Comments_Insert_Input;
 }>;
 
 
-export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, updated_at: any, user_id: string, time: number, invite_id: any, id: any, created_at: any } | null };
+export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, updated_at: any, user_id: string, time: number, invite_id: any, id: any, created_at: any, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
 
 export type SubscriptionCommentsSubscriptionVariables = Exact<{
   invite_id: Scalars['uuid'];
 }>;
 
 
-export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string }> };
+export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 export type GetInvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3213,6 +3213,10 @@ export const GetCommentsDocument = `
     id
     created_at
     content
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;
@@ -3245,6 +3249,10 @@ export const InsertCommentDocument = `
     invite_id
     id
     created_at
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;
@@ -3272,6 +3280,10 @@ export const SubscriptionCommentsDocument = `
     id
     created_at
     content
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;

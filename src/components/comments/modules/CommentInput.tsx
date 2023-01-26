@@ -6,14 +6,14 @@ import { useCommentInputStore } from "../../../store/comment/commentType";
 import { useUserStore } from "../../../store/user/userState";
 
 type Props = {
-  postId: string;
+  invite_id: string;
 };
 
-export const CommentInput: FC<Props> = ({ postId }) => {
+export const CommentInput: FC<Props> = ({ invite_id }) => {
   const user = useUserStore((state) => state.user);
   const comment = useCommentInputStore((state) => state.comment);
   const setComment = useCommentInputStore((state) => state.setComment);
-  const handleSubmit = useCommentHandler(postId);
+  const handleSubmit = useCommentHandler(invite_id);
 
   return (
     <div className="fixed bottom-0 left-0 min-h-[5rem] w-full border-x-0 border-b-0 border-t border-solid border-gray-200 bg-white py-2  md:min-h-[10rem]  md:py-6">

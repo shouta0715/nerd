@@ -10,6 +10,10 @@ export const GET_COMMENTS = gql`
       id
       created_at
       content
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;
@@ -24,6 +28,10 @@ export const INSERT_COMMENT = gql`
       invite_id
       id
       created_at
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;
@@ -36,9 +44,12 @@ export const SUBSCRIPTION_COMMENTS = gql`
       time
       invite_id
       id
-
       created_at
       content
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;

@@ -1,6 +1,5 @@
 import { Avatar, Text } from "@mantine/core";
 import React, { FC, memo } from "react";
-import { useQueryUser } from "../../../hooks/users/useQueryUser";
 import { timeProcessing } from "../../../hooks/utils/timeProcessing";
 import { useUserStore } from "../../../store/user/userState";
 import { Comment } from "../../../types/commentType";
@@ -11,7 +10,6 @@ type Props = {
 
 export const CommentItem: FC<Props> = memo(({ comment }) => {
   const user = useUserStore((state) => state.user);
-  const { data: commentUser } = useQueryUser(comment.user_id);
   const { timeCommented } = timeProcessing();
 
   return (
@@ -37,11 +35,7 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
                   comment.user_id === user?.uid ? "ml-4" : "mr-4"
                 } `}
               >
-                <Avatar
-                  className=""
-                  src={commentUser?.userPhotoURL}
-                  radius="xl"
-                />
+                <Avatar className="" src={comment.user.photo_url} radius="xl" />
               </div>
               <div className="flex flex-col space-y-1">
                 <span
@@ -49,7 +43,9 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
                     comment.user_id === user?.uid ? "self-end" : ""
                   } `}
                 >
-                  {commentUser?.userName ?? "匿名"}
+                  {comment.user.user_name !== "anonymous"
+                    ? comment.user.user_name
+                    : "匿名"}
                 </span>
                 <div
                   className={`w-fit rounded-md bg-[#deffe7] px-4 py-2 font-normal ${

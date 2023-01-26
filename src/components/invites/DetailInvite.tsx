@@ -13,13 +13,13 @@ import { InviteCountUp } from "./modules/InviteCountUp";
 import { InviteTimer } from "./modules/InviteTimer";
 
 type Props = {
-  postId: string;
+  invite_id: string;
 };
 
-export const DetailInvite: FC<Props> = ({ postId }) => {
-  const { invite, isLoading } = useQueryInvite(postId);
+export const DetailInvite: FC<Props> = ({ invite_id }) => {
+  const { invite, isLoading } = useQueryInvite(invite_id);
   const router = useRouter();
-  const { isStart } = useEnteredInvite(postId, invite?.start_time);
+  const { isStart } = useEnteredInvite(invite_id, invite?.start_time);
 
   if (isLoading) {
     return (
@@ -52,14 +52,14 @@ export const DetailInvite: FC<Props> = ({ postId }) => {
             ) : (
               <InviteTimer
                 parent="comment"
-                post_id={postId}
+                invite_id={invite_id}
                 start_time={invite?.start_time}
               />
             )}
           </div>
         </div>
 
-        <MainComment postId={postId} />
+        <MainComment invite_id={invite_id} />
       </div>
     </div>
   );
