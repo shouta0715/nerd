@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -320,6 +320,7 @@ export type Comments = {
   /** An object relationship */
   invite: Invites;
   invite_id: Scalars['uuid'];
+  spoiler: Scalars['Boolean'];
   time: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
   /** An object relationship */
@@ -335,7 +336,23 @@ export type Comments_Aggregate = {
 };
 
 export type Comments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Comments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Comments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
 };
 
 export type Comments_Aggregate_Bool_Exp_Count = {
@@ -411,6 +428,7 @@ export type Comments_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   invite?: InputMaybe<Invites_Bool_Exp>;
   invite_id?: InputMaybe<Uuid_Comparison_Exp>;
+  spoiler?: InputMaybe<Boolean_Comparison_Exp>;
   time?: InputMaybe<Int_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -435,6 +453,7 @@ export type Comments_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   invite?: InputMaybe<Invites_Obj_Rel_Insert_Input>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
   time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -510,6 +529,7 @@ export type Comments_Order_By = {
   id?: InputMaybe<Order_By>;
   invite?: InputMaybe<Invites_Order_By>;
   invite_id?: InputMaybe<Order_By>;
+  spoiler?: InputMaybe<Order_By>;
   time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -532,11 +552,25 @@ export enum Comments_Select_Column {
   /** column name */
   InviteId = 'invite_id',
   /** column name */
+  Spoiler = 'spoiler',
+  /** column name */
   Time = 'time',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
+}
+
+/** select "comments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "comments" */
+export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Spoiler = 'spoiler'
+}
+
+/** select "comments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "comments" */
+export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  Spoiler = 'spoiler'
 }
 
 /** input type for updating data in table "comments" */
@@ -545,6 +579,7 @@ export type Comments_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
   time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
@@ -597,6 +632,7 @@ export type Comments_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  spoiler?: InputMaybe<Scalars['Boolean']>;
   time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
@@ -623,6 +659,8 @@ export enum Comments_Update_Column {
   Id = 'id',
   /** column name */
   InviteId = 'invite_id',
+  /** column name */
+  Spoiler = 'spoiler',
   /** column name */
   Time = 'time',
   /** column name */
@@ -3124,6 +3162,27 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetCommentsQueryVariables = Exact<{
+  invite_id: Scalars['uuid'];
+}>;
+
+
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string }> };
+
+export type InsertCommentMutationVariables = Exact<{
+  object: Comments_Insert_Input;
+}>;
+
+
+export type InsertCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, updated_at: any, user_id: string, time: number, invite_id: any, id: any, created_at: any } | null };
+
+export type SubscriptionCommentsSubscriptionVariables = Exact<{
+  invite_id: Scalars['uuid'];
+}>;
+
+
+export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'comments', user_id: string, updated_at: any, time: number, invite_id: any, id: any, created_at: any, content: string }> };
+
 export type GetInvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3144,6 +3203,78 @@ export type GetInvitesByCategoryQueryVariables = Exact<{
 export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 
+export const GetCommentsDocument = `
+    query GetComments($invite_id: uuid!) {
+  comments(where: {invite_id: {_eq: $invite_id}}) {
+    user_id
+    updated_at
+    time
+    invite_id
+    id
+    created_at
+    content
+  }
+}
+    `;
+export const useGetCommentsQuery = <
+      TData = GetCommentsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCommentsQueryVariables,
+      options?: UseQueryOptions<GetCommentsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCommentsQuery, TError, TData>(
+      ['GetComments', variables],
+      fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers),
+      options
+    );
+
+useGetCommentsQuery.getKey = (variables: GetCommentsQueryVariables) => ['GetComments', variables];
+;
+
+useGetCommentsQuery.fetcher = (client: GraphQLClient, variables: GetCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers);
+export const InsertCommentDocument = `
+    mutation InsertComment($object: comments_insert_input!) {
+  insert_comments_one(object: $object) {
+    content
+    updated_at
+    user_id
+    time
+    invite_id
+    id
+    created_at
+  }
+}
+    `;
+export const useInsertCommentMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<InsertCommentMutation, TError, InsertCommentMutationVariables, TContext>(
+      ['InsertComment'],
+      (variables?: InsertCommentMutationVariables) => fetcher<InsertCommentMutation, InsertCommentMutationVariables>(client, InsertCommentDocument, variables, headers)(),
+      options
+    );
+useInsertCommentMutation.fetcher = (client: GraphQLClient, variables: InsertCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertCommentMutation, InsertCommentMutationVariables>(client, InsertCommentDocument, variables, headers);
+export const SubscriptionCommentsDocument = `
+    subscription SubscriptionComments($invite_id: uuid!) {
+  comments(where: {invite_id: {_eq: $invite_id}}) {
+    user_id
+    updated_at
+    time
+    invite_id
+    id
+    created_at
+    content
+  }
+}
+    `;
 export const GetInvitesDocument = `
     query GetInvites {
   invites {

@@ -15,7 +15,7 @@ interface Payload extends ExecutionResult {
   };
 }
 
-export const useSubscriptionComment = (postId: string) => {
+export const useSubscriptionComment = (invite_id: string) => {
   const queryClient = useQueryClient();
   const wsClient = useGlobalStore((state) => state.wsClient);
   useEffect(() => {
@@ -24,13 +24,13 @@ export const useSubscriptionComment = (postId: string) => {
       {
         query: SUBSCRIPTION_COMMENTS,
         variables: {
-          post_id: postId,
+          invite_id,
         },
       },
       {
         next: (payload: Payload) => {
           queryClient.setQueryData<Comment[]>(
-            [postId, "comments"],
+            [invite_id, "comments"],
             payload.data?.comments
           );
         },

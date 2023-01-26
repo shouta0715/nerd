@@ -7,7 +7,7 @@ import {
 import { useMutateComment } from "../comments/useMutateComment";
 import { timeProcessing } from "../utils/timeProcessing";
 
-export const useCommentHandler = (post_id: string) => {
+export const useCommentHandler = (invite_id: string) => {
   const mutateComment = useMutateComment();
   const resetComment = useCommentInputStore((state) => state.resetComment);
   const getTime = useCommentTimeStore((state) => state.getTime);
@@ -21,14 +21,14 @@ export const useCommentHandler = (post_id: string) => {
       mutateComment.mutateAsync({
         object: {
           ...object,
-          post_id,
+          invite_id,
           time: timeToSecond(getTime()),
         },
       });
       resetComment();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [post_id]
+    [invite_id]
   );
 
   return handleSubmit;
