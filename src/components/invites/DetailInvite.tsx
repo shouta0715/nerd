@@ -16,7 +16,7 @@ type Props = {
   postId: string;
 };
 
-export const DetailPost: FC<Props> = ({ postId }) => {
+export const DetailInvite: FC<Props> = ({ postId }) => {
   const { invite, isLoading } = useQueryInvite(postId);
   const router = useRouter();
   const { isStart } = useEnteredInvite(postId, invite?.start_time);

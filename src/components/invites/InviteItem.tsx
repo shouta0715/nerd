@@ -11,10 +11,10 @@ type Props = {
 };
 
 export const InviteItem: FC<Props> = memo(({ invite }) => (
-  <li className=" group relative block h-full overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0">
+  <li className=" group relative block h-full w-full overflow-x-hidden border-y border-x-0 border-t-0 border-solid border-gray-300 py-4 first:pt-0">
     <Link
       href={{
-        pathname: `/category/${invite.category}/${invite.id}`,
+        pathname: `/categories/${invite.category}/${invite.id}`,
       }}
       className="absolute inset-0"
     />

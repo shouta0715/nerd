@@ -1,6 +1,7 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetServerSideProps, NextPage } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 import { InviteItem } from "../../../components/invites/InviteItem";
 import { Layout } from "../../../components/layouts/Layout";
@@ -12,8 +13,9 @@ import {
 import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
 
 const Index: NextPage = () => {
+  const router = useRouter();
   const { isLoading, invites } = useQueryInvitesByCategory(
-    Categories_Enum.Anime
+    Categories_Enum[router.query.category as keyof typeof Categories_Enum]
   );
 
   if (isLoading) {
@@ -35,17 +37,21 @@ const Index: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
   const queryKey = useGetInvitesByCategoryQuery.getKey({
-    category: Categories_Enum.Anime,
+    category:
+      Categories_Enum[context.params?.category as keyof typeof Categories_Enum],
   });
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
   await queryClient.prefetchQuery(
     queryKey,
     useGetInvitesByCategoryQuery.fetcher(request, {
-      category: Categories_Enum.Anime,
+      category:
+        Categories_Enum[
+          context.params?.category as keyof typeof Categories_Enum
+        ],
     })
   );
 
