@@ -2,17 +2,20 @@ import { ScrollArea } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { Categories_Enum } from "../../../generated/graphql";
+import { categoryToJa } from "../../../hooks/utils/useCategoryToJa";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
 
   return (
-    <nav className=" sticky top-0 z-[50]  w-full border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">
+    <nav className=" sticky top-0 z-[50]  h-10 border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">
       <ScrollArea
         type="never"
-        className="flex w-full "
+        className="flex"
         classNames={{
-          viewport: "px-4 font-bold text-base text-gray-500",
+          viewport:
+            "px-4 font-bold text-base text-gray-500 h-full whitespace-nowrap ",
         }}
       >
         <Link
@@ -23,22 +26,21 @@ export const CategoryNav: FC = () => {
         >
           All
         </Link>
-        <Link
-          href="/category/Anime"
-          className={` mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 ${
-            router.pathname === "/category/Anime" ? "border-b-2 text-black" : ""
-          }`}
-        >
-          Anime
-        </Link>
-        <Link
-          href="/category/Movie"
-          className={`mr-6 inline-block border-x-0 border-y-0 border-solid px-2 py-2 ${
-            router.pathname === "/category/Movie" ? "border-b-2 text-black" : ""
-          }`}
-        >
-          Movie
-        </Link>
+        {Object.keys(Categories_Enum).map((enum_category) => (
+          <Link
+            key={`nav-${enum_category}`}
+            href={`/categories/${enum_category}`}
+            className={` mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 ${
+              router.asPath === `/categories/${enum_category}`
+                ? "border-b-2 text-black"
+                : ""
+            }`}
+          >
+            {categoryToJa(
+              Categories_Enum[enum_category as keyof typeof Categories_Enum]
+            )}
+          </Link>
+        ))}
       </ScrollArea>
     </nav>
   );

@@ -3,7 +3,7 @@ import { useCommentTimeStore } from "../../store/comment/commentType";
 import { useSubscriptionComment } from "../comments/useSubscriptionComment";
 import { changeTimeToJa } from "../utils/changeTimeToJa";
 
-export const useEnteredPost = (postId: string, start_time: string) => {
+export const useEnteredInvite = (postId: string, start_time: string) => {
   const statePostId = useCommentTimeStore((state) => state.postId);
   const setPostId = useCommentTimeStore((state) => state.setPostId);
   const resetTime = useCommentTimeStore((state) => state.resetTime);

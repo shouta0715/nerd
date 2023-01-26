@@ -1,11 +1,11 @@
-import { GetPostQuery, useGetPostQuery } from "../../generated/graphql";
+import { GetInviteQuery, useGetInviteQuery } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
 
-export const useQueryPost = (id: string) => {
+export const useQueryInvite = (id: string) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data, isLoading } = useGetPostQuery<GetPostQuery, Error>(
+  const { data, isLoading } = useGetInviteQuery<GetInviteQuery, Error>(
     client,
     {
       id,
@@ -20,7 +20,7 @@ export const useQueryPost = (id: string) => {
   );
 
   return {
-    post: data?.posts_by_pk,
+    invite: data?.invites_by_pk,
     isLoading,
   };
 };

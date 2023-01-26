@@ -1,20 +1,26 @@
-import React, { FC, Suspense } from "react";
-import { useGlobalStore } from "../store/global/globalStore";
-import { PostLoading } from "./layouts/loading/PostLoading";
-import { MainPost } from "./posts/MainPost";
+import React, { FC } from "react";
+import { useQueryInvites } from "../hooks/invites/useQueryInvites";
+import { InviteItem } from "./invites/InviteItem";
+import { Layout } from "./layouts/Layout";
+import { InviteLoading } from "./layouts/loading/InviteLoading";
 
 export const Dashboard: FC = () => {
-  const authLoading = useGlobalStore((state) => state.authLoading);
+  const { invites, isLoading } = useQueryInvites();
+
+  if (isLoading)
+    return (
+      <Layout>
+        <InviteLoading />
+      </Layout>
+    );
 
   return (
     <div>
-      {authLoading ? (
-        <PostLoading />
-      ) : (
-        <Suspense fallback={<PostLoading />}>
-          <MainPost />
-        </Suspense>
-      )}
+      <ul className="relative p-4 py-4 md:p-6">
+        {invites?.map((invite) => (
+          <InviteItem key={invite.id} invite={invite} />
+        ))}
+      </ul>
     </div>
   );
 };
