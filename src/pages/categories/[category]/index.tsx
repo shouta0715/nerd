@@ -1,6 +1,6 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { InviteItem } from "../../../components/invites/InviteItem";
@@ -35,6 +35,17 @@ const Index: NextPage = () => {
       </ul>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = Object.keys(Categories_Enum).map((category) => ({
+    params: { category },
+  }));
+
+  return {
+    paths,
+    fallback: true,
+  };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
