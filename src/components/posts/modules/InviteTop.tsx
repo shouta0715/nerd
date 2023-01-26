@@ -10,7 +10,7 @@ type Props = {
   user: User | undefined;
 };
 
-export const PostTop: FC<Props> = memo(({ category, user }) => {
+export const InviteTop: FC<Props> = memo(({ category, user }) => {
   const { categoryToJa } = useCategoryToJa();
   const router = useRouter();
   const replaceUsername = user?.userName?.replace(/\//, "");

@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { useGlobalStore } from "../store/global/globalStore";
 import { PostLoading } from "./layouts/loading/PostLoading";
-import { MainPost } from "./posts/MainPost";
+import { MainInvite } from "./posts/MainInvite";
 
 export const Dashboard: FC = () => {
   const authLoading = useGlobalStore((state) => state.authLoading);
@@ -12,7 +12,7 @@ export const Dashboard: FC = () => {
         <PostLoading />
       ) : (
         <Suspense fallback={<PostLoading />}>
-          <MainPost />
+          <MainInvite />
         </Suspense>
       )}
     </div>

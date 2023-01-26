@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { useCountUp } from "../../../hooks/time/useCountUp";
 import { Panel } from "./Panel";
 
-export const PostCountUp: FC = () => {
+export const InviteCountUp: FC = () => {
   const { seconds, minutes, hours } = useCountUp();
 
   return (

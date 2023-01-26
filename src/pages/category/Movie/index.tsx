@@ -1,8 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
 import { Layout } from "../../../components/layouts/Layout";
-import { PostItem } from "../../../components/posts/PostItem";
-import { useQueryPostsByCategory } from "../../../hooks/posts/useQueryPostByCategory";
+import { PostItem } from "../../../components/posts/InviteItem";
+import { useQueryPostsByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
 import { Categories_Enum } from "../../../generated/graphql";
 import { PostLoading } from "../../../components/layouts/loading/PostLoading";
 

@@ -9,7 +9,7 @@ type Props = {
   parent: "post" | "comment";
 };
 
-export const PostTimer: FC<Props> = ({ start_time, post_id, parent }) => {
+export const InviteTimer: FC<Props> = ({ start_time, post_id, parent }) => {
   const { time } = useTimer(start_time);
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");

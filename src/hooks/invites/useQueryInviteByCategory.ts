@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import {
   Categories_Enum,
-  GetPostByCategoryQuery,
-  useGetPostByCategoryQuery,
+  GetInvitesByCategoryQuery,
+  useGetInvitesByCategoryQuery,
 } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
 
@@ -10,8 +10,8 @@ export const useQueryPostsByCategory = (category: Categories_Enum) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data, isLoading } = useGetPostByCategoryQuery<
-    GetPostByCategoryQuery,
+  const { data, isLoading } = useGetInvitesByCategoryQuery<
+    GetInvitesByCategoryQuery,
     Error
   >(
     client,
@@ -26,5 +26,5 @@ export const useQueryPostsByCategory = (category: Categories_Enum) => {
     }
   );
 
-  return { posts: data?.posts, isLoading };
+  return { invite: data?.invites, isLoading };
 };

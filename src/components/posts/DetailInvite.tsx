@@ -4,22 +4,22 @@ import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 
-import { useEnteredPost } from "../../hooks/posts/useEnteredPost";
-import { useQueryPost } from "../../hooks/posts/useQueryPost";
+import { useEnteredPost } from "../../hooks/invites/useEnteredInvite";
+import { useQueryPost } from "../../hooks/invites/useQueryInvite";
 import { MainComment } from "../comments/MainComment";
 import { Spinner } from "../layouts/loading/Spinner";
 
-import { PostCountUp } from "./modules/PostCountUp";
-import { PostTimer } from "./modules/PostTimer";
+import { InviteCountUp } from "./modules/InviteCountUp";
+import { InviteTimer } from "./modules/InviteTimer";
 
 type Props = {
   postId: string;
 };
 
 export const DetailPost: FC<Props> = ({ postId }) => {
-  const { post, isLoading } = useQueryPost(postId);
+  const { invite, isLoading } = useQueryPost(postId);
   const router = useRouter();
-  const { isStart } = useEnteredPost(postId, post?.start_time);
+  const { isStart } = useEnteredPost(postId, invite?.start_time);
 
   if (isLoading) {
     return (
@@ -44,16 +44,16 @@ export const DetailPost: FC<Props> = ({ postId }) => {
         </ActionIcon>
         <div className="relative mx-auto flex w-full shrink flex-col items-center justify-center">
           <Title order={2} className="pl-2 text-2xl md:text-3xl">
-            {post?.title}
+            {invite?.title}
           </Title>
           <div className="w-full border-x-0 border-y-0 border-b border-solid border-gray-200">
             {isStart ? (
-              <PostCountUp />
+              <InviteCountUp />
             ) : (
-              <PostTimer
+              <InviteTimer
                 parent="comment"
                 post_id={postId}
-                start_time={post?.start_time}
+                start_time={invite?.start_time}
               />
             )}
           </div>
