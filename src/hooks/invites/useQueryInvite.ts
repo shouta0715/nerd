@@ -5,7 +5,7 @@ export const useQueryInvite = (id: string) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data, isLoading } = useGetInviteQuery<GetInviteQuery, Error>(
+  return useGetInviteQuery<GetInviteQuery, Error>(
     client,
     {
       id,
@@ -18,9 +18,4 @@ export const useQueryInvite = (id: string) => {
       staleTime: 1000 * 60 * 5,
     }
   );
-
-  return {
-    invite: data?.invites_by_pk,
-    isLoading,
-  };
 };

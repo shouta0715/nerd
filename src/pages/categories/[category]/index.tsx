@@ -14,7 +14,7 @@ import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInvite
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const { isLoading, invites } = useQueryInvitesByCategory(
+  const { isLoading, data } = useQueryInvitesByCategory(
     Categories_Enum[router.query.category as keyof typeof Categories_Enum]
   );
 
@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   return (
     <Layout>
       <ul className="relative p-4 py-4 md:p-6">
-        {invites?.map((invite) => (
+        {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
       </ul>

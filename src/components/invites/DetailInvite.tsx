@@ -17,9 +17,12 @@ type Props = {
 };
 
 export const DetailInvite: FC<Props> = ({ invite_id }) => {
-  const { invite, isLoading } = useQueryInvite(invite_id);
+  const { data, isLoading } = useQueryInvite(invite_id);
   const router = useRouter();
-  const { isStart } = useEnteredInvite(invite_id, invite?.start_time);
+  const { isStart } = useEnteredInvite(
+    invite_id,
+    data?.invites_by_pk?.start_time
+  );
 
   if (isLoading) {
     return (
@@ -44,7 +47,7 @@ export const DetailInvite: FC<Props> = ({ invite_id }) => {
         </ActionIcon>
         <div className="relative mx-auto flex w-full shrink flex-col items-center justify-center">
           <Title order={2} className="pl-2 text-2xl md:text-3xl">
-            {invite?.title}
+            {data?.invites_by_pk?.title}
           </Title>
           <div className="w-full border-x-0 border-y-0 border-b border-solid border-gray-200">
             {isStart ? (
@@ -53,7 +56,7 @@ export const DetailInvite: FC<Props> = ({ invite_id }) => {
               <InviteTimer
                 parent="comment"
                 invite_id={invite_id}
-                start_time={invite?.start_time}
+                start_time={data?.invites_by_pk?.start_time}
               />
             )}
           </div>

@@ -4,7 +4,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { ExecutionResult } from "graphql";
-import { toast } from "react-toastify";
 import { SUBSCRIPTION_COMMENTS } from "../../graphql/comments/commentQuery";
 import { Comment } from "../../types/commentType";
 import { useGlobalStore } from "../../store/global/globalStore";
@@ -34,7 +33,7 @@ export const useSubscriptionComment = (invite_id: string) => {
             payload.data?.comments
           );
         },
-        error: (error: Error) => toast.error(error.message),
+        error: (error: Error) => console.log(error),
         complete: () => console.log("complete"),
       }
     );

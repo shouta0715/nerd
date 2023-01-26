@@ -4,11 +4,9 @@ import { useState } from "react";
 import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { MantineProvider } from "@mantine/core";
-import { ToastContainer } from "react-toastify";
 import { ErrorBoundary } from "react-error-boundary";
 import Head from "next/head";
 import queryClient from "../libs/queryClient";
-import "react-toastify/dist/ReactToastify.css";
 import { useInitialize } from "../hooks/useInitialize";
 import { Error } from "../components/layouts/error/Error";
 
@@ -43,15 +41,6 @@ const App = ({ Component, pageProps }: AppProps) => {
               primaryColor: "grape",
             }}
           >
-            <ToastContainer
-              position="top-right"
-              autoClose={3000}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
             <Head>
               <title>Anime</title>
             </Head>

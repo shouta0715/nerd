@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import {
   Categories_Enum,
   GetInvitesByCategoryQuery,
@@ -10,21 +9,16 @@ export const useQueryInvitesByCategory = (category: Categories_Enum) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data, isLoading } = useGetInvitesByCategoryQuery<
-    GetInvitesByCategoryQuery,
-    Error
-  >(
+  return useGetInvitesByCategoryQuery<GetInvitesByCategoryQuery, Error>(
     client,
     {
       category,
     },
     {
       onError: (error: Error) => {
-        toast.error(error.message);
+        console.log(error);
       },
       enabled: isClient,
     }
   );
-
-  return { invites: data?.invites, isLoading };
 };

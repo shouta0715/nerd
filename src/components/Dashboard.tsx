@@ -5,7 +5,7 @@ import { Layout } from "./layouts/Layout";
 import { InviteLoading } from "./layouts/loading/InviteLoading";
 
 export const Dashboard: FC = () => {
-  const { invites, isLoading } = useQueryInvites();
+  const { isLoading, data } = useQueryInvites();
 
   if (isLoading)
     return (
@@ -17,7 +17,7 @@ export const Dashboard: FC = () => {
   return (
     <div>
       <ul className="relative p-4 py-4 md:p-6">
-        {invites?.map((invite) => (
+        {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
       </ul>

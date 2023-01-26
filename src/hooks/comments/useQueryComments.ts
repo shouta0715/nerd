@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { toast } from "react-toastify";
 import { GET_COMMENTS } from "../../graphql/comments/commentQuery";
 import { useGlobalStore } from "../../store/global/globalStore";
 import { Comment } from "../../types/commentType";
@@ -21,7 +20,7 @@ export const useQueryComments = (id: string) => {
   return useQuery<Comment[], Error>({
     queryKey: [id, "comments"],
     queryFn: () => fetchComments(client, id),
-    onError: (error) => toast.error(error.message),
+    onError: (error) => console.log(error),
     enabled: !!isClient && !!id,
   });
 };
