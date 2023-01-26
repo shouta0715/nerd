@@ -19,6 +19,10 @@ export const GET_INVITES = gql`
       is_finished
       topics
       url
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;
@@ -42,6 +46,10 @@ export const GET_INVITE = gql`
       is_finished
       topics
       url
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;
@@ -65,6 +73,10 @@ export const GET_INVITES_BY_CATEGORY = gql`
       is_finished
       topics
       url
+      user {
+        photo_url
+        user_name
+      }
     }
   }
 `;

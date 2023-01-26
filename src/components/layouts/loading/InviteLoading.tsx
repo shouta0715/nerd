@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from "react";
 
-export const PostLoading: FC = () => (
+export const InviteLoading: FC = () => (
   <ul className="w-full p-4 md:p-6">
     {Array.from({ length: 4 }).map((_, i) => (
       <li

@@ -4,17 +4,18 @@ import { useGlobalStore } from "../../store/global/globalStore";
 
 export const useQueryInvites = () => {
   const client = useGlobalStore((state) => state.client);
+  const isClient = useGlobalStore((state) => state.isClient);
 
-  const { data } = useGetInvitesQuery<GetInvitesQuery, Error>(
+  const { data, isLoading } = useGetInvitesQuery<GetInvitesQuery, Error>(
     client,
     {},
     {
       onError: (error: Error) => {
         toast.error(error.message);
       },
-      suspense: true,
+      enabled: isClient,
     }
   );
 
-  return { invites: data?.invites };
+  return { invites: data?.invites, isLoading };
 };

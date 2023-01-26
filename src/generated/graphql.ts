@@ -320,6 +320,7 @@ export type Comments = {
   /** An object relationship */
   invite: Invites;
   invite_id: Scalars['uuid'];
+  time: Scalars['Int'];
   updated_at: Scalars['timestamptz'];
   /** An object relationship */
   user: Users;
@@ -347,9 +348,17 @@ export type Comments_Aggregate_Bool_Exp_Count = {
 /** aggregate fields of "comments" */
 export type Comments_Aggregate_Fields = {
   __typename?: 'comments_aggregate_fields';
+  avg?: Maybe<Comments_Avg_Fields>;
   count: Scalars['Int'];
   max?: Maybe<Comments_Max_Fields>;
   min?: Maybe<Comments_Min_Fields>;
+  stddev?: Maybe<Comments_Stddev_Fields>;
+  stddev_pop?: Maybe<Comments_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Comments_Stddev_Samp_Fields>;
+  sum?: Maybe<Comments_Sum_Fields>;
+  var_pop?: Maybe<Comments_Var_Pop_Fields>;
+  var_samp?: Maybe<Comments_Var_Samp_Fields>;
+  variance?: Maybe<Comments_Variance_Fields>;
 };
 
 
@@ -361,9 +370,17 @@ export type Comments_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "comments" */
 export type Comments_Aggregate_Order_By = {
+  avg?: InputMaybe<Comments_Avg_Order_By>;
   count?: InputMaybe<Order_By>;
   max?: InputMaybe<Comments_Max_Order_By>;
   min?: InputMaybe<Comments_Min_Order_By>;
+  stddev?: InputMaybe<Comments_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Comments_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Comments_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Comments_Sum_Order_By>;
+  var_pop?: InputMaybe<Comments_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Comments_Var_Samp_Order_By>;
+  variance?: InputMaybe<Comments_Variance_Order_By>;
 };
 
 /** input type for inserting array relation for remote table "comments" */
@@ -371,6 +388,17 @@ export type Comments_Arr_Rel_Insert_Input = {
   data: Array<Comments_Insert_Input>;
   /** upsert condition */
   on_conflict?: InputMaybe<Comments_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Comments_Avg_Fields = {
+  __typename?: 'comments_avg_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "comments" */
+export type Comments_Avg_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "comments". All fields are combined with a logical 'AND'. */
@@ -383,6 +411,7 @@ export type Comments_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   invite?: InputMaybe<Invites_Bool_Exp>;
   invite_id?: InputMaybe<Uuid_Comparison_Exp>;
+  time?: InputMaybe<Int_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
@@ -394,6 +423,11 @@ export enum Comments_Constraint {
   CommentsPkey = 'comments_pkey'
 }
 
+/** input type for incrementing numeric columns in table "comments" */
+export type Comments_Inc_Input = {
+  time?: InputMaybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "comments" */
 export type Comments_Insert_Input = {
   content?: InputMaybe<Scalars['String']>;
@@ -401,6 +435,7 @@ export type Comments_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   invite?: InputMaybe<Invites_Obj_Rel_Insert_Input>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['String']>;
@@ -413,6 +448,7 @@ export type Comments_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   invite_id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -423,6 +459,7 @@ export type Comments_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   invite_id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
@@ -434,6 +471,7 @@ export type Comments_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   invite_id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
 };
@@ -444,6 +482,7 @@ export type Comments_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   invite_id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
 };
@@ -471,6 +510,7 @@ export type Comments_Order_By = {
   id?: InputMaybe<Order_By>;
   invite?: InputMaybe<Invites_Order_By>;
   invite_id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -492,6 +532,8 @@ export enum Comments_Select_Column {
   /** column name */
   InviteId = 'invite_id',
   /** column name */
+  Time = 'time',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
@@ -503,8 +545,42 @@ export type Comments_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Comments_Stddev_Fields = {
+  __typename?: 'comments_stddev_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "comments" */
+export type Comments_Stddev_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Comments_Stddev_Pop_Fields = {
+  __typename?: 'comments_stddev_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "comments" */
+export type Comments_Stddev_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Comments_Stddev_Samp_Fields = {
+  __typename?: 'comments_stddev_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "comments" */
+export type Comments_Stddev_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "comments" */
@@ -521,8 +597,20 @@ export type Comments_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   invite_id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Comments_Sum_Fields = {
+  __typename?: 'comments_sum_fields';
+  time?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "comments" */
+export type Comments_Sum_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "comments" */
@@ -536,16 +624,53 @@ export enum Comments_Update_Column {
   /** column name */
   InviteId = 'invite_id',
   /** column name */
+  Time = 'time',
+  /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id'
 }
 
 export type Comments_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Comments_Inc_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Comments_Set_Input>;
   /** filter the rows which have to be updated */
   where: Comments_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Comments_Var_Pop_Fields = {
+  __typename?: 'comments_var_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "comments" */
+export type Comments_Var_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Comments_Var_Samp_Fields = {
+  __typename?: 'comments_var_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "comments" */
+export type Comments_Var_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Comments_Variance_Fields = {
+  __typename?: 'comments_variance_fields';
+  time?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "comments" */
+export type Comments_Variance_Order_By = {
+  time?: InputMaybe<Order_By>;
 };
 
 /** ordering argument of a cursor */
@@ -1867,6 +1992,7 @@ export type Mutation_RootUpdate_Categories_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_CommentsArgs = {
+  _inc?: InputMaybe<Comments_Inc_Input>;
   _set?: InputMaybe<Comments_Set_Input>;
   where: Comments_Bool_Exp;
 };
@@ -1874,6 +2000,7 @@ export type Mutation_RootUpdate_CommentsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Comments_By_PkArgs = {
+  _inc?: InputMaybe<Comments_Inc_Input>;
   _set?: InputMaybe<Comments_Set_Input>;
   pk_columns: Comments_Pk_Columns_Input;
 };
@@ -2733,6 +2860,7 @@ export type Users = {
   invites_aggregate: Invites_Aggregate;
   photo_url?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
+  user_name: Scalars['String'];
 };
 
 
@@ -2833,6 +2961,7 @@ export type Users_Bool_Exp = {
   invites_aggregate?: InputMaybe<Invites_Aggregate_Bool_Exp>;
   photo_url?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user_name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -2851,6 +2980,7 @@ export type Users_Insert_Input = {
   invites?: InputMaybe<Invites_Arr_Rel_Insert_Input>;
   photo_url?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_name?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
@@ -2860,6 +2990,7 @@ export type Users_Max_Fields = {
   id?: Maybe<Scalars['String']>;
   photo_url?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+  user_name?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
@@ -2869,6 +3000,7 @@ export type Users_Min_Fields = {
   id?: Maybe<Scalars['String']>;
   photo_url?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+  user_name?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "users" */
@@ -2904,6 +3036,7 @@ export type Users_Order_By = {
   invites_aggregate?: InputMaybe<Invites_Aggregate_Order_By>;
   photo_url?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
+  user_name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -2922,7 +3055,9 @@ export enum Users_Select_Column {
   /** column name */
   PhotoUrl = 'photo_url',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserName = 'user_name'
 }
 
 /** input type for updating data in table "users" */
@@ -2932,6 +3067,7 @@ export type Users_Set_Input = {
   id?: InputMaybe<Scalars['String']>;
   photo_url?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_name?: InputMaybe<Scalars['String']>;
 };
 
 /** Streaming cursor of the table "users" */
@@ -2949,6 +3085,7 @@ export type Users_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['String']>;
   photo_url?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_name?: InputMaybe<Scalars['String']>;
 };
 
 /** update columns of table "users" */
@@ -2962,7 +3099,9 @@ export enum Users_Update_Column {
   /** column name */
   PhotoUrl = 'photo_url',
   /** column name */
-  UpdatedAt = 'updated_at'
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserName = 'user_name'
 }
 
 export type Users_Updates = {
@@ -2988,21 +3127,21 @@ export type Uuid_Comparison_Exp = {
 export type GetInvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string }> };
+export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 export type GetInviteQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string } | null };
+export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
 
 export type GetInvitesByCategoryQueryVariables = Exact<{
   category: Categories_Enum;
 }>;
 
 
-export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string }> };
+export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 
 export const GetInvitesDocument = `
@@ -3024,6 +3163,10 @@ export const GetInvitesDocument = `
     is_finished
     topics
     url
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;
@@ -3065,6 +3208,10 @@ export const GetInviteDocument = `
     is_finished
     topics
     url
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;
@@ -3106,6 +3253,10 @@ export const GetInvitesByCategoryDocument = `
     is_finished
     topics
     url
+    user {
+      photo_url
+      user_name
+    }
   }
 }
     `;

@@ -26,5 +26,5 @@ export const useQueryInvitesByCategory = (category: Categories_Enum) => {
     }
   );
 
-  return { invite: data?.invites, isLoading };
+  return { invites: data?.invites, isLoading };
 };

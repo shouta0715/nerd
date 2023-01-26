@@ -1,8 +1,26 @@
 import React, { FC } from "react";
-import { MainInvite } from "./invites/MainInvite";
+import { useQueryInvites } from "../hooks/invites/useQueryInvites";
+import { InviteItem } from "./invites/InviteItem";
+import { Layout } from "./layouts/Layout";
+import { InviteLoading } from "./layouts/loading/InviteLoading";
 
-export const Dashboard: FC = () => (
-  <div>
-    <MainInvite />
-  </div>
-);
+export const Dashboard: FC = () => {
+  const { invites, isLoading } = useQueryInvites();
+
+  if (isLoading)
+    return (
+      <Layout>
+        <InviteLoading />
+      </Layout>
+    );
+
+  return (
+    <div>
+      <ul className="relative p-4 py-4 md:p-6">
+        {invites?.map((invite) => (
+          <InviteItem key={invite.id} invite={invite} />
+        ))}
+      </ul>
+    </div>
+  );
+};
