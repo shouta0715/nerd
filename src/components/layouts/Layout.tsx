@@ -13,7 +13,7 @@ export const Layout: FC<Props> = ({ children }) => (
   <div className="min-w-screen min-h-screen ">
     <div className=" container mx-auto flex h-full w-full">
       <Nav />
-      <section className="mb-14 w-full flex-1 overflow-hidden md:mb-0">
+      <section className="mb-14 max-w-full md:mb-0 md:max-w-[88%]  lg:max-w-[54.66667%]">
         <Header />
         <CategoryNav />
         <main>{children}</main>

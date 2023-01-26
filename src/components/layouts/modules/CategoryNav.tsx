@@ -9,7 +9,7 @@ export const CategoryNav: FC = () => {
   const router = useRouter();
 
   return (
-    <nav className=" sticky top-0 z-[50]  h-10 border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">
+    <nav className="  sticky top-0 z-[50] w-full overflow-hidden border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">
       <ScrollArea
         type="never"
         className="flex"
@@ -30,7 +30,7 @@ export const CategoryNav: FC = () => {
           <Link
             key={`nav-${enum_category}`}
             href={`/categories/${enum_category}`}
-            className={` mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 ${
+            className={`mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 last:mr-0 ${
               router.asPath === `/categories/${enum_category}`
                 ? "border-b-2 text-black"
                 : ""

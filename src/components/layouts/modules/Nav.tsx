@@ -17,7 +17,7 @@ export const Nav: FC = () => {
   );
 
   return (
-    <div className="sticky top-0 z-50 hidden h-screen w-[12%] flex-col items-center justify-around border-r border-l-0 border-t-0 border-b-0 border-solid border-gray-200 bg-white pt-16 md:flex">
+    <div className="sticky top-0 z-50 hidden h-screen basis-[12%] flex-col items-center justify-around border-r border-l-0 border-t-0 border-b-0 border-solid border-gray-200 bg-white pt-16 md:flex">
       <div className="mb-10 hidden  md:block">ICON</div>
       <ScrollArea className="w-full">
         <Flex
