@@ -14,7 +14,8 @@ export const generates = {
     plugins: ["typescript", "typescript-operations", "typescript-react-query"],
     config: {
       fetcher: "graphql-request",
+      exposeQueryKeys: true,
+      exposeFetcher: true,
     },
   },
 };
-export const exposeQueryKeys = true;

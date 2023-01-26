@@ -21,7 +21,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  time: any;
   timestamptz: any;
   uuid: any;
 };
@@ -890,7 +889,7 @@ export type Invites = {
   is_start: Scalars['Boolean'];
   site?: Maybe<Scalars['String']>;
   spoiler: Scalars['Boolean'];
-  start_time: Scalars['time'];
+  start_time: Scalars['timestamptz'];
   sub_title?: Maybe<Scalars['String']>;
   title: Scalars['String'];
   topics?: Maybe<Scalars['String']>;
@@ -1046,7 +1045,7 @@ export type Invites_Bool_Exp = {
   is_start?: InputMaybe<Boolean_Comparison_Exp>;
   site?: InputMaybe<String_Comparison_Exp>;
   spoiler?: InputMaybe<Boolean_Comparison_Exp>;
-  start_time?: InputMaybe<Time_Comparison_Exp>;
+  start_time?: InputMaybe<Timestamptz_Comparison_Exp>;
   sub_title?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   topics?: InputMaybe<String_Comparison_Exp>;
@@ -1078,7 +1077,7 @@ export type Invites_Insert_Input = {
   is_start?: InputMaybe<Scalars['Boolean']>;
   site?: InputMaybe<Scalars['String']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['time']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   topics?: InputMaybe<Scalars['String']>;
@@ -1096,6 +1095,7 @@ export type Invites_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   site?: Maybe<Scalars['String']>;
+  start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   topics?: Maybe<Scalars['String']>;
@@ -1111,6 +1111,7 @@ export type Invites_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   site?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   topics?: InputMaybe<Order_By>;
@@ -1127,6 +1128,7 @@ export type Invites_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   site?: Maybe<Scalars['String']>;
+  start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   topics?: Maybe<Scalars['String']>;
@@ -1142,6 +1144,7 @@ export type Invites_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   site?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   topics?: InputMaybe<Order_By>;
@@ -1278,7 +1281,7 @@ export type Invites_Set_Input = {
   is_start?: InputMaybe<Scalars['Boolean']>;
   site?: InputMaybe<Scalars['String']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['time']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   topics?: InputMaybe<Scalars['String']>;
@@ -1307,7 +1310,7 @@ export type Invites_Stream_Cursor_Value_Input = {
   is_start?: InputMaybe<Scalars['Boolean']>;
   site?: InputMaybe<Scalars['String']>;
   spoiler?: InputMaybe<Scalars['Boolean']>;
-  start_time?: InputMaybe<Scalars['time']>;
+  start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   topics?: InputMaybe<Scalars['String']>;
@@ -2476,19 +2479,6 @@ export type Subscription_RootUsers_StreamArgs = {
   where?: InputMaybe<Users_Bool_Exp>;
 };
 
-/** Boolean expression to compare columns of type "time". All fields are combined with logical 'AND'. */
-export type Time_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['time']>;
-  _gt?: InputMaybe<Scalars['time']>;
-  _gte?: InputMaybe<Scalars['time']>;
-  _in?: InputMaybe<Array<Scalars['time']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['time']>;
-  _lte?: InputMaybe<Scalars['time']>;
-  _neq?: InputMaybe<Scalars['time']>;
-  _nin?: InputMaybe<Array<Scalars['time']>>;
-};
-
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['timestamptz']>;
@@ -3051,6 +3041,11 @@ export const useGetInvitesQuery = <
       fetcher<GetInvitesQuery, GetInvitesQueryVariables>(client, GetInvitesDocument, variables, headers),
       options
     );
+
+useGetInvitesQuery.getKey = (variables?: GetInvitesQueryVariables) => variables === undefined ? ['GetInvites'] : ['GetInvites', variables];
+;
+
+useGetInvitesQuery.fetcher = (client: GraphQLClient, variables?: GetInvitesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInvitesQuery, GetInvitesQueryVariables>(client, GetInvitesDocument, variables, headers);
 export const GetInviteDocument = `
     query GetInvite($id: uuid!) {
   invites_by_pk(id: $id) {
@@ -3087,6 +3082,11 @@ export const useGetInviteQuery = <
       fetcher<GetInviteQuery, GetInviteQueryVariables>(client, GetInviteDocument, variables, headers),
       options
     );
+
+useGetInviteQuery.getKey = (variables: GetInviteQueryVariables) => ['GetInvite', variables];
+;
+
+useGetInviteQuery.fetcher = (client: GraphQLClient, variables: GetInviteQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInviteQuery, GetInviteQueryVariables>(client, GetInviteDocument, variables, headers);
 export const GetInvitesByCategoryDocument = `
     query GetInvitesByCategory($category: categories_enum!) {
   invites(where: {category: {_eq: $category}}) {
@@ -3123,3 +3123,8 @@ export const useGetInvitesByCategoryQuery = <
       fetcher<GetInvitesByCategoryQuery, GetInvitesByCategoryQueryVariables>(client, GetInvitesByCategoryDocument, variables, headers),
       options
     );
+
+useGetInvitesByCategoryQuery.getKey = (variables: GetInvitesByCategoryQueryVariables) => ['GetInvitesByCategory', variables];
+;
+
+useGetInvitesByCategoryQuery.fetcher = (client: GraphQLClient, variables: GetInvitesByCategoryQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInvitesByCategoryQuery, GetInvitesByCategoryQueryVariables>(client, GetInvitesByCategoryDocument, variables, headers);
