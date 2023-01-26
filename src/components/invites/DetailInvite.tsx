@@ -4,8 +4,8 @@ import { IconArrowNarrowLeft } from "@tabler/icons";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 
-import { useEnteredPost } from "../../hooks/invites/useEnteredInvite";
-import { useQueryPost } from "../../hooks/invites/useQueryInvite";
+import { useEnteredInvite } from "../../hooks/invites/useEnteredInvite";
+import { useQueryInvite } from "../../hooks/invites/useQueryInvite";
 import { MainComment } from "../comments/MainComment";
 import { Spinner } from "../layouts/loading/Spinner";
 
@@ -17,9 +17,9 @@ type Props = {
 };
 
 export const DetailPost: FC<Props> = ({ postId }) => {
-  const { invite, isLoading } = useQueryPost(postId);
+  const { invite, isLoading } = useQueryInvite(postId);
   const router = useRouter();
-  const { isStart } = useEnteredPost(postId, invite?.start_time);
+  const { isStart } = useEnteredInvite(postId, invite?.start_time);
 
   if (isLoading) {
     return (

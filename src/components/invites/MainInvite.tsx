@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import React, { FC } from "react";
-import { useQueryPosts } from "../../hooks/invites/useQueryInvites";
+import { useQueryInvites } from "../../hooks/invites/useQueryInvites";
 import { InviteItem } from "./InviteItem";
 
 export const MainInvite: FC = () => {
-  const { invites } = useQueryPosts();
+  const { invites } = useQueryInvites();
 
   return (
     <div>
