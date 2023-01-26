@@ -29,9 +29,10 @@ export const setCustomClaims = functions.auth.user().onCreate(async (user) => {
         $id: String!
         $anonymous: Boolean!
         $photo_url: String!
+        $user_name: String!
       ) {
         insert_users_one(
-          object: { anonymous: $anonymous, photo_url: $photo_url, id: $id }
+          object: { anonymous: $anonymous, photo_url: $photo_url, id: $id,user_name: $user_name}
         ) {
           id
         }
@@ -48,6 +49,7 @@ export const setCustomClaims = functions.auth.user().onCreate(async (user) => {
       id: user.uid,
       anonymous,
       photo_url: user.photoURL,
+      user_name: user.displayName??"anonymous",
     });
   } catch (e) {
     console.log(e);
