@@ -1,7 +1,7 @@
 import { GetInviteQuery, useGetInviteQuery } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
 
-export const useQueryPost = (id: string) => {
+export const useQueryInvite = (id: string) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 

@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { GetInvitesQuery, useGetInvitesQuery } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
 
-export const useQueryPosts = () => {
+export const useQueryInvites = () => {
   const client = useGlobalStore((state) => state.client);
 
   const { data } = useGetInvitesQuery<GetInvitesQuery, Error>(
