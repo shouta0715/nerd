@@ -17,7 +17,6 @@ export const GET_INVITES = gql`
       site
       is_start
       is_finished
-      topics
       url
       user {
         photo_url
@@ -44,7 +43,6 @@ export const GET_INVITE = gql`
       site
       is_start
       is_finished
-      topics
       url
       user {
         photo_url
@@ -57,7 +55,8 @@ export const GET_INVITE = gql`
 export const GET_INVITES_BY_CATEGORY = gql`
   query GetInvitesByCategory($category: category_enum!) {
     invites(
-      where: { category: { _eq: $category }, order_by: { created_at: desc } }
+      where: { category: { _eq: $category } }
+      order_by: { created_at: desc }
     ) {
       id
       user_id
@@ -73,7 +72,6 @@ export const GET_INVITES_BY_CATEGORY = gql`
       site
       is_start
       is_finished
-      topics
       url
       user {
         photo_url

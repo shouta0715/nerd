@@ -28,6 +28,7 @@ export const CategoryNav: FC = () => {
         </Link>
         {Object.keys(Category_Enum).map((enum_category) => (
           <Link
+            prefetch={false}
             key={`nav-${enum_category}`}
             href={`/categories/${enum_category}`}
             className={`mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 last:mr-0 ${

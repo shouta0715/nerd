@@ -1055,7 +1055,6 @@ export type Invites = {
   start_time: Scalars['timestamptz'];
   sub_title?: Maybe<Scalars['String']>;
   title: Scalars['String'];
-  topics?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
   url: Scalars['String'];
   /** An object relationship */
@@ -1211,7 +1210,6 @@ export type Invites_Bool_Exp = {
   start_time?: InputMaybe<Timestamptz_Comparison_Exp>;
   sub_title?: InputMaybe<String_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
-  topics?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   url?: InputMaybe<String_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -1243,7 +1241,6 @@ export type Invites_Insert_Input = {
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  topics?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   url?: InputMaybe<Scalars['String']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -1261,7 +1258,6 @@ export type Invites_Max_Fields = {
   start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  topics?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -1277,7 +1273,6 @@ export type Invites_Max_Order_By = {
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  topics?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   url?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -1294,7 +1289,6 @@ export type Invites_Min_Fields = {
   start_time?: Maybe<Scalars['timestamptz']>;
   sub_title?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  topics?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   url?: Maybe<Scalars['String']>;
   user_id?: Maybe<Scalars['String']>;
@@ -1310,7 +1304,6 @@ export type Invites_Min_Order_By = {
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  topics?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   url?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -1358,7 +1351,6 @@ export type Invites_Order_By = {
   start_time?: InputMaybe<Order_By>;
   sub_title?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  topics?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   url?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -1398,8 +1390,6 @@ export enum Invites_Select_Column {
   SubTitle = 'sub_title',
   /** column name */
   Title = 'title',
-  /** column name */
-  Topics = 'topics',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -1447,7 +1437,6 @@ export type Invites_Set_Input = {
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  topics?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   url?: InputMaybe<Scalars['String']>;
   user_id?: InputMaybe<Scalars['String']>;
@@ -1476,7 +1465,6 @@ export type Invites_Stream_Cursor_Value_Input = {
   start_time?: InputMaybe<Scalars['timestamptz']>;
   sub_title?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  topics?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   url?: InputMaybe<Scalars['String']>;
   user_id?: InputMaybe<Scalars['String']>;
@@ -1705,8 +1693,6 @@ export enum Invites_Update_Column {
   SubTitle = 'sub_title',
   /** column name */
   Title = 'title',
-  /** column name */
-  Topics = 'topics',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -3162,11 +3148,6 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type GetCategoryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCategoryQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', value: string, key: string }> };
-
 export type GetCommentsQueryVariables = Exact<{
   invite_id: Scalars['uuid'];
 }>;
@@ -3191,50 +3172,23 @@ export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root
 export type GetInvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
+export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 export type GetInviteQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
+export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
 
 export type GetInvitesByCategoryQueryVariables = Exact<{
   category: Category_Enum;
 }>;
 
 
-export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
+export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 
-export const GetCategoryDocument = `
-    query GetCategory {
-  category {
-    value
-    key
-  }
-}
-    `;
-export const useGetCategoryQuery = <
-      TData = GetCategoryQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables?: GetCategoryQueryVariables,
-      options?: UseQueryOptions<GetCategoryQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<GetCategoryQuery, TError, TData>(
-      variables === undefined ? ['GetCategory'] : ['GetCategory', variables],
-      fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers),
-      options
-    );
-
-useGetCategoryQuery.getKey = (variables?: GetCategoryQueryVariables) => variables === undefined ? ['GetCategory'] : ['GetCategory', variables];
-;
-
-useGetCategoryQuery.fetcher = (client: GraphQLClient, variables?: GetCategoryQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers);
 export const GetCommentsDocument = `
     query GetComments($invite_id: uuid!) {
   comments(
@@ -3342,7 +3296,6 @@ export const GetInvitesDocument = `
     site
     is_start
     is_finished
-    topics
     url
     user {
       photo_url
@@ -3387,7 +3340,6 @@ export const GetInviteDocument = `
     site
     is_start
     is_finished
-    topics
     url
     user {
       photo_url
@@ -3417,7 +3369,7 @@ useGetInviteQuery.getKey = (variables: GetInviteQueryVariables) => ['GetInvite',
 useGetInviteQuery.fetcher = (client: GraphQLClient, variables: GetInviteQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInviteQuery, GetInviteQueryVariables>(client, GetInviteDocument, variables, headers);
 export const GetInvitesByCategoryDocument = `
     query GetInvitesByCategory($category: category_enum!) {
-  invites(where: {category: {_eq: $category}}) {
+  invites(where: {category: {_eq: $category}}, order_by: {created_at: desc}) {
     id
     user_id
     anonymous
@@ -3432,7 +3384,6 @@ export const GetInvitesByCategoryDocument = `
     site
     is_start
     is_finished
-    topics
     url
     user {
       photo_url

@@ -10,8 +10,8 @@ type Props = {
 };
 
 export const Layout: FC<Props> = ({ children }) => (
-  <div className="min-w-screen flex min-h-screen flex-col ">
-    <div className="container mx-auto flex h-full w-full flex-1">
+  <div className="min-w-screen  min-h-screen ">
+    <div className="container mx-auto flex h-full w-full">
       <Nav />
       <section className="mb-14 flex max-w-full flex-1 flex-col  md:mb-0 md:max-w-[88%] lg:max-w-[54.66667%]">
         <Header />
