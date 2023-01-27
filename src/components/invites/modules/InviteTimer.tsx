@@ -1,15 +1,24 @@
 /* eslint-disable react/no-array-index-key */
+import { Text } from "@mantine/core";
 import React, { FC } from "react";
+import { Categories_Enum } from "../../../generated/graphql";
 import { useTimer } from "../../../hooks/time/useTimer";
+import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
 import { Panel } from "./Panel";
 
 type Props = {
   start_time: string;
   invite_id: string;
   parent: "post" | "comment";
+  category: Categories_Enum | null;
 };
 
-export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
+export const InviteTimer: FC<Props> = ({
+  start_time,
+  invite_id,
+  parent,
+  category,
+}) => {
   const { time } = useTimer(start_time);
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");
@@ -17,9 +26,12 @@ export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
 
   return (
     <div className="my-4 flex w-full flex-col items-center justify-center">
-      <p className="m-0 mb-2.5  px-10 text-lg font-bold text-indigo-500">
+      <Text
+        color={`${categoryProcessing(category).color}.5`}
+        className="m-0 mb-2.5  px-10 text-lg font-bold"
+      >
         開始まで
-      </p>
+      </Text>
       <div className="flex w-full justify-center space-x-4 md:space-x-6">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">

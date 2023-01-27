@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Categories_Enum } from "../../../generated/graphql";
-import { categoryToJa } from "../../../hooks/utils/useCategoryToJa";
+import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
@@ -36,9 +36,11 @@ export const CategoryNav: FC = () => {
                 : ""
             }`}
           >
-            {categoryToJa(
-              Categories_Enum[enum_category as keyof typeof Categories_Enum]
-            )}
+            {
+              categoryProcessing(
+                Categories_Enum[enum_category as keyof typeof Categories_Enum]
+              ).ja
+            }
           </Link>
         ))}
       </ScrollArea>

@@ -2,7 +2,7 @@ import { Avatar, Badge } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { FC, memo } from "react";
 import { Categories_Enum, GetInvitesQuery } from "../../../generated/graphql";
-import { categoryToJa } from "../../../hooks/utils/useCategoryToJa";
+import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
 
 type Props = {
   category?: Categories_Enum;
@@ -21,8 +21,8 @@ export const InviteTop: FC<Props> = memo(({ category, user }) => {
       >
         <Avatar radius="xl" src={user?.photo_url} />
       </button>
-      <Badge color={category === "Anime" ? "grape" : "green"}>
-        {categoryToJa(category)}
+      <Badge color={categoryProcessing(category).color}>
+        {categoryProcessing(category).ja}
       </Badge>
     </div>
   );
