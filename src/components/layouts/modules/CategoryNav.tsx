@@ -2,8 +2,8 @@ import { ScrollArea } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { Categories_Enum } from "../../../generated/graphql";
-import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
+import { Category_Enum } from "../../../generated/graphql";
+import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
@@ -26,7 +26,7 @@ export const CategoryNav: FC = () => {
         >
           All
         </Link>
-        {Object.keys(Categories_Enum).map((enum_category) => (
+        {Object.keys(Category_Enum).map((enum_category) => (
           <Link
             key={`nav-${enum_category}`}
             href={`/categories/${enum_category}`}
@@ -38,7 +38,7 @@ export const CategoryNav: FC = () => {
           >
             {
               categoryProcessing(
-                Categories_Enum[enum_category as keyof typeof Categories_Enum]
+                Category_Enum[enum_category as keyof typeof Category_Enum]
               ).ja
             }
           </Link>

@@ -1,11 +1,11 @@
 import {
-  Categories_Enum,
+  Category_Enum,
   GetInvitesByCategoryQuery,
   useGetInvitesByCategoryQuery,
 } from "../../generated/graphql";
 import { useGlobalStore } from "../../store/global/globalStore";
 
-export const useQueryInvitesByCategory = (category: Categories_Enum) => {
+export const useQueryInvitesByCategory = (category: Category_Enum) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
 

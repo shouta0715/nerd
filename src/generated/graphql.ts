@@ -84,9 +84,9 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
-/** columns and relationships of "categories" */
-export type Categories = {
-  __typename?: 'categories';
+/** columns and relationships of "category" */
+export type Category = {
+  __typename?: 'category';
   /** An array relationship */
   invites: Array<Invites>;
   /** An aggregate relationship */
@@ -100,8 +100,8 @@ export type Categories = {
 };
 
 
-/** columns and relationships of "categories" */
-export type CategoriesInvitesArgs = {
+/** columns and relationships of "category" */
+export type CategoryInvitesArgs = {
   distinct_on?: InputMaybe<Array<Invites_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -110,8 +110,8 @@ export type CategoriesInvitesArgs = {
 };
 
 
-/** columns and relationships of "categories" */
-export type CategoriesInvites_AggregateArgs = {
+/** columns and relationships of "category" */
+export type CategoryInvites_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Invites_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -120,8 +120,8 @@ export type CategoriesInvites_AggregateArgs = {
 };
 
 
-/** columns and relationships of "categories" */
-export type CategoriesTopicsArgs = {
+/** columns and relationships of "category" */
+export type CategoryTopicsArgs = {
   distinct_on?: InputMaybe<Array<Topics_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -130,8 +130,8 @@ export type CategoriesTopicsArgs = {
 };
 
 
-/** columns and relationships of "categories" */
-export type CategoriesTopics_AggregateArgs = {
+/** columns and relationships of "category" */
+export type CategoryTopics_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Topics_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -139,33 +139,33 @@ export type CategoriesTopics_AggregateArgs = {
   where?: InputMaybe<Topics_Bool_Exp>;
 };
 
-/** aggregated selection of "categories" */
-export type Categories_Aggregate = {
-  __typename?: 'categories_aggregate';
-  aggregate?: Maybe<Categories_Aggregate_Fields>;
-  nodes: Array<Categories>;
+/** aggregated selection of "category" */
+export type Category_Aggregate = {
+  __typename?: 'category_aggregate';
+  aggregate?: Maybe<Category_Aggregate_Fields>;
+  nodes: Array<Category>;
 };
 
-/** aggregate fields of "categories" */
-export type Categories_Aggregate_Fields = {
-  __typename?: 'categories_aggregate_fields';
+/** aggregate fields of "category" */
+export type Category_Aggregate_Fields = {
+  __typename?: 'category_aggregate_fields';
   count: Scalars['Int'];
-  max?: Maybe<Categories_Max_Fields>;
-  min?: Maybe<Categories_Min_Fields>;
+  max?: Maybe<Category_Max_Fields>;
+  min?: Maybe<Category_Min_Fields>;
 };
 
 
-/** aggregate fields of "categories" */
-export type Categories_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Categories_Select_Column>>;
+/** aggregate fields of "category" */
+export type Category_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Category_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** Boolean expression to filter rows from the table "categories". All fields are combined with a logical 'AND'. */
-export type Categories_Bool_Exp = {
-  _and?: InputMaybe<Array<Categories_Bool_Exp>>;
-  _not?: InputMaybe<Categories_Bool_Exp>;
-  _or?: InputMaybe<Array<Categories_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "category". All fields are combined with a logical 'AND'. */
+export type Category_Bool_Exp = {
+  _and?: InputMaybe<Array<Category_Bool_Exp>>;
+  _not?: InputMaybe<Category_Bool_Exp>;
+  _or?: InputMaybe<Array<Category_Bool_Exp>>;
   invites?: InputMaybe<Invites_Bool_Exp>;
   invites_aggregate?: InputMaybe<Invites_Aggregate_Bool_Exp>;
   key?: InputMaybe<String_Comparison_Exp>;
@@ -174,13 +174,13 @@ export type Categories_Bool_Exp = {
   value?: InputMaybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "categories" */
-export enum Categories_Constraint {
+/** unique or primary key constraints on table "category" */
+export enum Category_Constraint {
   /** unique or primary key constraint on columns "key" */
-  CategoriesPkey = 'categories_pkey'
+  CategoryPkey = 'category_pkey'
 }
 
-export enum Categories_Enum {
+export enum Category_Enum {
   /** Anime */
   Anime = 'Anime',
   /** Doujinshi */
@@ -201,17 +201,17 @@ export enum Categories_Enum {
   Youtube = 'Youtube'
 }
 
-/** Boolean expression to compare columns of type "categories_enum". All fields are combined with logical 'AND'. */
-export type Categories_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<Categories_Enum>;
-  _in?: InputMaybe<Array<Categories_Enum>>;
+/** Boolean expression to compare columns of type "category_enum". All fields are combined with logical 'AND'. */
+export type Category_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Category_Enum>;
+  _in?: InputMaybe<Array<Category_Enum>>;
   _is_null?: InputMaybe<Scalars['Boolean']>;
-  _neq?: InputMaybe<Categories_Enum>;
-  _nin?: InputMaybe<Array<Categories_Enum>>;
+  _neq?: InputMaybe<Category_Enum>;
+  _nin?: InputMaybe<Array<Category_Enum>>;
 };
 
-/** input type for inserting data into table "categories" */
-export type Categories_Insert_Input = {
+/** input type for inserting data into table "category" */
+export type Category_Insert_Input = {
   invites?: InputMaybe<Invites_Arr_Rel_Insert_Input>;
   key?: InputMaybe<Scalars['String']>;
   topics?: InputMaybe<Topics_Arr_Rel_Insert_Input>;
@@ -219,96 +219,96 @@ export type Categories_Insert_Input = {
 };
 
 /** aggregate max on columns */
-export type Categories_Max_Fields = {
-  __typename?: 'categories_max_fields';
+export type Category_Max_Fields = {
+  __typename?: 'category_max_fields';
   key?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
 /** aggregate min on columns */
-export type Categories_Min_Fields = {
-  __typename?: 'categories_min_fields';
+export type Category_Min_Fields = {
+  __typename?: 'category_min_fields';
   key?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
-/** response of any mutation on the table "categories" */
-export type Categories_Mutation_Response = {
-  __typename?: 'categories_mutation_response';
+/** response of any mutation on the table "category" */
+export type Category_Mutation_Response = {
+  __typename?: 'category_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Categories>;
+  returning: Array<Category>;
 };
 
-/** input type for inserting object relation for remote table "categories" */
-export type Categories_Obj_Rel_Insert_Input = {
-  data: Categories_Insert_Input;
+/** input type for inserting object relation for remote table "category" */
+export type Category_Obj_Rel_Insert_Input = {
+  data: Category_Insert_Input;
   /** upsert condition */
-  on_conflict?: InputMaybe<Categories_On_Conflict>;
+  on_conflict?: InputMaybe<Category_On_Conflict>;
 };
 
-/** on_conflict condition type for table "categories" */
-export type Categories_On_Conflict = {
-  constraint: Categories_Constraint;
-  update_columns?: Array<Categories_Update_Column>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+/** on_conflict condition type for table "category" */
+export type Category_On_Conflict = {
+  constraint: Category_Constraint;
+  update_columns?: Array<Category_Update_Column>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "categories". */
-export type Categories_Order_By = {
+/** Ordering options when selecting data from "category". */
+export type Category_Order_By = {
   invites_aggregate?: InputMaybe<Invites_Aggregate_Order_By>;
   key?: InputMaybe<Order_By>;
   topics_aggregate?: InputMaybe<Topics_Aggregate_Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: categories */
-export type Categories_Pk_Columns_Input = {
+/** primary key columns input for table: category */
+export type Category_Pk_Columns_Input = {
   key: Scalars['String'];
 };
 
-/** select columns of table "categories" */
-export enum Categories_Select_Column {
+/** select columns of table "category" */
+export enum Category_Select_Column {
   /** column name */
   Key = 'key',
   /** column name */
   Value = 'value'
 }
 
-/** input type for updating data in table "categories" */
-export type Categories_Set_Input = {
+/** input type for updating data in table "category" */
+export type Category_Set_Input = {
   key?: InputMaybe<Scalars['String']>;
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "categories" */
-export type Categories_Stream_Cursor_Input = {
+/** Streaming cursor of the table "category" */
+export type Category_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Categories_Stream_Cursor_Value_Input;
+  initial_value: Category_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Categories_Stream_Cursor_Value_Input = {
+export type Category_Stream_Cursor_Value_Input = {
   key?: InputMaybe<Scalars['String']>;
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** update columns of table "categories" */
-export enum Categories_Update_Column {
+/** update columns of table "category" */
+export enum Category_Update_Column {
   /** column name */
   Key = 'key',
   /** column name */
   Value = 'value'
 }
 
-export type Categories_Updates = {
+export type Category_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Categories_Set_Input>;
+  _set?: InputMaybe<Category_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Categories_Bool_Exp;
+  where: Category_Bool_Exp;
 };
 
 /** columns and relationships of "comments" */
@@ -1030,9 +1030,9 @@ export type Invites = {
   __typename?: 'invites';
   anonymous: Scalars['Boolean'];
   author_name: Scalars['String'];
-  category: Categories_Enum;
+  category: Category_Enum;
   /** An object relationship */
-  categoryByCategory: Categories;
+  categoryByCategory: Category;
   /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
@@ -1193,8 +1193,8 @@ export type Invites_Bool_Exp = {
   _or?: InputMaybe<Array<Invites_Bool_Exp>>;
   anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   author_name?: InputMaybe<String_Comparison_Exp>;
-  category?: InputMaybe<Categories_Enum_Comparison_Exp>;
-  categoryByCategory?: InputMaybe<Categories_Bool_Exp>;
+  category?: InputMaybe<Category_Enum_Comparison_Exp>;
+  categoryByCategory?: InputMaybe<Category_Bool_Exp>;
   comments?: InputMaybe<Comments_Bool_Exp>;
   comments_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
@@ -1228,8 +1228,8 @@ export enum Invites_Constraint {
 export type Invites_Insert_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
   author_name?: InputMaybe<Scalars['String']>;
-  category?: InputMaybe<Categories_Enum>;
-  categoryByCategory?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
+  category?: InputMaybe<Category_Enum>;
+  categoryByCategory?: InputMaybe<Category_Obj_Rel_Insert_Input>;
   comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1344,7 +1344,7 @@ export type Invites_Order_By = {
   anonymous?: InputMaybe<Order_By>;
   author_name?: InputMaybe<Order_By>;
   category?: InputMaybe<Order_By>;
-  categoryByCategory?: InputMaybe<Categories_Order_By>;
+  categoryByCategory?: InputMaybe<Category_Order_By>;
   comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -1436,7 +1436,7 @@ export enum Invites_Select_Column_Invites_Aggregate_Bool_Exp_Bool_Or_Arguments_C
 export type Invites_Set_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
   author_name?: InputMaybe<Scalars['String']>;
-  category?: InputMaybe<Categories_Enum>;
+  category?: InputMaybe<Category_Enum>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1465,7 +1465,7 @@ export type Invites_Stream_Cursor_Input = {
 export type Invites_Stream_Cursor_Value_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
   author_name?: InputMaybe<Scalars['String']>;
-  category?: InputMaybe<Categories_Enum>;
+  category?: InputMaybe<Category_Enum>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1725,10 +1725,10 @@ export type Invites_Updates = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** delete data from the table: "categories" */
-  delete_categories?: Maybe<Categories_Mutation_Response>;
-  /** delete single row from the table: "categories" */
-  delete_categories_by_pk?: Maybe<Categories>;
+  /** delete data from the table: "category" */
+  delete_category?: Maybe<Category_Mutation_Response>;
+  /** delete single row from the table: "category" */
+  delete_category_by_pk?: Maybe<Category>;
   /** delete data from the table: "comments" */
   delete_comments?: Maybe<Comments_Mutation_Response>;
   /** delete single row from the table: "comments" */
@@ -1753,10 +1753,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
-  /** insert data into the table: "categories" */
-  insert_categories?: Maybe<Categories_Mutation_Response>;
-  /** insert a single row into the table: "categories" */
-  insert_categories_one?: Maybe<Categories>;
+  /** insert data into the table: "category" */
+  insert_category?: Maybe<Category_Mutation_Response>;
+  /** insert a single row into the table: "category" */
+  insert_category_one?: Maybe<Category>;
   /** insert data into the table: "comments" */
   insert_comments?: Maybe<Comments_Mutation_Response>;
   /** insert a single row into the table: "comments" */
@@ -1781,12 +1781,12 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
-  /** update data of the table: "categories" */
-  update_categories?: Maybe<Categories_Mutation_Response>;
-  /** update single row of the table: "categories" */
-  update_categories_by_pk?: Maybe<Categories>;
-  /** update multiples rows of table: "categories" */
-  update_categories_many?: Maybe<Array<Maybe<Categories_Mutation_Response>>>;
+  /** update data of the table: "category" */
+  update_category?: Maybe<Category_Mutation_Response>;
+  /** update single row of the table: "category" */
+  update_category_by_pk?: Maybe<Category>;
+  /** update multiples rows of table: "category" */
+  update_category_many?: Maybe<Array<Maybe<Category_Mutation_Response>>>;
   /** update data of the table: "comments" */
   update_comments?: Maybe<Comments_Mutation_Response>;
   /** update single row of the table: "comments" */
@@ -1827,13 +1827,13 @@ export type Mutation_Root = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_CategoriesArgs = {
-  where: Categories_Bool_Exp;
+export type Mutation_RootDelete_CategoryArgs = {
+  where: Category_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Categories_By_PkArgs = {
+export type Mutation_RootDelete_Category_By_PkArgs = {
   key: Scalars['String'];
 };
 
@@ -1911,16 +1911,16 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_CategoriesArgs = {
-  objects: Array<Categories_Insert_Input>;
-  on_conflict?: InputMaybe<Categories_On_Conflict>;
+export type Mutation_RootInsert_CategoryArgs = {
+  objects: Array<Category_Insert_Input>;
+  on_conflict?: InputMaybe<Category_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Categories_OneArgs = {
-  object: Categories_Insert_Input;
-  on_conflict?: InputMaybe<Categories_On_Conflict>;
+export type Mutation_RootInsert_Category_OneArgs = {
+  object: Category_Insert_Input;
+  on_conflict?: InputMaybe<Category_On_Conflict>;
 };
 
 
@@ -2009,22 +2009,22 @@ export type Mutation_RootInsert_Users_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_CategoriesArgs = {
-  _set?: InputMaybe<Categories_Set_Input>;
-  where: Categories_Bool_Exp;
+export type Mutation_RootUpdate_CategoryArgs = {
+  _set?: InputMaybe<Category_Set_Input>;
+  where: Category_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Categories_By_PkArgs = {
-  _set?: InputMaybe<Categories_Set_Input>;
-  pk_columns: Categories_Pk_Columns_Input;
+export type Mutation_RootUpdate_Category_By_PkArgs = {
+  _set?: InputMaybe<Category_Set_Input>;
+  pk_columns: Category_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Categories_ManyArgs = {
-  updates: Array<Categories_Updates>;
+export type Mutation_RootUpdate_Category_ManyArgs = {
+  updates: Array<Category_Updates>;
 };
 
 
@@ -2169,12 +2169,12 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "categories" */
-  categories: Array<Categories>;
-  /** fetch aggregated fields from the table: "categories" */
-  categories_aggregate: Categories_Aggregate;
-  /** fetch data from the table: "categories" using primary key columns */
-  categories_by_pk?: Maybe<Categories>;
+  /** fetch data from the table: "category" */
+  category: Array<Category>;
+  /** fetch aggregated fields from the table: "category" */
+  category_aggregate: Category_Aggregate;
+  /** fetch data from the table: "category" using primary key columns */
+  category_by_pk?: Maybe<Category>;
   /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
@@ -2214,25 +2214,25 @@ export type Query_Root = {
 };
 
 
-export type Query_RootCategoriesArgs = {
-  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+export type Query_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Categories_Order_By>>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
-export type Query_RootCategories_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+export type Query_RootCategory_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Categories_Order_By>>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
-export type Query_RootCategories_By_PkArgs = {
+export type Query_RootCategory_By_PkArgs = {
   key: Scalars['String'];
 };
 
@@ -2376,14 +2376,14 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "categories" */
-  categories: Array<Categories>;
-  /** fetch aggregated fields from the table: "categories" */
-  categories_aggregate: Categories_Aggregate;
-  /** fetch data from the table: "categories" using primary key columns */
-  categories_by_pk?: Maybe<Categories>;
-  /** fetch data from the table in a streaming manner: "categories" */
-  categories_stream: Array<Categories>;
+  /** fetch data from the table: "category" */
+  category: Array<Category>;
+  /** fetch aggregated fields from the table: "category" */
+  category_aggregate: Category_Aggregate;
+  /** fetch data from the table: "category" using primary key columns */
+  category_by_pk?: Maybe<Category>;
+  /** fetch data from the table in a streaming manner: "category" */
+  category_stream: Array<Category>;
   /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
@@ -2435,33 +2435,33 @@ export type Subscription_Root = {
 };
 
 
-export type Subscription_RootCategoriesArgs = {
-  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+export type Subscription_RootCategoryArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Categories_Order_By>>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
-export type Subscription_RootCategories_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Categories_Select_Column>>;
+export type Subscription_RootCategory_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Category_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Categories_Order_By>>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+  order_by?: InputMaybe<Array<Category_Order_By>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
-export type Subscription_RootCategories_By_PkArgs = {
+export type Subscription_RootCategory_By_PkArgs = {
   key: Scalars['String'];
 };
 
 
-export type Subscription_RootCategories_StreamArgs = {
+export type Subscription_RootCategory_StreamArgs = {
   batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Categories_Stream_Cursor_Input>>;
-  where?: InputMaybe<Categories_Bool_Exp>;
+  cursor: Array<InputMaybe<Category_Stream_Cursor_Input>>;
+  where?: InputMaybe<Category_Bool_Exp>;
 };
 
 
@@ -2660,9 +2660,9 @@ export type Timestamptz_Comparison_Exp = {
 /** columns and relationships of "topics" */
 export type Topics = {
   __typename?: 'topics';
-  category: Categories_Enum;
+  category: Category_Enum;
   /** An object relationship */
-  categoryByCategory: Categories;
+  categoryByCategory: Category;
   /** An array relationship */
   invites_topics: Array<Invites_Topics>;
   /** An aggregate relationship */
@@ -2743,8 +2743,8 @@ export type Topics_Bool_Exp = {
   _and?: InputMaybe<Array<Topics_Bool_Exp>>;
   _not?: InputMaybe<Topics_Bool_Exp>;
   _or?: InputMaybe<Array<Topics_Bool_Exp>>;
-  category?: InputMaybe<Categories_Enum_Comparison_Exp>;
-  categoryByCategory?: InputMaybe<Categories_Bool_Exp>;
+  category?: InputMaybe<Category_Enum_Comparison_Exp>;
+  categoryByCategory?: InputMaybe<Category_Bool_Exp>;
   invites_topics?: InputMaybe<Invites_Topics_Bool_Exp>;
   invites_topics_aggregate?: InputMaybe<Invites_Topics_Aggregate_Bool_Exp>;
   key?: InputMaybe<String_Comparison_Exp>;
@@ -2759,8 +2759,8 @@ export enum Topics_Constraint {
 
 /** input type for inserting data into table "topics" */
 export type Topics_Insert_Input = {
-  category?: InputMaybe<Categories_Enum>;
-  categoryByCategory?: InputMaybe<Categories_Obj_Rel_Insert_Input>;
+  category?: InputMaybe<Category_Enum>;
+  categoryByCategory?: InputMaybe<Category_Obj_Rel_Insert_Input>;
   invites_topics?: InputMaybe<Invites_Topics_Arr_Rel_Insert_Input>;
   key?: InputMaybe<Scalars['String']>;
   photo?: InputMaybe<Scalars['String']>;
@@ -2818,7 +2818,7 @@ export type Topics_On_Conflict = {
 /** Ordering options when selecting data from "topics". */
 export type Topics_Order_By = {
   category?: InputMaybe<Order_By>;
-  categoryByCategory?: InputMaybe<Categories_Order_By>;
+  categoryByCategory?: InputMaybe<Category_Order_By>;
   invites_topics_aggregate?: InputMaybe<Invites_Topics_Aggregate_Order_By>;
   key?: InputMaybe<Order_By>;
   photo?: InputMaybe<Order_By>;
@@ -2841,7 +2841,7 @@ export enum Topics_Select_Column {
 
 /** input type for updating data in table "topics" */
 export type Topics_Set_Input = {
-  category?: InputMaybe<Categories_Enum>;
+  category?: InputMaybe<Category_Enum>;
   key?: InputMaybe<Scalars['String']>;
   photo?: InputMaybe<Scalars['String']>;
 };
@@ -2856,7 +2856,7 @@ export type Topics_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Topics_Stream_Cursor_Value_Input = {
-  category?: InputMaybe<Categories_Enum>;
+  category?: InputMaybe<Category_Enum>;
   key?: InputMaybe<Scalars['String']>;
   photo?: InputMaybe<Scalars['String']>;
 };
@@ -3162,6 +3162,11 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetCategoryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoryQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', value: string, key: string }> };
+
 export type GetCommentsQueryVariables = Exact<{
   invite_id: Scalars['uuid'];
 }>;
@@ -3186,23 +3191,50 @@ export type SubscriptionCommentsSubscription = { __typename?: 'subscription_root
 export type GetInvitesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
+export type GetInvitesQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 export type GetInviteQueryVariables = Exact<{
   id: Scalars['uuid'];
 }>;
 
 
-export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
+export type GetInviteQuery = { __typename?: 'query_root', invites_by_pk?: { __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } } | null };
 
 export type GetInvitesByCategoryQueryVariables = Exact<{
-  category: Categories_Enum;
+  category: Category_Enum;
 }>;
 
 
-export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Categories_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
+export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, topics?: string | null, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
 
+export const GetCategoryDocument = `
+    query GetCategory {
+  category {
+    value
+    key
+  }
+}
+    `;
+export const useGetCategoryQuery = <
+      TData = GetCategoryQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetCategoryQueryVariables,
+      options?: UseQueryOptions<GetCategoryQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCategoryQuery, TError, TData>(
+      variables === undefined ? ['GetCategory'] : ['GetCategory', variables],
+      fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers),
+      options
+    );
+
+useGetCategoryQuery.getKey = (variables?: GetCategoryQueryVariables) => variables === undefined ? ['GetCategory'] : ['GetCategory', variables];
+;
+
+useGetCategoryQuery.fetcher = (client: GraphQLClient, variables?: GetCategoryQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers);
 export const GetCommentsDocument = `
     query GetComments($invite_id: uuid!) {
   comments(
@@ -3384,7 +3416,7 @@ useGetInviteQuery.getKey = (variables: GetInviteQueryVariables) => ['GetInvite',
 
 useGetInviteQuery.fetcher = (client: GraphQLClient, variables: GetInviteQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInviteQuery, GetInviteQueryVariables>(client, GetInviteDocument, variables, headers);
 export const GetInvitesByCategoryDocument = `
-    query GetInvitesByCategory($category: categories_enum!) {
+    query GetInvitesByCategory($category: category_enum!) {
   invites(where: {category: {_eq: $category}}) {
     id
     user_id

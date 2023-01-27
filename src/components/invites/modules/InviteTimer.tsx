@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { Text } from "@mantine/core";
 import React, { FC } from "react";
-import { Categories_Enum } from "../../../generated/graphql";
 import { useTimer } from "../../../hooks/time/useTimer";
 import { Panel } from "./Panel";
 

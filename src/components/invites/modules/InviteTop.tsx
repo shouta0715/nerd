@@ -1,11 +1,11 @@
 import { Avatar, Badge } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { FC, memo } from "react";
-import { Categories_Enum, GetInvitesQuery } from "../../../generated/graphql";
-import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
+import { Category_Enum, GetInvitesQuery } from "../../../generated/graphql";
+import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 type Props = {
-  category?: Categories_Enum;
+  category?: Category_Enum;
   user: GetInvitesQuery["invites"][0]["user"];
 };
 

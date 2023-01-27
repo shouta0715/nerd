@@ -8,16 +8,16 @@ import { InviteItem } from "../../../components/invites/InviteItem";
 import { Layout } from "../../../components/layouts/Layout";
 import { InviteLoading } from "../../../components/layouts/loading/InviteLoading";
 import {
-  Categories_Enum,
   useGetInvitesByCategoryQuery,
+  Category_Enum,
 } from "../../../generated/graphql";
 import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
-import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
+import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 const Index: NextPage = () => {
   const router = useRouter();
   const { isLoading, data } = useQueryInvitesByCategory(
-    Categories_Enum[router.query.category as keyof typeof Categories_Enum]
+    Category_Enum[router.query.category as keyof typeof Category_Enum]
   );
 
   if (isLoading) {
@@ -34,9 +34,7 @@ const Index: NextPage = () => {
         component="ul"
         bg={`${
           categoryProcessing(
-            Categories_Enum[
-              router.query.category as keyof typeof Categories_Enum
-            ]
+            Category_Enum[router.query.category as keyof typeof Category_Enum]
           ).color
         }.0`}
         className="relative min-h-full space-y-4 p-4 py-4 md:p-6"
@@ -50,7 +48,7 @@ const Index: NextPage = () => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(Categories_Enum).map((category) => ({
+  const paths = Object.keys(Category_Enum).map((category) => ({
     params: { category },
   }));
 
@@ -64,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
   const queryKey = useGetInvitesByCategoryQuery.getKey({
     category:
-      Categories_Enum[context.params?.category as keyof typeof Categories_Enum],
+      Category_Enum[context.params?.category as keyof typeof Category_Enum],
   });
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
@@ -72,9 +70,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     queryKey,
     useGetInvitesByCategoryQuery.fetcher(request, {
       category:
-        Categories_Enum[
-          context.params?.category as keyof typeof Categories_Enum
-        ],
+        Category_Enum[context.params?.category as keyof typeof Category_Enum],
     })
   );
 
