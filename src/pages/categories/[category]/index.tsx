@@ -1,3 +1,4 @@
+import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
@@ -11,6 +12,7 @@ import {
   useGetInvitesByCategoryQuery,
 } from "../../../generated/graphql";
 import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
+import { categoryProcessing } from "../../../hooks/utils/useCategoryToJa";
 
 const Index: NextPage = () => {
   const router = useRouter();
@@ -28,11 +30,21 @@ const Index: NextPage = () => {
 
   return (
     <Layout>
-      <ul className="relative p-4 py-4 md:p-6">
+      <Box
+        component="ul"
+        bg={`${
+          categoryProcessing(
+            Categories_Enum[
+              router.query.category as keyof typeof Categories_Enum
+            ]
+          ).color
+        }.0`}
+        className="relative min-h-full space-y-4 p-4 py-4 md:p-6"
+      >
         {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
-      </ul>
+      </Box>
     </Layout>
   );
 };

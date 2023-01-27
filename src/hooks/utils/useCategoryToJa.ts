@@ -1,35 +1,81 @@
 import { Categories_Enum } from "../../generated/graphql";
 
-export const categoryToJa = (category?: Categories_Enum | null) => {
+export const categoryProcessing = (
+  category?: Categories_Enum | null
+): {
+  ja: string;
+  en: string;
+  color: string;
+} => {
   switch (category) {
     case Categories_Enum.Anime:
-      return "アニメ";
+      return {
+        ja: "アニメ",
+        en: "Anime",
+        color: "teal",
+      };
 
     case Categories_Enum.Movie:
-      return "映画";
+      return {
+        ja: "映画",
+        en: "Movie",
+        color: "blue",
+      };
 
     case Categories_Enum.Music:
-      return "音楽";
+      return {
+        ja: "音楽",
+        en: "Music",
+        color: "yellow",
+      };
 
     case Categories_Enum.Doujinshi:
-      return "同人誌";
+      return {
+        ja: "同人誌",
+        en: "Doujinshi",
+        color: "pink",
+      };
 
     case Categories_Enum.Drama:
-      return "ドラマ";
+      return {
+        ja: "ドラマ",
+        en: "Drama",
+        color: "gray",
+      };
 
     case Categories_Enum.Manga:
-      return "漫画";
+      return {
+        ja: "漫画",
+        en: "Manga",
+        color: "orange",
+      };
 
     case Categories_Enum.Tv:
-      return "テレビ";
+      return {
+        ja: "テレビ",
+        en: "TV",
+        color: "grape",
+      };
 
     case Categories_Enum.WeeklyMagazine:
-      return "週刊誌";
+      return {
+        ja: "週刊誌",
+        en: "Weekly Magazine",
+        color: "cyan",
+      };
 
     case Categories_Enum.Youtube:
-      return "YouTube";
+      return {
+        ja: "YouTube",
+        en: "YouTube",
+        color: "red",
+      };
 
     default:
-      return "その他";
+      return {
+        ja: "その他",
+        en: "Other",
+        color: "gray",
+      };
   }
 };

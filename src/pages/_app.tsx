@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               /** Put your mantine theme override here */
               colorScheme: "light",
               colors: {
-                grape: [
+                indigo: [
                   "#f0f5ff",
                   "#eef2ff",
                   "#e0e7ff",
@@ -38,7 +38,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   "#3730a3",
                 ],
               },
-              primaryColor: "grape",
+              primaryColor: "indigo",
             }}
           >
             <Head>

@@ -1,3 +1,4 @@
+import { Box } from "@mantine/core";
 import React, { FC } from "react";
 import { useQueryInvites } from "../hooks/invites/useQueryInvites";
 import { InviteItem } from "./invites/InviteItem";
@@ -16,11 +17,15 @@ export const Dashboard: FC = () => {
 
   return (
     <div>
-      <ul className="relative p-4 py-4 md:p-6">
+      <Box
+        component="ul"
+        bg="indigo.0"
+        className="relative space-y-4 p-4 py-4 md:p-6"
+      >
         {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
-      </ul>
+      </Box>
     </div>
   );
 };
