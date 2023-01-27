@@ -1,7 +1,7 @@
 import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { InviteItem } from "../../../components/invites/InviteItem";
@@ -40,18 +40,7 @@ const Index: NextPage = () => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(Category_Enum).map((category) => ({
-    params: { category },
-  }));
-
-  return {
-    paths,
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
   const queryKey = useGetInvitesByCategoryQuery.getKey({
     category:
@@ -71,7 +60,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: 5,
   };
 };
 
