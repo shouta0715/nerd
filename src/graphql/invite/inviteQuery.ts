@@ -56,7 +56,9 @@ export const GET_INVITE = gql`
 
 export const GET_INVITES_BY_CATEGORY = gql`
   query GetInvitesByCategory($category: category_enum!) {
-    invites(where: { category: { _eq: $category } }) {
+    invites(
+      where: { category: { _eq: $category }, order_by: { created_at: desc } }
+    ) {
       id
       user_id
       anonymous

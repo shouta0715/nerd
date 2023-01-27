@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InviteItem } from "../../../components/invites/InviteItem";
 import { Layout } from "../../../components/layouts/Layout";
-import { InviteLoading } from "../../../components/layouts/loading/InviteLoading";
 import {
   useGetInvitesByCategoryQuery,
   Category_Enum,
@@ -16,17 +15,9 @@ import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 const Index: NextPage = () => {
   const router = useRouter();
-  const { isLoading, data } = useQueryInvitesByCategory(
+  const { data } = useQueryInvitesByCategory(
     Category_Enum[router.query.category as keyof typeof Category_Enum]
   );
-
-  if (isLoading) {
-    return (
-      <Layout>
-        <InviteLoading />
-      </Layout>
-    );
-  }
 
   return (
     <Layout>

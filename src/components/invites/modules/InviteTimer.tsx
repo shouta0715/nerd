@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
-  const { time } = useTimer(start_time);
+  const { time } = useTimer(start_time ?? "2000-01-01T00:00:00+00:00");
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");
   const seconds = time.seconds.toString().padStart(2, "0");

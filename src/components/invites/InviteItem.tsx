@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const InviteItem: FC<Props> = memo(({ invite }) => (
-  <li className=" group relative block h-full w-full overflow-x-hidden rounded-md border-y border-x-0 border-t-0 border-solid border-gray-300 bg-white py-4 shadow transition-colors first:pt-0 hover:bg-slate-50">
+  <li className="animate-fadeIn group relative block h-full w-full overflow-x-hidden rounded-md border-y border-x-0 border-t-0 border-solid border-gray-300 bg-white py-4 shadow transition-colors first:pt-0 hover:bg-slate-50">
     <Link
       href={{
         pathname: `/categories/${invite.category}/${invite.id}`,

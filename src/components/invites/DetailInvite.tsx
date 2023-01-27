@@ -7,8 +7,6 @@ import React, { FC } from "react";
 import { useEnteredInvite } from "../../hooks/invites/useEnteredInvite";
 import { useQueryInvite } from "../../hooks/invites/useQueryInvite";
 import { MainComment } from "../comments/MainComment";
-import { Spinner } from "../layouts/loading/Spinner";
-
 import { InviteCountUp } from "./modules/InviteCountUp";
 import { InviteTimer } from "./modules/InviteTimer";
 
@@ -17,20 +15,12 @@ type Props = {
 };
 
 export const DetailInvite: FC<Props> = ({ invite_id }) => {
-  const { data, isLoading } = useQueryInvite(invite_id);
+  const { data } = useQueryInvite(invite_id);
   const router = useRouter();
   const { isStart } = useEnteredInvite(
     invite_id,
     data?.invites_by_pk?.start_time
   );
-
-  if (isLoading) {
-    return (
-      <div className="fixed inset-0 z-[999] h-screen w-screen bg-white">
-        <Spinner />
-      </div>
-    );
-  }
 
   return (
     <div className=" font-semibold">

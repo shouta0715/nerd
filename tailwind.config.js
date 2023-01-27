@@ -1,3 +1,4 @@
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,7 +9,7 @@ module.exports = {
     extend: {
       height: {
         "screen": "100dvh",
-      }
+      },
     },
   },
   plugins: [],

@@ -1,9 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from "react";
 
-export const InviteLoading: FC = () => (
+type Props = {
+  length: number;
+};
+
+export const InviteLoading: FC<Props> = ({ length = 1 }) => (
   <ul className="w-full p-4 md:p-6">
-    {Array.from({ length: 4 }).map((_, i) => (
+    {Array.from({ length }).map((_, i) => (
       <li
         key={`skelton-${i}`}
         className="animate-pulse overflow-x-hidden border-x-0 border-y-0 border-b border-solid border-slate-200 p-2  md:p-4"
