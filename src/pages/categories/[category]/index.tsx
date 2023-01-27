@@ -12,7 +12,7 @@ import {
   useGetInvitesByCategoryQuery,
 } from "../../../generated/graphql";
 import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
-import { categoryProcessing } from "../../../hooks/utils/useCategoryToJa";
+import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
 
 const Index: NextPage = () => {
   const router = useRouter();

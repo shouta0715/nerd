@@ -54,6 +54,7 @@ export const DetailInvite: FC<Props> = ({ invite_id }) => {
               <InviteCountUp />
             ) : (
               <InviteTimer
+                category={data?.invites_by_pk?.category ?? null}
                 parent="comment"
                 invite_id={invite_id}
                 start_time={data?.invites_by_pk?.start_time}

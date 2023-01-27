@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Categories_Enum } from "../../../generated/graphql";
-import { categoryProcessing } from "../../../hooks/utils/useCategoryToJa";
+import { categoryProcessing } from "../../../hooks/utils/categoryToJa";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();

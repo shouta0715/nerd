@@ -40,7 +40,7 @@ export const categoryProcessing = (
       return {
         ja: "ドラマ",
         en: "Drama",
-        color: "gray",
+        color: "dark",
       };
 
     case Categories_Enum.Manga:
