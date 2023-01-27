@@ -31,7 +31,6 @@ export const InviteItem: FC<Props> = memo(({ invite }) => (
         </Title>
         <InviteTimer
           parent="post"
-          category={invite.category}
           invite_id={invite.id}
           start_time={invite.start_time}
         />
