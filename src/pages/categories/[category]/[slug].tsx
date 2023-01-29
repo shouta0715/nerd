@@ -1,24 +1,21 @@
-/* eslint-disable no-nested-ternary */
 import { ActionIcon, Title } from "@mantine/core";
 import { IconArrowNarrowLeft } from "@tabler/icons";
+import { NextPage } from "next";
 import { useRouter } from "next/router";
-import React, { FC } from "react";
+import React from "react";
+import { MainComment } from "../../../features/comments/MainComment";
+import { InviteCountUp } from "../../../features/invites/modules/InviteCountUp";
+import { InviteTimer } from "../../../features/invites/modules/InviteTimer";
+import { useEnteredInvite } from "../../../hooks/invites/useEnteredInvite";
+import { useQueryInvite } from "../../../hooks/invites/useQueryInvite";
 
-import { useEnteredInvite } from "../../hooks/invites/useEnteredInvite";
-import { useQueryInvite } from "../../hooks/invites/useQueryInvite";
-import { MainComment } from "../comments/MainComment";
-import { InviteCountUp } from "./modules/InviteCountUp";
-import { InviteTimer } from "./modules/InviteTimer";
-
-type Props = {
-  invite_id: string;
-};
-
-export const DetailInvite: FC<Props> = ({ invite_id }) => {
-  const { data } = useQueryInvite(invite_id);
+const Detail: NextPage = () => {
   const router = useRouter();
+
+  const { slug } = router.query as { slug: string };
+  const { data } = useQueryInvite(slug);
   const { isStart } = useEnteredInvite({
-    invite_id,
+    invite_id: slug,
     start_time: data?.invites_by_pk?.start_time,
   });
 
@@ -45,15 +42,17 @@ export const DetailInvite: FC<Props> = ({ invite_id }) => {
             ) : (
               <InviteTimer
                 parent="comment"
-                invite_id={invite_id}
+                invite_id={slug}
                 start_time={data?.invites_by_pk?.start_time}
               />
             )}
           </div>
         </div>
 
-        <MainComment invite_id={invite_id} />
+        <MainComment invite_id={slug} />
       </div>
     </div>
   );
 };
+
+export default Detail;
