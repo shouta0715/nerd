@@ -75,6 +75,7 @@ export const useInitialize = () => {
     setClient,
     setIsClient,
     setIsWsClient,
+    setUser,
     setWsClient,
   ]);
 };
