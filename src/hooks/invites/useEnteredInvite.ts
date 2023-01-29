@@ -3,21 +3,26 @@ import { useCommentTimeStore } from "../../store/comment/commentType";
 import { useSubscriptionComment } from "../comments/useSubscriptionComment";
 import { changeTimeToJa } from "../utils/changeTimeToJa";
 
-export const useEnteredInvite = (postId: string, start_time: string) => {
-  const statePostId = useCommentTimeStore((state) => state.postId);
-  const setPostId = useCommentTimeStore((state) => state.setPostId);
+type Props = {
+  invite_id: string;
+  start_time: string;
+};
+
+export const useEnteredInvite = ({ invite_id, start_time }: Props) => {
+  const startInviteId = useCommentTimeStore((state) => state.inviteId);
+  const setInviteId = useCommentTimeStore((state) => state.setInviteId);
   const resetTime = useCommentTimeStore((state) => state.resetTime);
   const isStart =
     new Date().getTime() - changeTimeToJa(start_time).getTime() > 0;
-  useSubscriptionComment(postId);
+  useSubscriptionComment(invite_id);
 
   useEffect(() => {
-    if (!postId) return;
-    if (statePostId !== postId) {
-      setPostId(postId);
+    if (!invite_id) return;
+    if (startInviteId !== invite_id) {
+      setInviteId(invite_id);
       resetTime();
     }
-  }, [postId, resetTime, setPostId, statePostId]);
+  }, [invite_id, resetTime, setInviteId, startInviteId]);
 
   return { isStart };
 };

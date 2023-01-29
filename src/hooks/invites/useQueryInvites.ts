@@ -9,9 +9,6 @@ export const useQueryInvites = () => {
     client,
     {},
     {
-      onSuccess: (data) => {
-        console.log(data);
-      },
       onError: (error: Error) => {
         console.log(error);
       },
