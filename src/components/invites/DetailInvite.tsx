@@ -17,10 +17,10 @@ type Props = {
 export const DetailInvite: FC<Props> = ({ invite_id }) => {
   const { data } = useQueryInvite(invite_id);
   const router = useRouter();
-  const { isStart } = useEnteredInvite(
+  const { isStart } = useEnteredInvite({
     invite_id,
-    data?.invites_by_pk?.start_time
-  );
+    start_time: data?.invites_by_pk?.start_time,
+  });
 
   return (
     <div className=" font-semibold">

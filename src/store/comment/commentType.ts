@@ -12,9 +12,7 @@ export const useCommentInputStore = create<CommentInputStore>((set) => ({
     content: "",
     spoiler: false,
   },
-
   setComment: (comment: CommentInput) => set({ comment }),
-
   resetComment: () =>
     set({
       comment: { content: "", spoiler: false },
@@ -29,12 +27,12 @@ type CountTime = {
 
 type CommentTimeStore = {
   time: CountTime;
-  postId: string;
+  inviteId: string;
   setTime: () => void;
   resetTime: () => void;
   getTime: () => CountTime;
-  setPostId: (postId: string) => void;
-  restPostId: () => void;
+  setInviteId: (InviteId: string) => void;
+  restInviteId: () => void;
 };
 
 export const useCommentTimeStore = create<CommentTimeStore>((set, get) => ({
@@ -43,7 +41,7 @@ export const useCommentTimeStore = create<CommentTimeStore>((set, get) => ({
     minutes: 0,
     hours: 0,
   },
-  postId: "",
+  inviteId: "",
   setTime: () =>
     set({
       time: {
@@ -58,8 +56,8 @@ export const useCommentTimeStore = create<CommentTimeStore>((set, get) => ({
     }),
   resetTime: () => set({ time: { seconds: 0, minutes: 0, hours: 0 } }),
   getTime: () => get().time,
-  setPostId: (postId: string) => set({ postId }),
-  restPostId: () => set({ postId: "" }),
+  setInviteId: (inviteId: string) => set({ inviteId }),
+  restInviteId: () => set({ inviteId: "" }),
 }));
 
 type CommentScrollStore = {
