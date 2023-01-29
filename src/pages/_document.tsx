@@ -24,7 +24,6 @@ export default class _Document extends Documents {
           />
         </Head>
         <body>
-          <script> </script>
           <Main />
           <NextScript />
         </body>
