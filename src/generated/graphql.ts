@@ -3188,6 +3188,13 @@ export type GetInvitesByCategoryQueryVariables = Exact<{
 
 export type GetInvitesByCategoryQuery = { __typename?: 'query_root', invites: Array<{ __typename?: 'invites', id: any, user_id: string, anonymous: boolean, author_name: string, category: Category_Enum, content?: string | null, created_at: any, title: string, sub_title?: string | null, start_time: any, spoiler: boolean, site?: string | null, is_start: boolean, is_finished: boolean, url: string, user: { __typename?: 'users', photo_url?: string | null, user_name: string } }> };
 
+export type GetUserQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetUserQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, anonymous: boolean, photo_url?: string | null, user_name: string } | null };
+
 
 export const GetCommentsDocument = `
     query GetComments($invite_id: uuid!) {
@@ -3411,3 +3418,32 @@ useGetInvitesByCategoryQuery.getKey = (variables: GetInvitesByCategoryQueryVaria
 ;
 
 useGetInvitesByCategoryQuery.fetcher = (client: GraphQLClient, variables: GetInvitesByCategoryQueryVariables, headers?: RequestInit['headers']) => fetcher<GetInvitesByCategoryQuery, GetInvitesByCategoryQueryVariables>(client, GetInvitesByCategoryDocument, variables, headers);
+export const GetUserDocument = `
+    query GetUser($id: String!) {
+  users_by_pk(id: $id) {
+    id
+    anonymous
+    photo_url
+    user_name
+  }
+}
+    `;
+export const useGetUserQuery = <
+      TData = GetUserQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetUserQueryVariables,
+      options?: UseQueryOptions<GetUserQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetUserQuery, TError, TData>(
+      ['GetUser', variables],
+      fetcher<GetUserQuery, GetUserQueryVariables>(client, GetUserDocument, variables, headers),
+      options
+    );
+
+useGetUserQuery.getKey = (variables: GetUserQueryVariables) => ['GetUser', variables];
+;
+
+useGetUserQuery.fetcher = (client: GraphQLClient, variables: GetUserQueryVariables, headers?: RequestInit['headers']) => fetcher<GetUserQuery, GetUserQueryVariables>(client, GetUserDocument, variables, headers);

@@ -17,22 +17,22 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
       <div className="flex">
         <div
           className={`flex w-full ${
-            comment.user_id === user?.uid ? "justify-end" : "justify-start"
+            comment.user_id === user?.id ? "justify-end" : "justify-start"
           }`}
         >
           <div
             className={`flex w-[80%]  ${
-              comment.user_id === user?.uid ? "justify-end " : "justify-start"
+              comment.user_id === user?.id ? "justify-end " : "justify-start"
             } `}
           >
             <div
               className={`flex items-center ${
-                comment.user_id === user?.uid ? "flex-row-reverse" : ""
+                comment.user_id === user?.id ? "flex-row-reverse" : ""
               }  `}
             >
               <div
                 className={`mb-auto ${
-                  comment.user_id === user?.uid ? "ml-4" : "mr-4"
+                  comment.user_id === user?.id ? "ml-4" : "mr-4"
                 } `}
               >
                 <Avatar className="" src={comment.user.photo_url} radius="xl" />
@@ -40,7 +40,7 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
               <div className="flex flex-col space-y-1">
                 <span
                   className={`flex h-[38px] items-center  overflow-hidden ${
-                    comment.user_id === user?.uid ? "self-end" : ""
+                    comment.user_id === user?.id ? "self-end" : ""
                   } `}
                 >
                   {comment.user.user_name !== "anonymous"
@@ -49,14 +49,14 @@ export const CommentItem: FC<Props> = memo(({ comment }) => {
                 </span>
                 <div
                   className={`w-fit rounded-md bg-[#deffe7] px-4 py-2 font-normal ${
-                    comment.user_id === user?.uid ? "self-end" : ""
+                    comment.user_id === user?.id ? "self-end" : ""
                   } `}
                 >
                   <Text>{comment.content}</Text>
                 </div>
                 <Text
                   className={`px-2 ${
-                    comment.user_id === user?.uid ? "self-end" : ""
+                    comment.user_id === user?.id ? "self-end" : ""
                   }`}
                   color="gray"
                   size="xs"

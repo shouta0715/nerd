@@ -22,11 +22,11 @@ export const CommentInput: FC<Props> = ({ invite_id }) => {
           <Avatar
             size="md"
             className="mb-2 md:mb-0"
-            src={user?.photoURL}
+            src={user?.photo_url}
             radius="xl"
           />
           <span className="hidden font-bold md:inline-block">
-            {user?.displayName ?? "匿名"}
+            {user?.user_name}
           </span>
           <span
             className={`w-[58px]  text-center text-xs font-semibold text-indigo-500 md:pl-0 ${
