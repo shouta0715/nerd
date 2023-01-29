@@ -1,3 +1,4 @@
+/* eslint-disable no-self-assign */
 import { signInAnonymously } from "firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
@@ -12,11 +13,11 @@ let unSub: () => void;
 export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setClient = useGlobalStore((state) => state.setClient);
-  const setUser = useUserStore((state) => state.setUser);
   const setIsClient = useGlobalStore((state) => state.setIsClient);
   const setIsWsClient = useGlobalStore((state) => state.setIsWsClient);
   const setWsClient = useGlobalStore((state) => state.setWsClient);
   const setAuthLoading = useGlobalStore((state) => state.setAuthLoading);
+  const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -29,7 +30,6 @@ export const useInitialize = () => {
           setClient(client);
           const wsClient = createWsClient(idTokenResult.token);
           setWsClient(wsClient);
-          setUser(user);
           setIsClient(true);
           setIsWsClient(true);
           setAuthLoading(false);
@@ -44,13 +44,18 @@ export const useInitialize = () => {
               const wsClient = createWsClient(idTokenResultSnap.token);
               setClient(client);
               setWsClient(wsClient);
-              setUser(user);
               setIsClient(true);
               setIsWsClient(true);
               setAuthLoading(false);
             }
           });
         }
+        setUser({
+          id: user.uid,
+          anonymous: user.isAnonymous,
+          photo_url: user.photoURL,
+          user_name: user.displayName ?? "匿名",
+        });
       } else {
         const createGustUser = async () => {
           await signInAnonymously(auth).then((result) => result.user);
@@ -64,6 +69,13 @@ export const useInitialize = () => {
       console.log(unSub);
       // unSub();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    TOKEN_KEY,
+    setAuthLoading,
+    setClient,
+    setIsClient,
+    setIsWsClient,
+    setUser,
+    setWsClient,
+  ]);
 };

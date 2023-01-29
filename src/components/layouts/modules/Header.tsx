@@ -28,9 +28,9 @@ export const Header: FC = () => {
       <div className="flex items-center justify-between px-6 py-2  md:px-10">
         <Logo />
         <div>
-          {user && !user.isAnonymous ? (
+          {user && !user.anonymous ? (
             <Avatar
-              src={user?.photoURL}
+              src={user?.photo_url}
               radius="xl"
               size="md"
               className="cursor-pointer"
