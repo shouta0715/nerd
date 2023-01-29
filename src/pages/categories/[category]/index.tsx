@@ -4,8 +4,8 @@ import { GraphQLClient } from "graphql-request";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { InviteItem } from "../../../components/invites/InviteItem";
-import { Layout } from "../../../components/layouts/Layout";
+import { InviteItem } from "../../../features/invites/InviteItem";
+import { Layout } from "../../../components/Layout/Layout";
 import {
   useGetInvitesByCategoryQuery,
   Category_Enum,

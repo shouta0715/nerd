@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { DetailInvite } from "../../../components/invites/DetailInvite";
+import { DetailInvite } from "../../../features/invites/DetailInvite";
 
 const Detail: NextPage = () => {
   const router = useRouter();
