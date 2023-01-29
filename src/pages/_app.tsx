@@ -12,6 +12,7 @@ import { Error } from "../components/Layout/error/Error";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
+
   useInitialize();
 
   return (
