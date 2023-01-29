@@ -8,7 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Head from "next/head";
 import queryClient from "../libs/queryClient";
 import { useInitialize } from "../hooks/useInitialize";
-import { Error } from "../components/layouts/error/Error";
+import { Error } from "../components/Layout/error/Error";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
