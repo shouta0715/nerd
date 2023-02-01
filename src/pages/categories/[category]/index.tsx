@@ -53,17 +53,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
+  const category =
+    Category_Enum[context.params?.category as keyof typeof Category_Enum];
+
   const queryKey = useGetInvitesByCategoryQuery.getKey({
-    category:
-      Category_Enum[context.params?.category as keyof typeof Category_Enum],
+    category,
   });
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
   await queryClient.prefetchQuery(
     queryKey,
     useGetInvitesByCategoryQuery.fetcher(request, {
-      category:
-        Category_Enum[context.params?.category as keyof typeof Category_Enum],
+      category,
     })
   );
 
