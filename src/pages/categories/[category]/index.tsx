@@ -56,6 +56,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const category =
     Category_Enum[context.params?.category as keyof typeof Category_Enum];
 
+  if (!category) return { notFound: true };
+
   const queryKey = useGetInvitesByCategoryQuery.getKey({
     category,
   });
@@ -63,9 +65,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   await queryClient.prefetchQuery(
     queryKey,
-    useGetInvitesByCategoryQuery.fetcher(request, {
-      category,
-    })
+    useGetInvitesByCategoryQuery.fetcher(request, { category })
   );
 
   return {

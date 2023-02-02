@@ -18,7 +18,7 @@ export const useQueryInvitesByCategory = (category: Category_Enum) => {
       onError: (error: Error) => {
         console.log(error);
       },
-      enabled: isClient,
+      enabled: isClient && !!category,
     }
   );
 };
