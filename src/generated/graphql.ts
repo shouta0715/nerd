@@ -3148,6 +3148,11 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type GetCategoryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoryQuery = { __typename?: 'query_root', category: Array<{ __typename?: 'category', key: string, value: string }> };
+
 export type GetCommentsQueryVariables = Exact<{
   invite_id: Scalars['uuid'];
 }>;
@@ -3196,6 +3201,33 @@ export type GetUserQueryVariables = Exact<{
 export type GetUserQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, anonymous: boolean, photo_url?: string | null, user_name: string } | null };
 
 
+export const GetCategoryDocument = `
+    query GetCategory {
+  category {
+    key
+    value
+  }
+}
+    `;
+export const useGetCategoryQuery = <
+      TData = GetCategoryQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetCategoryQueryVariables,
+      options?: UseQueryOptions<GetCategoryQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCategoryQuery, TError, TData>(
+      variables === undefined ? ['GetCategory'] : ['GetCategory', variables],
+      fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers),
+      options
+    );
+
+useGetCategoryQuery.getKey = (variables?: GetCategoryQueryVariables) => variables === undefined ? ['GetCategory'] : ['GetCategory', variables];
+;
+
+useGetCategoryQuery.fetcher = (client: GraphQLClient, variables?: GetCategoryQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCategoryQuery, GetCategoryQueryVariables>(client, GetCategoryDocument, variables, headers);
 export const GetCommentsDocument = `
     query GetComments($invite_id: uuid!) {
   comments(

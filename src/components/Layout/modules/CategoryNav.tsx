@@ -3,10 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Category_Enum } from "../../../generated/graphql";
+import { useQueryCategory } from "../../../hooks/useQueryCategory";
 import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
+  const { data } = useQueryCategory();
+  console.log(data);
 
   return (
     <nav className="  sticky top-0 z-[50] w-full overflow-hidden border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">

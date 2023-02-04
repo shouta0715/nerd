@@ -3,7 +3,7 @@ import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import { Box } from "@mantine/core";
 import { Layout } from "../components/Layout/Layout";
-import { useGetInvitesQuery } from "../generated/graphql";
+import { useGetCategoryQuery, useGetInvitesQuery } from "../generated/graphql";
 import { useQueryInvites } from "../hooks/invites/useQueryInvites";
 import { InviteItem } from "../features/invites/InviteItem";
 
@@ -32,10 +32,16 @@ export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
   const queryKey = useGetInvitesQuery.getKey({});
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
+  const categoryQueryKey = useGetCategoryQuery.getKey({});
 
   await queryClient.prefetchQuery(
     queryKey,
     useGetInvitesQuery.fetcher(request, {})
+  );
+
+  await queryClient.prefetchQuery(
+    categoryQueryKey,
+    useGetCategoryQuery.fetcher(request, {})
   );
 
   return {
