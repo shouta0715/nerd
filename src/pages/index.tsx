@@ -1,18 +1,16 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
-import { Box } from "@mantine/core";
+// import { Box } from "@mantine/core";
 import { Layout } from "../components/Layout/Layout";
 import { useGetCategoryQuery, useGetInvitesQuery } from "../generated/graphql";
-import { useQueryInvites } from "../hooks/invites/useQueryInvites";
-import { InviteItem } from "../features/invites/InviteItem";
+// import { InviteItem } from "../features/invites/InviteItem";
 
-const Home: NextPage = () => {
-  const { data } = useQueryInvites();
+const Home: NextPage = () => (
+  // const { data } = useQueryInvites();
 
-  return (
-    <Layout>
-      <Box
+  <Layout>
+    {/* <Box
         component="ul"
         bg="indigo.0"
         className={`relative space-y-4 p-4 py-4 md:p-6 ${
@@ -22,10 +20,9 @@ const Home: NextPage = () => {
         {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
-      </Box>
-    </Layout>
-  );
-};
+      </Box> */}
+  </Layout>
+);
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {

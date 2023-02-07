@@ -1,27 +1,26 @@
-import { Box } from "@mantine/core";
+// import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import React from "react";
-import { InviteItem } from "../../../features/invites/InviteItem";
+// import { InviteItem } from "../../../features/invites/InviteItem";
 import { Layout } from "../../../components/Layout/Layout";
 import {
   useGetInvitesByCategoryQuery,
   Category_Enum,
 } from "../../../generated/graphql";
-import { useQueryInvitesByCategory } from "../../../hooks/invites/useQueryInviteByCategory";
-import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
-const Index: NextPage = () => {
-  const router = useRouter();
-  const { data } = useQueryInvitesByCategory(
-    Category_Enum[router.query.category as keyof typeof Category_Enum]
-  );
+// import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
-  return (
-    <Layout>
-      <Box
+const Index: NextPage = () => (
+  // const router = useRouter();
+  // const { data } = useQueryInvitesByCategory(
+  //   Category_Enum[router.query.category as keyof typeof Category_Enum]
+  // );
+
+  <Layout>
+    {/* <Box
         component="ul"
         bg={`${
           categoryProcessing(
@@ -35,11 +34,9 @@ const Index: NextPage = () => {
         {data?.invites?.map((invite) => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
-      </Box>
-    </Layout>
-  );
-};
-
+      </Box> */}
+  </Layout>
+);
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = Object.keys(Category_Enum).map((category) => ({
     params: { category },
