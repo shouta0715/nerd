@@ -3,7 +3,7 @@ import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 // import { Box } from "@mantine/core";
 import { Layout } from "../components/Layout/Layout";
-import { useGetCategoryQuery, useGetInvitesQuery } from "../generated/graphql";
+import { useGetMediaTypesQuery } from "../generated/graphql";
 // import { InviteItem } from "../features/invites/InviteItem";
 
 const Home: NextPage = () => (
@@ -27,18 +27,11 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
-  const queryKey = useGetInvitesQuery.getKey({});
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
-  const categoryQueryKey = useGetCategoryQuery.getKey({});
-
+  const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
   await queryClient.prefetchQuery(
-    queryKey,
-    useGetInvitesQuery.fetcher(request, {})
-  );
-
-  await queryClient.prefetchQuery(
-    categoryQueryKey,
-    useGetCategoryQuery.fetcher(request, {})
+    mediaTypesQueryKey,
+    useGetMediaTypesQuery.fetcher(request, {})
   );
 
   return {

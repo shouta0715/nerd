@@ -2,14 +2,12 @@ import { ScrollArea } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { Category_Enum } from "../../../generated/graphql";
-import { useQueryCategory } from "../../../hooks/useQueryCategory";
+import { useQueryMediaTypes } from "../../../hooks/useQueryMediaTypes";
 import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
-  const { data } = useQueryCategory();
-  console.log(data);
+  const { data } = useQueryMediaTypes();
 
   return (
     <nav className="  sticky top-0 z-[50] w-full overflow-hidden border-x-0 border-y-0 border-b border-solid border-gray-200 bg-white">
@@ -29,22 +27,18 @@ export const CategoryNav: FC = () => {
         >
           All
         </Link>
-        {Object.keys(Category_Enum).map((enum_category) => (
+        {data?.media_types.map((media) => (
           <Link
             prefetch={false}
-            key={`nav-${enum_category}`}
-            href={`/categories/${enum_category}`}
+            key={`nav-${media.id}`}
+            href={`/categories/${media.name}`}
             className={`mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 last:mr-0 ${
-              router.asPath === `/categories/${enum_category}`
+              router.asPath === `/categories/${media.name}`
                 ? "border-b-2 text-black"
                 : ""
             }`}
           >
-            {
-              categoryProcessing(
-                Category_Enum[enum_category as keyof typeof Category_Enum]
-              ).ja
-            }
+            {categoryProcessing(media).ja}
           </Link>
         ))}
       </ScrollArea>

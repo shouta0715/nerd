@@ -1,15 +1,11 @@
 // import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GraphQLClient } from "graphql-request";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 // import { useRouter } from "next/router";
 import React from "react";
 // import { InviteItem } from "../../../features/invites/InviteItem";
 import { Layout } from "../../../components/Layout/Layout";
-import {
-  useGetInvitesByCategoryQuery,
-  Category_Enum,
-} from "../../../generated/graphql";
+import { getAllMediaTypes } from "../../../libs/DynamicPaths";
 
 // import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
 
@@ -38,9 +34,7 @@ const Index: NextPage = () => (
   </Layout>
 );
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = Object.keys(Category_Enum).map((category) => ({
-    params: { category },
-  }));
+  const paths = await getAllMediaTypes();
 
   return {
     paths,
@@ -50,20 +44,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
-  const category =
-    Category_Enum[context.params?.category as keyof typeof Category_Enum];
+  const slug = context.params;
+  console.log(slug);
 
-  if (!category) return { notFound: true };
-
-  const queryKey = useGetInvitesByCategoryQuery.getKey({
-    category,
-  });
-  const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
-
-  await queryClient.prefetchQuery(
-    queryKey,
-    useGetInvitesByCategoryQuery.fetcher(request, { category })
-  );
+  // const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
   return {
     props: {
