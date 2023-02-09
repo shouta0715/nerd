@@ -1,18 +1,17 @@
 /* eslint-disable react/display-name */
-import { Title } from "@mantine/core";
-import Link from "next/link";
+// import { Title } from "@mantine/core";
+// import Link from "next/link";
 import React, { FC, memo } from "react";
-import { GetInvitesQuery } from "../../generated/graphql";
-import { InviteTimer } from "./modules/InviteTimer";
-import { InviteTop } from "./modules/InviteTop";
+// import { InviteTimer } from "./modules/InviteTimer";
+// import { InviteTop } from "./modules/InviteTop";
 
-type Props = {
-  invite: GetInvitesQuery["invites"][0];
-};
+// type Props = {
+//   invite: GetInvitesQuery["invites"][0];
+// };
 
-export const InviteItem: FC<Props> = memo(({ invite }) => (
+export const InviteItem: FC = memo(() => (
   <li className="animate-fadeIn group relative block h-full w-full overflow-x-hidden rounded-md border-y border-x-0 border-t-0 border-solid border-gray-300 bg-white py-4 shadow transition-colors first:pt-0 hover:bg-slate-50">
-    <Link
+    {/* <Link
       href={{
         pathname: `/categories/${invite.category}/${invite.id}`,
       }}
@@ -35,6 +34,6 @@ export const InviteItem: FC<Props> = memo(({ invite }) => (
           start_time={invite.start_time}
         />
       </div>
-    </div>
+    </div> */}
   </li>
 ));

@@ -22,7 +22,7 @@ export const useGlobalStore = create<GlobalState>((set) => ({
   isOpenBurger: false,
   changeIsOpenBurger: () =>
     set((state) => ({ isOpenBurger: !state.isOpenBurger })),
-  client: new GraphQLClient(""),
+  client: new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string),
   setClient: (client) => set(() => ({ client })),
   isClient: false,
   setIsClient: (isClient) => set(() => ({ isClient })),
