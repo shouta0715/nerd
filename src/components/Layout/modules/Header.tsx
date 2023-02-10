@@ -1,9 +1,9 @@
 import { Avatar, Button, Modal } from "@mantine/core";
 import React, { FC, useState } from "react";
-import { useGlobalStore } from "../../../store/global/globalStore";
-import { useUserStore } from "../../../store/user/userState";
-import { Logo } from "../../Icon/Logo";
-import { ModalContent } from "./ModalContent";
+import { Logo } from "src/components/Icon/Logo";
+import { ModalContent } from "src/components/Layout/modules/ModalContent";
+import { useGlobalStore } from "src/store/global/globalStore";
+import { useUserStore } from "src/store/user/userState";
 
 export const Header: FC = () => {
   const user = useUserStore((state) => state.user);

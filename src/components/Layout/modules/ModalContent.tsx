@@ -1,9 +1,9 @@
 import { Button, Paper, Text } from "@mantine/core";
 import Link from "next/link";
 import React, { Dispatch, FC, memo } from "react";
-import { useGoogleSignIn } from "../../../hooks/auth/useGoogleSignIn";
-import { GoogleIcon } from "../../Icon/GoogleIcon";
-import { TwitterIcon } from "../../Icon/TwitterIcon";
+import { GoogleIcon } from "src/components/Icon/GoogleIcon";
+import { TwitterIcon } from "src/components/Icon/TwitterIcon";
+import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
 
 type Props = {
   setOpened: Dispatch<React.SetStateAction<boolean>>;

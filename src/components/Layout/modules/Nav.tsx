@@ -8,7 +8,7 @@ import {
 import { Burger, Flex, ScrollArea, ThemeIcon, Tooltip } from "@mantine/core";
 import Link from "next/link";
 import React, { FC } from "react";
-import { useGlobalStore } from "../../../store/global/globalStore";
+import { useGlobalStore } from "src/store/global/globalStore";
 
 export const Nav: FC = () => {
   const isOpenBurger = useGlobalStore((state) => state.isOpenBurger);

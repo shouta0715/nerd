@@ -1,9 +1,9 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
+import { Layout } from "src/components/Layout/Layout";
+import { useGetMediaTypesQuery } from "src/generated/graphql";
 // import { Box } from "@mantine/core";
-import { Layout } from "../components/Layout/Layout";
-import { useGetMediaTypesQuery } from "../generated/graphql";
 // import { InviteItem } from "../features/invites/InviteItem";
 
 const Home: NextPage = () => (

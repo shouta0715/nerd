@@ -1,9 +1,9 @@
 import React, { FC, ReactNode } from "react";
-import { Aside } from "./modules/Aside";
-import { Header } from "./modules/Header";
-import { Footer } from "./modules/Footer";
-import { Nav } from "./modules/Nav";
-import { CategoryNav } from "./modules/CategoryNav";
+import { Aside } from "src/components/Layout/modules/Aside";
+import { CategoryNav } from "src/components/Layout/modules/CategoryNav";
+import { Footer } from "src/components/Layout/modules/Footer";
+import { Header } from "src/components/Layout/modules/Header";
+import { Nav } from "src/components/Layout/modules/Nav";
 
 type Props = {
   children: ReactNode;

@@ -2,8 +2,8 @@ import { ScrollArea } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { useQueryMediaTypes } from "../../../hooks/useQueryMediaTypes";
-import { categoryProcessing } from "../../../hooks/utils/categoryProcessing";
+import { useQueryMediaTypes } from "src/hooks/useQueryMediaTypes";
+import { categoryProcessing } from "src/hooks/utils/categoryProcessing";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();

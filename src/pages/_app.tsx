@@ -6,9 +6,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { MantineProvider } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import Head from "next/head";
-import queryClient from "../libs/queryClient";
-import { useInitialize } from "../hooks/useInitialize";
-import { Error } from "../components/Layout/error/Error";
+import queryClient from "src/libs/queryClient";
+import { useInitialize } from "src/hooks/useInitialize";
+import { Error } from "src/components/Layout/error/Error";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
