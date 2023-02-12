@@ -2,7 +2,11 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
-import { useGetMediaTypesQuery } from "src/generated/graphql";
+import {
+  useGetMediaTypesQuery,
+  useGetTodayEpisodesQuery,
+} from "src/generated/graphql";
+import { getTodayData } from "src/hooks/router/dynamicPaths";
 // import { Box } from "@mantine/core";
 // import { InviteItem } from "../features/invites/InviteItem";
 
@@ -28,16 +32,29 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
+
   const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
   await queryClient.prefetchQuery(
     mediaTypesQueryKey,
     useGetMediaTypesQuery.fetcher(request, {})
   );
 
+  const episodesWhereQuery = await getTodayData();
+
+  const todayEpisodesQueryKey = useGetTodayEpisodesQuery.getKey({
+    where: episodesWhereQuery,
+  });
+
+  await queryClient.prefetchQuery(
+    todayEpisodesQueryKey,
+    useGetTodayEpisodesQuery.fetcher(request, {
+      where: episodesWhereQuery,
+    })
+  );
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: 3,
   };
 };

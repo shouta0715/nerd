@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useMutation, useQuery, UseMutationOptions, UseQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -21,6 +21,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  timestamp: any;
   timestamptz: any;
   uuid: any;
 };
@@ -91,6 +92,448 @@ export enum Cursor_Ordering {
   /** descending ordering of the cursor */
   Desc = 'DESC'
 }
+
+/** columns and relationships of "episodes" */
+export type Episodes = {
+  __typename?: 'episodes';
+  created_at: Scalars['timestamptz'];
+  end_time?: Maybe<Scalars['timestamp']>;
+  has_next_episode: Scalars['Boolean'];
+  has_prev_episode: Scalars['Boolean'];
+  id: Scalars['uuid'];
+  number: Scalars['Int'];
+  start_time?: Maybe<Scalars['timestamp']>;
+  title: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+  /** An object relationship */
+  work: Works;
+  work_id: Scalars['Int'];
+};
+
+/** aggregated selection of "episodes" */
+export type Episodes_Aggregate = {
+  __typename?: 'episodes_aggregate';
+  aggregate?: Maybe<Episodes_Aggregate_Fields>;
+  nodes: Array<Episodes>;
+};
+
+export type Episodes_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Episodes_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Episodes_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Episodes_Aggregate_Bool_Exp_Count>;
+};
+
+export type Episodes_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Episodes_Select_Column_Episodes_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Episodes_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Episodes_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Episodes_Select_Column_Episodes_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Episodes_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Episodes_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Episodes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Episodes_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "episodes" */
+export type Episodes_Aggregate_Fields = {
+  __typename?: 'episodes_aggregate_fields';
+  avg?: Maybe<Episodes_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Episodes_Max_Fields>;
+  min?: Maybe<Episodes_Min_Fields>;
+  stddev?: Maybe<Episodes_Stddev_Fields>;
+  stddev_pop?: Maybe<Episodes_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Episodes_Stddev_Samp_Fields>;
+  sum?: Maybe<Episodes_Sum_Fields>;
+  var_pop?: Maybe<Episodes_Var_Pop_Fields>;
+  var_samp?: Maybe<Episodes_Var_Samp_Fields>;
+  variance?: Maybe<Episodes_Variance_Fields>;
+};
+
+
+/** aggregate fields of "episodes" */
+export type Episodes_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Episodes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "episodes" */
+export type Episodes_Aggregate_Order_By = {
+  avg?: InputMaybe<Episodes_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Episodes_Max_Order_By>;
+  min?: InputMaybe<Episodes_Min_Order_By>;
+  stddev?: InputMaybe<Episodes_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Episodes_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Episodes_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Episodes_Sum_Order_By>;
+  var_pop?: InputMaybe<Episodes_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Episodes_Var_Samp_Order_By>;
+  variance?: InputMaybe<Episodes_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "episodes" */
+export type Episodes_Arr_Rel_Insert_Input = {
+  data: Array<Episodes_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Episodes_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Episodes_Avg_Fields = {
+  __typename?: 'episodes_avg_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "episodes" */
+export type Episodes_Avg_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "episodes". All fields are combined with a logical 'AND'. */
+export type Episodes_Bool_Exp = {
+  _and?: InputMaybe<Array<Episodes_Bool_Exp>>;
+  _not?: InputMaybe<Episodes_Bool_Exp>;
+  _or?: InputMaybe<Array<Episodes_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  end_time?: InputMaybe<Timestamp_Comparison_Exp>;
+  has_next_episode?: InputMaybe<Boolean_Comparison_Exp>;
+  has_prev_episode?: InputMaybe<Boolean_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  number?: InputMaybe<Int_Comparison_Exp>;
+  start_time?: InputMaybe<Timestamp_Comparison_Exp>;
+  title?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  work?: InputMaybe<Works_Bool_Exp>;
+  work_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "episodes" */
+export enum Episodes_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  EpisodesPkey = 'episodes_pkey',
+  /** unique or primary key constraint on columns "number", "work_id" */
+  EpisodesWorkIdNumberKey = 'episodes_work_id_number_key'
+}
+
+/** input type for incrementing numeric columns in table "episodes" */
+export type Episodes_Inc_Input = {
+  number?: InputMaybe<Scalars['Int']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "episodes" */
+export type Episodes_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_time?: InputMaybe<Scalars['timestamp']>;
+  has_next_episode?: InputMaybe<Scalars['Boolean']>;
+  has_prev_episode?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  number?: InputMaybe<Scalars['Int']>;
+  start_time?: InputMaybe<Scalars['timestamp']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Episodes_Max_Fields = {
+  __typename?: 'episodes_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  end_time?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  number?: Maybe<Scalars['Int']>;
+  start_time?: Maybe<Scalars['timestamp']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "episodes" */
+export type Episodes_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  end_time?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Episodes_Min_Fields = {
+  __typename?: 'episodes_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  end_time?: Maybe<Scalars['timestamp']>;
+  id?: Maybe<Scalars['uuid']>;
+  number?: Maybe<Scalars['Int']>;
+  start_time?: Maybe<Scalars['timestamp']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "episodes" */
+export type Episodes_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  end_time?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "episodes" */
+export type Episodes_Mutation_Response = {
+  __typename?: 'episodes_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Episodes>;
+};
+
+/** on_conflict condition type for table "episodes" */
+export type Episodes_On_Conflict = {
+  constraint: Episodes_Constraint;
+  update_columns?: Array<Episodes_Update_Column>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "episodes". */
+export type Episodes_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  end_time?: InputMaybe<Order_By>;
+  has_next_episode?: InputMaybe<Order_By>;
+  has_prev_episode?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  number?: InputMaybe<Order_By>;
+  start_time?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  work?: InputMaybe<Works_Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: episodes */
+export type Episodes_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "episodes" */
+export enum Episodes_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EndTime = 'end_time',
+  /** column name */
+  HasNextEpisode = 'has_next_episode',
+  /** column name */
+  HasPrevEpisode = 'has_prev_episode',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Number = 'number',
+  /** column name */
+  StartTime = 'start_time',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+/** select "episodes_aggregate_bool_exp_bool_and_arguments_columns" columns of table "episodes" */
+export enum Episodes_Select_Column_Episodes_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  HasNextEpisode = 'has_next_episode',
+  /** column name */
+  HasPrevEpisode = 'has_prev_episode'
+}
+
+/** select "episodes_aggregate_bool_exp_bool_or_arguments_columns" columns of table "episodes" */
+export enum Episodes_Select_Column_Episodes_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  HasNextEpisode = 'has_next_episode',
+  /** column name */
+  HasPrevEpisode = 'has_prev_episode'
+}
+
+/** input type for updating data in table "episodes" */
+export type Episodes_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_time?: InputMaybe<Scalars['timestamp']>;
+  has_next_episode?: InputMaybe<Scalars['Boolean']>;
+  has_prev_episode?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  number?: InputMaybe<Scalars['Int']>;
+  start_time?: InputMaybe<Scalars['timestamp']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Episodes_Stddev_Fields = {
+  __typename?: 'episodes_stddev_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "episodes" */
+export type Episodes_Stddev_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Episodes_Stddev_Pop_Fields = {
+  __typename?: 'episodes_stddev_pop_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "episodes" */
+export type Episodes_Stddev_Pop_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Episodes_Stddev_Samp_Fields = {
+  __typename?: 'episodes_stddev_samp_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "episodes" */
+export type Episodes_Stddev_Samp_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "episodes" */
+export type Episodes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Episodes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Episodes_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  end_time?: InputMaybe<Scalars['timestamp']>;
+  has_next_episode?: InputMaybe<Scalars['Boolean']>;
+  has_prev_episode?: InputMaybe<Scalars['Boolean']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  number?: InputMaybe<Scalars['Int']>;
+  start_time?: InputMaybe<Scalars['timestamp']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Episodes_Sum_Fields = {
+  __typename?: 'episodes_sum_fields';
+  number?: Maybe<Scalars['Int']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "episodes" */
+export type Episodes_Sum_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "episodes" */
+export enum Episodes_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EndTime = 'end_time',
+  /** column name */
+  HasNextEpisode = 'has_next_episode',
+  /** column name */
+  HasPrevEpisode = 'has_prev_episode',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Number = 'number',
+  /** column name */
+  StartTime = 'start_time',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+export type Episodes_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Episodes_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Episodes_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Episodes_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Episodes_Var_Pop_Fields = {
+  __typename?: 'episodes_var_pop_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "episodes" */
+export type Episodes_Var_Pop_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Episodes_Var_Samp_Fields = {
+  __typename?: 'episodes_var_samp_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "episodes" */
+export type Episodes_Var_Samp_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Episodes_Variance_Fields = {
+  __typename?: 'episodes_variance_fields';
+  number?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "episodes" */
+export type Episodes_Variance_Order_By = {
+  number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
 
 /** columns and relationships of "media_types" */
 export type Media_Types = {
@@ -329,6 +772,10 @@ export type Media_Types_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "episodes" */
+  delete_episodes?: Maybe<Episodes_Mutation_Response>;
+  /** delete single row from the table: "episodes" */
+  delete_episodes_by_pk?: Maybe<Episodes>;
   /** delete data from the table: "media_types" */
   delete_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** delete single row from the table: "media_types" */
@@ -341,6 +788,10 @@ export type Mutation_Root = {
   delete_works?: Maybe<Works_Mutation_Response>;
   /** delete single row from the table: "works" */
   delete_works_by_pk?: Maybe<Works>;
+  /** insert data into the table: "episodes" */
+  insert_episodes?: Maybe<Episodes_Mutation_Response>;
+  /** insert a single row into the table: "episodes" */
+  insert_episodes_one?: Maybe<Episodes>;
   /** insert data into the table: "media_types" */
   insert_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** insert a single row into the table: "media_types" */
@@ -353,6 +804,12 @@ export type Mutation_Root = {
   insert_works?: Maybe<Works_Mutation_Response>;
   /** insert a single row into the table: "works" */
   insert_works_one?: Maybe<Works>;
+  /** update data of the table: "episodes" */
+  update_episodes?: Maybe<Episodes_Mutation_Response>;
+  /** update single row of the table: "episodes" */
+  update_episodes_by_pk?: Maybe<Episodes>;
+  /** update multiples rows of table: "episodes" */
+  update_episodes_many?: Maybe<Array<Maybe<Episodes_Mutation_Response>>>;
   /** update data of the table: "media_types" */
   update_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** update single row of the table: "media_types" */
@@ -371,6 +828,18 @@ export type Mutation_Root = {
   update_works_by_pk?: Maybe<Works>;
   /** update multiples rows of table: "works" */
   update_works_many?: Maybe<Array<Maybe<Works_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_EpisodesArgs = {
+  where: Episodes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Episodes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -406,7 +875,21 @@ export type Mutation_RootDelete_WorksArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Works_By_PkArgs = {
-  id: Scalars['uuid'];
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_EpisodesArgs = {
+  objects: Array<Episodes_Insert_Input>;
+  on_conflict?: InputMaybe<Episodes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Episodes_OneArgs = {
+  object: Episodes_Insert_Input;
+  on_conflict?: InputMaybe<Episodes_On_Conflict>;
 };
 
 
@@ -449,6 +932,28 @@ export type Mutation_RootInsert_WorksArgs = {
 export type Mutation_RootInsert_Works_OneArgs = {
   object: Works_Insert_Input;
   on_conflict?: InputMaybe<Works_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_EpisodesArgs = {
+  _inc?: InputMaybe<Episodes_Inc_Input>;
+  _set?: InputMaybe<Episodes_Set_Input>;
+  where: Episodes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Episodes_By_PkArgs = {
+  _inc?: InputMaybe<Episodes_Inc_Input>;
+  _set?: InputMaybe<Episodes_Set_Input>;
+  pk_columns: Episodes_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Episodes_ManyArgs = {
+  updates: Array<Episodes_Updates>;
 };
 
 
@@ -533,6 +1038,12 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** An array relationship */
+  episodes: Array<Episodes>;
+  /** An aggregate relationship */
+  episodes_aggregate: Episodes_Aggregate;
+  /** fetch data from the table: "episodes" using primary key columns */
+  episodes_by_pk?: Maybe<Episodes>;
   /** fetch data from the table: "media_types" */
   media_types: Array<Media_Types>;
   /** fetch aggregated fields from the table: "media_types" */
@@ -551,6 +1062,29 @@ export type Query_Root = {
   works_aggregate: Works_Aggregate;
   /** fetch data from the table: "works" using primary key columns */
   works_by_pk?: Maybe<Works>;
+};
+
+
+export type Query_RootEpisodesArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Query_RootEpisodes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Query_RootEpisodes_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -619,11 +1153,19 @@ export type Query_RootWorks_AggregateArgs = {
 
 
 export type Query_RootWorks_By_PkArgs = {
-  id: Scalars['uuid'];
+  id: Scalars['Int'];
 };
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** An array relationship */
+  episodes: Array<Episodes>;
+  /** An aggregate relationship */
+  episodes_aggregate: Episodes_Aggregate;
+  /** fetch data from the table: "episodes" using primary key columns */
+  episodes_by_pk?: Maybe<Episodes>;
+  /** fetch data from the table in a streaming manner: "episodes" */
+  episodes_stream: Array<Episodes>;
   /** fetch data from the table: "media_types" */
   media_types: Array<Media_Types>;
   /** fetch aggregated fields from the table: "media_types" */
@@ -648,6 +1190,36 @@ export type Subscription_Root = {
   works_by_pk?: Maybe<Works>;
   /** fetch data from the table in a streaming manner: "works" */
   works_stream: Array<Works>;
+};
+
+
+export type Subscription_RootEpisodesArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootEpisodes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootEpisodes_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootEpisodes_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Episodes_Stream_Cursor_Input>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
 };
 
 
@@ -730,7 +1302,7 @@ export type Subscription_RootWorks_AggregateArgs = {
 
 
 export type Subscription_RootWorks_By_PkArgs = {
-  id: Scalars['uuid'];
+  id: Scalars['Int'];
 };
 
 
@@ -738,6 +1310,19 @@ export type Subscription_RootWorks_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Works_Stream_Cursor_Input>>;
   where?: InputMaybe<Works_Bool_Exp>;
+};
+
+/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['timestamp']>;
+  _gt?: InputMaybe<Scalars['timestamp']>;
+  _gte?: InputMaybe<Scalars['timestamp']>;
+  _in?: InputMaybe<Array<Scalars['timestamp']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['timestamp']>;
+  _lte?: InputMaybe<Scalars['timestamp']>;
+  _neq?: InputMaybe<Scalars['timestamp']>;
+  _nin?: InputMaybe<Array<Scalars['timestamp']>>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
@@ -949,21 +1534,42 @@ export type Uuid_Comparison_Exp = {
 /** columns and relationships of "works" */
 export type Works = {
   __typename?: 'works';
-  copyright?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
+  /** An array relationship */
+  episodes: Array<Episodes>;
+  /** An aggregate relationship */
+  episodes_aggregate: Episodes_Aggregate;
   has_episodes?: Maybe<Scalars['Boolean']>;
-  id: Scalars['uuid'];
-  image?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
   /** An object relationship */
   media_type?: Maybe<Media_Types>;
   media_type_id?: Maybe<Scalars['Int']>;
-  official_site?: Maybe<Scalars['String']>;
-  official_twitter_name?: Maybe<Scalars['String']>;
+  season_name?: Maybe<Scalars['String']>;
+  season_year?: Maybe<Scalars['Int']>;
   series_id?: Maybe<Scalars['String']>;
   series_title: Scalars['String'];
-  sub_title?: Maybe<Scalars['String']>;
+  tid?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
-  twitter_hash_tag?: Maybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksEpisodesArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksEpisodes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
 };
 
 /** aggregated selection of "works" */
@@ -1048,12 +1654,18 @@ export type Works_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Works_Avg_Fields = {
   __typename?: 'works_avg_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "works" */
 export type Works_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "works". All fields are combined with a logical 'AND'. */
@@ -1061,20 +1673,19 @@ export type Works_Bool_Exp = {
   _and?: InputMaybe<Array<Works_Bool_Exp>>;
   _not?: InputMaybe<Works_Bool_Exp>;
   _or?: InputMaybe<Array<Works_Bool_Exp>>;
-  copyright?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  episodes?: InputMaybe<Episodes_Bool_Exp>;
+  episodes_aggregate?: InputMaybe<Episodes_Aggregate_Bool_Exp>;
   has_episodes?: InputMaybe<Boolean_Comparison_Exp>;
-  id?: InputMaybe<Uuid_Comparison_Exp>;
-  image?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
   media_type?: InputMaybe<Media_Types_Bool_Exp>;
   media_type_id?: InputMaybe<Int_Comparison_Exp>;
-  official_site?: InputMaybe<String_Comparison_Exp>;
-  official_twitter_name?: InputMaybe<String_Comparison_Exp>;
+  season_name?: InputMaybe<String_Comparison_Exp>;
+  season_year?: InputMaybe<Int_Comparison_Exp>;
   series_id?: InputMaybe<String_Comparison_Exp>;
   series_title?: InputMaybe<String_Comparison_Exp>;
-  sub_title?: InputMaybe<String_Comparison_Exp>;
+  tid?: InputMaybe<Int_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
-  twitter_hash_tag?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "works" */
@@ -1087,91 +1698,80 @@ export enum Works_Constraint {
 
 /** input type for incrementing numeric columns in table "works" */
 export type Works_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
   media_type_id?: InputMaybe<Scalars['Int']>;
+  season_year?: InputMaybe<Scalars['Int']>;
+  tid?: InputMaybe<Scalars['Int']>;
 };
 
 /** input type for inserting data into table "works" */
 export type Works_Insert_Input = {
-  copyright?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  episodes?: InputMaybe<Episodes_Arr_Rel_Insert_Input>;
   has_episodes?: InputMaybe<Scalars['Boolean']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
   media_type?: InputMaybe<Media_Types_Obj_Rel_Insert_Input>;
   media_type_id?: InputMaybe<Scalars['Int']>;
-  official_site?: InputMaybe<Scalars['String']>;
-  official_twitter_name?: InputMaybe<Scalars['String']>;
+  season_name?: InputMaybe<Scalars['String']>;
+  season_year?: InputMaybe<Scalars['Int']>;
   series_id?: InputMaybe<Scalars['String']>;
   series_title?: InputMaybe<Scalars['String']>;
-  sub_title?: InputMaybe<Scalars['String']>;
+  tid?: InputMaybe<Scalars['Int']>;
   title?: InputMaybe<Scalars['String']>;
-  twitter_hash_tag?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type Works_Max_Fields = {
   __typename?: 'works_max_fields';
-  copyright?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
   media_type_id?: Maybe<Scalars['Int']>;
-  official_site?: Maybe<Scalars['String']>;
-  official_twitter_name?: Maybe<Scalars['String']>;
+  season_name?: Maybe<Scalars['String']>;
+  season_year?: Maybe<Scalars['Int']>;
   series_id?: Maybe<Scalars['String']>;
   series_title?: Maybe<Scalars['String']>;
-  sub_title?: Maybe<Scalars['String']>;
+  tid?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
-  twitter_hash_tag?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "works" */
 export type Works_Max_Order_By = {
-  copyright?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  image?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
-  official_site?: InputMaybe<Order_By>;
-  official_twitter_name?: InputMaybe<Order_By>;
+  season_name?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
   series_id?: InputMaybe<Order_By>;
   series_title?: InputMaybe<Order_By>;
-  sub_title?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  twitter_hash_tag?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Works_Min_Fields = {
   __typename?: 'works_min_fields';
-  copyright?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
-  id?: Maybe<Scalars['uuid']>;
-  image?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
   media_type_id?: Maybe<Scalars['Int']>;
-  official_site?: Maybe<Scalars['String']>;
-  official_twitter_name?: Maybe<Scalars['String']>;
+  season_name?: Maybe<Scalars['String']>;
+  season_year?: Maybe<Scalars['Int']>;
   series_id?: Maybe<Scalars['String']>;
   series_title?: Maybe<Scalars['String']>;
-  sub_title?: Maybe<Scalars['String']>;
+  tid?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
-  twitter_hash_tag?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "works" */
 export type Works_Min_Order_By = {
-  copyright?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  image?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
-  official_site?: InputMaybe<Order_By>;
-  official_twitter_name?: InputMaybe<Order_By>;
+  season_name?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
   series_id?: InputMaybe<Order_By>;
   series_title?: InputMaybe<Order_By>;
-  sub_title?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  twitter_hash_tag?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "works" */
@@ -1183,6 +1783,13 @@ export type Works_Mutation_Response = {
   returning: Array<Works>;
 };
 
+/** input type for inserting object relation for remote table "works" */
+export type Works_Obj_Rel_Insert_Input = {
+  data: Works_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Works_On_Conflict>;
+};
+
 /** on_conflict condition type for table "works" */
 export type Works_On_Conflict = {
   constraint: Works_Constraint;
@@ -1192,31 +1799,27 @@ export type Works_On_Conflict = {
 
 /** Ordering options when selecting data from "works". */
 export type Works_Order_By = {
-  copyright?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  episodes_aggregate?: InputMaybe<Episodes_Aggregate_Order_By>;
   has_episodes?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  image?: InputMaybe<Order_By>;
   media_type?: InputMaybe<Media_Types_Order_By>;
   media_type_id?: InputMaybe<Order_By>;
-  official_site?: InputMaybe<Order_By>;
-  official_twitter_name?: InputMaybe<Order_By>;
+  season_name?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
   series_id?: InputMaybe<Order_By>;
   series_title?: InputMaybe<Order_By>;
-  sub_title?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
-  twitter_hash_tag?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: works */
 export type Works_Pk_Columns_Input = {
-  id: Scalars['uuid'];
+  id: Scalars['Int'];
 };
 
 /** select columns of table "works" */
 export enum Works_Select_Column {
-  /** column name */
-  Copyright = 'copyright',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1224,23 +1827,19 @@ export enum Works_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Image = 'image',
-  /** column name */
   MediaTypeId = 'media_type_id',
   /** column name */
-  OfficialSite = 'official_site',
+  SeasonName = 'season_name',
   /** column name */
-  OfficialTwitterName = 'official_twitter_name',
+  SeasonYear = 'season_year',
   /** column name */
   SeriesId = 'series_id',
   /** column name */
   SeriesTitle = 'series_title',
   /** column name */
-  SubTitle = 'sub_title',
+  Tid = 'tid',
   /** column name */
-  Title = 'title',
-  /** column name */
-  TwitterHashTag = 'twitter_hash_tag'
+  Title = 'title'
 }
 
 /** select "works_aggregate_bool_exp_bool_and_arguments_columns" columns of table "works" */
@@ -1257,52 +1856,67 @@ export enum Works_Select_Column_Works_Aggregate_Bool_Exp_Bool_Or_Arguments_Colum
 
 /** input type for updating data in table "works" */
 export type Works_Set_Input = {
-  copyright?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   has_episodes?: InputMaybe<Scalars['Boolean']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
   media_type_id?: InputMaybe<Scalars['Int']>;
-  official_site?: InputMaybe<Scalars['String']>;
-  official_twitter_name?: InputMaybe<Scalars['String']>;
+  season_name?: InputMaybe<Scalars['String']>;
+  season_year?: InputMaybe<Scalars['Int']>;
   series_id?: InputMaybe<Scalars['String']>;
   series_title?: InputMaybe<Scalars['String']>;
-  sub_title?: InputMaybe<Scalars['String']>;
+  tid?: InputMaybe<Scalars['Int']>;
   title?: InputMaybe<Scalars['String']>;
-  twitter_hash_tag?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate stddev on columns */
 export type Works_Stddev_Fields = {
   __typename?: 'works_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "works" */
 export type Works_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Works_Stddev_Pop_Fields = {
   __typename?: 'works_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "works" */
 export type Works_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Works_Stddev_Samp_Fields = {
   __typename?: 'works_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "works" */
 export type Works_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "works" */
@@ -1315,36 +1929,37 @@ export type Works_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Works_Stream_Cursor_Value_Input = {
-  copyright?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   has_episodes?: InputMaybe<Scalars['Boolean']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  image?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
   media_type_id?: InputMaybe<Scalars['Int']>;
-  official_site?: InputMaybe<Scalars['String']>;
-  official_twitter_name?: InputMaybe<Scalars['String']>;
+  season_name?: InputMaybe<Scalars['String']>;
+  season_year?: InputMaybe<Scalars['Int']>;
   series_id?: InputMaybe<Scalars['String']>;
   series_title?: InputMaybe<Scalars['String']>;
-  sub_title?: InputMaybe<Scalars['String']>;
+  tid?: InputMaybe<Scalars['Int']>;
   title?: InputMaybe<Scalars['String']>;
-  twitter_hash_tag?: InputMaybe<Scalars['String']>;
 };
 
 /** aggregate sum on columns */
 export type Works_Sum_Fields = {
   __typename?: 'works_sum_fields';
+  id?: Maybe<Scalars['Int']>;
   media_type_id?: Maybe<Scalars['Int']>;
+  season_year?: Maybe<Scalars['Int']>;
+  tid?: Maybe<Scalars['Int']>;
 };
 
 /** order by sum() on columns of table "works" */
 export type Works_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "works" */
 export enum Works_Update_Column {
-  /** column name */
-  Copyright = 'copyright',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -1352,23 +1967,19 @@ export enum Works_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Image = 'image',
-  /** column name */
   MediaTypeId = 'media_type_id',
   /** column name */
-  OfficialSite = 'official_site',
+  SeasonName = 'season_name',
   /** column name */
-  OfficialTwitterName = 'official_twitter_name',
+  SeasonYear = 'season_year',
   /** column name */
   SeriesId = 'series_id',
   /** column name */
   SeriesTitle = 'series_title',
   /** column name */
-  SubTitle = 'sub_title',
+  Tid = 'tid',
   /** column name */
-  Title = 'title',
-  /** column name */
-  TwitterHashTag = 'twitter_hash_tag'
+  Title = 'title'
 }
 
 export type Works_Updates = {
@@ -1383,35 +1994,69 @@ export type Works_Updates = {
 /** aggregate var_pop on columns */
 export type Works_Var_Pop_Fields = {
   __typename?: 'works_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "works" */
 export type Works_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Works_Var_Samp_Fields = {
   __typename?: 'works_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "works" */
 export type Works_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Works_Variance_Fields = {
   __typename?: 'works_variance_fields';
+  id?: Maybe<Scalars['Float']>;
   media_type_id?: Maybe<Scalars['Float']>;
+  season_year?: Maybe<Scalars['Float']>;
+  tid?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "works" */
 export type Works_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
   media_type_id?: InputMaybe<Order_By>;
+  season_year?: InputMaybe<Order_By>;
+  tid?: InputMaybe<Order_By>;
 };
+
+export type UpdateTodayEpisodeMutationVariables = Exact<{
+  tid: Scalars['Int'];
+  number: Scalars['Int'];
+  episodes_set_input: Episodes_Set_Input;
+}>;
+
+
+export type UpdateTodayEpisodeMutation = { __typename?: 'mutation_root', update_episodes?: { __typename?: 'episodes_mutation_response', returning: Array<{ __typename?: 'episodes', id: any, start_time?: any | null, end_time?: any | null }> } | null };
+
+export type GetTodayEpisodesQueryVariables = Exact<{
+  where: Episodes_Bool_Exp;
+}>;
+
+
+export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } }> };
 
 export type GetMediaTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1426,6 +2071,73 @@ export type GetUserQueryVariables = Exact<{
 export type GetUserQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, anonymous: boolean, photo_url?: string | null, user_name: string } | null };
 
 
+export const UpdateTodayEpisodeDocument = `
+    mutation UpdateTodayEpisode($tid: Int!, $number: Int!, $episodes_set_input: episodes_set_input!) {
+  update_episodes(
+    where: {_and: {number: {_eq: $number}, work: {tid: {_eq: $tid}}}}
+    _set: $episodes_set_input
+  ) {
+    returning {
+      id
+      start_time
+      end_time
+    }
+  }
+}
+    `;
+export const useUpdateTodayEpisodeMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<UpdateTodayEpisodeMutation, TError, UpdateTodayEpisodeMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<UpdateTodayEpisodeMutation, TError, UpdateTodayEpisodeMutationVariables, TContext>(
+      ['UpdateTodayEpisode'],
+      (variables?: UpdateTodayEpisodeMutationVariables) => fetcher<UpdateTodayEpisodeMutation, UpdateTodayEpisodeMutationVariables>(client, UpdateTodayEpisodeDocument, variables, headers)(),
+      options
+    );
+useUpdateTodayEpisodeMutation.fetcher = (client: GraphQLClient, variables: UpdateTodayEpisodeMutationVariables, headers?: RequestInit['headers']) => fetcher<UpdateTodayEpisodeMutation, UpdateTodayEpisodeMutationVariables>(client, UpdateTodayEpisodeDocument, variables, headers);
+export const GetTodayEpisodesDocument = `
+    query GetTodayEpisodes($where: episodes_bool_exp!) {
+  episodes(where: $where) {
+    id
+    title
+    end_time
+    start_time
+    number
+    has_next_episode
+    has_prev_episode
+    work {
+      series_title
+      title
+      id
+      series_id
+      tid
+    }
+  }
+}
+    `;
+export const useGetTodayEpisodesQuery = <
+      TData = GetTodayEpisodesQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetTodayEpisodesQueryVariables,
+      options?: UseQueryOptions<GetTodayEpisodesQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetTodayEpisodesQuery, TError, TData>(
+      ['GetTodayEpisodes', variables],
+      fetcher<GetTodayEpisodesQuery, GetTodayEpisodesQueryVariables>(client, GetTodayEpisodesDocument, variables, headers),
+      options
+    );
+
+useGetTodayEpisodesQuery.getKey = (variables: GetTodayEpisodesQueryVariables) => ['GetTodayEpisodes', variables];
+;
+
+useGetTodayEpisodesQuery.fetcher = (client: GraphQLClient, variables: GetTodayEpisodesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTodayEpisodesQuery, GetTodayEpisodesQueryVariables>(client, GetTodayEpisodesDocument, variables, headers);
 export const GetMediaTypesDocument = `
     query GetMediaTypes {
   media_types(order_by: {id: asc}) {
