@@ -33,8 +33,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
   const parser = new XMLParser();
 
   try {
-    const URL =
-      "https://cal.syoboi.jp/rss?filter=0&start=today&count=1000&days=1&titlefmt=%24(SubTitleB)%3B%24(TID)";
+    const URL = process.env.NEXT_PUBLIC_SHOBOI_ENDOPOINT as string;
     const data = await axios.get(URL).then((response) => response.data);
     const xmlDoc = parser.parse(data as string);
     const items: Item[] = xmlDoc["rdf:RDF"].item;
