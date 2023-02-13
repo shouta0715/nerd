@@ -1,8 +1,9 @@
-import { HeartIcon, UserGroupIcon } from "@heroicons/react/24/outline";
-import { ActionIcon, Text, Title } from "@mantine/core";
-import { IconUpload } from "@tabler/icons";
+import { Button, Text, Title } from "@mantine/core";
 import React, { FC } from "react";
+import { LikeButton } from "src/components/Elements/LikeButton";
+import { ShareButton } from "src/components/Elements/ShareButton";
 import { Timer } from "src/components/Elements/Timer";
+import { UserGroupButton } from "src/components/Elements/UserGroupButton";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
 import { Episode } from "src/features/episodes/types";
 
@@ -10,10 +11,10 @@ export const TodayEpisodeList: FC = () => {
   const { data } = useQueryTodayEpisodes();
 
   const sortFn = (target: Episode, next: Episode) => {
-    const aDate = new Date(target.start_time);
-    const bDate = new Date(next.start_time);
+    const targetDate = new Date(target.start_time);
+    const nextDate = new Date(next.start_time);
 
-    return aDate.getTime() - bDate.getTime();
+    return targetDate.getTime() - nextDate.getTime();
   };
 
   return (
@@ -29,22 +30,21 @@ export const TodayEpisodeList: FC = () => {
               <Text>{episode.title}</Text>
             </div>
             <Timer start_time={episode.start_time} id={episode.id} />
-            <div className="flex w-full justify-between">
-              <div className="flex items-center space-x-2">
-                <ActionIcon color="pink" variant="transparent">
-                  <HeartIcon className="h-6 w-6 cursor-pointer text-black" />
-                </ActionIcon>
-                <span>10</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <ActionIcon color="green" variant="subtle" radius="md">
-                  <UserGroupIcon className="h-6 w-6 cursor-pointer text-blue-500" />
-                </ActionIcon>
-                <span className="text-blue-500">10人</span>
-              </div>
-              <ActionIcon color="green" variant="subtle" radius="md">
-                <IconUpload className="h-6 w-6" />
-              </ActionIcon>
+            <div className="flex w-full justify-around">
+              <LikeButton
+                likeCount={10}
+                liked={false}
+                debounceTime={3000}
+                onClickHandler={() => console.log("click")}
+              />
+              <UserGroupButton
+                count={10}
+                onClickHandler={() => console.log("click")}
+              />
+              <ShareButton onClickHandler={() => console.log("share")} />
+              <Button size="xs" radius="md" variant="light">
+                参加する
+              </Button>
             </div>
           </div>
         </li>
