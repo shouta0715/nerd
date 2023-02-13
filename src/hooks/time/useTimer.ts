@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { changeTimeToJa } from "../utils/changeTimeToJa";
+import { changeTimeToJa } from "../../utils/changeTimeToJa";
 
 export const useTimer = (startTime: string) => {
   const [time, setTime] = useState({
