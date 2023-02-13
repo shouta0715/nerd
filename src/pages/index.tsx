@@ -6,15 +6,21 @@ import {
   useGetMediaTypesQuery,
   useGetTodayEpisodesQuery,
 } from "src/generated/graphql";
+import { useQueryTodayEpisodes } from "src/hooks/episodes/useQueryTodayEpisodes";
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 // import { Box } from "@mantine/core";
 // import { InviteItem } from "../features/invites/InviteItem";
 
-const Home: NextPage = () => (
-  // const { data } = useQueryInvites();
+const Home: NextPage = () => {
+  const { data } = useQueryTodayEpisodes();
 
-  <Layout>
-    {/* <Box
+  console.log(data);
+
+  return (
+    // const { data } = useQueryInvites();
+
+    <Layout>
+      {/* <Box
         component="ul"
         bg="indigo.0"
         className={`relative space-y-4 p-4 py-4 md:p-6 ${
@@ -25,8 +31,9 @@ const Home: NextPage = () => (
           <InviteItem key={invite.id} invite={invite} />
         ))}
       </Box> */}
-  </Layout>
-);
+    </Layout>
+  );
+};
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -41,12 +48,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const episodesWhereQuery = await getTodayData();
 
-  const todayEpisodesQueryKey = useGetTodayEpisodesQuery.getKey({
-    where: episodesWhereQuery,
-  });
-
   await queryClient.prefetchQuery(
-    todayEpisodesQueryKey,
+    ["todayEpisodes"],
     useGetTodayEpisodesQuery.fetcher(request, {
       where: episodesWhereQuery,
     })
