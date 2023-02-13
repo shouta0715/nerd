@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 // import { useRouter } from "next/router";
 import React from "react";
 import { Layout } from "src/components/Layout/Layout";
+
 import { getAllMediaTypes } from "src/hooks/router/dynamicPaths";
 // import { InviteItem } from "../../../features/invites/InviteItem";
 

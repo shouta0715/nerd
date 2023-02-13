@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { useQueryMediaTypes } from "src/hooks/useQueryMediaTypes";
-import { categoryProcessing } from "src/hooks/utils/categoryProcessing";
+import { categoryProcessing } from "src/utils/categoryProcessing";
 
 export const CategoryNav: FC = () => {
   const router = useRouter();
