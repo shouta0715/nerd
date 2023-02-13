@@ -16,8 +16,11 @@ export const Timer: FC<Props> = ({ start_time, id }) => {
   const seconds = time.seconds.toString().padStart(2, "0");
 
   return (
-    <div className="my-4 flex w-full flex-col items-center justify-center">
-      <Text color="indigo" className="m-0 mb-2.5  px-10 text-lg font-bold">
+    <div className="my-4 flex flex-col">
+      <Text
+        color="indigo"
+        className="m-0 mx-auto mb-2.5  px-10 text-lg font-bold"
+      >
         開始まで
       </Text>
       <div className="flex space-x-4 md:space-x-6">
