@@ -1,6 +1,7 @@
 /* eslint-disable no-promise-executor-return */
 import axios from "axios";
 import { GraphQLClient } from "graphql-request";
+import { UPDATE_TODAY_EPISODE } from "src/graphql/episode/episodeQuery";
 import { parseXml } from "src/utils/parseXml";
 import {
   Episodes_Bool_Exp,
@@ -28,16 +29,6 @@ export const getTodayData = async () => {
 
   const todatData = parseXml(data);
 
-  const todayDataQuery: Episodes_Bool_Exp[] = todatData.map((item) => ({
-    _and: [{ number: { _eq: item.number }, work: { tid: { _eq: item.TID } } }],
-  }));
-
-  const query = {
-    _or: todayDataQuery,
-  };
-
-  return query;
-
   // const client = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string, {
   //   headers: {
   //     "x-hasura-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET as string,
@@ -45,7 +36,7 @@ export const getTodayData = async () => {
   // });
 
   // await Promise.all(
-  //   data.map(async (item) => {
+  //   todatData.map(async (item) => {
   //     // TODO 本番のときは消去する
   //     await new Promise((resolve) => setTimeout(resolve, 2000));
   //     const result = await client.request<UpdateTodayEpisodeMutation>(
@@ -63,4 +54,14 @@ export const getTodayData = async () => {
   //     return result;
   //   })
   // );
+
+  const todayDataQuery: Episodes_Bool_Exp[] = todatData.map((item) => ({
+    _and: [{ number: { _eq: item.number }, work: { tid: { _eq: item.TID } } }],
+  }));
+
+  const query = {
+    _or: todayDataQuery,
+  };
+
+  return query;
 };

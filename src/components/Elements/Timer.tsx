@@ -1,16 +1,15 @@
 /* eslint-disable react/no-array-index-key */
 import { Text } from "@mantine/core";
 import React, { FC } from "react";
-import { useTimer } from "../../../hooks/time/useTimer";
+import { useTimer } from "../../hooks/time/useTimer";
 import { Panel } from "./Panel";
 
 type Props = {
   start_time: string;
-  invite_id: string;
-  parent: "post" | "comment";
+  id: string;
 };
 
-export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
+export const Timer: FC<Props> = ({ start_time, id }) => {
   const { time } = useTimer(start_time ?? "2000-01-01T00:00:00+00:00");
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");
@@ -21,39 +20,39 @@ export const InviteTimer: FC<Props> = ({ start_time, invite_id, parent }) => {
       <Text color="indigo" className="m-0 mb-2.5  px-10 text-lg font-bold">
         開始まで
       </Text>
-      <div className="flex w-full justify-center space-x-4 md:space-x-6">
+      <div className="flex space-x-4 md:space-x-6">
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
             {hours.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-hours-${character}-${index}-${invite_id}`}
+                key={`hours-${character}-${index}-${id}`}
               />
             ))}
           </div>
-          <span className="text-sm font-bold md:text-sm ">時間</span>
+          <span className="text-sm font-bold ">時間</span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
             {minutes.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-minutes-${character}-${index}-${invite_id}`}
+                key={`minutes-${character}-${index}-${id}`}
               />
             ))}
           </div>
-          <span className="text-sm font-bold md:text-sm ">分</span>
+          <span className="text-sm font-bold ">分</span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
             {seconds.split("").map((character, index) => (
               <Panel
                 character={character}
-                key={`${parent}-seconds-${character}-${index}-${invite_id}`}
+                key={`seconds-${character}-${index}-${id}`}
               />
             ))}
           </div>
-          <span className="text-sm font-bold md:text-sm ">秒</span>
+          <span className="text-sm font-bold ">秒</span>
         </div>
       </div>
     </div>

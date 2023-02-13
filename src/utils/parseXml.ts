@@ -26,6 +26,7 @@ export const parseXml = (data: string) => {
       !end_time
     )
       return;
+
     const isInclude = todayDatas?.some((resultData) => resultData.TID === +TID);
 
     if (isInclude) return;

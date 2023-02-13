@@ -2,25 +2,20 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
+import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import {
   useGetMediaTypesQuery,
   useGetTodayEpisodesQuery,
 } from "src/generated/graphql";
-import { useQueryTodayEpisodes } from "src/hooks/episodes/useQueryTodayEpisodes";
+
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 // import { Box } from "@mantine/core";
 // import { InviteItem } from "../features/invites/InviteItem";
 
-const Home: NextPage = () => {
-  const { data } = useQueryTodayEpisodes();
-
-  console.log(data);
-
-  return (
-    // const { data } = useQueryInvites();
-
-    <Layout>
-      {/* <Box
+const Home: NextPage = () => (
+  <Layout>
+    <TodayEpisodes />
+    {/* <Box
         component="ul"
         bg="indigo.0"
         className={`relative space-y-4 p-4 py-4 md:p-6 ${
@@ -31,9 +26,8 @@ const Home: NextPage = () => {
           <InviteItem key={invite.id} invite={invite} />
         ))}
       </Box> */}
-    </Layout>
-  );
-};
+  </Layout>
+);
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
