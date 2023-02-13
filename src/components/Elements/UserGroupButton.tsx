@@ -15,7 +15,7 @@ export const UserGroupButton: FC<Props> = memo(({ onClickHandler, count }) => (
       variant="subtle"
       radius="md"
     >
-      <UserGroupIcon className="h-6 w-6 cursor-pointer text-blue-500" />
+      <UserGroupIcon className="h-5 w-5 cursor-pointer text-blue-500 md:h-6 md:w-6" />
     </ActionIcon>
     <span className="text-blue-500">{`${count}人`}</span>
   </div>

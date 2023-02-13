@@ -13,6 +13,6 @@ export const ShareButton: FC<Props> = memo(({ onClickHandler }) => (
     variant="subtle"
     radius="md"
   >
-    <IconUpload className="h-6 w-6" />
+    <IconUpload className="h-5 w-5 md:h-6 md:w-6" />
   </ActionIcon>
 ));

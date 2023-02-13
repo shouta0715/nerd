@@ -22,15 +22,15 @@ export const TodayEpisodeList: FC = () => {
       {data?.episodes?.sort(sortFn).map((episode) => (
         <li key={episode.id} className="flex-1 rounded-md bg-white p-4 md:px-6">
           <div className="mx-auto flex min-h-full flex-col items-center justify-between">
-            <Title order={3} className="mb-2 text-xl md:text-2xl">
+            <Title order={3} className="mb-1 md:mb-2">
               {episode.work.series_title}
             </Title>
-            <div className="flex w-full text-lg">
+            <div className="mb-2 flex w-full text-base">
               <Text className="mr-4">{episode.number}.</Text>
               <Text>{episode.title}</Text>
             </div>
             <Timer start_time={episode.start_time} id={episode.id} />
-            <div className="flex w-full justify-around">
+            <div className="mt-2 flex w-full justify-around text-sm">
               <LikeButton
                 likeCount={10}
                 liked={false}

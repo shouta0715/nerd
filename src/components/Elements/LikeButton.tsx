@@ -29,7 +29,7 @@ export const LikeButton: FC<Props> = memo(
         className="group flex cursor-pointer items-center space-x-2"
       >
         <HeartIcon
-          className={`h-6 w-6 cursor-pointer ${
+          className={`h-5 w-5 cursor-pointer md:h-6 md:w-6 ${
             isLiked
               ? "fill-pink-500 text-pink-500"
               : "text-black group-hover:text-pink-500"
