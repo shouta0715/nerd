@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { changeTimeToJa } from "../../utils/changeTimeToJa";
 
 export const useTimer = (startTime: string) => {
   const [time, setTime] = useState({
@@ -11,7 +10,7 @@ export const useTimer = (startTime: string) => {
   });
   const calcTimeToStart = () => {
     const now = new Date();
-    const start = changeTimeToJa(startTime);
+    const start = new Date(startTime);
 
     const diff = start.getTime() - now.getTime();
     const day = Math.floor(diff / (1000 * 60 * 60 * 24));
