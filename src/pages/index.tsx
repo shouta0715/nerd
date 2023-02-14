@@ -1,3 +1,4 @@
+import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
@@ -14,18 +15,9 @@ import { getTodayData } from "src/hooks/router/dynamicPaths";
 
 const Home: NextPage = () => (
   <Layout>
-    <TodayEpisodes />
-    {/* <Box
-        component="ul"
-        bg="indigo.0"
-        className={`relative space-y-4 p-4 py-4 md:p-6 ${
-          !data?.invites?.length ? "p-0 py-0 md:p-0" : ""
-        }`}
-      >
-        {data?.invites?.map((invite) => (
-          <InviteItem key={invite.id} invite={invite} />
-        ))}
-      </Box> */}
+    <Box component="section" bg="indigo.1">
+      <TodayEpisodes />
+    </Box>
   </Layout>
 );
 export default Home;

@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
 
 export const TodayEpisodes: FC = () => (
-  <Box bg="indigo.1">
+  <Box className="container mx-auto ">
     <div className="p-6">
       <Title order={2} size="h3" className="mb-4">
         <Link passHref href="/">
