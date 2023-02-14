@@ -11,7 +11,7 @@ export const Header: FC = () => {
   const authLoading = useGlobalStore((state) => state.authLoading);
 
   return (
-    <header className="w-full ">
+    <header className="w-full">
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
@@ -25,7 +25,7 @@ export const Header: FC = () => {
       >
         <ModalContent setOpened={setOpened} />
       </Modal>
-      <div className="flex items-center justify-between px-6 py-2  md:px-10">
+      <div className="container mx-auto flex items-center justify-between px-6 py-2  md:px-10">
         <Logo />
         <div>
           {user && !user.anonymous ? (
