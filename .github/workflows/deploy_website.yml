@@ -24,15 +24,12 @@ jobs:
         with:
           node-version: "18.x"
       # 投稿内容を更新するために npm run build:posts を走らせる
-      - name: Create env file
+      - name: Recreate all posts
+        shell: bash
         run: |
           touch .env.local
           echo NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }} >> .env.local
           echo NEXT_PUBLIC_SHOBOI_ENDOPOINT=${{ secrets.NEXT_PUBLIC_SHOBOI_ENDOPOINT }} >> .env.local
-
-      - name: Recreate all posts
-        shell: bash
-        run: |
           yarn install
           yarn build
       - name: Vercel Action
