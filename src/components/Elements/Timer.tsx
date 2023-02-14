@@ -7,9 +7,10 @@ import { Panel } from "./Panel";
 type Props = {
   start_time: string;
   id: string;
+  text: string;
 };
 
-export const Timer: FC<Props> = ({ start_time, id }) => {
+export const Timer: FC<Props> = ({ start_time, id, text }) => {
   const { time } = useTimer(start_time ?? "2000-01-01T00:00:00+00:00");
   const hours = time.hours.toString().padStart(2, "0");
   const minutes = time.minutes.toString().padStart(2, "0");
@@ -21,7 +22,7 @@ export const Timer: FC<Props> = ({ start_time, id }) => {
         color="indigo"
         className="m-0 mx-auto mb-2.5  px-10 text-lg font-bold"
       >
-        開始まで
+        {text}
       </Text>
       <div className="flex space-x-4 md:space-x-6">
         <div className="flex flex-col items-center justify-center">
