@@ -29,9 +29,6 @@ jobs:
         run: |
           yarn install
           yarn build
-          cd functions
-          npm i
-          cd ..
       - name: Vercel Action
         uses: amondnet/vercel-action@v25
         with:
