@@ -3,6 +3,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
+import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import {
   useGetMediaTypesQuery,
@@ -16,7 +17,10 @@ import { getTodayData } from "src/hooks/router/dynamicPaths";
 const Home: NextPage = () => (
   <Layout>
     <Box component="section" bg="indigo.1">
-      <TodayEpisodes />
+      <Box className="container mx-auto ">
+        <Navigation />
+        <TodayEpisodes />
+      </Box>
     </Box>
   </Layout>
 );
