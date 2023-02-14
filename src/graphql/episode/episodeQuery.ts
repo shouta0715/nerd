@@ -38,6 +38,11 @@ export const GET_TODAY_EPISODES = gql`
         series_id
         tid
       }
+      episode_likes_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
