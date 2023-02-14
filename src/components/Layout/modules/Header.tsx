@@ -1,5 +1,5 @@
 import { Avatar, Button, Modal } from "@mantine/core";
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Logo } from "src/components/Icon/Logo";
 import { ModalContent } from "src/components/Layout/modules/ModalContent";
 import { useGlobalStore } from "src/store/global/globalStore";
@@ -7,14 +7,15 @@ import { useUserStore } from "src/store/user/userState";
 
 export const Header: FC = () => {
   const user = useUserStore((state) => state.user);
-  const [opened, setOpened] = useState(false);
   const authLoading = useGlobalStore((state) => state.authLoading);
+  const isOpenLoginModal = useGlobalStore((state) => state.isOpenLoginModal);
+  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
 
   return (
     <header className="w-full">
       <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
+        opened={isOpenLoginModal}
+        onClose={() => changeIsOpenModal(false)}
         title={<Logo />}
         classNames={{
           title: "text-2xl font-bold mx-auto",
@@ -23,7 +24,7 @@ export const Header: FC = () => {
         centered
         radius="md"
       >
-        <ModalContent setOpened={setOpened} />
+        <ModalContent />
       </Modal>
       <div className="container mx-auto flex items-center justify-between px-6 py-2  md:px-10">
         <Logo />
@@ -37,7 +38,7 @@ export const Header: FC = () => {
             />
           ) : (
             <Button
-              onClick={() => setOpened((prev) => !prev)}
+              onClick={() => changeIsOpenModal(true)}
               size="xs"
               radius="md"
               className={` transition-opacity duration-[250ms] ${

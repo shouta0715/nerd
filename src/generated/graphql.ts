@@ -93,11 +93,197 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
+/** columns and relationships of "episode_likes" */
+export type Episode_Likes = {
+  __typename?: 'episode_likes';
+  /** An object relationship */
+  episode: Episodes;
+  episode_id: Scalars['uuid'];
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars['String'];
+};
+
+/** aggregated selection of "episode_likes" */
+export type Episode_Likes_Aggregate = {
+  __typename?: 'episode_likes_aggregate';
+  aggregate?: Maybe<Episode_Likes_Aggregate_Fields>;
+  nodes: Array<Episode_Likes>;
+};
+
+export type Episode_Likes_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Episode_Likes_Aggregate_Bool_Exp_Count>;
+};
+
+export type Episode_Likes_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Episode_Likes_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "episode_likes" */
+export type Episode_Likes_Aggregate_Fields = {
+  __typename?: 'episode_likes_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Episode_Likes_Max_Fields>;
+  min?: Maybe<Episode_Likes_Min_Fields>;
+};
+
+
+/** aggregate fields of "episode_likes" */
+export type Episode_Likes_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "episode_likes" */
+export type Episode_Likes_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Episode_Likes_Max_Order_By>;
+  min?: InputMaybe<Episode_Likes_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "episode_likes" */
+export type Episode_Likes_Arr_Rel_Insert_Input = {
+  data: Array<Episode_Likes_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Episode_Likes_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "episode_likes". All fields are combined with a logical 'AND'. */
+export type Episode_Likes_Bool_Exp = {
+  _and?: InputMaybe<Array<Episode_Likes_Bool_Exp>>;
+  _not?: InputMaybe<Episode_Likes_Bool_Exp>;
+  _or?: InputMaybe<Array<Episode_Likes_Bool_Exp>>;
+  episode?: InputMaybe<Episodes_Bool_Exp>;
+  episode_id?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "episode_likes" */
+export enum Episode_Likes_Constraint {
+  /** unique or primary key constraint on columns "user_id", "episode_id" */
+  EpisodeLikesPkey = 'episode_likes_pkey'
+}
+
+/** input type for inserting data into table "episode_likes" */
+export type Episode_Likes_Insert_Input = {
+  episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Episode_Likes_Max_Fields = {
+  __typename?: 'episode_likes_max_fields';
+  episode_id?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "episode_likes" */
+export type Episode_Likes_Max_Order_By = {
+  episode_id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Episode_Likes_Min_Fields = {
+  __typename?: 'episode_likes_min_fields';
+  episode_id?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "episode_likes" */
+export type Episode_Likes_Min_Order_By = {
+  episode_id?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "episode_likes" */
+export type Episode_Likes_Mutation_Response = {
+  __typename?: 'episode_likes_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Episode_Likes>;
+};
+
+/** on_conflict condition type for table "episode_likes" */
+export type Episode_Likes_On_Conflict = {
+  constraint: Episode_Likes_Constraint;
+  update_columns?: Array<Episode_Likes_Update_Column>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "episode_likes". */
+export type Episode_Likes_Order_By = {
+  episode?: InputMaybe<Episodes_Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: episode_likes */
+export type Episode_Likes_Pk_Columns_Input = {
+  episode_id: Scalars['uuid'];
+  user_id: Scalars['String'];
+};
+
+/** select columns of table "episode_likes" */
+export enum Episode_Likes_Select_Column {
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+/** input type for updating data in table "episode_likes" */
+export type Episode_Likes_Set_Input = {
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "episode_likes" */
+export type Episode_Likes_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Episode_Likes_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Episode_Likes_Stream_Cursor_Value_Input = {
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "episode_likes" */
+export enum Episode_Likes_Update_Column {
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  UserId = 'user_id'
+}
+
+export type Episode_Likes_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Episode_Likes_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Episode_Likes_Bool_Exp;
+};
+
 /** columns and relationships of "episodes" */
 export type Episodes = {
   __typename?: 'episodes';
   created_at: Scalars['timestamptz'];
   end_time?: Maybe<Scalars['timestamp']>;
+  /** An array relationship */
+  episode_likes: Array<Episode_Likes>;
+  /** An aggregate relationship */
+  episode_likes_aggregate: Episode_Likes_Aggregate;
   has_next_episode: Scalars['Boolean'];
   has_prev_episode: Scalars['Boolean'];
   id: Scalars['uuid'];
@@ -108,6 +294,26 @@ export type Episodes = {
   /** An object relationship */
   work: Works;
   work_id: Scalars['Int'];
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesEpisode_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesEpisode_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
 };
 
 /** aggregated selection of "episodes" */
@@ -209,6 +415,8 @@ export type Episodes_Bool_Exp = {
   _or?: InputMaybe<Array<Episodes_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   end_time?: InputMaybe<Timestamp_Comparison_Exp>;
+  episode_likes?: InputMaybe<Episode_Likes_Bool_Exp>;
+  episode_likes_aggregate?: InputMaybe<Episode_Likes_Aggregate_Bool_Exp>;
   has_next_episode?: InputMaybe<Boolean_Comparison_Exp>;
   has_prev_episode?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -238,6 +446,7 @@ export type Episodes_Inc_Input = {
 export type Episodes_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   end_time?: InputMaybe<Scalars['timestamp']>;
+  episode_likes?: InputMaybe<Episode_Likes_Arr_Rel_Insert_Input>;
   has_next_episode?: InputMaybe<Scalars['Boolean']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -308,6 +517,13 @@ export type Episodes_Mutation_Response = {
   returning: Array<Episodes>;
 };
 
+/** input type for inserting object relation for remote table "episodes" */
+export type Episodes_Obj_Rel_Insert_Input = {
+  data: Episodes_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Episodes_On_Conflict>;
+};
+
 /** on_conflict condition type for table "episodes" */
 export type Episodes_On_Conflict = {
   constraint: Episodes_Constraint;
@@ -319,6 +535,7 @@ export type Episodes_On_Conflict = {
 export type Episodes_Order_By = {
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
+  episode_likes_aggregate?: InputMaybe<Episode_Likes_Aggregate_Order_By>;
   has_next_episode?: InputMaybe<Order_By>;
   has_prev_episode?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -772,6 +989,10 @@ export type Media_Types_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "episode_likes" */
+  delete_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
+  /** delete single row from the table: "episode_likes" */
+  delete_episode_likes_by_pk?: Maybe<Episode_Likes>;
   /** delete data from the table: "episodes" */
   delete_episodes?: Maybe<Episodes_Mutation_Response>;
   /** delete single row from the table: "episodes" */
@@ -788,6 +1009,10 @@ export type Mutation_Root = {
   delete_works?: Maybe<Works_Mutation_Response>;
   /** delete single row from the table: "works" */
   delete_works_by_pk?: Maybe<Works>;
+  /** insert data into the table: "episode_likes" */
+  insert_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
+  /** insert a single row into the table: "episode_likes" */
+  insert_episode_likes_one?: Maybe<Episode_Likes>;
   /** insert data into the table: "episodes" */
   insert_episodes?: Maybe<Episodes_Mutation_Response>;
   /** insert a single row into the table: "episodes" */
@@ -804,6 +1029,12 @@ export type Mutation_Root = {
   insert_works?: Maybe<Works_Mutation_Response>;
   /** insert a single row into the table: "works" */
   insert_works_one?: Maybe<Works>;
+  /** update data of the table: "episode_likes" */
+  update_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
+  /** update single row of the table: "episode_likes" */
+  update_episode_likes_by_pk?: Maybe<Episode_Likes>;
+  /** update multiples rows of table: "episode_likes" */
+  update_episode_likes_many?: Maybe<Array<Maybe<Episode_Likes_Mutation_Response>>>;
   /** update data of the table: "episodes" */
   update_episodes?: Maybe<Episodes_Mutation_Response>;
   /** update single row of the table: "episodes" */
@@ -828,6 +1059,19 @@ export type Mutation_Root = {
   update_works_by_pk?: Maybe<Works>;
   /** update multiples rows of table: "works" */
   update_works_many?: Maybe<Array<Maybe<Works_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Episode_LikesArgs = {
+  where: Episode_Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Episode_Likes_By_PkArgs = {
+  episode_id: Scalars['uuid'];
+  user_id: Scalars['String'];
 };
 
 
@@ -876,6 +1120,20 @@ export type Mutation_RootDelete_WorksArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Works_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Episode_LikesArgs = {
+  objects: Array<Episode_Likes_Insert_Input>;
+  on_conflict?: InputMaybe<Episode_Likes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Episode_Likes_OneArgs = {
+  object: Episode_Likes_Insert_Input;
+  on_conflict?: InputMaybe<Episode_Likes_On_Conflict>;
 };
 
 
@@ -932,6 +1190,26 @@ export type Mutation_RootInsert_WorksArgs = {
 export type Mutation_RootInsert_Works_OneArgs = {
   object: Works_Insert_Input;
   on_conflict?: InputMaybe<Works_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Episode_LikesArgs = {
+  _set?: InputMaybe<Episode_Likes_Set_Input>;
+  where: Episode_Likes_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Episode_Likes_By_PkArgs = {
+  _set?: InputMaybe<Episode_Likes_Set_Input>;
+  pk_columns: Episode_Likes_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Episode_Likes_ManyArgs = {
+  updates: Array<Episode_Likes_Updates>;
 };
 
 
@@ -1039,6 +1317,12 @@ export enum Order_By {
 export type Query_Root = {
   __typename?: 'query_root';
   /** An array relationship */
+  episode_likes: Array<Episode_Likes>;
+  /** An aggregate relationship */
+  episode_likes_aggregate: Episode_Likes_Aggregate;
+  /** fetch data from the table: "episode_likes" using primary key columns */
+  episode_likes_by_pk?: Maybe<Episode_Likes>;
+  /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
   episodes_aggregate: Episodes_Aggregate;
@@ -1062,6 +1346,30 @@ export type Query_Root = {
   works_aggregate: Works_Aggregate;
   /** fetch data from the table: "works" using primary key columns */
   works_by_pk?: Maybe<Works>;
+};
+
+
+export type Query_RootEpisode_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+export type Query_RootEpisode_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+export type Query_RootEpisode_Likes_By_PkArgs = {
+  episode_id: Scalars['uuid'];
+  user_id: Scalars['String'];
 };
 
 
@@ -1159,6 +1467,14 @@ export type Query_RootWorks_By_PkArgs = {
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** An array relationship */
+  episode_likes: Array<Episode_Likes>;
+  /** An aggregate relationship */
+  episode_likes_aggregate: Episode_Likes_Aggregate;
+  /** fetch data from the table: "episode_likes" using primary key columns */
+  episode_likes_by_pk?: Maybe<Episode_Likes>;
+  /** fetch data from the table in a streaming manner: "episode_likes" */
+  episode_likes_stream: Array<Episode_Likes>;
+  /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
   episodes_aggregate: Episodes_Aggregate;
@@ -1190,6 +1506,37 @@ export type Subscription_Root = {
   works_by_pk?: Maybe<Works>;
   /** fetch data from the table in a streaming manner: "works" */
   works_stream: Array<Works>;
+};
+
+
+export type Subscription_RootEpisode_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootEpisode_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+export type Subscription_RootEpisode_Likes_By_PkArgs = {
+  episode_id: Scalars['uuid'];
+  user_id: Scalars['String'];
+};
+
+
+export type Subscription_RootEpisode_Likes_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Episode_Likes_Stream_Cursor_Input>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
 };
 
 
@@ -1343,10 +1690,34 @@ export type Users = {
   __typename?: 'users';
   anonymous: Scalars['Boolean'];
   created_at: Scalars['timestamptz'];
+  /** An array relationship */
+  episode_likes: Array<Episode_Likes>;
+  /** An aggregate relationship */
+  episode_likes_aggregate: Episode_Likes_Aggregate;
   id: Scalars['String'];
   photo_url?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
   user_name: Scalars['String'];
+};
+
+
+/** columns and relationships of "users" */
+export type UsersEpisode_LikesArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersEpisode_Likes_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Episode_Likes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Episode_Likes_Order_By>>;
+  where?: InputMaybe<Episode_Likes_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -1378,6 +1749,8 @@ export type Users_Bool_Exp = {
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  episode_likes?: InputMaybe<Episode_Likes_Bool_Exp>;
+  episode_likes_aggregate?: InputMaybe<Episode_Likes_Aggregate_Bool_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
   photo_url?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1394,6 +1767,7 @@ export enum Users_Constraint {
 export type Users_Insert_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  episode_likes?: InputMaybe<Episode_Likes_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['String']>;
   photo_url?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1429,6 +1803,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -1440,6 +1821,7 @@ export type Users_On_Conflict = {
 export type Users_Order_By = {
   anonymous?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
+  episode_likes_aggregate?: InputMaybe<Episode_Likes_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   photo_url?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -2056,7 +2438,30 @@ export type GetTodayEpisodesQueryVariables = Exact<{
 }>;
 
 
-export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } }> };
+export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null }, episode_likes_aggregate: { __typename?: 'episode_likes_aggregate', aggregate?: { __typename?: 'episode_likes_aggregate_fields', count: number } | null } }> };
+
+export type InsertEpisodeLikesMutationVariables = Exact<{
+  object: Episode_Likes_Insert_Input;
+}>;
+
+
+export type InsertEpisodeLikesMutation = { __typename?: 'mutation_root', insert_episode_likes_one?: { __typename?: 'episode_likes', user_id: string, episode_id: any } | null };
+
+export type GetEpisodeLikesQueryVariables = Exact<{
+  episodeId: Scalars['uuid'];
+  userId: Scalars['String'];
+}>;
+
+
+export type GetEpisodeLikesQuery = { __typename?: 'query_root', episode_likes_by_pk?: { __typename?: 'episode_likes', episode_id: any } | null };
+
+export type DeleteEpisodeLikesMutationVariables = Exact<{
+  episodeId: Scalars['uuid'];
+  userId: Scalars['String'];
+}>;
+
+
+export type DeleteEpisodeLikesMutation = { __typename?: 'mutation_root', delete_episode_likes_by_pk?: { __typename?: 'episode_likes', user_id: string, episode_id: any } | null };
 
 export type GetMediaTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2116,6 +2521,11 @@ export const GetTodayEpisodesDocument = `
       series_id
       tid
     }
+    episode_likes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
 }
     `;
@@ -2138,6 +2548,76 @@ useGetTodayEpisodesQuery.getKey = (variables: GetTodayEpisodesQueryVariables) =>
 ;
 
 useGetTodayEpisodesQuery.fetcher = (client: GraphQLClient, variables: GetTodayEpisodesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTodayEpisodesQuery, GetTodayEpisodesQueryVariables>(client, GetTodayEpisodesDocument, variables, headers);
+export const InsertEpisodeLikesDocument = `
+    mutation InsertEpisodeLikes($object: episode_likes_insert_input!) {
+  insert_episode_likes_one(object: $object) {
+    user_id
+    episode_id
+  }
+}
+    `;
+export const useInsertEpisodeLikesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<InsertEpisodeLikesMutation, TError, InsertEpisodeLikesMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<InsertEpisodeLikesMutation, TError, InsertEpisodeLikesMutationVariables, TContext>(
+      ['InsertEpisodeLikes'],
+      (variables?: InsertEpisodeLikesMutationVariables) => fetcher<InsertEpisodeLikesMutation, InsertEpisodeLikesMutationVariables>(client, InsertEpisodeLikesDocument, variables, headers)(),
+      options
+    );
+useInsertEpisodeLikesMutation.fetcher = (client: GraphQLClient, variables: InsertEpisodeLikesMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertEpisodeLikesMutation, InsertEpisodeLikesMutationVariables>(client, InsertEpisodeLikesDocument, variables, headers);
+export const GetEpisodeLikesDocument = `
+    query GetEpisodeLikes($episodeId: uuid!, $userId: String!) {
+  episode_likes_by_pk(episode_id: $episodeId, user_id: $userId) {
+    episode_id
+  }
+}
+    `;
+export const useGetEpisodeLikesQuery = <
+      TData = GetEpisodeLikesQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetEpisodeLikesQueryVariables,
+      options?: UseQueryOptions<GetEpisodeLikesQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetEpisodeLikesQuery, TError, TData>(
+      ['GetEpisodeLikes', variables],
+      fetcher<GetEpisodeLikesQuery, GetEpisodeLikesQueryVariables>(client, GetEpisodeLikesDocument, variables, headers),
+      options
+    );
+
+useGetEpisodeLikesQuery.getKey = (variables: GetEpisodeLikesQueryVariables) => ['GetEpisodeLikes', variables];
+;
+
+useGetEpisodeLikesQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeLikesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeLikesQuery, GetEpisodeLikesQueryVariables>(client, GetEpisodeLikesDocument, variables, headers);
+export const DeleteEpisodeLikesDocument = `
+    mutation DeleteEpisodeLikes($episodeId: uuid!, $userId: String!) {
+  delete_episode_likes_by_pk(episode_id: $episodeId, user_id: $userId) {
+    user_id
+    episode_id
+  }
+}
+    `;
+export const useDeleteEpisodeLikesMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<DeleteEpisodeLikesMutation, TError, DeleteEpisodeLikesMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<DeleteEpisodeLikesMutation, TError, DeleteEpisodeLikesMutationVariables, TContext>(
+      ['DeleteEpisodeLikes'],
+      (variables?: DeleteEpisodeLikesMutationVariables) => fetcher<DeleteEpisodeLikesMutation, DeleteEpisodeLikesMutationVariables>(client, DeleteEpisodeLikesDocument, variables, headers)(),
+      options
+    );
+useDeleteEpisodeLikesMutation.fetcher = (client: GraphQLClient, variables: DeleteEpisodeLikesMutationVariables, headers?: RequestInit['headers']) => fetcher<DeleteEpisodeLikesMutation, DeleteEpisodeLikesMutationVariables>(client, DeleteEpisodeLikesDocument, variables, headers);
 export const GetMediaTypesDocument = `
     query GetMediaTypes {
   media_types(order_by: {id: asc}) {

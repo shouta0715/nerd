@@ -4,8 +4,8 @@ import { Client } from "graphql-ws";
 import create from "zustand";
 
 type GlobalState = {
-  isOpenBurger: boolean;
-  changeIsOpenBurger: () => void;
+  isOpenLoginModal: boolean;
+  setIsOpenModal: (flag: boolean) => void;
   client: GraphQLClient;
   setClient: (client: GraphQLClient) => void;
   isClient: boolean;
@@ -19,9 +19,8 @@ type GlobalState = {
 };
 
 export const useGlobalStore = create<GlobalState>((set) => ({
-  isOpenBurger: false,
-  changeIsOpenBurger: () =>
-    set((state) => ({ isOpenBurger: !state.isOpenBurger })),
+  isOpenLoginModal: false,
+  setIsOpenModal: (flag) => set(() => ({ isOpenLoginModal: flag })),
   client: new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string),
   setClient: (client) => set(() => ({ client })),
   isClient: false,

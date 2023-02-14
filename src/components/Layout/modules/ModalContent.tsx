@@ -1,16 +1,14 @@
 import { Button, Paper, Text } from "@mantine/core";
 import Link from "next/link";
-import React, { Dispatch, FC, memo } from "react";
+import React, { FC } from "react";
 import { GoogleIcon } from "src/components/Icon/GoogleIcon";
 import { TwitterIcon } from "src/components/Icon/TwitterIcon";
 import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
+import { useGlobalStore } from "src/store/global/globalStore";
 
-type Props = {
-  setOpened: Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const ModalContent: FC<Props> = memo(({ setOpened }) => {
+export const ModalContent: FC = () => {
   const signInGoogle = useGoogleSignIn();
+  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
 
   return (
     <Paper className="flex flex-col items-center justify-center space-y-6 px-4">
@@ -32,7 +30,7 @@ export const ModalContent: FC<Props> = memo(({ setOpened }) => {
         radius="xl"
         onClick={async () => {
           await signInGoogle();
-          setOpened(false);
+          changeIsOpenModal(false);
         }}
       >
         Googleでログイン
@@ -64,4 +62,4 @@ export const ModalContent: FC<Props> = memo(({ setOpened }) => {
       </Text>
     </Paper>
   );
-});
+};
