@@ -29,6 +29,15 @@ jobs:
           touch .env.local
           echo "NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }}" >> .env.local
           echo "NEXT_PUBLIC_SHOBOI_ENDOPOINT=${{ secrets.NEXT_PUBLIC_SHOBOI_ENDOPOINT }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_MESSAGIN_SENDER_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGIN_SENDER_ID }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.local
+          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.local
+          echo "NEXT_PUBLIC_TOKEN_KEY=${{ secrets.NEXT_PUBLIC_TOKEN_KEY }}" >> .env.local
+          echo "NEXT_PUBLIC_ADMIN_SECRET=${{ secrets.NEXT_PUBLIC_ADMIN_SECRET }}" >> .env.local
       - name: Recreate all posts
         shell: bash
         run: |
