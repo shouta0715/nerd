@@ -12,17 +12,17 @@ on:
   # 毎日日本時間の 11時 に GitHub Actions が実行される (cron の時刻は UST)
   # 実行の際に参照されるブランチは上記の default で指定したものが使用される
   schedule:
-    - cron: "0 2 * * *"
+    - cron: "0 21 * * *"
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.ref }}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "18.x"
       # 投稿内容を更新するために npm run build:posts を走らせる
       - name: Recreate all posts
         shell: bash
