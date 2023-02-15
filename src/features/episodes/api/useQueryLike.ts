@@ -1,21 +1,27 @@
-import { useGetEpisodeLikesQuery } from "src/generated/graphql";
+import { useQuery } from "@tanstack/react-query";
+import {
+  GetEpisodeLikesQuery,
+  useGetEpisodeLikesQuery,
+} from "src/generated/graphql";
 import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserStore } from "src/store/user/userState";
+import { useUserLikesStore, useUserStore } from "src/store/user/userState";
 
-export const useQueryLike = (episodeId: string) => {
+export const useQueryLikes = (episodeIds: string[]) => {
   const client = useGlobalStore((state) => state.client);
   const isClient = useGlobalStore((state) => state.isClient);
   const user = useUserStore((state) => state.user);
+  const setData = useUserLikesStore((state) => state.setData);
 
-  return useGetEpisodeLikesQuery(
-    client,
-    {
+  return useQuery<GetEpisodeLikesQuery>({
+    queryKey: ["userLikes", user?.id],
+    queryFn: useGetEpisodeLikesQuery.fetcher(client, {
       userId: user?.id as string,
-      episodeId,
+      episodeIds,
+    }),
+    enabled: isClient && !!user?.id && !!episodeIds.length && !user?.anonymous,
+    suspense: false,
+    onSuccess: (data) => {
+      setData(data);
     },
-    {
-      enabled: isClient && !!user?.id && !!episodeId && !user?.anonymous,
-      suspense: false,
-    }
-  );
+  });
 };

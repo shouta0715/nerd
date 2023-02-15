@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, memo, useEffect, useMemo } from "react";
+import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { useSearchInputState } from "src/store/input/serchInput";
@@ -19,6 +20,8 @@ type Props = {
 
 export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
   const { data } = useQueryTodayEpisodes();
+  useQueryLikes(data?.episodes.map((e) => e.id) ?? []);
+
   const { pathname } = useRouter();
   const todayPage = pathname === "/today";
   const limit = todayPage ? data?.episodes.length : 8;

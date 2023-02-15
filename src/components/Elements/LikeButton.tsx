@@ -4,10 +4,9 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import { UnstyledButton } from "@mantine/core";
 import React, { FC, memo, useEffect, useState } from "react";
 import { useMutateEpisodeLike } from "src/features/episodes/api/useMutateEpisodeLike";
-import { useQueryLike } from "src/features/episodes/api/useQueryLike";
 import { useDebounce } from "src/hooks/useDebounce";
 import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserStore } from "src/store/user/userState";
+import { useUserLikesStore, useUserStore } from "src/store/user/userState";
 
 type Props = {
   debounceTime: number;
@@ -21,24 +20,25 @@ type LikeState = {
 };
 
 export const LikeButton: FC<Props> = memo(
-  ({ likeCount, debounceTime = 1000, episodeId }) => {
+  ({ likeCount, debounceTime, episodeId }) => {
+    const user = useUserStore((state) => state.user);
     const [likeState, setLikeState] = useState<LikeState>({
       isLiked: false,
       clickCount: 0,
     });
     const [count, setCount] = useState(likeCount);
-    const user = useUserStore((state) => state.user);
     const setIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
     const debounce = useDebounce(debounceTime);
-    const { data, isFetching } = useQueryLike(episodeId);
     const { insertLikesMutation, deleteLikeMutation } = useMutateEpisodeLike();
+    const likesData = useUserLikesStore((state) => state.data);
 
     useEffect(() => {
-      const flag =
-        data?.episode_likes_by_pk !== null &&
-        data?.episode_likes_by_pk !== undefined;
-      setLikeState({ isLiked: flag, clickCount: 0 });
-    }, [data?.episode_likes_by_pk]);
+      const flag = likesData?.episode_likes.some(
+        (like) => like.episode_id === episodeId
+      );
+
+      setLikeState({ isLiked: flag ?? false, clickCount: 0 });
+    }, [episodeId, likesData?.episode_likes]);
 
     const onClickHandler = async () => {
       if (likeState.clickCount % 2 !== 0) return;
@@ -61,7 +61,7 @@ export const LikeButton: FC<Props> = memo(
 
     return (
       <UnstyledButton
-        disabled={isFetching || !user}
+        disabled={!user}
         onClick={() => {
           if (user?.anonymous) {
             setIsOpenModal(true);
