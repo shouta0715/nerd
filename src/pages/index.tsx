@@ -1,9 +1,9 @@
 import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
-import { Navigation } from "src/components/Layout/modules/Navigation";
+// import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import {
   useGetMediaTypesQuery,
@@ -18,7 +18,7 @@ const Home: NextPage = () => (
   <Layout>
     <Box component="section" bg="indigo.1">
       <Box className="container mx-auto ">
-        <Navigation />
+        {/* <Navigation /> */}
         <TodayEpisodes />
       </Box>
     </Box>
@@ -26,7 +26,7 @@ const Home: NextPage = () => (
 );
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const queryClient = new QueryClient();
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 

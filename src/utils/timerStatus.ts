@@ -1,5 +1,7 @@
+import { utcToZonedTime } from "date-fns-tz";
+
 export const genTimerStatus = (start_time: string, end_time: string) => {
-  const now = new Date();
+  const now = utcToZonedTime(new Date(), "Asia/Tokyo");
   const startTime = new Date(start_time);
   const endTime = new Date(end_time);
 
