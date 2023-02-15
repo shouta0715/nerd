@@ -30,7 +30,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
         />
       ) : (
         <div>
-          <Button className="mr-4" color="red">
+          <Button className="mr-4" color="red" variant="light">
             アーカイブで参加する
           </Button>
         </div>
