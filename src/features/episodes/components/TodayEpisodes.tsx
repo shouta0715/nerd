@@ -4,12 +4,10 @@ import React, { FC } from "react";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
 
 export const TodayEpisodes: FC = () => (
-  <div className="p-6">
+  <div className="px-6 pb-12 pt-6">
     <Title order={2} size="h3" className="mb-4">
       <Link passHref href="/">
-        <Text component="span" underline color="indigo">
-          今日放送のテレビ
-        </Text>
+        <Text component="span">今日放送のエピソード</Text>
       </Link>
     </Title>
     <TodayEpisodeList />
