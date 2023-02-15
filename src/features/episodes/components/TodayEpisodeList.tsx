@@ -11,11 +11,7 @@ import { AutoCompleteData } from "src/features/episodes/types";
 import { useSearchInputState } from "src/store/input/serchInput";
 
 const DynamicTodayEpisodeItem = dynamic(
-  () => import("src/features/episodes/components/TodayEpisodeItem"),
-  {
-    loading: () => <div>loading...</div>,
-    ssr: false,
-  }
+  () => import("src/features/episodes/components/TodayEpisodeItem")
 );
 
 type Props = {
