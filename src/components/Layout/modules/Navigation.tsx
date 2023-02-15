@@ -1,4 +1,4 @@
-import { Card, Text, SimpleGrid } from "@mantine/core";
+import { Card, Text, SimpleGrid, Group, Anchor } from "@mantine/core";
 import {
   IconReceiptRefund,
   IconSearch,
@@ -11,12 +11,12 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 const mockdata = [
-  { title: "今日放送", icon: IconDeviceTv, color: "blue" },
-  { title: "検索", icon: IconSearch, color: "indigo" },
-  { title: "設定", icon: IconSettings, color: "gray" },
-  { title: "作品の要望", icon: IconReceiptRefund, color: "teal" },
-  { title: "使い方", icon: IconBook, color: "red" },
-  { title: "マイリスト", icon: IconPlus, color: "orange" },
+  { title: "今日放送", icon: IconDeviceTv, color: "text-blue-400" },
+  { title: "検索", icon: IconSearch, color: "text-indigo-400" },
+  { title: "設定", icon: IconSettings, color: "text-gray-500" },
+  { title: "作品の要望", icon: IconReceiptRefund, color: "text-green-500" },
+  { title: "使い方", icon: IconBook, color: "text-red-400" },
+  { title: "マイリスト", icon: IconPlus, color: "text-orange-400" },
 ];
 
 export const Navigation: FC = () => {
@@ -27,7 +27,7 @@ export const Navigation: FC = () => {
       className="flex h-20 flex-col items-center justify-center
       rounded-md bg-white text-center transition-all duration-200 hover:scale-105 hover:bg-slate-50"
     >
-      <item.icon color={item.color} size={32} />
+      <item.icon className={`${item.color}`} size={32} />
       <Text component="span" size="xs" mt={7}>
         {item.title}
       </Text>
@@ -36,8 +36,19 @@ export const Navigation: FC = () => {
 
   return (
     <div className="px-6">
-      <Card radius="md" className="bg-transparent p-0">
-        <SimpleGrid cols={3} mt="md">
+      <Card
+        radius="md"
+        withBorder
+        bg="white"
+        className="mx-auto max-w-md border-indigo-200"
+      >
+        <Group position="apart">
+          <Text className="font-bold">Services</Text>
+          <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
+            プライバシーポリシー
+          </Anchor>
+        </Group>
+        <SimpleGrid cols={3} mt="md" className="p-4" bg="indigo.1">
           {items}
         </SimpleGrid>
       </Card>

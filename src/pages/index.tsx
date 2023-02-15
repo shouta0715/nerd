@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
-// import { Navigation } from "src/components/Layout/modules/Navigation";
+import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import {
   useGetMediaTypesQuery,
@@ -11,14 +11,16 @@ import {
 } from "src/generated/graphql";
 
 import { getTodayData } from "src/hooks/router/dynamicPaths";
-// import { Box } from "@mantine/core";
-// import { InviteItem } from "../features/invites/InviteItem";
 
 const Home: NextPage = () => (
   <Layout>
+    <Box component="section" bg="indigo.1" className="mb-1">
+      <Box className="container mx-auto py-4">
+        <Navigation />
+      </Box>
+    </Box>
     <Box component="section" bg="indigo.1">
       <Box className="container mx-auto ">
-        {/* <Navigation /> */}
         <TodayEpisodes />
       </Box>
     </Box>
