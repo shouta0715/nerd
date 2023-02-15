@@ -1,7 +1,7 @@
 import { Box } from "@mantine/core";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
@@ -26,7 +26,7 @@ const Home: NextPage = () => (
 );
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 

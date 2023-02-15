@@ -3,7 +3,7 @@ import { Autocomplete, Box, Text, Title } from "@mantine/core";
 import { IconSearch } from "@tabler/icons";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetStaticProps, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
@@ -76,7 +76,7 @@ const Index: NextPage = () => {
 
 export default Index;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const queryClient = new QueryClient();
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
