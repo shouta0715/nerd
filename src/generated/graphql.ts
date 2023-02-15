@@ -2506,7 +2506,7 @@ export const useUpdateTodayEpisodeMutation = <
 useUpdateTodayEpisodeMutation.fetcher = (client: GraphQLClient, variables: UpdateTodayEpisodeMutationVariables, headers?: RequestInit['headers']) => fetcher<UpdateTodayEpisodeMutation, UpdateTodayEpisodeMutationVariables>(client, UpdateTodayEpisodeDocument, variables, headers);
 export const GetTodayEpisodesDocument = `
     query GetTodayEpisodes($where: episodes_bool_exp!) {
-  episodes(where: $where) {
+  episodes(where: $where, order_by: {start_time: asc}) {
     id
     title
     end_time

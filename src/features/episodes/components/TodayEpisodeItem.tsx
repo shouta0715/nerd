@@ -1,5 +1,5 @@
 import { Button, Text, Title } from "@mantine/core";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { CommentsButton } from "src/components/Elements/CommentsButton";
 import { LikeButton } from "src/components/Elements/LikeButton";
 import { ShareButton } from "src/components/Elements/ShareButton";
@@ -12,7 +12,7 @@ type Props = {
   episode: Episode;
 };
 
-export const TodayEpisodeItem: FC<Props> = ({ episode }) => (
+const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
   <li className="flex-1 rounded-md bg-white p-4 md:px-6">
     <div className="mx-auto flex min-h-full flex-col items-center justify-between">
       <Title order={3} size="h4" className="mb-1 md:mb-2">
@@ -64,4 +64,6 @@ export const TodayEpisodeItem: FC<Props> = ({ episode }) => (
       </div>
     </div>
   </li>
-);
+));
+
+export default TodayEpisodeItem;

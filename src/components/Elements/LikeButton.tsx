@@ -15,40 +15,47 @@ type Props = {
   episodeId: string;
 };
 
+type LikeState = {
+  isLiked: boolean;
+  clickCount: number;
+};
+
 export const LikeButton: FC<Props> = memo(
   ({ likeCount, debounceTime = 1000, episodeId }) => {
-    const [isLiked, setIsLiked] = useState<boolean>(false);
+    const [likeState, setLikeState] = useState<LikeState>({
+      isLiked: false,
+      clickCount: 0,
+    });
     const [count, setCount] = useState(likeCount);
-
     const user = useUserStore((state) => state.user);
     const setIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
     const debounce = useDebounce(debounceTime);
     const { data, isFetching } = useQueryLike(episodeId);
-    const [likeFlag, setLikeFlag] = useState(false);
-
     const { insertLikesMutation, deleteLikeMutation } = useMutateEpisodeLike();
+
     useEffect(() => {
       const flag =
         data?.episode_likes_by_pk !== null &&
         data?.episode_likes_by_pk !== undefined;
-      setLikeFlag(flag);
-      setIsLiked(flag);
+      setLikeState({ isLiked: flag, clickCount: 0 });
     }, [data?.episode_likes_by_pk]);
 
     const onClickHandler = async () => {
-      if (likeFlag !== isLiked) return;
+      if (likeState.clickCount % 2 !== 0) return;
 
-      if (isLiked) {
+      if (likeState.isLiked) {
         await deleteLikeMutation.mutateAsync({
           userId: user?.id as string,
           episodeId,
         });
+        setLikeState({ clickCount: 0, isLiked: false });
       } else {
         await insertLikesMutation.mutateAsync({
           object: {
             episode_id: episodeId,
           },
         });
+        setLikeState({ clickCount: 0, isLiked: true });
       }
     };
 
@@ -61,8 +68,11 @@ export const LikeButton: FC<Props> = memo(
 
             return;
           }
-          setIsLiked((prev) => !prev);
-          setCount((prev) => (isLiked ? prev - 1 : prev + 1));
+          setLikeState((prev) => ({
+            isLiked: !prev.isLiked,
+            clickCount: prev.clickCount + 1,
+          }));
+          setCount((prev) => (likeState.isLiked ? prev - 1 : prev + 1));
           debounce(onClickHandler);
         }}
         role="button"
@@ -70,14 +80,16 @@ export const LikeButton: FC<Props> = memo(
       >
         <HeartIcon
           className={`h-5 w-5 cursor-pointer group-disabled:animate-pulse group-disabled:text-slate-300 group-disabled:opacity-50 md:h-6  md:w-6  ${
-            isLiked
+            likeState.isLiked
               ? "fill-pink-500 text-pink-500"
               : "text-black group-hover:text-pink-500"
           }`}
         />
         <span
           className={`${
-            isLiked ? "text-pink-500" : "text-black group-hover:text-pink-500"
+            likeState.isLiked
+              ? "text-pink-500"
+              : "text-black group-hover:text-pink-500"
           }`}
         >
           {count}
