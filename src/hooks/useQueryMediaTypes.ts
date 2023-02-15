@@ -10,6 +10,7 @@ export const useQueryMediaTypes = () => {
     {
       staleTime: Infinity,
       cacheTime: Infinity,
+      enabled: false,
     }
   );
 };

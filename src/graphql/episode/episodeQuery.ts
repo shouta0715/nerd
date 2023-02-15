@@ -23,7 +23,7 @@ export const UPDATE_TODAY_EPISODE = gql`
 
 export const GET_TODAY_EPISODES = gql`
   query GetTodayEpisodes($where: episodes_bool_exp!) {
-    episodes(where: $where) {
+    episodes(where: $where, order_by: { start_time: asc }) {
       id
       title
       end_time
