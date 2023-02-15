@@ -13,7 +13,7 @@ type Props = {
 };
 
 const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
-  <li className="flex-1 rounded-md bg-white p-4 md:px-6">
+  <li className="mx-auto max-w-lg flex-1 rounded-md bg-white p-4 md:px-6">
     <div className="mx-auto flex min-h-full flex-col items-center justify-between">
       <Title order={3} size="h4" className="mb-1 md:mb-2">
         {episode.work.series_title}

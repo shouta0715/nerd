@@ -4,8 +4,9 @@ import { Text } from "@mantine/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, memo, useEffect } from "react";
+import React, { FC, memo, useEffect, useMemo } from "react";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
+import { AutoCompleteData } from "src/features/episodes/types";
 import { useSearchInputState } from "src/store/input/serchInput";
 
 const DynamicTodayEpisodeItem = dynamic(
@@ -13,7 +14,7 @@ const DynamicTodayEpisodeItem = dynamic(
 );
 
 type Props = {
-  callbackTitle?: (titles: string[] | undefined) => void;
+  callbackTitle?: (items: AutoCompleteData[] | undefined) => void;
 };
 
 export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
@@ -22,13 +23,39 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
   const todayPage = pathname === "/today";
   const limit = todayPage ? data?.episodes.length : 8;
   const searchInput = useSearchInputState((state) => state.searchInput);
-  const filterEpisodes = data?.episodes
-    .slice(0, limit)
-    .filter((episode) => episode.title.includes(searchInput));
+  const setSearchInput = useSearchInputState((state) => state.setSearchInput);
+  const filterEpisodes = useMemo(
+    () =>
+      data?.episodes
+        .slice(0, limit)
+        .filter(
+          (episode) =>
+            episode.title
+              .toLowerCase()
+              .includes(searchInput.toLowerCase().trim()) ||
+            episode.work.series_title
+              .toLowerCase()
+              .includes(searchInput.toLowerCase().trim())
+        ),
+    [data?.episodes, limit, searchInput]
+  );
 
   useEffect(() => {
-    callbackTitle && callbackTitle(data?.episodes?.map((e) => e.title));
-  }, [callbackTitle, data?.episodes]);
+    callbackTitle &&
+      callbackTitle(
+        data?.episodes?.map((e) => ({
+          title: e.work.series_title,
+          episodeTitle: e.title,
+          number: e.number,
+          value: e.title,
+        }))
+      );
+
+    return () => {
+      setSearchInput("");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.episodes]);
 
   return (
     <>
