@@ -10,10 +10,8 @@ export const INSERT_EPISODE_LIKE = gql`
 `;
 
 export const GET_EPISODE_LIKES = gql`
-  query GetEpisodeLikes($episodeIds: [uuid!]!, $userId: String!) {
-    episode_likes(
-      where: { user_id: { _eq: $userId }, episode_id: { _in: $episodeIds } }
-    ) {
+  query GetEpisodeLikes($episodeIds: [uuid!]!) {
+    episode_likes(where: { episode_id: { _in: $episodeIds } }) {
       episode_id
     }
   }

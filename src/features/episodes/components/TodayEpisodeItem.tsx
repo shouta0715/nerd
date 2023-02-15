@@ -38,11 +38,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
       <div className="mt-2 flex w-full justify-around text-sm">
         {genTimerStatus(episode.start_time, episode.end_time).timer ? (
           <>
-            <LikeButton
-              likeCount={episode.episode_likes_aggregate.aggregate?.count ?? 0}
-              debounceTime={1500}
-              episodeId={episode.id}
-            />
+            <LikeButton debounceTime={1500} episodeId={episode.id} />
             <UserGroupButton
               count={10}
               onClickHandler={() => console.log("click")}
