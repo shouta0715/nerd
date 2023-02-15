@@ -28,7 +28,7 @@ export const Navigation: FC = () => {
       rounded-md bg-white text-center transition-all duration-200 hover:scale-105 hover:bg-slate-50"
     >
       <item.icon color={item.color} size={32} />
-      <Text size="xs" mt={7}>
+      <Text component="span" size="xs" mt={7}>
         {item.title}
       </Text>
     </Link>
