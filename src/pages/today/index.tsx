@@ -5,8 +5,10 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
+import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
+import { AutoCompleteData } from "src/features/episodes/types";
 import {
   useGetMediaTypesQuery,
   useGetTodayEpisodesQuery,
@@ -15,46 +17,55 @@ import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { useSearchInputState } from "src/store/input/serchInput";
 
 const Index: NextPage = () => {
-  const [dataTitle, setDataTitle] = useState([""]);
-
+  const [autoCompleteData, setAutoCompleteData] = useState<AutoCompleteData[]>(
+    []
+  );
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
-
-  const setTitle = (titles: string[] | undefined) => {
-    setDataTitle(titles ?? [""]);
-  };
+  const setTitle = useCallback(
+    (items: AutoCompleteData[] | undefined) => {
+      setAutoCompleteData(items ?? []);
+    },
+    [setAutoCompleteData]
+  );
 
   return (
     <Box component="section" className="min-h-screen" bg="indigo.1">
-      <Box className="container mx-auto ">
-        <div className="px-6 pb-12 pt-6">
-          <Box className="sticky top-0 z-[100] flex items-center bg-[rgba(238,242,255,0.95)] p-2">
+      <Box className="container mx-auto">
+        <div className="px-6 pb-12 pt-0">
+          <Box className="sticky top-0 z-[100] flex flex-col items-start justify-center space-y-2 bg-[rgba(238,242,255,0.95)] py-4 md:flex-row md:items-center md:space-y-0">
             <Title
               order={2}
               size="h3"
-              className="mr-3 flex h-full items-center text-base md:mr-6 md:text-2xl"
+              className="mr-3  flex h-full items-center text-base md:mr-6 md:text-2xl"
             >
               <Link
                 scroll={false}
                 href="/"
                 className="mr-2 flex justify-center p-1 md:mr-4 md:p-2"
               >
-                <ArrowSmallLeftIcon className="h-6 w-6  text-black" />
+                <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
               </Link>
               <Text component="span">今日放送のエピソード</Text>
             </Title>
-            <form className="flex-1">
+            <div className="w-full flex-1">
               <Autocomplete
-                data={dataTitle}
+                filter={(value, item) =>
+                  item.title.includes(value.toLowerCase().trim()) ||
+                  item.episodeTitle.includes(value.toLowerCase().trim())
+                }
+                itemComponent={AutoCompleteItem}
+                data={autoCompleteData}
                 icon={<IconSearch className="text-indigo-500" size={20} />}
                 placeholder="タイトルで検索"
                 classNames={{
-                  wrapper: "h-8 w-full flex items-center max-w-sm",
+                  wrapper:
+                    "h-8 w-full mx-auto md:mx-0 flex items-center md:max-w-sm max-w-xs",
                   input: "text-base",
                 }}
                 radius="xl"
                 onChange={(e) => setSearchInput(e)}
               />
-            </form>
+            </div>
           </Box>
           <TodayEpisodeList callbackTitle={setTitle} />
         </div>
