@@ -13,9 +13,8 @@ export const useQueryLikes = (episodeIds: string[]) => {
   const setData = useUserLikesStore((state) => state.setData);
 
   return useQuery<GetEpisodeLikesQuery>({
-    queryKey: ["userLikes", user?.id],
+    queryKey: ["todayEpisodesLikes", episodeIds],
     queryFn: useGetEpisodeLikesQuery.fetcher(client, {
-      userId: user?.id as string,
       episodeIds,
     }),
     enabled: isClient && !!user?.id && !!episodeIds.length && !user?.anonymous,

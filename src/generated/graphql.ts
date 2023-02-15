@@ -2449,7 +2449,6 @@ export type InsertEpisodeLikesMutation = { __typename?: 'mutation_root', insert_
 
 export type GetEpisodeLikesQueryVariables = Exact<{
   episodeIds: Array<Scalars['uuid']> | Scalars['uuid'];
-  userId: Scalars['String'];
 }>;
 
 
@@ -2571,8 +2570,8 @@ export const useInsertEpisodeLikesMutation = <
     );
 useInsertEpisodeLikesMutation.fetcher = (client: GraphQLClient, variables: InsertEpisodeLikesMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertEpisodeLikesMutation, InsertEpisodeLikesMutationVariables>(client, InsertEpisodeLikesDocument, variables, headers);
 export const GetEpisodeLikesDocument = `
-    query GetEpisodeLikes($episodeIds: [uuid!]!, $userId: String!) {
-  episode_likes(where: {user_id: {_eq: $userId}, episode_id: {_in: $episodeIds}}) {
+    query GetEpisodeLikes($episodeIds: [uuid!]!) {
+  episode_likes(where: {episode_id: {_in: $episodeIds}}) {
     episode_id
   }
 }

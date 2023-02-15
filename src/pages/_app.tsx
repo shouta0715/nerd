@@ -3,15 +3,20 @@ import type { AppProps } from "next/app";
 import { useState } from "react";
 import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, Modal } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import Head from "next/head";
 import queryClient from "src/libs/queryClient";
 import { useInitialize } from "src/hooks/useInitialize";
 import { Error } from "src/components/Layout/error/Error";
+import { ModalContent } from "src/components/Layout/modules/ModalContent";
+import { Logo } from "src/components/Icon/Logo";
+import { useGlobalStore } from "src/store/global/globalStore";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
+  const isOpenLoginModal = useGlobalStore((state) => state.isOpenLoginModal);
+  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
 
   useInitialize();
 
@@ -45,6 +50,19 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Head>
               <title>Anime</title>
             </Head>
+            <Modal
+              opened={isOpenLoginModal}
+              onClose={() => changeIsOpenModal(false)}
+              title={<Logo />}
+              classNames={{
+                title: "text-2xl font-bold mx-auto",
+                overlay: "bg-gray-900 bg-opacity-50",
+              }}
+              centered
+              radius="md"
+            >
+              <ModalContent />
+            </Modal>
             <Component {...pageProps} />
             <ReactQueryDevtools initialIsOpen={false} />
           </MantineProvider>
