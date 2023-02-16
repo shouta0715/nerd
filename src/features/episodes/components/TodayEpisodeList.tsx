@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, memo, useEffect, useMemo } from "react";
+import { Skeleton } from "src/components/Layout/loading/Skeleton";
 import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
 import { AutoCompleteData } from "src/features/episodes/types";
@@ -14,7 +15,7 @@ const DynamicTodayEpisodeItem = dynamic(
   () => import("src/features/episodes/components/TodayEpisodeItem"),
   {
     ssr: false,
-    loading: () => <div>loading...</div>,
+    loading: () => <Skeleton />,
   }
 );
 
