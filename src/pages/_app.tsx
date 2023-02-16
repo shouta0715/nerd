@@ -29,6 +29,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             withNormalizeCSS
             theme={{
               /** Put your mantine theme override here */
+              fontFamily: "futura",
               colorScheme: "light",
               colors: {
                 indigo: [

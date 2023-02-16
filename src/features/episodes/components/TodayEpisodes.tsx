@@ -7,7 +7,9 @@ export const TodayEpisodes: FC = () => (
   <div className="px-6 pb-12 pt-6">
     <Title order={2} size="h3" className="mb-4">
       <Link passHref href="/today">
-        <Text component="span">今日放送のエピソード</Text>
+        <Text component="span" ff="Hiragino Sans">
+          今日放送のエピソード
+        </Text>
       </Link>
     </Title>
     <TodayEpisodeList />
