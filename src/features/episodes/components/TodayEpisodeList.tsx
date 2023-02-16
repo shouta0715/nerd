@@ -3,12 +3,9 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Text } from "@mantine/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { FC, memo, useEffect, useMemo, useDeferredValue } from "react";
+import React, { FC, memo } from "react";
 import { Skeleton } from "src/components/Layout/loading/Skeleton";
-import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
-import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
-import { useSearchInputState } from "src/store/input/serchInput";
+import { useTodayEpisodeList } from "src/features/episodes/hooks/useTodayEpisodeList";
 import { AutoCompleteData } from "src/types/dataType";
 
 const DynamicTodayEpisodeItem = dynamic(
@@ -24,47 +21,9 @@ type Props = {
 };
 
 export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
-  const { data } = useQueryTodayEpisodes();
-  useQueryLikes(data?.episodes.map((e) => e.id) ?? []);
-
-  const { pathname } = useRouter();
-  const indexPage = pathname === "/";
-  const limit = indexPage ? 8 : data?.episodes.length;
-  const searchInput = useSearchInputState((state) => state.searchInput);
-  const setSearchInput = useSearchInputState((state) => state.setSearchInput);
-  const filterEpisodes = useMemo(
-    () =>
-      data?.episodes
-        .slice(0, limit)
-        .filter(
-          (episode) =>
-            episode.title
-              .toLowerCase()
-              .includes(searchInput.toLowerCase().trim()) ||
-            episode.work.series_title
-              .toLowerCase()
-              .includes(searchInput.toLowerCase().trim())
-        ),
-    [data?.episodes, limit, searchInput]
-  );
-
-  const deferredFilterEpisodes = useDeferredValue(filterEpisodes);
-
-  useEffect(() => {
-    callbackTitle &&
-      callbackTitle(
-        data?.episodes?.map((e) => ({
-          title: e.work.series_title,
-          episodeTitle: e.title,
-          number: e.number,
-          value: e.title,
-        }))
-      );
-
-    return () => {
-      setSearchInput("");
-    };
-  }, [callbackTitle, data?.episodes, setSearchInput]);
+  const { indexPage, deferredFilterEpisodes } = useTodayEpisodeList({
+    callbackTitle,
+  });
 
   return (
     <>
