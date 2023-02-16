@@ -8,8 +8,8 @@ import React, { FC, memo, useEffect, useMemo } from "react";
 import { Skeleton } from "src/components/Layout/loading/Skeleton";
 import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
-import { AutoCompleteData } from "src/features/episodes/types";
 import { useSearchInputState } from "src/store/input/serchInput";
+import { AutoCompleteData } from "src/types/dataType";
 
 const DynamicTodayEpisodeItem = dynamic(
   () => import("src/features/episodes/components/TodayEpisodeItem"),
@@ -28,8 +28,8 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
   useQueryLikes(data?.episodes.map((e) => e.id) ?? []);
 
   const { pathname } = useRouter();
-  const todayPage = pathname === "/today";
-  const limit = todayPage ? data?.episodes.length : 8;
+  const indexPage = pathname === "/";
+  const limit = indexPage ? 8 : data?.episodes.length;
   const searchInput = useSearchInputState((state) => state.searchInput);
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
   const filterEpisodes = useMemo(
@@ -62,8 +62,7 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
     return () => {
       setSearchInput("");
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.episodes]);
+  }, [callbackTitle, data?.episodes, setSearchInput]);
 
   return (
     <>
@@ -72,13 +71,13 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
           <DynamicTodayEpisodeItem episode={episode} key={episode.id} />
         ))}
       </ul>
-      {!todayPage && (
+      {indexPage && (
         <Text
           align="center"
           component="p"
           className="mt-6 flex w-full items-center justify-center text-lg hover:underline"
         >
-          <Link href="/today" className="">
+          <Link href="/lists/today" className="">
             今日のエピソードをもっと見る
           </Link>
           <ArrowSmallRightIcon className="ml-1 h-6 w-6" />

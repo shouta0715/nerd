@@ -5,7 +5,7 @@ import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
-import { SeasonWorks } from "src/features/works/SeasonWorks";
+import { SeasonWorks } from "src/features/works/components/SeasonWorks";
 import {
   useGetMediaTypesQuery,
   useGetSeasonWorksQuery,

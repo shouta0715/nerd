@@ -4,7 +4,7 @@ import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeL
 
 export const TodayEpisodes: FC = () => (
   <div className="px-6 pb-12 pt-6">
-    <TopTitle href="/today" title="今日放送のエピソード" />
+    <TopTitle href="/lists/today" title="今日放送のエピソード" />
     <TodayEpisodeList />
   </div>
 );

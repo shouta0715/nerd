@@ -3,20 +3,26 @@ import { Autocomplete, Box, Text, Title } from "@mantine/core";
 import { IconSearch } from "@tabler/icons";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GraphQLClient } from "graphql-request";
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
-import { AutoCompleteData } from "src/features/episodes/types";
+import { SeasonWorksList } from "src/features/works/components/SeasonWorksList";
 import {
   useGetMediaTypesQuery,
+  useGetSeasonWorksQuery,
   useGetTodayEpisodesQuery,
 } from "src/generated/graphql";
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { useSearchInputState } from "src/store/input/serchInput";
+import { AutoCompleteData } from "src/types/dataType";
+import { returningSeason } from "src/utils/returningSeason";
 
 const Index: NextPage = () => {
+  const router = useRouter();
+  const { query } = router;
   const [autoCompleteData, setAutoCompleteData] = useState<AutoCompleteData[]>(
     []
   );
@@ -44,13 +50,15 @@ const Index: NextPage = () => {
             >
               <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
             </Link>
-            <Text component="span">今日放送のエピソード</Text>
+            <Text component="span">
+              {query.list === "today" ? "今日放送のエピソード" : "今期のアニメ"}
+            </Text>
           </Title>
           <div className="w-full flex-1">
             <Autocomplete
               filter={(value, item) =>
                 item.title.includes(value.toLowerCase().trim()) ||
-                item.episodeTitle.includes(value.toLowerCase().trim())
+                item.episodeTitle?.includes(value.toLowerCase().trim())
               }
               itemComponent={AutoCompleteItem}
               data={autoCompleteData}
@@ -69,7 +77,13 @@ const Index: NextPage = () => {
       </header>
       <Box className="container mx-auto">
         <div className="p-6">
-          <TodayEpisodeList callbackTitle={setTitle} />
+          {query.list === "today" && (
+            <TodayEpisodeList callbackTitle={setTitle} />
+          )}
+
+          {query.list === "season" && (
+            <SeasonWorksList callbackTitle={setTitle} />
+          )}
         </div>
       </Box>
     </Box>
@@ -78,7 +92,18 @@ const Index: NextPage = () => {
 
 export default Index;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = [{ params: { list: "today" } }, { params: { list: "season" } }];
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  const query = context.params?.list;
+
   const queryClient = new QueryClient();
   const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
@@ -88,14 +113,26 @@ export const getStaticProps: GetStaticProps = async () => {
     useGetMediaTypesQuery.fetcher(request, {})
   );
 
-  const episodesWhereQuery = await getTodayData();
+  if (query === "today") {
+    const episodesWhereQuery = await getTodayData();
+    await queryClient.prefetchQuery(
+      ["todayEpisodes"],
+      useGetTodayEpisodesQuery.fetcher(request, {
+        where: episodesWhereQuery,
+      })
+    );
+  }
 
-  await queryClient.prefetchQuery(
-    ["todayEpisodes"],
-    useGetTodayEpisodesQuery.fetcher(request, {
-      where: episodesWhereQuery,
-    })
-  );
+  if (query === "season") {
+    const seasonData = returningSeason();
+    await queryClient.prefetchQuery(
+      ["seasonWorks"],
+      useGetSeasonWorksQuery.fetcher(request, {
+        season: seasonData.season,
+        year: seasonData.year,
+      })
+    );
+  }
 
   return {
     props: {
