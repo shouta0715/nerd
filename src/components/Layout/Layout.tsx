@@ -1,5 +1,4 @@
-import React, { FC, ReactNode, Suspense } from "react";
-import { Spinner } from "src/components/Layout/loading/Spinner";
+import React, { FC, ReactNode } from "react";
 import { CategoryNav } from "src/components/Layout/modules/CategoryNav";
 import { Header } from "src/components/Layout/modules/Header";
 
@@ -12,9 +11,7 @@ export const Layout: FC<Props> = ({ children }) => (
     <div className=" flex h-full w-full">
       <section className="flex max-w-full flex-1 flex-col">
         <Header />
-        <Suspense fallback={<Spinner />}>
-          <CategoryNav />
-        </Suspense>
+        <CategoryNav />
         <main className="flex-1">{children}</main>
       </section>
     </div>

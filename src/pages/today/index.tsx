@@ -29,44 +29,46 @@ const Index: NextPage = () => {
   );
 
   return (
-    <Box component="section" className="min-h-screen" bg="indigo.1">
-      <Box className="container mx-auto">
-        <div className="px-6 pb-12 pt-0">
-          <Box className="sticky top-0 z-[100] flex flex-col items-start justify-center space-y-2 bg-[rgba(238,242,255,0.95)] py-4 md:flex-row md:items-center md:space-y-0">
-            <Title
-              order={2}
-              size="h3"
-              className="mr-3  flex h-full items-center text-base md:mr-6 md:text-2xl"
+    <Box component="section" className="min-h-screen bg-sky-50/30">
+      <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
+        <Box className="container mx-auto flex flex-col items-start justify-center  space-y-2 bg-transparent py-4 md:flex-row md:items-center md:space-y-0">
+          <Title
+            order={2}
+            size="h3"
+            className="mr-3  flex h-full items-center text-base md:mr-6 md:text-2xl"
+          >
+            <Link
+              scroll={false}
+              href="/"
+              className="mr-2 flex justify-center p-1 md:mr-4 md:p-2"
             >
-              <Link
-                scroll={false}
-                href="/"
-                className="mr-2 flex justify-center p-1 md:mr-4 md:p-2"
-              >
-                <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
-              </Link>
-              <Text component="span">今日放送のエピソード</Text>
-            </Title>
-            <div className="w-full flex-1">
-              <Autocomplete
-                filter={(value, item) =>
-                  item.title.includes(value.toLowerCase().trim()) ||
-                  item.episodeTitle.includes(value.toLowerCase().trim())
-                }
-                itemComponent={AutoCompleteItem}
-                data={autoCompleteData}
-                icon={<IconSearch className="text-indigo-500" size={20} />}
-                placeholder="タイトルで検索"
-                classNames={{
-                  wrapper:
-                    "h-8 w-full mx-auto md:mx-0 flex items-center md:max-w-sm max-w-xs",
-                  input: "text-base",
-                }}
-                radius="xl"
-                onChange={(e) => setSearchInput(e)}
-              />
-            </div>
-          </Box>
+              <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
+            </Link>
+            <Text component="span">今日放送のエピソード</Text>
+          </Title>
+          <div className="w-full flex-1">
+            <Autocomplete
+              filter={(value, item) =>
+                item.title.includes(value.toLowerCase().trim()) ||
+                item.episodeTitle.includes(value.toLowerCase().trim())
+              }
+              itemComponent={AutoCompleteItem}
+              data={autoCompleteData}
+              icon={<IconSearch className="text-indigo-500" size={20} />}
+              placeholder="タイトルで検索"
+              classNames={{
+                wrapper:
+                  "h-8 w-full mx-auto md:mx-0 flex items-center md:max-w-sm max-w-xs",
+                input: "text-base",
+              }}
+              radius="xl"
+              onChange={(e) => setSearchInput(e)}
+            />
+          </div>
+        </Box>
+      </header>
+      <Box className="container mx-auto">
+        <div className="px-6">
           <TodayEpisodeList callbackTitle={setTitle} />
         </div>
       </Box>
