@@ -1,4 +1,4 @@
-import { Card, Text, SimpleGrid, Group, Anchor } from "@mantine/core";
+import { Card, Text, Group, Anchor } from "@mantine/core";
 import {
   IconReceiptRefund,
   IconSearch,
@@ -11,24 +11,39 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 const mockdata = [
-  { title: "今日放送", icon: IconDeviceTv, color: "text-blue-400" },
-  { title: "検索", icon: IconSearch, color: "text-indigo-400" },
-  { title: "設定", icon: IconSettings, color: "text-gray-500" },
-  { title: "作品の要望", icon: IconReceiptRefund, color: "text-green-500" },
-  { title: "使い方", icon: IconBook, color: "text-red-400" },
-  { title: "マイリスト", icon: IconPlus, color: "text-orange-400" },
+  {
+    title: "今日放送",
+    icon: IconDeviceTv,
+    color: "text-blue-400",
+    href: "/today",
+  },
+  { title: "検索", icon: IconSearch, color: "text-indigo-400", href: "/today" },
+  { title: "設定", icon: IconSettings, color: "text-gray-500", href: "/today" },
+  {
+    title: "作品の要望",
+    icon: IconReceiptRefund,
+    color: "text-green-500",
+    href: "/today",
+  },
+  { title: "使い方", icon: IconBook, color: "text-red-400", href: "/today" },
+  {
+    title: "マイリスト",
+    icon: IconPlus,
+    color: "text-orange-400",
+    href: "/today",
+  },
 ];
 
 export const Navigation: FC = () => {
   const items = mockdata.map((item) => (
     <Link
-      href="/"
+      href={item.href}
       key={item.title}
-      className="flex h-20 flex-col items-center justify-center
-      rounded-md bg-white text-center transition-all duration-200 hover:scale-105 hover:bg-slate-50"
+      className="flex h-20  flex-col items-center justify-center
+      rounded-md  text-center transition-all duration-100 hover:scale-105"
     >
       <item.icon className={`${item.color}`} size={32} />
-      <Text component="span" size="xs" mt={7}>
+      <Text ff="Hiragino Sans" component="span" size="sm" mt={7}>
         {item.title}
       </Text>
     </Link>
@@ -38,19 +53,24 @@ export const Navigation: FC = () => {
     <div className="px-6">
       <Card
         radius="md"
-        withBorder
-        bg="white"
-        className="mx-auto max-w-md border-indigo-200"
+        className="mx-auto flex max-w-md flex-col items-stretch bg-transparent"
       >
-        <Group position="apart">
-          <Text className="font-bold">Services</Text>
-          <Anchor size="xs" color="dimmed" sx={{ lineHeight: 1 }}>
+        <Group position="apart" className="px-4">
+          <Text ff="Hiragino Sans" className="font-bold">
+            Services
+          </Text>
+          <Anchor
+            size="xs"
+            ff="Hiragino Sans"
+            color="dimmed"
+            sx={{ lineHeight: 1 }}
+          >
             プライバシーポリシー
           </Anchor>
         </Group>
-        <SimpleGrid cols={3} mt="md" className="p-4" bg="indigo.1">
+        <div className="mt-2 grid grid-cols-3 justify-between gap-1">
           {items}
-        </SimpleGrid>
+        </div>
       </Card>
     </div>
   );
