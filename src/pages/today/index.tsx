@@ -29,7 +29,7 @@ const Index: NextPage = () => {
   );
 
   return (
-    <Box component="section" className="min-h-screen bg-sky-50/30">
+    <Box component="section" className="min-h-screen">
       <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
         <Box className="container mx-auto flex flex-col items-start justify-center  space-y-2 bg-transparent py-4 md:flex-row md:items-center md:space-y-0">
           <Title
@@ -68,7 +68,7 @@ const Index: NextPage = () => {
         </Box>
       </header>
       <Box className="container mx-auto">
-        <div className="px-6">
+        <div className="p-6">
           <TodayEpisodeList callbackTitle={setTitle} />
         </div>
       </Box>

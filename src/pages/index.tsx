@@ -14,12 +14,12 @@ import { getTodayData } from "src/hooks/router/dynamicPaths";
 
 const Home: NextPage = () => (
   <Layout>
-    <Box component="section" className="mb-2 bg-sky-50/30">
+    <Box component="section" className="mb-2 ">
       <Box className="container mx-auto py-4">
         <Navigation />
       </Box>
     </Box>
-    <Box component="section" className="bg-sky-50/30">
+    <Box component="section">
       <Box className="container mx-auto ">
         <TodayEpisodes />
       </Box>
