@@ -2695,7 +2695,7 @@ export const GetSeasonWorksDocument = `
     id
     has_episodes
     media_type_id
-    episodes {
+    episodes(order_by: {number: desc_nulls_last}) {
       title
       start_time
       number
