@@ -22,3 +22,10 @@ export type Item = {
   "dc:publisher": string;
   "tv:feed": TvFeed;
 };
+
+export type AutoCompleteData = {
+  title: string;
+  episodeTitle?: string;
+  value: string;
+  number?: number;
+};
