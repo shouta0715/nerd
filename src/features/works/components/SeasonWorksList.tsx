@@ -2,7 +2,7 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Text } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { FC, memo, useEffect, useMemo } from "react";
+import React, { FC, memo, useEffect, useMemo, useDeferredValue } from "react";
 import { useQuerySeasonWorks } from "src/features/works/api/useQuerySeasonWorks";
 import { useSearchInputState } from "src/store/input/serchInput";
 import { AutoCompleteData } from "src/types/dataType";
@@ -18,7 +18,7 @@ export const SeasonWorksList: FC<Props> = memo(({ callbackTitle }) => {
   const searchInput = useSearchInputState((state) => state.searchInput);
   const limit = indexPage ? 16 : data?.works.length;
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
-  const filterEpisodes = useMemo(
+  const filterWorks = useMemo(
     () =>
       data?.works
         .slice(0, limit)
@@ -45,10 +45,12 @@ export const SeasonWorksList: FC<Props> = memo(({ callbackTitle }) => {
     };
   }, [callbackTitle, data?.works, setSearchInput]);
 
+  const deferredFilterWorks = useDeferredValue(filterWorks);
+
   return (
     <>
       <ul>
-        {filterEpisodes?.map((work) => (
+        {deferredFilterWorks?.map((work) => (
           <li key={`works-${work.id}`}>{work.series_title}</li>
         ))}
       </ul>
