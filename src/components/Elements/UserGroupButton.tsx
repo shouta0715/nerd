@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const UserGroupButton: FC<Props> = memo(({ onClickHandler, count }) => (
-  <div className="flex items-center space-x-2">
+  <div className="flex items-center space-x-2 text-sm">
     <ActionIcon
       onClick={onClickHandler}
       color="green"

@@ -17,10 +17,14 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
   <li className="relative mx-auto max-w-lg flex-1 rounded-md bg-white p-4 shadow hover:bg-slate-50 md:px-6">
     <Link href="/today" className="absolute inset-0 rounded-md" />
     <div className="mx-auto flex min-h-full flex-col items-center justify-between">
-      <Title order={3} size="h4" ff="Hiragino Sans" className="mb-1 md:mb-2">
+      <Title
+        order={3}
+        ff="Hiragino Sans"
+        className="mb-1 text-base md:mb-2 md:text-lg"
+      >
         {episode.work.series_title}
       </Title>
-      <div className="mb-2 flex w-full text-base">
+      <div className="mb-2 flex w-full text-sm md:text-base">
         <Text className="mr-4">{episode.number}.</Text>
         <Text ff="Hiragino Sans">{episode.title}</Text>
       </div>

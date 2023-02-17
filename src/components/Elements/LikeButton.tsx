@@ -79,10 +79,10 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
         debounce(onClickHandler);
       }}
       role="button"
-      className="group flex cursor-pointer items-center space-x-2"
+      className="group flex cursor-pointer items-center space-x-2 text-sm"
     >
       <HeartIcon
-        className={`h-5 w-5 cursor-pointer group-disabled:animate-pulse group-disabled:text-slate-300 group-disabled:opacity-50 md:h-6  md:w-6  ${
+        className={`h-5 w-5 cursor-pointer group-disabled:animate-pulse group-disabled:text-slate-300  group-disabled:opacity-50 md:h-6  md:w-6  ${
           likeState.isLiked
             ? "fill-pink-500 text-pink-500"
             : "text-black group-hover:text-pink-500"

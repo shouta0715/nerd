@@ -20,7 +20,7 @@ export const Timer: FC<Props> = ({ start_time, id, text }) => {
     <div className="flex flex-col">
       <Text
         color="indigo"
-        className="m-0 mx-auto mb-2.5  px-10 text-lg font-bold"
+        className="m-0 mx-auto mb-2.5 px-10 text-sm font-bold md:text-base"
       >
         {text}
       </Text>
@@ -34,7 +34,7 @@ export const Timer: FC<Props> = ({ start_time, id, text }) => {
               />
             ))}
           </div>
-          <span className="text-sm font-bold ">時間</span>
+          <span className="text-xs font-bold ">時間</span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
@@ -45,7 +45,7 @@ export const Timer: FC<Props> = ({ start_time, id, text }) => {
               />
             ))}
           </div>
-          <span className="text-sm font-bold ">分</span>
+          <span className="text-xs font-bold ">分</span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <div className="mb-2 flex space-x-2">
@@ -56,7 +56,7 @@ export const Timer: FC<Props> = ({ start_time, id, text }) => {
               />
             ))}
           </div>
-          <span className="text-sm font-bold ">秒</span>
+          <span className="text-xs font-bold">秒</span>
         </div>
       </div>
     </div>
