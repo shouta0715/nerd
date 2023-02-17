@@ -1,5 +1,5 @@
+import { ShareIcon } from "@heroicons/react/24/outline";
 import { ActionIcon } from "@mantine/core";
-import { IconUpload } from "@tabler/icons";
 import React, { FC, memo } from "react";
 
 type Props = {
@@ -13,6 +13,6 @@ export const ShareButton: FC<Props> = memo(({ onClickHandler }) => (
     variant="subtle"
     radius="md"
   >
-    <IconUpload className="h-5 w-5 md:h-6 md:w-6" />
+    <ShareIcon className="h-5 w-5 md:h-6 md:w-6" />
   </ActionIcon>
 ));
