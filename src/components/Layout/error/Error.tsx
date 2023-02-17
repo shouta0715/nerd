@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import {
   createStyles,
   Title,
@@ -8,6 +7,7 @@ import {
   Group,
 } from "@mantine/core";
 import { useRouter } from "next/router";
+import React, { FC } from "react";
 
 const useStyles = createStyles((theme) => ({
   root: {

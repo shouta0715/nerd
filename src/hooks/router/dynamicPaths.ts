@@ -1,15 +1,9 @@
 /* eslint-disable no-promise-executor-return */
 import axios from "axios";
 import { GraphQLClient } from "graphql-request";
-import { UPDATE_TODAY_EPISODE } from "src/graphql/episode/episodeQuery";
-import { parseXml } from "src/utils/parseXml";
-import {
-  Episodes_Bool_Exp,
-  GetMediaTypesQuery,
-  // UpdateTodayEpisodeMutation,
-} from "../../generated/graphql";
+import { Episodes_Bool_Exp, GetMediaTypesQuery } from "../../generated/graphql";
 import { GET_MEDIA_TYPES } from "../../graphql/otherQuery";
-// import { UPDATE_TODAY_EPISODE } from "../../graphql/episode/episodeQuery";
+import { parseXml } from "src/utils/parseXml";
 
 export const getAllMediaTypes = async () => {
   const client = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);

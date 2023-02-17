@@ -11,7 +11,7 @@
     "check-types": "tsc --pretty --noEmit",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "test-all": "yarn format && yarn check-lint && yarn check-types",
+    "test-all": "npx eslint . --fix && yarn format && yarn check-lint && yarn check-types",
     "codegen": "graphql-codegen --config codegen.js"
   },
   "dependencies": {
@@ -55,11 +55,12 @@
     "autoprefixer": "^10.4.13",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "postcss": "^8.4.20",
