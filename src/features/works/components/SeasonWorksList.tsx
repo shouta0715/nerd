@@ -2,6 +2,7 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Text } from "@mantine/core";
 import Link from "next/link";
 import React, { FC, memo } from "react";
+import { WorkItem } from "src/features/works/components/WorkItem";
 import { useSeasonWorksList } from "src/features/works/hooks/useSeasonWorksList";
 import { AutoCompleteData } from "src/types/dataType";
 
@@ -16,9 +17,9 @@ export const SeasonWorksList: FC<Props> = memo(({ callbackTitle }) => {
 
   return (
     <>
-      <ul>
+      <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4  lg:grid-cols-3">
         {deferredFilterWorks?.map((work) => (
-          <li key={`works-${work.id}`}>{work.series_title}</li>
+          <WorkItem work={work} key={`work-${work.id}`} />
         ))}
       </ul>
       {indexPage && (

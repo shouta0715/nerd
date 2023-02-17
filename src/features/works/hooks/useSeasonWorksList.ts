@@ -13,7 +13,7 @@ export const useSeasonWorksList = ({ callbackTitle }: Props) => {
   const { pathname } = useRouter();
   const indexPage = pathname === "/";
   const searchInput = useSearchInputState((state) => state.searchInput);
-  const limit = indexPage ? 16 : data?.works.length;
+  const limit = indexPage ? 18 : data?.works.length;
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
   const filterWorks = useMemo(
     () =>
