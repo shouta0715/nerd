@@ -11,8 +11,9 @@
     "check-types": "tsc --pretty --noEmit",
     "check-lint": "eslint . --ext ts --ext tsx --ext js",
     "format": "prettier --write .",
-    "test-all": "npx eslint . --fix && yarn format && yarn check-lint && yarn check-types",
-    "codegen": "graphql-codegen --config codegen.js"
+    "test-all": "yarn format && yarn check-lint && yarn check-types",
+    "codegen": "graphql-codegen --config codegen.js",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -21,6 +22,7 @@
     "@mantine/core": "^5.10.2",
     "@mantine/hooks": "^5.10.2",
     "@mantine/next": "^5.10.2",
+    "@next/bundle-analyzer": "^13.1.6",
     "@next/font": "13.1.1",
     "@tabler/icons": "^1.119.0",
     "@tanstack/react-query": "^4.20.4",
