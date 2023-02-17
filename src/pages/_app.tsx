@@ -1,16 +1,16 @@
 import "../styles/tailwind.css";
-import type { AppProps } from "next/app";
-import { useState } from "react";
+import { MantineProvider, Modal } from "@mantine/core";
 import { Hydrate, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { MantineProvider, Modal } from "@mantine/core";
-import { ErrorBoundary } from "react-error-boundary";
+import type { AppProps } from "next/app";
 import Head from "next/head";
-import queryClient from "src/libs/queryClient";
-import { useInitialize } from "src/hooks/useInitialize";
+import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { Logo } from "src/components/Icon/Logo";
 import { Error } from "src/components/Layout/error/Error";
 import { ModalContent } from "src/components/Layout/modules/ModalContent";
-import { Logo } from "src/components/Icon/Logo";
+import { useInitialize } from "src/hooks/useInitialize";
+import queryClient from "src/libs/queryClient";
 import { useGlobalStore } from "src/store/global/globalStore";
 
 const App = ({ Component, pageProps }: AppProps) => {

@@ -28,6 +28,7 @@ module.exports = {
     "prefer-arrow",
     "react",
     "react-hooks",
+    "unused-imports",
     "@typescript-eslint",
   ],
   rules: {
@@ -67,6 +68,7 @@ module.exports = {
         unnamedComponents: "arrow-function",
       },
     ],
+    "unused-imports/no-unused-imports": "error",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -91,6 +93,12 @@ module.exports = {
       "error",
       {
         extensions: [".jsx", ".tsx"],
+      },
+    ],
+    "import/order": [
+      "error",
+      {
+        alphabetize: { order: "asc", caseInsensitive: true },
       },
     ],
     "react/jsx-props-no-spreading": ["off"],
