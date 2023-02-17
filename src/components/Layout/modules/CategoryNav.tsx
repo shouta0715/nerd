@@ -17,7 +17,7 @@ export const CategoryNav: FC = () => {
           className="flex"
           classNames={{
             viewport:
-              "px-4 font-bold text-base text-gray-500 h-full whitespace-nowrap ",
+              "px-4 font-bold text-sm md:text-base text-gray-500 h-full whitespace-nowrap ",
           }}
         >
           <Link

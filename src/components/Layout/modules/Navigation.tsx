@@ -43,7 +43,12 @@ export const Navigation: FC = () => {
       rounded-md  text-center transition-all duration-100 hover:scale-105"
     >
       <item.icon className={`${item.color}`} size={32} />
-      <Text ff="Hiragino Sans" component="span" size="sm" mt={7}>
+      <Text
+        ff="Hiragino Sans"
+        component="span"
+        className="text-xs md:text-sm"
+        mt={7}
+      >
         {item.title}
       </Text>
     </Link>
@@ -56,7 +61,7 @@ export const Navigation: FC = () => {
         className="mx-auto flex max-w-md flex-col items-stretch bg-transparent"
       >
         <Group position="apart" className="px-4">
-          <Text ff="Hiragino Sans" className="font-bold">
+          <Text ff="Hiragino Sans" className="text-sm font-bold md:text-base">
             Services
           </Text>
           <Anchor

@@ -36,9 +36,9 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
         <Text
           align="center"
           component="p"
-          className="mt-6 flex w-full items-center justify-center text-lg hover:underline"
+          className="mt-6 flex w-full items-center justify-center hover:underline"
         >
-          <Link href="/lists/today" className="">
+          <Link href="/lists/today" className="text-base md:text-lg">
             今日のエピソードをもっと見る
           </Link>
           <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
