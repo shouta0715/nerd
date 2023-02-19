@@ -1,13 +1,22 @@
 import { Button, Text, Title } from "@mantine/core";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 import { CommentsButton } from "src/components/Elements/CommentsButton";
 import { LikeButton } from "src/components/Elements/LikeButton";
 import { ShareButton } from "src/components/Elements/ShareButton";
-import { Timer } from "src/components/Elements/Timer";
 import { UserGroupButton } from "src/components/Elements/UserGroupButton";
+import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { Episode } from "src/features/episodes/types";
 import { genTimerStatus } from "src/utils/timerStatus";
+
+const DynamicTimer = dynamic(
+  () => import("src/components/Elements/Timer").then((mod) => mod.Timer),
+  {
+    ssr: false,
+    loading: () => <TimerSkelton />,
+  }
+);
 
 type Props = {
   episode: Episode;
@@ -29,11 +38,15 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
         <Text ff="Hiragino Sans">{episode.title}</Text>
       </div>
       {genTimerStatus(episode.start_time, episode.end_time).timer ? (
-        <Timer
-          start_time={episode.start_time}
-          id={episode.id}
-          text={genTimerStatus(episode.start_time, episode.end_time).status}
-        />
+        <div className="flex flex-col">
+          <Text
+            color="indigo"
+            className="m-0 mx-auto mb-2.5 px-10 text-sm font-bold md:text-base"
+          >
+            {genTimerStatus(episode.start_time, episode.end_time).status}
+          </Text>
+          <DynamicTimer start_time={episode.start_time} id={episode.id} />
+        </div>
       ) : (
         <div>
           <Button className="mr-4" color="red" variant="light">

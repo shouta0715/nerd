@@ -2,19 +2,7 @@ import { HeartIcon, UserGroupIcon } from "@heroicons/react/24/outline";
 import { Text, Title } from "@mantine/core";
 import { IconUpload } from "@tabler/icons";
 import React, { FC } from "react";
-
-const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
-  <div
-    key={`skelton-${i}`}
-    className="flex flex-col items-center justify-center"
-  >
-    <div className="mb-2 flex space-x-2">
-      <div className="h-[46px] w-[40px] rounded-xl bg-slate-200" />
-      <div className="h-[46px] w-[40px] rounded-xl bg-slate-200" />
-    </div>
-    <span className="h-2 w-10 rounded-md bg-slate-200" />
-  </div>
-));
+import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 
 export const Skeleton: FC = () => (
   <li className="mx-auto max-w-lg flex-1 rounded-md p-4 shadow  md:px-6">
@@ -31,7 +19,7 @@ export const Skeleton: FC = () => (
       </div>
       <div className="flex flex-col">
         <Text className="m-0 mx-auto mb-2.5  h-5 w-32 bg-slate-200 px-10" />
-        <div className="flex space-x-4 md:space-x-6">{skeltonTimers}</div>
+        <TimerSkelton />
       </div>
       <div className="mt-2 flex w-full justify-around">
         <div className="flex place-items-center space-x-2">
