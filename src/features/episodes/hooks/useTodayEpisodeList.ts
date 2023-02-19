@@ -63,12 +63,14 @@ export const useTodayEpisodeList = ({ callbackTitle }: Props) => {
   useEffect(() => {
     callbackTitle &&
       callbackTitle(
-        data?.episodes?.map((e) => ({
-          title: e.work.series_title,
-          episodeTitle: e.title,
-          number: e.number,
-          value: e.title,
-        }))
+        data?.episodes
+          ?.map((e) => ({
+            title: e.work.series_title,
+            episodeTitle: e.title,
+            number: e.number,
+            value: e.title,
+          }))
+          .reverse()
       );
 
     return () => {
