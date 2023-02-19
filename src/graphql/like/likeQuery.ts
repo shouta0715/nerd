@@ -13,6 +13,7 @@ export const GET_EPISODE_LIKES = gql`
   query GetEpisodeLikes($episodeIds: [uuid!]!) {
     episode_likes(where: { episode_id: { _in: $episodeIds } }) {
       episode_id
+      user_id
     }
   }
 `;

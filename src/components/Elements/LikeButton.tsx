@@ -32,7 +32,7 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
 
   useEffect(() => {
     const flag = likesData?.episode_likes.some(
-      (like) => like.episode_id === episodeId
+      (like) => like.episode_id === episodeId && like.user_id === user?.id
     );
 
     const likesCount = likesData?.episode_likes.filter(
@@ -41,7 +41,7 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
 
     setLikeState({ isLiked: flag ?? false, clickCount: 0 });
     setCount(likesCount ?? 0);
-  }, [episodeId, likesData?.episode_likes]);
+  }, [episodeId, likesData?.episode_likes, user?.id]);
 
   const onClickHandler = async () => {
     if (likeState.clickCount % 2 !== 0) return;

@@ -2452,7 +2452,7 @@ export type GetEpisodeLikesQueryVariables = Exact<{
 }>;
 
 
-export type GetEpisodeLikesQuery = { __typename?: 'query_root', episode_likes: Array<{ __typename?: 'episode_likes', episode_id: any }> };
+export type GetEpisodeLikesQuery = { __typename?: 'query_root', episode_likes: Array<{ __typename?: 'episode_likes', episode_id: any, user_id: string }> };
 
 export type DeleteEpisodeLikesMutationVariables = Exact<{
   episodeId: Scalars['uuid'];
@@ -2581,6 +2581,7 @@ export const GetEpisodeLikesDocument = `
     query GetEpisodeLikes($episodeIds: [uuid!]!) {
   episode_likes(where: {episode_id: {_in: $episodeIds}}) {
     episode_id
+    user_id
   }
 }
     `;
