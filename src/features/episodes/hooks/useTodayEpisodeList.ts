@@ -78,5 +78,5 @@ export const useTodayEpisodeList = ({ callbackTitle }: Props) => {
     };
   }, [callbackTitle, data?.episodes, setSearchInput]);
 
-  return { deferredFilterEpisodes, indexPage };
+  return { deferredFilterEpisodes };
 };
