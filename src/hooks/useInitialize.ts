@@ -1,10 +1,9 @@
 /* eslint-disable no-self-assign */
+
 import { signInAnonymously } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
-import { auth, db } from "../libs/firebase";
-import { createClient } from "../libs/graphqlClient";
-import { createWsClient } from "../libs/wsClient";
+import { auth } from "../libs/firebase";
+import { createClients } from "../libs/graphqlClient";
 import { useGlobalStore } from "../store/global/globalStore";
 import { useUserStore } from "../store/user/userState";
 
@@ -12,43 +11,44 @@ let unSub: () => void;
 
 export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
-  const setClient = useGlobalStore((state) => state.setClient);
-  const setIsClient = useGlobalStore((state) => state.setIsClient);
-  const setIsWsClient = useGlobalStore((state) => state.setIsWsClient);
-  const setWsClient = useGlobalStore((state) => state.setWsClient);
-  const setAuthLoading = useGlobalStore((state) => state.setAuthLoading);
+  const setAllClient = useGlobalStore((state) => state.setAllClient);
   const setUser = useUserStore((state) => state.setUser);
+  const setAuthLoading = useGlobalStore((state) => state.setAuthLoading);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
-
         if (idTokenResult.token && isHasClaims) {
-          const client = createClient(idTokenResult.token);
-          setClient(client);
-          const wsClient = createWsClient(idTokenResult.token);
-          setWsClient(wsClient);
-          setIsClient(true);
-          setIsWsClient(true);
-          setAuthLoading(false);
-        } else {
-          const userRef = doc(db, "user_meta", user.uid);
-          unSub = onSnapshot(userRef, async () => {
-            const idTokenResultSnap = await user.getIdTokenResult(true);
-            const isHasClaimsSnap = idTokenResultSnap.claims[TOKEN_KEY];
-
-            if (idTokenResultSnap.token && isHasClaimsSnap) {
-              const client = createClient(idTokenResultSnap.token);
-              const wsClient = createWsClient(idTokenResultSnap.token);
-              setClient(client);
-              setWsClient(wsClient);
-              setIsClient(true);
-              setIsWsClient(true);
-              setAuthLoading(false);
-            }
+          const { client, wsClient } = createClients(idTokenResult.token);
+          setAllClient({
+            client,
+            wsClient,
+            isClient: true,
+            isWsClient: true,
           });
+        } else {
+          const res = await fetch("/api/auth/setCustomClaims", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              idToken: idTokenResult.token,
+            }),
+          });
+
+          if (res.status === 200 && res.ok) {
+            const token = await auth.currentUser?.getIdToken(true);
+            const { client, wsClient } = createClients(token);
+            setAllClient({
+              client,
+              wsClient,
+              isClient: true,
+              isWsClient: true,
+            });
+          }
         }
         setUser({
           id: user.uid,
@@ -56,11 +56,11 @@ export const useInitialize = () => {
           photo_url: user.photoURL,
           user_name: user.displayName ?? "匿名",
         });
+        setAuthLoading(false);
       } else {
-        const createGustUser = async () => {
+        (async () => {
           await signInAnonymously(auth).then((result) => result.user);
-        };
-        createGustUser();
+        })();
       }
     });
 
@@ -69,13 +69,5 @@ export const useInitialize = () => {
       console.log(unSub);
       // unSub();
     };
-  }, [
-    TOKEN_KEY,
-    setAuthLoading,
-    setClient,
-    setIsClient,
-    setIsWsClient,
-    setUser,
-    setWsClient,
-  ]);
+  }, [TOKEN_KEY, setUser, setAllClient, setAuthLoading]);
 };

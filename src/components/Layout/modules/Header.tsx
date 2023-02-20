@@ -16,7 +16,7 @@ export const Header: FC = () => {
         <div>
           {user && !user.anonymous ? (
             <Avatar
-              src={user?.photo_url}
+              src={user.photo_url}
               radius="xl"
               size="md"
               className="cursor-pointer"
