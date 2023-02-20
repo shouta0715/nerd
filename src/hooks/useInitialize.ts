@@ -22,7 +22,9 @@ export const useInitialize = () => {
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
+        console.log("user", user);
         const idTokenResult = await user.getIdTokenResult(true);
+        console.log("idTokenResult", idTokenResult);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
 
         if (idTokenResult.token && isHasClaims) {
