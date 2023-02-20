@@ -38,6 +38,9 @@ jobs:
           echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.local
           echo "NEXT_PUBLIC_TOKEN_KEY=${{ secrets.NEXT_PUBLIC_TOKEN_KEY }}" >> .env.local
           echo "NEXT_PUBLIC_ADMIN_SECRET=${{ secrets.NEXT_PUBLIC_ADMIN_SECRET }}" >> .env.local
+          echo "FIREBASE_PRIVATE_KEY=${{ secrets.FIREBASE_PRIVATE_KEY }}" >> .env.local
+          echo "FIREBASE_CLIENT_EMAIL=${{ secrets.FIREBASE_CLIENT_EMAIL }}" >> .env.local
+
       - name: Recreate all posts
         shell: bash
         run: |

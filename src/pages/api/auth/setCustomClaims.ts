@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cert, getApp, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { GraphQLClient } from "graphql-request";
@@ -19,16 +20,22 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!idToken) {
     return res.status(400).send("No idToken");
   }
-  const claims = await getAuth().verifyIdToken(idToken);
+  const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
+  const idTokenResult = await getAuth().verifyIdToken(idToken);
+  const isHasClaims = idTokenResult[TOKEN_KEY];
 
-  const isAnonymous = claims.firebase.sign_in_provider === "anonymous";
+  if (isHasClaims) {
+    return res.status(200).send("ok");
+  }
+
+  const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
 
   const customClaims = {
     "https://hasura.io/jwt/claims": {
       "x-hasura-default-role": "user",
       "x-hasura-allowed-roles": ["user", "anonymous"],
       "x-hasura-role": isAnonymous ? "anonymous" : "user",
-      "x-hasura-user-id": claims.uid,
+      "x-hasura-user-id": idTokenResult.uid,
     },
   };
 
@@ -40,15 +47,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   try {
-    await getAuth().setCustomUserClaims(claims.uid, customClaims);
+    await getAuth().setCustomUserClaims(idTokenResult.uid, customClaims);
     await client.request(CREATE_USER, {
-      id: claims.uid,
+      id: idTokenResult.uid,
       anonymous: isAnonymous,
-      photo_url: claims.picture ?? null,
-      user_name: claims.name ?? "anonymous",
+      photo_url: idTokenResult.picture ?? null,
+      user_name: idTokenResult.name ?? "anonymous",
     });
 
-    return res.status(200).json({ message: "success" });
+    return res.status(200).json({ message: "ok" });
   } catch (err: any) {
     console.log(err);
 

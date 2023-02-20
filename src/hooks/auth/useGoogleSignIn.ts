@@ -8,6 +8,7 @@ export const useGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider).then((result) => result.user);
+
       router.push("/");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

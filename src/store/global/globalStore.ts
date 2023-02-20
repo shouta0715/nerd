@@ -16,6 +16,17 @@ type GlobalState = {
   setIsWsClient: (isWsClient: boolean) => void;
   authLoading: boolean;
   setAuthLoading: (authLoading: boolean) => void;
+  setAllClient: ({
+    client,
+    isClient,
+    wsClient,
+    isWsClient,
+  }: {
+    client: GraphQLClient;
+    isClient: boolean;
+    wsClient: Client;
+    isWsClient: boolean;
+  }) => void;
 };
 
 export const useGlobalStore = create<GlobalState>((set) => ({
@@ -31,6 +42,13 @@ export const useGlobalStore = create<GlobalState>((set) => ({
   setIsWsClient: (isWsClient) => set(() => ({ isWsClient })),
   authLoading: true,
   setAuthLoading: (authLoading) => set(() => ({ authLoading })),
+  setAllClient: ({ client, isClient, wsClient, isWsClient }) =>
+    set(() => ({
+      client,
+      isClient,
+      wsClient,
+      isWsClient,
+    })),
 }));
 
 type interval = {
