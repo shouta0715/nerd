@@ -3011,6 +3011,14 @@ export type GetEpisodeQueryVariables = Exact<{
 
 export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } } | null };
 
+export type GetNextEpisodeIdQueryVariables = Exact<{
+  number: Scalars['Int'];
+  work_id: Scalars['Int'];
+}>;
+
+
+export type GetNextEpisodeIdQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any }> };
+
 export type InsertEpisodeLikesMutationVariables = Exact<{
   object: Episode_Likes_Insert_Input;
 }>;
@@ -3175,6 +3183,32 @@ useGetEpisodeQuery.getKey = (variables: GetEpisodeQueryVariables) => ['GetEpisod
 ;
 
 useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
+export const GetNextEpisodeIdDocument = `
+    query GetNextEpisodeId($number: Int!, $work_id: Int!) {
+  episodes(where: {_and: {work_id: {_eq: $work_id}, number: {_eq: $number}}}) {
+    id
+  }
+}
+    `;
+export const useGetNextEpisodeIdQuery = <
+      TData = GetNextEpisodeIdQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetNextEpisodeIdQueryVariables,
+      options?: UseQueryOptions<GetNextEpisodeIdQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetNextEpisodeIdQuery, TError, TData>(
+      ['GetNextEpisodeId', variables],
+      fetcher<GetNextEpisodeIdQuery, GetNextEpisodeIdQueryVariables>(client, GetNextEpisodeIdDocument, variables, headers),
+      options
+    );
+
+useGetNextEpisodeIdQuery.getKey = (variables: GetNextEpisodeIdQueryVariables) => ['GetNextEpisodeId', variables];
+;
+
+useGetNextEpisodeIdQuery.fetcher = (client: GraphQLClient, variables: GetNextEpisodeIdQueryVariables, headers?: RequestInit['headers']) => fetcher<GetNextEpisodeIdQuery, GetNextEpisodeIdQueryVariables>(client, GetNextEpisodeIdDocument, variables, headers);
 export const InsertEpisodeLikesDocument = `
     mutation InsertEpisodeLikes($object: episode_likes_insert_input!) {
   insert_episode_likes_one(object: $object) {

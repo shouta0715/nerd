@@ -67,3 +67,13 @@ export const GET_EPISODE = gql`
     }
   }
 `;
+
+export const GET_NEXT_EPISODE = gql`
+  query GetNextEpisodeId($number: Int!, $work_id: Int!) {
+    episodes(
+      where: { _and: { work_id: { _eq: $work_id }, number: { _eq: $number } } }
+    ) {
+      id
+    }
+  }
+`;

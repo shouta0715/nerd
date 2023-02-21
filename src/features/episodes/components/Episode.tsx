@@ -1,10 +1,11 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { EpisodeMenu } from "src/components/Elements/EpisodeMenu";
-import { useQueryEpisode } from "src/features/episodes/hooks/useQueryEpisode";
+import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
 
 const DynamicTimer = dynamic(
@@ -74,7 +75,8 @@ export const Episode: FC = () => {
       <nav className="sticky top-0 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
         <ActionIcon
           color="dark"
-          onClick={() => router.back()}
+          component={Link}
+          href="/"
           variant="transparent"
         >
           <ArrowSmallLeftIcon className="h-6 w-6" />
@@ -108,7 +110,7 @@ export const Episode: FC = () => {
         <EpisodeMenu
           episodeTitle={data?.episodes_by_pk?.title}
           hasNextEpisode={data?.episodes_by_pk?.has_next_episode}
-          hasPrevEpisode={data?.episodes_by_pk?.has_prev_episode}
+          workId={data?.episodes_by_pk?.work.id}
           episodeNumber={data?.episodes_by_pk?.number}
           workTitle={data?.episodes_by_pk?.work.series_title}
         />
