@@ -24,7 +24,10 @@ type Props = {
 
 const TodayEpisodeItem: FC<Props> = memo(({ episode }) => (
   <li className="relative mx-auto max-w-lg flex-1 rounded-md bg-white p-4 shadow hover:bg-slate-50 md:px-6">
-    <Link href="/today" className="absolute inset-0 rounded-md" />
+    <Link
+      href={`episode/${episode.id}`}
+      className="absolute inset-0 rounded-md"
+    />
     <div className="mx-auto flex min-h-full flex-col items-center justify-between">
       <Title
         order={3}

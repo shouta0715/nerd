@@ -1,8 +1,7 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { Autocomplete, Box, Text, Title } from "@mantine/core";
 import { IconSearch } from "@tabler/icons";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GraphQLClient } from "graphql-request";
+import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,6 +17,7 @@ import {
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { useSearchInputState } from "src/store/input/serchInput";
 import { AutoCompleteData } from "src/types/dataType";
+import { getClient } from "src/utils/getClient";
 import { returningSeason } from "src/utils/returningSeason";
 
 const Index: NextPage = () => {
@@ -104,8 +104,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const query = context.params?.list;
 
-  const queryClient = new QueryClient();
-  const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
+  const { queryClient, request } = getClient();
 
   const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
   await queryClient.prefetchQuery(

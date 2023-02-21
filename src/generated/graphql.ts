@@ -85,6 +85,385 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "chat_comments" */
+export type Chat_Comments = {
+  __typename?: 'chat_comments';
+  content: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  episode?: Maybe<Episodes>;
+  episodes_id?: Maybe<Scalars['uuid']>;
+  id: Scalars['uuid'];
+  time: Scalars['Int'];
+  user_id: Scalars['String'];
+  /** An object relationship */
+  work?: Maybe<Works>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregated selection of "chat_comments" */
+export type Chat_Comments_Aggregate = {
+  __typename?: 'chat_comments_aggregate';
+  aggregate?: Maybe<Chat_Comments_Aggregate_Fields>;
+  nodes: Array<Chat_Comments>;
+};
+
+export type Chat_Comments_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Chat_Comments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Chat_Comments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "chat_comments" */
+export type Chat_Comments_Aggregate_Fields = {
+  __typename?: 'chat_comments_aggregate_fields';
+  avg?: Maybe<Chat_Comments_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Chat_Comments_Max_Fields>;
+  min?: Maybe<Chat_Comments_Min_Fields>;
+  stddev?: Maybe<Chat_Comments_Stddev_Fields>;
+  stddev_pop?: Maybe<Chat_Comments_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Chat_Comments_Stddev_Samp_Fields>;
+  sum?: Maybe<Chat_Comments_Sum_Fields>;
+  var_pop?: Maybe<Chat_Comments_Var_Pop_Fields>;
+  var_samp?: Maybe<Chat_Comments_Var_Samp_Fields>;
+  variance?: Maybe<Chat_Comments_Variance_Fields>;
+};
+
+
+/** aggregate fields of "chat_comments" */
+export type Chat_Comments_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "chat_comments" */
+export type Chat_Comments_Aggregate_Order_By = {
+  avg?: InputMaybe<Chat_Comments_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Chat_Comments_Max_Order_By>;
+  min?: InputMaybe<Chat_Comments_Min_Order_By>;
+  stddev?: InputMaybe<Chat_Comments_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Chat_Comments_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Chat_Comments_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Chat_Comments_Sum_Order_By>;
+  var_pop?: InputMaybe<Chat_Comments_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Chat_Comments_Var_Samp_Order_By>;
+  variance?: InputMaybe<Chat_Comments_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "chat_comments" */
+export type Chat_Comments_Arr_Rel_Insert_Input = {
+  data: Array<Chat_Comments_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Chat_Comments_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Chat_Comments_Avg_Fields = {
+  __typename?: 'chat_comments_avg_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "chat_comments" */
+export type Chat_Comments_Avg_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "chat_comments". All fields are combined with a logical 'AND'. */
+export type Chat_Comments_Bool_Exp = {
+  _and?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
+  _not?: InputMaybe<Chat_Comments_Bool_Exp>;
+  _or?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
+  content?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  episode?: InputMaybe<Episodes_Bool_Exp>;
+  episodes_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  time?: InputMaybe<Int_Comparison_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+  work?: InputMaybe<Works_Bool_Exp>;
+  work_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "chat_comments" */
+export enum Chat_Comments_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ChatCommentsPkey = 'chat_comments_pkey'
+}
+
+/** input type for incrementing numeric columns in table "chat_comments" */
+export type Chat_Comments_Inc_Input = {
+  time?: InputMaybe<Scalars['Int']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "chat_comments" */
+export type Chat_Comments_Insert_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
+  episodes_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Chat_Comments_Max_Fields = {
+  __typename?: 'chat_comments_max_fields';
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  episodes_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "chat_comments" */
+export type Chat_Comments_Max_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episodes_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Chat_Comments_Min_Fields = {
+  __typename?: 'chat_comments_min_fields';
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  episodes_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  time?: Maybe<Scalars['Int']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "chat_comments" */
+export type Chat_Comments_Min_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episodes_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "chat_comments" */
+export type Chat_Comments_Mutation_Response = {
+  __typename?: 'chat_comments_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Chat_Comments>;
+};
+
+/** on_conflict condition type for table "chat_comments" */
+export type Chat_Comments_On_Conflict = {
+  constraint: Chat_Comments_Constraint;
+  update_columns?: Array<Chat_Comments_Update_Column>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "chat_comments". */
+export type Chat_Comments_Order_By = {
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episode?: InputMaybe<Episodes_Order_By>;
+  episodes_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  time?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work?: InputMaybe<Works_Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: chat_comments */
+export type Chat_Comments_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "chat_comments" */
+export enum Chat_Comments_Select_Column {
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EpisodesId = 'episodes_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Time = 'time',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+/** input type for updating data in table "chat_comments" */
+export type Chat_Comments_Set_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episodes_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Chat_Comments_Stddev_Fields = {
+  __typename?: 'chat_comments_stddev_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "chat_comments" */
+export type Chat_Comments_Stddev_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Chat_Comments_Stddev_Pop_Fields = {
+  __typename?: 'chat_comments_stddev_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "chat_comments" */
+export type Chat_Comments_Stddev_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Chat_Comments_Stddev_Samp_Fields = {
+  __typename?: 'chat_comments_stddev_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "chat_comments" */
+export type Chat_Comments_Stddev_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "chat_comments" */
+export type Chat_Comments_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Chat_Comments_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Chat_Comments_Stream_Cursor_Value_Input = {
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episodes_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  time?: InputMaybe<Scalars['Int']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Chat_Comments_Sum_Fields = {
+  __typename?: 'chat_comments_sum_fields';
+  time?: Maybe<Scalars['Int']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "chat_comments" */
+export type Chat_Comments_Sum_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "chat_comments" */
+export enum Chat_Comments_Update_Column {
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EpisodesId = 'episodes_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Time = 'time',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+export type Chat_Comments_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Chat_Comments_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Chat_Comments_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Chat_Comments_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Chat_Comments_Var_Pop_Fields = {
+  __typename?: 'chat_comments_var_pop_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "chat_comments" */
+export type Chat_Comments_Var_Pop_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Chat_Comments_Var_Samp_Fields = {
+  __typename?: 'chat_comments_var_samp_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "chat_comments" */
+export type Chat_Comments_Var_Samp_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Chat_Comments_Variance_Fields = {
+  __typename?: 'chat_comments_variance_fields';
+  time?: Maybe<Scalars['Float']>;
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "chat_comments" */
+export type Chat_Comments_Variance_Order_By = {
+  time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -278,6 +657,10 @@ export type Episode_Likes_Updates = {
 /** columns and relationships of "episodes" */
 export type Episodes = {
   __typename?: 'episodes';
+  /** An array relationship */
+  chat_comments: Array<Chat_Comments>;
+  /** An aggregate relationship */
+  chat_comments_aggregate: Chat_Comments_Aggregate;
   created_at: Scalars['timestamptz'];
   end_time?: Maybe<Scalars['timestamp']>;
   /** An array relationship */
@@ -294,6 +677,26 @@ export type Episodes = {
   /** An object relationship */
   work: Works;
   work_id: Scalars['Int'];
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesChat_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
 };
 
 
@@ -413,6 +816,8 @@ export type Episodes_Bool_Exp = {
   _and?: InputMaybe<Array<Episodes_Bool_Exp>>;
   _not?: InputMaybe<Episodes_Bool_Exp>;
   _or?: InputMaybe<Array<Episodes_Bool_Exp>>;
+  chat_comments?: InputMaybe<Chat_Comments_Bool_Exp>;
+  chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   end_time?: InputMaybe<Timestamp_Comparison_Exp>;
   episode_likes?: InputMaybe<Episode_Likes_Bool_Exp>;
@@ -444,6 +849,7 @@ export type Episodes_Inc_Input = {
 
 /** input type for inserting data into table "episodes" */
 export type Episodes_Insert_Input = {
+  chat_comments?: InputMaybe<Chat_Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   end_time?: InputMaybe<Scalars['timestamp']>;
   episode_likes?: InputMaybe<Episode_Likes_Arr_Rel_Insert_Input>;
@@ -533,6 +939,7 @@ export type Episodes_On_Conflict = {
 
 /** Ordering options when selecting data from "episodes". */
 export type Episodes_Order_By = {
+  chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
   episode_likes_aggregate?: InputMaybe<Episode_Likes_Aggregate_Order_By>;
@@ -989,6 +1396,10 @@ export type Media_Types_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "chat_comments" */
+  delete_chat_comments?: Maybe<Chat_Comments_Mutation_Response>;
+  /** delete single row from the table: "chat_comments" */
+  delete_chat_comments_by_pk?: Maybe<Chat_Comments>;
   /** delete data from the table: "episode_likes" */
   delete_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
   /** delete single row from the table: "episode_likes" */
@@ -1009,6 +1420,10 @@ export type Mutation_Root = {
   delete_works?: Maybe<Works_Mutation_Response>;
   /** delete single row from the table: "works" */
   delete_works_by_pk?: Maybe<Works>;
+  /** insert data into the table: "chat_comments" */
+  insert_chat_comments?: Maybe<Chat_Comments_Mutation_Response>;
+  /** insert a single row into the table: "chat_comments" */
+  insert_chat_comments_one?: Maybe<Chat_Comments>;
   /** insert data into the table: "episode_likes" */
   insert_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
   /** insert a single row into the table: "episode_likes" */
@@ -1029,6 +1444,12 @@ export type Mutation_Root = {
   insert_works?: Maybe<Works_Mutation_Response>;
   /** insert a single row into the table: "works" */
   insert_works_one?: Maybe<Works>;
+  /** update data of the table: "chat_comments" */
+  update_chat_comments?: Maybe<Chat_Comments_Mutation_Response>;
+  /** update single row of the table: "chat_comments" */
+  update_chat_comments_by_pk?: Maybe<Chat_Comments>;
+  /** update multiples rows of table: "chat_comments" */
+  update_chat_comments_many?: Maybe<Array<Maybe<Chat_Comments_Mutation_Response>>>;
   /** update data of the table: "episode_likes" */
   update_episode_likes?: Maybe<Episode_Likes_Mutation_Response>;
   /** update single row of the table: "episode_likes" */
@@ -1059,6 +1480,18 @@ export type Mutation_Root = {
   update_works_by_pk?: Maybe<Works>;
   /** update multiples rows of table: "works" */
   update_works_many?: Maybe<Array<Maybe<Works_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Chat_CommentsArgs = {
+  where: Chat_Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Chat_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -1120,6 +1553,20 @@ export type Mutation_RootDelete_WorksArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Works_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Chat_CommentsArgs = {
+  objects: Array<Chat_Comments_Insert_Input>;
+  on_conflict?: InputMaybe<Chat_Comments_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Chat_Comments_OneArgs = {
+  object: Chat_Comments_Insert_Input;
+  on_conflict?: InputMaybe<Chat_Comments_On_Conflict>;
 };
 
 
@@ -1190,6 +1637,28 @@ export type Mutation_RootInsert_WorksArgs = {
 export type Mutation_RootInsert_Works_OneArgs = {
   object: Works_Insert_Input;
   on_conflict?: InputMaybe<Works_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Chat_CommentsArgs = {
+  _inc?: InputMaybe<Chat_Comments_Inc_Input>;
+  _set?: InputMaybe<Chat_Comments_Set_Input>;
+  where: Chat_Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Chat_Comments_By_PkArgs = {
+  _inc?: InputMaybe<Chat_Comments_Inc_Input>;
+  _set?: InputMaybe<Chat_Comments_Set_Input>;
+  pk_columns: Chat_Comments_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Chat_Comments_ManyArgs = {
+  updates: Array<Chat_Comments_Updates>;
 };
 
 
@@ -1317,6 +1786,12 @@ export enum Order_By {
 export type Query_Root = {
   __typename?: 'query_root';
   /** An array relationship */
+  chat_comments: Array<Chat_Comments>;
+  /** An aggregate relationship */
+  chat_comments_aggregate: Chat_Comments_Aggregate;
+  /** fetch data from the table: "chat_comments" using primary key columns */
+  chat_comments_by_pk?: Maybe<Chat_Comments>;
+  /** An array relationship */
   episode_likes: Array<Episode_Likes>;
   /** An aggregate relationship */
   episode_likes_aggregate: Episode_Likes_Aggregate;
@@ -1346,6 +1821,29 @@ export type Query_Root = {
   works_aggregate: Works_Aggregate;
   /** fetch data from the table: "works" using primary key columns */
   works_by_pk?: Maybe<Works>;
+};
+
+
+export type Query_RootChat_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+export type Query_RootChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+export type Query_RootChat_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -1467,6 +1965,14 @@ export type Query_RootWorks_By_PkArgs = {
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** An array relationship */
+  chat_comments: Array<Chat_Comments>;
+  /** An aggregate relationship */
+  chat_comments_aggregate: Chat_Comments_Aggregate;
+  /** fetch data from the table: "chat_comments" using primary key columns */
+  chat_comments_by_pk?: Maybe<Chat_Comments>;
+  /** fetch data from the table in a streaming manner: "chat_comments" */
+  chat_comments_stream: Array<Chat_Comments>;
+  /** An array relationship */
   episode_likes: Array<Episode_Likes>;
   /** An aggregate relationship */
   episode_likes_aggregate: Episode_Likes_Aggregate;
@@ -1506,6 +2012,36 @@ export type Subscription_Root = {
   works_by_pk?: Maybe<Works>;
   /** fetch data from the table in a streaming manner: "works" */
   works_stream: Array<Works>;
+};
+
+
+export type Subscription_RootChat_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootChat_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootChat_Comments_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Chat_Comments_Stream_Cursor_Input>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
 };
 
 
@@ -1916,6 +2452,10 @@ export type Uuid_Comparison_Exp = {
 /** columns and relationships of "works" */
 export type Works = {
   __typename?: 'works';
+  /** An array relationship */
+  chat_comments: Array<Chat_Comments>;
+  /** An aggregate relationship */
+  chat_comments_aggregate: Chat_Comments_Aggregate;
   created_at?: Maybe<Scalars['timestamptz']>;
   /** An array relationship */
   episodes: Array<Episodes>;
@@ -1932,6 +2472,26 @@ export type Works = {
   series_title: Scalars['String'];
   tid?: Maybe<Scalars['Int']>;
   title: Scalars['String'];
+};
+
+
+/** columns and relationships of "works" */
+export type WorksChat_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
 };
 
 
@@ -2055,6 +2615,8 @@ export type Works_Bool_Exp = {
   _and?: InputMaybe<Array<Works_Bool_Exp>>;
   _not?: InputMaybe<Works_Bool_Exp>;
   _or?: InputMaybe<Array<Works_Bool_Exp>>;
+  chat_comments?: InputMaybe<Chat_Comments_Bool_Exp>;
+  chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episodes?: InputMaybe<Episodes_Bool_Exp>;
   episodes_aggregate?: InputMaybe<Episodes_Aggregate_Bool_Exp>;
@@ -2088,6 +2650,7 @@ export type Works_Inc_Input = {
 
 /** input type for inserting data into table "works" */
 export type Works_Insert_Input = {
+  chat_comments?: InputMaybe<Chat_Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episodes?: InputMaybe<Episodes_Arr_Rel_Insert_Input>;
   has_episodes?: InputMaybe<Scalars['Boolean']>;
@@ -2181,6 +2744,7 @@ export type Works_On_Conflict = {
 
 /** Ordering options when selecting data from "works". */
 export type Works_Order_By = {
+  chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   episodes_aggregate?: InputMaybe<Episodes_Aggregate_Order_By>;
   has_episodes?: InputMaybe<Order_By>;
@@ -2440,6 +3004,13 @@ export type GetTodayEpisodesQueryVariables = Exact<{
 
 export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null }, episode_likes_aggregate: { __typename?: 'episode_likes_aggregate', aggregate?: { __typename?: 'episode_likes_aggregate_fields', count: number } | null } }> };
 
+export type GetEpisodeQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } } | null };
+
 export type InsertEpisodeLikesMutationVariables = Exact<{
   object: Episode_Likes_Insert_Input;
 }>;
@@ -2473,6 +3044,16 @@ export type GetUserQueryVariables = Exact<{
 
 
 export type GetUserQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, anonymous: boolean, photo_url?: string | null, user_name: string } | null };
+
+export type CreateUserMutationVariables = Exact<{
+  id: Scalars['String'];
+  anonymous: Scalars['Boolean'];
+  photo_url: Scalars['String'];
+  user_name: Scalars['String'];
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string } | null };
 
 export type GetSeasonWorksQueryVariables = Exact<{
   season: Scalars['String'];
@@ -2555,6 +3136,45 @@ useGetTodayEpisodesQuery.getKey = (variables: GetTodayEpisodesQueryVariables) =>
 ;
 
 useGetTodayEpisodesQuery.fetcher = (client: GraphQLClient, variables: GetTodayEpisodesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTodayEpisodesQuery, GetTodayEpisodesQueryVariables>(client, GetTodayEpisodesDocument, variables, headers);
+export const GetEpisodeDocument = `
+    query GetEpisode($id: uuid!) {
+  episodes_by_pk(id: $id) {
+    id
+    title
+    end_time
+    start_time
+    number
+    has_next_episode
+    has_prev_episode
+    work {
+      series_title
+      title
+      id
+      series_id
+      tid
+    }
+  }
+}
+    `;
+export const useGetEpisodeQuery = <
+      TData = GetEpisodeQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetEpisodeQueryVariables,
+      options?: UseQueryOptions<GetEpisodeQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetEpisodeQuery, TError, TData>(
+      ['GetEpisode', variables],
+      fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers),
+      options
+    );
+
+useGetEpisodeQuery.getKey = (variables: GetEpisodeQueryVariables) => ['GetEpisode', variables];
+;
+
+useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
 export const InsertEpisodeLikesDocument = `
     mutation InsertEpisodeLikes($object: episode_likes_insert_input!) {
   insert_episode_likes_one(object: $object) {
@@ -2682,6 +3302,29 @@ useGetUserQuery.getKey = (variables: GetUserQueryVariables) => ['GetUser', varia
 ;
 
 useGetUserQuery.fetcher = (client: GraphQLClient, variables: GetUserQueryVariables, headers?: RequestInit['headers']) => fetcher<GetUserQuery, GetUserQueryVariables>(client, GetUserDocument, variables, headers);
+export const CreateUserDocument = `
+    mutation createUser($id: String!, $anonymous: Boolean!, $photo_url: String!, $user_name: String!) {
+  insert_users_one(
+    object: {anonymous: $anonymous, photo_url: $photo_url, id: $id, user_name: $user_name}
+  ) {
+    id
+  }
+}
+    `;
+export const useCreateUserMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<CreateUserMutation, TError, CreateUserMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<CreateUserMutation, TError, CreateUserMutationVariables, TContext>(
+      ['createUser'],
+      (variables?: CreateUserMutationVariables) => fetcher<CreateUserMutation, CreateUserMutationVariables>(client, CreateUserDocument, variables, headers)(),
+      options
+    );
+useCreateUserMutation.fetcher = (client: GraphQLClient, variables: CreateUserMutationVariables, headers?: RequestInit['headers']) => fetcher<CreateUserMutation, CreateUserMutationVariables>(client, CreateUserDocument, variables, headers);
 export const GetSeasonWorksDocument = `
     query GetSeasonWorks($season: String!, $year: Int!) {
   works(

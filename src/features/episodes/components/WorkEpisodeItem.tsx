@@ -12,7 +12,7 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode }) => (
     <Text
       variant="link"
       color="indigo"
-      href="/"
+      href={`/episode/${episode.id}`}
       component={Link}
       ff="Hiragino Sans"
       className="mb-1 text-xs md:text-sm"

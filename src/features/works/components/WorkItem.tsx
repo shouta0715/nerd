@@ -45,16 +45,16 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
         className="mt-2 w-full items-center justify-around md:justify-between"
       >
         <div className="flex flex-col items-center justify-center">
-          <ActionIcon color="orange" className="mb-1" variant="transparent">
-            <PlusIcon className="h-5 w-5 stroke-2 text-orange-500 md:h-6 md:w-6" />
+          <ActionIcon color="dark" className="mb-1" variant="transparent">
+            <PlusIcon className="h-5 w-5 stroke-2 md:h-6 md:w-6" />
           </ActionIcon>
           <Text component="span" className="text-xs">
             マイリスト
           </Text>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <ActionIcon color="orange" className="mb-1" variant="transparent">
-            <ShareIcon className=" h-5 w-5 stroke-2 text-green-500 md:h-6 md:w-6" />
+          <ActionIcon color="dark" className="mb-1" variant="transparent">
+            <ShareIcon className=" h-5 w-5 stroke-2 md:h-6 md:w-6" />
           </ActionIcon>
           <Text component="span" className="text-xs">
             シェア
