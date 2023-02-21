@@ -3,8 +3,7 @@ import { useGlobalStore } from "src/store/global/globalStore";
 
 export const useQueryEpisode = (id: string | string[] | undefined) => {
   const client = useGlobalStore((state) => state.client);
-
-  console.log("client", client);
+  const isServer = typeof window === "undefined";
 
   return useGetEpisodeQuery(
     client,
@@ -12,7 +11,7 @@ export const useQueryEpisode = (id: string | string[] | undefined) => {
       id,
     },
     {
-      enabled: !!id,
+      enabled: !!id && !isServer,
     }
   );
 };

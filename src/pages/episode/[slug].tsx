@@ -1,16 +1,19 @@
+import { Box } from "@mantine/core";
 import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { useRouter } from "next/router";
-import React from "react";
+import React, { Suspense } from "react";
+import { Episode } from "src/features/episodes/components/Episode";
 import { useGetEpisodeQuery } from "src/generated/graphql";
 import { getTodaysAndSeasonsIds } from "src/hooks/router/dynamicPaths";
 import { getClient } from "src/utils/getClient";
 
-const Index: NextPage = () => {
-  const _ = useRouter();
-
-  return <div>hello</div>;
-};
+const Index: NextPage = () => (
+  <Box component="section" className="min-h-screen">
+    <Suspense fallback={<div>Loading...</div>}>
+      <Episode />
+    </Suspense>
+  </Box>
+);
 
 export default Index;
 
@@ -19,7 +22,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: "blocking",
+    fallback: true,
   };
 };
 
@@ -27,15 +30,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const slug = context.params?.slug;
   const { queryClient, request } = getClient();
 
-  // eslint-disable-next-line no-promise-executor-return
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
-  const queryKey = useGetEpisodeQuery.getKey({ id: slug as string });
+  const queryKey = useGetEpisodeQuery.getKey({ id: slug });
   await queryClient.prefetchQuery(
     queryKey,
-    useGetEpisodeQuery.fetcher(request, { id: slug as string })
+    useGetEpisodeQuery.fetcher(request, { id: slug })
   );
 
   return {
     props: { dehydratedState: dehydrate(queryClient) },
+    revalidate: 60,
   };
 };

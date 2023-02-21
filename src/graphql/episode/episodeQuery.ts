@@ -47,7 +47,7 @@ export const GET_TODAY_EPISODES = gql`
   }
 `;
 
-export const GET_EPISODES = gql`
+export const GET_EPISODE = gql`
   query GetEpisode($id: uuid!) {
     episodes_by_pk(id: $id) {
       id
