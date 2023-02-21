@@ -1,6 +1,5 @@
 import { Box } from "@mantine/core";
-import { dehydrate, QueryClient } from "@tanstack/react-query";
-import { GraphQLClient } from "graphql-request";
+import { dehydrate } from "@tanstack/react-query";
 import { GetStaticProps, NextPage } from "next";
 import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
@@ -13,6 +12,7 @@ import {
 } from "src/generated/graphql";
 
 import { getTodayData } from "src/hooks/router/dynamicPaths";
+import { getClient } from "src/utils/getClient";
 import { returningSeason } from "src/utils/returningSeason";
 
 const Home: NextPage = () => (
@@ -45,8 +45,7 @@ const Home: NextPage = () => (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const queryClient = new QueryClient();
-  const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
+  const { queryClient, request } = getClient();
 
   const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
   await queryClient.prefetchQuery(

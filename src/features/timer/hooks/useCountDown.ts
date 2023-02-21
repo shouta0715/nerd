@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 
-export const useTimer = (startTime: string) => {
+export const useCountDown = (startTime: string) => {
   const [time, setTime] = useState({
     day: 0,
     hours: 0,

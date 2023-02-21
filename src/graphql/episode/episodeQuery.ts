@@ -46,3 +46,34 @@ export const GET_TODAY_EPISODES = gql`
     }
   }
 `;
+
+export const GET_EPISODE = gql`
+  query GetEpisode($id: uuid!) {
+    episodes_by_pk(id: $id) {
+      id
+      title
+      end_time
+      start_time
+      number
+      has_next_episode
+      has_prev_episode
+      work {
+        series_title
+        title
+        id
+        series_id
+        tid
+      }
+    }
+  }
+`;
+
+export const GET_NEXT_EPISODE = gql`
+  query GetNextEpisodeId($number: Int!, $work_id: Int!) {
+    episodes(
+      where: { _and: { work_id: { _eq: $work_id }, number: { _eq: $number } } }
+    ) {
+      id
+    }
+  }
+`;

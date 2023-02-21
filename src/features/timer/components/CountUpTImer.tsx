@@ -1,18 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 import React, { FC } from "react";
-import { useTimer } from "../../hooks/time/useTimer";
-import { Panel } from "./Panel";
+import { Panel } from "src/features/timer/components/Panel";
+import { useCountUp } from "src/features/timer/hooks/useCountUp";
 
 type Props = {
-  start_time: string;
-  id: string;
+  episodeId: string;
 };
 
-export const Timer: FC<Props> = ({ start_time, id }) => {
-  const { time } = useTimer(start_time ?? "2000-01-01T00:00:00+00:00");
-  const hours = time.hours.toString().padStart(2, "0");
-  const minutes = time.minutes.toString().padStart(2, "0");
-  const seconds = time.seconds.toString().padStart(2, "0");
+export const CountUpTimer: FC<Props> = ({ episodeId }) => {
+  const { minutes, hours, seconds } = useCountUp();
 
   return (
     <div className="flex space-x-4 md:space-x-6">
@@ -21,7 +17,7 @@ export const Timer: FC<Props> = ({ start_time, id }) => {
           {hours.split("").map((character, index) => (
             <Panel
               character={character}
-              key={`hours-${character}-${index}-${id}`}
+              key={`hours-${character}-${index}-${episodeId}`}
             />
           ))}
         </div>
@@ -32,7 +28,7 @@ export const Timer: FC<Props> = ({ start_time, id }) => {
           {minutes.split("").map((character, index) => (
             <Panel
               character={character}
-              key={`minutes-${character}-${index}-${id}`}
+              key={`minutes-${character}-${index}-${episodeId}`}
             />
           ))}
         </div>
@@ -43,7 +39,7 @@ export const Timer: FC<Props> = ({ start_time, id }) => {
           {seconds.split("").map((character, index) => (
             <Panel
               character={character}
-              key={`seconds-${character}-${index}-${id}`}
+              key={`seconds-${character}-${index}-${episodeId}`}
             />
           ))}
         </div>

@@ -1,8 +1,8 @@
-import { GraphQLClient } from "graphql-request";
 import { useGetMediaTypesQuery } from "../generated/graphql";
+import { getClient } from "src/utils/getClient";
 
 export const useQueryMediaTypes = () => {
-  const client = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
+  const { request: client } = getClient();
 
   return useGetMediaTypesQuery(
     client,

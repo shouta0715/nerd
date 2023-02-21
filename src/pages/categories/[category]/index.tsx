@@ -45,9 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient();
-  const slug = context.params;
-  console.log(slug);
-
+  const _ = context.params;
   // const request = new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string);
 
   return {
