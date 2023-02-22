@@ -27,7 +27,7 @@ export const Episode: FC = () => {
   return (
     <div>
       <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
-        <div className="flex w-full flex-1 flex-wrap gap-2">
+        <div className="flex w-full flex-1  flex-col gap-2">
           <Title ff="Hiragino Sans" className=" text-base  md:text-lg">
             {data?.episodes_by_pk?.work.series_title}
           </Title>
