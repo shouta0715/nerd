@@ -24,13 +24,13 @@ export const EpisodeMenu: FC<Props> = memo(
 
     return (
       <Menu
-        opened={isOpened}
-        classNames={{
-          dropdown: "max-w-xs w-full",
+        onChange={(value) => {
+          setIsOpened(value);
         }}
+        width={250}
       >
         <ActionIcon component={Menu.Target} variant="transparent" color="dark">
-          <Burger opened={isOpened} onClick={() => setIsOpened((p) => !p)} />
+          <Burger opened={isOpened} />
         </ActionIcon>
         <Menu.Dropdown>
           <Menu.Label>メニュー</Menu.Label>
@@ -44,7 +44,7 @@ export const EpisodeMenu: FC<Props> = memo(
               {workTitle}
             </Text>
             {episodeTitle && (
-              <div className="flex items-center">
+              <div className="flex">
                 <Text size="xs" className="mr-1" color="dimmed">
                   {episodeNumber}.
                 </Text>
