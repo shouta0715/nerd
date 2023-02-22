@@ -25,6 +25,7 @@ export const EpisodeMenu: FC<Props> = memo(
 
     return (
       <Menu
+        width={240}
         onChange={(value) => {
           setIsOpened(value);
         }}
@@ -48,7 +49,7 @@ export const EpisodeMenu: FC<Props> = memo(
               {workTitle}
             </Text>
             {episodeTitle && (
-              <div className="flex items-center">
+              <div className="flex">
                 <Text size="xs" className="mr-1" color="dimmed">
                   {episodeNumber}.
                 </Text>
