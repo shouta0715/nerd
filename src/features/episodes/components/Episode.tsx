@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
 import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
@@ -133,7 +132,7 @@ export const Episode: FC = () => {
           size={48}
           className="fixed bottom-10 right-4"
           onClick={() => {
-            interval?.active ? interval.stop() : interval.start();
+            interval.toggle();
           }}
         >
           {interval.active ? (

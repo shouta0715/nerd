@@ -25,6 +25,9 @@ export const EpisodeMenu: FC<Props> = memo(
 
     return (
       <Menu
+        onChange={(value) => {
+          setIsOpened(value);
+        }}
         opened={isOpened}
         classNames={{
           dropdown: "max-w-xs w-full",
