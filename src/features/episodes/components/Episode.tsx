@@ -5,9 +5,9 @@ import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
-import { EpisodeMenu } from "src/components/Elements/EpisodeMenu";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useCountUp } from "src/features/timer/hooks/useCountUp";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
 
