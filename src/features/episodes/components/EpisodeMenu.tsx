@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ActionIcon, Burger, Menu, Text } from "@mantine/core";
 import {
-  IconClock,
   IconPlayerSkipForward,
   IconPlus,
   IconStack2,
@@ -24,19 +25,19 @@ export const EpisodeMenu: FC<Props> = memo(
 
     return (
       <Menu
-        onChange={(value) => {
-          setIsOpened(value);
+        opened={isOpened}
+        classNames={{
+          dropdown: "max-w-xs w-full",
         }}
-        width={250}
       >
         <ActionIcon component={Menu.Target} variant="transparent" color="dark">
-          <Burger opened={isOpened} />
+          <Burger opened={isOpened} onClick={() => setIsOpened((p) => !p)} />
         </ActionIcon>
         <Menu.Dropdown>
           <Menu.Label>メニュー</Menu.Label>
           <Menu.Item icon={<IconUser size={14} />}>投稿名の変更</Menu.Item>
           <Menu.Item icon={<IconPlus size={14} />}>マイリストに追加</Menu.Item>
-          <Menu.Item icon={<IconClock size={14} />}>再生速度</Menu.Item>
+
           <Menu.Divider />
           <Menu.Label>エピソード</Menu.Label>
           <Text component="div" className="py-2 px-[10px]">
@@ -44,7 +45,7 @@ export const EpisodeMenu: FC<Props> = memo(
               {workTitle}
             </Text>
             {episodeTitle && (
-              <div className="flex">
+              <div className="flex items-center">
                 <Text size="xs" className="mr-1" color="dimmed">
                   {episodeNumber}.
                 </Text>
