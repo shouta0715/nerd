@@ -9,26 +9,25 @@ import {
 } from "@tabler/icons";
 import Link from "next/link";
 import React, { FC, memo } from "react";
-import { useQueryNextEpisodeId } from "src/features/episodes/api/useQueryNextEpisodeId";
+import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 
 type Props = {
   episodeTitle?: string;
   episodeNumber?: number;
   workTitle?: string;
-  hasNextEpisode?: boolean;
-  workId?: number;
+  nextEpisodeId?: string;
 };
 
 export const EpisodeMenu: FC<Props> = memo(
-  ({ episodeTitle, episodeNumber, workTitle, hasNextEpisode, workId }) => {
-    const { data } = useQueryNextEpisodeId({
-      workId,
-      episodeNumber,
-      hasNextEpisode,
-    });
+  ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
+    const { data } = useQueryEpisode(nextEpisodeId);
 
     return (
-      <Menu>
+      <Menu
+        classNames={{
+          dropdown: "max-w-xs w-full",
+        }}
+      >
         <ActionIcon component={Menu.Target} variant="transparent" color="dark">
           <Bars3Icon />
         </ActionIcon>
@@ -39,8 +38,10 @@ export const EpisodeMenu: FC<Props> = memo(
           <Menu.Item icon={<IconClock size={14} />}>再生速度</Menu.Item>
           <Menu.Divider />
           <Menu.Label>エピソード</Menu.Label>
-          <Text component="p" className="py-2 px-[10px]">
-            <Text className="mb-1 text-xs">{workTitle}</Text>
+          <Text component="div" className="py-2 px-[10px]">
+            <Text component="p" className="mb-1 text-xs">
+              {workTitle}
+            </Text>
             {episodeTitle && (
               <div className="flex items-center">
                 <Text size="xs" className="mr-1" color="dimmed">
@@ -52,10 +53,10 @@ export const EpisodeMenu: FC<Props> = memo(
               </div>
             )}
           </Text>
-          {hasNextEpisode && (
+          {nextEpisodeId && (
             <Menu.Item
               component={Link}
-              href={`${data?.episodes[0].id}?category=archive`}
+              href={`${data?.episodes_by_pk?.id}?category=archive`}
               icon={<IconPlayerSkipForward size={14} />}
             >
               次のエピソード

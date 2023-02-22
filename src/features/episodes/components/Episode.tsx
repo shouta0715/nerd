@@ -111,10 +111,9 @@ export const Episode: FC = () => {
         </ul>
         <EpisodeMenu
           episodeTitle={data?.episodes_by_pk?.title}
-          hasNextEpisode={data?.episodes_by_pk?.has_next_episode}
-          workId={data?.episodes_by_pk?.work.id}
           episodeNumber={data?.episodes_by_pk?.number}
           workTitle={data?.episodes_by_pk?.work.series_title}
+          nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
         />
       </nav>
       <main>a</main>

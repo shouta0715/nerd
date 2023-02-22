@@ -670,7 +670,9 @@ export type Episodes = {
   has_next_episode: Scalars['Boolean'];
   has_prev_episode: Scalars['Boolean'];
   id: Scalars['uuid'];
+  next_episode_id?: Maybe<Scalars['uuid']>;
   number: Scalars['Int'];
+  prev_episode_id?: Maybe<Scalars['uuid']>;
   start_time?: Maybe<Scalars['timestamp']>;
   title: Scalars['String'];
   updated_at: Scalars['timestamptz'];
@@ -825,7 +827,9 @@ export type Episodes_Bool_Exp = {
   has_next_episode?: InputMaybe<Boolean_Comparison_Exp>;
   has_prev_episode?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  next_episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   number?: InputMaybe<Int_Comparison_Exp>;
+  prev_episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   start_time?: InputMaybe<Timestamp_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -856,7 +860,9 @@ export type Episodes_Insert_Input = {
   has_next_episode?: InputMaybe<Scalars['Boolean']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
+  next_episode_id?: InputMaybe<Scalars['uuid']>;
   number?: InputMaybe<Scalars['Int']>;
+  prev_episode_id?: InputMaybe<Scalars['uuid']>;
   start_time?: InputMaybe<Scalars['timestamp']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -870,7 +876,9 @@ export type Episodes_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   end_time?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
+  next_episode_id?: Maybe<Scalars['uuid']>;
   number?: Maybe<Scalars['Int']>;
+  prev_episode_id?: Maybe<Scalars['uuid']>;
   start_time?: Maybe<Scalars['timestamp']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -882,7 +890,9 @@ export type Episodes_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  next_episode_id?: InputMaybe<Order_By>;
   number?: InputMaybe<Order_By>;
+  prev_episode_id?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -895,7 +905,9 @@ export type Episodes_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   end_time?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
+  next_episode_id?: Maybe<Scalars['uuid']>;
   number?: Maybe<Scalars['Int']>;
+  prev_episode_id?: Maybe<Scalars['uuid']>;
   start_time?: Maybe<Scalars['timestamp']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -907,7 +919,9 @@ export type Episodes_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  next_episode_id?: InputMaybe<Order_By>;
   number?: InputMaybe<Order_By>;
+  prev_episode_id?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -946,7 +960,9 @@ export type Episodes_Order_By = {
   has_next_episode?: InputMaybe<Order_By>;
   has_prev_episode?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  next_episode_id?: InputMaybe<Order_By>;
   number?: InputMaybe<Order_By>;
+  prev_episode_id?: InputMaybe<Order_By>;
   start_time?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -972,7 +988,11 @@ export enum Episodes_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  NextEpisodeId = 'next_episode_id',
+  /** column name */
   Number = 'number',
+  /** column name */
+  PrevEpisodeId = 'prev_episode_id',
   /** column name */
   StartTime = 'start_time',
   /** column name */
@@ -1006,7 +1026,9 @@ export type Episodes_Set_Input = {
   has_next_episode?: InputMaybe<Scalars['Boolean']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
+  next_episode_id?: InputMaybe<Scalars['uuid']>;
   number?: InputMaybe<Scalars['Int']>;
+  prev_episode_id?: InputMaybe<Scalars['uuid']>;
   start_time?: InputMaybe<Scalars['timestamp']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1067,7 +1089,9 @@ export type Episodes_Stream_Cursor_Value_Input = {
   has_next_episode?: InputMaybe<Scalars['Boolean']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
+  next_episode_id?: InputMaybe<Scalars['uuid']>;
   number?: InputMaybe<Scalars['Int']>;
+  prev_episode_id?: InputMaybe<Scalars['uuid']>;
   start_time?: InputMaybe<Scalars['timestamp']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
@@ -1100,7 +1124,11 @@ export enum Episodes_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  NextEpisodeId = 'next_episode_id',
+  /** column name */
   Number = 'number',
+  /** column name */
+  PrevEpisodeId = 'prev_episode_id',
   /** column name */
   StartTime = 'start_time',
   /** column name */
@@ -3009,15 +3037,7 @@ export type GetEpisodeQueryVariables = Exact<{
 }>;
 
 
-export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } } | null };
-
-export type GetNextEpisodeIdQueryVariables = Exact<{
-  number: Scalars['Int'];
-  work_id: Scalars['Int'];
-}>;
-
-
-export type GetNextEpisodeIdQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any }> };
+export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, next_episode_id?: any | null, prev_episode_id?: any | null, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } } | null };
 
 export type InsertEpisodeLikesMutationVariables = Exact<{
   object: Episode_Likes_Insert_Input;
@@ -3154,6 +3174,8 @@ export const GetEpisodeDocument = `
     number
     has_next_episode
     has_prev_episode
+    next_episode_id
+    prev_episode_id
     work {
       series_title
       title
@@ -3183,32 +3205,6 @@ useGetEpisodeQuery.getKey = (variables: GetEpisodeQueryVariables) => ['GetEpisod
 ;
 
 useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
-export const GetNextEpisodeIdDocument = `
-    query GetNextEpisodeId($number: Int!, $work_id: Int!) {
-  episodes(where: {_and: {work_id: {_eq: $work_id}, number: {_eq: $number}}}) {
-    id
-  }
-}
-    `;
-export const useGetNextEpisodeIdQuery = <
-      TData = GetNextEpisodeIdQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables: GetNextEpisodeIdQueryVariables,
-      options?: UseQueryOptions<GetNextEpisodeIdQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<GetNextEpisodeIdQuery, TError, TData>(
-      ['GetNextEpisodeId', variables],
-      fetcher<GetNextEpisodeIdQuery, GetNextEpisodeIdQueryVariables>(client, GetNextEpisodeIdDocument, variables, headers),
-      options
-    );
-
-useGetNextEpisodeIdQuery.getKey = (variables: GetNextEpisodeIdQueryVariables) => ['GetNextEpisodeId', variables];
-;
-
-useGetNextEpisodeIdQuery.fetcher = (client: GraphQLClient, variables: GetNextEpisodeIdQueryVariables, headers?: RequestInit['headers']) => fetcher<GetNextEpisodeIdQuery, GetNextEpisodeIdQueryVariables>(client, GetNextEpisodeIdDocument, variables, headers);
 export const InsertEpisodeLikesDocument = `
     mutation InsertEpisodeLikes($object: episode_likes_insert_input!) {
   insert_episode_likes_one(object: $object) {
