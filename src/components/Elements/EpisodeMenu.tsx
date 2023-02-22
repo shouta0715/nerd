@@ -1,5 +1,4 @@
-import { Bars3Icon } from "@heroicons/react/24/outline";
-import { ActionIcon, Menu, Text } from "@mantine/core";
+import { ActionIcon, Burger, Menu, Text } from "@mantine/core";
 import {
   IconClock,
   IconPlayerSkipForward,
@@ -8,7 +7,7 @@ import {
   IconUser,
 } from "@tabler/icons";
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import React, { FC, memo, useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 
 type Props = {
@@ -21,15 +20,17 @@ type Props = {
 export const EpisodeMenu: FC<Props> = memo(
   ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
     const { data } = useQueryEpisode(nextEpisodeId);
+    const [isOpened, setIsOpened] = useState(false);
 
     return (
       <Menu
+        opened={isOpened}
         classNames={{
           dropdown: "max-w-xs w-full",
         }}
       >
         <ActionIcon component={Menu.Target} variant="transparent" color="dark">
-          <Bars3Icon />
+          <Burger opened={isOpened} onClick={() => setIsOpened((p) => !p)} />
         </ActionIcon>
         <Menu.Dropdown>
           <Menu.Label>メニュー</Menu.Label>
