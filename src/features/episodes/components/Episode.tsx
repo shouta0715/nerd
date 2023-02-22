@@ -27,7 +27,7 @@ export const Episode: FC = () => {
   return (
     <div>
       <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
-        <div className="flex w-full flex-1 flex-wrap gap-2">
+        <div className="flex w-full flex-1  flex-col gap-2">
           <Title ff="Hiragino Sans" className=" text-base  md:text-lg">
             {data?.episodes_by_pk?.work.series_title}
           </Title>
@@ -70,7 +70,12 @@ export const Episode: FC = () => {
           <DynamicTimer
             episodeId={data?.episodes_by_pk?.id}
             start_time={data?.episodes_by_pk?.start_time}
-            end_time={data?.episodes_by_pk?.end_time}
+            isCountUp={
+              category === "archive" ||
+              getIsFinished({
+                end_time: data?.episodes_by_pk?.end_time,
+              })
+            }
           />
         </div>
       </header>
@@ -111,10 +116,9 @@ export const Episode: FC = () => {
         </ul>
         <EpisodeMenu
           episodeTitle={data?.episodes_by_pk?.title}
-          hasNextEpisode={data?.episodes_by_pk?.has_next_episode}
-          workId={data?.episodes_by_pk?.work.id}
           episodeNumber={data?.episodes_by_pk?.number}
           workTitle={data?.episodes_by_pk?.work.series_title}
+          nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
         />
       </nav>
       <main>a</main>
