@@ -1,12 +1,14 @@
+/* eslint-disable no-unused-expressions */
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
+import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { EpisodeMenu } from "src/components/Elements/EpisodeMenu";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { useCountUp } from "src/features/timer/hooks/useCountUp";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
 
 const DynamicTimer = dynamic(
@@ -21,8 +23,9 @@ export const Episode: FC = () => {
   const router = useRouter();
   const { slug, category } = router.query;
   const { data } = useQueryEpisode(slug);
-  const { getIsFinished } = useTimerStatus();
+  const { getIsArchive } = useTimerStatus();
   const [isChat, setIsChat] = useState(true);
+  const { interval } = useCountUp();
 
   return (
     <div>
@@ -49,9 +52,9 @@ export const Episode: FC = () => {
           </Text>
         </div>
         <div className="mx-auto mt-3 flex max-w-max flex-col">
-          {category === "archive" ||
-          getIsFinished({
+          {getIsArchive({
             end_time: data?.episodes_by_pk?.end_time,
+            slug: category,
           }) ? (
             <Text
               color="indigo"
@@ -70,20 +73,17 @@ export const Episode: FC = () => {
           <DynamicTimer
             episodeId={data?.episodes_by_pk?.id}
             start_time={data?.episodes_by_pk?.start_time}
-            isCountUp={
-              category === "archive" ||
-              getIsFinished({
-                end_time: data?.episodes_by_pk?.end_time,
-              })
-            }
+            isCountUp={getIsArchive({
+              end_time: data?.episodes_by_pk?.end_time,
+              slug: category,
+            })}
           />
         </div>
       </header>
       <nav className="sticky top-0 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
         <ActionIcon
           color="dark"
-          component={Link}
-          href="/"
+          onClick={() => router.back()}
           variant="transparent"
         >
           <ArrowSmallLeftIcon className="h-6 w-6" />
@@ -122,6 +122,27 @@ export const Episode: FC = () => {
         />
       </nav>
       <main>a</main>
+      {getIsArchive({
+        end_time: data?.episodes_by_pk?.end_time,
+        slug: category,
+      }) && (
+        <ActionIcon
+          variant="filled"
+          color="indigo"
+          radius="xl"
+          size={48}
+          className="fixed bottom-10 right-4"
+          onClick={() => {
+            interval?.active ? interval.stop() : interval.start();
+          }}
+        >
+          {interval.active ? (
+            <IconPlayerPause size={28} className="fill-white" />
+          ) : (
+            <IconPlayerPlay size={28} className="fill-white" />
+          )}
+        </ActionIcon>
+      )}
     </div>
   );
 };
