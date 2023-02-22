@@ -6,6 +6,11 @@ type Args = {
   end_time: string;
 };
 
+type GetIsArchiveArgs = {
+  end_time: string;
+  slug: string | string[] | undefined;
+};
+
 export const useTimerStatus = () => {
   const getTimeStatus = useCallback(({ start_time, end_time }: Args) => {
     const now = utcToZonedTime(new Date(), "Asia/Tokyo");
@@ -40,8 +45,19 @@ export const useTimerStatus = () => {
     []
   );
 
+  const getIsArchive = useCallback(
+    ({ end_time, slug }: GetIsArchiveArgs) => {
+      const isFInished = getIsFinished({ end_time });
+      const isArchive = slug === "archive";
+
+      return isFInished || isArchive;
+    },
+    [getIsFinished]
+  );
+
   return {
     getTimeStatus,
     getIsFinished,
+    getIsArchive,
   };
 };
