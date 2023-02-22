@@ -70,7 +70,12 @@ export const Episode: FC = () => {
           <DynamicTimer
             episodeId={data?.episodes_by_pk?.id}
             start_time={data?.episodes_by_pk?.start_time}
-            end_time={data?.episodes_by_pk?.end_time}
+            isCountUp={
+              category === "archive" ||
+              getIsFinished({
+                end_time: data?.episodes_by_pk?.end_time,
+              })
+            }
           />
         </div>
       </header>
