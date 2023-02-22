@@ -5,8 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
-import { ChatComments } from "src/features/comments/components/ChatComments";
-import { FinishComments } from "src/features/comments/components/FinishComments";
+
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useCountUp } from "src/features/timer/hooks/useCountUp";
@@ -17,6 +16,22 @@ const DynamicTimer = dynamic(
   {
     ssr: false,
     loading: () => <TimerSkelton />,
+  }
+);
+
+const DynamicChatComments = dynamic(
+  () => import("src/features/comments/components/ChatComments"),
+  {
+    ssr: false,
+    loading: () => <div>loading...</div>,
+  }
+);
+
+const DynamicFinishComments = dynamic(
+  () => import("src/features/comments/components/FinishComments"),
+  {
+    ssr: false,
+    loading: () => <div>loading...</div>,
   }
 );
 
@@ -127,9 +142,9 @@ export const Episode: FC = () => {
       <main>
         <div className="container mx-auto">
           {isChat ? (
-            <ChatComments episode_id={data?.episodes_by_pk?.id} />
+            <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
           ) : (
-            <FinishComments />
+            <DynamicFinishComments />
           )}
         </div>
       </main>
