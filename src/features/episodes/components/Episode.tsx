@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { ChatComments } from "src/features/comments/components/ChatComments";
+import { FinishComments } from "src/features/comments/components/FinishComments";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useCountUp } from "src/features/timer/hooks/useCountUp";
@@ -80,47 +82,57 @@ export const Episode: FC = () => {
         </div>
       </header>
       <nav className="sticky top-0 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
-        <ActionIcon
-          color="dark"
-          onClick={() => router.back()}
-          variant="transparent"
-        >
-          <ArrowSmallLeftIcon className="h-6 w-6" />
-        </ActionIcon>
-        <ul className="container mx-auto flex h-full flex-1 items-center justify-around">
-          <Text
-            onClick={() => setIsChat(true)}
-            color="indigo"
-            component="li"
-            className={`inline-block cursor-pointer  py-2 text-sm font-bold md:text-base ${
-              isChat
-                ? "border-indigo border-0 border-b-2 border-solid"
-                : "border-none"
-            }`}
+        <div className="container mx-auto flex items-center justify-between">
+          <ActionIcon
+            color="dark"
+            onClick={() => router.back()}
+            variant="transparent"
           >
-            チャット
-          </Text>
-          <Text
-            onClick={() => setIsChat(false)}
-            color="indigo"
-            component="li"
-            className={`inline-block cursor-pointer py-2 text-sm font-bold md:text-base ${
-              !isChat
-                ? "border-indigo border-0 border-b-2 border-solid"
-                : "border-none"
-            }`}
-          >
-            コメント
-          </Text>
-        </ul>
-        <EpisodeMenu
-          episodeTitle={data?.episodes_by_pk?.title}
-          episodeNumber={data?.episodes_by_pk?.number}
-          workTitle={data?.episodes_by_pk?.work.series_title}
-          nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
-        />
+            <ArrowSmallLeftIcon className="h-6 w-6" />
+          </ActionIcon>
+          <ul className=" flex h-full flex-1 items-center justify-around">
+            <Text
+              onClick={() => setIsChat(true)}
+              color="indigo"
+              component="li"
+              className={`inline-block cursor-pointer  py-2 text-sm font-bold md:text-base ${
+                isChat
+                  ? "border-indigo border-0 border-b-2 border-solid"
+                  : "border-none"
+              }`}
+            >
+              チャット
+            </Text>
+            <Text
+              onClick={() => setIsChat(false)}
+              color="indigo"
+              component="li"
+              className={`inline-block cursor-pointer py-2 text-sm font-bold md:text-base ${
+                !isChat
+                  ? "border-indigo border-0 border-b-2 border-solid"
+                  : "border-none"
+              }`}
+            >
+              コメント
+            </Text>
+          </ul>
+          <EpisodeMenu
+            episodeTitle={data?.episodes_by_pk?.title}
+            episodeNumber={data?.episodes_by_pk?.number}
+            workTitle={data?.episodes_by_pk?.work.series_title}
+            nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
+          />
+        </div>
       </nav>
-      <main>a</main>
+      <main>
+        <div className="container mx-auto">
+          {isChat ? (
+            <ChatComments episode_id={data?.episodes_by_pk?.id} />
+          ) : (
+            <FinishComments />
+          )}
+        </div>
+      </main>
       {getIsArchive({
         end_time: data?.episodes_by_pk?.end_time,
         slug: category,
