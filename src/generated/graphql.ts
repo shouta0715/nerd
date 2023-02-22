@@ -88,6 +88,7 @@ export type String_Comparison_Exp = {
 /** columns and relationships of "chat_comments" */
 export type Chat_Comments = {
   __typename?: 'chat_comments';
+  anonymous: Scalars['Boolean'];
   content: Scalars['String'];
   created_at: Scalars['timestamptz'];
   /** An object relationship */
@@ -111,7 +112,23 @@ export type Chat_Comments_Aggregate = {
 };
 
 export type Chat_Comments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Chat_Comments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Chat_Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Chat_Comments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Chat_Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
 };
 
 export type Chat_Comments_Aggregate_Bool_Exp_Count = {
@@ -184,6 +201,7 @@ export type Chat_Comments_Bool_Exp = {
   _and?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
   _not?: InputMaybe<Chat_Comments_Bool_Exp>;
   _or?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
+  anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episode?: InputMaybe<Episodes_Bool_Exp>;
@@ -210,6 +228,7 @@ export type Chat_Comments_Inc_Input = {
 
 /** input type for inserting data into table "chat_comments" */
 export type Chat_Comments_Insert_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
@@ -286,6 +305,7 @@ export type Chat_Comments_On_Conflict = {
 
 /** Ordering options when selecting data from "chat_comments". */
 export type Chat_Comments_Order_By = {
+  anonymous?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode?: InputMaybe<Episodes_Order_By>;
@@ -306,6 +326,8 @@ export type Chat_Comments_Pk_Columns_Input = {
 /** select columns of table "chat_comments" */
 export enum Chat_Comments_Select_Column {
   /** column name */
+  Anonymous = 'anonymous',
+  /** column name */
   Content = 'content',
   /** column name */
   CreatedAt = 'created_at',
@@ -321,8 +343,21 @@ export enum Chat_Comments_Select_Column {
   WorkId = 'work_id'
 }
 
+/** select "chat_comments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "chat_comments" */
+export enum Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Anonymous = 'anonymous'
+}
+
+/** select "chat_comments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "chat_comments" */
+export enum Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  Anonymous = 'anonymous'
+}
+
 /** input type for updating data in table "chat_comments" */
 export type Chat_Comments_Set_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
@@ -381,6 +416,7 @@ export type Chat_Comments_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Chat_Comments_Stream_Cursor_Value_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
@@ -405,6 +441,8 @@ export type Chat_Comments_Sum_Order_By = {
 
 /** update columns of table "chat_comments" */
 export enum Chat_Comments_Update_Column {
+  /** column name */
+  Anonymous = 'anonymous',
   /** column name */
   Content = 'content',
   /** column name */
@@ -3070,7 +3108,14 @@ export type GetChatCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments: Array<{ __typename?: 'chat_comments', id: any, time: number, episode_id?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, anonymous: boolean, created_at: any, episode_id?: any | null, id: any, time: number, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+
+export type InsertChatCommentMutationVariables = Exact<{
+  object: Chat_Comments_Insert_Input;
+}>;
+
+
+export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any } | null };
 
 export type UpdateTodayEpisodeMutationVariables = Exact<{
   tid: Scalars['Int'];
@@ -3154,9 +3199,12 @@ export const GetChatCommentsDocument = `
     where: {_and: {episode_id: {_eq: $episode_id}, time: {_gt: 0}}}
     order_by: {time: asc}
   ) {
+    content
+    anonymous
+    created_at
+    episode_id
     id
     time
-    episode_id
     user {
       anonymous
       user_name
@@ -3185,6 +3233,33 @@ useGetChatCommentsQuery.getKey = (variables: GetChatCommentsQueryVariables) => [
 ;
 
 useGetChatCommentsQuery.fetcher = (client: GraphQLClient, variables: GetChatCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetChatCommentsQuery, GetChatCommentsQueryVariables>(client, GetChatCommentsDocument, variables, headers);
+export const InsertChatCommentDocument = `
+    mutation InsertChatComment($object: chat_comments_insert_input!) {
+  insert_chat_comments_one(object: $object) {
+    content
+    work_id
+    user_id
+    time
+    id
+    episode_id
+    created_at
+  }
+}
+    `;
+export const useInsertChatCommentMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<InsertChatCommentMutation, TError, InsertChatCommentMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<InsertChatCommentMutation, TError, InsertChatCommentMutationVariables, TContext>(
+      ['InsertChatComment'],
+      (variables?: InsertChatCommentMutationVariables) => fetcher<InsertChatCommentMutation, InsertChatCommentMutationVariables>(client, InsertChatCommentDocument, variables, headers)(),
+      options
+    );
+useInsertChatCommentMutation.fetcher = (client: GraphQLClient, variables: InsertChatCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatCommentMutation, InsertChatCommentMutationVariables>(client, InsertChatCommentDocument, variables, headers);
 export const UpdateTodayEpisodeDocument = `
     mutation UpdateTodayEpisode($tid: Int!, $number: Int!, $episodes_set_input: episodes_set_input!) {
   update_episodes(

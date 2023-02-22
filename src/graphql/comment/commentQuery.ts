@@ -6,15 +6,32 @@ export const GET_CHAT_COMMENTS = gql`
       where: { _and: { episode_id: { _eq: $episode_id }, time: { _gt: 0 } } }
       order_by: { time: asc }
     ) {
+      content
+      anonymous
+      created_at
+      episode_id
       id
       time
-      episode_id
       user {
         anonymous
         user_name
         photo_url
         id
       }
+    }
+  }
+`;
+
+export const INSERT_CHAT_COMMENT = gql`
+  mutation InsertChatComment($object: chat_comments_insert_input!) {
+    insert_chat_comments_one(object: $object) {
+      content
+      work_id
+      user_id
+      time
+      id
+      episode_id
+      created_at
     }
   }
 `;
