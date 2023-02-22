@@ -6,7 +6,7 @@ type Props = {
   episode_id: string;
 };
 
-export const ChatComments: FC<Props> = memo(({ episode_id }) => {
+const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { data } = useQueryComments(episode_id);
   const { insertComment } = useMutateChatComments();
   const [commentInput, setCommentInput] = React.useState("");
@@ -42,3 +42,5 @@ export const ChatComments: FC<Props> = memo(({ episode_id }) => {
     </>
   );
 });
+
+export default ChatComments;
