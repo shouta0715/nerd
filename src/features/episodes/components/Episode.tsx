@@ -13,7 +13,7 @@ import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
-import { useTimerState } from "src/store/timer/timerStore";
+import { useTimerState } from "src/features/timer/store/timerStore";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer"),

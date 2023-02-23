@@ -4,11 +4,11 @@ import React, { FC } from "react";
 import { GoogleIcon } from "src/components/Icon/GoogleIcon";
 import { TwitterIcon } from "src/components/Icon/TwitterIcon";
 import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
-import { useGlobalStore } from "src/store/global/globalStore";
+import { useGlobalState } from "src/store/global/globalStore";
 
 export const ModalContent: FC = () => {
   const signInGoogle = useGoogleSignIn();
-  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
+  const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
     <Paper className="flex flex-col items-center justify-center space-y-6 px-4">

@@ -1,6 +1,6 @@
 import { useInterval } from "@mantine/hooks";
 import { useEffect } from "react";
-import { useTimerState } from "src/store/timer/timerStore";
+import { useTimerState } from "src/features/timer/store/timerStore";
 
 export const useCountUp = () => {
   const setTimer = useTimerState((state) => state.setTime);

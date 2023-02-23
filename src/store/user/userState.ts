@@ -8,7 +8,7 @@ type UserStore = {
   resetUser: () => void;
 };
 
-export const useUserStore = create<UserStore>((set) => ({
+export const useUserState = create<UserStore>((set) => ({
   user: null,
   setUser: (userProp) => set({ user: userProp }),
   resetUser: () => set({ user: null }),

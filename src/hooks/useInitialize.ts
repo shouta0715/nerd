@@ -4,16 +4,16 @@ import { signInAnonymously } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "../libs/firebase";
 import { createClients } from "../libs/graphqlClient";
-import { useGlobalStore } from "../store/global/globalStore";
-import { useUserStore } from "../store/user/userState";
+import { useUserState } from "../store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
 
 let unSub: () => void;
 
 export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
-  const setAllClient = useGlobalStore((state) => state.setAllClient);
-  const setUser = useUserStore((state) => state.setUser);
-  const setAuthLoading = useGlobalStore((state) => state.setAuthLoading);
+  const setAllClient = useGlobalState((state) => state.setAllClient);
+  const setUser = useUserState((state) => state.setUser);
+  const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {

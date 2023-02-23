@@ -3,8 +3,8 @@ import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { useMutateChatComments } from "src/features/comments/api/useMutateChatComments";
 import { useQueryComments } from "src/features/comments/api/useQueryComments";
-import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserStore } from "src/store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   episode_id: string;
@@ -14,8 +14,8 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { data } = useQueryComments(episode_id);
   const { insertComment } = useMutateChatComments();
   const [commentInput, setCommentInput] = React.useState("");
-  const user = useUserStore((state) => state.user);
-  const setIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
+  const user = useUserState((state) => state.user);
+  const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -5,8 +5,8 @@ import { UnstyledButton } from "@mantine/core";
 import React, { FC, memo, useEffect, useState } from "react";
 import { useMutateEpisodeLike } from "src/features/episodes/api/useMutateEpisodeLike";
 import { useDebounce } from "src/hooks/useDebounce";
-import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserLikesStore, useUserStore } from "src/store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
+import { useUserLikesStore, useUserState } from "src/store/user/userState";
 
 type Props = {
   debounceTime: number;
@@ -19,12 +19,12 @@ type LikeState = {
 };
 
 export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
-  const user = useUserStore((state) => state.user);
+  const user = useUserState((state) => state.user);
   const [likeState, setLikeState] = useState<LikeState>({
     isLiked: false,
     clickCount: 0,
   });
-  const setIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
+  const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
   const debounce = useDebounce(debounceTime);
   const { insertLikesMutation, deleteLikeMutation } = useMutateEpisodeLike();
   const likesData = useUserLikesStore((state) => state.data);
