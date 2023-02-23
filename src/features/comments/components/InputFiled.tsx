@@ -1,6 +1,7 @@
 import { ActionIcon, Avatar, Box, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
+import { useInputFiledSize } from "src/features/comments/hooks/useInputFiledSize";
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -18,9 +19,13 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const { onSubmitHandler, insertComment } = useSubmitComment({ episode_id });
   const user = useUserState((state) => state.user);
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
+  const { ref } = useInputFiledSize();
 
   return (
-    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 px-4 py-2 md:py-4">
+    <div
+      ref={ref}
+      className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2"
+    >
       <form
         className=" container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}
@@ -40,9 +45,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           placeholder={user ? `${user?.user_name}で投稿` : ""}
           className="w-full max-w-sm flex-1"
           classNames={{
-            input: "text-[16px] pr-[50px] placeholder:pl-4",
+            input: "text-[16px] pr-[50px] placeholder:pl-4 scale-90",
           }}
-          rightSectionWidth={50}
+          rightSectionWidth={80}
           maxRows={3}
           maxLength={100}
           autosize

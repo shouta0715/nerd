@@ -3115,7 +3115,7 @@ export type InsertChatCommentMutationVariables = Exact<{
 }>;
 
 
-export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any } | null };
+export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
 export type UpdateTodayEpisodeMutationVariables = Exact<{
   tid: Scalars['Int'];
@@ -3197,7 +3197,7 @@ export const GetChatCommentsDocument = `
     query GetChatComments($episode_id: uuid!) {
   chat_comments(
     where: {_and: {episode_id: {_eq: $episode_id}, time: {_gt: 0}}}
-    order_by: {time: asc}
+    order_by: {time: asc, created_at: asc}
   ) {
     content
     anonymous
@@ -3243,6 +3243,12 @@ export const InsertChatCommentDocument = `
     id
     episode_id
     created_at
+    user {
+      anonymous
+      user_name
+      photo_url
+      id
+    }
   }
 }
     `;

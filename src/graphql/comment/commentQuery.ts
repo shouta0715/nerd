@@ -4,7 +4,7 @@ export const GET_CHAT_COMMENTS = gql`
   query GetChatComments($episode_id: uuid!) {
     chat_comments(
       where: { _and: { episode_id: { _eq: $episode_id }, time: { _gt: 0 } } }
-      order_by: { time: asc }
+      order_by: { time: asc, created_at: asc }
     ) {
       content
       anonymous
@@ -32,6 +32,12 @@ export const INSERT_CHAT_COMMENT = gql`
       id
       episode_id
       created_at
+      user {
+        anonymous
+        user_name
+        photo_url
+        id
+      }
     }
   }
 `;

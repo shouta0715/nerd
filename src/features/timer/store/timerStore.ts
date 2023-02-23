@@ -1,6 +1,6 @@
 import { useInterval } from "@mantine/hooks";
 import create from "zustand";
-import { timeProcessing } from "src/utils/timeProcessing";
+import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 
 const { timeToSecond } = timeProcessing();
 

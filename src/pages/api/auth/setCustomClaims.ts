@@ -52,7 +52,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       id: idTokenResult.uid,
       anonymous: isAnonymous,
       photo_url: idTokenResult.picture ?? null,
-      user_name: idTokenResult.name ?? "anonymous",
+      user_name: idTokenResult.name ?? "匿名",
     });
 
     return res.status(200).json({ message: "ok" });
