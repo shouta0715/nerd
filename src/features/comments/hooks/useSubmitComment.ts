@@ -12,9 +12,6 @@ export const useSubmitComment = ({ episode_id }: Args) => {
   const { insertComment } = useMutateChatComments();
   const getTime = useTimerState((state) => state.getTime);
   const { content } = useInputCommentState((state) => state.inputComment);
-  const resetInputComment = useInputCommentState(
-    (state) => state.resetInputComment
-  );
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +24,6 @@ export const useSubmitComment = ({ episode_id }: Args) => {
       await insertComment.mutateAsync({
         object,
       });
-      resetInputComment();
     } catch (error) {
       //
     }

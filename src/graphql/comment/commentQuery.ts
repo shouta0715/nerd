@@ -32,6 +32,12 @@ export const INSERT_CHAT_COMMENT = gql`
       id
       episode_id
       created_at
+      user {
+        anonymous
+        user_name
+        photo_url
+        id
+      }
     }
   }
 `;

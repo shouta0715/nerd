@@ -20,7 +20,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 px-4 py-2 md:py-4">
+    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2 md:py-4">
       <form
         className=" container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}
@@ -40,9 +40,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           placeholder={user ? `${user?.user_name}で投稿` : ""}
           className="w-full max-w-sm flex-1"
           classNames={{
-            input: "text-[16px] pr-[50px] placeholder:pl-4",
+            input: "text-[16px] pr-[50px] placeholder:pl-4 scale-90",
           }}
-          rightSectionWidth={50}
+          rightSectionWidth={80}
           maxRows={3}
           maxLength={100}
           autosize
