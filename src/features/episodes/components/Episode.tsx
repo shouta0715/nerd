@@ -1,19 +1,16 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import { ActionIcon, Text, Title, UnstyledButton } from "@mantine/core";
-import {
-  IconChevronRight,
-  IconPlayerPause,
-  IconPlayerPlay,
-} from "@tabler/icons";
+import { ActionIcon, Text, Title } from "@mantine/core";
+
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
+import { PlayButton } from "src/components/Elements/PlayButton";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { InputFiled } from "src/features/comments/components/InputFiled";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
-import { useTimerState } from "src/features/timer/store/timerStore";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer"),
@@ -45,8 +42,6 @@ export const Episode: FC = () => {
   const { data } = useQueryEpisode(slug);
   const { getIsArchive } = useTimerStatus();
   const [isChat, setIsChat] = useState(true);
-  const [showPlayButton, setShowPlayButton] = useState(true);
-  const interval = useTimerState((state) => state.interval);
 
   return (
     <div className=" flex min-h-screen flex-col">
@@ -152,47 +147,12 @@ export const Episode: FC = () => {
             <DynamicFinishComments />
           )}
         </div>
+        <InputFiled episode_id={data?.episodes_by_pk?.id} />
       </main>
       {getIsArchive({
         end_time: data?.episodes_by_pk?.end_time,
         slug: category,
-      }) && (
-        <div
-          className={`fixed bottom-24 right-0  rounded-l-md border-indigo-500 bg-indigo-500 p-2 shadow-xl transition-transform ${
-            showPlayButton ? "" : "translate-x-full"
-          }`}
-        >
-          <UnstyledButton
-            onClick={() => setShowPlayButton((p) => !p)}
-            className="absolute top-2 -left-4 flex h-1/2 w-4 items-center justify-center rounded-r-none rounded-l-md border-l bg-indigo-500 shadow-xl"
-          >
-            <IconChevronRight
-              color="white"
-              className={` ${showPlayButton ? "" : "-rotate-180 transform"}`}
-            />
-          </UnstyledButton>
-          <ActionIcon
-            variant="transparent"
-            size={40}
-            className="bg-white"
-            onClick={() => {
-              interval?.toggle();
-            }}
-          >
-            {interval?.active ? (
-              <IconPlayerPause
-                size={20}
-                className="fill-indigo-500 text-indigo-500"
-              />
-            ) : (
-              <IconPlayerPlay
-                size={20}
-                className="fill-indigo-500 text-indigo-500"
-              />
-            )}
-          </ActionIcon>
-        </div>
-      )}
+      }) && <PlayButton />}
     </div>
   );
 };
