@@ -96,7 +96,7 @@ export const Episode: FC = () => {
           />
         </div>
       </header>
-      <nav className="sticky top-0 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
+      <nav className="sticky top-0 z-50 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
         <div className="container mx-auto flex items-center justify-between">
           <ActionIcon
             color="dark"

@@ -1,7 +1,7 @@
 import { ActionIcon, Avatar, Box, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
-import { useInputFiledSize } from "src/features/comments/hooks/useInputFiledSize";
+
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -19,13 +19,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const { onSubmitHandler, insertComment } = useSubmitComment({ episode_id });
   const user = useUserState((state) => state.user);
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
-  const { ref } = useInputFiledSize();
 
   return (
-    <div
-      ref={ref}
-      className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2"
-    >
+    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
       <form
         className=" container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}

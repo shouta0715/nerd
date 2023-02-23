@@ -2,7 +2,6 @@ import { Avatar, Box, Text } from "@mantine/core";
 import React, { FC, memo } from "react";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
-import { useElementSizeState } from "src/store/global/globalStore";
 
 type Props = {
   episode_id: string;
@@ -11,13 +10,11 @@ type Props = {
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { timeCommented } = timeProcessing();
   const { data } = useChatComments({ episode_id });
-  const inputFiledHeight = useElementSizeState((state) => state.height);
 
   return (
     <Box
       component="ul"
-      pb={inputFiledHeight}
-      className="mx-auto w-full space-y-3 md:max-w-xl"
+      className="pb- mx-auto w-full space-y-3 pb-16 md:max-w-xl"
     >
       {data?.map((comment) => (
         <li key={comment.id} className="flex w-full">
