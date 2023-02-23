@@ -1,5 +1,8 @@
 import { useInterval } from "@mantine/hooks";
 import create from "zustand";
+import { timeProcessing } from "src/utils/timeProcessing";
+
+const { timeToSecond } = timeProcessing();
 
 const InitialTimerCount = {
   seconds: 0,
@@ -17,7 +20,7 @@ type TimerState = {
   episodeId: string;
   setTime: () => void;
   resetTime: () => void;
-  getTime: () => TimerCount;
+  getTime: () => number;
   setEpisodeId: (episodeId: string) => void;
   restEpisodeId: () => void;
   interval: null | ReturnType<typeof useInterval>;
@@ -43,7 +46,7 @@ export const useTimerState = create<TimerState>((set, get) => ({
   resetTime: () => {
     set({ time: InitialTimerCount });
   },
-  getTime: () => get().time,
+  getTime: () => timeToSecond(get().time),
   setEpisodeId: (episodeId: string) => set({ episodeId }),
   restEpisodeId: () => set({ episodeId: "" }),
   interval: null,
