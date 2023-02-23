@@ -6,6 +6,11 @@ export const useCountUp = () => {
   const setTimer = useTimerState((state) => state.setTime);
   const time = useTimerState((state) => state.time);
   const interval = useInterval(setTimer, 1000);
+  const setInterval = useTimerState((state) => state.setInterval);
+
+  useEffect(() => {
+    setInterval(interval);
+  }, [interval, setInterval, interval.active]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => () => interval.stop(), []);
