@@ -1,13 +1,13 @@
 import { Avatar, Button } from "@mantine/core";
 import React, { FC } from "react";
 import { Logo } from "src/components/Icon/Logo";
-import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserStore } from "src/store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
+import { useUserState } from "src/store/user/userState";
 
 export const Header: FC = () => {
-  const user = useUserStore((state) => state.user);
-  const authLoading = useGlobalStore((state) => state.authLoading);
-  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
+  const user = useUserState((state) => state.user);
+  const authLoading = useGlobalState((state) => state.authLoading);
+  const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
     <header className="w-full">

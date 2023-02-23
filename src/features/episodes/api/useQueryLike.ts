@@ -3,13 +3,13 @@ import {
   GetEpisodeLikesQuery,
   useGetEpisodeLikesQuery,
 } from "src/generated/graphql";
-import { useGlobalStore } from "src/store/global/globalStore";
-import { useUserLikesStore, useUserStore } from "src/store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
+import { useUserLikesStore, useUserState } from "src/store/user/userState";
 
 export const useQueryLikes = (episodeIds: string[]) => {
-  const client = useGlobalStore((state) => state.client);
-  const isClient = useGlobalStore((state) => state.isClient);
-  const user = useUserStore((state) => state.user);
+  const client = useGlobalState((state) => state.client);
+  const isClient = useGlobalState((state) => state.isClient);
+  const user = useUserState((state) => state.user);
   const setData = useUserLikesStore((state) => state.setData);
 
   return useQuery<GetEpisodeLikesQuery>({

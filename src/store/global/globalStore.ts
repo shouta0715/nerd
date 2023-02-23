@@ -29,7 +29,7 @@ type GlobalState = {
   }) => void;
 };
 
-export const useGlobalStore = create<GlobalState>((set) => ({
+export const useGlobalState = create<GlobalState>((set) => ({
   isOpenLoginModal: false,
   setIsOpenModal: (flag) => set(() => ({ isOpenLoginModal: flag })),
   client: new GraphQLClient(process.env.NEXT_PUBLIC_ENDPOINT as string),
@@ -49,27 +49,4 @@ export const useGlobalStore = create<GlobalState>((set) => ({
       wsClient,
       isWsClient,
     })),
-}));
-
-type interval = {
-  start: () => void;
-  stop: () => void;
-  toggle: () => void;
-  active: boolean;
-};
-
-type GlobalTimerState = {
-  interval: interval;
-  setInterval: (inputInterval: interval) => void;
-};
-
-export const useGlobalTimerStore = create<GlobalTimerState>((set) => ({
-  interval: {
-    start: () => {},
-    stop: () => {},
-    toggle: () => {},
-    active: false,
-  },
-
-  setInterval: (inputInterval) => set(() => ({ interval: inputInterval })),
 }));

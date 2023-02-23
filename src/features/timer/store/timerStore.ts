@@ -1,3 +1,4 @@
+import { useInterval } from "@mantine/hooks";
 import create from "zustand";
 
 const InitialTimerCount = {
@@ -19,6 +20,8 @@ type TimerState = {
   getTime: () => TimerCount;
   setEpisodeId: (episodeId: string) => void;
   restEpisodeId: () => void;
+  interval: null | ReturnType<typeof useInterval>;
+  setInterval: (interval: ReturnType<typeof useInterval>) => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
@@ -43,4 +46,6 @@ export const useTimerState = create<TimerState>((set, get) => ({
   getTime: () => get().time,
   setEpisodeId: (episodeId: string) => set({ episodeId }),
   restEpisodeId: () => set({ episodeId: "" }),
+  interval: null,
+  setInterval: (interval: ReturnType<typeof useInterval>) => set({ interval }),
 }));

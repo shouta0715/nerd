@@ -1,9 +1,9 @@
 import { useGetUserQuery } from "../../generated/graphql";
-import { useGlobalStore } from "../../store/global/globalStore";
+import { useGlobalState } from "../../store/global/globalStore";
 
 export const useUserQuery = (id: string) => {
-  const client = useGlobalStore((state) => state.client);
-  const isClient = useGlobalStore((state) => state.isClient);
+  const client = useGlobalState((state) => state.client);
+  const isClient = useGlobalState((state) => state.isClient);
 
   return useGetUserQuery(
     client,

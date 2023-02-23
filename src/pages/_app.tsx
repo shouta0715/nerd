@@ -11,12 +11,12 @@ import { Error } from "src/components/Layout/error/Error";
 import { ModalContent } from "src/components/Layout/modules/ModalContent";
 import { useInitialize } from "src/hooks/useInitialize";
 import queryClient from "src/libs/queryClient";
-import { useGlobalStore } from "src/store/global/globalStore";
+import { useGlobalState } from "src/store/global/globalStore";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
-  const isOpenLoginModal = useGlobalStore((state) => state.isOpenLoginModal);
-  const changeIsOpenModal = useGlobalStore((state) => state.setIsOpenModal);
+  const isOpenLoginModal = useGlobalState((state) => state.isOpenLoginModal);
+  const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   useInitialize();
 

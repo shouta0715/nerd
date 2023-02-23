@@ -5,10 +5,10 @@ import {
   useGetChatCommentsQuery,
   useInsertChatCommentMutation,
 } from "src/generated/graphql";
-import { useGlobalStore } from "src/store/global/globalStore";
+import { useGlobalState } from "src/store/global/globalStore";
 
 export const useMutateChatComments = () => {
-  const client = useGlobalStore((state) => state.client);
+  const client = useGlobalState((state) => state.client);
   const queryClient = useQueryClient();
   const insertComment = useInsertChatCommentMutation(client, {
     onMutate: async (newComment) => {

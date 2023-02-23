@@ -1,6 +1,10 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import { ActionIcon, Text, Title } from "@mantine/core";
-import { IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
+import { ActionIcon, Text, Title, UnstyledButton } from "@mantine/core";
+import {
+  IconChevronRight,
+  IconPlayerPause,
+  IconPlayerPlay,
+} from "@tabler/icons";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
@@ -8,8 +12,8 @@ import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
-import { useCountUp } from "src/features/timer/hooks/useCountUp";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
+import { useTimerState } from "src/features/timer/store/timerStore";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer"),
@@ -41,10 +45,11 @@ export const Episode: FC = () => {
   const { data } = useQueryEpisode(slug);
   const { getIsArchive } = useTimerStatus();
   const [isChat, setIsChat] = useState(true);
-  const { interval } = useCountUp();
+  const [showPlayButton, setShowPlayButton] = useState(true);
+  const interval = useTimerState((state) => state.interval);
 
   return (
-    <div>
+    <div className=" flex min-h-screen flex-col">
       <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
         <div className="flex w-full flex-1  flex-col gap-2">
           <Title ff="Hiragino Sans" className=" text-base  md:text-lg">
@@ -139,8 +144,8 @@ export const Episode: FC = () => {
           />
         </div>
       </nav>
-      <main>
-        <div className="container mx-auto">
+      <main className=" flex-1">
+        <div className="container mx-auto p-6">
           {isChat ? (
             <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
           ) : (
@@ -152,22 +157,41 @@ export const Episode: FC = () => {
         end_time: data?.episodes_by_pk?.end_time,
         slug: category,
       }) && (
-        <ActionIcon
-          variant="filled"
-          color="indigo"
-          radius="xl"
-          size={48}
-          className="fixed bottom-10 right-4"
-          onClick={() => {
-            interval.toggle();
-          }}
+        <div
+          className={`fixed bottom-24 right-0  rounded-l-md border-indigo-500 bg-indigo-500 p-2 shadow-xl transition-transform ${
+            showPlayButton ? "" : "translate-x-full"
+          }`}
         >
-          {interval.active ? (
-            <IconPlayerPause size={28} className="fill-white" />
-          ) : (
-            <IconPlayerPlay size={28} className="fill-white" />
-          )}
-        </ActionIcon>
+          <UnstyledButton
+            onClick={() => setShowPlayButton((p) => !p)}
+            className="absolute top-2 -left-4 flex h-1/2 w-4 items-center justify-center rounded-r-none rounded-l-md border-l bg-indigo-500 shadow-xl"
+          >
+            <IconChevronRight
+              color="white"
+              className={` ${showPlayButton ? "" : "-rotate-180 transform"}`}
+            />
+          </UnstyledButton>
+          <ActionIcon
+            variant="transparent"
+            size={40}
+            className="bg-white"
+            onClick={() => {
+              interval?.toggle();
+            }}
+          >
+            {interval?.active ? (
+              <IconPlayerPause
+                size={20}
+                className="fill-indigo-500 text-indigo-500"
+              />
+            ) : (
+              <IconPlayerPlay
+                size={20}
+                className="fill-indigo-500 text-indigo-500"
+              />
+            )}
+          </ActionIcon>
+        </div>
       )}
     </div>
   );
