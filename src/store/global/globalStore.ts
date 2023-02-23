@@ -50,3 +50,17 @@ export const useGlobalState = create<GlobalState>((set) => ({
       isWsClient,
     })),
 }));
+
+type ElementSizeState = {
+  width: number;
+  height: number;
+  setHeight: (height: number) => void;
+  setWidth: (width: number) => void;
+};
+
+export const useElementSizeState = create<ElementSizeState>((set) => ({
+  width: 0,
+  height: 0,
+  setHeight: (height) => set(() => ({ height })),
+  setWidth: (width) => set(() => ({ width })),
+}));
