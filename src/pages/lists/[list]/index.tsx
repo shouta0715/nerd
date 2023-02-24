@@ -35,7 +35,7 @@ const Index: NextPage = () => {
   );
 
   return (
-    <Box component="section" className="min-h-screen">
+    <Box component="section">
       <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
         <Box className="container mx-auto flex flex-col items-start justify-center  space-y-2 bg-transparent py-4 md:flex-row md:items-center md:space-y-0">
           <Title

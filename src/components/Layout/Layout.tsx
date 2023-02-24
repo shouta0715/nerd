@@ -7,8 +7,8 @@ type Props = {
 };
 
 export const Layout: FC<Props> = ({ children }) => (
-  <div className="min-w-screen  min-h-screen ">
-    <div className=" flex h-full w-full">
+  <div>
+    <div className="flex w-full">
       <section className="flex max-w-full flex-1 flex-col">
         <Header />
         <CategoryNav />

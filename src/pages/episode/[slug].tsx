@@ -7,7 +7,7 @@ import { useGetEpisodeQuery } from "src/generated/graphql";
 import { getClient } from "src/utils/getClient";
 
 const Index: NextPage = () => (
-  <Box component="section" className="min-h-screen">
+  <Box component="section" className="">
     <Suspense fallback={<div>Loading...</div>}>
       <Episode />
     </Suspense>

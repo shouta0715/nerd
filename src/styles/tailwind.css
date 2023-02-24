@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply h-screen;
+    @apply min-h-[100dvh];
   }
 
   li {
