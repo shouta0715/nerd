@@ -4,7 +4,7 @@
 
 @layer base {
   html {
-    @apply h-screen;
+    @apply m-0 h-[100dvh] p-0;
   }
 
   li {

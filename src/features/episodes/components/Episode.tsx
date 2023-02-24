@@ -44,7 +44,7 @@ export const Episode: FC = () => {
   const [isChat, setIsChat] = useState(true);
 
   return (
-    <div className=" flex min-h-screen flex-col">
+    <div className="flex flex-col">
       <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
         <div className="flex w-full flex-1  flex-col gap-2">
           <Title ff="Hiragino Sans" className=" text-base  md:text-lg">
