@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Box, Textarea } from "@mantine/core";
+import { ActionIcon, Avatar, Box, Input } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 
@@ -36,7 +36,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             }}
           />
         </figure>
-        <Textarea
+        <Input
           // onFocus={}
           disabled={!user}
           placeholder={user ? `${user?.user_name}で投稿` : ""}
@@ -45,9 +45,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             input: "text-[16px] pr-[50px] placeholder:pl-4 scale-90",
           }}
           rightSectionWidth={80}
-          maxRows={3}
-          maxLength={100}
-          autosize
+          // maxRows={3}
+          // maxLength={100}
+          // autosize
           radius="xl"
           value={content}
           rightSection={
