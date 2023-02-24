@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { PlayButton } from "src/components/Elements/PlayButton";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
-import { InputFiled } from "src/features/comments/components/InputFiled";
+import { InputFiled } from "src/features/comments/components/CommnetInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
@@ -96,7 +96,7 @@ export const Episode: FC = () => {
           />
         </div>
       </header>
-      <nav className="sticky top-0 z-50 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
+      <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2">
         <div className="container mx-auto flex items-center justify-between">
           <ActionIcon
             color="dark"
@@ -139,8 +139,8 @@ export const Episode: FC = () => {
           />
         </div>
       </nav>
-      <main className=" flex-1">
-        <div className="container mx-auto p-6">
+      <main className="flex-1">
+        <div className="container relative mx-auto">
           {isChat ? (
             <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
           ) : (

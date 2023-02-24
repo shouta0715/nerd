@@ -12,10 +12,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { data } = useChatComments({ episode_id });
 
   return (
-    <Box
-      component="ul"
-      className="pb- mx-auto w-full space-y-3 pb-16 md:max-w-xl"
-    >
+    <Box component="ul" className=" mx-auto w-full space-y-3 md:max-w-xl">
       {data?.map((comment) => (
         <li key={comment.id} className="flex w-full">
           <Avatar

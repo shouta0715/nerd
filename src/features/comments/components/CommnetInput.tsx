@@ -1,4 +1,4 @@
-import { ActionIcon, Avatar, Box, Input } from "@mantine/core";
+import { ActionIcon, Avatar, Box, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 
@@ -21,9 +21,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className=" bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
+    <div className="fixed bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
       <form
-        className=" container mx-auto flex items-center justify-center opacity-100"
+        className="container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}
       >
         <figure className="m-0 mr-2">
@@ -36,8 +36,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             }}
           />
         </figure>
-        <Input
-          // onFocus={}
+        <Textarea
           disabled={!user}
           placeholder={user ? `${user?.user_name}で投稿` : ""}
           className="w-full max-w-sm flex-1"
@@ -45,9 +44,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             input: "text-[16px] pr-[50px] placeholder:pl-4 scale-90",
           }}
           rightSectionWidth={80}
-          // maxRows={3}
-          // maxLength={100}
-          // autosize
+          maxRows={3}
+          maxLength={100}
+          autosize
           radius="xl"
           value={content}
           rightSection={
