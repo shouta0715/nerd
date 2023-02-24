@@ -140,7 +140,7 @@ export const Episode: FC = () => {
         </div>
       </nav>
       <main className="flex-1">
-        <div className="container relative mx-auto">
+        <div className="container relative mx-auto mb-16">
           {isChat ? (
             <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
           ) : (
