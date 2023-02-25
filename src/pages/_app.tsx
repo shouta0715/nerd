@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { RouterTransition } from "src/components/Elements/RouterTransition";
 import { Logo } from "src/components/Icon/Logo";
 import { Error } from "src/components/Layout/error/Error";
 import { ModalContent } from "src/components/Layout/modules/ModalContent";
@@ -64,6 +65,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             >
               <ModalContent />
             </Modal>
+            <RouterTransition />
             <Component {...pageProps} />
             <ReactQueryDevtools initialIsOpen={false} />
           </MantineProvider>

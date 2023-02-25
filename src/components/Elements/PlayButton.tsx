@@ -7,7 +7,11 @@ import {
 import React, { FC, useState } from "react";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
-export const PlayButton: FC = () => {
+type Props = {
+  loading: boolean;
+};
+
+export const PlayButton: FC<Props> = ({ loading }) => {
   const [showPlayButton, setShowPlayButton] = useState(true);
   const interval = useTimerState((state) => state.interval);
 
@@ -27,6 +31,8 @@ export const PlayButton: FC = () => {
         />
       </UnstyledButton>
       <ActionIcon
+        loaderProps={{ color: "indigo.6" }}
+        loading={loading}
         variant="transparent"
         size={40}
         className="bg-white"
