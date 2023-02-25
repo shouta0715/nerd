@@ -5,9 +5,9 @@ import {
   NavigationProgress,
 } from "@mantine/nprogress";
 import { useRouter } from "next/router";
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 
-export const RouterTransition: FC = () => {
+export const RouterTransition = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +24,8 @@ export const RouterTransition: FC = () => {
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
-  }, [router.asPath, router.events]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.asPath]);
 
-  return <NavigationProgress autoReset progressLabel="Loading Page" />;
+  return <NavigationProgress autoReset />;
 };
