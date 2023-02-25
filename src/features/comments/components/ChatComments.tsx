@@ -2,6 +2,7 @@ import { Avatar, Box, Text } from "@mantine/core";
 import React, { FC, memo } from "react";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   episode_id: string;
@@ -10,18 +11,29 @@ type Props = {
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { timeCommented } = timeProcessing();
   const { data } = useChatComments({ episode_id });
+  const user = useUserState((state) => state.user);
 
   return (
     <Box component="ul" className="mx-auto w-full space-y-3 p-4 md:max-w-xl">
       {data?.map((comment) => (
-        <li key={comment.id} className="flex w-full">
+        <li
+          key={comment.id}
+          className={`flex w-full ${
+            user?.id === comment.user?.id ? "flex-row-reverse" : ""
+          }`}
+        >
           <Avatar
             src={comment.user?.photo_url}
             alt={comment.user?.user_name}
             radius="xl"
-            className="mr-2"
+            className={`
+              ${user?.id === comment.user?.id ? "ml-2" : "mr-2"}`}
           />
-          <div className="max-w-[calc(100%-46px)] flex-1">
+          <div
+            className={`max-w-[calc(100%-92px)] flex-1 ${
+              user?.id === comment.user?.id ? "text-right" : ""
+            }`}
+          >
             <Text ff="Hiragino Sans" size="xs" className="my-1 font-bold">
               {comment.user?.user_name}
             </Text>

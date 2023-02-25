@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import React, { Suspense } from "react";
 import { Episode } from "src/features/episodes/components/Episode";
 import { useGetEpisodeQuery } from "src/generated/graphql";
+import { getTodaysAndSeasonsIds } from "src/hooks/router/dynamicPaths";
 import { getClient } from "src/utils/getClient";
 
 const Index: NextPage = () => (
@@ -16,13 +17,14 @@ const Index: NextPage = () => (
 
 export default Index;
 
-export const getStaticPaths: GetStaticPaths = async () =>
-  // const paths = await getTodaysAndSeasonsIds();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = await getTodaysAndSeasonsIds();
 
-  ({
-    paths: [],
-    fallback: "blocking",
-  });
+  return {
+    paths,
+    fallback: true,
+  };
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const slug = context.params?.slug;

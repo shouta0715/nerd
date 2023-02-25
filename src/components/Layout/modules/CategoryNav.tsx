@@ -23,7 +23,7 @@ export const CategoryNav: FC = () => {
           <Link
             href="/"
             className={` mr-6 inline-block border-x-0 border-y-0 border-solid px-2 py-2 tracking-wide ${
-              router.pathname === "/" ? "border-b-2 text-black" : ""
+              router.pathname === "/" ? "border-b-2 text-indigo-500" : ""
             }`}
           >
             All
@@ -35,7 +35,7 @@ export const CategoryNav: FC = () => {
               href={`/categories/${media.name}`}
               className={`mr-6 inline-block border-x-0 border-y-0 border-solid py-2 px-2 last:mr-0 ${
                 router.asPath === `/categories/${media.name}`
-                  ? "border-b-2 text-black"
+                  ? "border-b-2 text-indigo-500"
                   : ""
               }`}
             >

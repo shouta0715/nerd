@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { HeartIcon } from "@heroicons/react/24/outline";
-import { UnstyledButton } from "@mantine/core";
+import { ActionIcon } from "@mantine/core";
 import React, { FC, memo, useEffect, useState } from "react";
 import { useMutateEpisodeLike } from "src/features/episodes/api/useMutateEpisodeLike";
 import { useDebounce } from "src/hooks/useDebounce";
@@ -63,8 +63,7 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
   };
 
   return (
-    <UnstyledButton
-      disabled={!user}
+    <div
       onClick={() => {
         if (user?.anonymous) {
           setIsOpenModal(true);
@@ -81,13 +80,20 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
       role="button"
       className="group flex cursor-pointer items-center space-x-2 text-sm"
     >
-      <HeartIcon
-        className={`h-5 w-5 cursor-pointer group-disabled:animate-pulse group-disabled:text-slate-300  group-disabled:opacity-50 md:h-6  md:w-6  ${
-          likeState.isLiked
-            ? "fill-pink-500 text-pink-500"
-            : "text-black group-hover:text-pink-500"
-        }`}
-      />
+      <ActionIcon
+        loading={
+          insertLikesMutation.isLoading || deleteLikeMutation.isLoading || !user
+        }
+        loaderProps={{ color: "pink" }}
+      >
+        <HeartIcon
+          className={`h-5 w-5 cursor-pointer group-disabled:animate-pulse group-disabled:text-slate-300  group-disabled:opacity-50 md:h-6  md:w-6  ${
+            likeState.isLiked
+              ? "fill-pink-500 text-pink-500"
+              : "text-black group-hover:text-pink-500"
+          }`}
+        />
+      </ActionIcon>
       <span
         className={`${
           likeState.isLiked
@@ -97,6 +103,6 @@ export const LikeButton: FC<Props> = memo(({ debounceTime, episodeId }) => {
       >
         {count}
       </span>
-    </UnstyledButton>
+    </div>
   );
 });
