@@ -26,5 +26,5 @@ export const RouterTransition: FC = () => {
     };
   }, [router.asPath, router.events]);
 
-  return <NavigationProgress autoReset />;
+  return <NavigationProgress autoReset progressLabel="Loading Page" />;
 };

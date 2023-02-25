@@ -74,7 +74,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             </Button>
           </div>
         )}
-        <div className="z-10 mt-2 flex w-full justify-around text-sm">
+        <div className="z-10 mt-2 flex w-full items-center justify-around text-sm">
           {getTimeStatus({
             start_time: episode.start_time,
             end_time: episode.end_time,
