@@ -23,9 +23,11 @@ interface Payload extends ExecutionResult {
 export const useSubscriptionChatComments = ({ episode_id, category }: Args) => {
   const queryClient = useQueryClient();
   const wsClient = useGlobalState((state) => state.wsClient);
+  const isWSClient = useGlobalState((state) => state.isWsClient);
 
   useEffect(() => {
-    if (wsClient === null || category !== "live" || !episode_id) return;
+    if (wsClient === null || category !== "live" || !episode_id || !isWSClient)
+      return;
 
     const unSubscriptions = wsClient.subscribe(
       {

@@ -1,16 +1,17 @@
 import { useGetChatCommentsQuery } from "src/generated/graphql";
-import { getClient } from "src/utils/getClient";
+import { useGlobalState } from "src/store/global/globalStore";
 
 export const useQueryComments = (episode_id: string) => {
-  const { request } = getClient();
+  const client = useGlobalState((state) => state.client);
+  const isCLient = useGlobalState((state) => state.isClient);
 
   return useGetChatCommentsQuery(
-    request,
+    client,
     {
       episode_id,
     },
     {
-      enabled: !!episode_id,
+      enabled: !!episode_id && isCLient,
     }
   );
 };
