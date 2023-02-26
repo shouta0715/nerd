@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
-import { InputFiled } from "src/features/comments/components/CommnetInput";
+import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
