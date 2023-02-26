@@ -13,7 +13,7 @@ export const useChatComments = ({ episode_id }: Args) => {
   const { timeToSecond } = timeProcessing();
   const timeFilterData = useMemo(
     () =>
-      data?.chat_comments.filter(
+      data?.chat_comments?.filter(
         (comment) => comment.time <= timeToSecond(time)
       ),
     [data, time, timeToSecond]

@@ -3,7 +3,7 @@ import { gql } from "graphql-request";
 export const GET_CHAT_COMMENTS = gql`
   query GetChatComments($episode_id: uuid!) {
     chat_comments(
-      where: { _and: { episode_id: { _eq: $episode_id }, time: { _gt: 0 } } }
+      where: { _and: { episode_id: { _eq: $episode_id }, time: { _gte: 0 } } }
       order_by: { time: asc, created_at: asc }
     ) {
       content
@@ -12,6 +12,7 @@ export const GET_CHAT_COMMENTS = gql`
       episode_id
       id
       time
+      commenter_name
       user {
         anonymous
         user_name
@@ -32,6 +33,28 @@ export const INSERT_CHAT_COMMENT = gql`
       id
       episode_id
       created_at
+      commenter_name
+      user {
+        anonymous
+        user_name
+        photo_url
+        id
+      }
+    }
+  }
+`;
+
+export const SUBSCRIPTION_CHAT_COMMENT = gql`
+  subscription SubscriptionChatComments($episode_id: uuid!) {
+    chat_comments(where: { episode_id: { _eq: $episode_id } }) {
+      content
+      work_id
+      user_id
+      time
+      id
+      episode_id
+      created_at
+      commenter_name
       user {
         anonymous
         user_name

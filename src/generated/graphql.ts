@@ -89,6 +89,7 @@ export type String_Comparison_Exp = {
 export type Chat_Comments = {
   __typename?: 'chat_comments';
   anonymous: Scalars['Boolean'];
+  commenter_name: Scalars['String'];
   content: Scalars['String'];
   created_at: Scalars['timestamptz'];
   /** An object relationship */
@@ -202,6 +203,7 @@ export type Chat_Comments_Bool_Exp = {
   _not?: InputMaybe<Chat_Comments_Bool_Exp>;
   _or?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
   anonymous?: InputMaybe<Boolean_Comparison_Exp>;
+  commenter_name?: InputMaybe<String_Comparison_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episode?: InputMaybe<Episodes_Bool_Exp>;
@@ -229,6 +231,7 @@ export type Chat_Comments_Inc_Input = {
 /** input type for inserting data into table "chat_comments" */
 export type Chat_Comments_Insert_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
@@ -244,6 +247,7 @@ export type Chat_Comments_Insert_Input = {
 /** aggregate max on columns */
 export type Chat_Comments_Max_Fields = {
   __typename?: 'chat_comments_max_fields';
+  commenter_name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   episode_id?: Maybe<Scalars['uuid']>;
@@ -255,6 +259,7 @@ export type Chat_Comments_Max_Fields = {
 
 /** order by max() on columns of table "chat_comments" */
 export type Chat_Comments_Max_Order_By = {
+  commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
@@ -267,6 +272,7 @@ export type Chat_Comments_Max_Order_By = {
 /** aggregate min on columns */
 export type Chat_Comments_Min_Fields = {
   __typename?: 'chat_comments_min_fields';
+  commenter_name?: Maybe<Scalars['String']>;
   content?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['timestamptz']>;
   episode_id?: Maybe<Scalars['uuid']>;
@@ -278,6 +284,7 @@ export type Chat_Comments_Min_Fields = {
 
 /** order by min() on columns of table "chat_comments" */
 export type Chat_Comments_Min_Order_By = {
+  commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
@@ -306,6 +313,7 @@ export type Chat_Comments_On_Conflict = {
 /** Ordering options when selecting data from "chat_comments". */
 export type Chat_Comments_Order_By = {
   anonymous?: InputMaybe<Order_By>;
+  commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode?: InputMaybe<Episodes_Order_By>;
@@ -327,6 +335,8 @@ export type Chat_Comments_Pk_Columns_Input = {
 export enum Chat_Comments_Select_Column {
   /** column name */
   Anonymous = 'anonymous',
+  /** column name */
+  CommenterName = 'commenter_name',
   /** column name */
   Content = 'content',
   /** column name */
@@ -358,6 +368,7 @@ export enum Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_Or
 /** input type for updating data in table "chat_comments" */
 export type Chat_Comments_Set_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
@@ -417,6 +428,7 @@ export type Chat_Comments_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Chat_Comments_Stream_Cursor_Value_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
   content?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
@@ -443,6 +455,8 @@ export type Chat_Comments_Sum_Order_By = {
 export enum Chat_Comments_Update_Column {
   /** column name */
   Anonymous = 'anonymous',
+  /** column name */
+  CommenterName = 'commenter_name',
   /** column name */
   Content = 'content',
   /** column name */
@@ -3108,14 +3122,21 @@ export type GetChatCommentsQueryVariables = Exact<{
 }>;
 
 
-export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, anonymous: boolean, created_at: any, episode_id?: any | null, id: any, time: number, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, anonymous: boolean, created_at: any, episode_id?: any | null, id: any, time: number, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
 
 export type InsertChatCommentMutationVariables = Exact<{
   object: Chat_Comments_Insert_Input;
 }>;
 
 
-export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
+export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
+
+export type SubscriptionChatCommentsSubscriptionVariables = Exact<{
+  episode_id: Scalars['uuid'];
+}>;
+
+
+export type SubscriptionChatCommentsSubscription = { __typename?: 'subscription_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
 
 export type UpdateTodayEpisodeMutationVariables = Exact<{
   tid: Scalars['Int'];
@@ -3196,7 +3217,7 @@ export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __
 export const GetChatCommentsDocument = `
     query GetChatComments($episode_id: uuid!) {
   chat_comments(
-    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gt: 0}}}
+    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gte: 0}}}
     order_by: {time: asc, created_at: asc}
   ) {
     content
@@ -3205,6 +3226,7 @@ export const GetChatCommentsDocument = `
     episode_id
     id
     time
+    commenter_name
     user {
       anonymous
       user_name
@@ -3243,6 +3265,7 @@ export const InsertChatCommentDocument = `
     id
     episode_id
     created_at
+    commenter_name
     user {
       anonymous
       user_name
@@ -3266,6 +3289,26 @@ export const useInsertChatCommentMutation = <
       options
     );
 useInsertChatCommentMutation.fetcher = (client: GraphQLClient, variables: InsertChatCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatCommentMutation, InsertChatCommentMutationVariables>(client, InsertChatCommentDocument, variables, headers);
+export const SubscriptionChatCommentsDocument = `
+    subscription SubscriptionChatComments($episode_id: uuid!) {
+  chat_comments(where: {episode_id: {_eq: $episode_id}}) {
+    content
+    work_id
+    user_id
+    time
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      photo_url
+      id
+    }
+  }
+}
+    `;
 export const UpdateTodayEpisodeDocument = `
     mutation UpdateTodayEpisode($tid: Int!, $number: Int!, $episodes_set_input: episodes_set_input!) {
   update_episodes(
