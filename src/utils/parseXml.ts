@@ -23,7 +23,8 @@ export const parseXml = (data: string) => {
       !title?.trim() ||
       Number.isNaN(Number(number)) ||
       !start_time ||
-      !end_time
+      !end_time ||
+      !Number.isInteger(Number(number))
     )
       return;
 
