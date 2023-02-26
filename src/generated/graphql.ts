@@ -3131,6 +3131,13 @@ export type InsertChatCommentMutationVariables = Exact<{
 
 export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
+export type SubscriptionChatCommentsSubscriptionVariables = Exact<{
+  episode_id: Scalars['uuid'];
+}>;
+
+
+export type SubscriptionChatCommentsSubscription = { __typename?: 'subscription_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+
 export type UpdateTodayEpisodeMutationVariables = Exact<{
   tid: Scalars['Int'];
   number: Scalars['Int'];
@@ -3210,7 +3217,7 @@ export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __
 export const GetChatCommentsDocument = `
     query GetChatComments($episode_id: uuid!) {
   chat_comments(
-    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gt: 0}}}
+    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gte: 0}}}
     order_by: {time: asc, created_at: asc}
   ) {
     content
@@ -3282,6 +3289,26 @@ export const useInsertChatCommentMutation = <
       options
     );
 useInsertChatCommentMutation.fetcher = (client: GraphQLClient, variables: InsertChatCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatCommentMutation, InsertChatCommentMutationVariables>(client, InsertChatCommentDocument, variables, headers);
+export const SubscriptionChatCommentsDocument = `
+    subscription SubscriptionChatComments($episode_id: uuid!) {
+  chat_comments(where: {episode_id: {_eq: $episode_id}}) {
+    content
+    work_id
+    user_id
+    time
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      photo_url
+      id
+    }
+  }
+}
+    `;
 export const UpdateTodayEpisodeDocument = `
     mutation UpdateTodayEpisode($tid: Int!, $number: Int!, $episodes_set_input: episodes_set_input!) {
   update_episodes(

@@ -1,5 +1,7 @@
 import { Avatar, Box, Text } from "@mantine/core";
+import { useRouter } from "next/router";
 import React, { FC, memo } from "react";
+import { useSubscriptionChatComments } from "src/features/comments/api/useSubscriptionChatComments";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
@@ -10,8 +12,14 @@ type Props = {
 
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { timeCommented } = timeProcessing();
+  const router = useRouter();
   const { data } = useChatComments({ episode_id });
   const user = useUserState((state) => state.user);
+
+  useSubscriptionChatComments({
+    episode_id,
+    category: router.query.category,
+  });
 
   return (
     <Box component="ul" className="mx-auto w-full space-y-3 p-4 md:max-w-xl">
