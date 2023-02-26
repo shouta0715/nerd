@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
@@ -38,16 +39,6 @@ const DynamicFinishComments = dynamic(
 const DynamicPlayButton = dynamic(
   () =>
     import("src/components/Elements/PlayButton").then((mod) => mod.PlayButton),
-  {
-    ssr: false,
-  }
-);
-
-const DynamicInputFiled = dynamic(
-  () =>
-    import("src/features/comments/components/CommentInput").then(
-      (mod) => mod.InputFiled
-    ),
   {
     ssr: false,
   }
@@ -172,7 +163,7 @@ export const Episode: FC = () => {
             <DynamicFinishComments />
           )}
         </div>
-        <DynamicInputFiled episode_id={data?.episodes_by_pk?.id} />
+        <InputFiled episode_id={data?.episodes_by_pk?.id} />
       </main>
       {getIsArchive({
         end_time: data?.episodes_by_pk?.end_time,
