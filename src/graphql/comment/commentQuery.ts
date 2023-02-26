@@ -12,6 +12,7 @@ export const GET_CHAT_COMMENTS = gql`
       episode_id
       id
       time
+      commenter_name
       user {
         anonymous
         user_name
@@ -32,6 +33,7 @@ export const INSERT_CHAT_COMMENT = gql`
       id
       episode_id
       created_at
+      commenter_name
       user {
         anonymous
         user_name

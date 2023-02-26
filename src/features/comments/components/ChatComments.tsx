@@ -35,7 +35,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
             }`}
           >
             <Text ff="Hiragino Sans" size="xs" className="my-1 font-bold">
-              {comment.user?.user_name}
+              {comment.commenter_name}
             </Text>
 
             <Text
