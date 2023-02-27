@@ -1,6 +1,9 @@
-import { ActionIcon, Avatar, Box, Textarea } from "@mantine/core";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { ActionIcon, Box, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
+import { Avatar } from "src/components/Elements/Avatar";
 
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
@@ -26,15 +29,13 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
         className="container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}
       >
-        <figure className="m-0 mr-2">
-          <Avatar
-            radius="xl"
-            className="cursor-pointer"
-            src={user?.photo_url}
-            onClick={() => {
-              if (user?.anonymous) setIsOpenModal(true);
-            }}
-          />
+        <figure
+          className="m-0 mr-2"
+          onClick={() => {
+            if (user?.anonymous) setIsOpenModal(true);
+          }}
+        >
+          <Avatar user_id={user?.id ?? ""} user_name={user?.user_name ?? ""} />
         </figure>
         <Textarea
           disabled={!user}

@@ -1,6 +1,7 @@
-import { Avatar, Box, Text } from "@mantine/core";
+import { Box, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { FC, memo } from "react";
+import { Avatar } from "src/components/Elements/Avatar";
 import { useSubscriptionChatComments } from "src/features/comments/api/useSubscriptionChatComments";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
@@ -30,13 +31,14 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
             user?.id === comment.user?.id ? "flex-row-reverse" : ""
           }`}
         >
-          <Avatar
-            src={comment.user?.photo_url}
-            alt={comment.user?.user_name}
-            radius="xl"
-            className={`
-              ${user?.id === comment.user?.id ? "ml-2" : "mr-2"}`}
-          />
+          <figure
+            className={`m-0 ${user?.id === comment.user?.id ? "ml-2" : "mr-2"}`}
+          >
+            <Avatar
+              user_id={comment.user?.id}
+              user_name={comment.commenter_name}
+            />
+          </figure>
           <div
             className={`max-w-[calc(100%-92px)] flex-1 ${
               user?.id === comment.user?.id ? "text-right" : ""
