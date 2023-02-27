@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import {
   GetEpisodeLikesQuery,
   useGetEpisodeLikesQuery,
-} from "src/generated/graphql";
+} from "src/graphql/like/likeQuery.generated";
+
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserLikesStore, useUserState } from "src/store/user/userState";
 

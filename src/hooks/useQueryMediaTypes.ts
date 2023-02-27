@@ -1,4 +1,4 @@
-import { useGetMediaTypesQuery } from "../generated/graphql";
+import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
 import { getClient } from "src/utils/getClient";
 
 export const useQueryMediaTypes = () => {

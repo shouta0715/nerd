@@ -5,7 +5,8 @@ import {
   GetChatCommentsQuery,
   useGetChatCommentsQuery,
   useInsertChatCommentMutation,
-} from "src/generated/graphql";
+} from "src/graphql/comment/commentQuery.generated";
+
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 

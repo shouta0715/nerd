@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetSeasonWorksQuery } from "src/generated/graphql";
+import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
 export const useQuerySeasonWorks = () =>
   useQuery<GetSeasonWorksQuery>({

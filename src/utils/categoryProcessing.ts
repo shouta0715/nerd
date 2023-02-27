@@ -1,4 +1,4 @@
-import { GetMediaTypesQuery } from "../generated/graphql";
+import { GetMediaTypesQuery } from "src/graphql/otherQuery.generated";
 
 type args = GetMediaTypesQuery["media_types"][0];
 

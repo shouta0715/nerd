@@ -9,11 +9,10 @@ import React, { useCallback, useState } from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
 import { SeasonWorksList } from "src/features/works/components/SeasonWorksList";
-import {
-  useGetMediaTypesQuery,
-  useGetSeasonWorksQuery,
-  useGetTodayEpisodesQuery,
-} from "src/generated/graphql";
+import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
+import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { useSearchInputState } from "src/store/input/serchInput";
 import { AutoCompleteData } from "src/types/dataType";
