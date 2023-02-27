@@ -26,9 +26,7 @@ export const Header: FC = () => {
               onClick={() => changeIsOpenModal(true)}
               size="xs"
               radius="md"
-              className={` transition-opacity duration-[250ms] ${
-                authLoading ? "pointer-events-none opacity-0" : "opacity-100"
-              } `}
+              loading={authLoading}
               classNames={{
                 label: "font-bold text-sm",
               }}

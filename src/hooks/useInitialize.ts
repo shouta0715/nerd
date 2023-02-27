@@ -11,6 +11,7 @@ export const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setAllClient = useGlobalState((state) => state.setAllClient);
   const setUser = useUserState((state) => state.setUser);
+  const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -53,6 +54,7 @@ export const useInitialize = () => {
           photo_url: user.photoURL,
           user_name: user.displayName ?? "匿名",
         });
+        setAuthLoading(false);
       } else {
         (async () => {
           await signInAnonymously(auth).then((result) => result.user);
@@ -63,5 +65,5 @@ export const useInitialize = () => {
     return () => {
       unSubUser();
     };
-  }, [TOKEN_KEY, setUser, setAllClient]);
+  }, [TOKEN_KEY, setUser, setAllClient, setAuthLoading]);
 };
