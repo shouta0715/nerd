@@ -1,4 +1,4 @@
-import { Button, Paper, Text } from "@mantine/core";
+import { Button, Text } from "@mantine/core";
 import Link from "next/link";
 import React, { FC } from "react";
 import { GoogleIcon } from "src/components/Icon/GoogleIcon";
@@ -11,7 +11,7 @@ export const ModalContent: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <Paper className="flex flex-col items-center justify-center space-y-6 px-4">
+    <div className="flex flex-col items-center justify-center space-y-6 px-4">
       <Text color="dimmed" size="sm" className="font-medium">
         ログインをすると他の人をフォローしたり、自分の投稿を保存することができます。
         <Link href="/">
@@ -60,6 +60,6 @@ export const ModalContent: FC = () => {
         </Link>
         を確認の上、ご利用ください。
       </Text>
-    </Paper>
+    </div>
   );
 };

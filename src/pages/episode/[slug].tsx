@@ -1,15 +1,26 @@
 import { Box } from "@mantine/core";
 import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-import { Episode } from "src/features/episodes/components/Episode";
 import { useGetEpisodeQuery } from "src/generated/graphql";
 import { getClient } from "src/utils/getClient";
 
+const DynamicEpisode = dynamic(
+  () =>
+    import("src/features/episodes/components/Episode").then(
+      (mod) => mod.Episode
+    ),
+  {
+    ssr: true,
+    suspense: true,
+  }
+);
+
 const Index: NextPage = () => (
-  <Box component="section" className="">
+  <Box component="section">
     <Suspense fallback={<div>loading...</div>}>
-      <Episode />
+      <DynamicEpisode />
     </Suspense>
   </Box>
 );
