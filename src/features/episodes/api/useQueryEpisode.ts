@@ -1,4 +1,4 @@
-import { useGetEpisodeQuery } from "src/generated/graphql";
+import { useGetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const useQueryEpisode = (id: string | string[] | undefined) => {

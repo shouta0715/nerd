@@ -1,6 +1,6 @@
 import create from "zustand";
 import { User } from "../../types/userType";
-import { GetEpisodeLikesQuery } from "src/generated/graphql";
+import { GetEpisodeLikesQuery } from "src/graphql/like/likeQuery.generated";
 
 type UserStore = {
   user: User | null;

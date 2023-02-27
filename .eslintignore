@@ -7,3 +7,5 @@ public
 generated
 functions
 *.config.*
+*.generated.ts
+graphql.ts

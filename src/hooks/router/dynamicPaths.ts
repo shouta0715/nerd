@@ -1,12 +1,11 @@
 /* eslint-disable no-promise-executor-return */
 import axios from "axios";
-import {
-  Episodes_Bool_Exp,
-  GetMediaTypesQuery,
-  useGetSeasonWorksQuery,
-  useGetTodayEpisodesQuery,
-} from "../../generated/graphql";
+
 import { GET_MEDIA_TYPES } from "../../graphql/otherQuery";
+import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetMediaTypesQuery } from "src/graphql/otherQuery.generated";
+import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { Episodes_Bool_Exp } from "src/types/graphql";
 import { getClient } from "src/utils/getClient";
 import { parseXml } from "src/utils/parseXml";
 import { returningSeason } from "src/utils/returningSeason";

@@ -1,18 +1,17 @@
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
 import { useQuerySeasonWorks } from "src/features/works/api/useQuerySeasonWorks";
+import { useAutoCompleteState } from "src/store/global/globalStore";
 import { useSearchInputState } from "src/store/input/serchInput";
-import { AutoCompleteData } from "src/types/dataType";
 
-type Props = {
-  callbackTitle?: (items: AutoCompleteData[] | undefined) => void;
-};
-
-export const useSeasonWorksList = ({ callbackTitle }: Props) => {
+export const useSeasonWorksList = () => {
   const { data } = useQuerySeasonWorks();
   const { pathname } = useRouter();
   const indexPage = pathname === "/";
   const searchInput = useSearchInputState((state) => state.searchInput);
+  const setAutoCompleteData = useAutoCompleteState(
+    (state) => state.setAutoCompleteData
+  );
   const limit = indexPage ? 18 : data?.works.length;
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
   const filterWorks = useMemo(
@@ -28,19 +27,17 @@ export const useSeasonWorksList = ({ callbackTitle }: Props) => {
   );
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    callbackTitle &&
-      callbackTitle(
-        data?.works?.map((e) => ({
-          title: e.series_title,
-          value: e.series_title,
-        }))
-      );
+    setAutoCompleteData(
+      data?.works?.map((e) => ({
+        title: e.series_title,
+        value: e.series_title,
+      })) ?? []
+    );
 
     return () => {
       setSearchInput("");
     };
-  }, [callbackTitle, data?.works, setSearchInput]);
+  }, [data?.works, setAutoCompleteData, setSearchInput]);
 
   const deferredFilterWorks = useDeferredValue(filterWorks);
 

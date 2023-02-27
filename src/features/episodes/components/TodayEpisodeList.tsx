@@ -3,10 +3,9 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Text } from "@mantine/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { Skeleton } from "src/components/Layout/loading/Skeleton";
 import { useTodayEpisodeList } from "src/features/episodes/hooks/useTodayEpisodeList";
-import { AutoCompleteData } from "src/types/dataType";
 
 const DynamicTodayEpisodeItem = dynamic(
   () => import("src/features/episodes/components/TodayEpisodeItem"),
@@ -16,14 +15,8 @@ const DynamicTodayEpisodeItem = dynamic(
   }
 );
 
-type Props = {
-  callbackTitle?: (items: AutoCompleteData[] | undefined) => void;
-};
-
-export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
-  const { indexPage, deferredFilterEpisodes } = useTodayEpisodeList({
-    callbackTitle,
-  });
+export const TodayEpisodeList: FC = () => {
+  const { indexPage, deferredFilterEpisodes } = useTodayEpisodeList();
 
   return (
     <>
@@ -46,4 +39,4 @@ export const TodayEpisodeList: FC<Props> = memo(({ callbackTitle }) => {
       )}
     </>
   );
-});
+};

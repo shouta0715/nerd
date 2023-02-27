@@ -22,7 +22,6 @@
     "@mantine/core": "^5.10.4",
     "@mantine/hooks": "^5.10.4",
     "@mantine/next": "^5.10.2",
-    "@mantine/nprogress": "^5.10.4",
     "@next/bundle-analyzer": "^13.1.6",
     "@next/font": "13.1.1",
     "@tabler/icons": "^1.119.0",
@@ -48,11 +47,11 @@
     "react-dom": "18.2.0",
     "react-error-boundary": "^3.1.4",
     "typescript": "4.9.4",
-    "zod": "^3.20.6",
     "zustand": "^4.1.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.16.2",
+    "@graphql-codegen/near-operation-file-preset": "^2.5.0",
     "@graphql-codegen/typescript": "^2.8.6",
     "@graphql-codegen/typescript-operations": "^2.5.11",
     "@graphql-codegen/typescript-react-query": "^4.0.6",

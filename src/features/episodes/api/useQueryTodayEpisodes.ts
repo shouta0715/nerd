@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { GetTodayEpisodesQuery } from "src/generated/graphql";
+import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 
 export const useQueryTodayEpisodes = () =>
   useQuery<GetTodayEpisodesQuery>({

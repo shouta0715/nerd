@@ -5,11 +5,9 @@ import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import { SeasonWorks } from "src/features/works/components/SeasonWorks";
-import {
-  useGetMediaTypesQuery,
-  useGetSeasonWorksQuery,
-  useGetTodayEpisodesQuery,
-} from "src/generated/graphql";
+import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
+import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { getClient } from "src/utils/getClient";

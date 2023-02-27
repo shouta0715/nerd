@@ -3,7 +3,7 @@ import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
-import { useGetEpisodeQuery } from "src/generated/graphql";
+import { useGetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { getClient } from "src/utils/getClient";
 
 const DynamicEpisode = dynamic(

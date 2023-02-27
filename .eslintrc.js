@@ -108,6 +108,13 @@ module.exports = {
     "react/button-has-type": "off",
     camelcase: "off",
     "react/display-name": "off",
-    "import/no-extraneous-dependencies": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: false,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
   },
 };

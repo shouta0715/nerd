@@ -10,8 +10,15 @@ export const schema = {
 };
 export const documents = "./src/graphql/**/*.ts";
 export const generates = {
-  "./src/generated/graphql.ts": {
-    plugins: ["typescript", "typescript-operations", "typescript-react-query"],
+  "src/types/graphql.ts": {
+    plugins: ["typescript"],
+  },
+  "src/": {
+    preset: "near-operation-file",
+    presetConfig: {
+      baseTypesPath: "types/graphql.ts",
+    },
+    plugins: ["typescript-operations", "typescript-react-query"],
     config: {
       fetcher: "graphql-request",
       exposeQueryKeys: true,

@@ -1,7 +1,7 @@
 import {
   useDeleteEpisodeLikesMutation,
   useInsertEpisodeLikesMutation,
-} from "src/generated/graphql";
+} from "src/graphql/like/likeQuery.generated";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const useMutateEpisodeLike = () => {

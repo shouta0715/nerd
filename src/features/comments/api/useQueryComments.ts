@@ -1,4 +1,4 @@
-import { useGetChatCommentsQuery } from "src/generated/graphql";
+import { useGetChatCommentsQuery } from "src/graphql/comment/commentQuery.generated";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const useQueryComments = (episode_id: string) => {

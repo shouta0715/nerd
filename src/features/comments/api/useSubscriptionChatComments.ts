@@ -2,11 +2,12 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { ExecutionResult } from "graphql-ws";
 import { useEffect } from "react";
+
+import { SUBSCRIPTION_CHAT_COMMENT } from "src/graphql/comment/commentQuery";
 import {
   GetChatCommentsQuery,
   useGetChatCommentsQuery,
-} from "src/generated/graphql";
-import { SUBSCRIPTION_CHAT_COMMENT } from "src/graphql/comment/commentQuery";
+} from "src/graphql/comment/commentQuery.generated";
 import { useGlobalState } from "src/store/global/globalStore";
 
 type Args = {
@@ -68,5 +69,5 @@ export const useSubscriptionChatComments = ({ episode_id, category }: Args) => {
     return () => {
       unSubscriptions();
     };
-  }, [category, episode_id, queryClient, wsClient]);
+  }, [category, episode_id, isWSClient, queryClient, wsClient]);
 };
