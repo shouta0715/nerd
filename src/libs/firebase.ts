@@ -14,7 +14,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 // const analytics = getAnalytics(app);
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+const app =
+  getApps().length && typeof window !== undefined
+    ? getApp()
+    : initializeApp(firebaseConfig);
 // getAnalytics(app);
 
 const auth = getAuth(app);

@@ -1,9 +1,9 @@
 import { Box } from "@mantine/core";
 import { dehydrate } from "@tanstack/react-query";
 import { GetStaticProps, NextPage } from "next";
-import dynamic from "next/dynamic";
 import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
+import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
 import { SeasonWorks } from "src/features/works/components/SeasonWorks";
 import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
@@ -12,14 +12,6 @@ import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { getClient } from "src/utils/getClient";
 import { returningSeason } from "src/utils/returningSeason";
-
-const DynamicTodayEpisodes = dynamic(
-  () =>
-    import("src/features/episodes/components/TodayEpisodes").then(
-      (mod) => mod.TodayEpisodes
-    ),
-  { ssr: true }
-);
 
 const Home: NextPage = () => (
   <Layout>
@@ -37,7 +29,7 @@ const Home: NextPage = () => (
         className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100"
       >
         <Box className="container mx-auto ">
-          <DynamicTodayEpisodes />
+          <TodayEpisodes />
         </Box>
       </Box>
       <Box component="section">
