@@ -10,7 +10,7 @@ import { RouterTransition } from "src/components/Elements/RouterTransition";
 import { Logo } from "src/components/Icon/Logo";
 import { Error } from "src/components/Layout/error/Error";
 import { ModalContent } from "src/components/Layout/modules/ModalContent";
-import { useInitialize } from "src/hooks/useInitialize";
+import useInitialize from "src/hooks/useInitialize";
 import queryClient from "src/libs/queryClient";
 import { useGlobalState } from "src/store/global/globalStore";
 

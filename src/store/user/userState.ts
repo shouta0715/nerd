@@ -3,7 +3,7 @@ import { User } from "../../types/userType";
 import { GetEpisodeLikesQuery } from "src/generated/graphql";
 
 type UserStore = {
-  user: User;
+  user: User | null;
   setUser: (user: User) => void;
   resetUser: () => void;
 };

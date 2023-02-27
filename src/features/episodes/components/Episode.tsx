@@ -9,7 +9,6 @@ import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
-import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
 
 const DynamicTimer = dynamic(
@@ -39,6 +38,16 @@ const DynamicFinishComments = dynamic(
 const DynamicPlayButton = dynamic(
   () =>
     import("src/components/Elements/PlayButton").then((mod) => mod.PlayButton),
+  {
+    ssr: false,
+  }
+);
+
+const DynamicEpisodeMenu = dynamic(
+  () =>
+    import("src/features/episodes/components/EpisodeMenu").then(
+      (mod) => mod.EpisodeMenu
+    ),
   {
     ssr: false,
   }
@@ -147,7 +156,7 @@ export const Episode: FC = () => {
               コメント
             </Text>
           </ul>
-          <EpisodeMenu
+          <DynamicEpisodeMenu
             episodeTitle={data?.episodes_by_pk?.title}
             episodeNumber={data?.episodes_by_pk?.number}
             workTitle={data?.episodes_by_pk?.work.series_title}

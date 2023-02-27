@@ -7,13 +7,15 @@ import { createClients } from "../libs/graphqlClient";
 import { useUserState } from "../store/user/userState";
 import { useGlobalState } from "src/store/global/globalStore";
 
-export const useInitialize = () => {
+const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setAllClient = useGlobalState((state) => state.setAllClient);
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
   useEffect(() => {
+    const localUserName = localStorage.getItem("user_name");
+
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult(true);
@@ -52,8 +54,12 @@ export const useInitialize = () => {
           id: user.uid,
           anonymous: user.isAnonymous,
           photo_url: user.photoURL,
-          user_name: user.displayName ?? "匿名",
+          user_name: localUserName ?? user.displayName ?? "匿名",
         });
+
+        if (!localUserName && user.displayName) {
+          localStorage.setItem("user_name", user.displayName);
+        }
         setAuthLoading(false);
       } else {
         (async () => {
@@ -67,3 +73,5 @@ export const useInitialize = () => {
     };
   }, [TOKEN_KEY, setUser, setAllClient, setAuthLoading]);
 };
+
+export default useInitialize;
