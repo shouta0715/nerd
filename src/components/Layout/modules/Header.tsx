@@ -1,5 +1,6 @@
-import { Avatar, Button } from "@mantine/core";
+import { Button } from "@mantine/core";
 import React, { FC } from "react";
+import { Avatar } from "src/components/Elements/Avatar";
 import { Logo } from "src/components/Icon/Logo";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -15,12 +16,7 @@ export const Header: FC = () => {
         <Logo />
         <div>
           {user && !user.anonymous ? (
-            <Avatar
-              src={user.photo_url}
-              radius="xl"
-              size="md"
-              className="cursor-pointer"
-            />
+            <Avatar user_id={user.id} user_name={user.user_name} />
           ) : (
             <Button
               onClick={() => changeIsOpenModal(true)}
