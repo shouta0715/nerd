@@ -1,3 +1,6 @@
-import { GetUserQuery } from "../generated/graphql";
-
-export type User = GetUserQuery["users_by_pk"];
+export type User = {
+  id: string;
+  user_name: string;
+  photo_url: string | null;
+  anonymous: boolean;
+};

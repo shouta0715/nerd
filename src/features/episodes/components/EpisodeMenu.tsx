@@ -1,15 +1,11 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ActionIcon, Burger, Menu, Text } from "@mantine/core";
-import {
-  IconPlayerSkipForward,
-  IconPlus,
-  IconStack2,
-  IconUser,
-} from "@tabler/icons";
+import { ActionIcon, Box, Burger, Input, Menu, Text } from "@mantine/core";
+import { IconPencil, IconPlayerSkipForward, IconStack2 } from "@tabler/icons";
 import Link from "next/link";
 import React, { FC, memo, useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   episodeTitle?: string;
@@ -18,10 +14,23 @@ type Props = {
   nextEpisodeId?: string;
 };
 
+const InitialUserName = localStorage.getItem("user_name");
+
 export const EpisodeMenu: FC<Props> = memo(
   ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
     const { data } = useQueryEpisode(nextEpisodeId);
     const [isOpened, setIsOpened] = useState(false);
+    const user = useUserState((state) => state.user);
+    const setUser = useUserState((state) => state.setUser);
+    const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
+
+    const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      if (!inputValue.trim() || !user) return;
+      setUser({ ...user, user_name: inputValue });
+      setIsOpened(false);
+      localStorage.setItem("user_name", inputValue);
+    };
 
     return (
       <Menu
@@ -30,6 +39,7 @@ export const EpisodeMenu: FC<Props> = memo(
           setIsOpened(value);
         }}
         opened={isOpened}
+        position="bottom"
         classNames={{
           dropdown: "max-w-xs w-full",
         }}
@@ -39,12 +49,27 @@ export const EpisodeMenu: FC<Props> = memo(
         </ActionIcon>
         <Menu.Dropdown>
           <Menu.Label>メニュー</Menu.Label>
-          <Menu.Item icon={<IconUser size={14} />}>投稿名の変更</Menu.Item>
-          <Menu.Item icon={<IconPlus size={14} />}>マイリストに追加</Menu.Item>
-
+          <Box className="px-3">
+            <IconPencil className="mr-2" size={14} />
+            <Text component="span" className="text-xs">
+              投稿名の変更
+            </Text>
+          </Box>
+          <form onSubmit={onSubmitHandler}>
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.currentTarget.value)}
+              onBlur={() => setIsOpened(false)}
+              className="px-2"
+              classNames={{
+                input: "text-[16px] scale-75",
+              }}
+              size="xs"
+            />
+          </form>
           <Menu.Divider />
           <Menu.Label>エピソード</Menu.Label>
-          <Text component="div" className="py-2 px-[10px]">
+          <Text component="div" className="py-2 px-3">
             <Text component="p" className="mb-1 text-xs">
               {workTitle}
             </Text>
