@@ -69,5 +69,5 @@ export const useSubscriptionChatComments = ({ episode_id, category }: Args) => {
     return () => {
       unSubscriptions();
     };
-  }, [category, episode_id, queryClient, wsClient]);
+  }, [category, episode_id, isWSClient, queryClient, wsClient]);
 };

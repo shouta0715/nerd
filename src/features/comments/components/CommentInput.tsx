@@ -4,6 +4,7 @@ import { ActionIcon, Box, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Modal } from "src/components/Elements/Modal";
 
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
@@ -25,6 +26,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
 
   return (
     <div className="fixed bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
+      <Modal />
       <form
         className="container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}

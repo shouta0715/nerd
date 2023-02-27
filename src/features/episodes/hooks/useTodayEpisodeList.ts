@@ -4,8 +4,8 @@ import { useDeferredValue, useEffect, useMemo } from "react";
 import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
 import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
 import { Episode } from "src/features/episodes/types";
+import { useAutoCompleteState } from "src/store/global/globalStore";
 import { useSearchInputState } from "src/store/input/serchInput";
-import { AutoCompleteData } from "src/types/dataType";
 
 const sortFn = (next: Episode, target: Episode) => {
   const now = new Date();
@@ -29,12 +29,12 @@ const sortFn = (next: Episode, target: Episode) => {
   return nextStartDate.getTime() - targetStartDate.getTime();
 };
 
-type Props = {
-  callbackTitle?: (items: AutoCompleteData[] | undefined) => void;
-};
-export const useTodayEpisodeList = ({ callbackTitle }: Props) => {
+export const useTodayEpisodeList = () => {
   const { data } = useQueryTodayEpisodes();
   useQueryLikes(data?.episodes.map((e) => e.id) ?? []);
+  const setAutoCompleteData = useAutoCompleteState(
+    (state) => state.setAutoCompleteData
+  );
 
   const { pathname } = useRouter();
   const indexPage = pathname === "/";
@@ -61,22 +61,21 @@ export const useTodayEpisodeList = ({ callbackTitle }: Props) => {
   const deferredFilterEpisodes = useDeferredValue(filterEpisodes);
 
   useEffect(() => {
-    callbackTitle &&
-      callbackTitle(
-        data?.episodes
-          ?.map((e) => ({
-            title: e.work.series_title,
-            episodeTitle: e.title,
-            number: e.number,
-            value: e.title,
-          }))
-          .reverse()
-      );
+    setAutoCompleteData(
+      data?.episodes
+        ?.map((e) => ({
+          title: e.work.series_title,
+          episodeTitle: e.title,
+          number: e.number,
+          value: e.title,
+        }))
+        .reverse() ?? []
+    );
 
     return () => {
       setSearchInput("");
     };
-  }, [callbackTitle, data?.episodes, setSearchInput]);
+  }, [data?.episodes, setAutoCompleteData, setSearchInput]);
 
   return { deferredFilterEpisodes, indexPage };
 };

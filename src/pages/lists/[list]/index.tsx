@@ -5,7 +5,7 @@ import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
 import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
 import { SeasonWorksList } from "src/features/works/components/SeasonWorksList";
@@ -14,24 +14,18 @@ import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
 import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
 import { getTodayData } from "src/hooks/router/dynamicPaths";
+import { useAutoCompleteState } from "src/store/global/globalStore";
 import { useSearchInputState } from "src/store/input/serchInput";
-import { AutoCompleteData } from "src/types/dataType";
 import { getClient } from "src/utils/getClient";
 import { returningSeason } from "src/utils/returningSeason";
 
 const Index: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const [autoCompleteData, setAutoCompleteData] = useState<AutoCompleteData[]>(
-    []
+  const autoCompleteData = useAutoCompleteState(
+    (state) => state.autoCompleteData
   );
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
-  const setTitle = useCallback(
-    (items: AutoCompleteData[] | undefined) => {
-      setAutoCompleteData(items ?? []);
-    },
-    [setAutoCompleteData]
-  );
 
   return (
     <Box component="section">
@@ -76,13 +70,9 @@ const Index: NextPage = () => {
       </header>
       <Box className="container mx-auto">
         <div className="p-6">
-          {query.list === "today" && (
-            <TodayEpisodeList callbackTitle={setTitle} />
-          )}
+          {query.list === "today" && <TodayEpisodeList />}
 
-          {query.list === "season" && (
-            <SeasonWorksList callbackTitle={setTitle} />
-          )}
+          {query.list === "season" && <SeasonWorksList />}
         </div>
       </Box>
     </Box>

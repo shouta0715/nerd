@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutateChatComments } from "src/features/comments/api/useMutateChatComments";
 import { useInputCommentState } from "src/features/comments/store";
-import { InputStateSchema } from "src/features/comments/types";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -18,12 +17,13 @@ export const useSubmitComment = ({ episode_id }: Args) => {
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const object = InputStateSchema.parse({
+      if (!content) return;
+      const object = {
         episode_id,
         content: content.trim(),
         time: getTime(),
         commenter_name: user?.user_name || "匿名",
-      });
+      };
       await insertComment.mutateAsync({
         object,
       });

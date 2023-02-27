@@ -1768,13 +1768,6 @@
     "@mantine/ssr" "5.10.2"
     "@mantine/styles" "5.10.2"
 
-"@mantine/nprogress@^5.10.4":
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/@mantine/nprogress/-/nprogress-5.10.4.tgz#4bc4c63dcdbc66cdb71200cfd1ca31da9265f006"
-  integrity sha512-MB/k3hu4mu3a61RQ6rSCug8nYPabs0gBpdE+9GHjao1hlILKIdh+dE6O59VY+X3+Ls+TmG+1ebeJ2lzg9t2soA==
-  dependencies:
-    "@mantine/utils" "5.10.4"
-
 "@mantine/ssr@5.10.2":
   version "5.10.2"
   resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-5.10.2.tgz#7893a11e1f79d996dc436a66114149427201d44f"
@@ -7340,11 +7333,6 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
-
-zod@^3.20.6:
-  version "3.20.6"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.20.6.tgz#2f2f08ff81291d47d99e86140fedb4e0db08361a"
-  integrity sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==
 
 zustand@^4.1.5:
   version "4.1.5"
