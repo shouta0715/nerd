@@ -15,7 +15,6 @@ type GlobalState = {
   isWsClient: boolean;
   setIsWsClient: (isWsClient: boolean) => void;
   authLoading: boolean;
-  setAuthLoading: (authLoading: boolean) => void;
   setAllClient: ({
     client,
     isClient,
@@ -41,7 +40,6 @@ export const useGlobalState = create<GlobalState>((set) => ({
   isWsClient: false,
   setIsWsClient: (isWsClient) => set(() => ({ isWsClient })),
   authLoading: true,
-  setAuthLoading: (authLoading) => set(() => ({ authLoading })),
   setAllClient: ({ client, isClient, wsClient, isWsClient }) =>
     set(() => ({
       client,
