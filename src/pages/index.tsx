@@ -18,7 +18,7 @@ const DynamicTodayEpisodes = dynamic(
     import("src/features/episodes/components/TodayEpisodes").then(
       (mod) => mod.TodayEpisodes
     ),
-  { ssr: false }
+  { ssr: true }
 );
 
 const Home: NextPage = () => (

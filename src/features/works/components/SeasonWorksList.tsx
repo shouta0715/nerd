@@ -1,19 +1,12 @@
 import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Text } from "@mantine/core";
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { WorkItem } from "src/features/works/components/WorkItem";
 import { useSeasonWorksList } from "src/features/works/hooks/useSeasonWorksList";
-import { AutoCompleteData } from "src/types/dataType";
 
-type Props = {
-  callbackTitle?: (items: AutoCompleteData[] | undefined) => void;
-};
-
-export const SeasonWorksList: FC<Props> = memo(({ callbackTitle }) => {
-  const { deferredFilterWorks, indexPage } = useSeasonWorksList({
-    callbackTitle,
-  });
+export const SeasonWorksList: FC = () => {
+  const { deferredFilterWorks, indexPage } = useSeasonWorksList();
 
   return (
     <>
@@ -36,4 +29,4 @@ export const SeasonWorksList: FC<Props> = memo(({ callbackTitle }) => {
       )}
     </>
   );
-});
+};
