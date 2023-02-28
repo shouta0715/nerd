@@ -24,6 +24,8 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(
 }
 export type GetChatCommentsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars["uuid"];
+  _gte: Types.Scalars["Int"];
+  _lt: Types.Scalars["Int"];
 }>;
 
 export type GetChatCommentsQuery = {
@@ -100,10 +102,11 @@ export type SubscriptionChatCommentsSubscription = {
 };
 
 export const GetChatCommentsDocument = `
-    query GetChatComments($episode_id: uuid!) {
+    query GetChatComments($episode_id: uuid!, $_gte: Int!, $_lt: Int!) {
   chat_comments(
-    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gte: 0}}}
-    order_by: {time: asc, created_at: asc}
+    where: {_and: {episode_id: {_eq: $episode_id}, time: {_gte: $_gte, _lt: $_lt}}}
+    order_by: {time: asc, created_at: desc}
+    limit: 500
   ) {
     content
     anonymous

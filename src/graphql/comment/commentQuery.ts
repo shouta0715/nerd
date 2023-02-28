@@ -1,10 +1,16 @@
 import { gql } from "graphql-request";
 
 export const GET_CHAT_COMMENTS = gql`
-  query GetChatComments($episode_id: uuid!) {
+  query GetChatComments($episode_id: uuid!, $_gte: Int!, $_lt: Int!) {
     chat_comments(
-      where: { _and: { episode_id: { _eq: $episode_id }, time: { _gte: 0 } } }
-      order_by: { time: asc, created_at: asc }
+      where: {
+        _and: {
+          episode_id: { _eq: $episode_id }
+          time: { _gte: $_gte, _lt: $_lt }
+        }
+      }
+      order_by: { time: asc, created_at: desc }
+      limit: 500
     ) {
       content
       anonymous
