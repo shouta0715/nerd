@@ -1,25 +1,24 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { Autocomplete, Box, Text, Title } from "@mantine/core";
 import { IconSearch } from "@tabler/icons";
-import { dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
-import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
-import { SeasonWorksList } from "src/features/works/components/SeasonWorksList";
-import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
-import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
-
-import { getTodayData } from "src/hooks/router/dynamicPaths";
+import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
+import { SeasonWorks } from "src/features/works/components/SeasonWorks";
+import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { getSeasonWorks, getTodayEpisodes } from "src/hooks/router/getData";
 import { useAutoCompleteState } from "src/store/global/globalStore";
 import { useSearchInputState } from "src/store/input/serchInput";
-import { getClient } from "src/utils/getClient";
-import { returningSeason } from "src/utils/returningSeason";
 
-const Index: NextPage = () => {
+type Props = {
+  data: GetTodayEpisodesQuery | GetSeasonWorksQuery;
+};
+
+const Index: NextPage<Props> = ({ data }) => {
   const router = useRouter();
   const { query } = router;
   const autoCompleteData = useAutoCompleteState(
@@ -70,9 +69,13 @@ const Index: NextPage = () => {
       </header>
       <Box className="container mx-auto">
         <div className="p-6">
-          {query.list === "today" && <TodayEpisodeList />}
+          {query.list === "today" && (
+            <TodayEpisodes data={data as GetTodayEpisodesQuery} />
+          )}
 
-          {query.list === "season" && <SeasonWorksList />}
+          {query.list === "season" && (
+            <SeasonWorks data={data as GetSeasonWorksQuery} />
+          )}
         </div>
       </Box>
     </Box>
@@ -93,38 +96,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const query = context.params?.list;
 
-  const { queryClient, request } = getClient();
-
-  const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
-  await queryClient.prefetchQuery(
-    mediaTypesQueryKey,
-    useGetMediaTypesQuery.fetcher(request, {})
-  );
-
-  if (query === "today") {
-    const episodesWhereQuery = await getTodayData();
-    await queryClient.prefetchQuery(
-      ["todayEpisodes"],
-      useGetTodayEpisodesQuery.fetcher(request, {
-        where: episodesWhereQuery,
-      })
-    );
-  }
-
-  if (query === "season") {
-    const seasonData = returningSeason();
-    await queryClient.prefetchQuery(
-      ["seasonWorks"],
-      useGetSeasonWorksQuery.fetcher(request, {
-        season: seasonData.season,
-        year: seasonData.year,
-      })
-    );
-  }
+  const data =
+    query === "today" ? await getTodayEpisodes() : await getSeasonWorks(null);
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      data,
     },
   };
 };
