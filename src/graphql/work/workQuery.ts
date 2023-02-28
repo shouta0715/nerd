@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 export const GET_SEASON_WORKS = gql`
-  query GetSeasonWorks($season: String!, $year: Int!) {
+  query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
     works(
       where: {
         _and: {
@@ -10,6 +10,7 @@ export const GET_SEASON_WORKS = gql`
           has_episodes: { _eq: true }
         }
       }
+      limit: $limit
     ) {
       title
       tid
@@ -20,7 +21,7 @@ export const GET_SEASON_WORKS = gql`
       id
       has_episodes
       media_type_id
-      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
+      episodes(order_by: { number: desc_nulls_last }, limit: 6) {
         title
         start_time
         number

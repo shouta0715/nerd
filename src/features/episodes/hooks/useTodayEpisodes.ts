@@ -2,8 +2,8 @@
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
 import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
-import { useQueryTodayEpisodes } from "src/features/episodes/api/useQueryTodayEpisodes";
 import { Episode } from "src/features/episodes/types";
+import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useAutoCompleteState } from "src/store/global/globalStore";
 import { useSearchInputState } from "src/store/input/serchInput";
 
@@ -29,16 +29,19 @@ const sortFn = (next: Episode, target: Episode) => {
   return nextStartDate.getTime() - targetStartDate.getTime();
 };
 
-export const useTodayEpisodeList = () => {
-  const { data } = useQueryTodayEpisodes();
-  useQueryLikes(data?.episodes.map((e) => e.id) ?? []);
+type Props = {
+  data: GetTodayEpisodesQuery;
+};
+
+export const useTodayEpisodes = ({ data }: Props) => {
+  useQueryLikes(data?.episodes?.map((e) => e.id) ?? []);
   const setAutoCompleteData = useAutoCompleteState(
     (state) => state.setAutoCompleteData
   );
 
   const { pathname } = useRouter();
   const indexPage = pathname === "/";
-  const limit = indexPage ? 8 : data?.episodes.length;
+  const limit = indexPage ? 8 : data?.episodes?.length;
   const searchInput = useSearchInputState((state) => state.searchInput);
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
   const filterEpisodes = useMemo(

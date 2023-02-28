@@ -20,6 +20,7 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(
 export type GetSeasonWorksQueryVariables = Types.Exact<{
   season: Types.Scalars["String"];
   year: Types.Scalars["Int"];
+  limit?: Types.InputMaybe<Types.Scalars["Int"]>;
 }>;
 
 export type GetSeasonWorksQuery = {
@@ -49,9 +50,10 @@ export type GetSeasonWorksQuery = {
 };
 
 export const GetSeasonWorksDocument = `
-    query GetSeasonWorks($season: String!, $year: Int!) {
+    query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
   works(
     where: {_and: {season_year: {_eq: $year}, season_name: {_eq: $season}, has_episodes: {_eq: true}}}
+    limit: $limit
   ) {
     title
     tid
@@ -62,7 +64,7 @@ export const GetSeasonWorksDocument = `
     id
     has_episodes
     media_type_id
-    episodes(order_by: {number: desc_nulls_last}, limit: 8) {
+    episodes(order_by: {number: desc_nulls_last}, limit: 6) {
       title
       start_time
       number

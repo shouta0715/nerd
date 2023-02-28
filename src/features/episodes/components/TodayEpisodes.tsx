@@ -1,10 +1,29 @@
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { TopTitle } from "src/components/Elements/TopTitle";
-import { TodayEpisodeList } from "src/features/episodes/components/TodayEpisodeList";
+import { Skeleton } from "src/components/Layout/loading/Skeleton";
+import { useTodayEpisodes } from "src/features/episodes/hooks/useTodayEpisodes";
+import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 
-export const TodayEpisodes: FC = () => (
-  <div className="px-6 pb-12 pt-6">
-    <TopTitle href="/lists/today" title="今日放送のエピソード" />
-    <TodayEpisodeList />
-  </div>
+type Props = {
+  data: GetTodayEpisodesQuery;
+};
+
+const DynamicTodayEpisodeItem = dynamic(
+  () => import("src/features/episodes/components/TodayEpisodeItem"),
+  {
+    ssr: false,
+    loading: () => <Skeleton />,
+  }
 );
+
+export const TodayEpisodes: FC<Props> = ({ data }) => {
+  const { deferredFilterEpisodes } = useTodayEpisodes({ data });
+
+  return (
+    <ul className="flex flex-wrap gap-2 md:gap-4">
+      {deferredFilterEpisodes?.map((episode) => (
+        <DynamicTodayEpisodeItem episode={episode} key={episode.id} />
+      ))}
+    </ul>
+  );
+};
