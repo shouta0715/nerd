@@ -1,6 +1,5 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
-import { useIsFetching } from "@tanstack/react-query";
 
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -35,14 +34,6 @@ const DynamicFinishComments = dynamic(
   }
 );
 
-const DynamicPlayButton = dynamic(
-  () =>
-    import("src/components/Elements/PlayButton").then((mod) => mod.PlayButton),
-  {
-    ssr: false,
-  }
-);
-
 const DynamicEpisodeMenu = dynamic(
   () =>
     import("src/features/episodes/components/EpisodeMenu").then(
@@ -59,14 +50,6 @@ export const Episode: FC = () => {
   const { data } = useQueryEpisode(slug);
   const { getIsArchive } = useTimerStatus();
   const [isChat, setIsChat] = useState(true);
-  const isFetchingComments = useIsFetching({
-    queryKey: [
-      "GetChatComments",
-      {
-        episode_id: data?.episodes_by_pk?.id,
-      },
-    ],
-  });
 
   return (
     <div className="flex flex-col">
@@ -174,10 +157,6 @@ export const Episode: FC = () => {
         </div>
         <InputFiled episode_id={data?.episodes_by_pk?.id} />
       </main>
-      {getIsArchive({
-        end_time: data?.episodes_by_pk?.end_time,
-        slug: category,
-      }) && <DynamicPlayButton loading={Boolean(isFetchingComments)} />}
     </div>
   );
 };

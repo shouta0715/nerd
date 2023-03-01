@@ -1,53 +1,25 @@
-import * as Types from "../../types/graphql";
+import * as Types from '../../types/graphql';
 
-import { GraphQLClient } from "graphql-request";
-import { RequestInit } from "graphql-request/dist/types.dom";
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { GraphQLClient } from 'graphql-request';
+import { RequestInit } from 'graphql-request/dist/types.dom';
+import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 
-function fetcher<TData, TVariables extends { [key: string]: any }>(
-  client: GraphQLClient,
-  query: string,
-  variables?: TVariables,
-  requestHeaders?: RequestInit["headers"]
-) {
-  return async (): Promise<TData> =>
-    client.request({
-      document: query,
-      variables,
-      requestHeaders,
-    });
+function fetcher<TData, TVariables extends { [key: string]: any }>(client: GraphQLClient, query: string, variables?: TVariables, requestHeaders?: RequestInit['headers']) {
+  return async (): Promise<TData> => client.request({
+    document: query,
+    variables,
+    requestHeaders
+  });
 }
 export type GetSeasonWorksQueryVariables = Types.Exact<{
-  season: Types.Scalars["String"];
-  year: Types.Scalars["Int"];
-  limit?: Types.InputMaybe<Types.Scalars["Int"]>;
+  season: Types.Scalars['String'];
+  year: Types.Scalars['Int'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']>;
 }>;
 
-export type GetSeasonWorksQuery = {
-  __typename?: "query_root";
-  works: Array<{
-    __typename?: "works";
-    title: string;
-    tid?: number | null;
-    series_title: string;
-    series_id?: string | null;
-    season_year?: number | null;
-    season_name?: string | null;
-    id: number;
-    has_episodes?: boolean | null;
-    media_type_id?: number | null;
-    episodes: Array<{
-      __typename?: "episodes";
-      title: string;
-      start_time?: any | null;
-      number: number;
-      id: any;
-      has_prev_episode: boolean;
-      has_next_episode: boolean;
-      end_time?: any | null;
-    }>;
-  }>;
-};
+
+export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, tid?: number | null, series_title: string, series_id?: string | null, season_year?: number | null, season_name?: string | null, id: number, has_episodes?: boolean | null, media_type_id?: number | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+
 
 export const GetSeasonWorksDocument = `
     query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
@@ -77,37 +49,21 @@ export const GetSeasonWorksDocument = `
 }
     `;
 export const useGetSeasonWorksQuery = <
-  TData = GetSeasonWorksQuery,
-  TError = unknown
->(
-  client: GraphQLClient,
-  variables: GetSeasonWorksQueryVariables,
-  options?: UseQueryOptions<GetSeasonWorksQuery, TError, TData>,
-  headers?: RequestInit["headers"]
-) =>
-  useQuery<GetSeasonWorksQuery, TError, TData>(
-    ["GetSeasonWorks", variables],
-    fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(
-      client,
-      GetSeasonWorksDocument,
-      variables,
-      headers
-    ),
-    options
-  );
+      TData = GetSeasonWorksQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetSeasonWorksQueryVariables,
+      options?: UseQueryOptions<GetSeasonWorksQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetSeasonWorksQuery, TError, TData>(
+      ['GetSeasonWorks', variables],
+      fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(client, GetSeasonWorksDocument, variables, headers),
+      options
+    );
 
-useGetSeasonWorksQuery.getKey = (variables: GetSeasonWorksQueryVariables) => [
-  "GetSeasonWorks",
-  variables,
-];
-useGetSeasonWorksQuery.fetcher = (
-  client: GraphQLClient,
-  variables: GetSeasonWorksQueryVariables,
-  headers?: RequestInit["headers"]
-) =>
-  fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(
-    client,
-    GetSeasonWorksDocument,
-    variables,
-    headers
-  );
+useGetSeasonWorksQuery.getKey = (variables: GetSeasonWorksQueryVariables) => ['GetSeasonWorks', variables];
+;
+
+useGetSeasonWorksQuery.fetcher = (client: GraphQLClient, variables: GetSeasonWorksQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(client, GetSeasonWorksDocument, variables, headers);
