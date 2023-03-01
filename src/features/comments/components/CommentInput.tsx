@@ -20,7 +20,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const setInputComment = useInputCommentState(
     (state) => state.setInputComment
   );
-  const { onSubmitHandler } = useSubmitComment({ episode_id });
+  const { onSubmitHandler, isLoading } = useSubmitComment({ episode_id });
   const user = useUserState((state) => state.user);
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
@@ -63,7 +63,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
                 {content.length > 50 && content.length.toString()}
               </Box>
               <ActionIcon
-                // loading={insertComment.isLoading}
+                loading={isLoading}
                 type="submit"
                 variant="light"
                 color="teal"

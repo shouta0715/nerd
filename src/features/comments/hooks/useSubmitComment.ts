@@ -34,6 +34,6 @@ export const useSubmitComment = ({ episode_id }: Args) => {
 
   return {
     onSubmitHandler,
-    // insertComment,
+    isLoading: insertComment.isLoading,
   };
 };

@@ -30,7 +30,7 @@ const getChatComments = async ({
   const { _gte, _lt } = pageParam;
   const fetcher = useGetChatCommentsQuery.fetcher(client, {
     episode_id,
-    get_limit: 25,
+    get_limit: 40,
     _gte,
     _lt,
   });
