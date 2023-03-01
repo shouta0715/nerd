@@ -84,6 +84,7 @@ export type String_Comparison_Exp = {
 export type Chat_Comments = {
   __typename?: "chat_comments";
   anonymous: Scalars["Boolean"];
+  comment_time: Scalars["Int"];
   commenter_name: Scalars["String"];
   content: Scalars["String"];
   created_at: Scalars["timestamptz"];
@@ -91,7 +92,6 @@ export type Chat_Comments = {
   episode?: Maybe<Episodes>;
   episode_id?: Maybe<Scalars["uuid"]>;
   id: Scalars["uuid"];
-  time: Scalars["Int"];
   /** An object relationship */
   user: Users;
   user_id: Scalars["String"];
@@ -181,13 +181,13 @@ export type Chat_Comments_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Chat_Comments_Avg_Fields = {
   __typename?: "chat_comments_avg_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by avg() on columns of table "chat_comments" */
 export type Chat_Comments_Avg_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -197,17 +197,24 @@ export type Chat_Comments_Bool_Exp = {
   _not?: InputMaybe<Chat_Comments_Bool_Exp>;
   _or?: InputMaybe<Array<Chat_Comments_Bool_Exp>>;
   anonymous?: InputMaybe<Boolean_Comparison_Exp>;
+  comment_time?: InputMaybe<Int_Comparison_Exp>;
   commenter_name?: InputMaybe<String_Comparison_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episode?: InputMaybe<Episodes_Bool_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  time?: InputMaybe<Int_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
   work?: InputMaybe<Works_Bool_Exp>;
   work_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+export type Chat_Comments_By_Episode_Id_Args = {
+  _episode_id?: InputMaybe<Scalars["uuid"]>;
+  get_limit?: InputMaybe<Scalars["Int"]>;
+  max_time?: InputMaybe<Scalars["Int"]>;
+  min_time?: InputMaybe<Scalars["Int"]>;
 };
 
 /** unique or primary key constraints on table "chat_comments" */
@@ -218,20 +225,20 @@ export enum Chat_Comments_Constraint {
 
 /** input type for incrementing numeric columns in table "chat_comments" */
 export type Chat_Comments_Inc_Input = {
-  time?: InputMaybe<Scalars["Int"]>;
+  comment_time?: InputMaybe<Scalars["Int"]>;
   work_id?: InputMaybe<Scalars["Int"]>;
 };
 
 /** input type for inserting data into table "chat_comments" */
 export type Chat_Comments_Insert_Input = {
   anonymous?: InputMaybe<Scalars["Boolean"]>;
+  comment_time?: InputMaybe<Scalars["Int"]>;
   commenter_name?: InputMaybe<Scalars["String"]>;
   content?: InputMaybe<Scalars["String"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
   episode_id?: InputMaybe<Scalars["uuid"]>;
   id?: InputMaybe<Scalars["uuid"]>;
-  time?: InputMaybe<Scalars["Int"]>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars["String"]>;
   work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
@@ -241,24 +248,24 @@ export type Chat_Comments_Insert_Input = {
 /** aggregate max on columns */
 export type Chat_Comments_Max_Fields = {
   __typename?: "chat_comments_max_fields";
+  comment_time?: Maybe<Scalars["Int"]>;
   commenter_name?: Maybe<Scalars["String"]>;
   content?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   episode_id?: Maybe<Scalars["uuid"]>;
   id?: Maybe<Scalars["uuid"]>;
-  time?: Maybe<Scalars["Int"]>;
   user_id?: Maybe<Scalars["String"]>;
   work_id?: Maybe<Scalars["Int"]>;
 };
 
 /** order by max() on columns of table "chat_comments" */
 export type Chat_Comments_Max_Order_By = {
+  comment_time?: InputMaybe<Order_By>;
   commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  time?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
@@ -266,24 +273,24 @@ export type Chat_Comments_Max_Order_By = {
 /** aggregate min on columns */
 export type Chat_Comments_Min_Fields = {
   __typename?: "chat_comments_min_fields";
+  comment_time?: Maybe<Scalars["Int"]>;
   commenter_name?: Maybe<Scalars["String"]>;
   content?: Maybe<Scalars["String"]>;
   created_at?: Maybe<Scalars["timestamptz"]>;
   episode_id?: Maybe<Scalars["uuid"]>;
   id?: Maybe<Scalars["uuid"]>;
-  time?: Maybe<Scalars["Int"]>;
   user_id?: Maybe<Scalars["String"]>;
   work_id?: Maybe<Scalars["Int"]>;
 };
 
 /** order by min() on columns of table "chat_comments" */
 export type Chat_Comments_Min_Order_By = {
+  comment_time?: InputMaybe<Order_By>;
   commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  time?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
@@ -307,13 +314,13 @@ export type Chat_Comments_On_Conflict = {
 /** Ordering options when selecting data from "chat_comments". */
 export type Chat_Comments_Order_By = {
   anonymous?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode?: InputMaybe<Episodes_Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  time?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
   work?: InputMaybe<Works_Order_By>;
@@ -330,6 +337,8 @@ export enum Chat_Comments_Select_Column {
   /** column name */
   Anonymous = "anonymous",
   /** column name */
+  CommentTime = "comment_time",
+  /** column name */
   CommenterName = "commenter_name",
   /** column name */
   Content = "content",
@@ -339,8 +348,6 @@ export enum Chat_Comments_Select_Column {
   EpisodeId = "episode_id",
   /** column name */
   Id = "id",
-  /** column name */
-  Time = "time",
   /** column name */
   UserId = "user_id",
   /** column name */
@@ -362,12 +369,12 @@ export enum Chat_Comments_Select_Column_Chat_Comments_Aggregate_Bool_Exp_Bool_Or
 /** input type for updating data in table "chat_comments" */
 export type Chat_Comments_Set_Input = {
   anonymous?: InputMaybe<Scalars["Boolean"]>;
+  comment_time?: InputMaybe<Scalars["Int"]>;
   commenter_name?: InputMaybe<Scalars["String"]>;
   content?: InputMaybe<Scalars["String"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   episode_id?: InputMaybe<Scalars["uuid"]>;
   id?: InputMaybe<Scalars["uuid"]>;
-  time?: InputMaybe<Scalars["Int"]>;
   user_id?: InputMaybe<Scalars["String"]>;
   work_id?: InputMaybe<Scalars["Int"]>;
 };
@@ -375,39 +382,39 @@ export type Chat_Comments_Set_Input = {
 /** aggregate stddev on columns */
 export type Chat_Comments_Stddev_Fields = {
   __typename?: "chat_comments_stddev_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev() on columns of table "chat_comments" */
 export type Chat_Comments_Stddev_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Chat_Comments_Stddev_Pop_Fields = {
   __typename?: "chat_comments_stddev_pop_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev_pop() on columns of table "chat_comments" */
 export type Chat_Comments_Stddev_Pop_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Chat_Comments_Stddev_Samp_Fields = {
   __typename?: "chat_comments_stddev_samp_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by stddev_samp() on columns of table "chat_comments" */
 export type Chat_Comments_Stddev_Samp_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -422,12 +429,12 @@ export type Chat_Comments_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Chat_Comments_Stream_Cursor_Value_Input = {
   anonymous?: InputMaybe<Scalars["Boolean"]>;
+  comment_time?: InputMaybe<Scalars["Int"]>;
   commenter_name?: InputMaybe<Scalars["String"]>;
   content?: InputMaybe<Scalars["String"]>;
   created_at?: InputMaybe<Scalars["timestamptz"]>;
   episode_id?: InputMaybe<Scalars["uuid"]>;
   id?: InputMaybe<Scalars["uuid"]>;
-  time?: InputMaybe<Scalars["Int"]>;
   user_id?: InputMaybe<Scalars["String"]>;
   work_id?: InputMaybe<Scalars["Int"]>;
 };
@@ -435,13 +442,13 @@ export type Chat_Comments_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Chat_Comments_Sum_Fields = {
   __typename?: "chat_comments_sum_fields";
-  time?: Maybe<Scalars["Int"]>;
+  comment_time?: Maybe<Scalars["Int"]>;
   work_id?: Maybe<Scalars["Int"]>;
 };
 
 /** order by sum() on columns of table "chat_comments" */
 export type Chat_Comments_Sum_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -449,6 +456,8 @@ export type Chat_Comments_Sum_Order_By = {
 export enum Chat_Comments_Update_Column {
   /** column name */
   Anonymous = "anonymous",
+  /** column name */
+  CommentTime = "comment_time",
   /** column name */
   CommenterName = "commenter_name",
   /** column name */
@@ -459,8 +468,6 @@ export enum Chat_Comments_Update_Column {
   EpisodeId = "episode_id",
   /** column name */
   Id = "id",
-  /** column name */
-  Time = "time",
   /** column name */
   UserId = "user_id",
   /** column name */
@@ -479,39 +486,39 @@ export type Chat_Comments_Updates = {
 /** aggregate var_pop on columns */
 export type Chat_Comments_Var_Pop_Fields = {
   __typename?: "chat_comments_var_pop_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by var_pop() on columns of table "chat_comments" */
 export type Chat_Comments_Var_Pop_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Chat_Comments_Var_Samp_Fields = {
   __typename?: "chat_comments_var_samp_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by var_samp() on columns of table "chat_comments" */
 export type Chat_Comments_Var_Samp_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Chat_Comments_Variance_Fields = {
   __typename?: "chat_comments_variance_fields";
-  time?: Maybe<Scalars["Float"]>;
+  comment_time?: Maybe<Scalars["Float"]>;
   work_id?: Maybe<Scalars["Float"]>;
 };
 
 /** order by variance() on columns of table "chat_comments" */
 export type Chat_Comments_Variance_Order_By = {
-  time?: InputMaybe<Order_By>;
+  comment_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -1821,6 +1828,10 @@ export type Query_Root = {
   chat_comments: Array<Chat_Comments>;
   /** An aggregate relationship */
   chat_comments_aggregate: Chat_Comments_Aggregate;
+  /** execute function "chat_comments_by_episode_id" which returns "chat_comments" */
+  chat_comments_by_episode_id: Array<Chat_Comments>;
+  /** execute function "chat_comments_by_episode_id" and query aggregates on result of table type "chat_comments" */
+  chat_comments_by_episode_id_aggregate: Chat_Comments_Aggregate;
   /** fetch data from the table: "chat_comments" using primary key columns */
   chat_comments_by_pk?: Maybe<Chat_Comments>;
   /** An array relationship */
@@ -1864,6 +1875,24 @@ export type Query_RootChat_CommentsArgs = {
 };
 
 export type Query_RootChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+export type Query_RootChat_Comments_By_Episode_IdArgs = {
+  args: Chat_Comments_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+export type Query_RootChat_Comments_By_Episode_Id_AggregateArgs = {
+  args: Chat_Comments_By_Episode_Id_Args;
   distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
@@ -1982,6 +2011,10 @@ export type Subscription_Root = {
   chat_comments: Array<Chat_Comments>;
   /** An aggregate relationship */
   chat_comments_aggregate: Chat_Comments_Aggregate;
+  /** execute function "chat_comments_by_episode_id" which returns "chat_comments" */
+  chat_comments_by_episode_id: Array<Chat_Comments>;
+  /** execute function "chat_comments_by_episode_id" and query aggregates on result of table type "chat_comments" */
+  chat_comments_by_episode_id_aggregate: Chat_Comments_Aggregate;
   /** fetch data from the table: "chat_comments" using primary key columns */
   chat_comments_by_pk?: Maybe<Chat_Comments>;
   /** fetch data from the table in a streaming manner: "chat_comments" */
@@ -2037,6 +2070,24 @@ export type Subscription_RootChat_CommentsArgs = {
 };
 
 export type Subscription_RootChat_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+export type Subscription_RootChat_Comments_By_Episode_IdArgs = {
+  args: Chat_Comments_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars["Int"]>;
+  offset?: InputMaybe<Scalars["Int"]>;
+  order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
+  where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+export type Subscription_RootChat_Comments_By_Episode_Id_AggregateArgs = {
+  args: Chat_Comments_By_Episode_Id_Args;
   distinct_on?: InputMaybe<Array<Chat_Comments_Select_Column>>;
   limit?: InputMaybe<Scalars["Int"]>;
   offset?: InputMaybe<Scalars["Int"]>;
