@@ -46,15 +46,15 @@ export const GET_CHAT_COMMENTS = gql`
   query GetChatComments(
     $episode_id: uuid!
     $get_limit: Int!
-    $min_time: Int!
-    $max_time: Int!
+    $_lt: Int!
+    $_gte: Int!
   ) {
     chat_comments_by_episode_id(
       args: {
         _episode_id: $episode_id
         get_limit: $get_limit
-        max_time: $max_time
-        min_time: $min_time
+        _gte: $_gte
+        _lt: $_lt
       }
       order_by: { comment_time: asc }
     ) {

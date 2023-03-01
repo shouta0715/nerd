@@ -212,9 +212,9 @@ export type Chat_Comments_Bool_Exp = {
 
 export type Chat_Comments_By_Episode_Id_Args = {
   _episode_id?: InputMaybe<Scalars["uuid"]>;
+  _gte?: InputMaybe<Scalars["Int"]>;
+  _lt?: InputMaybe<Scalars["Int"]>;
   get_limit?: InputMaybe<Scalars["Int"]>;
-  max_time?: InputMaybe<Scalars["Int"]>;
-  min_time?: InputMaybe<Scalars["Int"]>;
 };
 
 /** unique or primary key constraints on table "chat_comments" */

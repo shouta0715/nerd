@@ -7,7 +7,7 @@ type Args = {
 };
 
 export const useChatComments = ({ episode_id }: Args) => {
-  const { data, fetchNextPage } = useInfiniteQueryChatComments({
+  const { data, fetchNextPage, isLoading } = useInfiniteQueryChatComments({
     episode_id,
     enabled: true,
   });
@@ -37,15 +37,15 @@ export const useChatComments = ({ episode_id }: Args) => {
 
   useEffect(() => {
     // eslint-disable-next-line no-useless-return
-    if (time % 30 !== 0 || time === 0) return;
+    if (time % 300 !== 0 || time === 0) return;
 
     fetchNextPage({
       pageParam: {
-        min_time: time + 1,
-        max_time: time + 30,
+        _gte: time,
+        _lt: time + 300,
       },
     });
   }, [fetchNextPage, time]);
 
-  return { data: deferredData };
+  return { data: deferredData, isLoading };
 };

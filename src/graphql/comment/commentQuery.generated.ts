@@ -77,8 +77,8 @@ export type SubscriptionChatCommentsSubscription = {
 export type GetChatCommentsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars["uuid"];
   get_limit: Types.Scalars["Int"];
-  min_time: Types.Scalars["Int"];
-  max_time: Types.Scalars["Int"];
+  _lt: Types.Scalars["Int"];
+  _gte: Types.Scalars["Int"];
 }>;
 
 export type GetChatCommentsQuery = {
@@ -184,9 +184,9 @@ export const SubscriptionChatCommentsDocument = `
 }
     `;
 export const GetChatCommentsDocument = `
-    query GetChatComments($episode_id: uuid!, $get_limit: Int!, $min_time: Int!, $max_time: Int!) {
+    query GetChatComments($episode_id: uuid!, $get_limit: Int!, $_lt: Int!, $_gte: Int!) {
   chat_comments_by_episode_id(
-    args: {_episode_id: $episode_id, get_limit: $get_limit, max_time: $max_time, min_time: $min_time}
+    args: {_episode_id: $episode_id, get_limit: $get_limit, _gte: $_gte, _lt: $_lt}
     order_by: {comment_time: asc}
   ) {
     content

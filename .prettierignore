@@ -8,3 +8,5 @@ tailwind.config.js
 tsconfig.json
 generated
 functions
+*.generated.ts
+graphql.ts
