@@ -14,7 +14,7 @@ type Args = {
 
 interface Payload extends ExecutionResult {
   data: {
-    chat_comments: GetChatCommentsQuery["chat_comments"];
+    chat_comments: GetChatCommentsQuery["chat_comments_by_episode_id"];
   };
 }
 

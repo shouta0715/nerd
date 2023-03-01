@@ -12,14 +12,14 @@ type GetChatCommentsArgs = {
   client: GraphQLClient;
   episode_id: string;
   pageParam: {
-    _gte: number;
-    _lt: number;
+    min_time: number;
+    max_time: number;
   };
 };
 
 const InitialPageParam = {
-  _gte: 0,
-  _lt: 30,
+  min_time: 0,
+  max_time: 30,
 };
 
 const getChatComments = async ({
@@ -27,11 +27,12 @@ const getChatComments = async ({
   episode_id,
   pageParam,
 }: GetChatCommentsArgs) => {
-  const { _gte, _lt } = pageParam;
+  const { max_time, min_time } = pageParam;
   const fetcher = useGetChatCommentsQuery.fetcher(client, {
     episode_id,
-    _gte,
-    _lt,
+    get_limit: 25,
+    min_time,
+    max_time,
   });
 
   const data = await fetcher();

@@ -20,7 +20,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
       {data?.map((comment) => (
         <li
           key={comment.id}
-          className={`flex w-full ${
+          className={`flex w-full animate-[chat-fade-in] transition-all ${
             user?.id === comment.user?.id ? "flex-row-reverse" : ""
           }`}
         >
@@ -50,7 +50,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
               {comment.content}
             </Text>
             <Text size="xs" color="dimmed">
-              <span>{timeCommented(comment.time)}</span>
+              <span>{timeCommented(comment.comment_time)}</span>
             </Text>
           </div>
         </li>

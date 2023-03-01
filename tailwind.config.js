@@ -1,4 +1,5 @@
 
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,6 +9,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        "chat-fade-in": "chat-fade-in 0.2s ease-in-out",
+      },
+      keyframes: {
+        "chat-fade-in": {
+          "0%": { opacity: 0 },
+          "100%": {
+            opacity: 1,
+          },
+        }
+      }
     },
   },
   plugins: [],
