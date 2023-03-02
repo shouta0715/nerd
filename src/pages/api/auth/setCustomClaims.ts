@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { cert, getApp, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { GraphQLClient } from "graphql-request";
 import { NextApiRequest, NextApiResponse } from "next";
+import { setCookie } from "nookies";
 import { CREATE_USER } from "src/graphql/user/userQuery";
 
 const firebaseConfig = {
@@ -13,9 +15,18 @@ const firebaseConfig = {
   }),
 };
 
+const options = {
+  maxAge: 14 * 24 * 60 * 60, // 14 days
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax",
+  path: "/",
+};
+
 const _ = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { idToken } = req.body;
+  const { idToken, refreshToken } = req.body;
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   if (!idToken) {
     return res.status(400).send("No idToken");
@@ -25,6 +36,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const isHasClaims = idTokenResult[TOKEN_KEY];
 
   if (isHasClaims) {
+    setCookie({ res }, "refreshToken", refreshToken, options);
+
     return res.status(200).send("ok");
   }
 
@@ -53,10 +66,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       anonymous: isAnonymous,
       photo_url: idTokenResult.picture ?? null,
       user_name: idTokenResult.name ?? "匿名",
+      ip: ip ?? null,
     });
+
+    setCookie({ res }, "refreshToken", refreshToken, options);
 
     return res.status(200).json({ message: "ok" });
   } catch (err: any) {
+    console.log(err);
+
     return res.status(500).json({ message: err.message });
   }
 };

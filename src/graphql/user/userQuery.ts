@@ -17,6 +17,7 @@ export const CREATE_USER = gql`
     $anonymous: Boolean!
     $photo_url: String!
     $user_name: String!
+    $ip: String
   ) {
     insert_users_one(
       object: {
@@ -24,6 +25,7 @@ export const CREATE_USER = gql`
         photo_url: $photo_url
         id: $id
         user_name: $user_name
+        ip: $ip
       }
     ) {
       id

@@ -10,7 +10,6 @@ import { useGlobalState } from "src/store/global/globalStore";
 const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const setClient = useGlobalState((state) => state.setClient);
-
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
@@ -32,6 +31,7 @@ const useInitialize = () => {
             },
             body: JSON.stringify({
               idToken: idTokenResult.token,
+              refreshToken: user.refreshToken,
             }),
           });
 
