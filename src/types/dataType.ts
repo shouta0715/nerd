@@ -29,3 +29,8 @@ export type AutoCompleteData = {
   value: string;
   number?: number;
 };
+
+export type RefreshTokenResult = {
+  idToken: string;
+  message: string;
+};

@@ -3,7 +3,6 @@ import { useGetUserQuery } from "src/graphql/user/userQuery.generated";
 
 export const useUserQuery = (id: string) => {
   const client = useGlobalState((state) => state.client);
-  const isClient = useGlobalState((state) => state.isClient);
 
   return useGetUserQuery(
     client,
@@ -16,7 +15,7 @@ export const useUserQuery = (id: string) => {
       },
       staleTime: Infinity,
       cacheTime: Infinity,
-      enabled: isClient && !!id,
+      enabled: !!id,
     }
   );
 };

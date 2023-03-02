@@ -6,8 +6,10 @@ import {
   GetChatCommentsQuery,
   useInsertChatCommentMutation,
 } from "src/graphql/comment/commentQuery.generated";
+import { createClients } from "src/libs/graphqlClient";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
+import { RefreshTokenResult } from "src/types/dataType";
 
 type PrevData = {
   pages: GetChatCommentsQuery[];
@@ -19,6 +21,8 @@ type PrevData = {
 
 export const useMutateChatComments = () => {
   const client = useGlobalState((state) => state.client);
+  const setClient = useGlobalState((state) => state.setClient);
+
   const queryClient = useQueryClient();
   const resetInputComment = useInputCommentState(
     (state) => state.resetInputComment
@@ -109,12 +113,32 @@ export const useMutateChatComments = () => {
       queryClient.invalidateQueries(["GetChatComments", { episode_id }]);
     },
 
-    onError: (_, newComment, context) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: (error: any, newComment, context) => {
       const { episode_id } = newComment.object;
 
       const prevData = context?.pages;
       if (prevData) {
         queryClient.setQueryData(["GetChatComments", { episode_id }], prevData);
+      }
+
+      if (error.message.includes("Could not verify JWT: JWTExpired")) {
+        // TODO: handle expired token
+        (async () => {
+          const data: RefreshTokenResult = await fetch(
+            "/api/auth/refreshToken",
+            {
+              method: "POST",
+              credentials: "include",
+            }
+          ).then((res) => res.json());
+
+          if (data.message === "ok") {
+            const newClient = createClients(data.idToken);
+            setClient(newClient);
+            insertComment.mutate(newComment);
+          }
+        })();
       }
     },
   });
