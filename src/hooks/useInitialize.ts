@@ -9,7 +9,8 @@ import { useGlobalState } from "src/store/global/globalStore";
 
 const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
-  const setAllClient = useGlobalState((state) => state.setAllClient);
+  const setClient = useGlobalState((state) => state.setClient);
+
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
@@ -21,13 +22,8 @@ const useInitialize = () => {
         const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
         if (idTokenResult.token && isHasClaims) {
-          const { client, wsClient } = createClients(idTokenResult.token);
-          setAllClient({
-            client,
-            wsClient,
-            isClient: true,
-            isWsClient: true,
-          });
+          const client = createClients(idTokenResult.token);
+          setClient(client);
         } else {
           const res = await fetch("/api/auth/setCustomClaims", {
             method: "POST",
@@ -41,13 +37,8 @@ const useInitialize = () => {
 
           if (res.status === 200 && res.ok) {
             const token = await auth.currentUser?.getIdToken(true);
-            const { client, wsClient } = createClients(token);
-            setAllClient({
-              client,
-              wsClient,
-              isClient: true,
-              isWsClient: true,
-            });
+            const client = createClients(token);
+            setClient(client);
           }
         }
         setUser({
@@ -71,7 +62,7 @@ const useInitialize = () => {
     return () => {
       unSubUser();
     };
-  }, [TOKEN_KEY, setUser, setAllClient, setAuthLoading]);
+  }, [TOKEN_KEY, setUser, setAuthLoading, setClient]);
 };
 
 export default useInitialize;
