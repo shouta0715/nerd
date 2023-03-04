@@ -1,12 +1,56 @@
-import { GraphQLClient } from "graphql-request";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-return-await */
+import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
+import { GraphQLClient, Variables } from "graphql-request";
+import {
+  RequestDocument,
+  RequestOptions,
+  VariablesAndRequestHeaders,
+} from "graphql-request/dist/types";
+import { RefreshTokenResult } from "src/types/dataType";
 
-export const createClients = (token?: string) => {
-  const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
-  const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
-  const client = new GraphQLClient(endpoint, {
-    headers,
-  });
+class GraphQLRequest extends GraphQLClient {
+  constructor() {
+    super(endpoint);
+  }
 
-  return client;
-};
+  private async refreshToken() {
+    const data: RefreshTokenResult = await fetch("/api/auth/refreshToken", {
+      method: "POST",
+      credentials: "include",
+    }).then((res) => res.json());
+
+    return data;
+  }
+
+  override async request<T = any, V extends Variables = Variables>(
+    document: RequestDocument | TypedDocumentNode<T, V> | RequestOptions,
+    ...variablesAndRequestHeaders: VariablesAndRequestHeaders<V>
+  ): Promise<T> {
+    try {
+      return await super.request(
+        document as string,
+        ...variablesAndRequestHeaders
+      );
+    } catch (error: any) {
+      if (JSON.stringify(error).includes("Could not verify JWT: JWTExpired")) {
+        const data = await this.refreshToken();
+        if (data.message === "ok") {
+          this.setHeader("Authorization", `Bearer ${data.idToken}`);
+
+          return await super.request(
+            document as string,
+            ...variablesAndRequestHeaders
+          );
+        }
+      }
+
+      throw error;
+    }
+  }
+}
+
+export const client = new GraphQLRequest();

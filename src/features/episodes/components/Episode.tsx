@@ -22,7 +22,6 @@ const DynamicChatComments = dynamic(
   () => import("src/features/comments/components/ChatComments"),
   {
     ssr: false,
-    loading: () => <div>loading...</div>,
   }
 );
 

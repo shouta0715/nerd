@@ -9,7 +9,7 @@ type Args = {
 export const useChatComments = ({ episode_id }: Args) => {
   const { data, fetchNextPage, isLoading } = useInfiniteQueryChatComments({
     episode_id,
-    enabled: true,
+    enabled: !!episode_id,
   });
   const time = useTimerState((state) => state.getTime());
 
