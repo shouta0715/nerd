@@ -36,9 +36,11 @@ class GraphQLRequest extends GraphQLClient {
         ...variablesAndRequestHeaders
       );
     } catch (error: any) {
+      console.log(error);
       if (JSON.stringify(error).includes("Could not verify JWT: JWTExpired")) {
         const data = await this.refreshToken();
         if (data.message === "ok") {
+          console.log("refreshToken");
           this.setHeader("Authorization", `Bearer ${data.idToken}`);
 
           return await super.request(

@@ -12,7 +12,7 @@ type Props = {
 
 export const WorkItem: FC<Props> = memo(({ work }) => (
   <li
-    className="relative w-full max-w-lg flex-1 rounded-md bg-white p-3 shadow md:p-4"
+    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 drop-shadow-sm md:p-4"
     key={`works-${work.id}`}
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">

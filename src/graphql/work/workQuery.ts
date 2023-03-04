@@ -21,7 +21,7 @@ export const GET_SEASON_WORKS = gql`
       id
       has_episodes
       media_type_id
-      episodes(order_by: { number: desc_nulls_last }, limit: 6) {
+      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         title
         start_time
         number
