@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
-  const { data, isLoading } = useChatComments({ episode_id });
+  const { data } = useChatComments({ episode_id });
   const { timeCommented } = timeProcessing();
   const user = useUserState((state) => state.user);
 
@@ -64,7 +64,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
           </li>
         ))}
       </Box>
-      <PlayButton loading={isLoading} />
+      <PlayButton />
     </>
   );
 });

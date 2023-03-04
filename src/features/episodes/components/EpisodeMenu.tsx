@@ -22,6 +22,7 @@ export const EpisodeMenu: FC<Props> = memo(
     const [isOpened, setIsOpened] = useState(false);
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);
+
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,7 +40,7 @@ export const EpisodeMenu: FC<Props> = memo(
           setIsOpened(value);
         }}
         opened={isOpened}
-        position="bottom"
+        position="bottom-end"
         classNames={{
           dropdown: "max-w-xs w-full",
         }}

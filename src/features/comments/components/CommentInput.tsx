@@ -25,7 +25,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="fixed bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
+    <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
       <Modal />
       <form
         className="container mx-auto flex items-center justify-center opacity-100"
