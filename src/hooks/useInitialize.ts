@@ -3,13 +3,14 @@
 import { signInAnonymously } from "firebase/auth";
 import { useEffect } from "react";
 import { auth } from "../libs/firebase";
-import { createClients } from "../libs/graphqlClient";
+
 import { useUserState } from "../store/user/userState";
+import { client } from "src/libs/graphqlClient";
 import { useGlobalState } from "src/store/global/globalStore";
 
 const useInitialize = () => {
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
-  const setClient = useGlobalState((state) => state.setClient);
+
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
@@ -21,8 +22,7 @@ const useInitialize = () => {
         const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
         if (idTokenResult.token && isHasClaims) {
-          const client = createClients(idTokenResult.token);
-          setClient(client);
+          client.setHeader("Authorization", `Bearer ${idTokenResult.token}`);
         } else {
           const res = await fetch("/api/auth/setCustomClaims", {
             method: "POST",
@@ -37,8 +37,7 @@ const useInitialize = () => {
 
           if (res.status === 200 && res.ok) {
             const token = await auth.currentUser?.getIdToken(true);
-            const client = createClients(token);
-            setClient(client);
+            client.setHeader("Authorization", `Bearer ${token}`);
           }
         }
         setUser({
@@ -62,7 +61,7 @@ const useInitialize = () => {
     return () => {
       unSubUser();
     };
-  }, [TOKEN_KEY, setUser, setAuthLoading, setClient]);
+  }, [TOKEN_KEY, setUser, setAuthLoading]);
 };
 
 export default useInitialize;
