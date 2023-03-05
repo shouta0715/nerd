@@ -25,7 +25,7 @@ export type GetTodayEpisodesQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null }, episode_likes_aggregate: { __typename?: 'episode_likes_aggregate', aggregate?: { __typename?: 'episode_likes_aggregate_fields', count: number } | null } }> };
+export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } }> };
 
 export type GetEpisodeQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
@@ -79,11 +79,6 @@ export const GetTodayEpisodesDocument = `
       id
       series_id
       tid
-    }
-    episode_likes_aggregate {
-      aggregate {
-        count
-      }
     }
   }
 }

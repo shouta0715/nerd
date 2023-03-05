@@ -62,13 +62,24 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               start_time={episode.start_time}
               id={episode.id}
             />
-            <Button className="mt-2 ml-auto" variant="light">
+            <Button
+              component="a"
+              href={`/episode/${episode.id}?category=archive`}
+              className="mt-2 ml-auto"
+              variant="light"
+            >
               参加する
             </Button>
           </div>
         ) : (
           <div>
-            <Button className="mr-4" color="red" variant="light">
+            <Button
+              component={Link}
+              href={`/episode/${episode.id}?category=archive`}
+              className="mr-4"
+              color="red"
+              variant="light"
+            >
               アーカイブで参加する
             </Button>
           </div>
