@@ -20,7 +20,7 @@ export const TodayEpisodes: FC<Props> = ({ data }) => {
   const { deferredFilterEpisodes } = useTodayEpisodes({ data });
 
   return (
-    <ul className="flex flex-wrap gap-2 md:gap-4">
+    <ul className="flex flex-wrap gap-4">
       {deferredFilterEpisodes?.map((episode) => (
         <DynamicTodayEpisodeItem episode={episode} key={episode.id} />
       ))}

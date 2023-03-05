@@ -107,6 +107,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "react/button-has-type": "off",
     camelcase: "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "react/display-name": "off",
     "import/no-extraneous-dependencies": [
       "error",

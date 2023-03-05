@@ -1,6 +1,6 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import { Autocomplete, Box, Text, Title } from "@mantine/core";
-import { IconSearch } from "@tabler/icons";
+import { ActionIcon, Autocomplete, Box, Text, Title } from "@mantine/core";
+import { IconSearch, IconX } from "@tabler/icons";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generate
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { getSeasonWorks, getTodayEpisodes } from "src/hooks/router/getData";
 import { useAutoCompleteState } from "src/store/global/globalStore";
-import { useSearchInputState } from "src/store/input/serchInput";
+import { useSearchInputState } from "src/store/input/searchInput";
 
 type Props = {
   data: GetTodayEpisodesQuery | GetSeasonWorksQuery;
@@ -29,24 +29,11 @@ const Index: NextPage<Props> = ({ data }) => {
   return (
     <Box component="section">
       <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
-        <Box className="container mx-auto flex flex-col items-start justify-center  space-y-2 bg-transparent py-4 md:flex-row md:items-center md:space-y-0">
-          <Title
-            order={2}
-            size="h3"
-            className="mr-3  flex h-full items-center text-base md:mr-6 md:text-2xl"
-          >
-            <Link
-              scroll={false}
-              href="/"
-              className="mr-2 flex justify-center p-1 md:mr-4 md:p-2"
-            >
+        <Box className="container mx-auto bg-transparent py-3">
+          <div className="flex w-full items-center px-4">
+            <Link href="/" className="mr-2 flex justify-center md:mr-4 ">
               <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
             </Link>
-            <Text component="span">
-              {query.list === "today" ? "今日放送のエピソード" : "今期のアニメ"}
-            </Text>
-          </Title>
-          <div className="w-full flex-1">
             <Autocomplete
               filter={(value, item) =>
                 item.title.includes(value.toLowerCase().trim()) ||
@@ -54,21 +41,42 @@ const Index: NextPage<Props> = ({ data }) => {
               }
               itemComponent={AutoCompleteItem}
               data={autoCompleteData}
+              className="mx-auto w-full max-w-sm md:max-w-md"
               icon={<IconSearch className="text-indigo-500" size={20} />}
+              iconWidth={48}
+              rightSectionWidth={48}
+              rightSection={
+                <ActionIcon
+                  variant="transparent"
+                  onClick={() => setSearchInput("")}
+                >
+                  <IconX className="text-indigo-500" size={20} />
+                </ActionIcon>
+              }
               placeholder="タイトルで検索"
               classNames={{
-                wrapper:
-                  "h-8 w-full mx-auto md:mx-0 flex items-center md:max-w-sm max-w-xs",
+                wrapper: "h-8 w-full  mx-auto md:mx-0 flex items-center ",
                 input: "text-base",
               }}
               radius="xl"
               onChange={(e) => setSearchInput(e)}
+              value={useSearchInputState((state) => state.searchInput)}
             />
           </div>
         </Box>
       </header>
       <Box className="container mx-auto">
         <div className="p-6">
+          <Title
+            order={2}
+            size="h3"
+            className="mb-3 items-center text-base md:text-2xl"
+          >
+            <Text component="span">
+              {query.list === "today" ? "今日放送のエピソード" : "今期のアニメ"}
+            </Text>
+          </Title>
+
           {query.list === "today" && (
             <TodayEpisodes data={data as GetTodayEpisodesQuery} />
           )}

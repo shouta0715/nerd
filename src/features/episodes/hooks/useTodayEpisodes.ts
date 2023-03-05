@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
-import { useQueryLikes } from "src/features/episodes/api/useQueryLike";
 import { Episode } from "src/features/episodes/types";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useAutoCompleteState } from "src/store/global/globalStore";
-import { useSearchInputState } from "src/store/input/serchInput";
+import { useSearchInputState } from "src/store/input/searchInput";
 
 const sortFn = (next: Episode, target: Episode) => {
   const now = new Date();
@@ -34,7 +33,6 @@ type Props = {
 };
 
 export const useTodayEpisodes = ({ data }: Props) => {
-  useQueryLikes(data?.episodes?.map((e) => e.id) ?? []);
   const setAutoCompleteData = useAutoCompleteState(
     (state) => state.setAutoCompleteData
   );

@@ -1,10 +1,16 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ActionIcon, Box, Burger, Input, Menu, Text } from "@mantine/core";
-import { IconPencil, IconPlayerSkipForward, IconStack2 } from "@tabler/icons";
+import { ActionIcon, Burger, Input, Text } from "@mantine/core";
+import {
+  IconEdit,
+  IconPencil,
+  IconPlayerSkipForward,
+  IconStack2,
+} from "@tabler/icons";
 import Link from "next/link";
 import React, { FC, memo, useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
@@ -22,6 +28,8 @@ export const EpisodeMenu: FC<Props> = memo(
     const [isOpened, setIsOpened] = useState(false);
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);
+    const time = useTimerState((state) => state.time);
+
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,75 +41,114 @@ export const EpisodeMenu: FC<Props> = memo(
     };
 
     return (
-      <Menu
-        width={240}
-        onChange={(value) => {
-          setIsOpened(value);
-        }}
-        opened={isOpened}
-        position="bottom"
-        classNames={{
-          dropdown: "max-w-xs w-full",
-        }}
-      >
-        <ActionIcon component={Menu.Target} variant="transparent" color="dark">
-          <Burger opened={isOpened} onClick={() => setIsOpened((p) => !p)} />
-        </ActionIcon>
-        <Menu.Dropdown>
-          <Menu.Label>メニュー</Menu.Label>
-          <Box className="px-3">
-            <IconPencil className="mr-2" size={14} />
-            <Text component="span" className="text-xs">
-              投稿名の変更
+      <div className="relative">
+        <Burger
+          className="lg:hidden"
+          opened={isOpened}
+          onClick={() => setIsOpened(!isOpened)}
+          aria-label={isOpened ? "メニューを閉じる" : "メニューを開く"}
+        />
+        <div
+          className={`absolute top-10 right-0 w-60 rounded border border-solid border-slate-200 bg-white lg:static lg:w-full lg:border-0 ${
+            isOpened ? "block" : "hidden lg:block"
+          }`}
+        >
+          <section className="px-4 py-2">
+            <Text size="sm" color="dimmed" className="mb-2">
+              メニュー
             </Text>
-          </Box>
-          <form onSubmit={onSubmitHandler}>
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.currentTarget.value)}
-              onBlur={() => setIsOpened(false)}
-              className="px-2"
-              classNames={{
-                input: "text-[16px] scale-75",
-              }}
-              size="xs"
-            />
-          </form>
-          <Menu.Divider />
-          <Menu.Label>エピソード</Menu.Label>
-          <Text component="div" className="py-2 px-3">
-            <Text component="p" className="mb-1 text-xs">
-              {workTitle}
-            </Text>
-            {episodeTitle && (
-              <div className="flex">
-                <Text size="xs" className="mr-1" color="dimmed">
-                  {episodeNumber}.
+            <form onSubmit={onSubmitHandler} className="mb-3 space-y-1">
+              <label
+                htmlFor="commenter-name-input"
+                className="flex items-center"
+              >
+                <IconPencil className="mr-1" size={14} />
+                <Text component="span" className="text-sm">
+                  投稿名の変更
                 </Text>
-                <Text size="xs" color="dimmed">
-                  {episodeTitle}
+              </label>
+              <Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.currentTarget.value)}
+                maxLength={14}
+                classNames={{
+                  input: "text-[16px]",
+                }}
+                id="commenter-name-input"
+                size="xs"
+              />
+            </form>
+            <div className="flex flex-col items-center space-y-1">
+              <Text size="sm" color="indigo">
+                開始から
+              </Text>
+              <div className="flex items-center">
+                <ActionIcon
+                  className="mr-2"
+                  size={20}
+                  variant="light"
+                  color="blue"
+                >
+                  <IconEdit />
+                </ActionIcon>
+                <Text
+                  size="sm"
+                  color="dimmed"
+                  className="flex items-center space-x-1"
+                >
+                  <span>{time.hours.toString().padStart(2, "0")}</span>
+                  <span>時間</span>
+                  <span>{time.minutes.toString().padStart(2, "0")}</span>
+                  <span>分</span>
+                  <span>{time.seconds.toString().padStart(2, "0")}</span>
+                  <span>秒</span>
                 </Text>
               </div>
+            </div>
+          </section>
+          <div className="h-[1px] w-full bg-slate-200" />
+          <section className="px-4 py-2">
+            <Text size="sm" color="dimmed" className="mb-2">
+              エピソード
+            </Text>
+            <Text component="div">
+              <Text component="p" className="mb-1 text-sm">
+                {workTitle}
+              </Text>
+              {episodeTitle && (
+                <div className="flex">
+                  <Text size="sm" className="mr-1" color="dimmed">
+                    {episodeNumber}.
+                  </Text>
+                  <Text size="sm" color="dimmed">
+                    {episodeTitle}
+                  </Text>
+                </div>
+              )}
+            </Text>
+            {nextEpisodeId && (
+              <Text
+                size="sm"
+                component={Link}
+                href={`${data?.episodes_by_pk?.id}?category=archive`}
+                className="my-2 flex items-center space-x-2"
+              >
+                <IconPlayerSkipForward size={16} />
+                <span className="inline-block pt-1">次のエピソード</span>
+              </Text>
             )}
-          </Text>
-          {nextEpisodeId && (
-            <Menu.Item
+            <Text
+              size="sm"
               component={Link}
-              href={`${data?.episodes_by_pk?.id}?category=archive`}
-              icon={<IconPlayerSkipForward size={14} />}
+              href={`${"xxx"}?category=archive`}
+              className="mt-2 flex items-center space-x-2"
             >
-              次のエピソード
-            </Menu.Item>
-          )}
-          <Menu.Item
-            component={Link}
-            href="/"
-            icon={<IconStack2 size={14} strokeWidth={1.5} />}
-          >
-            他のエピソード
-          </Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
+              <IconStack2 size={16} strokeWidth={1.5} />
+              <span className="inline-block">他のエピソード</span>
+            </Text>
+          </section>
+        </div>
+      </div>
     );
   }
 );

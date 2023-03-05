@@ -2,10 +2,6 @@ import { Button, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, memo } from "react";
-import { CommentsButton } from "src/components/Elements/CommentsButton";
-import { LikeButton } from "src/components/Elements/LikeButton";
-import { ShareButton } from "src/components/Elements/ShareButton";
-import { UserGroupButton } from "src/components/Elements/UserGroupButton";
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 import { Episode } from "src/features/episodes/types";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
@@ -29,7 +25,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   const { getTimeStatus } = useTimerStatus();
 
   return (
-    <li className="relative mx-auto max-w-lg flex-1 rounded-md bg-white p-4 shadow hover:bg-slate-50 md:px-6">
+    <li className="relative mx-auto max-w-md flex-1  rounded-md border border-solid border-slate-200 bg-white p-4 drop-shadow-sm hover:bg-slate-50 md:px-6">
       <Link
         href={`/episode/${episode.id}?category=live`}
         className="absolute inset-0 rounded-md"
@@ -66,6 +62,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               start_time={episode.start_time}
               id={episode.id}
             />
+            <Button className="mt-2 ml-auto" variant="light">
+              参加する
+            </Button>
           </div>
         ) : (
           <div>
@@ -74,32 +73,6 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             </Button>
           </div>
         )}
-        <div className="z-10 mt-2 flex w-full items-center justify-around text-sm">
-          {getTimeStatus({
-            start_time: episode.start_time,
-            end_time: episode.end_time,
-          }).timer ? (
-            <>
-              <LikeButton debounceTime={1500} episodeId={episode.id} />
-              <UserGroupButton
-                count={10}
-                onClickHandler={() => console.log("click")}
-              />
-              <ShareButton onClickHandler={() => console.log("share")} />
-              <Button size="xs" radius="md" variant="light">
-                参加する
-              </Button>
-            </>
-          ) : (
-            <>
-              <CommentsButton
-                count={10}
-                onClickHandler={() => console.log("share")}
-              />
-              <ShareButton onClickHandler={() => console.log("share")} />
-            </>
-          )}
-        </div>
       </div>
     </li>
   );

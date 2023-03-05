@@ -13,6 +13,7 @@ import { RefreshTokenResult } from "src/types/dataType";
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
 class GraphQLRequest extends GraphQLClient {
+  private retry = 0;
   constructor() {
     super(endpoint);
   }
@@ -36,7 +37,11 @@ class GraphQLRequest extends GraphQLClient {
         ...variablesAndRequestHeaders
       );
     } catch (error: any) {
-      if (JSON.stringify(error).includes("Could not verify JWT: JWTExpired")) {
+      if (
+        JSON.stringify(error).includes("Could not verify JWT: JWTExpired") &&
+        this.retry < 1
+      ) {
+        this.retry += 1;
         const data = await this.refreshToken();
         if (data.message === "ok") {
           this.setHeader("Authorization", `Bearer ${data.idToken}`);
