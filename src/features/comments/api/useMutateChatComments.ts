@@ -56,14 +56,14 @@ export const useMutateChatComments = () => {
                 page.chat_comments_by_episode_id.findIndex(
                   (comment) => comment.comment_time >= comment_time
                 );
-              const newPages = {
+              const newPages: GetChatCommentsQuery = {
                 chat_comments_by_episode_id: [
                   ...page.chat_comments_by_episode_id,
                 ],
               };
 
               if (mutateNextTimeIndex === -1) {
-                newPages.chat_comments_by_episode_id.unshift({
+                newPages.chat_comments_by_episode_id.push({
                   comment_time,
                   content,
                   created_at,
