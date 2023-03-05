@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { ActionIcon, Box, Textarea } from "@mantine/core";
+import { ActionIcon, Box, Indicator, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -37,7 +37,18 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             if (user?.anonymous) setIsOpenModal(true);
           }}
         >
-          <Avatar user_id={user?.id ?? ""} user_name={user?.user_name ?? ""} />
+          <Indicator
+            offset={4}
+            color="red"
+            withBorder
+            size={16}
+            disabled={user?.anonymous}
+          >
+            <Avatar
+              user_id={user?.id ?? ""}
+              user_name={user?.user_name ?? ""}
+            />
+          </Indicator>
         </figure>
         <Textarea
           disabled={!user}

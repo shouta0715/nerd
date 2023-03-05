@@ -17,23 +17,22 @@ export const Header: FC = () => {
       <header className="w-full">
         <div className="container mx-auto flex items-center justify-between px-6 py-2  md:px-10">
           <Logo />
-          <div>
-            {user && !user.anonymous ? (
-              <Avatar user_id={user.id} user_name={user.user_name} />
-            ) : (
-              <Button
-                onClick={() => changeIsOpenModal(true)}
-                size="xs"
-                radius="md"
-                loading={authLoading}
-                classNames={{
-                  label: "font-bold text-sm",
-                }}
-              >
-                ログイン
-              </Button>
-            )}
-          </div>
+
+          {user && !user.anonymous ? (
+            <Avatar user_id={user.id} user_name={user.user_name} />
+          ) : (
+            <Button
+              onClick={() => changeIsOpenModal(true)}
+              size="xs"
+              radius="md"
+              loading={authLoading}
+              classNames={{
+                label: "font-bold text-sm",
+              }}
+            >
+              ログイン
+            </Button>
+          )}
         </div>
       </header>
     </>

@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ActionIcon, Burger, Input, Text } from "@mantine/core";
+import { ActionIcon, Burger, Button, Input, Text } from "@mantine/core";
 import {
-  IconEdit,
   IconPencil,
   IconPlayerSkipForward,
+  IconSettings,
   IconStack2,
 } from "@tabler/icons";
 import Link from "next/link";
@@ -29,6 +30,7 @@ export const EpisodeMenu: FC<Props> = memo(
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);
     const time = useTimerState((state) => state.time);
+    const interval = useTimerState((state) => state.interval);
 
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
@@ -85,17 +87,14 @@ export const EpisodeMenu: FC<Props> = memo(
               <div className="flex items-center">
                 <ActionIcon
                   className="mr-2"
-                  size={20}
-                  variant="light"
+                  size={26}
+                  variant="subtle"
                   color="blue"
+                  radius="xl"
                 >
-                  <IconEdit />
+                  <IconSettings size={22} />
                 </ActionIcon>
-                <Text
-                  size="sm"
-                  color="dimmed"
-                  className="flex items-center space-x-1"
-                >
+                <Text size="sm" className="flex items-center space-x-1">
                   <span>{time.hours.toString().padStart(2, "0")}</span>
                   <span>時間</span>
                   <span>{time.minutes.toString().padStart(2, "0")}</span>
@@ -104,6 +103,28 @@ export const EpisodeMenu: FC<Props> = memo(
                   <span>秒</span>
                 </Text>
               </div>
+              <Button
+                onClick={() =>
+                  interval?.active ? interval.stop() : interval?.start()
+                }
+                size="xs"
+                color={
+                  interval?.active
+                    ? "red"
+                    : time.hours === 0 &&
+                      time.minutes === 0 &&
+                      time.seconds === 0
+                    ? "indigo"
+                    : "blue"
+                }
+                className="w-full"
+              >
+                {interval?.active
+                  ? "一時停止"
+                  : time.hours === 0 && time.minutes === 0 && time.seconds === 0
+                  ? "開始"
+                  : "再開"}
+              </Button>
             </div>
           </section>
           <div className="h-[1px] w-full bg-slate-200" />
