@@ -43,10 +43,10 @@ export const Episode: FC = () => {
   return (
     <div className="flex flex-col">
       <div className="container contents lg:mx-auto lg:flex">
-        <div className="sticky top-0 contents h-max flex-1 lg:block">
+        <div className="sticky top-0 contents h-full flex-1 lg:block lg:overflow-y-auto">
           <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
             <div className="flex w-full flex-1  flex-col gap-2">
-              <Title ff="Hiragino Sans" className=" text-base  md:text-lg">
+              <Title ff="Hiragino Sans" className=" text-base md:text-lg">
                 {data?.episodes_by_pk?.work.series_title}
               </Title>
               <Text component="p" className="flex items-center">
@@ -77,40 +77,42 @@ export const Episode: FC = () => {
             </div>
           </header>
           <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 md:border-none">
-            <div className="container mx-auto flex items-center justify-between">
-              <ActionIcon
-                color="dark"
-                onClick={() => router.back()}
-                variant="transparent"
-              >
-                <ArrowSmallLeftIcon className="h-6 w-6" />
-              </ActionIcon>
-              <ul className=" flex h-full flex-1 items-center justify-around">
-                <Text
-                  onClick={() => setIsChat(true)}
-                  color="indigo"
-                  component="li"
-                  className={`inline-block cursor-pointer  py-2 text-sm font-bold md:text-base ${
-                    isChat
-                      ? "border-indigo border-0 border-b-2 border-solid"
-                      : "border-none"
-                  }`}
+            <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch">
+              <div className="flex flex-1 items-center justify-between">
+                <ActionIcon
+                  color="dark"
+                  onClick={() => router.back()}
+                  variant="transparent"
                 >
-                  チャット
-                </Text>
-                <Text
-                  onClick={() => setIsChat(false)}
-                  color="indigo"
-                  component="li"
-                  className={`inline-block cursor-pointer py-2 text-sm font-bold md:text-base ${
-                    !isChat
-                      ? "border-indigo border-0 border-b-2 border-solid"
-                      : "border-none"
-                  }`}
-                >
-                  コメント
-                </Text>
-              </ul>
+                  <ArrowSmallLeftIcon className="h-6 w-6" />
+                </ActionIcon>
+                <ul className=" flex h-full flex-1 items-center justify-around">
+                  <Text
+                    onClick={() => setIsChat(true)}
+                    color="indigo"
+                    component="li"
+                    className={`inline-block cursor-pointer  py-2 text-sm font-bold md:text-base ${
+                      isChat
+                        ? "border-indigo border-0 border-b-2 border-solid"
+                        : "border-none"
+                    }`}
+                  >
+                    チャット
+                  </Text>
+                  <Text
+                    onClick={() => setIsChat(false)}
+                    color="indigo"
+                    component="li"
+                    className={`inline-block cursor-pointer py-2 text-sm font-bold md:text-base ${
+                      !isChat
+                        ? "border-indigo border-0 border-b-2 border-solid"
+                        : "border-none"
+                    }`}
+                  >
+                    コメント
+                  </Text>
+                </ul>
+              </div>
               <DynamicEpisodeMenu
                 episodeTitle={data?.episodes_by_pk?.title}
                 episodeNumber={data?.episodes_by_pk?.number}

@@ -44,7 +44,8 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           placeholder={user ? `${user?.user_name}で投稿` : ""}
           className="w-full max-w-sm flex-1"
           classNames={{
-            input: "text-[16px] pr-[50px] placeholder:pl-4 scale-90",
+            input:
+              "text-[16px] pr-[50px] placeholder:pl-4 scale-90 placeholder:text-ellipsis placeholder:overflow-hidden placeholder:whitespace-nowrap",
           }}
           rightSectionWidth={80}
           maxRows={3}
