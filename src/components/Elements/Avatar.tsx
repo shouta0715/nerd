@@ -10,6 +10,7 @@ export const Avatar: FC<Props> = ({ user_id, user_name }) => (
   <BoringAvatar
     name={`${user_id}${user_name}`}
     variant="beam"
+    size={38}
     colors={[
       "#4FB3BE",
       "#FF7F50",
@@ -24,9 +25,7 @@ export const Avatar: FC<Props> = ({ user_id, user_name }) => (
       "#00FA9A",
       "#FFB6C1",
       "#00FF7F",
-      "#2E8B57",
       "#FF6347",
-      "#008B8B",
       "#FFFF00",
     ]}
   />
