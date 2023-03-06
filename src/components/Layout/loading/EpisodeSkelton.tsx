@@ -8,7 +8,7 @@ export const EpisodeSkelton: FC = () => (
   <div className="flex flex-col">
     <div className="container contents lg:mx-auto lg:flex">
       <li className="w-full flex-1 rounded-md p-4  md:px-6">
-        <header className="mx-auto flex animate-pulse flex-col items-center justify-between">
+        <header className="mx-auto flex animate-pulse flex-col items-center justify-between ">
           <Title
             order={3}
             size="h4"
@@ -24,8 +24,8 @@ export const EpisodeSkelton: FC = () => (
             <TimerSkelton />
           </div>
         </header>
-        <nav className="container mx-auto mt-3 flex animate-pulse items-center justify-between lg:flex-col lg:items-stretch">
-          <div className="flex flex-1 items-center justify-between">
+        <nav className="container mx-auto mt-3 flex animate-pulse items-center justify-between border-0 border-b  border-solid border-slate-200 py-2 lg:flex-col lg:items-stretch">
+          <div className="flex flex-1 items-center justify-between border-0 border-t  border-solid border-slate-200">
             <ArrowSmallLeftIcon className="h-6 w-6 text-slate-200" />
             <Text className="ml-2 h-6 w-20 rounded-md bg-slate-200" />
             <Text className="ml-2 h-6 w-20 rounded-md bg-slate-200" />

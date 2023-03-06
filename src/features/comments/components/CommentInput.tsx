@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { ActionIcon, Box, Indicator, Textarea } from "@mantine/core";
+import { ActionIcon, Box, Indicator, Loader, Textarea } from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -23,6 +23,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const { onSubmitHandler, isLoading } = useSubmitComment({ episode_id });
   const user = useUserState((state) => state.user);
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
     <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
@@ -37,18 +38,22 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             if (user?.anonymous) setIsOpenModal(true);
           }}
         >
-          <Indicator
-            offset={4}
-            color="red"
-            withBorder
-            size={16}
-            disabled={user?.anonymous}
-          >
-            <Avatar
-              user_id={user?.id ?? ""}
-              user_name={user?.user_name ?? ""}
-            />
-          </Indicator>
+          {authLoading ? (
+            <Loader />
+          ) : (
+            <Indicator
+              offset={4}
+              color="red"
+              withBorder
+              size={16}
+              disabled={user?.anonymous}
+            >
+              <Avatar
+                user_id={user?.id ?? ""}
+                user_name={user?.user_name ?? ""}
+              />
+            </Indicator>
+          )}
         </figure>
         <Textarea
           disabled={!user}

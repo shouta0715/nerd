@@ -79,8 +79,8 @@ export const Episode: FC = () => {
             </div>
           </header>
           <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:border-none">
-            <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch">
-              <div className="flex flex-1 items-center justify-between">
+            <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
+              <div className="flex flex-1 items-center justify-between border-0 border-t  border-solid border-slate-200">
                 <ActionIcon
                   color="dark"
                   onClick={() => router.back()}

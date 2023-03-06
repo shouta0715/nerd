@@ -242,7 +242,7 @@ export const EpisodeMenu: FC<Props> = memo(
             </div>
           </section>
           <div className="h-[1px] w-full bg-slate-200" />
-          <section className="px-4 py-2">
+          <section className="border-0 border-b border-solid border-slate-200 px-4 py-2">
             <Text size="xs" color="dimmed" className="mb-2">
               エピソード
             </Text>
