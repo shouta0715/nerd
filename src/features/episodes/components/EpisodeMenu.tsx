@@ -39,7 +39,7 @@ const InitialUserName = localStorage.getItem("user_name");
 
 export const EpisodeMenu: FC<Props> = memo(
   ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
-    const { data } = useQueryEpisode(nextEpisodeId);
+    const { data } = useQueryEpisode(nextEpisodeId, undefined);
     const [isOpened, setIsOpened] = useState(false);
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);

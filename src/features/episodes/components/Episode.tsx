@@ -38,8 +38,8 @@ const DynamicEpisodeMenu = dynamic(
 
 export const Episode: FC = () => {
   const router = useRouter();
-  const { slug } = router.query;
-  const { data } = useQueryEpisode(slug);
+  const { slug, episode } = router.query;
+  const { data } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
 
   return (

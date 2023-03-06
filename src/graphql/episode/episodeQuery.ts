@@ -51,15 +51,9 @@ export const GET_EPISODE = gql`
       start_time
       number
       has_next_episode
-      has_prev_episode
       next_episode_id
-      prev_episode_id
       work {
         series_title
-        title
-        id
-        series_id
-        tid
       }
     }
   }

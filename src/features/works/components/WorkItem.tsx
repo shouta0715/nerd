@@ -29,7 +29,11 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
       <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0 border-b border-solid border-slate-200 pb-2">
         <ul className="mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
           {work.episodes.map((episode) => (
-            <WorkEpisodeItem episode={episode} key={`work-${episode.id}`} />
+            <WorkEpisodeItem
+              episode={episode}
+              work_title={work.series_title}
+              key={`work-${episode.id}`}
+            />
           ))}
         </ul>
         <Button
