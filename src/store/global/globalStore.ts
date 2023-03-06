@@ -5,9 +5,10 @@ import { AutoCompleteData } from "src/types/dataType";
 type GlobalState = {
   isOpenLoginModal: boolean;
   setIsOpenModal: (flag: boolean) => void;
-
   authLoading: boolean;
   setAuthLoading: (authLoading: boolean) => void;
+  isMenuModalOpen: boolean;
+  setIsMenuModalOpen: (flag: boolean) => void;
 };
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -15,6 +16,8 @@ export const useGlobalState = create<GlobalState>((set) => ({
   setIsOpenModal: (flag) => set(() => ({ isOpenLoginModal: flag })),
   authLoading: true,
   setAuthLoading: (authLoading) => set(() => ({ authLoading })),
+  isMenuModalOpen: false,
+  setIsMenuModalOpen: (flag) => set(() => ({ isMenuModalOpen: flag })),
 }));
 type AutCompleteState = {
   autoCompleteData: AutoCompleteData[];

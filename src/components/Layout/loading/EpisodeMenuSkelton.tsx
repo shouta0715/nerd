@@ -3,7 +3,7 @@ import React, { FC } from "react";
 
 export const EpisodeMenuSkelton: FC = () => (
   <>
-    <Loader className="h-8 w-8" />
+    <Loader className="h-6 w-6 lg:hidden" />
     <div className="hidden lg:block">
       <section className="px-4 py-2">
         <div className="mb-2 h-2 w-16 rounded-md bg-slate-200" />
