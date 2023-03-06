@@ -17,7 +17,6 @@ const DynamicEpisode = dynamic(
 
 const Index: NextPage = () => (
   <Box component="section">
-    <EpisodeSkelton />
     <DynamicEpisode />
   </Box>
 );
