@@ -2,6 +2,7 @@ import { Box } from "@mantine/core";
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
+import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
 
 const DynamicEpisode = dynamic(
   () =>
@@ -10,7 +11,7 @@ const DynamicEpisode = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <div>loading...</div>,
+    loading: () => <EpisodeSkelton />,
   }
 );
 

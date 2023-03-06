@@ -4,6 +4,7 @@ import { ActionIcon, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
+import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -31,6 +32,7 @@ const DynamicEpisodeMenu = dynamic(
     ),
   {
     ssr: false,
+    loading: () => <EpisodeMenuSkelton />,
   }
 );
 

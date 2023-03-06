@@ -51,7 +51,7 @@ export const EpisodeMenu: FC<Props> = memo(
           aria-label={isOpened ? "メニューを閉じる" : "メニューを開く"}
         />
         <div
-          className={`absolute top-10 right-0 w-60 rounded border border-solid border-slate-200 bg-white lg:static lg:w-full lg:border-0 ${
+          className={`absolute top-10 right-0 w-60 overflow-y-auto rounded border border-solid border-slate-200 bg-white shadow lg:static lg:h-auto lg:w-full lg:border-0 ${
             isOpened ? "block" : "hidden lg:block"
           }`}
         >
@@ -155,7 +155,7 @@ export const EpisodeMenu: FC<Props> = memo(
                 className="my-2 flex items-center space-x-2"
               >
                 <IconPlayerSkipForward size={16} />
-                <span className="inline-block pt-1">次のエピソード</span>
+                <span className="inline-block">次のエピソード</span>
               </Text>
             )}
             <Text
