@@ -2,7 +2,7 @@ import { useInterval } from "@mantine/hooks";
 import create from "zustand";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 
-const { timeToSecond } = timeProcessing();
+const { timeToSecond, secondToTime } = timeProcessing();
 
 const InitialTimerCount = {
   seconds: 0,
@@ -25,6 +25,7 @@ type TimerState = {
   restEpisodeId: () => void;
   interval: null | ReturnType<typeof useInterval>;
   setInterval: (interval: ReturnType<typeof useInterval>) => void;
+  changeTenTime: (formula: "add" | "minus") => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
@@ -51,4 +52,10 @@ export const useTimerState = create<TimerState>((set, get) => ({
   restEpisodeId: () => set({ episodeId: "" }),
   interval: null,
   setInterval: (interval: ReturnType<typeof useInterval>) => set({ interval }),
+  changeTenTime: (formula: "add" | "minus") => {
+    const time = get().getTime();
+    const newTime = formula === "add" ? time + 10 : time - 10;
+    const { hours, minutes, seconds } = secondToTime(newTime);
+    set({ time: { hours, minutes, seconds } });
+  },
 }));

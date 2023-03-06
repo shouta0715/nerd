@@ -51,18 +51,18 @@ export const Episode: FC = () => {
               <Title ff="Hiragino Sans" className=" text-base md:text-lg">
                 {data?.episodes_by_pk?.work.series_title}
               </Title>
-              <Text component="p" className="flex items-center">
+              <Text component="p" className="flex">
                 <Text
-                  component="span"
+                  component="p"
                   ff="Hiragino Sans"
-                  className="mr-2  text-sm md:text-base"
+                  className="mr-2 text-sm md:text-base"
                 >
                   第{data?.episodes_by_pk?.number}話
                 </Text>
                 <Text
-                  component="span"
+                  component="p"
                   ff="Hiragino Sans"
-                  className="text-sm md:text-base"
+                  className="flex-1 text-sm md:text-base"
                 >
                   {data?.episodes_by_pk?.title}
                 </Text>

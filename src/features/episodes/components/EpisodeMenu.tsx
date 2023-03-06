@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -5,6 +6,7 @@ import {
   ActionIcon,
   Burger,
   Button,
+  CloseButton,
   Input,
   Text,
   UnstyledButton,
@@ -13,6 +15,8 @@ import { useClickOutside } from "@mantine/hooks";
 import {
   IconPencil,
   IconPlayerSkipForward,
+  IconRotate,
+  IconRotateClockwise,
   IconSettings,
   IconStack2,
 } from "@tabler/icons";
@@ -40,6 +44,7 @@ export const EpisodeMenu: FC<Props> = memo(
     const time = useTimerState((state) => state.time);
     const interval = useTimerState((state) => state.interval);
     const ref = useClickOutside(() => setIsOpened(false));
+    const changeTenTime = useTimerState((state) => state.changeTenTime);
 
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
@@ -52,7 +57,7 @@ export const EpisodeMenu: FC<Props> = memo(
     };
 
     return (
-      <div className="relative z-10" ref={ref}>
+      <div ref={ref}>
         <Burger
           className="lg:hidden"
           opened={isOpened}
@@ -60,14 +65,27 @@ export const EpisodeMenu: FC<Props> = memo(
           aria-label={isOpened ? "メニューを閉じる" : "メニューを開く"}
         />
         <div
-          className={`absolute top-10 right-0 z-20 max-h-96 w-60 overflow-y-auto rounded border border-solid border-slate-200 bg-white shadow lg:static lg:h-auto lg:w-full lg:border-0 lg:shadow-none ${
-            isOpened ? "block" : "hidden lg:block"
+          className={`fixed inset-0 bg-black/40 lg:hidden ${
+            isOpened ? "block" : "hidden"
+          }`}
+          onClick={() => setIsOpened(false)}
+        />
+        <div
+          className={`fixed top-1/2 left-1/2 max-h-[90vh] w-4/5 max-w-md  -translate-y-1/2 -translate-x-1/2 overflow-y-auto rounded-md border border-solid border-slate-100 bg-white shadow  lg:static lg:h-auto lg:max-h-fit lg:w-full lg:translate-y-0 lg:translate-x-0 lg:border-0 lg:shadow-none lg:transition-none ${
+            isOpened ? "block" : "  hidden lg:block"
           }`}
         >
           <section className="px-4 py-2">
-            <Text size="xs" color="dimmed" className="mb-2">
-              メニュー
-            </Text>
+            <div className="mb-4 flex items-center justify-between">
+              <Text size="xs" color="dimmed">
+                メニュー
+              </Text>
+              <CloseButton
+                aria-label="Close modal"
+                size="sm"
+                onClick={() => setIsOpened(false)}
+              />
+            </div>
             <form onSubmit={onSubmitHandler} className="mb-3 space-y-1">
               <label
                 htmlFor="commenter-name-input"
@@ -125,28 +143,57 @@ export const EpisodeMenu: FC<Props> = memo(
                   <span>秒</span>
                 </Text>
               </div>
-              <Button
-                onClick={() =>
-                  interval?.active ? interval.stop() : interval?.start()
-                }
-                size="xs"
-                color={
-                  interval?.active
-                    ? "red"
+              <div className="grid w-full grid-cols-3 items-center justify-between">
+                <ActionIcon
+                  onClick={() => changeTenTime("minus")}
+                  color="indigo"
+                  variant="transparent"
+                  className="relative mx-auto h-12 w-12"
+                >
+                  <IconRotate size={48} className="rotate-180 stroke-1" />
+                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
+                    10
+                  </span>
+                </ActionIcon>
+                <Button
+                  onClick={() =>
+                    interval?.active ? interval.stop() : interval?.start()
+                  }
+                  size="xs"
+                  color={
+                    interval?.active
+                      ? "red"
+                      : time.hours === 0 &&
+                        time.minutes === 0 &&
+                        time.seconds === 0
+                      ? "indigo"
+                      : "blue"
+                  }
+                  className="w-full"
+                >
+                  {interval?.active
+                    ? "一時停止"
                     : time.hours === 0 &&
                       time.minutes === 0 &&
                       time.seconds === 0
-                    ? "indigo"
-                    : "blue"
-                }
-                className="w-full"
-              >
-                {interval?.active
-                  ? "一時停止"
-                  : time.hours === 0 && time.minutes === 0 && time.seconds === 0
-                  ? "開始"
-                  : "再開"}
-              </Button>
+                    ? "開始"
+                    : "再開"}
+                </Button>
+                <ActionIcon
+                  onClick={() => changeTenTime("add")}
+                  color="indigo"
+                  className="relative mx-auto h-12 w-12"
+                  variant="transparent"
+                >
+                  <IconRotateClockwise
+                    size={48}
+                    className="rotate-180 stroke-1"
+                  />
+                  <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
+                    10
+                  </span>
+                </ActionIcon>
+              </div>
             </div>
           </section>
           <div className="h-[1px] w-full bg-slate-200" />
