@@ -5,7 +5,6 @@ import { AutoCompleteData } from "src/types/dataType";
 type GlobalState = {
   isOpenLoginModal: boolean;
   setIsOpenModal: (flag: boolean) => void;
-
   authLoading: boolean;
   setAuthLoading: (authLoading: boolean) => void;
 };

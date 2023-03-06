@@ -4,6 +4,7 @@ import { ActionIcon, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
+import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -31,6 +32,7 @@ const DynamicEpisodeMenu = dynamic(
     ),
   {
     ssr: false,
+    loading: () => <EpisodeMenuSkelton />,
   }
 );
 
@@ -76,7 +78,7 @@ export const Episode: FC = () => {
               <CountUpTimer episodeId={data?.episodes_by_pk?.id} />
             </div>
           </header>
-          <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 md:border-none">
+          <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:border-none">
             <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch">
               <div className="flex flex-1 items-center justify-between">
                 <ActionIcon

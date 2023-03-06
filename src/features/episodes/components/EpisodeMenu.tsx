@@ -1,7 +1,15 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ActionIcon, Burger, Button, Input, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Burger,
+  Button,
+  Input,
+  Text,
+  UnstyledButton,
+} from "@mantine/core";
+import { useClickOutside } from "@mantine/hooks";
 import {
   IconPencil,
   IconPlayerSkipForward,
@@ -31,6 +39,7 @@ export const EpisodeMenu: FC<Props> = memo(
     const setUser = useUserState((state) => state.setUser);
     const time = useTimerState((state) => state.time);
     const interval = useTimerState((state) => state.interval);
+    const ref = useClickOutside(() => setIsOpened(false));
 
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
@@ -43,7 +52,7 @@ export const EpisodeMenu: FC<Props> = memo(
     };
 
     return (
-      <div className="relative">
+      <div className="relative z-10" ref={ref}>
         <Burger
           className="lg:hidden"
           opened={isOpened}
@@ -51,12 +60,12 @@ export const EpisodeMenu: FC<Props> = memo(
           aria-label={isOpened ? "メニューを閉じる" : "メニューを開く"}
         />
         <div
-          className={`absolute top-10 right-0 w-60 rounded border border-solid border-slate-200 bg-white lg:static lg:w-full lg:border-0 ${
+          className={`absolute top-10 right-0 z-20 max-h-96 w-60 overflow-y-auto rounded border border-solid border-slate-200 bg-white shadow lg:static lg:h-auto lg:w-full lg:border-0 lg:shadow-none ${
             isOpened ? "block" : "hidden lg:block"
           }`}
         >
           <section className="px-4 py-2">
-            <Text size="sm" color="dimmed" className="mb-2">
+            <Text size="xs" color="dimmed" className="mb-2">
               メニュー
             </Text>
             <form onSubmit={onSubmitHandler} className="mb-3 space-y-1">
@@ -65,12 +74,25 @@ export const EpisodeMenu: FC<Props> = memo(
                 className="flex items-center"
               >
                 <IconPencil className="mr-1" size={14} />
-                <Text component="span" className="text-sm">
+                <Text component="span" className="text-xs">
                   投稿名の変更
                 </Text>
+                <UnstyledButton
+                  type="submit"
+                  className="ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5"
+                  onClick={() => {
+                    if (!inputValue.trim())
+                      setInputValue(user?.user_name ?? "");
+                  }}
+                >
+                  変更
+                </UnstyledButton>
               </label>
               <Input
                 value={inputValue}
+                onBlur={() => {
+                  if (!inputValue.trim()) setInputValue(user?.user_name ?? "");
+                }}
                 onChange={(e) => setInputValue(e.currentTarget.value)}
                 maxLength={14}
                 classNames={{
@@ -81,7 +103,7 @@ export const EpisodeMenu: FC<Props> = memo(
               />
             </form>
             <div className="flex flex-col items-center space-y-1">
-              <Text size="sm" color="indigo">
+              <Text size="xs" color="indigo">
                 開始から
               </Text>
               <div className="flex items-center">
@@ -94,7 +116,7 @@ export const EpisodeMenu: FC<Props> = memo(
                 >
                   <IconSettings size={22} />
                 </ActionIcon>
-                <Text size="sm" className="flex items-center space-x-1">
+                <Text size="xs" className="flex items-center space-x-1">
                   <span>{time.hours.toString().padStart(2, "0")}</span>
                   <span>時間</span>
                   <span>{time.minutes.toString().padStart(2, "0")}</span>
@@ -129,19 +151,19 @@ export const EpisodeMenu: FC<Props> = memo(
           </section>
           <div className="h-[1px] w-full bg-slate-200" />
           <section className="px-4 py-2">
-            <Text size="sm" color="dimmed" className="mb-2">
+            <Text size="xs" color="dimmed" className="mb-2">
               エピソード
             </Text>
             <Text component="div">
-              <Text component="p" className="mb-1 text-sm">
+              <Text component="p" className="mb-1 text-xs">
                 {workTitle}
               </Text>
               {episodeTitle && (
                 <div className="flex">
-                  <Text size="sm" className="mr-1" color="dimmed">
+                  <Text size="xs" className="mr-1" color="dimmed">
                     {episodeNumber}.
                   </Text>
-                  <Text size="sm" color="dimmed">
+                  <Text size="xs" color="dimmed">
                     {episodeTitle}
                   </Text>
                 </div>
@@ -149,17 +171,17 @@ export const EpisodeMenu: FC<Props> = memo(
             </Text>
             {nextEpisodeId && (
               <Text
-                size="sm"
+                size="xs"
                 component={Link}
                 href={`${data?.episodes_by_pk?.id}?category=archive`}
                 className="my-2 flex items-center space-x-2"
               >
                 <IconPlayerSkipForward size={16} />
-                <span className="inline-block pt-1">次のエピソード</span>
+                <span className="inline-block">次のエピソード</span>
               </Text>
             )}
             <Text
-              size="sm"
+              size="xs"
               component={Link}
               href={`${"xxx"}?category=archive`}
               className="mt-2 flex items-center space-x-2"
