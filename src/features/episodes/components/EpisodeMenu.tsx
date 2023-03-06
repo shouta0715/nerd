@@ -9,6 +9,7 @@ import {
   Text,
   UnstyledButton,
 } from "@mantine/core";
+import { useClickOutside } from "@mantine/hooks";
 import {
   IconPencil,
   IconPlayerSkipForward,
@@ -38,6 +39,7 @@ export const EpisodeMenu: FC<Props> = memo(
     const setUser = useUserState((state) => state.setUser);
     const time = useTimerState((state) => state.time);
     const interval = useTimerState((state) => state.interval);
+    const ref = useClickOutside(() => setIsOpened(false));
 
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
@@ -50,7 +52,7 @@ export const EpisodeMenu: FC<Props> = memo(
     };
 
     return (
-      <div className="relative z-10">
+      <div className="relative z-10" ref={ref}>
         <Burger
           className="lg:hidden"
           opened={isOpened}
@@ -77,7 +79,7 @@ export const EpisodeMenu: FC<Props> = memo(
                 </Text>
                 <UnstyledButton
                   type="submit"
-                  className="ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white"
+                  className="ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5"
                   onClick={() => {
                     if (!inputValue.trim())
                       setInputValue(user?.user_name ?? "");
