@@ -18,20 +18,23 @@ type TimerCount = {
 type TimerState = {
   time: TimerCount;
   episodeId: string;
-  setTime: () => void;
+  intervalTime: () => void;
   resetTime: () => void;
+  setTime: (time: TimerCount) => void;
   getTime: () => number;
   setEpisodeId: (episodeId: string) => void;
   restEpisodeId: () => void;
   interval: null | ReturnType<typeof useInterval>;
   setInterval: (interval: ReturnType<typeof useInterval>) => void;
   changeTenTime: (formula: "add" | "minus") => void;
+  changeTime: (time: number) => void;
+  getPadStartTime: () => string;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
   time: InitialTimerCount,
   episodeId: "",
-  setTime: () =>
+  intervalTime: () =>
     set({
       time: {
         seconds: get().time.seconds === 59 ? 0 : get().time.seconds + 1,
@@ -43,7 +46,7 @@ export const useTimerState = create<TimerState>((set, get) => ({
           get().time.minutes === 59 ? get().time.hours + 1 : get().time.hours,
       },
     }),
-
+  setTime: (time: TimerCount) => set({ time }),
   resetTime: () => {
     set({ time: InitialTimerCount });
   },
@@ -57,5 +60,16 @@ export const useTimerState = create<TimerState>((set, get) => ({
     const newTime = formula === "add" ? time + 10 : time - 10;
     const { hours, minutes, seconds } = secondToTime(newTime);
     set({ time: { hours, minutes, seconds } });
+  },
+  changeTime: (time: number) => {
+    const { hours, minutes, seconds } = secondToTime(time);
+    set({ time: { hours, minutes, seconds } });
+  },
+  getPadStartTime: () => {
+    const { hours, minutes, seconds } = get().time;
+
+    return `${hours.toString().padStart(2, "0")}${minutes
+      .toString()
+      .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
   },
 }));

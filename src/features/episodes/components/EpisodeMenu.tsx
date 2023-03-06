@@ -2,12 +2,15 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import {
   ActionIcon,
   Burger,
   Button,
   CloseButton,
+  HoverCard,
   Input,
+  PinInput,
   Text,
   UnstyledButton,
 } from "@mantine/core";
@@ -17,7 +20,6 @@ import {
   IconPlayerSkipForward,
   IconRotate,
   IconRotateClockwise,
-  IconSettings,
   IconStack2,
 } from "@tabler/icons";
 import Link from "next/link";
@@ -42,6 +44,8 @@ export const EpisodeMenu: FC<Props> = memo(
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);
     const time = useTimerState((state) => state.time);
+    const padTime = useTimerState((state) => state.getPadStartTime());
+    const setTime = useTimerState((state) => state.setTime);
     const interval = useTimerState((state) => state.interval);
     const ref = useClickOutside(() => setIsOpened(false));
     const changeTenTime = useTimerState((state) => state.changeTenTime);
@@ -97,7 +101,11 @@ export const EpisodeMenu: FC<Props> = memo(
                 </Text>
                 <UnstyledButton
                   type="submit"
-                  className="ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5"
+                  className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
+                    inputValue === user?.user_name || !inputValue.trim()
+                      ? "opacity-0"
+                      : "opacity-100"
+                  }`}
                   onClick={() => {
                     if (!inputValue.trim())
                       setInputValue(user?.user_name ?? "");
@@ -121,28 +129,65 @@ export const EpisodeMenu: FC<Props> = memo(
               />
             </form>
             <div className="flex flex-col items-center space-y-1">
-              <Text size="xs" color="indigo">
-                開始から
-              </Text>
-              <div className="flex items-center">
-                <ActionIcon
-                  className="mr-2"
-                  size={26}
-                  variant="subtle"
-                  color="blue"
-                  radius="xl"
-                >
-                  <IconSettings size={22} />
-                </ActionIcon>
-                <Text size="xs" className="flex items-center space-x-1">
-                  <span>{time.hours.toString().padStart(2, "0")}</span>
-                  <span>時間</span>
-                  <span>{time.minutes.toString().padStart(2, "0")}</span>
-                  <span>分</span>
-                  <span>{time.seconds.toString().padStart(2, "0")}</span>
-                  <span>秒</span>
+              <div className="flex">
+                <Text size="sm" color="indigo" className="">
+                  開始から
                 </Text>
+                <HoverCard position="top" width={100} withArrow withinPortal>
+                  <HoverCard.Target>
+                    <QuestionMarkCircleIcon className="-mr-8 ml-2 h-6 w-6" />
+                  </HoverCard.Target>
+                  <HoverCard.Dropdown className="bg-black p-1 text-xs text-white shadow">
+                    下の数字をタップすると変更できます。
+                  </HoverCard.Dropdown>
+                </HoverCard>
               </div>
+              <div className="flex flex-col items-center space-y-1">
+                <PinInput
+                  inputType="number"
+                  manageFocus
+                  inputMode="numeric"
+                  size="sm"
+                  value={padTime}
+                  onChange={(e) => {
+                    interval?.stop();
+                    const digits = e.match(/.{1,2}/g);
+                    if (!digits) return;
+                    const [hours, minutes, seconds] = digits;
+                    setTime({
+                      hours: +hours,
+                      minutes: +minutes,
+                      seconds: +seconds,
+                    });
+                  }}
+                  length={6}
+                  type="number"
+                  classNames={{
+                    wrapper: "w-full even:mr-2 odd:-mr-1",
+                    input: "text-[16px]",
+                  }}
+                />
+                <div className="flex w-full">
+                  <Text
+                    size="xs"
+                    color="dimmed"
+                    className="w-1/3 pr-4 text-center"
+                  >
+                    時間
+                  </Text>
+                  <Text
+                    size="xs"
+                    color="dimmed"
+                    className="w-1/3 pr-1 text-center"
+                  >
+                    分
+                  </Text>
+                  <Text size="xs" color="dimmed" className="w-1/3 text-center">
+                    秒
+                  </Text>
+                </div>
+              </div>
+
               <div className="grid w-full grid-cols-3 items-center justify-between">
                 <ActionIcon
                   onClick={() => changeTenTime("minus")}
@@ -156,6 +201,7 @@ export const EpisodeMenu: FC<Props> = memo(
                   </span>
                 </ActionIcon>
                 <Button
+                  className="relative w-full"
                   onClick={() =>
                     interval?.active ? interval.stop() : interval?.start()
                   }
@@ -169,7 +215,6 @@ export const EpisodeMenu: FC<Props> = memo(
                       ? "indigo"
                       : "blue"
                   }
-                  className="w-full"
                 >
                   {interval?.active
                     ? "一時停止"
