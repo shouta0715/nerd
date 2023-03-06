@@ -80,11 +80,12 @@ export const EpisodeMenu: FC<Props> = memo(
           }`}
         >
           <section className="px-4 py-2">
-            <div className="mb-4 flex items-center justify-between">
+            <div className="mb-2 flex items-center justify-between">
               <Text size="xs" color="dimmed">
                 メニュー
               </Text>
               <CloseButton
+                className="lg:hidden"
                 aria-label="Close modal"
                 size="sm"
                 onClick={() => setIsOpened(false)}
