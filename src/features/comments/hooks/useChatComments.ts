@@ -1,4 +1,5 @@
-import { useDeferredValue, useEffect, useMemo } from "react";
+import { useIntersection } from "@mantine/hooks";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useInfiniteQueryChatComments } from "src/features/comments/api/useInfiniteQueryChatComments";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
@@ -12,6 +13,14 @@ export const useChatComments = ({ episode_id }: Args) => {
     enabled: !!episode_id,
   });
   const time = useTimerState((state) => state.getTime());
+
+  const { ref, entry } = useIntersection({
+    root: null,
+    rootMargin: "100px",
+    threshold: 1,
+  });
+
+  const [isBottom, setIsBottom] = useState<boolean>(true);
 
   const chatCommentData = useMemo(() => {
     if (!data?.pages) return [];
@@ -36,6 +45,18 @@ export const useChatComments = ({ episode_id }: Args) => {
   const deferredData = useDeferredValue(timeFilterData);
 
   useEffect(() => {
+    if (!entry) return;
+
+    setIsBottom(entry.isIntersecting);
+  }, [entry]);
+
+  useEffect(() => {
+    if (!isBottom) return;
+
+    entry?.target.scrollIntoView({ behavior: "smooth" });
+  }, [deferredData.length, entry?.target, isBottom]);
+
+  useEffect(() => {
     // eslint-disable-next-line no-useless-return
     if (time % 300 !== 0 || time === 0) return;
 
@@ -47,5 +68,12 @@ export const useChatComments = ({ episode_id }: Args) => {
     });
   }, [fetchNextPage, time]);
 
-  return { data: deferredData, isLoading };
+  return {
+    data: deferredData,
+    isLoading,
+    bottomRef: ref,
+    isBottom,
+    setIsBottom,
+    entry,
+  };
 };

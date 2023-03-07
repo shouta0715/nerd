@@ -124,8 +124,8 @@ export const Episode: FC = () => {
             </div>
           </nav>
         </div>
-        <main className="flex-1 lg:w-[36rem] lg:flex-none lg:pb-16">
-          <div className="container mx-auto mb-16 lg:contents">
+        <main className="h-max flex-1 lg:w-[36rem] lg:flex-none lg:pb-16">
+          <div className="container mx-auto mb-16  lg:contents">
             {isChat ? (
               <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
             ) : (
