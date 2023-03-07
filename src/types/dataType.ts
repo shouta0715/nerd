@@ -23,13 +23,6 @@ export type Item = {
   "tv:feed": TvFeed;
 };
 
-export type AutoCompleteData = {
-  title: string;
-  episodeTitle?: string;
-  value: string;
-  number?: number;
-};
-
 export type RefreshTokenResult = {
   idToken: string;
   message: string;

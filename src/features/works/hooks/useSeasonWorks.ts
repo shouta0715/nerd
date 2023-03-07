@@ -1,6 +1,7 @@
 import { useDeferredValue, useEffect, useMemo } from "react";
+import { useAutoCompleteState } from "src/features/episodes/store";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
-import { useAutoCompleteState } from "src/store/global/globalStore";
+
 import { useSearchInputState } from "src/store/input/searchInput";
 
 type Props = {

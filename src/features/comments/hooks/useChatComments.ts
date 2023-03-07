@@ -1,5 +1,6 @@
 import { useIntersection } from "@mantine/hooks";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
+import { useOpenState } from "../../episodes/store/index";
 import { useInfiniteQueryChatComments } from "src/features/comments/api/useInfiniteQueryChatComments";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
@@ -13,13 +14,13 @@ export const useChatComments = ({ episode_id }: Args) => {
     enabled: !!episode_id,
   });
   const time = useTimerState((state) => state.getTime());
-
+  const isMenuOpen = useOpenState((state) => state.isMenuOpen);
+  const interval = useTimerState((state) => state.interval);
   const { ref, entry } = useIntersection({
     root: null,
     rootMargin: "100px",
     threshold: 1,
   });
-
   const [isBottom, setIsBottom] = useState<boolean>(true);
 
   const chatCommentData = useMemo(() => {
@@ -32,17 +33,8 @@ export const useChatComments = ({ episode_id }: Args) => {
     return flatData;
   }, [data?.pages]);
 
-  const timeFilterData = useMemo(() => {
-    if (!chatCommentData) return [];
-
-    const filteredData = chatCommentData.filter(
-      (comment) => comment.comment_time <= time
-    );
-
-    return filteredData;
-  }, [chatCommentData, time]);
-
-  const deferredData = useDeferredValue(timeFilterData);
+  const [filteredData, setFilteredData] = useState<typeof chatCommentData>([]);
+  const deferredData = useDeferredValue(filteredData);
 
   useEffect(() => {
     if (!entry) return;
@@ -57,6 +49,15 @@ export const useChatComments = ({ episode_id }: Args) => {
   }, [deferredData.length, entry?.target, isBottom]);
 
   useEffect(() => {
+    if (!chatCommentData) setFilteredData([]);
+
+    if (isMenuOpen && !interval?.active) {
+      setFilteredData((oldData) => [...oldData]);
+    } else {
+      setFilteredData(
+        chatCommentData.filter((comment) => comment.comment_time <= time)
+      );
+    }
     // eslint-disable-next-line no-useless-return
     if (time % 300 !== 0 || time === 0) return;
 
@@ -66,7 +67,7 @@ export const useChatComments = ({ episode_id }: Args) => {
         _lt: time + 300,
       },
     });
-  }, [fetchNextPage, time]);
+  }, [chatCommentData, fetchNextPage, interval?.active, isMenuOpen, time]);
 
   return {
     data: deferredData,

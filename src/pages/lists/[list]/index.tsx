@@ -7,11 +7,12 @@ import { useRouter } from "next/router";
 import React from "react";
 import { AutoCompleteItem } from "src/components/Elements/AutoCompleteItem";
 import { TodayEpisodes } from "src/features/episodes/components/TodayEpisodes";
+import { useAutoCompleteState } from "src/features/episodes/store";
 import { SeasonWorks } from "src/features/works/components/SeasonWorks";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { getSeasonWorks, getTodayEpisodes } from "src/hooks/router/getData";
-import { useAutoCompleteState } from "src/store/global/globalStore";
+
 import { useSearchInputState } from "src/store/input/searchInput";
 
 type Props = {

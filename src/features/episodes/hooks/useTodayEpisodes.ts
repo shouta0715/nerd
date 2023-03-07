@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-expressions */
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
+import { useAutoCompleteState } from "src/features/episodes/store";
 import { Episode } from "src/features/episodes/types";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useAutoCompleteState } from "src/store/global/globalStore";
+
 import { useSearchInputState } from "src/store/input/searchInput";
 
 const sortFn = (next: Episode, target: Episode) => {
