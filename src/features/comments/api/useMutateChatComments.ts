@@ -53,11 +53,9 @@ export const useMutateChatComments = () => {
           pages: prevData.pages.map((page, index) => {
             if (index === mutateCommentPageIndex) {
               const mutateNextTimeIndex =
-                page.chat_comments_by_episode_id.findIndex((comment) => {
-                  console.log(comment.comment_time >= comment_time);
-
-                  return comment.comment_time >= comment_time;
-                });
+                page.chat_comments_by_episode_id.findIndex(
+                  (comment) => comment.comment_time >= comment_time
+                );
 
               const newPages: GetChatCommentsQuery = {
                 chat_comments_by_episode_id: [
