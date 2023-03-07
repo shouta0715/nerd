@@ -5,6 +5,7 @@
 @layer base {
   html {
     @apply min-h-[100dvh];
+    scroll-behavior: smooth;
   }
 
   li {

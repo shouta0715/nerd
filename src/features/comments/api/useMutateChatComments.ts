@@ -53,16 +53,19 @@ export const useMutateChatComments = () => {
           pages: prevData.pages.map((page, index) => {
             if (index === mutateCommentPageIndex) {
               const mutateNextTimeIndex =
-                page.chat_comments_by_episode_id.findIndex(
-                  (comment) => comment.comment_time >= comment_time
-                );
+                page.chat_comments_by_episode_id.findIndex((comment) => {
+                  console.log(comment.comment_time >= comment_time);
+
+                  return comment.comment_time >= comment_time;
+                });
+
               const newPages: GetChatCommentsQuery = {
                 chat_comments_by_episode_id: [
                   ...page.chat_comments_by_episode_id,
                 ],
               };
 
-              if (mutateNextTimeIndex === -1) {
+              if (mutateNextTimeIndex === -1 || comment_time === 0) {
                 newPages.chat_comments_by_episode_id.push({
                   comment_time,
                   content,
@@ -105,6 +108,7 @@ export const useMutateChatComments = () => {
       };
     },
     onSuccess: (newData, __) => {
+      // TODO: ここでコメントを追加する
       const episode_id = newData.insert_chat_comments_one?.episode_id;
       queryClient.invalidateQueries(["GetChatComments", { episode_id }]);
     },
