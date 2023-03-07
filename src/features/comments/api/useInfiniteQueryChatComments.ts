@@ -16,7 +16,7 @@ type GetChatCommentsArgs = {
 };
 
 const InitialPageParam = {
-  _gte: 0,
+  _gte: 1,
   _lt: 300,
 };
 
