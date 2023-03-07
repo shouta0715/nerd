@@ -5,7 +5,6 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import {
   ActionIcon,
-  Burger,
   Button,
   CloseButton,
   HoverCard,
@@ -63,12 +62,6 @@ export const EpisodeMenu: FC<Props> = memo(
 
     return (
       <div>
-        <Burger
-          className="lg:hidden"
-          opened={isMenuOpen}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-        />
         <div
           className={`fixed inset-0 bg-black/40 lg:contents ${
             isMenuOpen ? "block" : "hidden"
@@ -143,7 +136,7 @@ export const EpisodeMenu: FC<Props> = memo(
                       <QuestionMarkCircleIcon className="-mr-8 ml-2 h-6 w-6" />
                     </HoverCard.Target>
                     <HoverCard.Dropdown className="bg-black p-1 text-xs text-white shadow">
-                      下の数字をタップすると変更できます。
+                      下の数字をタップすると時間を変更できます。
                     </HoverCard.Dropdown>
                   </HoverCard>
                 </div>

@@ -1,6 +1,13 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { ActionIcon, Box, Indicator, Loader, Textarea } from "@mantine/core";
+import {
+  ActionIcon,
+  Box,
+  Burger,
+  Indicator,
+  Loader,
+  Textarea,
+} from "@mantine/core";
 import { IconArrowUp } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -8,6 +15,7 @@ import { Modal } from "src/components/Elements/Modal";
 
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
+import { useOpenState } from "src/features/episodes/store";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -24,6 +32,8 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const user = useUserState((state) => state.user);
   const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
   const authLoading = useGlobalState((state) => state.authLoading);
+  const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
+  const isMenuOpen = useOpenState((state) => state.isMenuOpen);
 
   return (
     <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
@@ -96,6 +106,12 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
               content: e.currentTarget.value,
             })
           }
+        />
+        <Burger
+          className="lg:hidden"
+          opened={isMenuOpen}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
         />
       </form>
     </div>
