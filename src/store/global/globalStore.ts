@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import create from "zustand";
-import { AutoCompleteData } from "src/types/dataType";
 
 type GlobalState = {
   isOpenLoginModal: boolean;
@@ -14,13 +13,4 @@ export const useGlobalState = create<GlobalState>((set) => ({
   setIsOpenModal: (flag) => set(() => ({ isOpenLoginModal: flag })),
   authLoading: true,
   setAuthLoading: (authLoading) => set(() => ({ authLoading })),
-}));
-type AutCompleteState = {
-  autoCompleteData: AutoCompleteData[];
-  setAutoCompleteData: (data: AutoCompleteData[]) => void;
-};
-
-export const useAutoCompleteState = create<AutCompleteState>((set) => ({
-  autoCompleteData: [],
-  setAutoCompleteData: (data) => set(() => ({ autoCompleteData: data })),
 }));

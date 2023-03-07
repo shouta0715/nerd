@@ -14,7 +14,6 @@ import {
   Text,
   UnstyledButton,
 } from "@mantine/core";
-import { useClickOutside } from "@mantine/hooks";
 import {
   IconPencil,
   IconPlayerSkipForward,
@@ -25,6 +24,7 @@ import {
 import Link from "next/link";
 import React, { FC, memo, useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -40,14 +40,15 @@ const InitialUserName = localStorage.getItem("user_name");
 export const EpisodeMenu: FC<Props> = memo(
   ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
     const { data } = useQueryEpisode(nextEpisodeId, undefined);
-    const [isOpened, setIsOpened] = useState(false);
+    const isMenuOpen = useOpenState((state) => state.isMenuOpen);
+    const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
     const user = useUserState((state) => state.user);
     const setUser = useUserState((state) => state.setUser);
     const time = useTimerState((state) => state.time);
     const padTime = useTimerState((state) => state.getPadStartTime());
     const setTime = useTimerState((state) => state.setTime);
     const interval = useTimerState((state) => state.interval);
-    const ref = useClickOutside(() => setIsOpened(false));
+
     const changeTenTime = useTimerState((state) => state.changeTenTime);
 
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
@@ -56,29 +57,29 @@ export const EpisodeMenu: FC<Props> = memo(
       e.preventDefault();
       if (!inputValue.trim() || !user) return;
       setUser({ ...user, user_name: inputValue });
-      setIsOpened(false);
+      setIsMenuOpen(false);
       localStorage.setItem("user_name", inputValue);
     };
 
     return (
-      <div ref={ref}>
+      <div>
         <Burger
           className="lg:hidden"
-          opened={isOpened}
-          onClick={() => setIsOpened(!isOpened)}
-          aria-label={isOpened ? "メニューを閉じる" : "メニューを開く"}
+          opened={isMenuOpen}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
         />
         <div
           className={`fixed inset-0 bg-black/40 lg:contents ${
-            isOpened ? "block" : "hidden"
+            isMenuOpen ? "block" : "hidden"
           }`}
           onClick={(e) => {
-            if (e.target === e.currentTarget) setIsOpened(false);
+            if (e.target === e.currentTarget) setIsMenuOpen(false);
           }}
         >
           <div
             className={`absolute top-1/2 left-1/2 max-h-[90vh] w-4/5 max-w-md  -translate-y-1/2 -translate-x-1/2 overflow-y-auto rounded-md border border-solid border-slate-100 bg-white shadow  lg:static lg:h-auto lg:max-h-fit lg:w-full lg:translate-y-0 lg:translate-x-0 lg:border-0 lg:shadow-none lg:transition-none ${
-              isOpened ? "block" : "  hidden lg:block"
+              isMenuOpen ? "block" : "  hidden lg:block"
             }`}
           >
             <section className="px-4 py-2">
@@ -90,7 +91,7 @@ export const EpisodeMenu: FC<Props> = memo(
                   className="lg:hidden"
                   aria-label="Close modal"
                   size="sm"
-                  onClick={() => setIsOpened(false)}
+                  onClick={() => setIsMenuOpen(false)}
                 />
               </div>
               <form onSubmit={onSubmitHandler} className="mb-3 space-y-1">
@@ -154,7 +155,6 @@ export const EpisodeMenu: FC<Props> = memo(
                     size="sm"
                     value={padTime}
                     onChange={(e) => {
-                      interval?.stop();
                       const digits = e.match(/.{1,2}/g);
                       if (!digits) return;
                       const [hours, minutes, seconds] = digits;
@@ -163,6 +163,9 @@ export const EpisodeMenu: FC<Props> = memo(
                         minutes: +minutes,
                         seconds: +seconds,
                       });
+                    }}
+                    onFocus={() => {
+                      interval?.stop();
                     }}
                     length={6}
                     type="number"
