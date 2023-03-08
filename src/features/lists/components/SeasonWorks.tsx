@@ -6,7 +6,7 @@ import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
 type Props = { data: GetSeasonWorksQuery };
 
-export const SeasonWorks: FC<Props> = ({ data }) => {
+export const SeasonWorksList: FC<Props> = ({ data }) => {
   const { deferredFilterWorks } = useSeasonWorks({ data });
 
   return (

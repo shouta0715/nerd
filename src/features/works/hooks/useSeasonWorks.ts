@@ -1,5 +1,4 @@
 import { useDeferredValue, useEffect, useMemo } from "react";
-import { useAutoCompleteState } from "src/features/episodes/store";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
 import { useSearchInputState } from "src/store/input/searchInput";
@@ -10,10 +9,6 @@ type Props = {
 
 export const useSeasonWorks = ({ data }: Props) => {
   const searchInput = useSearchInputState((state) => state.searchInput);
-  const setAutoCompleteData = useAutoCompleteState(
-    (state) => state.setAutoCompleteData
-  );
-
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
   const filterWorks = useMemo(
     () =>
@@ -25,18 +20,7 @@ export const useSeasonWorks = ({ data }: Props) => {
     [data?.works, searchInput]
   );
 
-  useEffect(() => {
-    setAutoCompleteData(
-      data?.works?.map((e) => ({
-        title: e.series_title,
-        value: e.series_title,
-      })) ?? []
-    );
-
-    return () => {
-      setSearchInput("");
-    };
-  }, [data?.works, setAutoCompleteData, setSearchInput]);
+  useEffect(() => () => setSearchInput(""), [setSearchInput]);
 
   const deferredFilterWorks = useDeferredValue(filterWorks);
 
