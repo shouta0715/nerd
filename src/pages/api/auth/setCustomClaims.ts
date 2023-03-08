@@ -2,10 +2,31 @@
 
 import { cert, getApp, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
-import { GraphQLClient } from "graphql-request";
+import { gql, GraphQLClient } from "graphql-request";
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "nookies";
-import { CREATE_USER } from "src/graphql/user/userQuery";
+
+export const CREATE_USER = gql`
+  mutation createUser(
+    $id: String!
+    $anonymous: Boolean!
+    $photo_url: String!
+    $user_name: String!
+    $ip: String
+  ) {
+    insert_users_one(
+      object: {
+        anonymous: $anonymous
+        photo_url: $photo_url
+        id: $id
+        user_name: $user_name
+        ip: $ip
+      }
+    ) {
+      id
+    }
+  }
+`;
 
 const firebaseConfig = {
   credential: cert({

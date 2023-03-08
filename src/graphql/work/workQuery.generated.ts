@@ -18,7 +18,7 @@ export type GetSeasonWorksQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, tid?: number | null, series_title: string, series_id?: string | null, season_year?: number | null, season_name?: string | null, id: number, has_episodes?: boolean | null, media_type_id?: number | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, tid?: number | null, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
 
 
 export const GetSeasonWorksDocument = `
@@ -31,11 +31,8 @@ export const GetSeasonWorksDocument = `
     tid
     series_title
     series_id
-    season_year
-    season_name
     id
     has_episodes
-    media_type_id
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
       title
       start_time
@@ -62,8 +59,4 @@ export const useGetSeasonWorksQuery = <
       fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(client, GetSeasonWorksDocument, variables, headers),
       options
     );
-
-useGetSeasonWorksQuery.getKey = (variables: GetSeasonWorksQueryVariables) => ['GetSeasonWorks', variables];
-;
-
 useGetSeasonWorksQuery.fetcher = (client: GraphQLClient, variables: GetSeasonWorksQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(client, GetSeasonWorksDocument, variables, headers);

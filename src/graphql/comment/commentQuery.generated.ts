@@ -18,13 +18,6 @@ export type InsertChatCommentMutationVariables = Types.Exact<{
 
 export type InsertChatCommentMutation = { __typename?: 'mutation_root', insert_chat_comments_one?: { __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
-export type SubscriptionChatCommentsSubscriptionVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-}>;
-
-
-export type SubscriptionChatCommentsSubscription = { __typename?: 'subscription_root', chat_comments: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
-
 export type GetChatCommentsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
   get_limit: Types.Scalars['Int'];
@@ -33,7 +26,7 @@ export type GetChatCommentsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments_by_episode_id: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments_by_episode_id: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 
 export const InsertChatCommentDocument = `
@@ -70,26 +63,6 @@ export const useInsertChatCommentMutation = <
       options
     );
 useInsertChatCommentMutation.fetcher = (client: GraphQLClient, variables: InsertChatCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatCommentMutation, InsertChatCommentMutationVariables>(client, InsertChatCommentDocument, variables, headers);
-export const SubscriptionChatCommentsDocument = `
-    subscription SubscriptionChatComments($episode_id: uuid!) {
-  chat_comments(where: {episode_id: {_eq: $episode_id}}) {
-    content
-    work_id
-    user_id
-    comment_time
-    id
-    episode_id
-    created_at
-    commenter_name
-    user {
-      anonymous
-      user_name
-      photo_url
-      id
-    }
-  }
-}
-    `;
 export const GetChatCommentsDocument = `
     query GetChatComments($episode_id: uuid!, $get_limit: Int!, $_lt: Int!, $_gte: Int!) {
   chat_comments_by_episode_id(
@@ -107,7 +80,6 @@ export const GetChatCommentsDocument = `
     user {
       anonymous
       user_name
-      photo_url
       id
     }
   }
@@ -127,8 +99,4 @@ export const useGetChatCommentsQuery = <
       fetcher<GetChatCommentsQuery, GetChatCommentsQueryVariables>(client, GetChatCommentsDocument, variables, headers),
       options
     );
-
-useGetChatCommentsQuery.getKey = (variables: GetChatCommentsQueryVariables) => ['GetChatComments', variables];
-;
-
 useGetChatCommentsQuery.fetcher = (client: GraphQLClient, variables: GetChatCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetChatCommentsQuery, GetChatCommentsQueryVariables>(client, GetChatCommentsDocument, variables, headers);

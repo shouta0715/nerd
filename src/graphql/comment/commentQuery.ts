@@ -21,27 +21,6 @@ export const INSERT_CHAT_COMMENT = gql`
   }
 `;
 
-export const SUBSCRIPTION_CHAT_COMMENT = gql`
-  subscription SubscriptionChatComments($episode_id: uuid!) {
-    chat_comments(where: { episode_id: { _eq: $episode_id } }) {
-      content
-      work_id
-      user_id
-      comment_time
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        photo_url
-        id
-      }
-    }
-  }
-`;
-
 export const GET_CHAT_COMMENTS = gql`
   query GetChatComments(
     $episode_id: uuid!
@@ -69,7 +48,6 @@ export const GET_CHAT_COMMENTS = gql`
       user {
         anonymous
         user_name
-        photo_url
         id
       }
     }

@@ -16,11 +16,8 @@ export const GET_SEASON_WORKS = gql`
       tid
       series_title
       series_id
-      season_year
-      season_name
       id
       has_episodes
-      media_type_id
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         title
         start_time
