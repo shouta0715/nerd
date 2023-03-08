@@ -41,7 +41,6 @@
     "firebase-admin": "^11.5.0",
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
-    "graphql-ws": "^5.11.2",
     "next": "13.1.1",
     "nookies": "^2.5.2",
     "react": "18.2.0",

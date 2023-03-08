@@ -1,6 +1,5 @@
 import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { Box, Text } from "@mantine/core";
-import { dehydrate } from "@tanstack/react-query";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { TopTitle } from "src/components/Elements/TopTitle";
@@ -13,10 +12,7 @@ import {
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";
 import { WorkItem } from "src/features/works/components/WorkItem";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useGetMediaTypesQuery } from "src/graphql/otherQuery.generated";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
-
-import { getClient } from "src/utils/getClient";
 
 type Props = {
   todayEpisodes: GetTodayEpisodesQuery;
@@ -83,20 +79,11 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { queryClient, request } = getClient();
-
-  const mediaTypesQueryKey = useGetMediaTypesQuery.getKey({});
-  await queryClient.prefetchQuery(
-    mediaTypesQueryKey,
-    useGetMediaTypesQuery.fetcher(request, {})
-  );
-
   const todayEpisodes = await getTodayEpisodes();
   const seasonWorks = await getSeasonWorks(18);
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
       todayEpisodes,
       seasonWorks,
     },

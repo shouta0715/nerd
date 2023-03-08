@@ -1,26 +1,12 @@
 /* eslint-disable no-promise-executor-return */
 import axios from "axios";
 
-import { GET_MEDIA_TYPES } from "../../graphql/otherQuery";
 import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { GetMediaTypesQuery } from "src/graphql/otherQuery.generated";
 import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { Episodes_Bool_Exp } from "src/types/graphql";
 import { getClient } from "src/utils/getClient";
 import { parseXml } from "src/utils/parseXml";
 import { returningSeason } from "src/utils/returningSeason";
-
-export const getAllMediaTypes = async () => {
-  const { request: client } = getClient();
-
-  const data = await client.request<GetMediaTypesQuery>(GET_MEDIA_TYPES);
-
-  const paths = data.media_types.map((media) => ({
-    params: { category: media.name.toString() },
-  }));
-
-  return paths;
-};
 
 export const getTodayData = async () => {
   const URL = process.env.NEXT_PUBLIC_SHOBOI_ENDOPOINT as string;
