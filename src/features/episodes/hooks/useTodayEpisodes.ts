@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
-import { useAutoCompleteState } from "src/features/episodes/store";
 import { Episode } from "src/features/episodes/types";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -34,10 +33,6 @@ type Props = {
 };
 
 export const useTodayEpisodes = ({ data }: Props) => {
-  const setAutoCompleteData = useAutoCompleteState(
-    (state) => state.setAutoCompleteData
-  );
-
   const { pathname } = useRouter();
   const indexPage = pathname === "/";
   const limit = indexPage ? 8 : data?.episodes?.length;
@@ -62,22 +57,7 @@ export const useTodayEpisodes = ({ data }: Props) => {
 
   const deferredFilterEpisodes = useDeferredValue(filterEpisodes);
 
-  useEffect(() => {
-    setAutoCompleteData(
-      data?.episodes
-        ?.map((e) => ({
-          title: e.work.series_title,
-          episodeTitle: e.title,
-          number: e.number,
-          value: e.title,
-        }))
-        .reverse() ?? []
-    );
-
-    return () => {
-      setSearchInput("");
-    };
-  }, [data?.episodes, setAutoCompleteData, setSearchInput]);
+  useEffect(() => () => setSearchInput(""), [setSearchInput]);
 
   return { deferredFilterEpisodes, indexPage };
 };

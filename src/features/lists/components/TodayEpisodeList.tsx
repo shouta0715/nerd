@@ -16,7 +16,7 @@ const DynamicTodayEpisodeItem = dynamic(
   }
 );
 
-export const TodayEpisodes: FC<Props> = ({ data }) => {
+export const TodayEpisodeList: FC<Props> = ({ data }) => {
   const { deferredFilterEpisodes } = useTodayEpisodes({ data });
 
   return (
