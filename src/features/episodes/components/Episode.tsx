@@ -1,5 +1,6 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
+import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
@@ -10,8 +11,18 @@ import { InputFiled } from "src/features/comments/components/CommentInput";
 import FinishComments from "src/features/comments/components/FinishComments";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
-import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
+
+const DynamicEpisodeMenu = dynamic(
+  () =>
+    import("src/features/episodes/components/EpisodeMenu").then(
+      (mod) => mod.EpisodeMenu
+    ),
+  {
+    ssr: false,
+    loading: () => <EpisodeMenuSkelton />,
+  }
+);
 
 export const Episode: FC = () => {
   const router = useRouter();
@@ -99,14 +110,13 @@ export const Episode: FC = () => {
                   </Text>
                 </ul>
               </div>
-              <Suspense fallback={<EpisodeMenuSkelton />}>
-                <EpisodeMenu
-                  episodeTitle={data?.episodes_by_pk?.title}
-                  episodeNumber={data?.episodes_by_pk?.number}
-                  workTitle={data?.episodes_by_pk?.work.series_title}
-                  nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
-                />
-              </Suspense>
+
+              <DynamicEpisodeMenu
+                episodeTitle={data?.episodes_by_pk?.title}
+                episodeNumber={data?.episodes_by_pk?.number}
+                workTitle={data?.episodes_by_pk?.work.series_title}
+                nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
+              />
             </div>
           </nav>
         </div>

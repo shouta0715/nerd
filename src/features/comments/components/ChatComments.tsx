@@ -18,9 +18,9 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
   const { timeCommented } = timeProcessing();
   const user = useUserState((state) => state.user);
 
-  if (!user) {
-    throw new Promise(() => {});
-  }
+  // if (!user) {
+  //   throw new Promise(() => {});
+  // }
 
   return (
     <Box
