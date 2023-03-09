@@ -27,6 +27,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   return (
     <li className="relative mx-auto max-w-md flex-1  rounded-md border border-solid border-slate-200 bg-white p-4 drop-shadow-sm hover:bg-slate-50 md:px-6">
       <Link
+        scroll={false}
         href={`/episode/${episode.id}?category=live`}
         className="absolute inset-0 rounded-md"
       />
@@ -75,6 +76,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <div>
             <Button
               component={Link}
+              scroll={false}
               href={`/episode/${episode.id}?category=archive`}
               className="mr-4"
               color="red"

@@ -44,6 +44,7 @@ export const NextEpisodeMenu: FC<Props> = ({
         <Text
           size="sm"
           component={Link}
+          scroll={false}
           href={`${data?.episodes_by_pk?.id}?category=archive`}
           className="my-3 flex items-center space-x-2"
         >
@@ -54,6 +55,7 @@ export const NextEpisodeMenu: FC<Props> = ({
       <Text
         size="sm"
         component={Link}
+        scroll={false}
         href={`${"xxx"}?category=archive`}
         className="flex items-center space-x-2"
       >

@@ -12,6 +12,7 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
   <li key={episode.id} className="flex h-full flex-col items-center p-2">
     <Text
       variant="link"
+      scroll={false}
       color="indigo"
       href={{
         pathname: `/episode/${episode.id}`,

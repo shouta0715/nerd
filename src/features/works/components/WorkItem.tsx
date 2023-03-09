@@ -21,6 +21,7 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
         variant="link"
         color="dark"
         component={Link}
+        scroll={false}
         ff="Hiragino Sans"
         className="mb-2 text-sm font-bold md:mb-3 md:text-base"
       >
