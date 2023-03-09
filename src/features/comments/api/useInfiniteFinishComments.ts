@@ -48,6 +48,6 @@ export const useInfiniteFinishComments = (episode_id: string) =>
         cursor: lastFinishComments?.created_at,
       };
     },
-
+    suspense: true,
     enabled: !!episode_id,
   });

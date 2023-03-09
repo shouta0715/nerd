@@ -5,8 +5,8 @@ export const usePrefetchFinishEpisode = () => {
   const queryClient = useQueryClient();
 
   return async (episode_id: string) => {
-    await queryClient.prefetchQuery(["GetFinishEpisode", { episode_id }], {
-      queryKey: ["GetFinishEpisode", { episode_id }],
+    await queryClient.prefetchInfiniteQuery({
+      queryKey: ["GetFinishComments", { episode_id }],
       queryFn: () =>
         getFinishComments({
           episode_id,

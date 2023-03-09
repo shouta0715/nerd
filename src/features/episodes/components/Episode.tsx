@@ -1,37 +1,17 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Text, Title } from "@mantine/core";
 
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import React, { FC, useState } from "react";
+import React, { FC, Suspense, useState } from "react";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
+import ChatComments from "src/features/comments/components/ChatComments";
 import { InputFiled } from "src/features/comments/components/CommentInput";
+import FinishComments from "src/features/comments/components/FinishComments";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
-
-const DynamicChatComments = dynamic(
-  () => import("src/features/comments/components/ChatComments"),
-  {
-    ssr: false,
-  }
-);
-
-const DynamicFinishComments = dynamic(
-  () => import("src/features/comments/components/FinishComments")
-);
-
-const DynamicEpisodeMenu = dynamic(
-  () =>
-    import("src/features/episodes/components/EpisodeMenu").then(
-      (mod) => mod.EpisodeMenu
-    ),
-  {
-    ssr: false,
-    loading: () => <EpisodeMenuSkelton />,
-  }
-);
 
 export const Episode: FC = () => {
   const router = useRouter();
@@ -43,7 +23,7 @@ export const Episode: FC = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="container contents lg:mx-auto lg:flex">
-        <div className="sticky top-0 contents h-full flex-1 lg:block lg:overflow-y-auto">
+        <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
           <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
             <div className="flex w-full flex-1  flex-col gap-2">
               <Title ff="Hiragino Sans" className=" text-base md:text-lg">
@@ -78,7 +58,7 @@ export const Episode: FC = () => {
           </header>
           <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
             <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
-              <div className="flex flex-1 items-center justify-between border-0  border-solid border-slate-200">
+              <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 after:h-7 after:w-7 after:content-['']">
                 <ActionIcon
                   color="dark"
                   onClick={() => router.back()}
@@ -100,7 +80,7 @@ export const Episode: FC = () => {
                     チャット
                   </Text>
                   <Text
-                    onMouseEnter={async () =>
+                    onMouseEnter={() =>
                       prefetchFinishComments(data?.episodes_by_pk?.id)
                     }
                     onTouchStart={() =>
@@ -119,21 +99,27 @@ export const Episode: FC = () => {
                   </Text>
                 </ul>
               </div>
-              <DynamicEpisodeMenu
-                episodeTitle={data?.episodes_by_pk?.title}
-                episodeNumber={data?.episodes_by_pk?.number}
-                workTitle={data?.episodes_by_pk?.work.series_title}
-                nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
-              />
+              <Suspense fallback={<EpisodeMenuSkelton />}>
+                <EpisodeMenu
+                  episodeTitle={data?.episodes_by_pk?.title}
+                  episodeNumber={data?.episodes_by_pk?.number}
+                  workTitle={data?.episodes_by_pk?.work.series_title}
+                  nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
+                />
+              </Suspense>
             </div>
           </nav>
         </div>
         <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
           <div className="container mx-auto mb-16 flex flex-1  lg:contents">
             {isChat ? (
-              <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <ChatComments episode_id={data?.episodes_by_pk?.id} />
+              </Suspense>
             ) : (
-              <DynamicFinishComments episode_id={data?.episodes_by_pk?.id} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <FinishComments episode_id={data?.episodes_by_pk?.id} />
+              </Suspense>
             )}
           </div>
           <InputFiled episode_id={data?.episodes_by_pk?.id} />
