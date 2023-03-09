@@ -48,7 +48,6 @@ export const GET_CHAT_COMMENTS = gql`
       user {
         anonymous
         user_name
-        photo_url
         id
       }
     }

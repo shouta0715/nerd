@@ -26,7 +26,7 @@ export type GetChatCommentsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments_by_episode_id: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } }> };
+export type GetChatCommentsQuery = { __typename?: 'query_root', chat_comments_by_episode_id: Array<{ __typename?: 'chat_comments', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 export type GetFinishCommentsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
@@ -89,7 +89,6 @@ export const GetChatCommentsDocument = `
     user {
       anonymous
       user_name
-      photo_url
       id
     }
   }
@@ -109,10 +108,6 @@ export const useGetChatCommentsQuery = <
       fetcher<GetChatCommentsQuery, GetChatCommentsQueryVariables>(client, GetChatCommentsDocument, variables, headers),
       options
     );
-
-useGetChatCommentsQuery.getKey = (variables: GetChatCommentsQueryVariables) => ['GetChatComments', variables];
-;
-
 useGetChatCommentsQuery.fetcher = (client: GraphQLClient, variables: GetChatCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetChatCommentsQuery, GetChatCommentsQueryVariables>(client, GetChatCommentsDocument, variables, headers);
 export const GetFinishCommentsDocument = `
     query GetFinishComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
@@ -145,8 +140,4 @@ export const useGetFinishCommentsQuery = <
       fetcher<GetFinishCommentsQuery, GetFinishCommentsQueryVariables>(client, GetFinishCommentsDocument, variables, headers),
       options
     );
-
-useGetFinishCommentsQuery.getKey = (variables: GetFinishCommentsQueryVariables) => ['GetFinishComments', variables];
-;
-
 useGetFinishCommentsQuery.fetcher = (client: GraphQLClient, variables: GetFinishCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetFinishCommentsQuery, GetFinishCommentsQueryVariables>(client, GetFinishCommentsDocument, variables, headers);

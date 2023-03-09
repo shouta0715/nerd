@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import { secret } from "./secrets.json";
 
 // export const overwrite = true;
@@ -21,7 +23,6 @@ export const generates = {
     plugins: ["typescript-operations", "typescript-react-query"],
     config: {
       fetcher: "graphql-request",
-      exposeQueryKeys: true,
       exposeFetcher: true,
     },
   },
