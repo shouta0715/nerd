@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
+import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import ChatComments from "src/features/comments/components/ChatComments";
 import { InputFiled } from "src/features/comments/components/CommentInput";
@@ -27,9 +28,13 @@ const DynamicEpisodeMenu = dynamic(
 export const Episode: FC = () => {
   const router = useRouter();
   const { slug, episode } = router.query;
-  const { data } = useQueryEpisode(slug, episode);
+  const { data, isLoading } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
   const prefetchFinishComments = usePrefetchFinishEpisode();
+
+  if (isLoading) {
+    return <EpisodeSkelton />;
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
