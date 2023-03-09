@@ -13,16 +13,10 @@ import {
   Text,
   UnstyledButton,
 } from "@mantine/core";
-import {
-  IconPencil,
-  IconPlayerSkipForward,
-  IconRotate,
-  IconRotateClockwise,
-  IconStack2,
-} from "@tabler/icons";
-import Link from "next/link";
-import React, { FC, memo, useState } from "react";
-import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { IconPencil, IconRotate, IconRotateClockwise } from "@tabler/icons";
+import React, { FC, memo, Suspense, useState } from "react";
+import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
+import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
@@ -38,7 +32,6 @@ const InitialUserName = localStorage.getItem("user_name");
 
 export const EpisodeMenu: FC<Props> = memo(
   ({ episodeTitle, episodeNumber, workTitle, nextEpisodeId }) => {
-    const { data } = useQueryEpisode(nextEpisodeId, undefined);
     const isMenuOpen = useOpenState((state) => state.isMenuOpen);
     const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
     const user = useUserState((state) => state.user);
@@ -77,7 +70,7 @@ export const EpisodeMenu: FC<Props> = memo(
           >
             <section className="px-4 py-2">
               <div className="mb-2 flex items-center justify-between">
-                <Text size="xs" color="dimmed">
+                <Text size="sm" color="dimmed">
                   メニュー
                 </Text>
                 <CloseButton
@@ -100,7 +93,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     type="submit"
                     className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
                       inputValue === user?.user_name || !inputValue.trim()
-                        ? "opacity-0"
+                        ? "pointer-events-none opacity-0"
                         : "opacity-100"
                     }`}
                     onClick={() => {
@@ -246,46 +239,14 @@ export const EpisodeMenu: FC<Props> = memo(
               </div>
             </section>
             <div className="h-[1px] w-full bg-slate-200" />
-            <section className="border-0 border-b border-solid border-slate-200 px-4 py-2">
-              <Text size="xs" color="dimmed" className="mb-2">
-                エピソード
-              </Text>
-              <Text component="div">
-                <Text component="p" className="mb-1 text-xs">
-                  {workTitle}
-                </Text>
-                {episodeTitle && (
-                  <div className="flex">
-                    <Text size="xs" className="mr-1" color="dimmed">
-                      {episodeNumber}.
-                    </Text>
-                    <Text size="xs" color="dimmed">
-                      {episodeTitle}
-                    </Text>
-                  </div>
-                )}
-              </Text>
-              {nextEpisodeId && (
-                <Text
-                  size="xs"
-                  component={Link}
-                  href={`${data?.episodes_by_pk?.id}?category=archive`}
-                  className="my-2 flex items-center space-x-2"
-                >
-                  <IconPlayerSkipForward size={16} />
-                  <span className="inline-block">次のエピソード</span>
-                </Text>
-              )}
-              <Text
-                size="xs"
-                component={Link}
-                href={`${"xxx"}?category=archive`}
-                className="mt-2 flex items-center space-x-2"
-              >
-                <IconStack2 size={16} strokeWidth={1.5} />
-                <span className="inline-block">他のエピソード</span>
-              </Text>
-            </section>
+            <Suspense fallback={<NextEpisodeMenuSkelton />}>
+              <NextEpisodeMenu
+                episodeNumber={episodeNumber}
+                episodeTitle={episodeTitle}
+                workTitle={workTitle}
+                nextEpisodeId={nextEpisodeId}
+              />
+            </Suspense>
           </div>
         </div>
       </div>

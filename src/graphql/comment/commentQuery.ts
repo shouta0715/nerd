@@ -53,3 +53,25 @@ export const GET_CHAT_COMMENTS = gql`
     }
   }
 `;
+
+export const GET_FINISH_COMMENTS = gql`
+  query GetFinishComments(
+    $episode_id: uuid!
+    $cursor: timestamptz
+    $limit: Int!
+  ) {
+    finish_comments(
+      where: { episode_id: { _eq: $episode_id }, created_at: { _lt: $cursor } }
+      order_by: { created_at: desc }
+      limit: $limit
+    ) {
+      content
+      work_id
+      user_id
+      id
+      episode_id
+      created_at
+      commenter_name
+    }
+  }
+`;

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Box, Text, UnstyledButton } from "@mantine/core";
-import { IconArrowDown } from "@tabler/icons";
+import { IconArrowDown, IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
-  const { data, bottomRef, isBottom, entry } = useChatComments({
+  const { data, bottomRef, isBottom, entry, interval } = useChatComments({
     episode_id,
   });
   const { timeCommented } = timeProcessing();
@@ -25,12 +25,22 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
   return (
     <Box
       component="ul"
-      className="relative mx-auto  w-full space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
+      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
     >
+      <UnstyledButton
+        onClick={() => interval?.toggle()}
+        className="absolute  top-1/2 left-1/2 flex  h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center  justify-center rounded-full bg-indigo-500 transition-transform"
+      >
+        {interval?.active ? (
+          <IconPlayerPause className="fill-white text-white" />
+        ) : (
+          <IconPlayerPlay className="fill-white text-white" />
+        )}
+      </UnstyledButton>
       {data?.map((comment) => (
         <li
           key={comment.id}
-          className={`flex w-full animate-[chat-fade-in] transition-all ${
+          className={`flex w-full animate-chat transition-all ${
             user?.id === comment.user?.id ? "flex-row-reverse" : ""
           }`}
         >

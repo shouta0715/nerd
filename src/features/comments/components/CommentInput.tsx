@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import {
@@ -16,6 +17,7 @@ import { Modal } from "src/components/Elements/Modal";
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
 import { useOpenState } from "src/features/episodes/store";
+import { useTimerState } from "src/features/timer/store/timerStore";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -34,6 +36,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const authLoading = useGlobalState((state) => state.authLoading);
   const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
   const isMenuOpen = useOpenState((state) => state.isMenuOpen);
+  const time = useTimerState((state) => state.getTime());
 
   return (
     <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
@@ -66,12 +69,18 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           )}
         </figure>
         <Textarea
-          disabled={!user}
-          placeholder={user ? `${user?.user_name}で投稿` : ""}
+          disabled={time === 0 || !user}
+          placeholder={
+            user && time !== 0
+              ? `${user?.user_name}で投稿`
+              : !user
+              ? "ログイン中です"
+              : "再生してください"
+          }
           className="w-full max-w-sm flex-1"
           classNames={{
             input:
-              "text-[16px] pr-[50px] placeholder:pl-4 scale-90 placeholder:text-ellipsis placeholder:overflow-hidden placeholder:whitespace-nowrap",
+              "text-[16px] pr-[50px] placeholder:pl-4 scale-90 placeholder:text-sm placeholder:align-middle placeholder:pt-0.5 disabled:bg-white disabled:border-red-500 disabled:placeholder:text-red-500",
           }}
           rightSectionWidth={80}
           maxRows={3}

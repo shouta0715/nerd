@@ -22,6 +22,7 @@ export const useChatComments = ({ episode_id }: Args) => {
     threshold: 1,
   });
   const [isBottom, setIsBottom] = useState<boolean>(true);
+  // const prefetchFinishComments = usePrefetchFinishEpisode();
 
   const chatCommentData = useMemo(() => {
     if (!data?.pages) return [];
@@ -58,6 +59,7 @@ export const useChatComments = ({ episode_id }: Args) => {
         chatCommentData.filter((comment) => comment.comment_time <= time)
       );
     }
+
     // eslint-disable-next-line no-useless-return
     if (time % 300 !== 0 || time === 0) return;
 
@@ -69,6 +71,11 @@ export const useChatComments = ({ episode_id }: Args) => {
     });
   }, [chatCommentData, fetchNextPage, interval?.active, isMenuOpen, time]);
 
+  // useEffect(() => {
+  // TODO prefetchの秒数どうするか問題
+  //   if (time === 600) prefetchFinishComments(episode_id);
+  // }, [time, prefetchFinishComments, episode_id]);
+
   return {
     data: deferredData,
     isLoading,
@@ -76,5 +83,6 @@ export const useChatComments = ({ episode_id }: Args) => {
     isBottom,
     setIsBottom,
     entry,
+    interval,
   };
 };

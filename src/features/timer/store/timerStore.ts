@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useInterval } from "@mantine/hooks";
 import create from "zustand";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
@@ -57,7 +58,8 @@ export const useTimerState = create<TimerState>((set, get) => ({
   setInterval: (interval: ReturnType<typeof useInterval>) => set({ interval }),
   changeTenTime: (formula: "add" | "minus") => {
     const time = get().getTime();
-    const newTime = formula === "add" ? time + 10 : time - 10;
+    const newTime =
+      formula === "add" ? time + 10 : time - 10 > 0 ? time - 10 : 0;
     const { hours, minutes, seconds } = secondToTime(newTime);
     set({ time: { hours, minutes, seconds } });
   },
