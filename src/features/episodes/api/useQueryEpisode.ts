@@ -4,7 +4,8 @@ import { client } from "src/libs/graphqlClient";
 export const useQueryEpisode = (
   id: string | string[] | undefined,
   episode: string | string[] | undefined
-) => useGetEpisodeQuery(
+) =>
+  useGetEpisodeQuery(
     client,
     {
       id,
@@ -29,4 +30,4 @@ export const useQueryEpisode = (
         };
       },
     }
-  )
+  );
