@@ -43,7 +43,7 @@ export const Episode: FC = () => {
   const [isChat, setIsChat] = useState(true);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <div className="container contents lg:mx-auto lg:flex">
         <div className="sticky top-0 contents h-full flex-1 lg:block lg:overflow-y-auto">
           <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
@@ -124,8 +124,8 @@ export const Episode: FC = () => {
             </div>
           </nav>
         </div>
-        <main className="h-max flex-1 lg:w-[36rem] lg:flex-none lg:pb-16">
-          <div className="container mx-auto mb-16  lg:contents">
+        <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
+          <div className="container mx-auto mb-16 flex flex-1  lg:contents">
             {isChat ? (
               <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
             ) : (

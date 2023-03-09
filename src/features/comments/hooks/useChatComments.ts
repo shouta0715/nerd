@@ -76,5 +76,6 @@ export const useChatComments = ({ episode_id }: Args) => {
     isBottom,
     setIsBottom,
     entry,
+    interval,
   };
 };
