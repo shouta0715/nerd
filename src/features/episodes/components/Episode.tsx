@@ -78,7 +78,7 @@ export const Episode: FC = () => {
               <CountUpTimer episodeId={data?.episodes_by_pk?.id} />
             </div>
           </header>
-          <nav className="sticky top-0 z-10 flex items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:border-none">
+          <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
             <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
               <div className="flex flex-1 items-center justify-between border-0  border-solid border-slate-200">
                 <ActionIcon
@@ -95,7 +95,7 @@ export const Episode: FC = () => {
                     component="li"
                     className={`inline-block cursor-pointer  py-2 text-sm font-bold md:text-base ${
                       isChat
-                        ? "border-indigo border-0 border-b-2 border-solid"
+                        ? "border-0 border-b-2 border-solid border-indigo-500"
                         : "border-none"
                     }`}
                   >
@@ -107,7 +107,7 @@ export const Episode: FC = () => {
                     component="li"
                     className={`inline-block cursor-pointer py-2 text-sm font-bold md:text-base ${
                       !isChat
-                        ? "border-indigo border-0 border-b-2 border-solid"
+                        ? "border-0 border-b-2 border-solid border-indigo-500"
                         : "border-none"
                     }`}
                   >

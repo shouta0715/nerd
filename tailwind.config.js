@@ -1,5 +1,3 @@
-
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,25 +7,29 @@ module.exports = {
   ],
   theme: {
     extend: {
-      height: {
-        'screen': [
-          '100vh','100dvh'
-        ]
+      animation: {
+        chat: "chat 0.25s ease-out",
       },
-      minHeight: {
-        'screen': [
-          '100vh','100dvh'
-        ]
+      keyframes: {
+        chat: {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+
+        height: {
+          screen: ["100vh", "100dvh"],
+        },
+        minHeight: {
+          screen: ["100vh", "100dvh"],
+        },
+        maxHeight: {
+          screen: ["100vh", "100dvh"],
+        },
       },
-      maxHeight: {
-        'screen': [
-          '100vh','100dvh'
-        ]
-      }
+    },
+    plugins: [],
+    corePlugins: {
+      preflight: false,
     },
   },
-  plugins: [],
-  corePlugins: {
-    preflight: false,
-  }
 };

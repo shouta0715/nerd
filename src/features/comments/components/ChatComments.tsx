@@ -40,7 +40,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
       {data?.map((comment) => (
         <li
           key={comment.id}
-          className={`flex w-full animate-[chat-fade-in] transition-all ${
+          className={`flex w-full animate-chat transition-all ${
             user?.id === comment.user?.id ? "flex-row-reverse" : ""
           }`}
         >
