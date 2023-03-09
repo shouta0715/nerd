@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useGetFinishCommentsQuery } from "../../../graphql/comment/commentQuery.generated";
+import { useGetFinishCommentsQuery } from "src/graphql/comment/commentQuery.generated";
+
 import { client } from "src/libs/graphqlClient";
 
 type GetFInishCommentsArgs = {
@@ -13,7 +14,7 @@ const InitialPageParam = {
   cursor: new Date().toISOString(),
 };
 
-const getFinishComments = async ({
+export const getFinishComments = async ({
   episode_id,
   pageParam,
 }: GetFInishCommentsArgs) => {
@@ -22,7 +23,7 @@ const getFinishComments = async ({
   const fetcher = useGetFinishCommentsQuery.fetcher(client, {
     episode_id,
     cursor,
-    limit: 10,
+    limit: 100,
   });
 
   const data = await fetcher();
@@ -40,18 +41,13 @@ export const useInfiniteFinishComments = (episode_id: string) =>
       }),
     getNextPageParam: (lastPage) => {
       const lastFinishComments = lastPage.finish_comments.at(-1);
-      if (!lastFinishComments || lastPage.finish_comments.length < 10)
+      if (!lastFinishComments || lastPage.finish_comments.length < 100)
         return undefined;
 
       return {
         cursor: lastFinishComments?.created_at,
       };
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
+
     enabled: !!episode_id,
   });

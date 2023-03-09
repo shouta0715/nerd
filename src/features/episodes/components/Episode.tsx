@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, useState } from "react";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
+import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -18,11 +19,7 @@ const DynamicChatComments = dynamic(
 );
 
 const DynamicFinishComments = dynamic(
-  () => import("src/features/comments/components/FinishComments"),
-  {
-    ssr: false,
-    loading: () => <div>loading...</div>,
-  }
+  () => import("src/features/comments/components/FinishComments")
 );
 
 const DynamicEpisodeMenu = dynamic(
@@ -41,6 +38,7 @@ export const Episode: FC = () => {
   const { slug, episode } = router.query;
   const { data } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
+  const prefetchFinishComments = usePrefetchFinishEpisode();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -102,6 +100,12 @@ export const Episode: FC = () => {
                     チャット
                   </Text>
                   <Text
+                    onMouseEnter={async () =>
+                      prefetchFinishComments(data?.episodes_by_pk?.id)
+                    }
+                    onTouchStart={() =>
+                      prefetchFinishComments(data?.episodes_by_pk?.id)
+                    }
                     onClick={() => setIsChat(false)}
                     color="indigo"
                     component="li"
