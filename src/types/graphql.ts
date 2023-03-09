@@ -534,6 +534,10 @@ export type Episodes = {
   chat_comments_aggregate: Chat_Comments_Aggregate;
   created_at: Scalars['timestamptz'];
   end_time?: Maybe<Scalars['timestamp']>;
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
   has_next_episode: Scalars['Boolean'];
   has_prev_episode: Scalars['Boolean'];
   id: Scalars['uuid'];
@@ -566,6 +570,26 @@ export type EpisodesChat_Comments_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
   where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
 };
 
 /** aggregated selection of "episodes" */
@@ -669,6 +693,8 @@ export type Episodes_Bool_Exp = {
   chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   end_time?: InputMaybe<Timestamp_Comparison_Exp>;
+  finish_comments?: InputMaybe<Finish_Comments_Bool_Exp>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp>;
   has_next_episode?: InputMaybe<Boolean_Comparison_Exp>;
   has_prev_episode?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -701,6 +727,7 @@ export type Episodes_Insert_Input = {
   chat_comments?: InputMaybe<Chat_Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   end_time?: InputMaybe<Scalars['timestamp']>;
+  finish_comments?: InputMaybe<Finish_Comments_Arr_Rel_Insert_Input>;
   has_next_episode?: InputMaybe<Scalars['Boolean']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -800,6 +827,7 @@ export type Episodes_Order_By = {
   chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Order_By>;
   has_next_episode?: InputMaybe<Order_By>;
   has_prev_episode?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1027,6 +1055,425 @@ export type Episodes_Variance_Fields = {
 /** order by variance() on columns of table "episodes" */
 export type Episodes_Variance_Order_By = {
   number?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "finish_comments" */
+export type Finish_Comments = {
+  __typename?: 'finish_comments';
+  anonymous: Scalars['Boolean'];
+  commenter_name: Scalars['String'];
+  content: Scalars['String'];
+  created_at: Scalars['timestamptz'];
+  /** An object relationship */
+  episode?: Maybe<Episodes>;
+  episode_id?: Maybe<Scalars['uuid']>;
+  id: Scalars['uuid'];
+  reply_to?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars['String'];
+  /** An object relationship */
+  work?: Maybe<Works>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregated selection of "finish_comments" */
+export type Finish_Comments_Aggregate = {
+  __typename?: 'finish_comments_aggregate';
+  aggregate?: Maybe<Finish_Comments_Aggregate_Fields>;
+  nodes: Array<Finish_Comments>;
+};
+
+export type Finish_Comments_Aggregate_Bool_Exp = {
+  bool_and?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp_Bool_And>;
+  bool_or?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp_Bool_Or>;
+  count?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp_Count>;
+};
+
+export type Finish_Comments_Aggregate_Bool_Exp_Bool_And = {
+  arguments: Finish_Comments_Select_Column_Finish_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Finish_Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Finish_Comments_Aggregate_Bool_Exp_Bool_Or = {
+  arguments: Finish_Comments_Select_Column_Finish_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Finish_Comments_Bool_Exp>;
+  predicate: Boolean_Comparison_Exp;
+};
+
+export type Finish_Comments_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Finish_Comments_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "finish_comments" */
+export type Finish_Comments_Aggregate_Fields = {
+  __typename?: 'finish_comments_aggregate_fields';
+  avg?: Maybe<Finish_Comments_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Finish_Comments_Max_Fields>;
+  min?: Maybe<Finish_Comments_Min_Fields>;
+  stddev?: Maybe<Finish_Comments_Stddev_Fields>;
+  stddev_pop?: Maybe<Finish_Comments_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Finish_Comments_Stddev_Samp_Fields>;
+  sum?: Maybe<Finish_Comments_Sum_Fields>;
+  var_pop?: Maybe<Finish_Comments_Var_Pop_Fields>;
+  var_samp?: Maybe<Finish_Comments_Var_Samp_Fields>;
+  variance?: Maybe<Finish_Comments_Variance_Fields>;
+};
+
+
+/** aggregate fields of "finish_comments" */
+export type Finish_Comments_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "finish_comments" */
+export type Finish_Comments_Aggregate_Order_By = {
+  avg?: InputMaybe<Finish_Comments_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Finish_Comments_Max_Order_By>;
+  min?: InputMaybe<Finish_Comments_Min_Order_By>;
+  stddev?: InputMaybe<Finish_Comments_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Finish_Comments_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Finish_Comments_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Finish_Comments_Sum_Order_By>;
+  var_pop?: InputMaybe<Finish_Comments_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Finish_Comments_Var_Samp_Order_By>;
+  variance?: InputMaybe<Finish_Comments_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "finish_comments" */
+export type Finish_Comments_Arr_Rel_Insert_Input = {
+  data: Array<Finish_Comments_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Finish_Comments_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Finish_Comments_Avg_Fields = {
+  __typename?: 'finish_comments_avg_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "finish_comments" */
+export type Finish_Comments_Avg_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "finish_comments". All fields are combined with a logical 'AND'. */
+export type Finish_Comments_Bool_Exp = {
+  _and?: InputMaybe<Array<Finish_Comments_Bool_Exp>>;
+  _not?: InputMaybe<Finish_Comments_Bool_Exp>;
+  _or?: InputMaybe<Array<Finish_Comments_Bool_Exp>>;
+  anonymous?: InputMaybe<Boolean_Comparison_Exp>;
+  commenter_name?: InputMaybe<String_Comparison_Exp>;
+  content?: InputMaybe<String_Comparison_Exp>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  episode?: InputMaybe<Episodes_Bool_Exp>;
+  episode_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  reply_to?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+  work?: InputMaybe<Works_Bool_Exp>;
+  work_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "finish_comments" */
+export enum Finish_Comments_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  FinishCommentsPkey = 'finish_comments_pkey'
+}
+
+/** input type for incrementing numeric columns in table "finish_comments" */
+export type Finish_Comments_Inc_Input = {
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "finish_comments" */
+export type Finish_Comments_Insert_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  reply_to?: InputMaybe<Scalars['uuid']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Finish_Comments_Max_Fields = {
+  __typename?: 'finish_comments_max_fields';
+  commenter_name?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  episode_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  reply_to?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by max() on columns of table "finish_comments" */
+export type Finish_Comments_Max_Order_By = {
+  commenter_name?: InputMaybe<Order_By>;
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  reply_to?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Finish_Comments_Min_Fields = {
+  __typename?: 'finish_comments_min_fields';
+  commenter_name?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['timestamptz']>;
+  episode_id?: Maybe<Scalars['uuid']>;
+  id?: Maybe<Scalars['uuid']>;
+  reply_to?: Maybe<Scalars['uuid']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by min() on columns of table "finish_comments" */
+export type Finish_Comments_Min_Order_By = {
+  commenter_name?: InputMaybe<Order_By>;
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  reply_to?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "finish_comments" */
+export type Finish_Comments_Mutation_Response = {
+  __typename?: 'finish_comments_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Finish_Comments>;
+};
+
+/** on_conflict condition type for table "finish_comments" */
+export type Finish_Comments_On_Conflict = {
+  constraint: Finish_Comments_Constraint;
+  update_columns?: Array<Finish_Comments_Update_Column>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "finish_comments". */
+export type Finish_Comments_Order_By = {
+  anonymous?: InputMaybe<Order_By>;
+  commenter_name?: InputMaybe<Order_By>;
+  content?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  episode?: InputMaybe<Episodes_Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  reply_to?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work?: InputMaybe<Works_Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: finish_comments */
+export type Finish_Comments_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "finish_comments" */
+export enum Finish_Comments_Select_Column {
+  /** column name */
+  Anonymous = 'anonymous',
+  /** column name */
+  CommenterName = 'commenter_name',
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ReplyTo = 'reply_to',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+/** select "finish_comments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "finish_comments" */
+export enum Finish_Comments_Select_Column_Finish_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
+  /** column name */
+  Anonymous = 'anonymous'
+}
+
+/** select "finish_comments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "finish_comments" */
+export enum Finish_Comments_Select_Column_Finish_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
+  /** column name */
+  Anonymous = 'anonymous'
+}
+
+/** input type for updating data in table "finish_comments" */
+export type Finish_Comments_Set_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  reply_to?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Finish_Comments_Stddev_Fields = {
+  __typename?: 'finish_comments_stddev_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "finish_comments" */
+export type Finish_Comments_Stddev_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Finish_Comments_Stddev_Pop_Fields = {
+  __typename?: 'finish_comments_stddev_pop_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "finish_comments" */
+export type Finish_Comments_Stddev_Pop_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Finish_Comments_Stddev_Samp_Fields = {
+  __typename?: 'finish_comments_stddev_samp_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "finish_comments" */
+export type Finish_Comments_Stddev_Samp_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "finish_comments" */
+export type Finish_Comments_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Finish_Comments_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Finish_Comments_Stream_Cursor_Value_Input = {
+  anonymous?: InputMaybe<Scalars['Boolean']>;
+  commenter_name?: InputMaybe<Scalars['String']>;
+  content?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  episode_id?: InputMaybe<Scalars['uuid']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  reply_to?: InputMaybe<Scalars['uuid']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate sum on columns */
+export type Finish_Comments_Sum_Fields = {
+  __typename?: 'finish_comments_sum_fields';
+  work_id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "finish_comments" */
+export type Finish_Comments_Sum_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "finish_comments" */
+export enum Finish_Comments_Update_Column {
+  /** column name */
+  Anonymous = 'anonymous',
+  /** column name */
+  CommenterName = 'commenter_name',
+  /** column name */
+  Content = 'content',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  ReplyTo = 'reply_to',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+export type Finish_Comments_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Finish_Comments_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Finish_Comments_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Finish_Comments_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Finish_Comments_Var_Pop_Fields = {
+  __typename?: 'finish_comments_var_pop_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "finish_comments" */
+export type Finish_Comments_Var_Pop_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Finish_Comments_Var_Samp_Fields = {
+  __typename?: 'finish_comments_var_samp_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "finish_comments" */
+export type Finish_Comments_Var_Samp_Order_By = {
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Finish_Comments_Variance_Fields = {
+  __typename?: 'finish_comments_variance_fields';
+  work_id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "finish_comments" */
+export type Finish_Comments_Variance_Order_By = {
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -1275,6 +1722,10 @@ export type Mutation_Root = {
   delete_episodes?: Maybe<Episodes_Mutation_Response>;
   /** delete single row from the table: "episodes" */
   delete_episodes_by_pk?: Maybe<Episodes>;
+  /** delete data from the table: "finish_comments" */
+  delete_finish_comments?: Maybe<Finish_Comments_Mutation_Response>;
+  /** delete single row from the table: "finish_comments" */
+  delete_finish_comments_by_pk?: Maybe<Finish_Comments>;
   /** delete data from the table: "media_types" */
   delete_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** delete single row from the table: "media_types" */
@@ -1295,6 +1746,10 @@ export type Mutation_Root = {
   insert_episodes?: Maybe<Episodes_Mutation_Response>;
   /** insert a single row into the table: "episodes" */
   insert_episodes_one?: Maybe<Episodes>;
+  /** insert data into the table: "finish_comments" */
+  insert_finish_comments?: Maybe<Finish_Comments_Mutation_Response>;
+  /** insert a single row into the table: "finish_comments" */
+  insert_finish_comments_one?: Maybe<Finish_Comments>;
   /** insert data into the table: "media_types" */
   insert_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** insert a single row into the table: "media_types" */
@@ -1319,6 +1774,12 @@ export type Mutation_Root = {
   update_episodes_by_pk?: Maybe<Episodes>;
   /** update multiples rows of table: "episodes" */
   update_episodes_many?: Maybe<Array<Maybe<Episodes_Mutation_Response>>>;
+  /** update data of the table: "finish_comments" */
+  update_finish_comments?: Maybe<Finish_Comments_Mutation_Response>;
+  /** update single row of the table: "finish_comments" */
+  update_finish_comments_by_pk?: Maybe<Finish_Comments>;
+  /** update multiples rows of table: "finish_comments" */
+  update_finish_comments_many?: Maybe<Array<Maybe<Finish_Comments_Mutation_Response>>>;
   /** update data of the table: "media_types" */
   update_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** update single row of the table: "media_types" */
@@ -1360,6 +1821,18 @@ export type Mutation_RootDelete_EpisodesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Episodes_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Finish_CommentsArgs = {
+  where: Finish_Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Finish_Comments_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1425,6 +1898,20 @@ export type Mutation_RootInsert_EpisodesArgs = {
 export type Mutation_RootInsert_Episodes_OneArgs = {
   object: Episodes_Insert_Input;
   on_conflict?: InputMaybe<Episodes_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Finish_CommentsArgs = {
+  objects: Array<Finish_Comments_Insert_Input>;
+  on_conflict?: InputMaybe<Finish_Comments_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Finish_Comments_OneArgs = {
+  object: Finish_Comments_Insert_Input;
+  on_conflict?: InputMaybe<Finish_Comments_On_Conflict>;
 };
 
 
@@ -1511,6 +1998,28 @@ export type Mutation_RootUpdate_Episodes_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Episodes_ManyArgs = {
   updates: Array<Episodes_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Finish_CommentsArgs = {
+  _inc?: InputMaybe<Finish_Comments_Inc_Input>;
+  _set?: InputMaybe<Finish_Comments_Set_Input>;
+  where: Finish_Comments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Finish_Comments_By_PkArgs = {
+  _inc?: InputMaybe<Finish_Comments_Inc_Input>;
+  _set?: InputMaybe<Finish_Comments_Set_Input>;
+  pk_columns: Finish_Comments_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Finish_Comments_ManyArgs = {
+  updates: Array<Finish_Comments_Updates>;
 };
 
 
@@ -1611,6 +2120,12 @@ export type Query_Root = {
   episodes_aggregate: Episodes_Aggregate;
   /** fetch data from the table: "episodes" using primary key columns */
   episodes_by_pk?: Maybe<Episodes>;
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
+  /** fetch data from the table: "finish_comments" using primary key columns */
+  finish_comments_by_pk?: Maybe<Finish_Comments>;
   /** fetch data from the table: "media_types" */
   media_types: Array<Media_Types>;
   /** fetch aggregated fields from the table: "media_types" */
@@ -1694,6 +2209,29 @@ export type Query_RootEpisodes_AggregateArgs = {
 
 
 export type Query_RootEpisodes_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+export type Query_RootFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+export type Query_RootFinish_Comments_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
@@ -1788,6 +2326,14 @@ export type Subscription_Root = {
   episodes_by_pk?: Maybe<Episodes>;
   /** fetch data from the table in a streaming manner: "episodes" */
   episodes_stream: Array<Episodes>;
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
+  /** fetch data from the table: "finish_comments" using primary key columns */
+  finish_comments_by_pk?: Maybe<Finish_Comments>;
+  /** fetch data from the table in a streaming manner: "finish_comments" */
+  finish_comments_stream: Array<Finish_Comments>;
   /** fetch data from the table: "media_types" */
   media_types: Array<Media_Types>;
   /** fetch aggregated fields from the table: "media_types" */
@@ -1892,6 +2438,36 @@ export type Subscription_RootEpisodes_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Episodes_Stream_Cursor_Input>>;
   where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootFinish_Comments_By_PkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootFinish_Comments_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Finish_Comments_Stream_Cursor_Input>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
 };
 
 
@@ -2019,6 +2595,10 @@ export type Users = {
   /** An aggregate relationship */
   chat_comments_aggregate: Chat_Comments_Aggregate;
   created_at: Scalars['timestamptz'];
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
   id: Scalars['String'];
   ip?: Maybe<Scalars['String']>;
   photo_url?: Maybe<Scalars['String']>;
@@ -2044,6 +2624,26 @@ export type UsersChat_Comments_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Chat_Comments_Order_By>>;
   where?: InputMaybe<Chat_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -2077,6 +2677,8 @@ export type Users_Bool_Exp = {
   chat_comments?: InputMaybe<Chat_Comments_Bool_Exp>;
   chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  finish_comments?: InputMaybe<Finish_Comments_Bool_Exp>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
   ip?: InputMaybe<String_Comparison_Exp>;
   photo_url?: InputMaybe<String_Comparison_Exp>;
@@ -2095,6 +2697,7 @@ export type Users_Insert_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']>;
   chat_comments?: InputMaybe<Chat_Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
+  finish_comments?: InputMaybe<Finish_Comments_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['String']>;
   ip?: InputMaybe<Scalars['String']>;
   photo_url?: InputMaybe<Scalars['String']>;
@@ -2152,6 +2755,7 @@ export type Users_Order_By = {
   anonymous?: InputMaybe<Order_By>;
   chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   ip?: InputMaybe<Order_By>;
   photo_url?: InputMaybe<Order_By>;
@@ -2262,6 +2866,10 @@ export type Works = {
   episodes: Array<Episodes>;
   /** An aggregate relationship */
   episodes_aggregate: Episodes_Aggregate;
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
   has_episodes?: Maybe<Scalars['Boolean']>;
   id: Scalars['Int'];
   /** An object relationship */
@@ -2314,6 +2922,26 @@ export type WorksEpisodes_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Episodes_Order_By>>;
   where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
 };
 
 /** aggregated selection of "works" */
@@ -2422,6 +3050,8 @@ export type Works_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episodes?: InputMaybe<Episodes_Bool_Exp>;
   episodes_aggregate?: InputMaybe<Episodes_Aggregate_Bool_Exp>;
+  finish_comments?: InputMaybe<Finish_Comments_Bool_Exp>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp>;
   has_episodes?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   media_type?: InputMaybe<Media_Types_Bool_Exp>;
@@ -2458,6 +3088,7 @@ export type Works_Insert_Input = {
   chat_comments?: InputMaybe<Chat_Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episodes?: InputMaybe<Episodes_Arr_Rel_Insert_Input>;
+  finish_comments?: InputMaybe<Finish_Comments_Arr_Rel_Insert_Input>;
   has_episodes?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['Int']>;
   media_type?: InputMaybe<Media_Types_Obj_Rel_Insert_Input>;
@@ -2557,6 +3188,7 @@ export type Works_Order_By = {
   chat_comments_aggregate?: InputMaybe<Chat_Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   episodes_aggregate?: InputMaybe<Episodes_Aggregate_Order_By>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Order_By>;
   has_episodes?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   media_type?: InputMaybe<Media_Types_Order_By>;

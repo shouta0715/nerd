@@ -129,7 +129,7 @@ export const Episode: FC = () => {
             {isChat ? (
               <DynamicChatComments episode_id={data?.episodes_by_pk?.id} />
             ) : (
-              <DynamicFinishComments />
+              <DynamicFinishComments episode_id={data?.episodes_by_pk?.id} />
             )}
           </div>
           <InputFiled episode_id={data?.episodes_by_pk?.id} />
