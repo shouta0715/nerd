@@ -11,16 +11,38 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryReply(reply_id, isOpen);
   const [replyCount, setReplyCount] = useState(0);
+  const [showCount, setShowCount] = useState(1);
 
   const clickHandler = useCallback(async () => {
-    if (replyCount < reply_count) {
+    if (!data && !isOpen) {
       setIsOpen(true);
       await fetchNextPage();
-      setReplyCount(replyCount + 20);
-    } else {
-      setIsOpen(!isOpen);
+      setReplyCount((prev) => prev + 20);
+
+      return;
     }
-  }, [replyCount, reply_count, fetchNextPage, isOpen]);
+
+    if (isOpen && replyCount < reply_count) {
+      await fetchNextPage();
+      setReplyCount((prev) => prev + 20);
+      setShowCount((prev) => prev + 1);
+
+      return;
+    }
+
+    if (replyCount >= reply_count) {
+      setIsOpen(false);
+      setReplyCount(0);
+      setShowCount(1);
+
+      return;
+    }
+
+    if (!isOpen) {
+      setIsOpen(true);
+      setReplyCount((prev) => prev + 20);
+    }
+  }, [data, isOpen, replyCount, reply_count, fetchNextPage]);
 
   const controlLabel = useCallback((): string => {
     if (!reply_count) return "返信を表示";
@@ -43,5 +65,7 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
+    replyCount,
+    showCount,
   };
 };
