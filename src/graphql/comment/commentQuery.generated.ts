@@ -35,7 +35,7 @@ export type GetFinishCommentsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetFinishCommentsQuery = { __typename?: 'query_root', finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string }> };
+export type GetFinishCommentsQuery = { __typename?: 'query_root', finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, finish_comments_aggregate: { __typename?: 'finish_comments_aggregate', aggregate?: { __typename?: 'finish_comments_aggregate_fields', count: number } | null }, finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> }> };
 
 
 export const InsertChatCommentDocument = `
@@ -112,7 +112,7 @@ useGetChatCommentsQuery.fetcher = (client: GraphQLClient, variables: GetChatComm
 export const GetFinishCommentsDocument = `
     query GetFinishComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
   finish_comments(
-    where: {episode_id: {_eq: $episode_id}, created_at: {_lt: $cursor}}
+    where: {episode_id: {_eq: $episode_id}, created_at: {_lt: $cursor}, reply_to: {_is_null: true}}
     order_by: {created_at: desc}
     limit: $limit
   ) {
@@ -123,6 +123,30 @@ export const GetFinishCommentsDocument = `
     episode_id
     created_at
     commenter_name
+    user {
+      anonymous
+      user_name
+      id
+    }
+    finish_comments_aggregate {
+      aggregate {
+        count
+      }
+    }
+    finish_comments(limit: 20, order_by: {created_at: asc}) {
+      content
+      work_id
+      user_id
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        user_name
+        id
+      }
+    }
   }
 }
     `;

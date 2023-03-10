@@ -8,10 +8,10 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        chat: "chat 0.25s ease-out",
+        comment: "comment 0.25s ease-out",
       },
       keyframes: {
-        chat: {
+        comment: {
           "0%": { transform: "translateY(100%)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
         },

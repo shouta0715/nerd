@@ -1,5 +1,7 @@
-import { Loader } from "@mantine/core";
+import { Box, Loader } from "@mantine/core";
 import React, { FC } from "react";
+import { FinishComment } from "src/features/comments/components/FinishComment";
+
 import { useFinishComments } from "src/features/comments/hooks/useFInishComments";
 
 type Props = {
@@ -10,13 +12,15 @@ const FinishComments: FC<Props> = ({ episode_id }) => {
   const { data, ref, hasNextPage } = useFinishComments(episode_id);
 
   return (
-    <div className="w-full py-2">
+    <Box
+      component="ul"
+      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
+    >
       {data?.pages.map((page) =>
         page.finish_comments.map((comment) => (
-          <div key={comment.id}>{comment.content}</div>
+          <FinishComment key={comment.id} comment={comment} />
         ))
       )}
-
       <div
         ref={ref}
         className={`flex h-20 items-center justify-center text-center  ${
@@ -25,7 +29,7 @@ const FinishComments: FC<Props> = ({ episode_id }) => {
       >
         <Loader variant="oval" />
       </div>
-    </div>
+    </Box>
   );
 };
 

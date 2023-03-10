@@ -1068,6 +1068,12 @@ export type Finish_Comments = {
   /** An object relationship */
   episode?: Maybe<Episodes>;
   episode_id?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  finish_comment?: Maybe<Finish_Comments>;
+  /** An array relationship */
+  finish_comments: Array<Finish_Comments>;
+  /** An aggregate relationship */
+  finish_comments_aggregate: Finish_Comments_Aggregate;
   id: Scalars['uuid'];
   reply_to?: Maybe<Scalars['uuid']>;
   /** An object relationship */
@@ -1076,6 +1082,26 @@ export type Finish_Comments = {
   /** An object relationship */
   work?: Maybe<Works>;
   work_id?: Maybe<Scalars['Int']>;
+};
+
+
+/** columns and relationships of "finish_comments" */
+export type Finish_CommentsFinish_CommentsArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "finish_comments" */
+export type Finish_CommentsFinish_Comments_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Finish_Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Finish_Comments_Order_By>>;
+  where?: InputMaybe<Finish_Comments_Bool_Exp>;
 };
 
 /** aggregated selection of "finish_comments" */
@@ -1179,6 +1205,9 @@ export type Finish_Comments_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   episode?: InputMaybe<Episodes_Bool_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
+  finish_comment?: InputMaybe<Finish_Comments_Bool_Exp>;
+  finish_comments?: InputMaybe<Finish_Comments_Bool_Exp>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   reply_to?: InputMaybe<Uuid_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
@@ -1206,6 +1235,8 @@ export type Finish_Comments_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
   episode_id?: InputMaybe<Scalars['uuid']>;
+  finish_comment?: InputMaybe<Finish_Comments_Obj_Rel_Insert_Input>;
+  finish_comments?: InputMaybe<Finish_Comments_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
   reply_to?: InputMaybe<Scalars['uuid']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -1273,6 +1304,13 @@ export type Finish_Comments_Mutation_Response = {
   returning: Array<Finish_Comments>;
 };
 
+/** input type for inserting object relation for remote table "finish_comments" */
+export type Finish_Comments_Obj_Rel_Insert_Input = {
+  data: Finish_Comments_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Finish_Comments_On_Conflict>;
+};
+
 /** on_conflict condition type for table "finish_comments" */
 export type Finish_Comments_On_Conflict = {
   constraint: Finish_Comments_Constraint;
@@ -1288,6 +1326,8 @@ export type Finish_Comments_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode?: InputMaybe<Episodes_Order_By>;
   episode_id?: InputMaybe<Order_By>;
+  finish_comment?: InputMaybe<Finish_Comments_Order_By>;
+  finish_comments_aggregate?: InputMaybe<Finish_Comments_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
