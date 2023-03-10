@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Accordion, Loader } from "@mantine/core";
 import React, { FC } from "react";
 import { ReplyComment } from "src/features/comments/components/ReplyComment";
@@ -9,18 +10,25 @@ type Props = {
 };
 
 export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
-  const { clickHandler, controlLabel, isOpen, data, isFetchingNextPage } =
-    useFinishComment({
-      reply_id,
-      reply_count,
-    });
+  const {
+    clickHandler,
+    controlLabel,
+    isOpen,
+    data,
+    isFetchingNextPage,
+    replyCount,
+  } = useFinishComment({
+    reply_id,
+    reply_count,
+  });
 
   return (
-    <div>
+    <>
       {reply_count !== 0 && (
         <Accordion
           value={isOpen ? "reply-original" : null}
           ff="Hiragino Sans"
+          loop={false}
           disableChevronRotation={controlLabel() !== "返信を閉じる"}
           classNames={{
             control:
@@ -32,12 +40,20 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
         >
           <Accordion.Item className="border-0" value="reply-original">
             <Accordion.Panel ff="Hiragino Sans">
-              {data?.pages.map((replies) =>
-                replies.finish_comments.map((reply) => (
-                  <ReplyComment key={reply.id} reply={reply} />
-                ))
+              {data?.pages
+                .map((replies, index) => {
+                  if (index > replyCount / 20) return null;
+
+                  return replies.finish_comments.map((reply) => (
+                    <ReplyComment key={reply.id} reply={reply} />
+                  ));
+                })
+                .filter((reply) => reply !== null)}
+              {isFetchingNextPage && (
+                <div className="flex w-full">
+                  <Loader className="mx-auto" variant="dots" />
+                </div>
               )}
-              {isFetchingNextPage && <Loader variant="dots" />}
             </Accordion.Panel>
             <Accordion.Control onClick={clickHandler}>
               {controlLabel()}
@@ -45,6 +61,6 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
           </Accordion.Item>
         </Accordion>
       )}
-    </div>
+    </>
   );
 };

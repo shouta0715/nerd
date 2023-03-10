@@ -49,7 +49,13 @@ export const FinishComment: FC<Props> = ({ comment }) => (
           <span>100</span>
         </div>
       </Text>
-      <Suspense fallback={<Loader variant="dots" />}>
+      <Suspense
+        fallback={
+          <div className="flex w-full">
+            <Loader className="mx-auto" variant="dots" />
+          </div>
+        }
+      >
         <Replies
           reply_count={comment.finish_comments_aggregate.aggregate?.count || 0}
           reply_id={comment.id}

@@ -10,32 +10,31 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryReply(reply_id, isOpen);
-  const [replyCount, setReplyCount] = useState(
-    data?.pages[0].finish_comments.length ?? 0
-  );
+  const [replyCount, setReplyCount] = useState(0);
 
-  const clickHandler = useCallback(() => {
+  const clickHandler = useCallback(async () => {
     if (replyCount < reply_count) {
       setIsOpen(true);
-      fetchNextPage();
+      await fetchNextPage();
       setReplyCount(replyCount + 20);
     } else {
-      setIsOpen(!isOpen);
+      setIsOpen(false);
+      setReplyCount(data?.pages.length ?? 0);
     }
-  }, [replyCount, reply_count, fetchNextPage, isOpen]);
+  }, [replyCount, reply_count, fetchNextPage, data?.pages.length]);
 
   const controlLabel = useCallback((): string => {
     if (!reply_count) return "返信を表示";
     if (!isOpen) return `${reply_count}件の返信を表示`;
 
-    if (replyCount < (reply_count ?? 0) && hasNextPage)
+    if (replyCount < reply_count)
       return `${
         // eslint-disable-next-line no-unsafe-optional-chaining
         reply_count - replyCount
       }件をもっと表示する`;
 
     return "返信を閉じる";
-  }, [reply_count, hasNextPage, isOpen, replyCount]);
+  }, [reply_count, isOpen, replyCount]);
 
   return {
     isOpen,

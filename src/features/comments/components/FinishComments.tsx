@@ -14,7 +14,7 @@ const FinishComments: FC<Props> = ({ episode_id }) => {
   return (
     <Box
       component="ul"
-      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
+      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1  md:max-w-xl"
     >
       {data?.pages.map((page) =>
         page.finish_comments.map((comment) => (
