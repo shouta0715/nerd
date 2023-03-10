@@ -10,11 +10,17 @@ type Props = {
 };
 
 export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
-  const { clickHandler, controlLabel, isOpen, data, isFetchingNextPage } =
-    useFinishComment({
-      reply_id,
-      reply_count,
-    });
+  const {
+    clickHandler,
+    controlLabel,
+    isOpen,
+    data,
+    showCount,
+    isFetchingNextPage,
+  } = useFinishComment({
+    reply_id,
+    reply_count,
+  });
 
   return (
     <>
@@ -34,11 +40,13 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
         >
           <Accordion.Item className="border-0" value="reply-original">
             <Accordion.Panel ff="Hiragino Sans">
-              {data?.pages.map((replies) =>
-                replies.finish_comments.map((reply) => (
-                  <ReplyComment key={reply.id} reply={reply} />
-                ))
-              )}
+              {data?.pages
+                .slice(0, showCount)
+                .map((replies) =>
+                  replies.finish_comments.map((reply) => (
+                    <ReplyComment key={reply.id} reply={reply} />
+                  ))
+                )}
               {isFetchingNextPage && (
                 <div className="flex w-full">
                   <Loader className="mx-auto" variant="dots" />
