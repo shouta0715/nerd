@@ -35,7 +35,16 @@ export type GetFinishCommentsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetFinishCommentsQuery = { __typename?: 'query_root', finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, finish_comments_aggregate: { __typename?: 'finish_comments_aggregate', aggregate?: { __typename?: 'finish_comments_aggregate_fields', count: number } | null }, finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> }> };
+export type GetFinishCommentsQuery = { __typename?: 'query_root', finish_comments: Array<{ __typename?: 'finish_comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, finish_comments_aggregate: { __typename?: 'finish_comments_aggregate', aggregate?: { __typename?: 'finish_comments_aggregate_fields', count: number } | null } }> };
+
+export type GetReplyQueryVariables = Types.Exact<{
+  reply_to: Types.Scalars['uuid'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  limit: Types.Scalars['Int'];
+}>;
+
+
+export type GetReplyQuery = { __typename?: 'query_root', finish_comments: Array<{ __typename?: 'finish_comments', content: string, user_id: string, id: any, created_at: any, commenter_name: string, reply_to?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 
 export const InsertChatCommentDocument = `
@@ -133,20 +142,6 @@ export const GetFinishCommentsDocument = `
         count
       }
     }
-    finish_comments(limit: 20, order_by: {created_at: asc}) {
-      content
-      work_id
-      user_id
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        id
-      }
-    }
   }
 }
     `;
@@ -165,3 +160,39 @@ export const useGetFinishCommentsQuery = <
       options
     );
 useGetFinishCommentsQuery.fetcher = (client: GraphQLClient, variables: GetFinishCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetFinishCommentsQuery, GetFinishCommentsQueryVariables>(client, GetFinishCommentsDocument, variables, headers);
+export const GetReplyDocument = `
+    query GetReply($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
+  finish_comments(
+    where: {reply_to: {_eq: $reply_to}, created_at: {_lt: $cursor}}
+    order_by: {created_at: desc}
+    limit: $limit
+  ) {
+    content
+    user_id
+    id
+    created_at
+    commenter_name
+    reply_to
+    user {
+      anonymous
+      user_name
+      id
+    }
+  }
+}
+    `;
+export const useGetReplyQuery = <
+      TData = GetReplyQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetReplyQueryVariables,
+      options?: UseQueryOptions<GetReplyQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetReplyQuery, TError, TData>(
+      ['GetReply', variables],
+      fetcher<GetReplyQuery, GetReplyQueryVariables>(client, GetReplyDocument, variables, headers),
+      options
+    );
+useGetReplyQuery.fetcher = (client: GraphQLClient, variables: GetReplyQueryVariables, headers?: RequestInit['headers']) => fetcher<GetReplyQuery, GetReplyQueryVariables>(client, GetReplyDocument, variables, headers);
