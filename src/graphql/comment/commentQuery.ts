@@ -86,17 +86,27 @@ export const GET_FINISH_COMMENTS = gql`
           count
         }
       }
-      finish_comments(limit: 20, order_by: { created_at: asc }) {
-        content
-        user_id
+    }
+  }
+`;
+
+export const GET_REPLY = gql`
+  query GetReply($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
+    finish_comments(
+      where: { reply_to: { _eq: $reply_to }, created_at: { _lt: $cursor } }
+      order_by: { created_at: desc }
+      limit: $limit
+    ) {
+      content
+      user_id
+      id
+      created_at
+      commenter_name
+      reply_to
+      user {
+        anonymous
+        user_name
         id
-        created_at
-        commenter_name
-        user {
-          anonymous
-          user_name
-          id
-        }
       }
     }
   }

@@ -3,7 +3,7 @@ import { useGetFinishCommentsQuery } from "src/graphql/comment/commentQuery.gene
 
 import { client } from "src/libs/graphqlClient";
 
-type GetFInishCommentsArgs = {
+type GetFinishCommentsArgs = {
   episode_id: string;
   pageParam: {
     cursor: string;
@@ -17,7 +17,7 @@ const InitialPageParam = {
 export const getFinishComments = async ({
   episode_id,
   pageParam,
-}: GetFInishCommentsArgs) => {
+}: GetFinishCommentsArgs) => {
   const { cursor } = pageParam;
 
   const fetcher = useGetFinishCommentsQuery.fetcher(client, {
