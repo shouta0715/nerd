@@ -30,7 +30,7 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
       as={`/episode/${episode.id}`}
       component={Link}
       ff="Hiragino Sans"
-      className="mb-1 text-xs md:text-sm"
+      className="mb-1 px-2 text-sm md:text-base"
     >
       第{episode.number}話
     </Text>

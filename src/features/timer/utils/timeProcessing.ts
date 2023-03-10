@@ -1,5 +1,5 @@
 import { formatDistance } from "date-fns";
-import ja from "date-fns/locale/ja";
+import { ja } from "date-fns/locale";
 
 export const timeProcessing = () => {
   const secondToTime = (second: number) => {
@@ -39,15 +39,14 @@ export const timeProcessing = () => {
     return commented;
   };
 
-  const formatTimeDistance = (time: string): string => {
-    const distance = formatDistance(Date.parse(time), new Date(), {
-      includeSeconds: true,
-      addSuffix: true,
-      locale: ja,
-    });
+  return { secondToTime, timeToSecond, timeCommented };
+};
 
-    return `${distance}に投稿`;
-  };
+export const formatTimeDistance = (time: string): string => {
+  const distance = formatDistance(Date.parse(time), new Date(), {
+    addSuffix: true,
+    locale: ja,
+  });
 
-  return { secondToTime, timeToSecond, timeCommented, formatTimeDistance };
+  return `${distance.replace("約", "")}`;
 };

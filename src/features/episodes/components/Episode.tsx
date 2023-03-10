@@ -8,7 +8,6 @@ import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSke
 import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import ChatComments from "src/features/comments/components/ChatComments";
-import { InputFiled } from "src/features/comments/components/CommentInput";
 import FinishComments from "src/features/comments/components/FinishComments";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -137,7 +136,6 @@ export const Episode: FC = () => {
               </Suspense>
             )}
           </div>
-          <InputFiled episode_id={data?.episodes_by_pk?.id} />
         </main>
       </div>
     </div>

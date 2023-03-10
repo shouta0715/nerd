@@ -61,7 +61,11 @@ export const GET_FINISH_COMMENTS = gql`
     $limit: Int!
   ) {
     finish_comments(
-      where: { episode_id: { _eq: $episode_id }, created_at: { _lt: $cursor } }
+      where: {
+        episode_id: { _eq: $episode_id }
+        created_at: { _lt: $cursor }
+        reply_to: { _is_null: true }
+      }
       order_by: { created_at: desc }
       limit: $limit
     ) {
@@ -72,6 +76,28 @@ export const GET_FINISH_COMMENTS = gql`
       episode_id
       created_at
       commenter_name
+      user {
+        anonymous
+        user_name
+        id
+      }
+      finish_comments_aggregate {
+        aggregate {
+          count
+        }
+      }
+      finish_comments(limit: 20, order_by: { created_at: asc }) {
+        content
+        user_id
+        id
+        created_at
+        commenter_name
+        user {
+          anonymous
+          user_name
+          id
+        }
+      }
     }
   }
 `;

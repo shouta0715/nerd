@@ -8,7 +8,7 @@ export default class _Document extends Documents {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="ja">
         <Head>
           <meta charSet="utf-8" />
           <link rel="icon" href="/favicon.ico" />
