@@ -6,5 +6,5 @@ type Props = {
 };
 
 export const ReplyComment: FC<Props> = ({ reply }) => (
-  <div>{reply.content}</div>
+  <div className="">{reply.content}</div>
 );

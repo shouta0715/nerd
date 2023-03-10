@@ -18,10 +18,9 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
       await fetchNextPage();
       setReplyCount(replyCount + 20);
     } else {
-      setIsOpen(false);
-      setReplyCount(data?.pages.length ?? 0);
+      setIsOpen(!isOpen);
     }
-  }, [replyCount, reply_count, fetchNextPage, data?.pages.length]);
+  }, [replyCount, reply_count, fetchNextPage, isOpen]);
 
   const controlLabel = useCallback((): string => {
     if (!reply_count) return "返信を表示";
@@ -40,7 +39,6 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     isOpen,
     clickHandler,
     controlLabel,
-    replyCount,
     data,
     hasNextPage,
     fetchNextPage,
