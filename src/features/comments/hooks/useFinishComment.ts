@@ -57,6 +57,12 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     return "返信を閉じる";
   }, [reply_count, isOpen, replyCount]);
 
+  const closeClickHandler = useCallback(() => {
+    setIsOpen(false);
+    setReplyCount(0);
+    setShowCount(1);
+  }, []);
+
   return {
     isOpen,
     clickHandler,
@@ -67,5 +73,6 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     isFetchingNextPage,
     replyCount,
     showCount,
+    closeClickHandler,
   };
 };

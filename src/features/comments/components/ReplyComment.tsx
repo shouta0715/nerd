@@ -5,6 +5,6 @@ type Props = {
   reply: TypeReplyComment;
 };
 
-export const ReplyComment: FC<Props> = ({ reply }) => (
+export const Reply: FC<Props> = ({ reply }) => (
   <div className="">{reply.content}</div>
 );

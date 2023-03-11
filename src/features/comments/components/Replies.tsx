@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Accordion, Loader } from "@mantine/core";
+import { Accordion, Loader, UnstyledButton } from "@mantine/core";
+import { IconChevronUp } from "@tabler/icons";
 import React, { FC } from "react";
-import { ReplyComment } from "src/features/comments/components/ReplyComment";
+import { Reply } from "src/features/comments/components/ReplyComment";
 import { useFinishComment } from "src/features/comments/hooks/useFinishComment";
 
 type Props = {
@@ -17,6 +18,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
     data,
     showCount,
     isFetchingNextPage,
+    closeClickHandler,
   } = useFinishComment({
     reply_id,
     reply_count,
@@ -44,7 +46,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
                 .slice(0, showCount)
                 .map((replies) =>
                   replies.finish_comments.map((reply) => (
-                    <ReplyComment key={reply.id} reply={reply} />
+                    <Reply key={reply.id} reply={reply} />
                   ))
                 )}
               {isFetchingNextPage && (
@@ -53,9 +55,20 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
                 </div>
               )}
             </Accordion.Panel>
-            <Accordion.Control onClick={clickHandler}>
-              {controlLabel()}
-            </Accordion.Control>
+            <div className="flex w-full justify-between">
+              <Accordion.Control onClick={clickHandler}>
+                {controlLabel()}
+              </Accordion.Control>
+              <UnstyledButton
+                onClick={closeClickHandler}
+                className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
+                  controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
+                }`}
+              >
+                <span>閉じる</span>
+                <IconChevronUp size={16} />
+              </UnstyledButton>
+            </div>
           </Accordion.Item>
         </Accordion>
       )}
