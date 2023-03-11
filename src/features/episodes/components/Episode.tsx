@@ -8,6 +8,7 @@ import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSke
 import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import ChatComments from "src/features/comments/components/ChatComments";
+import { InputFiled } from "src/features/comments/components/CommentInput";
 import FinishComments from "src/features/comments/components/FinishComments";
 
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -127,9 +128,12 @@ export const Episode: FC = () => {
         <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
           <div className="container mx-auto mb-16 flex flex-1  lg:contents">
             {isChat ? (
-              <Suspense fallback={<div>Loading...</div>}>
-                <ChatComments episode_id={data?.episodes_by_pk?.id} />
-              </Suspense>
+              <>
+                <Suspense fallback={<div>Loading...</div>}>
+                  <ChatComments episode_id={data?.episodes_by_pk?.id} />
+                </Suspense>
+                <InputFiled episode_id={data?.episodes_by_pk?.id} />
+              </>
             ) : (
               <Suspense fallback={<div>Loading...</div>}>
                 <FinishComments episode_id={data?.episodes_by_pk?.id} />

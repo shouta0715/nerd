@@ -1,17 +1,19 @@
+/* eslint-disable no-nested-ternary */
 import BoringAvatar from "boring-avatars";
 import { FC } from "react";
 
 type Props = {
   user_id: string;
   user_name: string;
+  size?: "sm" | "md" | "lg";
 };
 
-export const Avatar: FC<Props> = ({ user_id, user_name }) => (
+export const Avatar: FC<Props> = ({ user_id, user_name, size = "md" }) => (
   <div className="h-[38px] w-[38px] overflow-hidden rounded-full">
     <BoringAvatar
       name={`${user_id}${user_name}`}
       variant="beam"
-      size={38}
+      size={size === "sm" ? 32 : size === "md" ? 38 : 48}
       colors={[
         "#4FB3BE",
         "#FF7F50",
@@ -32,3 +34,7 @@ export const Avatar: FC<Props> = ({ user_id, user_name }) => (
     />
   </div>
 );
+
+Avatar.defaultProps = {
+  size: "md",
+};
