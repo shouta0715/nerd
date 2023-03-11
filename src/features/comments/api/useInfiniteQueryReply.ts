@@ -10,7 +10,8 @@ type GetReplyArgs = {
 };
 
 const InitialPageParam = {
-  cursor: new Date().toISOString(),
+  // TODO アプリ公開日にする
+  cursor: "2023-03-10T00:00:00.000Z",
 };
 
 export const getReply = async ({ reply_to, pageParam }: GetReplyArgs) => {
@@ -19,7 +20,7 @@ export const getReply = async ({ reply_to, pageParam }: GetReplyArgs) => {
   const fetcher = useGetReplyQuery.fetcher(client, {
     reply_to,
     cursor,
-    limit: 20,
+    limit: 10,
   });
 
   const data = await fetcher();
@@ -37,7 +38,7 @@ export const useInfiniteQueryReply = (reply_to: string, isOpen: boolean) =>
       }),
     getNextPageParam: (lastPage) => {
       const lastReply = lastPage.finish_comments.at(-1);
-      if (!lastReply || lastPage.finish_comments.length < 20) return undefined;
+      if (!lastReply || lastPage.finish_comments.length < 10) return undefined;
 
       return {
         cursor: lastReply?.created_at,

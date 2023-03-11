@@ -1,16 +1,17 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Accordion, Loader, UnstyledButton } from "@mantine/core";
 import { IconChevronUp } from "@tabler/icons";
-import React, { FC } from "react";
+import React, { FC, RefObject } from "react";
 import { Reply } from "src/features/comments/components/ReplyComment";
 import { useFinishComment } from "src/features/comments/hooks/useFinishComment";
 
 type Props = {
   reply_count: number;
   reply_id: string;
+  content: RefObject<HTMLParagraphElement>;
 };
 
-export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
+export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
   const {
     clickHandler,
     controlLabel,
@@ -22,6 +23,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
   } = useFinishComment({
     reply_id,
     reply_count,
+    content,
   });
 
   return (
@@ -34,10 +36,11 @@ export const Replies: FC<Props> = ({ reply_count, reply_id }) => {
           disableChevronRotation={controlLabel() !== "返信を閉じる"}
           classNames={{
             control:
-              "justify-end w-full text-indigo-500 items-center p-0 hover:bg-transparent w-max",
+              "justify-end w-full text-indigo-500 items-center p-0 hover:bg-transparent w-max mt-1",
             label: " flex-none text-xs md:text-sm",
             content: "p-0",
             chevron: "m-0",
+            panel: "py-1",
           }}
         >
           <Accordion.Item className="border-0" value="reply-original">

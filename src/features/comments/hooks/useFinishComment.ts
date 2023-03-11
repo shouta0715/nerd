@@ -1,12 +1,13 @@
-import { useCallback, useState } from "react";
+import { RefObject, useCallback, useState } from "react";
 import { useInfiniteQueryReply } from "src/features/comments/api/useInfiniteQueryReply";
 
 type Props = {
   reply_count: number;
   reply_id: string;
+  content: RefObject<HTMLParagraphElement>;
 };
 
-export const useFinishComment = ({ reply_count, reply_id }: Props) => {
+export const useFinishComment = ({ reply_count, reply_id, content }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryReply(reply_id, isOpen);
@@ -17,14 +18,14 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     if (!data && !isOpen) {
       setIsOpen(true);
       await fetchNextPage();
-      setReplyCount((prev) => prev + 20);
+      setReplyCount((prev) => prev + 10);
 
       return;
     }
 
     if (isOpen && replyCount < reply_count) {
       await fetchNextPage();
-      setReplyCount((prev) => prev + 20);
+      setReplyCount((prev) => prev + 10);
       setShowCount((prev) => prev + 1);
 
       return;
@@ -35,14 +36,22 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
       setReplyCount(0);
       setShowCount(1);
 
+      // TODO ユーザーの設定によりの設定により変更する
+      if (content.current) {
+        content.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
       return;
     }
 
     if (!isOpen) {
       setIsOpen(true);
-      setReplyCount((prev) => prev + 20);
+      setReplyCount((prev) => prev + 10);
     }
-  }, [data, isOpen, replyCount, reply_count, fetchNextPage]);
+  }, [data, isOpen, replyCount, reply_count, fetchNextPage, content]);
 
   const controlLabel = useCallback((): string => {
     if (!reply_count) return "返信を表示";
@@ -61,7 +70,15 @@ export const useFinishComment = ({ reply_count, reply_id }: Props) => {
     setIsOpen(false);
     setReplyCount(0);
     setShowCount(1);
-  }, []);
+
+    // TODO ユーザーの設定によりの設定により変更する
+    if (content.current) {
+      content.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [content]);
 
   return {
     isOpen,

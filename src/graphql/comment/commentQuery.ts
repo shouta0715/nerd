@@ -93,8 +93,8 @@ export const GET_FINISH_COMMENTS = gql`
 export const GET_REPLY = gql`
   query GetReply($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
     finish_comments(
-      where: { reply_to: { _eq: $reply_to }, created_at: { _lt: $cursor } }
-      order_by: { created_at: desc }
+      where: { reply_to: { _eq: $reply_to }, created_at: { _gt: $cursor } }
+      order_by: { created_at: asc }
       limit: $limit
     ) {
       content
