@@ -22,7 +22,7 @@ const DynamicAutComplete = dynamic(() =>
 );
 
 const SeasonWorks: NextPage<Props> = ({ data, autoCompleteData }) => (
-  <Box component="section">
+  <Box component="section" className="animate-fadeUp">
     <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
       <Box className="container mx-auto bg-transparent py-3">
         <div className="flex w-full items-center px-4">

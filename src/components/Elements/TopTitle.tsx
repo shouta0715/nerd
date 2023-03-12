@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const TopTitle: FC<Props> = ({ title, href }) => (
-  <Title order={2} size="h3" className="mb-4">
+  <Title order={2} size="h3" className="mb-4 md:text-center lg:text-left">
     <Link scroll={false} passHref href={`${href}`}>
       <Text component="span" ff="Hiragino Sans" className="text-lg md:text-xl">
         {title}

@@ -31,7 +31,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
   const time = useTimerState((state) => state.getTime());
 
   return (
-    <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
+    <div className="fixed left-0 bottom-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
       <form
         className="container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}

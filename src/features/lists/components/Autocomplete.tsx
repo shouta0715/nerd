@@ -21,7 +21,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
       }
       itemComponent={AutoCompleteItem}
       data={autoCompleteData}
-      className="mx-auto w-full max-w-sm md:max-w-md"
+      className="mx-auto w-full max-w-sm animate-fadeIn   md:max-w-md"
       icon={<IconSearch className="text-indigo-500" size={20} />}
       iconWidth={48}
       rightSectionWidth={48}
@@ -32,8 +32,9 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
       }
       placeholder="タイトルで検索"
       classNames={{
-        wrapper: "h-8 w-full  mx-auto md:mx-0 flex items-center ",
+        wrapper: "h-8 w-full  mx-auto md:mx-0 flex items-center",
         input: "text-base",
+        dropdown: "animate-autoComplete origin-top",
       }}
       radius="xl"
       onChange={(e) => setSearchInput(e)}

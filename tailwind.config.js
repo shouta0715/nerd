@@ -12,6 +12,7 @@ module.exports = {
         modal: "modal 0.25s ease-out",
         fadeUp: "fadeUp 0.25s ease-out",
         fadeIn: "fadeIn 0.25s ease-out",
+        autoComplete: "autoComplete 0.15s ease-out forwards",
       },
       keyframes: {
         comment: {
@@ -29,6 +30,11 @@ module.exports = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+
+        autoComplete: {
+          "0%": { transform: "scaleY(0)" },
+          "100%": { transform: "scaleY(1)" },
         },
       },
       height: {
