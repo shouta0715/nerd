@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
-  const { data, bottomRef, isBottom, entry } = useChatComments({
+  const { data, bottomRef, isBottom, entry, time } = useChatComments({
     episode_id,
   });
   const { timeCommented } = timeProcessing();
@@ -66,7 +66,7 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
       ))}
       <UnstyledButton
         className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7   -translate-x-1/2 cursor-pointer  items-center justify-center rounded-full bg-indigo-500 shadow-md shadow-black/[0.3]  transition-transform active:translate-y-1 ${
-          isBottom ? "translate-y-10" : "translate-y-0"
+          isBottom || time === 0 ? "translate-y-10" : "translate-y-0"
         }`}
         onClick={() => {
           entry?.target.scrollIntoView({ behavior: "smooth" });
