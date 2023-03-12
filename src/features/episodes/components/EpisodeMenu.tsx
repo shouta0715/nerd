@@ -56,15 +56,15 @@ export const EpisodeMenu: FC<Props> = memo(
     return (
       <div>
         <div
-          className={`fixed inset-0 bg-black/40 lg:contents ${
-            isMenuOpen ? "block" : "hidden"
+          className={`fixed inset-0 z-50 place-items-center bg-black/40 lg:contents ${
+            isMenuOpen ? "flex" : "hidden"
           }`}
           onClick={(e) => {
             if (e.target === e.currentTarget) setIsMenuOpen(false);
           }}
         >
           <div
-            className={`absolute top-1/2 left-1/2 max-h-[90vh] w-4/5 max-w-md  -translate-y-1/2 -translate-x-1/2 overflow-y-auto rounded-md border border-solid border-slate-100 bg-white shadow  lg:static lg:h-auto lg:max-h-fit lg:w-full lg:translate-y-0 lg:translate-x-0 lg:border-0 lg:shadow-none lg:transition-none ${
+            className={` mx-auto h-max max-h-[90vh] w-4/5 max-w-md  animate-modal overflow-y-auto rounded-md border border-solid border-slate-100 bg-white shadow lg:static  lg:h-auto lg:max-h-fit lg:w-full lg:translate-y-0 lg:translate-x-0 lg:animate-none lg:border-0 lg:shadow-none lg:transition-none ${
               isMenuOpen ? "block" : "  hidden lg:block"
             }`}
           >

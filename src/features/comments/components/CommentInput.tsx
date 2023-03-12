@@ -1,18 +1,10 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import {
-  ActionIcon,
-  Box,
-  Burger,
-  Indicator,
-  Loader,
-  Textarea,
-} from "@mantine/core";
-import { IconArrowUp } from "@tabler/icons";
+import { ActionIcon, Box, Indicator, Loader, Textarea } from "@mantine/core";
+import { IconArrowUp, IconSettings } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
-import { Modal } from "src/components/Elements/Modal";
 
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
@@ -40,7 +32,6 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
 
   return (
     <div className="fixed left-0 bottom-0 w-full border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
-      <Modal />
       <form
         className="container mx-auto flex items-center justify-center opacity-100"
         onSubmit={onSubmitHandler}
@@ -116,9 +107,8 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             })
           }
         />
-        <Burger
-          className="lg:hidden"
-          opened={isMenuOpen}
+        <IconSettings
+          className="cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
         />

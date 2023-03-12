@@ -12,7 +12,9 @@ export const Modal: FC = () => {
   return (
     <div
       role="button"
-      onClick={() => changeIsOpenModal(false)}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) changeIsOpenModal(false);
+      }}
       className={`fixed inset-0 z-50 place-items-center bg-black/20 ${
         isOpenLoginModal ? "flex" : "hidden"
       }`}

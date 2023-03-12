@@ -12,7 +12,7 @@ export const ModalContent: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="mx-auto flex max-w-md animate-modal  flex-col items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm">
+    <div className="mx-auto flex w-4/5 animate-modal flex-col  items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm md:max-w-md">
       <header className="flex w-full items-center justify-center">
         <Text
           size="lg"
