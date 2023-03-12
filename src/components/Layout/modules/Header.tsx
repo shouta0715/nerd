@@ -1,14 +1,10 @@
 import { Button } from "@mantine/core";
-import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Modal } from "src/components/Elements/Modal";
 import { Logo } from "src/components/Icon/Logo";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
-
-const DynamicModal = dynamic(() =>
-  import("src/components/Elements/Modal").then((mod) => mod.Modal)
-);
 
 export const Header: FC = () => {
   const user = useUserState((state) => state.user);
@@ -34,7 +30,7 @@ export const Header: FC = () => {
             >
               ログイン
             </Button>
-            <DynamicModal />
+            <Modal />
           </>
         )}
       </div>

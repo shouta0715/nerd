@@ -1,5 +1,5 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import { ActionIcon, Text, Title } from "@mantine/core";
+import { ActionIcon, Loader, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
 
 import { useRouter } from "next/router";
@@ -37,10 +37,10 @@ export const Episode: FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen animate-fadeUp flex-col ">
       <div className="container contents lg:mx-auto lg:flex">
         <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
-          <header className="container mx-auto mb-2 flex flex-col p-6 pb-0">
+          <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
             <div className="flex w-full flex-1  flex-col gap-2">
               <Title ff="Hiragino Sans" className=" text-base md:text-lg">
                 {data?.episodes_by_pk?.work.series_title}
@@ -126,10 +126,12 @@ export const Episode: FC = () => {
           </nav>
         </div>
         <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
-          <div className="container mx-auto mb-16 flex flex-1  lg:contents">
+          <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
             {isChat ? (
               <>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense
+                  fallback={<Loader variant="dots" className="mx-auto" />}
+                >
                   <ChatComments episode_id={data?.episodes_by_pk?.id} />
                 </Suspense>
                 <InputFiled episode_id={data?.episodes_by_pk?.id} />

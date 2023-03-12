@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Box, Text, UnstyledButton } from "@mantine/core";
-import { IconArrowDown, IconPlayerPause, IconPlayerPlay } from "@tabler/icons";
+import { IconArrowDown } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { useChatComments } from "src/features/comments/hooks/useChatComments";
@@ -12,31 +14,18 @@ type Props = {
 };
 
 const ChatComments: FC<Props> = memo(({ episode_id }) => {
-  const { data, bottomRef, isBottom, entry, interval } = useChatComments({
+  const { data, bottomRef, isBottom, entry } = useChatComments({
     episode_id,
   });
   const { timeCommented } = timeProcessing();
-  const user = useUserState((state) => state.user);
 
-  // if (!user) {
-  //   throw new Promise(() => {});
-  // }
+  const user = useUserState((state) => state.user);
 
   return (
     <Box
       component="ul"
       className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
     >
-      <UnstyledButton
-        onClick={() => interval?.toggle()}
-        className="absolute  top-1/2 left-1/2 flex  h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center  justify-center rounded-full bg-indigo-500 transition-transform"
-      >
-        {interval?.active ? (
-          <IconPlayerPause className="fill-white text-white" />
-        ) : (
-          <IconPlayerPlay className="fill-white text-white" />
-        )}
-      </UnstyledButton>
       {data?.map((comment) => (
         <li
           key={comment.id}
