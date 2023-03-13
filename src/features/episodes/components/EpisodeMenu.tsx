@@ -110,8 +110,11 @@ export const EpisodeMenu: FC<Props> = memo(
                     if (!inputValue.trim())
                       setInputValue(user?.user_name ?? "");
                   }}
-                  onChange={(e) => setInputValue(e.currentTarget.value)}
-                  maxLength={14}
+                  onChange={(e) => {
+                    if (e.target.value.length > 30) return;
+                    setInputValue(e.target.value);
+                  }}
+                  maxLength={30}
                   classNames={{
                     input: "text-[16px]",
                   }}

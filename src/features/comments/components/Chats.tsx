@@ -5,7 +5,7 @@ import { Box, Text, UnstyledButton } from "@mantine/core";
 import { IconArrowDown } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
-import { useChatComments } from "src/features/comments/hooks/useChatComments";
+import { useChats } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 
@@ -13,8 +13,8 @@ type Props = {
   episode_id: string;
 };
 
-const ChatComments: FC<Props> = memo(({ episode_id }) => {
-  const { data, bottomRef, isBottom, entry, time } = useChatComments({
+const Chats: FC<Props> = memo(({ episode_id }) => {
+  const { data, bottomRef, isBottom, entry, time } = useChats({
     episode_id,
   });
   const { timeCommented } = timeProcessing();
@@ -65,8 +65,10 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
         </li>
       ))}
       <UnstyledButton
-        className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7   -translate-x-1/2 cursor-pointer  items-center justify-center rounded-full bg-indigo-500 shadow-md shadow-black/[0.3]  transition-transform active:translate-y-1 ${
-          isBottom || time === 0 ? "translate-y-10" : "translate-y-0"
+        className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7   -translate-x-1/2 cursor-pointer  items-center justify-center rounded-full bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
+          isBottom || time === 0
+            ? "translate-y-10 opacity-0"
+            : "opacity-1 translate-y-0"
         }`}
         onClick={() => {
           entry?.target.scrollIntoView({ behavior: "smooth" });
@@ -79,4 +81,4 @@ const ChatComments: FC<Props> = memo(({ episode_id }) => {
   );
 });
 
-export default ChatComments;
+export default Chats;

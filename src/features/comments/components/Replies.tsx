@@ -3,7 +3,7 @@ import { Accordion, Loader, UnstyledButton } from "@mantine/core";
 import { IconChevronUp } from "@tabler/icons";
 import React, { FC, RefObject } from "react";
 import { Reply } from "src/features/comments/components/ReplyComment";
-import { useFinishComment } from "src/features/comments/hooks/useFinishComment";
+import { useComment } from "src/features/comments/hooks/useComment";
 
 type Props = {
   reply_count: number;
@@ -20,7 +20,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     showCount,
     isFetchingNextPage,
     closeClickHandler,
-  } = useFinishComment({
+  } = useComment({
     reply_id,
     reply_count,
     content,
@@ -48,7 +48,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
               {data?.pages
                 .slice(0, showCount)
                 .map((replies) =>
-                  replies.finish_comments.map((reply) => (
+                  replies.comments.map((reply) => (
                     <Reply key={reply.id} reply={reply} />
                   ))
                 )}

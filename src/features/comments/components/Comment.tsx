@@ -4,14 +4,14 @@ import { IconHeart, IconThumbDown } from "@tabler/icons";
 import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
-import { FinishComment as TypeFinishComment } from "src/features/comments/types";
+import { Comment as TypeComment } from "src/features/comments/types";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
 type Props = {
-  comment: TypeFinishComment;
+  comment: TypeComment;
 };
 
-export const FinishComment: FC<Props> = ({ comment }) => {
+export const Comment: FC<Props> = ({ comment }) => {
   const content = useRef<HTMLParagraphElement>(null);
 
   return (
@@ -25,7 +25,7 @@ export const FinishComment: FC<Props> = ({ comment }) => {
         </Text>
         <Text
           ref={
-            (comment.finish_comments_aggregate.aggregate?.count ?? -1) > 0
+            (comment.replies_aggregate.aggregate?.count ?? -1) > 0
               ? content
               : null
           }
@@ -65,9 +65,7 @@ export const FinishComment: FC<Props> = ({ comment }) => {
           }
         >
           <Replies
-            reply_count={
-              comment.finish_comments_aggregate.aggregate?.count || 0
-            }
+            reply_count={comment.replies_aggregate.aggregate?.count || 0}
             reply_id={comment.id}
             content={content}
           />

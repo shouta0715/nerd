@@ -63,7 +63,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           disabled={time === 0 || !user}
           placeholder={
             user && time !== 0
-              ? `${user?.user_name}で投稿`
+              ? `コメントを入力`
               : !user
               ? "ログイン中です"
               : "再生してください"
