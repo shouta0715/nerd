@@ -46,7 +46,11 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
               user?.id === comment.user?.id ? "text-right" : ""
             }`}
           >
-            <Text ff="Hiragino Sans" size="xs" className="my-1 font-bold">
+            <Text
+              ff="Hiragino Sans"
+              size="xs"
+              className="my-1 max-w-full break-words font-bold"
+            >
               {comment.commenter_name}
             </Text>
 
@@ -54,7 +58,7 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
               component="p"
               ff="Hiragino Sans"
               size="sm"
-              className="break-words"
+              className="max-w-full break-words"
             >
               {comment.content}
             </Text>
