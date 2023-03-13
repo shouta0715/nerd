@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
-export const INSERT_CHAT_COMMENT = gql`
-  mutation InsertChatComment($object: chat_comments_insert_input!) {
-    insert_chat_comments_one(object: $object) {
+export const INSERT_CHAT = gql`
+  mutation InsertChat($object: chats_insert_input!) {
+    insert_chats_one(object: $object) {
       content
       work_id
       user_id
@@ -21,14 +21,14 @@ export const INSERT_CHAT_COMMENT = gql`
   }
 `;
 
-export const GET_CHAT_COMMENTS = gql`
-  query GetChatComments(
+export const GET_CHATS = gql`
+  query GetChats(
     $episode_id: uuid!
     $get_limit: Int!
     $_lt: Int!
     $_gte: Int!
   ) {
-    chat_comments_by_episode_id(
+    chats_by_episode_id(
       args: {
         _episode_id: $episode_id
         get_limit: $get_limit
@@ -54,13 +54,9 @@ export const GET_CHAT_COMMENTS = gql`
   }
 `;
 
-export const GET_FINISH_COMMENTS = gql`
-  query GetFinishComments(
-    $episode_id: uuid!
-    $cursor: timestamptz
-    $limit: Int!
-  ) {
-    finish_comments(
+export const GET_COMMENTS = gql`
+  query GetComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
+    comments(
       where: {
         episode_id: { _eq: $episode_id }
         created_at: { _lt: $cursor }
@@ -81,7 +77,7 @@ export const GET_FINISH_COMMENTS = gql`
         user_name
         id
       }
-      finish_comments_aggregate {
+      replies_aggregate {
         aggregate {
           count
         }
@@ -90,9 +86,9 @@ export const GET_FINISH_COMMENTS = gql`
   }
 `;
 
-export const GET_REPLY = gql`
-  query GetReply($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
-    finish_comments(
+export const GET_REPLIES = gql`
+  query GetReplies($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
+    comments(
       where: { reply_to: { _eq: $reply_to }, created_at: { _gt: $cursor } }
       order_by: { created_at: asc }
       limit: $limit

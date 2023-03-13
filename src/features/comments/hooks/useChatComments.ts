@@ -1,15 +1,16 @@
 import { useIntersection } from "@mantine/hooks";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useOpenState } from "../../episodes/store/index";
-import { useInfiniteQueryChatComments } from "src/features/comments/api/useInfiniteQueryChatComments";
+
+import { useInfiniteQueryChats } from "src/features/comments/api/useInfiniteQueryChatComments";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
 type Args = {
   episode_id: string;
 };
 
-export const useChatComments = ({ episode_id }: Args) => {
-  const { data, fetchNextPage, isLoading } = useInfiniteQueryChatComments({
+export const useChats = ({ episode_id }: Args) => {
+  const { data, fetchNextPage, isLoading } = useInfiniteQueryChats({
     episode_id,
     enabled: !!episode_id,
   });
@@ -27,9 +28,7 @@ export const useChatComments = ({ episode_id }: Args) => {
   const chatCommentData = useMemo(() => {
     if (!data?.pages) return [];
 
-    const flatData = data.pages
-      .map((page) => page.chat_comments_by_episode_id)
-      .flat();
+    const flatData = data.pages.map((page) => page.chats_by_episode_id).flat();
 
     return flatData;
   }, [data?.pages]);

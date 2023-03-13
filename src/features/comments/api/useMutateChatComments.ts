@@ -3,28 +3,29 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useInputCommentState } from "src/features/comments/store";
 import {
-  GetChatCommentsQuery,
-  useInsertChatCommentMutation,
+  GetChatsQuery,
+  useInsertChatMutation,
 } from "src/graphql/comment/commentQuery.generated";
+
 import { client } from "src/libs/graphqlClient";
 
 import { useUserState } from "src/store/user/userState";
 
 type PrevData = {
-  pages: GetChatCommentsQuery[];
+  pages: GetChatsQuery[];
   pageParams: {
     _gte: number;
     _lt: number;
   }[];
 };
 
-export const useMutateChatComments = () => {
+export const useMutateChats = () => {
   const queryClient = useQueryClient();
   const resetInputComment = useInputCommentState(
     (state) => state.resetInputComment
   );
   const user = useUserState((state) => state.user);
-  const insertComment = useInsertChatCommentMutation(client, {
+  const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
       const fake_id = randomId();
       const { episode_id, comment_time, content, commenter_name } =
@@ -44,27 +45,24 @@ export const useMutateChatComments = () => {
       const mutateCommentPageIndex = Math.floor(comment_time / 300);
 
       const prevData = queryClient.getQueryData<PrevData>([
-        "GetChatComments",
+        "chats",
         { episode_id },
       ]);
 
       if (prevData) {
-        queryClient.setQueryData(["GetChatComments", { episode_id }], {
+        queryClient.setQueryData(["chats", { episode_id }], {
           pages: prevData.pages.map((page, index) => {
             if (index === mutateCommentPageIndex) {
-              const mutateNextTimeIndex =
-                page.chat_comments_by_episode_id.findIndex(
-                  (comment) => comment.comment_time >= comment_time
-                );
+              const mutateNextTimeIndex = page.chats_by_episode_id.findIndex(
+                (comment) => comment.comment_time >= comment_time
+              );
 
-              const newPages: GetChatCommentsQuery = {
-                chat_comments_by_episode_id: [
-                  ...page.chat_comments_by_episode_id,
-                ],
+              const newPages: GetChatsQuery = {
+                chats_by_episode_id: [...page.chats_by_episode_id],
               };
 
               if (mutateNextTimeIndex === -1 || comment_time === 0) {
-                newPages.chat_comments_by_episode_id.push({
+                newPages.chats_by_episode_id.push({
                   comment_time,
                   content,
                   created_at,
@@ -74,19 +72,15 @@ export const useMutateChatComments = () => {
                   id: fake_id,
                 });
               } else {
-                newPages.chat_comments_by_episode_id.splice(
-                  mutateNextTimeIndex,
-                  0,
-                  {
-                    comment_time,
-                    content,
-                    created_at,
-                    commenter_name,
-                    user,
-                    user_id: user.id,
-                    id: fake_id,
-                  }
-                );
+                newPages.chats_by_episode_id.splice(mutateNextTimeIndex, 0, {
+                  comment_time,
+                  content,
+                  created_at,
+                  commenter_name,
+                  user,
+                  user_id: user.id,
+                  id: fake_id,
+                });
               }
 
               return newPages;
@@ -107,8 +101,8 @@ export const useMutateChatComments = () => {
     },
     onSuccess: (newData, __) => {
       // TODO: ここでコメントを追加する
-      const episode_id = newData.insert_chat_comments_one?.episode_id;
-      queryClient.invalidateQueries(["GetChatComments", { episode_id }]);
+      const episode_id = newData.insert_chats_one?.episode_id;
+      queryClient.invalidateQueries(["chats", { episode_id }]);
     },
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -117,12 +111,12 @@ export const useMutateChatComments = () => {
 
       const prevData = context?.pages;
       if (prevData) {
-        queryClient.setQueryData(["GetChatComments", { episode_id }], prevData);
+        queryClient.setQueryData(["chats", { episode_id }], prevData);
       }
     },
   });
 
   return {
-    insertComment,
+    insertChat,
   };
 };

@@ -2,11 +2,11 @@ import { ActionIcon, Text } from "@mantine/core";
 import { IconHeart, IconThumbDown } from "@tabler/icons";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
-import { ReplyComment as TypeReplyComment } from "src/features/comments/types";
+import { Reply as TypeReply } from "src/features/comments/types";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
 type Props = {
-  reply: TypeReplyComment;
+  reply: TypeReply;
 };
 
 export const Reply: FC<Props> = ({ reply }) => (

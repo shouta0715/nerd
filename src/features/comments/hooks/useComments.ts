@@ -1,10 +1,10 @@
 import { useIntersection } from "@mantine/hooks";
 import { useEffect } from "react";
-import { useInfiniteFinishComments } from "src/features/comments/api/useInfiniteFinishComments";
+import { useInfiniteQueryComments } from "src/features/comments/api/useInfiniteFinishComments";
 
-export const useFinishComments = (episode_id: string) => {
+export const useComments = (episode_id: string) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useInfiniteFinishComments(episode_id);
+    useInfiniteQueryComments(episode_id);
 
   const { ref, entry } = useIntersection({
     root: null,

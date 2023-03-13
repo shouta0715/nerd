@@ -1,5 +1,5 @@
 import { RefObject, useCallback, useState } from "react";
-import { useInfiniteQueryReply } from "src/features/comments/api/useInfiniteQueryReply";
+import { useInfiniteQueryReplies } from "src/features/comments/api/useInfiniteQueryReply";
 
 type Props = {
   reply_count: number;
@@ -7,10 +7,10 @@ type Props = {
   content: RefObject<HTMLParagraphElement>;
 };
 
-export const useFinishComment = ({ reply_count, reply_id, content }: Props) => {
+export const useComment = ({ reply_count, reply_id, content }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteQueryReply(reply_id, isOpen);
+    useInfiniteQueryReplies(reply_id, isOpen);
   const [replyCount, setReplyCount] = useState(0);
   const [showCount, setShowCount] = useState(1);
 

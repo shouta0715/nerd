@@ -1,17 +1,15 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { ActionIcon, Loader, Text, Title } from "@mantine/core";
 import dynamic from "next/dynamic";
-
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
 import { Modal } from "src/components/Elements/Modal";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
 import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
-import ChatComments from "src/features/comments/components/ChatComments";
+import Chats from "src/features/comments/components/Chats";
 import { InputFiled } from "src/features/comments/components/CommentInput";
-import FinishComments from "src/features/comments/components/FinishComments";
-
+import Comments from "src/features/comments/components/Comments";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 
@@ -134,13 +132,13 @@ export const Episode: FC = () => {
                   <Suspense
                     fallback={<Loader variant="dots" className="mx-auto" />}
                   >
-                    <ChatComments episode_id={data?.episodes_by_pk?.id} />
+                    <Chats episode_id={data?.episodes_by_pk?.id} />
                   </Suspense>
                   <InputFiled episode_id={data?.episodes_by_pk?.id} />
                 </>
               ) : (
                 <Suspense fallback={<div>Loading...</div>}>
-                  <FinishComments episode_id={data?.episodes_by_pk?.id} />
+                  <Comments episode_id={data?.episodes_by_pk?.id} />
                 </Suspense>
               )}
             </div>
