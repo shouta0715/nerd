@@ -1,10 +1,8 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/interactive-supports-focus */
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Box, Text, UnstyledButton } from "@mantine/core";
 import { IconArrowDown } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Button } from "src/components/Elements/Button";
+import { Text } from "src/components/Elements/Text";
 import { useChats } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
@@ -22,10 +20,7 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
   const user = useUserState((state) => state.user);
 
   return (
-    <Box
-      component="ul"
-      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl"
-    >
+    <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl">
       {data?.map((comment) => (
         <li
           key={comment.id}
@@ -47,6 +42,7 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
             }`}
           >
             <Text
+              align="inherit"
               ff="Hiragino Sans"
               size="xs"
               className="my-1 max-w-full break-words font-bold"
@@ -55,6 +51,7 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
             </Text>
 
             <Text
+              align="inherit"
               component="p"
               ff="Hiragino Sans"
               size="sm"
@@ -62,14 +59,14 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
             >
               {comment.content}
             </Text>
-            <Text size="xs" color="dimmed">
+            <Text size="xs" align="inherit" className="text-dimmed">
               <span>{timeCommented(comment.comment_time)}</span>
             </Text>
           </div>
         </li>
       ))}
-      <UnstyledButton
-        className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7   -translate-x-1/2 cursor-pointer  items-center justify-center rounded-full bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
+      <Button
+        className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7 -translate-x-1/2   cursor-pointer items-center  justify-center rounded-full border-none bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
           isBottom || time === 0
             ? "translate-y-10 opacity-0"
             : "opacity-1 translate-y-0"
@@ -79,9 +76,9 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
         }}
       >
         <IconArrowDown size={22} className="text-white" />
-      </UnstyledButton>
+      </Button>
       <div ref={bottomRef} className="absolute bottom-0 opacity-0" />
-    </Box>
+    </ul>
   );
 });
 

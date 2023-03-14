@@ -2,11 +2,9 @@ import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { Text } from "src/components/Elements/Text";
-
 import { TopTitle } from "src/components/Elements/TopTitle";
 import { Layout } from "src/components/Layout/Layout";
 import { Navigation } from "src/components/Layout/modules/Navigation";
-
 import {
   getSeasonWorks,
   getTodayEpisodes,

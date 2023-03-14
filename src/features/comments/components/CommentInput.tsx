@@ -1,10 +1,12 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { ActionIcon, Box, Indicator, Loader, Textarea } from "@mantine/core";
+import { Indicator, Textarea } from "@mantine/core";
 import { IconArrowUp, IconSettings } from "@tabler/icons";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Button } from "src/components/Elements/Button";
+import { Loader } from "src/components/Elements/Loader/Loader";
 
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
@@ -81,23 +83,25 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           value={content}
           rightSection={
             <div className="flex h-full flex-col items-center justify-around py-2">
-              <Box
+              <div
                 className={`text-xs transition-opacity ${
                   content.length === 100 ? "text-red-400" : "text-gray-500"
                 }
                 ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
               >
                 {content.length > 50 && content.length.toString()}
-              </Box>
-              <ActionIcon
-                loading={isLoading}
+              </div>
+              <Button
+                className="h-8 w-8 rounded-full border-none bg-teal-50 p-0"
+                size="xs"
                 type="submit"
-                variant="light"
-                color="teal"
-                radius="xl"
               >
-                <IconArrowUp />
-              </ActionIcon>
+                {isLoading ? (
+                  <Loader size="sm" color="green" />
+                ) : (
+                  <IconArrowUp className="stroke-teal-500" />
+                )}
+              </Button>
             </div>
           }
           onChange={(e) =>
