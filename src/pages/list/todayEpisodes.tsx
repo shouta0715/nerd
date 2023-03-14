@@ -1,4 +1,3 @@
-import { Box } from "@mantine/core";
 import { IconArrowLeft } from "@tabler/icons";
 import { GetStaticProps, NextPage } from "next";
 import dynamic from "next/dynamic";
@@ -22,24 +21,24 @@ const DynamicAutComplete = dynamic(() =>
 );
 
 const TodayEpisodes: NextPage<Props> = ({ autoCompleteData, data }) => (
-  <Box component="section" className="animate-fadeUp">
+  <section className="animate-fadeUp">
     <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
-      <Box className="container mx-auto bg-transparent py-3">
+      <div className="container mx-auto bg-transparent py-3">
         <div className="flex w-full items-center px-4">
           <Link href="/" className="mr-2 flex justify-center md:mr-4 ">
             <IconArrowLeft className="h-6 w-6 text-black" />
           </Link>
           <DynamicAutComplete autoCompleteData={autoCompleteData} />
         </div>
-      </Box>
+      </div>
     </header>
-    <Box className="container mx-auto">
+    <div className="container mx-auto">
       <div className="p-6">
         <ListTitle title="今日放送のエピソード" />
         <TodayEpisodeList data={data} />
       </div>
-    </Box>
-  </Box>
+    </div>
+  </section>
 );
 
 export default TodayEpisodes;

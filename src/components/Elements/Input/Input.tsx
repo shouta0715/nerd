@@ -3,6 +3,7 @@ import React from "react";
 import { twMerge } from "tailwind-merge";
 
 const sizes = {
+  xs: "text-xs",
   sm: "text-sm",
   md: "text-base",
   lg: "text-lg",

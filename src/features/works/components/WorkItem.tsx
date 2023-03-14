@@ -1,8 +1,9 @@
 import { PlusIcon, ShareIcon } from "@heroicons/react/24/outline";
-import { ActionIcon, Button, Group, Text } from "@mantine/core";
 import { IconStack2 } from "@tabler/icons";
 import Link from "next/link";
 import React, { FC, memo } from "react";
+import { Button } from "src/components/Elements/Button";
+import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { Work } from "src/features/works/types";
 
@@ -16,17 +17,14 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
     key={`works-${work.id}`}
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
-      <Text
+      <Link
         href="/"
-        variant="link"
         color="dark"
-        component={Link}
         scroll={false}
-        ff="Hiragino Sans"
-        className="mb-2 text-sm font-bold md:mb-3 md:text-base"
+        className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
       >
         {work.series_title}
-      </Text>
+      </Link>
       <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0 border-b border-solid border-slate-200 pb-2">
         <ul className="mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
           {work.episodes.map((episode) => (
@@ -38,42 +36,37 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
           ))}
         </ul>
         <Button
-          leftIcon={<IconStack2 size={20} strokeWidth={1.5} />}
-          color="gray.8"
-          className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+          size="xs"
+          leftIcon={<IconStack2 />}
+          className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
         >
           他のエピソードを見る
         </Button>
       </div>
-      <Group
-        position="apart"
-        className="mt-2 w-full items-center justify-around md:justify-between"
-      >
+      <div className="mt-2 flex w-full items-center justify-around md:justify-between">
         <div className="flex flex-col items-center justify-center">
-          <ActionIcon color="dark" className="mb-1" variant="transparent">
+          <Button className="mb-1 border-none">
             <PlusIcon className="h-5 w-5 stroke-2 md:h-6 md:w-6" />
-          </ActionIcon>
+          </Button>
           <Text component="span" className="text-xs">
             マイリスト
           </Text>
         </div>
-        <div className="flex flex-col items-center justify-center">
-          <ActionIcon color="dark" className="mb-1" variant="transparent">
+        <div className="flex flex-col items-center justify-center ">
+          <Button className="mb-1 border-none">
             <ShareIcon className=" h-5 w-5 stroke-2 md:h-6 md:w-6" />
-          </ActionIcon>
+          </Button>
           <Text component="span" className="text-xs">
             シェア
           </Text>
         </div>
         <Button
-          variant="filled"
-          color="indigo.6"
           size="xs"
-          className="flex flex-col items-center justify-center px-2 "
+          className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
         >
           シリーズ一覧
         </Button>
-      </Group>
+      </div>
     </div>
   </li>
 ));

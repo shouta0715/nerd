@@ -30,4 +30,8 @@
   .btn-light {
     @apply border-indigo-50 bg-indigo-50 font-bold text-indigo-500;
   }
+
+  .light-bg {
+    @apply bg-indigo-50 text-indigo-500;
+  }
 }

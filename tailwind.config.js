@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        futura: ["Futura", "sans-serif"],
+        "hiragino-sans": ["Hiragino Sans", "sans-serif"],
+      },
+      colors: {
+        dimmed: "rgb(134, 142, 150)",
+      },
+
       animation: {
         comment: "comment 0.25s ease-out",
         modal: "modal 0.25s ease-out",

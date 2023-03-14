@@ -2,19 +2,14 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import {
-  ActionIcon,
-  Button,
-  CloseButton,
-  HoverCard,
-  Input,
-  PinInput,
-  Text,
-  UnstyledButton,
-} from "@mantine/core";
+import { HoverCard, PinInput } from "@mantine/core";
 import { IconPencil, IconRotate, IconRotateClockwise } from "@tabler/icons";
 import React, { FC, memo, Suspense, useState } from "react";
+import { Button } from "src/components/Elements/Button";
+import { Input } from "src/components/Elements/Input/Input";
+import { Text } from "src/components/Elements/Text";
 import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useOpenState } from "src/features/episodes/store";
@@ -70,13 +65,12 @@ export const EpisodeMenu: FC<Props> = memo(
           >
             <section className="px-4 py-2">
               <div className="mb-2 flex items-center justify-between">
-                <Text size="sm" color="dimmed">
+                <Text size="sm" className="text-dimmed">
                   メニュー
                 </Text>
-                <CloseButton
-                  className="lg:hidden"
+                <XMarkIcon
+                  className="h-4 w-4 cursor-pointer text-dimmed lg:hidden"
                   aria-label="Close modal"
-                  size="sm"
                   onClick={() => setIsMenuOpen(false)}
                 />
               </div>
@@ -89,7 +83,7 @@ export const EpisodeMenu: FC<Props> = memo(
                   <Text component="span" className="text-xs">
                     投稿名の変更
                   </Text>
-                  <UnstyledButton
+                  <Button
                     type="submit"
                     className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
                       inputValue === user?.user_name || !inputValue.trim()
@@ -102,7 +96,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     }}
                   >
                     変更
-                  </UnstyledButton>
+                  </Button>
                 </label>
                 <Input
                   value={inputValue}
@@ -115,16 +109,14 @@ export const EpisodeMenu: FC<Props> = memo(
                     setInputValue(e.target.value);
                   }}
                   maxLength={30}
-                  classNames={{
-                    input: "text-[16px]",
-                  }}
                   id="commenter-name-input"
-                  size="xs"
+                  inputSize="xs"
+                  className="py-1 font-hiragino-sans"
                 />
               </form>
               <div className="flex flex-col items-center space-y-1">
                 <div className="flex">
-                  <Text size="sm" color="indigo" className="">
+                  <Text size="sm" className="text-indigo-500">
                     開始から
                   </Text>
                   <HoverCard position="top" width={100} withArrow withinPortal>
@@ -166,55 +158,46 @@ export const EpisodeMenu: FC<Props> = memo(
                   <div className="flex w-full">
                     <Text
                       size="xs"
-                      color="dimmed"
-                      className="w-1/3 pr-4 text-center"
+                      className="w-1/3 pr-4 text-center text-dimmed"
                     >
                       時間
                     </Text>
                     <Text
                       size="xs"
-                      color="dimmed"
-                      className="w-1/3 pr-1 text-center"
+                      className="w-1/3 pr-1 text-center text-dimmed"
                     >
                       分
                     </Text>
-                    <Text
-                      size="xs"
-                      color="dimmed"
-                      className="w-1/3 text-center"
-                    >
+                    <Text size="xs" className="text-cente w-1/3 text-dimmed">
                       秒
                     </Text>
                   </div>
                 </div>
 
                 <div className="grid w-full grid-cols-3 items-center justify-between">
-                  <ActionIcon
+                  <Button
                     onClick={() => changeTenTime("minus")}
-                    color="indigo"
-                    variant="transparent"
-                    className="relative mx-auto h-12 w-12"
+                    className="relative mx-auto h-12 w-12 border-none"
                   >
                     <IconRotate size={48} className="rotate-180 stroke-1" />
                     <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                       10
                     </span>
-                  </ActionIcon>
+                  </Button>
                   <Button
-                    className="relative w-full"
-                    onClick={() =>
-                      interval?.active ? interval.stop() : interval?.start()
-                    }
-                    size="xs"
-                    color={
+                    className={`relative w-full font-bold text-white ${
                       interval?.active
-                        ? "red"
+                        ? "bg-red-500"
                         : time.hours === 0 &&
                           time.minutes === 0 &&
                           time.seconds === 0
-                        ? "indigo"
-                        : "blue"
+                        ? "bg-indigo-500"
+                        : "bg-blue-500"
+                    }`}
+                    onClick={() =>
+                      interval?.active ? interval.stop() : interval?.start()
                     }
+                    size="sm"
                   >
                     {interval?.active
                       ? "一時停止"
@@ -224,11 +207,9 @@ export const EpisodeMenu: FC<Props> = memo(
                       ? "開始"
                       : "再開"}
                   </Button>
-                  <ActionIcon
+                  <Button
                     onClick={() => changeTenTime("add")}
-                    color="indigo"
-                    className="relative mx-auto h-12 w-12"
-                    variant="transparent"
+                    className="relative mx-auto h-12 w-12 border-none"
                   >
                     <IconRotateClockwise
                       size={48}
@@ -237,7 +218,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                       10
                     </span>
-                  </ActionIcon>
+                  </Button>
                 </div>
               </div>
             </section>
