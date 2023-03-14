@@ -1,5 +1,5 @@
-import { Box, Loader } from "@mantine/core";
 import React, { FC } from "react";
+import { Loader } from "src/components/Elements/Loader/Loader";
 import { Comment } from "src/features/comments/components/Comment";
 import { useComments } from "src/features/comments/hooks/useComments";
 
@@ -11,10 +11,7 @@ const Comments: FC<Props> = ({ episode_id }) => {
   const { data, ref, hasNextPage } = useComments(episode_id);
 
   return (
-    <Box
-      component="ul"
-      className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1  md:max-w-xl"
-    >
+    <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1  md:max-w-xl">
       {data?.pages.map((page) =>
         page.comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
@@ -28,7 +25,7 @@ const Comments: FC<Props> = ({ episode_id }) => {
       >
         <Loader variant="oval" />
       </div>
-    </Box>
+    </ul>
   );
 };
 

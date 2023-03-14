@@ -1,6 +1,6 @@
-import { Text, Title } from "@mantine/core";
 import Link from "next/link";
 import React, { FC } from "react";
+import { Text } from "src/components/Elements/Text";
 
 type Props = {
   title: string;
@@ -8,11 +8,15 @@ type Props = {
 };
 
 export const TopTitle: FC<Props> = ({ title, href }) => (
-  <Title order={2} size="h3" className="mb-4 md:text-center lg:text-left">
+  <h2 className="mb-4 md:text-center lg:text-left">
     <Link scroll={false} passHref href={`${href}`}>
-      <Text component="span" ff="Hiragino Sans" className="text-lg md:text-xl">
+      <Text
+        component="span"
+        ff="Hiragino Sans"
+        className="text-lg font-bold md:text-xl"
+      >
         {title}
       </Text>
     </Link>
-  </Title>
+  </h2>
 );

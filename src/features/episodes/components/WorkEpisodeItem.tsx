@@ -1,6 +1,6 @@
-import { Text } from "@mantine/core";
 import Link from "next/link";
 import React, { FC, memo } from "react";
+import { Text } from "src/components/Elements/Text";
 import { WorkEpisode } from "src/features/episodes/types";
 
 type Props = {
@@ -10,8 +10,7 @@ type Props = {
 
 export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
   <li key={episode.id} className="flex h-full flex-col items-center p-2">
-    <Text
-      variant="link"
+    <Link
       scroll={false}
       color="indigo"
       href={{
@@ -28,12 +27,10 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
         },
       }}
       as={`/episode/${episode.id}`}
-      component={Link}
-      ff="Hiragino Sans"
-      className="mb-1 px-2 text-sm md:text-base"
+      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"
     >
       第{episode.number}話
-    </Text>
+    </Link>
     <Text
       component="p"
       ff="Hiragino Sans"

@@ -102,6 +102,7 @@ module.exports = {
         alphabetize: { order: "asc", caseInsensitive: true },
       },
     ],
+    "react/require-default-props": "off",
     "react/jsx-props-no-spreading": ["off"],
     "react/react-in-jsx-scope": "off",
     "import/prefer-default-export": "off",

@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Accordion, Loader, UnstyledButton } from "@mantine/core";
+import { Accordion } from "@mantine/core";
 import { IconChevronUp } from "@tabler/icons";
 import React, { FC, RefObject } from "react";
+import { Loader } from "src/components/Elements/Loader/Loader";
 import { Reply } from "src/features/comments/components/ReplyComment";
 import { useComment } from "src/features/comments/hooks/useComment";
 
@@ -62,7 +63,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
               <Accordion.Control onClick={clickHandler}>
                 {controlLabel()}
               </Accordion.Control>
-              <UnstyledButton
+              <button
                 onClick={closeClickHandler}
                 className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
                   controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
@@ -70,7 +71,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
               >
                 <span>閉じる</span>
                 <IconChevronUp size={16} />
-              </UnstyledButton>
+              </button>
             </div>
           </Accordion.Item>
         </Accordion>

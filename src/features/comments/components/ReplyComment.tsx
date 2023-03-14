@@ -1,7 +1,7 @@
-import { ActionIcon, Text } from "@mantine/core";
 import { IconHeart, IconThumbDown } from "@tabler/icons";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Text } from "src/components/Elements/Text";
 import { Reply as TypeReply } from "src/features/comments/types";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
@@ -39,15 +39,12 @@ export const Reply: FC<Props> = ({ reply }) => (
         <span>{formatTimeDistance(reply.created_at)}</span>
         <div className="flex place-items-center">
           <div className="flex items-center">
-            <ActionIcon variant="transparent">
-              <IconHeart size={20} />
-            </ActionIcon>
+            <IconHeart size={20} />
             <span>1</span>
           </div>
           <div className="flex items-center">
-            <ActionIcon variant="transparent">
-              <IconThumbDown size={20} />
-            </ActionIcon>
+            <IconThumbDown size={20} />
+
             <span>100</span>
           </div>
         </div>

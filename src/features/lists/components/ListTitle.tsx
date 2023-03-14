@@ -1,16 +1,14 @@
-import { Text, Title } from "@mantine/core";
 import React, { FC } from "react";
+import { Text } from "src/components/Elements/Text";
 
 type Props = {
   title: string;
 };
 
 export const ListTitle: FC<Props> = ({ title }) => (
-  <Title
-    order={2}
-    size="h3"
-    className="mb-3 items-center text-base md:text-2xl"
-  >
-    <Text component="span">{title}</Text>
-  </Title>
+  <h2 className="mb-3 items-center ">
+    <Text component="span" className="text-base font-bold  md:text-2xl">
+      {title}
+    </Text>
+  </h2>
 );
