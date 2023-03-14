@@ -1,12 +1,13 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import { HoverCard, PinInput } from "@mantine/core";
+import { HoverCard } from "@mantine/core";
 import { IconPencil, IconRotate, IconRotateClockwise } from "@tabler/icons";
-import React, { FC, memo, Suspense, useState } from "react";
+import React, { FC, memo, Suspense, useId, useState } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
 import { Text } from "src/components/Elements/Text";
@@ -35,9 +36,8 @@ export const EpisodeMenu: FC<Props> = memo(
     const padTime = useTimerState((state) => state.getPadStartTime());
     const setTime = useTimerState((state) => state.setTime);
     const interval = useTimerState((state) => state.interval);
-
+    const uuid = useId();
     const changeTenTime = useTimerState((state) => state.changeTenTime);
-
     const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
     const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,6 +46,28 @@ export const EpisodeMenu: FC<Props> = memo(
       setUser({ ...user, user_name: inputValue });
       setIsMenuOpen(false);
       localStorage.setItem("user_name", inputValue);
+    };
+
+    const handleChange = (
+      event: React.ChangeEvent<HTMLInputElement>,
+      index: number
+    ) => {
+      const inputNumber = event.target.value;
+      const nextChar =
+        inputNumber.length > 1
+          ? inputNumber.split("")[inputNumber.length - 1]
+          : inputNumber;
+
+      const nextTime = padTime.split("");
+      nextTime[index] = nextChar;
+      const digits = nextTime.join("").match(/.{1,2}/g);
+      if (!digits) return;
+      const [hours, minutes, seconds] = digits;
+      setTime({
+        hours: +hours,
+        minutes: +minutes,
+        seconds: +seconds,
+      });
     };
 
     return (
@@ -129,32 +151,24 @@ export const EpisodeMenu: FC<Props> = memo(
                   </HoverCard>
                 </div>
                 <div className="flex flex-col items-center space-y-1">
-                  <PinInput
-                    inputType="number"
-                    manageFocus
-                    inputMode="numeric"
-                    size="sm"
-                    value={padTime}
-                    onChange={(e) => {
-                      const digits = e.match(/.{1,2}/g);
-                      if (!digits) return;
-                      const [hours, minutes, seconds] = digits;
-                      setTime({
-                        hours: +hours,
-                        minutes: +minutes,
-                        seconds: +seconds,
-                      });
-                    }}
-                    onFocus={() => {
-                      interval?.stop();
-                    }}
-                    length={6}
-                    type="number"
-                    classNames={{
-                      wrapper: "w-full even:mr-2 odd:-mr-1",
-                      input: "text-[16px]",
-                    }}
-                  />
+                  <div className=" w-full">
+                    {padTime.split("").map((digit, index) => (
+                      <input
+                        onFocus={() => {
+                          interval?.stop();
+                        }}
+                        onChange={(e) => {
+                          handleChange(e, index);
+                        }}
+                        type="number"
+                        key={`${uuid}-${index}`}
+                        id={`${uuid}-${index + 1}`}
+                        value={digit}
+                        inputMode="numeric"
+                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:mr-2 odd:ml-5 "
+                      />
+                    ))}
+                  </div>
                   <div className="flex w-full">
                     <Text
                       size="xs"
@@ -168,7 +182,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     >
                       分
                     </Text>
-                    <Text size="xs" className="text-cente w-1/3 text-dimmed">
+                    <Text size="xs" className="w-1/3 text-center text-dimmed">
                       秒
                     </Text>
                   </div>
