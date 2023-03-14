@@ -23,4 +23,11 @@
   a {
     @apply bg-transparent text-inherit no-underline;
   }
+  .btn-primary {
+    @apply border-indigo-500 bg-indigo-500 font-bold text-white hover:bg-indigo-600;
+  }
+
+  .btn-light {
+    @apply border-indigo-50 bg-indigo-50 font-bold text-indigo-500;
+  }
 }

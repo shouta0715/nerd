@@ -1,5 +1,6 @@
 import { clsx } from "@mantine/core";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 import { colors, LoaderProps, sizes } from "src/components/Elements/Loader";
 
 export const Dots = ({
@@ -10,7 +11,7 @@ export const Dots = ({
   <svg
     viewBox="0 0 120 30"
     xmlns="http://www.w3.org/2000/svg"
-    className={clsx(colors[color], sizes[size], className)}
+    className={twMerge(clsx(colors[color], sizes[size], className))}
   >
     <circle cx="15" cy="15" r="15">
       <animate

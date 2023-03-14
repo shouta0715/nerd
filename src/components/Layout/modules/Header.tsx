@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
+import { Button } from "src/components/Elements/Button";
 import { Modal } from "src/components/Elements/Modal";
 import { Logo } from "src/components/Icon/Logo";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -24,9 +24,7 @@ export const Header: FC = () => {
               size="xs"
               radius="md"
               loading={authLoading}
-              classNames={{
-                label: "font-bold text-sm",
-              }}
+              className="btn-primary text-sm"
             >
               ログイン
             </Button>
