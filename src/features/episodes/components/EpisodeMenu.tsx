@@ -185,7 +185,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     </span>
                   </Button>
                   <Button
-                    className={`relative w-full font-bold text-white ${
+                    className={`relative w-full text-xs font-bold text-white ${
                       interval?.active
                         ? "bg-red-500"
                         : time.hours === 0 &&

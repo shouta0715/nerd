@@ -35,7 +35,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
             />
           </button>
           <Combobox.Input
-            className="  block  w-full appearance-none rounded-full border  border-gray-300 py-2 px-8 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  "
+            className=" w-full appearance-none rounded-full border  border-gray-300 py-1.5 px-8 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  "
             onChange={(event) => {
               setSearchInput(event.target.value);
             }}
@@ -50,17 +50,17 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
         <Transition
           as={Fragment}
           show={searchInput !== "" && filteredData.length !== 0}
-          enter="transition ease-out duration-100 origin-top"
-          enterFrom="opacity-0 scale-y-0"
-          enterTo="opacity-100 scale-y-1"
+          enter="transition-all ease-out duration-100 origin-top"
+          enterFrom="scale-y-0"
+          enterTo=" scale-y-1"
           leave="transition ease-in duration-75 origin-top"
-          leaveFrom="opacity-100 scale-y-1"
-          leaveTo="opacity-0 scale-y-0 "
+          leaveFrom=" scale-y-1"
+          leaveTo=" scale-y-0 "
         >
-          <Combobox.Options className="group absolute top-10 left-1/2 z-50 max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black hover:!block peer-[&:not(:focus-within)]:hidden ">
+          <Combobox.Options className="absolute top-[2.625rem] left-1/2  z-20 block max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black shadow-md hover:!block peer-[&:not(:focus-within)]:hidden ">
             {filteredData.map((item) => (
               <Combobox.Option
-                className="h-max bg-white"
+                className="bg-white"
                 key={item.title}
                 value={item.title}
               >
