@@ -31,7 +31,7 @@ export const Modal: FC = () => {
         leave="transition-all duration-150"
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-0"
-        className="mx-auto w-full max-w-md rounded-md bg-white"
+        className="mx-auto w-4/5 max-w-md rounded-md bg-white"
       >
         <ModalContent />
       </Transition.Child>
