@@ -83,7 +83,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
               {content.length > 50 && content.length.toString()}
             </div>
             <Button
-              className="h-8 w-8 border-none bg-teal-50 p-0"
+              className="h-8 w-8 border-none bg-teal-50 p-0 active:translate-y-0"
               type="submit"
               radius="full"
             >
