@@ -51,12 +51,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           "flex items-center justify-center border transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
           sizes[size],
           rounded[radius],
+          loading && "cursor-wait opacity-60",
           className
         )
       )}
       {...props}
     >
-      {loading && <Loader size="sm" variant="oval" />}
+      {loading && <Loader size="sm" variant="oval" color="white" />}
       {!loading && leftIcon}
       <span className="mx-2">{props.children}</span> {loading && rightIcon}
     </button>

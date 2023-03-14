@@ -76,19 +76,22 @@ type TextProps = {
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "onCopy">;
 
 export const Text = forwardRef<HTMLDivElement, TextProps>(
-  ({
-    component = "div",
-    size = "md",
-    ff = "futura",
-    fw = "normal",
-    lh = "normal",
-    align = "left",
-    valign = "baseline",
-    radius = "md",
-    children,
-    className = "",
-    ...rest
-  }: TextProps) => {
+  (
+    {
+      component = "div",
+      size = "md",
+      ff = "futura",
+      fw = "normal",
+      lh = "normal",
+      align = "left",
+      valign = "baseline",
+      radius = "md",
+      children,
+      className = "",
+      ...rest
+    },
+    ref
+  ) => {
     const Component = component;
 
     return (
@@ -105,6 +108,7 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
             className
           )
         )}
+        ref={ref}
         {...rest}
       >
         {children}

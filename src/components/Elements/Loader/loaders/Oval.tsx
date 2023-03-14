@@ -1,4 +1,4 @@
-import { clsx } from "@mantine/core";
+import clsx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 import { colors, LoaderProps, sizes } from "src/components/Elements/Loader";
