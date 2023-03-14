@@ -1,6 +1,9 @@
-import { Button, CloseButton, Text } from "@mantine/core";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import React, { FC } from "react";
+import { Button } from "src/components/Elements/Button";
+import { Text } from "src/components/Elements/Text";
 import { GoogleIcon } from "src/components/Icon/GoogleIcon";
 import { Logo } from "src/components/Icon/Logo";
 import { TwitterIcon } from "src/components/Icon/TwitterIcon";
@@ -12,7 +15,7 @@ export const ModalContent: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="mx-auto flex w-4/5 animate-modal flex-col  items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm md:max-w-md">
+    <div className="mx-auto flex w-4/5 flex-col  items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm md:max-w-md">
       <header className="flex w-full items-center justify-center">
         <Text
           size="lg"
@@ -20,28 +23,24 @@ export const ModalContent: FC = () => {
         >
           <Logo />
         </Text>
-        <CloseButton onClick={() => changeIsOpenModal(false)} />
+        <XMarkIcon
+          className="h-5 w-5 cursor-pointer"
+          onClick={() => changeIsOpenModal(false)}
+        />
       </header>
-      <Text component="p" color="dimmed" size="sm" className="font-medium">
+      <Text component="p" size="sm" className="font-medium text-dimmed">
         ログインをすると他の人をフォローしたり、自分の投稿を保存することができます。
-        <Text
-          component={Link}
+        <Link
           href="/"
-          underline
-          size="sm"
-          className="inline-block text-indigo-500"
+          className="inline-block text-sm text-indigo-500 underline"
         >
           詳しくはこちら
-        </Text>
+        </Link>
       </Text>
       <Button
-        classNames={{
-          label: "font-bold",
-        }}
         leftIcon={<GoogleIcon />}
-        variant="default"
-        color="gray"
-        radius="xl"
+        radius="full"
+        className="font-hiragino-sans text-sm font-bold"
         onClick={async () => {
           await signInGoogle();
           changeIsOpenModal(false);
@@ -50,35 +49,25 @@ export const ModalContent: FC = () => {
         Googleでログイン
       </Button>
       <Button
-        classNames={{
-          label: "font-bold",
-        }}
         leftIcon={<TwitterIcon />}
-        variant="default"
-        color="gray"
-        radius="xl"
+        className="font-hiragino-sans text-sm font-bold"
+        radius="full"
       >
         Twitterでログイン
       </Button>
-      <Text color="dimmed" size="sm" className="font-medium">
-        <Text
-          component={Link}
+      <Text size="sm" className="font-medium text-dimmed">
+        <Link
           href="/"
-          underline
-          size="sm"
-          className="inline-block text-indigo-500"
+          className="inline-block text-sm text-indigo-500 underline"
         >
           利用規約
-        </Text>
-        <Text
-          component={Link}
+        </Link>
+        <Link
           href="/"
-          underline
-          size="sm"
-          className="inline-block text-indigo-500"
+          className="inline-block text-sm text-indigo-500 underline"
         >
           プライバシーポリシー
-        </Text>
+        </Link>
         を確認の上、ご利用ください。
       </Text>
     </div>
