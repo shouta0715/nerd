@@ -1,4 +1,3 @@
-import { randomId } from "@mantine/hooks";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useInputCommentState } from "src/features/comments/store";
@@ -27,7 +26,7 @@ export const useMutateChats = () => {
   const user = useUserState((state) => state.user);
   const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
-      const fake_id = randomId();
+      const fake_id = Math.random().toString(36).substring(7);
       const { episode_id, comment_time, content, commenter_name } =
         newComment.object;
 
