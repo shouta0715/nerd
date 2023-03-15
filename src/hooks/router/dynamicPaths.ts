@@ -1,5 +1,4 @@
 /* eslint-disable no-promise-executor-return */
-import axios from "axios";
 
 import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
@@ -10,7 +9,12 @@ import { returningSeason } from "src/utils/returningSeason";
 
 export const getTodayData = async () => {
   const URL = process.env.NEXT_PUBLIC_SHOBOI_ENDOPOINT as string;
-  const data = await axios.get(URL).then((response) => response.data);
+  const data = await fetch(URL, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/xml",
+    },
+  }).then((response) => response.text());
 
   const todayData = parseXml(data);
 
