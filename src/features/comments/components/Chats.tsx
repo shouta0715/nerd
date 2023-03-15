@@ -1,7 +1,6 @@
-import { IconArrowDown } from "@tabler/icons";
+import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
-import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { useChats } from "src/features/comments/hooks/useChatComments";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
@@ -65,7 +64,7 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
           </div>
         </li>
       ))}
-      <Button
+      <button
         className={`fixed left-1/2 bottom-[4.5rem] z-0 flex h-7 w-7 -translate-x-1/2   cursor-pointer items-center  justify-center rounded-full border-none bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
           isBottom || time === 0
             ? "translate-y-10 opacity-0"
@@ -75,8 +74,8 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
           entry?.target.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <IconArrowDown size={22} className="text-white" />
-      </Button>
+        <ArrowDownIcon className="h-4 w-4 fill-white stroke-white stroke-2 text-white" />
+      </button>
       <div ref={bottomRef} className="absolute bottom-0 opacity-0" />
     </ul>
   );
