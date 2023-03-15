@@ -1,10 +1,17 @@
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Modal } from "src/components/Elements/Modal";
 import { Logo } from "src/components/Icon/Logo";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
+
+const DynamicAvatar = dynamic(() =>
+  import("src/components/Elements/Avatar").then((mod) => mod.Avatar)
+);
+
+const DynamicModal = dynamic(() =>
+  import("src/components/Elements/Modal").then((mod) => mod.Modal)
+);
 
 export const Header: FC = () => {
   const user = useUserState((state) => state.user);
@@ -16,7 +23,7 @@ export const Header: FC = () => {
       <div className="container mx-auto flex items-center justify-between px-6 py-2  md:px-10">
         <Logo />
         {user && !user.anonymous ? (
-          <Avatar user_id={user.id} user_name={user.user_name} />
+          <DynamicAvatar user_id={user.id} user_name={user.user_name} />
         ) : (
           <>
             <Button
@@ -28,7 +35,7 @@ export const Header: FC = () => {
             >
               ログイン
             </Button>
-            <Modal />
+            <DynamicModal />
           </>
         )}
       </div>
