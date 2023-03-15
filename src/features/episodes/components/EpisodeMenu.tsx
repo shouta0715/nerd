@@ -5,7 +5,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import { HoverCard } from "@mantine/core";
 import { IconPencil, IconRotate, IconRotateClockwise } from "@tabler/icons";
 import React, { FC, memo, Suspense } from "react";
 import { Button } from "src/components/Elements/Button";
@@ -110,14 +109,12 @@ export const EpisodeMenu: FC<Props> = memo(
                   <Text size="sm" className="text-indigo-500">
                     開始から
                   </Text>
-                  <HoverCard position="top" width={100} withArrow withinPortal>
-                    <HoverCard.Target>
-                      <QuestionMarkCircleIcon className="-mr-8 ml-2 h-6 w-6" />
-                    </HoverCard.Target>
-                    <HoverCard.Dropdown className="bg-black p-1 text-xs text-white shadow">
+                  <div className="relative bg-red-500">
+                    <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6 text-gray-500" />
+                    <div className="absolute bottom-8 -left-7 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:top-full before:left-1/2 before:h-0   before:w-0  before:-translate-x-1/2 before:border-r-[6px] before:border-l-[6px] before:border-t-[6px] before:border-b-0 before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
                       下の数字をタップすると時間を変更できます。
-                    </HoverCard.Dropdown>
-                  </HoverCard>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-col items-center space-y-1">
                   <div className=" w-full">

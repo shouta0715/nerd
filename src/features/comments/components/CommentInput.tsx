@@ -62,7 +62,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
                 ? "ログイン中です"
                 : "再生してください"
             }
-            className="w-full resize-none appearance-none rounded-full border  border-gray-300 py-2 px-4 pr-10  placeholder:pt-0.5 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
+            className="w-full resize-none appearance-none rounded-full border  border-gray-300 py-3 px-4 pr-10 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             maxRows={4}
             maxLength={100}
             value={content}

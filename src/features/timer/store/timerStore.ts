@@ -1,6 +1,7 @@
 /* eslint-disable no-nested-ternary */
-import { useInterval } from "@mantine/hooks";
+
 import create from "zustand";
+import { useInterval } from "src/features/timer/hooks/useInterval";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 
 const { timeToSecond, secondToTime } = timeProcessing();
