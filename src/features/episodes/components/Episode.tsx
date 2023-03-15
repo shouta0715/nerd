@@ -2,7 +2,6 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
-import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
@@ -79,9 +78,12 @@ export const Episode: FC = () => {
             <nav className="sticky top-0 z-[1] flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
               <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
                 <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 after:h-7 after:w-7 after:content-['']">
-                  <Button onClick={() => router.back()} className="border-none">
-                    <ArrowSmallLeftIcon className="h-6 w-6" />
-                  </Button>
+                  <button
+                    onClick={() => router.back()}
+                    className="h-7 w-7 border-none"
+                  >
+                    <ArrowSmallLeftIcon className="h-full w-full" />
+                  </button>
                   <ul className=" flex h-full flex-1 items-center justify-around">
                     <Text
                       onClick={() => setIsChat(true)}
