@@ -3,13 +3,13 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import { IconPencil, IconRotate, IconRotateClockwise } from "@tabler/icons";
 import React, { FC, memo, Suspense } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
 import { Text } from "src/components/Elements/Text";
+import { RotateArrowRightIcon } from "src/components/Icon/RotateArrowRightIcon";
 import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useEpisodeMenu } from "src/features/episodes/hooks/useEpisodeMenu";
@@ -69,7 +69,7 @@ export const EpisodeMenu: FC<Props> = memo(
                   htmlFor="commenter-name-input"
                   className="flex items-center"
                 >
-                  <IconPencil className="mr-1" size={14} />
+                  <PencilIcon className="mr-1 h-4 w-4" />
                   <Text component="span" className="text-xs">
                     投稿名の変更
                   </Text>
@@ -159,7 +159,7 @@ export const EpisodeMenu: FC<Props> = memo(
                     onClick={() => changeTenTime("minus")}
                     className="relative mx-auto h-12 w-12 border-none"
                   >
-                    <IconRotate size={48} className="rotate-180 stroke-1" />
+                    <RotateArrowRightIcon className="stroke-4 h-8 w-8 stroke-indigo-500  [transform:rotateY(180deg)_rotateZ(-45deg)]" />
                     <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                       10
                     </span>
@@ -191,10 +191,8 @@ export const EpisodeMenu: FC<Props> = memo(
                     onClick={() => changeTenTime("add")}
                     className="relative mx-auto h-12 w-12 border-none"
                   >
-                    <IconRotateClockwise
-                      size={48}
-                      className="rotate-180 stroke-1"
-                    />
+                    <RotateArrowRightIcon className="stroke-4 h-8 w-8 -rotate-45 stroke-indigo-500" />
+
                     <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                       10
                     </span>

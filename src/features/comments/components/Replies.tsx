@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Disclosure, Transition } from "@headlessui/react";
-import { IconChevronUp } from "@tabler/icons";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, RefObject } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Reply } from "src/features/comments/components/ReplyComment";
@@ -49,18 +49,19 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
           </Transition>
           <div className="flex w-full justify-between">
             <Disclosure.Button
-              className="mt-1 flex w-max items-center justify-end p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
+              className="mt-1 flex w-max items-center justify-end space-x-1 p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
               onClick={clickHandler}
             >
               {controlLabel()}
               <span>
-                <IconChevronUp
-                  size={16}
-                  className={
+                <ChevronUpIcon
+                  className={`h-4 w-4 ${
                     controlLabel() === "返信を閉じる"
                       ? ""
                       : "rotate-180 transform"
                   }
+
+                  `}
                 />
               </span>
             </Disclosure.Button>
@@ -71,7 +72,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
               }`}
             >
               <span>閉じる</span>
-              <IconChevronUp size={16} />
+              <ChevronUpIcon className="h-4 w-4" />
             </button>
           </div>
         </Disclosure>

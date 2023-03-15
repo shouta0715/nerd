@@ -1,5 +1,8 @@
-import { PlusIcon, ShareIcon } from "@heroicons/react/24/outline";
-import { IconStack2 } from "@tabler/icons";
+import {
+  PlusIcon,
+  ShareIcon,
+  Square3Stack3DIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 import { Button } from "src/components/Elements/Button";
@@ -37,7 +40,7 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
         </ul>
         <Button
           size="xs"
-          leftIcon={<IconStack2 />}
+          leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
           className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
         >
           他のエピソードを見る

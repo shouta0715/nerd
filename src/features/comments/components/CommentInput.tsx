@@ -1,7 +1,8 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { IconArrowUp, IconSettings } from "@tabler/icons";
+import { Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { ArrowUpIcon } from "@heroicons/react/24/solid";
 import React, { FC, memo } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -90,14 +91,14 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
               {isLoading ? (
                 <Loader size="sm" color="green" />
               ) : (
-                <IconArrowUp className=" stroke-teal-500" />
+                <ArrowUpIcon className=" h-4 w-4 stroke-teal-500" />
               )}
             </Button>
           </div>
         </div>
 
-        <IconSettings
-          className="cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
+        <Cog8ToothIcon
+          className="h-6 w-6 cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
         />

@@ -1,4 +1,4 @@
-import { IconArrowLeft } from "@tabler/icons";
+import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import React from "react";
@@ -20,7 +20,7 @@ const SeasonWorks: NextPage<Props> = ({ data, autoCompleteData }) => (
       <div className="container mx-auto bg-transparent py-3">
         <div className="relative flex w-full items-center px-4">
           <Link href="/" className="mr-6 flex justify-center md:mr-4 ">
-            <IconArrowLeft className="h-6 w-6 text-black" />
+            <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
           </Link>
           <Autocomplete autoCompleteData={autoCompleteData} />
         </div>

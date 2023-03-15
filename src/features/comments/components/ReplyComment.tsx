@@ -1,4 +1,4 @@
-import { IconHeart, IconThumbDown } from "@tabler/icons";
+import { HandThumbDownIcon, HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
@@ -39,11 +39,11 @@ export const Reply: FC<Props> = ({ reply }) => (
         <span>{formatTimeDistance(reply.created_at)}</span>
         <div className="flex place-items-center">
           <div className="flex items-center">
-            <IconHeart size={20} />
+            <HeartIcon className="h-5 w-5" />
             <span>1</span>
           </div>
           <div className="flex items-center">
-            <IconThumbDown size={20} />
+            <HandThumbDownIcon className="h-5 w-5" />
 
             <span>100</span>
           </div>

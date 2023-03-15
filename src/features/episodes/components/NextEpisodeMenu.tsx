@@ -1,6 +1,9 @@
 /* eslint-disable react/require-default-props */
 
-import { IconPlayerSkipForward, IconStack2 } from "@tabler/icons";
+import {
+  ChevronDoubleRightIcon,
+  Square3Stack3DIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
@@ -47,7 +50,7 @@ export const NextEpisodeMenu: FC<Props> = ({
           href={`${data?.episodes_by_pk?.id}?category=archive`}
           className="my-3 flex items-center space-x-2 text-sm"
         >
-          <IconPlayerSkipForward size={16} />
+          <ChevronDoubleRightIcon className="h-4 w-4" />
           <span className="inline-block">次のエピソード</span>
         </Link>
       )}
@@ -56,7 +59,7 @@ export const NextEpisodeMenu: FC<Props> = ({
         href={`${"xxx"}?category=archive`}
         className="flex items-center space-x-2 text-sm"
       >
-        <IconStack2 size={16} strokeWidth={1.5} />
+        <Square3Stack3DIcon className="h-4 w-4" />
         <span className="inline-block">他のエピソード</span>
       </Link>
     </section>
