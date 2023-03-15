@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import { Accordion } from "@mantine/core";
+import { Disclosure, Transition } from "@headlessui/react";
 import { IconChevronUp } from "@tabler/icons";
 import React, { FC, RefObject } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
@@ -30,22 +30,9 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
   return (
     <>
       {reply_count !== 0 && (
-        <Accordion
-          value={isOpen ? "reply-original" : null}
-          ff="Hiragino Sans"
-          loop={false}
-          disableChevronRotation={controlLabel() !== "返信を閉じる"}
-          classNames={{
-            control:
-              "justify-end w-full text-indigo-500 items-center p-0 hover:bg-transparent w-max mt-1",
-            label: " flex-none text-xs md:text-sm",
-            content: "p-0",
-            chevron: "m-0",
-            panel: "py-1",
-          }}
-        >
-          <Accordion.Item className="border-0" value="reply-original">
-            <Accordion.Panel ff="Hiragino Sans">
+        <Disclosure>
+          <Transition show={isOpen}>
+            <Disclosure.Panel className="py-1" static>
               {data?.pages
                 .slice(0, showCount)
                 .map((replies) =>
@@ -58,23 +45,36 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                   <Loader className="mx-auto" variant="dots" />
                 </div>
               )}
-            </Accordion.Panel>
-            <div className="flex w-full justify-between">
-              <Accordion.Control onClick={clickHandler}>
-                {controlLabel()}
-              </Accordion.Control>
-              <button
-                onClick={closeClickHandler}
-                className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
-                  controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
-                }`}
-              >
-                <span>閉じる</span>
-                <IconChevronUp size={16} />
-              </button>
-            </div>
-          </Accordion.Item>
-        </Accordion>
+            </Disclosure.Panel>
+          </Transition>
+          <div className="flex w-full justify-between">
+            <Disclosure.Button
+              className="mt-1 flex w-max items-center justify-end p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
+              onClick={clickHandler}
+            >
+              {controlLabel()}
+              <span>
+                <IconChevronUp
+                  size={16}
+                  className={
+                    controlLabel() === "返信を閉じる"
+                      ? ""
+                      : "rotate-180 transform"
+                  }
+                />
+              </span>
+            </Disclosure.Button>
+            <button
+              onClick={closeClickHandler}
+              className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
+                controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
+              }`}
+            >
+              <span>閉じる</span>
+              <IconChevronUp size={16} />
+            </button>
+          </div>
+        </Disclosure>
       )}
     </>
   );
