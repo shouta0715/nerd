@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Disclosure, Transition } from "@headlessui/react";
 import { IconChevronUp } from "@tabler/icons";
-import React, { FC, RefObject } from "react";
+import React, { FC, Fragment, RefObject } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Reply } from "src/features/comments/components/ReplyComment";
 import { useComment } from "src/features/comments/hooks/useComment";
@@ -31,8 +31,8 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     <>
       {reply_count !== 0 && (
         <Disclosure>
-          <Transition show={isOpen}>
-            <Disclosure.Panel className="py-1" static>
+          <Transition show={isOpen} as={Fragment}>
+            <Disclosure.Panel className="py-1" static as="ul">
               {data?.pages
                 .slice(0, showCount)
                 .map((replies) =>

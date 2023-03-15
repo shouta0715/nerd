@@ -1,9 +1,9 @@
-import { useIntersection } from "@mantine/hooks";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useOpenState } from "../../episodes/store/index";
 
 import { useInfiniteQueryChats } from "src/features/comments/api/useInfiniteQueryChatComments";
 import { useTimerState } from "src/features/timer/store/timerStore";
+import { useInterSection } from "src/hooks/useInterSection";
 
 type Args = {
   episode_id: string;
@@ -17,7 +17,7 @@ export const useChats = ({ episode_id }: Args) => {
   const time = useTimerState((state) => state.getTime());
   const isMenuOpen = useOpenState((state) => state.isMenuOpen);
   const interval = useTimerState((state) => state.interval);
-  const { ref, entry } = useIntersection({
+  const { ref, entry } = useInterSection({
     root: null,
     rootMargin: "100px",
     threshold: 1,

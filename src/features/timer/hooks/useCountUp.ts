@@ -1,5 +1,5 @@
-import { useInterval } from "@mantine/hooks";
 import { useEffect } from "react";
+import { useInterval } from "src/features/timer/hooks/useInterval";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
 export const useCountUp = () => {

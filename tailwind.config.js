@@ -14,13 +14,11 @@ module.exports = {
       colors: {
         dimmed: "rgb(134, 142, 150)",
       },
-
       animation: {
         comment: "comment 0.25s ease-out",
         modal: "modal 0.25s ease-out",
         fadeUp: "fadeUp 0.25s ease-out",
         fadeIn: "fadeIn 0.25s ease-out",
-        autoComplete: "autoComplete 0.15s ease-out forwards",
       },
       keyframes: {
         comment: {
@@ -39,7 +37,6 @@ module.exports = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-
         autoComplete: {
           "0%": { transform: "scaleY(0)" },
           "100%": { transform: "scaleY(1)" },

@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Reply: FC<Props> = ({ reply }) => (
-  <div className="flex w-full">
+  <li className="flex w-full">
     <figure className="m-0 mr-2">
       <Avatar
         size="sm"
@@ -50,5 +50,5 @@ export const Reply: FC<Props> = ({ reply }) => (
         </div>
       </Text>
     </div>
-  </div>
+  </li>
 );
