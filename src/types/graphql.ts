@@ -844,6 +844,7 @@ export type Comments = {
   likes: Array<Likes>;
   /** An aggregate relationship */
   likes_aggregate: Likes_Aggregate;
+  replied_to_commenter_name?: Maybe<Scalars['String']>;
   /** An array relationship */
   replies: Array<Comments>;
   /** An aggregate relationship */
@@ -1024,6 +1025,7 @@ export type Comments_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   likes?: InputMaybe<Likes_Bool_Exp>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
+  replied_to_commenter_name?: InputMaybe<String_Comparison_Exp>;
   replies?: InputMaybe<Comments_Bool_Exp>;
   replies_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   reply_to?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1056,6 +1058,7 @@ export type Comments_Insert_Input = {
   episode_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
   likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
+  replied_to_commenter_name?: InputMaybe<Scalars['String']>;
   replies?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   reply_to?: InputMaybe<Scalars['uuid']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
@@ -1072,6 +1075,7 @@ export type Comments_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   episode_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  replied_to_commenter_name?: Maybe<Scalars['String']>;
   reply_to?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['String']>;
   work_id?: Maybe<Scalars['Int']>;
@@ -1084,6 +1088,7 @@ export type Comments_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  replied_to_commenter_name?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
@@ -1097,6 +1102,7 @@ export type Comments_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   episode_id?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  replied_to_commenter_name?: Maybe<Scalars['String']>;
   reply_to?: Maybe<Scalars['uuid']>;
   user_id?: Maybe<Scalars['String']>;
   work_id?: Maybe<Scalars['Int']>;
@@ -1109,6 +1115,7 @@ export type Comments_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  replied_to_commenter_name?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
@@ -1149,6 +1156,7 @@ export type Comments_Order_By = {
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
+  replied_to_commenter_name?: InputMaybe<Order_By>;
   replies_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
@@ -1177,6 +1185,8 @@ export enum Comments_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  RepliedToCommenterName = 'replied_to_commenter_name',
+  /** column name */
   ReplyTo = 'reply_to',
   /** column name */
   UserId = 'user_id',
@@ -1204,6 +1214,7 @@ export type Comments_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  replied_to_commenter_name?: InputMaybe<Scalars['String']>;
   reply_to?: InputMaybe<Scalars['uuid']>;
   user_id?: InputMaybe<Scalars['String']>;
   work_id?: InputMaybe<Scalars['Int']>;
@@ -1258,6 +1269,7 @@ export type Comments_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   episode_id?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  replied_to_commenter_name?: InputMaybe<Scalars['String']>;
   reply_to?: InputMaybe<Scalars['uuid']>;
   user_id?: InputMaybe<Scalars['String']>;
   work_id?: InputMaybe<Scalars['Int']>;
@@ -1288,6 +1300,8 @@ export enum Comments_Update_Column {
   EpisodeId = 'episode_id',
   /** column name */
   Id = 'id',
+  /** column name */
+  RepliedToCommenterName = 'replied_to_commenter_name',
   /** column name */
   ReplyTo = 'reply_to',
   /** column name */
@@ -2976,6 +2990,10 @@ export type Query_Root = {
   media_types_aggregate: Media_Types_Aggregate;
   /** fetch data from the table: "media_types" using primary key columns */
   media_types_by_pk?: Maybe<Media_Types>;
+  /** execute function "replies" which returns "comments" */
+  replies: Array<Comments>;
+  /** execute function "replies" and query aggregates on result of table type "comments" */
+  replies_aggregate: Comments_Aggregate;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -3149,6 +3167,26 @@ export type Query_RootMedia_Types_By_PkArgs = {
 };
 
 
+export type Query_RootRepliesArgs = {
+  args: Replies_Args;
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Query_RootReplies_AggregateArgs = {
+  args: Replies_Args;
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
 export type Query_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3192,6 +3230,13 @@ export type Query_RootWorks_AggregateArgs = {
 
 export type Query_RootWorks_By_PkArgs = {
   id: Scalars['Int'];
+};
+
+export type Replies_Args = {
+  cursor_created_at?: InputMaybe<Scalars['timestamptz']>;
+  cursor_reply_to?: InputMaybe<Scalars['uuid']>;
+  original_comment_id?: InputMaybe<Scalars['uuid']>;
+  reply_limit?: InputMaybe<Scalars['Int']>;
 };
 
 export type Subscription_Root = {
@@ -3248,6 +3293,10 @@ export type Subscription_Root = {
   media_types_by_pk?: Maybe<Media_Types>;
   /** fetch data from the table in a streaming manner: "media_types" */
   media_types_stream: Array<Media_Types>;
+  /** execute function "replies" which returns "comments" */
+  replies: Array<Comments>;
+  /** execute function "replies" and query aggregates on result of table type "comments" */
+  replies_aggregate: Comments_Aggregate;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -3464,6 +3513,26 @@ export type Subscription_RootMedia_Types_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Media_Types_Stream_Cursor_Input>>;
   where?: InputMaybe<Media_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootRepliesArgs = {
+  args: Replies_Args;
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootReplies_AggregateArgs = {
+  args: Replies_Args;
+  distinct_on?: InputMaybe<Array<Comments_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Comments_Order_By>>;
+  where?: InputMaybe<Comments_Bool_Exp>;
 };
 
 

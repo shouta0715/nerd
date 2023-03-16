@@ -38,13 +38,14 @@ export type GetCommentsQueryVariables = Types.Exact<{
 export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, replies_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
-  reply_to: Types.Scalars['uuid'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  limit: Types.Scalars['Int'];
+  original_comment_id: Types.Scalars['uuid'];
+  cursor_reply_to?: Types.InputMaybe<Types.Scalars['uuid']>;
+  cursor_created_at?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  reply_limit: Types.Scalars['Int'];
 }>;
 
 
-export type GetRepliesQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, user_id: string, id: any, created_at: any, commenter_name: string, reply_to?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, replied_to_commenter_name?: string | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 
 export const InsertChatDocument = `
@@ -161,18 +162,18 @@ export const useGetCommentsQuery = <
     );
 useGetCommentsQuery.fetcher = (client: GraphQLClient, variables: GetCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers);
 export const GetRepliesDocument = `
-    query GetReplies($reply_to: uuid!, $cursor: timestamptz, $limit: Int!) {
-  comments(
-    where: {reply_to: {_eq: $reply_to}, created_at: {_gt: $cursor}}
-    order_by: {created_at: asc}
-    limit: $limit
+    query GetReplies($original_comment_id: uuid!, $cursor_reply_to: uuid, $cursor_created_at: timestamptz, $reply_limit: Int!) {
+  replies(
+    args: {original_comment_id: $original_comment_id, cursor_reply_to: $cursor_reply_to, cursor_created_at: $cursor_created_at, reply_limit: $reply_limit}
   ) {
     content
+    work_id
     user_id
     id
+    episode_id
     created_at
     commenter_name
-    reply_to
+    replied_to_commenter_name
     user {
       anonymous
       user_name
