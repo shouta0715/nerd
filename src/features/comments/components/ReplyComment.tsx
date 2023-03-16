@@ -7,9 +7,10 @@ import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
 type Props = {
   reply: TypeReply;
+  original_id: string;
 };
 
-export const Reply: FC<Props> = ({ reply }) => (
+export const Reply: FC<Props> = ({ reply, original_id }) => (
   <li className="flex w-full">
     <figure className="m-0 mr-2">
       <Avatar
@@ -19,8 +20,13 @@ export const Reply: FC<Props> = ({ reply }) => (
       />
     </figure>
     <div className="max-w-[calc(100%-46px)] flex-1">
-      <Text ff="Hiragino Sans" size="xs" className="font-bold">
-        {reply.commenter_name}
+      <Text ff="Hiragino Sans" size="xs" className="flex flex-col font-bold">
+        <span>{reply.commenter_name}</span>
+        {reply.replied_to_commenter_name && original_id !== reply.reply_to && (
+          <span className="text-blue-500">
+            @{reply.replied_to_commenter_name}に返信
+          </span>
+        )}
       </Text>
       <Text
         component="p"

@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { getComments } from "src/features/comments/api/useInfiniteFinishComments";
+import { getComments } from "src/features/comments/api/useInfiniteComments";
 
 export const usePrefetchFinishEpisode = () => {
   const queryClient = useQueryClient();

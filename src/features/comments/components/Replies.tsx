@@ -31,13 +31,26 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     <>
       {reply_count !== 0 && (
         <Disclosure>
-          <Transition show={isOpen} as={Fragment}>
+          <Transition
+            show={isOpen}
+            as={Fragment}
+            enter="transition ease-out duration-200 origin-top"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition ease-in duration-150 origin-bottom"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <Disclosure.Panel className="py-1" static as="ul">
               {data?.pages
                 .slice(0, showCount)
                 .map((page) =>
                   page.replies.map((reply) => (
-                    <Reply key={reply.id} reply={reply} />
+                    <Reply
+                      key={reply.id}
+                      reply={reply}
+                      original_id={reply_id}
+                    />
                   ))
                 )}
               {isFetchingNextPage && (
