@@ -5,22 +5,25 @@ import { client } from "src/libs/graphqlClient";
 type GetReplyArgs = {
   reply_to: string;
   pageParam: {
-    cursor: string;
+    cursor_created_at: string;
+    cursor_reply_to: string;
   };
 };
 
 const InitialPageParam = {
   // TODO アプリ公開日にする
-  cursor: "2023-03-10T00:00:00.000Z",
+  cursor_created_at: "2021-01-01T00:00:00.000Z",
+  cursor_reply_to: null,
 };
 
 export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
-  const { cursor } = pageParam;
+  const { cursor_created_at, cursor_reply_to } = pageParam;
 
   const fetcher = useGetRepliesQuery.fetcher(client, {
-    reply_to,
-    cursor,
-    limit: 10,
+    original_comment_id: reply_to,
+    cursor_created_at,
+    cursor_reply_to,
+    reply_limit: 10,
   });
 
   const data = await fetcher();
@@ -37,11 +40,12 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
         pageParam,
       }),
     getNextPageParam: (lastPage) => {
-      const lastReply = lastPage.comments.at(-1);
-      if (!lastReply || lastPage.comments.length < 10) return undefined;
+      const lastReply = lastPage.replies.at(-1);
+      if (!lastReply || lastPage.replies.length < 10) return undefined;
 
       return {
-        cursor: lastReply?.created_at,
+        cursor_created_at: lastReply.created_at,
+        cursor_reply_to: lastReply.id,
       };
     },
     suspense: true,

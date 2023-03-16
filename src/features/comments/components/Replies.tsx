@@ -35,8 +35,8 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
             <Disclosure.Panel className="py-1" static as="ul">
               {data?.pages
                 .slice(0, showCount)
-                .map((replies) =>
-                  replies.comments.map((reply) => (
+                .map((page) =>
+                  page.replies.map((reply) => (
                     <Reply key={reply.id} reply={reply} />
                   ))
                 )}

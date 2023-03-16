@@ -5,4 +5,4 @@ import {
 
 export type Comment = GetCommentsQuery["comments"][0];
 
-export type Reply = GetRepliesQuery["comments"][0];
+export type Reply = GetRepliesQuery["replies"][0];
