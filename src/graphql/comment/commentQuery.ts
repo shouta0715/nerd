@@ -108,6 +108,7 @@ export const GET_REPLIES = gql`
       episode_id
       created_at
       commenter_name
+      reply_to
       replied_to_commenter_name
       user {
         anonymous

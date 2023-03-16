@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useInfiniteQueryComments } from "src/features/comments/api/useInfiniteFinishComments";
+import { useInfiniteQueryComments } from "src/features/comments/api/useInfiniteComments";
 import { useInterSection } from "src/hooks/useInterSection";
 
 export const useComments = (episode_id: string) => {
