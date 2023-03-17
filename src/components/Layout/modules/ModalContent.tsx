@@ -18,8 +18,8 @@ export const ModalContent: FC = () => {
     <div className="mx-auto flex w-4/5 flex-col  items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm md:max-w-md">
       <header className="flex w-full items-center justify-center">
         <Text
-          size="lg"
           className="flex flex-1 items-center justify-center font-bold"
+          size="lg"
         >
           <Logo />
         </Text>
@@ -28,43 +28,43 @@ export const ModalContent: FC = () => {
           onClick={() => changeIsOpenModal(false)}
         />
       </header>
-      <Text component="p" size="sm" className="font-medium text-dimmed">
+      <Text className="font-medium text-dimmed" component="p" size="sm">
         ログインをすると他の人をフォローしたり、自分の投稿を保存することができます。
         <Link
-          href="/"
           className="inline-block text-sm text-indigo-500 underline"
+          href="/"
         >
           詳しくはこちら
         </Link>
       </Text>
       <Button
-        leftIcon={<GoogleIcon />}
-        radius="full"
         className="font-hiragino-sans text-sm font-bold"
+        leftIcon={<GoogleIcon />}
         onClick={async () => {
           await signInGoogle();
           changeIsOpenModal(false);
         }}
+        radius="full"
       >
         Googleでログイン
       </Button>
       <Button
-        leftIcon={<TwitterIcon />}
         className="font-hiragino-sans text-sm font-bold"
+        leftIcon={<TwitterIcon />}
         radius="full"
       >
         Twitterでログイン
       </Button>
-      <Text size="sm" className="font-medium text-dimmed">
+      <Text className="font-medium text-dimmed" size="sm">
         <Link
-          href="/"
           className="inline-block text-sm text-indigo-500 underline"
+          href="/"
         >
           利用規約
         </Link>
         <Link
-          href="/"
           className="inline-block text-sm text-indigo-500 underline"
+          href="/"
         >
           プライバシーポリシー
         </Link>

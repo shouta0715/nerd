@@ -27,11 +27,11 @@ export const Header: FC = () => {
         ) : (
           <>
             <Button
-              onClick={() => changeIsOpenModal(true)}
-              size="xs"
-              radius="md"
-              loading={authLoading}
               className="btn-primary text-sm"
+              loading={authLoading}
+              onClick={() => changeIsOpenModal(true)}
+              radius="md"
+              size="xs"
             >
               ログイン
             </Button>

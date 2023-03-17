@@ -23,7 +23,7 @@ export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
     original_comment_id: reply_to,
     cursor_created_at,
     cursor_reply_to,
-    reply_limit: 10,
+    reply_limit: 20,
   });
 
   const data = await fetcher();

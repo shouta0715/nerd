@@ -9,11 +9,11 @@ type Props = {
 
 export const TopTitle: FC<Props> = ({ title, href }) => (
   <h2 className="mb-4 md:text-center lg:text-left">
-    <Link scroll={false} passHref href={`${href}`}>
+    <Link href={`${href}`}>
       <Text
+        className="text-lg font-bold md:text-xl"
         component="span"
         ff="Hiragino Sans"
-        className="text-lg font-bold md:text-xl"
       >
         {title}
       </Text>

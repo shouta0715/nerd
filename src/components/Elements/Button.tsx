@@ -45,7 +45,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => (
     <button
       ref={ref}
-      type={type}
       className={twMerge(
         clsx(
           "flex items-center justify-center border transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
@@ -55,9 +54,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )
       )}
+      type={type}
       {...props}
     >
-      {loading && <Loader size={size} variant="oval" color="white" />}
+      {loading && <Loader color="white" size={size} variant="oval" />}
       {!loading && leftIcon}
       <span className="mx-2">{props.children}</span> {loading && rightIcon}
     </button>

@@ -27,18 +27,18 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           <Navigation />
         </div>
       </section>
-      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100">
+      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100 bg-indigo-50">
         <div className="container mx-auto ">
           <div className="p-6">
             <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
             <TodayEpisodeList data={todayEpisodes} />
             <Text
               align="center"
+              className="mt-6 flex w-full items-center justify-center hover:underline"
               component="p"
               ff="Hiragino Sans"
-              className="mt-6 flex w-full items-center justify-center hover:underline"
             >
-              <Link href="/list/todayEpisodes" className="text-base md:text-lg">
+              <Link className="text-base md:text-lg" href="/list/todayEpisodes">
                 今日のエピソードをもっと見る
               </Link>
               <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
@@ -46,22 +46,22 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </div>
         </div>
       </section>
-      <section>
+      <section className="bg-gray-50">
         <div className="container mx-auto ">
           <div className="px-6 pb-12 pt-6">
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />
             <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4  lg:grid-cols-3">
               {seasonWorks.works?.map((work) => (
-                <WorkItem work={work} key={`work-${work.id}`} />
+                <WorkItem key={`work-${work.id}`} work={work} />
               ))}
             </ul>
             <Text
-              component="p"
               align="center"
-              ff="Hiragino Sans"
               className="mt-6 flex w-full items-center justify-center hover:underline"
+              component="p"
+              ff="Hiragino Sans"
             >
-              <Link href="/list/seasonWorks" className="text-base md:text-lg">
+              <Link className="text-base md:text-lg" href="/list/seasonWorks">
                 今期のアニメをもっと見る
               </Link>
               <ArrowSmallRightIcon className="ml-1 h-6 w-6" />

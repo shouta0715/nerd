@@ -12,7 +12,7 @@ export const Modal: FC = () => {
 
   return (
     <Transition
-      show={isOpenLoginModal}
+      className="fixed inset-0 z-50   flex place-items-center bg-black/20"
       enter="transition-opacity duration-100"
       enterFrom="opacity-0"
       enterTo="opacity-100"
@@ -22,16 +22,16 @@ export const Modal: FC = () => {
       onClick={(e) => {
         if (e.target === e.currentTarget) changeIsOpenModal(false);
       }}
-      className="fixed inset-0 z-50   flex place-items-center bg-black/20"
+      show={isOpenLoginModal}
     >
       <Transition.Child
+        className="mx-auto w-4/5 max-w-md rounded-md bg-white"
         enter="transition-all duration-200"
         enterFrom="opacity-0 scale-0"
         enterTo="opacity-100 scale-100"
         leave="transition-all duration-150"
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-0"
-        className="mx-auto w-4/5 max-w-md rounded-md bg-white"
       >
         <ModalContent />
       </Transition.Child>

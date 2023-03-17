@@ -22,10 +22,10 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
   return (
     <div className="relative w-full">
       <Combobox
-        value={searchInput}
         onChange={(value) => {
           setSearchInput(value);
         }}
+        value={searchInput}
       >
         <div className="peer relative mx-auto w-full max-w-md">
           <button className="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -49,25 +49,25 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
         </div>
         <Transition
           as={Fragment}
-          show={searchInput !== "" && filteredData.length !== 0}
           enter="transition-all ease-out duration-100 origin-top"
           enterFrom="scale-y-0"
           enterTo=" scale-y-1"
           leave="transition ease-in duration-75 origin-top"
           leaveFrom=" scale-y-1"
           leaveTo=" scale-y-0 "
+          show={searchInput !== "" && filteredData.length !== 0}
         >
           <Combobox.Options className="absolute top-[2.625rem] left-1/2  z-20 block max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black shadow-md hover:!block peer-[&:not(:focus-within)]:hidden ">
             {filteredData.map((item) => (
               <Combobox.Option
-                className="bg-white"
                 key={item.title}
+                className="bg-white"
                 value={item.title}
               >
                 <AutoCompleteItem
-                  title={item.title}
-                  number={item.number}
                   episodeTitle={item.episodeTitle}
+                  number={item.number}
+                  title={item.title}
                 />
               </Combobox.Option>
             ))}

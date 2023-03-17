@@ -20,7 +20,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => (
       />
     </figure>
     <div className="max-w-[calc(100%-46px)] flex-1">
-      <Text ff="Hiragino Sans" size="xs" className="flex flex-col font-bold">
+      <Text className="flex flex-col font-bold" ff="Hiragino Sans" size="xs">
         <span>{reply.commenter_name}</span>
         {reply.replied_to_commenter_name && original_id !== reply.reply_to && (
           <span className="text-blue-500">
@@ -29,18 +29,18 @@ export const Reply: FC<Props> = ({ reply, original_id }) => (
         )}
       </Text>
       <Text
+        className="break-words py-1 text-sm"
         component="p"
         ff="Hiragino Sans"
-        className="break-words py-1 text-sm"
       >
         {reply.content}
       </Text>
       <Text
-        ff="Hiragino Sans"
-        size="xs"
+        className="flex items-center justify-between space-x-2"
         color="dimmed"
         component="div"
-        className="flex items-center justify-between space-x-2"
+        ff="Hiragino Sans"
+        size="xs"
       >
         <span>{formatTimeDistance(reply.created_at)}</span>
         <div className="flex place-items-center">

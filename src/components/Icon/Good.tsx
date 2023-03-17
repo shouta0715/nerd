@@ -3,18 +3,18 @@ import React, { FC } from "react";
 export const Good: FC = () => (
   <svg
     className="h-6 w-6 fill-indigo-500"
-    xmlns="http://www.w3.org/2000/svg"
     id="_レイヤー_10"
     viewBox="0 0 192 192"
+    xmlns="http://www.w3.org/2000/svg"
   >
     <rect
       className="cls-1"
-      x="32"
-      y="64.97"
-      width="36"
       height="93.03"
       rx="2.06"
       ry="2.06"
+      width="36"
+      x="32"
+      y="64.97"
     />
     <path
       className="cls-1"

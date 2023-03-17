@@ -9,74 +9,74 @@ export const Dots = ({
   className,
 }: LoaderProps) => (
   <svg
+    className={twMerge(clsx(colors[color], sizes[size], className))}
     viewBox="0 0 120 30"
     xmlns="http://www.w3.org/2000/svg"
-    className={twMerge(clsx(colors[color], sizes[size], className))}
   >
     <circle cx="15" cy="15" r="15">
       <animate
         attributeName="r"
-        from="15"
-        to="15"
         begin="0s"
-        dur="0.8s"
-        values="15;9;15"
         calcMode="linear"
+        dur="0.8s"
+        from="15"
         repeatCount="indefinite"
+        to="15"
+        values="15;9;15"
       />
       <animate
         attributeName="fill-opacity"
-        from="1"
-        to="1"
         begin="0s"
-        dur="0.8s"
-        values="1;.5;1"
         calcMode="linear"
+        dur="0.8s"
+        from="1"
         repeatCount="indefinite"
+        to="1"
+        values="1;.5;1"
       />
     </circle>
-    <circle cx="60" cy="15" r="9" fillOpacity="0.3">
+    <circle cx="60" cy="15" fillOpacity="0.3" r="9">
       <animate
         attributeName="r"
-        from="9"
-        to="9"
         begin="0s"
-        dur="0.8s"
-        values="9;15;9"
         calcMode="linear"
+        dur="0.8s"
+        from="9"
         repeatCount="indefinite"
+        to="9"
+        values="9;15;9"
       />
       <animate
         attributeName="fill-opacity"
-        from="0.5"
-        to="0.5"
         begin="0s"
-        dur="0.8s"
-        values=".5;1;.5"
         calcMode="linear"
+        dur="0.8s"
+        from="0.5"
         repeatCount="indefinite"
+        to="0.5"
+        values=".5;1;.5"
       />
     </circle>
     <circle cx="105" cy="15" r="15">
       <animate
         attributeName="r"
-        from="15"
-        to="15"
         begin="0s"
-        dur="0.8s"
-        values="15;9;15"
         calcMode="linear"
+        dur="0.8s"
+        from="15"
         repeatCount="indefinite"
+        to="15"
+        values="15;9;15"
       />
       <animate
         attributeName="fill-opacity"
-        from="1"
-        to="1"
         begin="0s"
-        dur="0.8s"
-        values="1;.5;1"
         calcMode="linear"
+        dur="0.8s"
+        from="1"
         repeatCount="indefinite"
+        to="1"
+        values="1;.5;1"
       />
     </circle>
   </svg>

@@ -96,6 +96,7 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
 
     return (
       <Component
+        ref={ref}
         className={twMerge(
           clsx(
             sizes[size],
@@ -108,7 +109,6 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
             className
           )
         )}
-        ref={ref}
         {...rest}
       >
         {children}

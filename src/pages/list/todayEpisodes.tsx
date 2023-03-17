@@ -15,11 +15,11 @@ type Props = {
 };
 
 const TodayEpisodes: NextPage<Props> = ({ autoCompleteData, data }) => (
-  <section className="animate-fadeUp">
+  <section className="animate-fadeUp bg-indigo-50">
     <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
       <div className="container mx-auto bg-transparent py-3">
         <div className="relative flex w-full items-center px-4">
-          <Link href="/" className="mr-6 flex justify-center md:mr-4 ">
+          <Link className="mr-6 flex justify-center md:mr-4 " href="/">
             <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
           </Link>
           <Autocomplete autoCompleteData={autoCompleteData} />

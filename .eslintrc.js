@@ -33,6 +33,7 @@ module.exports = {
     "@typescript-eslint",
   ],
   rules: {
+    "react/jsx-sort-props": "error",
     "lines-between-class-members": [
       "error",
       "always",

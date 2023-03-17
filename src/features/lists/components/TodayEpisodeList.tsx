@@ -22,7 +22,7 @@ export const TodayEpisodeList: FC<Props> = ({ data }) => {
   return (
     <ul className="flex flex-wrap gap-4">
       {deferredFilterEpisodes?.map((episode) => (
-        <DynamicTodayEpisodeItem episode={episode} key={episode.id} />
+        <DynamicTodayEpisodeItem key={episode.id} episode={episode} />
       ))}
     </ul>
   );

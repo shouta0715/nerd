@@ -21,7 +21,7 @@ export const Comment: FC<Props> = ({ comment }) => {
         <Avatar user_id={comment.user?.id} user_name={comment.commenter_name} />
       </figure>
       <div className="max-w-[calc(100%-46px)] flex-1">
-        <Text ff="Hiragino Sans" size="xs" className="font-bold">
+        <Text className="font-bold" ff="Hiragino Sans" size="xs">
           {comment.commenter_name}
         </Text>
         <p
@@ -35,10 +35,10 @@ export const Comment: FC<Props> = ({ comment }) => {
           {comment.content} lorem
         </p>
         <Text
+          className="flex items-center space-x-1 text-dimmed"
+          component="div"
           ff="Hiragino Sans"
           size="xs"
-          component="div"
-          className="flex items-center space-x-1 text-dimmed"
         >
           <span>{formatTimeDistance(comment.created_at)}</span>
           <Button className="border-none p-0 text-sm text-black">返信</Button>
@@ -59,9 +59,9 @@ export const Comment: FC<Props> = ({ comment }) => {
           }
         >
           <Replies
+            content={content}
             reply_count={comment.replies_aggregate.aggregate?.count || 0}
             reply_id={comment.id}
-            content={content}
           />
         </Suspense>
       </div>

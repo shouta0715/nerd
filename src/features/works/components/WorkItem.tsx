@@ -16,15 +16,15 @@ type Props = {
 
 export const WorkItem: FC<Props> = memo(({ work }) => (
   <li
-    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 drop-shadow-sm md:p-4"
     key={`works-${work.id}`}
+    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 drop-shadow-sm md:p-4"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <Link
-        href="/"
-        color="dark"
-        scroll={false}
         className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
+        color="dark"
+        href="/"
+        scroll={false}
       >
         {work.series_title}
       </Link>
@@ -32,16 +32,16 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
         <ul className="mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
           {work.episodes.map((episode) => (
             <WorkEpisodeItem
+              key={`work-${episode.id}`}
               episode={episode}
               work_title={work.series_title}
-              key={`work-${episode.id}`}
             />
           ))}
         </ul>
         <Button
-          size="xs"
-          leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
           className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+          leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
+          size="xs"
         >
           他のエピソードを見る
         </Button>
@@ -51,7 +51,7 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
           <Button className="mb-1 border-none">
             <PlusIcon className="h-5 w-5 stroke-2 md:h-6 md:w-6" />
           </Button>
-          <Text component="span" className="text-xs">
+          <Text className="text-xs" component="span">
             マイリスト
           </Text>
         </div>
@@ -59,13 +59,13 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
           <Button className="mb-1 border-none">
             <ShareIcon className=" h-5 w-5 stroke-2 md:h-6 md:w-6" />
           </Button>
-          <Text component="span" className="text-xs">
+          <Text className="text-xs" component="span">
             シェア
           </Text>
         </div>
         <Button
-          size="xs"
           className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
+          size="xs"
         >
           シリーズ一覧
         </Button>

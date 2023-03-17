@@ -12,7 +12,7 @@ const Timer: FC<Props> = memo(({ start_time, episodeId, isCountUp }) =>
   isCountUp ? (
     <CountUpTimer episodeId={episodeId} />
   ) : (
-    <CountDownTimer start_time={start_time} id={episodeId} />
+    <CountDownTimer id={episodeId} start_time={start_time} />
   )
 );
 
