@@ -15,7 +15,7 @@ const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
 ));
 
 export const EpisodeMenuSkelton: FC = () => (
-  <div className="hidden lg:block">
+  <div className="hidden bg-white lg:block">
     <section className="px-4 py-2">
       <div className="flex items-center justify-between">
         <div className="mb-2 h-2 w-16 rounded-md bg-slate-200" />

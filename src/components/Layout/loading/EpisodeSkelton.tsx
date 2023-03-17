@@ -5,7 +5,7 @@ import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSke
 import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
 
 export const EpisodeSkelton: FC = () => (
-  <div className="flex flex-col">
+  <div className="flex flex-col bg-white">
     <div className="container contents lg:mx-auto lg:flex">
       <li className="w-full flex-1 rounded-md p-4  md:px-6">
         <header className="mx-auto flex animate-pulse flex-col items-center justify-between ">

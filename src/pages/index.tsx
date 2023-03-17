@@ -22,12 +22,12 @@ type Props = {
 const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
   <Layout>
     <div className="space-y-2">
-      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100">
+      <section className=" border-slate-100">
         <div className="container mx-auto py-4">
           <Navigation />
         </div>
       </section>
-      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100 bg-indigo-50">
+      <section className=" border-slate-100 bg-sky-50/70">
         <div className="container mx-auto ">
           <div className="p-6">
             <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
@@ -46,7 +46,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </div>
         </div>
       </section>
-      <section className="bg-gray-50">
+      <section className="bg-gray-50/70">
         <div className="container mx-auto ">
           <div className="px-6 pb-12 pt-6">
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />
