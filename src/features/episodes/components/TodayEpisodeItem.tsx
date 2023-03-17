@@ -27,9 +27,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   return (
     <li className="relative mx-auto max-w-md flex-1  rounded-md border border-solid border-slate-200 bg-white p-4 drop-shadow-sm hover:bg-slate-50 md:px-6">
       <Link
-        scroll={false}
-        href={`/episode/${episode.id}?category=live`}
         className="absolute inset-0 rounded-md"
+        href={`/episode/${episode.id}?category=live`}
+        scroll={false}
       />
       <div className="mx-auto flex min-h-full flex-col items-center justify-between">
         <h3 className="mb-1 font-hiragino-sans text-base font-bold md:mb-2 md:text-lg">
@@ -53,12 +53,12 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               }
             </Text>
             <DynamicCountDownTimer
-              start_time={episode.start_time}
               id={episode.id}
+              start_time={episode.start_time}
             />
             <Link
-              href={`/episode/${episode.id}?category=archive`}
               className="light-bg mt-2 ml-auto rounded-md px-3 py-2 text-sm font-bold "
+              href={`/episode/${episode.id}?category=archive`}
             >
               参加する
             </Link>
@@ -66,9 +66,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         ) : (
           <div>
             <Link
-              scroll={false}
-              href={`/episode/${episode.id}?category=archive`}
               className="mr-4 inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
+              href={`/episode/${episode.id}?category=archive`}
+              scroll={false}
             >
               アーカイブで参加する
             </Link>

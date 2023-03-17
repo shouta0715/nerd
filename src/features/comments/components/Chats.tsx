@@ -42,23 +42,23 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
           >
             <Text
               align="inherit"
+              className="my-1 max-w-full break-words font-bold"
               ff="Hiragino Sans"
               size="xs"
-              className="my-1 max-w-full break-words font-bold"
             >
               {comment.commenter_name}
             </Text>
 
             <Text
               align="inherit"
+              className="max-w-full break-words"
               component="p"
               ff="Hiragino Sans"
               size="sm"
-              className="max-w-full break-words"
             >
               {comment.content}
             </Text>
-            <Text size="xs" align="inherit" className="text-dimmed">
+            <Text align="inherit" className="text-dimmed" size="xs">
               <span>{timeCommented(comment.comment_time)}</span>
             </Text>
           </div>

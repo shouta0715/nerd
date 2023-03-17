@@ -45,24 +45,24 @@ export const Episode: FC = () => {
             <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
               <div className="flex w-full flex-1  flex-col gap-2">
                 <Text
+                  className=" text-base font-bold md:text-lg"
                   component="h4"
                   ff="Hiragino Sans"
-                  className=" text-base font-bold md:text-lg"
                 >
                   {data?.episodes_by_pk?.work.series_title}
                 </Text>
-                <Text component="div" className="flex">
+                <Text className="flex" component="div">
                   <Text
+                    className="mr-2 text-sm md:text-base"
                     component="p"
                     ff="Hiragino Sans"
-                    className="mr-2 text-sm md:text-base"
                   >
                     第{data?.episodes_by_pk?.number}話
                   </Text>
                   <Text
+                    className="flex-1 text-sm md:text-base"
                     component="p"
                     ff="Hiragino Sans"
-                    className="flex-1 text-sm md:text-base"
                   >
                     {data?.episodes_by_pk?.title}
                   </Text>
@@ -79,38 +79,38 @@ export const Episode: FC = () => {
               <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
                 <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 after:h-7 after:w-7 after:content-['']">
                   <button
-                    onClick={() => router.back()}
                     className="h-7 w-7 border-none"
+                    onClick={() => router.back()}
                   >
                     <ArrowSmallLeftIcon className="h-full w-full" />
                   </button>
                   <ul className=" flex h-full flex-1 items-center justify-around">
                     <Text
-                      onClick={() => setIsChat(true)}
-                      component="button"
                       className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold text-indigo-500 md:text-base  ${
                         isChat
                           ? "border-0 border-b-2 border-solid border-indigo-500"
                           : "border-none"
                       }`}
+                      component="button"
+                      onClick={() => setIsChat(true)}
                     >
                       チャット
                     </Text>
                     <Text
+                      className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 md:text-base ${
+                        !isChat
+                          ? "border-0 border-b-2 border-solid border-indigo-500"
+                          : "border-none"
+                      }`}
+                      color="indigo"
+                      component="li"
+                      onClick={() => setIsChat(false)}
                       onMouseEnter={() =>
                         prefetchFinishComments(data?.episodes_by_pk?.id)
                       }
                       onTouchStart={() =>
                         prefetchFinishComments(data?.episodes_by_pk?.id)
                       }
-                      onClick={() => setIsChat(false)}
-                      color="indigo"
-                      component="li"
-                      className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 md:text-base ${
-                        !isChat
-                          ? "border-0 border-b-2 border-solid border-indigo-500"
-                          : "border-none"
-                      }`}
                     >
                       コメント
                     </Text>
@@ -118,10 +118,10 @@ export const Episode: FC = () => {
                 </div>
 
                 <DynamicEpisodeMenu
-                  episodeTitle={data?.episodes_by_pk?.title}
                   episodeNumber={data?.episodes_by_pk?.number}
-                  workTitle={data?.episodes_by_pk?.work.series_title}
+                  episodeTitle={data?.episodes_by_pk?.title}
                   nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
+                  workTitle={data?.episodes_by_pk?.work.series_title}
                 />
               </div>
             </nav>
@@ -131,7 +131,7 @@ export const Episode: FC = () => {
               {isChat ? (
                 <>
                   <Suspense
-                    fallback={<Loader variant="dots" className="m-auto" />}
+                    fallback={<Loader className="m-auto" variant="dots" />}
                   >
                     <Chats episode_id={data?.episodes_by_pk?.id} />
                   </Suspense>

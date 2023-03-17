@@ -16,8 +16,8 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {hours.split("").map((character, index) => (
             <Panel
-              character={character}
               key={`hours-${character}-${index}-${episodeId}`}
+              character={character}
             />
           ))}
         </div>
@@ -27,8 +27,8 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {minutes.split("").map((character, index) => (
             <Panel
-              character={character}
               key={`minutes-${character}-${index}-${episodeId}`}
+              character={character}
             />
           ))}
         </div>
@@ -38,8 +38,8 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {seconds.split("").map((character, index) => (
             <Panel
-              character={character}
               key={`seconds-${character}-${index}-${episodeId}`}
+              character={character}
             />
           ))}
         </div>

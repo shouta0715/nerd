@@ -9,7 +9,7 @@ export const Loader = ({
   className = "",
 }: LoaderProps) =>
   variant === "oval" ? (
-    <Oval color={color} size={size} className={className} />
+    <Oval className={className} color={color} size={size} />
   ) : (
-    <Dots color={color} size={size} className={className} />
+    <Dots className={className} color={color} size={size} />
   );

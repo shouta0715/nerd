@@ -12,7 +12,7 @@ export const SeasonWorksList: FC<Props> = ({ data }) => {
   return (
     <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4  lg:grid-cols-3">
       {deferredFilterWorks?.map((work) => (
-        <WorkItem work={work} key={`work-${work.id}`} />
+        <WorkItem key={`work-${work.id}`} work={work} />
       ))}
     </ul>
   );

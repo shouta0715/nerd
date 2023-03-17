@@ -34,11 +34,11 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
             <TodayEpisodeList data={todayEpisodes} />
             <Text
               align="center"
+              className="mt-6 flex w-full items-center justify-center hover:underline"
               component="p"
               ff="Hiragino Sans"
-              className="mt-6 flex w-full items-center justify-center hover:underline"
             >
-              <Link href="/list/todayEpisodes" className="text-base md:text-lg">
+              <Link className="text-base md:text-lg" href="/list/todayEpisodes">
                 今日のエピソードをもっと見る
               </Link>
               <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
@@ -52,16 +52,16 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />
             <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4  lg:grid-cols-3">
               {seasonWorks.works?.map((work) => (
-                <WorkItem work={work} key={`work-${work.id}`} />
+                <WorkItem key={`work-${work.id}`} work={work} />
               ))}
             </ul>
             <Text
-              component="p"
               align="center"
-              ff="Hiragino Sans"
               className="mt-6 flex w-full items-center justify-center hover:underline"
+              component="p"
+              ff="Hiragino Sans"
             >
-              <Link href="/list/seasonWorks" className="text-base md:text-lg">
+              <Link className="text-base md:text-lg" href="/list/seasonWorks">
                 今期のアニメをもっと見る
               </Link>
               <ArrowSmallRightIcon className="ml-1 h-6 w-6" />

@@ -14,10 +14,10 @@ export const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
       <Text className="mb-1 text-sm md:text-base">{title}</Text>
       {episodeTitle && (
         <div className="flex items-center">
-          <Text size="xs" className="mr-1" color="dimmed">
+          <Text className="mr-1" color="dimmed" size="xs">
             {number}.
           </Text>
-          <Text size="xs" color="dimmed">
+          <Text color="dimmed" size="xs">
             {episodeTitle}
           </Text>
         </div>

@@ -55,7 +55,16 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
         </figure>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
           <TextareaAutosize
+            className="w-full resize-none appearance-none rounded-full border  border-gray-300 py-2 px-4 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={time === 0 || !user}
+            maxLength={100}
+            maxRows={4}
+            onChange={(e) =>
+              content.length <= 100 &&
+              setInputComment({
+                content: e.currentTarget.value,
+              })
+            }
             placeholder={
               user && time !== 0
                 ? `コメントを入力`
@@ -63,16 +72,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
                 ? "ログイン中です"
                 : "再生してください"
             }
-            className="w-full resize-none appearance-none rounded-full border  border-gray-300 py-2 px-4 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
-            maxRows={4}
-            maxLength={100}
             value={content}
-            onChange={(e) =>
-              content.length <= 100 &&
-              setInputComment({
-                content: e.currentTarget.value,
-              })
-            }
           />
           <div className="absolute right-2 flex flex-col ">
             <div
@@ -85,11 +85,11 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
             </div>
             <Button
               className="h-8 w-8 border-none bg-teal-50 p-0 active:translate-y-0"
-              type="submit"
               radius="full"
+              type="submit"
             >
               {isLoading ? (
-                <Loader size="sm" color="green" />
+                <Loader color="green" size="sm" />
               ) : (
                 <ArrowUpIcon className=" h-4 w-4 stroke-teal-500" />
               )}
@@ -98,9 +98,9 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
         </div>
 
         <Cog8ToothIcon
+          aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
           className="h-6 w-6 cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
         />
       </form>
     </div>

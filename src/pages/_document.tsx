@@ -4,13 +4,13 @@ const Document = () => (
   <Html>
     <Head>
       <meta charSet="utf-8" />
-      <link rel="icon" href="/favicon.ico" />
-      <meta name="description" content="常にリアルタイムで感想を共有しよう" />
-      <meta property="og:site_name" content="Anime" />
-      <meta property="og:title" content="Anime" />
+      <link href="/favicon.ico" rel="icon" />
+      <meta content="常にリアルタイムで感想を共有しよう" name="description" />
+      <meta content="Anime" property="og:site_name" />
+      <meta content="Anime" property="og:title" />
       <meta
-        property="og:description"
         content="常にリアルタイムで感想を共有しよう"
+        property="og:description"
       />
     </Head>
     <body className="font-futura">

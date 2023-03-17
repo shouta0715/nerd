@@ -11,7 +11,8 @@ type Props = {
 export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
   <li key={episode.id} className="flex h-full flex-col items-center p-2">
     <Link
-      scroll={false}
+      as={`/episode/${episode.id}`}
+      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"
       color="indigo"
       href={{
         pathname: `/episode/${episode.id}`,
@@ -26,15 +27,14 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
           ],
         },
       }}
-      as={`/episode/${episode.id}`}
-      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"
+      scroll={false}
     >
       第{episode.number}話
     </Link>
     <Text
+      className="flex-1 text-xs md:text-sm"
       component="p"
       ff="Hiragino Sans"
-      className="flex-1 text-xs md:text-sm"
     >
       {episode.title}
     </Text>

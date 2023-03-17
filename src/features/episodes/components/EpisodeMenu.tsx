@@ -55,26 +55,25 @@ export const EpisodeMenu: FC<Props> = memo(
           >
             <section className="px-4 py-2">
               <div className="mb-2 flex items-center justify-between">
-                <Text size="sm" className="text-dimmed">
+                <Text className="text-dimmed" size="sm">
                   メニュー
                 </Text>
                 <XMarkIcon
-                  className="h-4 w-4 cursor-pointer text-dimmed lg:hidden"
                   aria-label="Close modal"
+                  className="h-4 w-4 cursor-pointer text-dimmed lg:hidden"
                   onClick={() => setIsMenuOpen(false)}
                 />
               </div>
-              <form onSubmit={onSubmitHandler} className="mb-3 space-y-1">
+              <form className="mb-3 space-y-1" onSubmit={onSubmitHandler}>
                 <label
-                  htmlFor="commenter-name-input"
                   className="flex items-center"
+                  htmlFor="commenter-name-input"
                 >
                   <PencilIcon className="mr-1 h-4 w-4" />
-                  <Text component="span" className="text-xs">
+                  <Text className="text-xs" component="span">
                     投稿名の変更
                   </Text>
                   <Button
-                    type="submit"
                     className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
                       inputValue === user?.user_name || !inputValue.trim()
                         ? "pointer-events-none opacity-0"
@@ -84,12 +83,16 @@ export const EpisodeMenu: FC<Props> = memo(
                       if (!inputValue.trim())
                         setInputValue(user?.user_name ?? "");
                     }}
+                    type="submit"
                   >
                     変更
                   </Button>
                 </label>
                 <Input
-                  value={inputValue}
+                  className="py-1 font-hiragino-sans"
+                  id="commenter-name-input"
+                  inputSize="xs"
+                  maxLength={30}
                   onBlur={() => {
                     if (!inputValue.trim())
                       setInputValue(user?.user_name ?? "");
@@ -98,15 +101,12 @@ export const EpisodeMenu: FC<Props> = memo(
                     if (e.target.value.length > 30) return;
                     setInputValue(e.target.value);
                   }}
-                  maxLength={30}
-                  id="commenter-name-input"
-                  inputSize="xs"
-                  className="py-1 font-hiragino-sans"
+                  value={inputValue}
                 />
               </form>
               <div className="flex flex-col items-center space-y-1">
                 <div className="flex">
-                  <Text size="sm" className="text-indigo-500">
+                  <Text className="text-indigo-500" size="sm">
                     開始から
                   </Text>
                   <div className="relative bg-red-500">
@@ -120,35 +120,35 @@ export const EpisodeMenu: FC<Props> = memo(
                   <div className=" w-full">
                     {padTime.split("").map((digit, index) => (
                       <input
-                        onFocus={() => {
-                          interval?.stop();
-                        }}
+                        key={`${uuid}-${index}`}
+                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:mr-2 odd:ml-5 "
+                        id={`${uuid}-${index + 1}`}
+                        inputMode="numeric"
                         onChange={(e) => {
                           handleChange(e, index);
                         }}
+                        onFocus={() => {
+                          interval?.stop();
+                        }}
                         type="number"
-                        key={`${uuid}-${index}`}
-                        id={`${uuid}-${index + 1}`}
                         value={digit}
-                        inputMode="numeric"
-                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:mr-2 odd:ml-5 "
                       />
                     ))}
                   </div>
                   <div className="flex w-full">
                     <Text
-                      size="xs"
                       className="w-1/3 pr-4 text-center text-dimmed"
+                      size="xs"
                     >
                       時間
                     </Text>
                     <Text
-                      size="xs"
                       className="w-1/3 pr-1 text-center text-dimmed"
+                      size="xs"
                     >
                       分
                     </Text>
-                    <Text size="xs" className="w-1/3 text-center text-dimmed">
+                    <Text className="w-1/3 text-center text-dimmed" size="xs">
                       秒
                     </Text>
                   </div>
@@ -156,8 +156,8 @@ export const EpisodeMenu: FC<Props> = memo(
 
                 <div className="grid w-full grid-cols-3 items-center justify-between">
                   <Button
-                    onClick={() => changeTenTime("minus")}
                     className="relative mx-auto h-12 w-12 border-none"
+                    onClick={() => changeTenTime("minus")}
                   >
                     <RotateArrowRightIcon className="stroke-4 h-8 w-8 stroke-indigo-500  [transform:rotateY(180deg)_rotateZ(-45deg)]" />
                     <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
@@ -188,8 +188,8 @@ export const EpisodeMenu: FC<Props> = memo(
                       : "再開"}
                   </Button>
                   <Button
-                    onClick={() => changeTenTime("add")}
                     className="relative mx-auto h-12 w-12 border-none"
+                    onClick={() => changeTenTime("add")}
                   >
                     <RotateArrowRightIcon className="stroke-4 h-8 w-8 -rotate-45 stroke-indigo-500" />
 
@@ -205,8 +205,8 @@ export const EpisodeMenu: FC<Props> = memo(
               <NextEpisodeMenu
                 episodeNumber={episodeNumber}
                 episodeTitle={episodeTitle}
-                workTitle={workTitle}
                 nextEpisodeId={nextEpisodeId}
+                workTitle={workTitle}
               />
             </Suspense>
           </div>

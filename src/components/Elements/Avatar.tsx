@@ -11,9 +11,6 @@ type Props = {
 export const Avatar: FC<Props> = ({ user_id, user_name, size = "md" }) => (
   <div className="h-[38px] w-[38px] overflow-hidden rounded-full">
     <BoringAvatar
-      name={`${user_id}${user_name}`}
-      variant="beam"
-      size={size === "sm" ? 32 : size === "md" ? 38 : 48}
       colors={[
         "#4FB3BE",
         "#FF7F50",
@@ -31,6 +28,9 @@ export const Avatar: FC<Props> = ({ user_id, user_name, size = "md" }) => (
         "#FF6347",
         "#FFFF00",
       ]}
+      name={`${user_id}${user_name}`}
+      size={size === "sm" ? 32 : size === "md" ? 38 : 48}
+      variant="beam"
     />
   </div>
 );
