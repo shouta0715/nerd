@@ -27,7 +27,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           <Navigation />
         </div>
       </section>
-      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100">
+      <section className="border-x-0 border-y-0 border-b-2 border-solid border-slate-100 bg-indigo-50">
         <div className="container mx-auto ">
           <div className="p-6">
             <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
@@ -46,7 +46,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </div>
         </div>
       </section>
-      <section>
+      <section className="bg-gray-50">
         <div className="container mx-auto ">
           <div className="px-6 pb-12 pt-6">
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />

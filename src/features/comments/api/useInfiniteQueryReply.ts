@@ -17,7 +17,6 @@ const InitialPageParam = {
 };
 
 export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
-  console.log("getReplies", reply_to, pageParam);
   const { cursor_created_at, cursor_reply_to } = pageParam;
 
   const fetcher = useGetRepliesQuery.fetcher(client, {
