@@ -77,11 +77,7 @@ export const GET_COMMENTS = gql`
         user_name
         id
       }
-      replies_aggregate {
-        aggregate {
-          count
-        }
-      }
+      reply_count
     }
   }
 `;

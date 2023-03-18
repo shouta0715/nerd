@@ -10,6 +10,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
   timestamp: any;
   timestamptz: any;
   uuid: any;
@@ -378,6 +379,19 @@ export type Bads_Variance_Fields = {
 /** order by variance() on columns of table "bads" */
 export type Bads_Variance_Order_By = {
   id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type Bigint_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['bigint']>;
+  _gt?: InputMaybe<Scalars['bigint']>;
+  _gte?: InputMaybe<Scalars['bigint']>;
+  _in?: InputMaybe<Array<Scalars['bigint']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bigint']>;
+  _lte?: InputMaybe<Scalars['bigint']>;
+  _neq?: InputMaybe<Scalars['bigint']>;
+  _nin?: InputMaybe<Array<Scalars['bigint']>>;
 };
 
 /** columns and relationships of "chats" */
@@ -849,6 +863,8 @@ export type Comments = {
   replies: Array<Comments>;
   /** An aggregate relationship */
   replies_aggregate: Comments_Aggregate;
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']>;
   reply_to?: Maybe<Scalars['uuid']>;
   /** An object relationship */
   user: Users;
@@ -1028,6 +1044,7 @@ export type Comments_Bool_Exp = {
   replied_to_commenter_name?: InputMaybe<String_Comparison_Exp>;
   replies?: InputMaybe<Comments_Bool_Exp>;
   replies_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
+  reply_count?: InputMaybe<Bigint_Comparison_Exp>;
   reply_to?: InputMaybe<Uuid_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
@@ -1158,6 +1175,7 @@ export type Comments_Order_By = {
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   replied_to_commenter_name?: InputMaybe<Order_By>;
   replies_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
+  reply_count?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
