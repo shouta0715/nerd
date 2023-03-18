@@ -25,11 +25,7 @@ export const Comment: FC<Props> = ({ comment }) => {
           {comment.commenter_name}
         </Text>
         <p
-          ref={
-            (comment.replies_aggregate.aggregate?.count ?? -1) > 0
-              ? content
-              : null
-          }
+          ref={(comment.reply_count ?? -1) > 0 ? content : null}
           className=" scroll-mt-20 break-words py-1 font-hiragino-sans text-base lg:scroll-mt-10"
         >
           {comment.content} lorem
@@ -60,7 +56,7 @@ export const Comment: FC<Props> = ({ comment }) => {
         >
           <Replies
             content={content}
-            reply_count={comment.replies_aggregate.aggregate?.count || 0}
+            reply_count={comment.reply_count || 0}
             reply_id={comment.id}
           />
         </Suspense>

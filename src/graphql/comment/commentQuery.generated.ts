@@ -35,7 +35,7 @@ export type GetCommentsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, replies_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null } }> };
+export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
   original_comment_id: Types.Scalars['uuid'];
@@ -138,11 +138,7 @@ export const GetCommentsDocument = `
       user_name
       id
     }
-    replies_aggregate {
-      aggregate {
-        count
-      }
-    }
+    reply_count
   }
 }
     `;

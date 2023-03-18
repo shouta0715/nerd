@@ -45,7 +45,7 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
 
       return {
         cursor_created_at: lastReply.created_at,
-        cursor_reply_to: lastReply.created_at,
+        cursor_reply_to: lastReply.reply_to,
       };
     },
     suspense: true,
