@@ -23,7 +23,7 @@ export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
     original_comment_id: reply_to,
     cursor_created_at,
     cursor_reply_to,
-    reply_limit: 20,
+    reply_limit: 10,
   });
 
   const data = await fetcher();
@@ -45,7 +45,7 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
 
       return {
         cursor_created_at: lastReply.created_at,
-        cursor_reply_to: lastReply.id,
+        cursor_reply_to: lastReply.created_at,
       };
     },
     suspense: true,
