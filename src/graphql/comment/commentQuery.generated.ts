@@ -44,7 +44,7 @@ export type GetRepliesQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, depth?: number | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 
 export const InsertChatDocument = `
@@ -170,7 +170,6 @@ export const GetRepliesDocument = `
     commenter_name
     reply_to
     replied_to_commenter_name
-    depth
     user {
       anonymous
       user_name

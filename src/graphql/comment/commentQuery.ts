@@ -104,7 +104,6 @@ export const GET_REPLIES = gql`
       commenter_name
       reply_to
       replied_to_commenter_name
-      depth
       user {
         anonymous
         user_name
