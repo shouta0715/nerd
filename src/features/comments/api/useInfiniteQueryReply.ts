@@ -17,7 +17,7 @@ type GetReplyArgs = {
 
 const InitialPageParam = {
   // TODO アプリ公開日にする
-  cursor: "2021-01-01T00:00:00.000Z",
+  cursor: null,
 };
 
 export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
@@ -44,7 +44,7 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
       }),
     getNextPageParam: (lastPage): PageParam => {
       const lastReply = lastPage.replies.at(-1);
-      console.log(lastReply);
+
       if (!lastReply || lastPage.replies.length < 10) return undefined;
 
       return {
