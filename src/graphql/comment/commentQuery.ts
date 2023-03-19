@@ -84,16 +84,14 @@ export const GET_COMMENTS = gql`
 
 export const GET_REPLIES = gql`
   query GetReplies(
-    $original_comment_id: uuid!
-    $cursor_reply_to: uuid
-    $cursor_created_at: timestamptz
+    $_reply_to: uuid!
+    $cursor: timestamptz!
     $reply_limit: Int!
   ) {
     replies(
       args: {
-        original_comment_id: $original_comment_id
-        cursor_reply_to: $cursor_reply_to
-        cursor_created_at: $cursor_created_at
+        _reply_to: $_reply_to
+        cursor: $cursor
         reply_limit: $reply_limit
       }
     ) {
@@ -106,6 +104,7 @@ export const GET_REPLIES = gql`
       commenter_name
       reply_to
       replied_to_commenter_name
+      depth
       user {
         anonymous
         user_name
