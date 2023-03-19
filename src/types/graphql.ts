@@ -850,8 +850,6 @@ export type Comments = {
   commenter_name: Scalars['String'];
   content: Scalars['String'];
   created_at: Scalars['timestamptz'];
-  /** A computed field, executes function "depth_for_comment" */
-  depth?: Maybe<Scalars['Int']>;
   /** An object relationship */
   episode?: Maybe<Episodes>;
   episode_id?: Maybe<Scalars['uuid']>;
@@ -1038,7 +1036,6 @@ export type Comments_Bool_Exp = {
   commenter_name?: InputMaybe<String_Comparison_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  depth?: InputMaybe<Int_Comparison_Exp>;
   episode?: InputMaybe<Episodes_Bool_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1172,7 +1169,6 @@ export type Comments_Order_By = {
   commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  depth?: InputMaybe<Order_By>;
   episode?: InputMaybe<Episodes_Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
