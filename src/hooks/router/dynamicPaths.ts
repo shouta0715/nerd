@@ -1,11 +1,7 @@
 /* eslint-disable no-promise-executor-return */
 
-import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { Episodes_Bool_Exp } from "src/types/graphql";
-import { getClient } from "src/utils/getClient";
 import { parseXml } from "src/utils/parseXml";
-import { returningSeason } from "src/utils/returningSeason";
 
 export const getTodayData = async () => {
   const URL = process.env.NEXT_PUBLIC_SHOBOI_ENDOPOINT as string;
@@ -29,38 +25,38 @@ export const getTodayData = async () => {
   return query;
 };
 
-export const getTodaysAndSeasonsIds = async () => {
-  const todayDataQuery = await getTodayData();
-  const { request: client } = getClient();
+// export const getTodaysAndSeasonsIds = async () => {
+//   const todayDataQuery = await getTodayData();
+//   const { request: client } = getClient();
 
-  const todayEpisodeFetcher = useGetTodayEpisodesQuery.fetcher(client, {
-    where: todayDataQuery,
-  });
+//   const todayEpisodeFetcher = useGetTodayEpisodesQuery.fetcher(client, {
+//     where: todayDataQuery,
+//   });
 
-  const todayEpisodes = await todayEpisodeFetcher();
-  const todayIds: string[] = todayEpisodes.episodes.map(
-    (episode) => episode.id
-  );
+//   const todayEpisodes = await todayEpisodeFetcher();
+//   const todayIds: string[] = todayEpisodes.episodes.map(
+//     (episode) => episode.id
+//   );
 
-  const seasonData = returningSeason();
-  const seasonsFetcher = useGetSeasonWorksQuery.fetcher(client, {
-    season: seasonData.season,
-    year: seasonData.year,
-  });
-  const seasons = await seasonsFetcher();
-  const seasonsIds: string[] = seasons.works
-    .map((work) => {
-      const episodeIds = work.episodes.map((episode) => episode.id);
+//   const seasonData = returningSeason();
+//   const seasonsFetcher = useGetSeasonWorksQuery.fetcher(client, {
+//     season: seasonData.season,
+//     year: seasonData.year,
+//   });
+//   const seasons = await seasonsFetcher();
+//   const seasonsIds: string[] = seasons.works
+//     .map((work) => {
+//       const episodeIds = work.episodes.map((episode) => episode.id);
 
-      return episodeIds;
-    })
-    .flat();
+//       return episodeIds;
+//     })
+//     .flat();
 
-  const allIds = [...todayIds, ...seasonsIds];
+//   const allIds = [...todayIds, ...seasonsIds];
 
-  const paths = allIds.map((id) => ({
-    params: { slug: id },
-  }));
+//   const paths = allIds.map((id) => ({
+//     params: { slug: id },
+//   }));
 
-  return paths;
-};
+//   return paths;
+// };
