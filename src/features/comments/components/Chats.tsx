@@ -2,7 +2,7 @@ import { ArrowDownIcon } from "@heroicons/react/24/solid";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
-import { useChats } from "src/features/comments/hooks/useChatComments";
+import { useChats } from "src/features/comments/hooks/useChats";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 

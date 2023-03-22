@@ -9,10 +9,9 @@ type Props = {
 };
 
 export const CountDownTimer: FC<Props> = ({ start_time, id }) => {
-  const { time } = useCountDown(start_time ?? "2000-01-01T00:00:00+00:00");
-  const hours = time.hours.toString().padStart(2, "0");
-  const minutes = time.minutes.toString().padStart(2, "0");
-  const seconds = time.seconds.toString().padStart(2, "0");
+  const { hours, minutes, seconds } = useCountDown(
+    start_time ?? "2000-01-01T00:00:00+00:00"
+  );
 
   return (
     <div className="flex space-x-4 md:space-x-6">

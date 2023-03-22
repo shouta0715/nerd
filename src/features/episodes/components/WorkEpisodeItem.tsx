@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisode } from "src/features/episodes/types";
 
@@ -8,7 +8,7 @@ type Props = {
   work_title: string;
 };
 
-export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
+export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
   <li key={episode.id} className="flex h-full flex-col items-center p-2">
     <Link
       as={`/episode/${episode.id}`}
@@ -39,4 +39,4 @@ export const WorkEpisodeItem: FC<Props> = memo(({ episode, work_title }) => (
       {episode.title}
     </Text>
   </li>
-));
+);
