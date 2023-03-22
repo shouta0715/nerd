@@ -53,7 +53,7 @@ export const Header: FC = () => {
           </div>
           <div>
             <Text
-              className="max-w-md py-2 text-base md:text-lg"
+              className="w-md py-1 text-base md:py-2 md:text-lg"
               component="p"
               ff="Hiragino Sans"
             >
@@ -72,10 +72,7 @@ export const Header: FC = () => {
               component="p"
               ff="Hiragino Sans"
             >
-              <span
-                className="inline-block rounded
-              bg-indigo-200 px-1 font-bold"
-              >
+              <span className="inline-block rounded font-bold">
                 匿名またはログイン
               </span>
               して、アニメ感想を投稿しよう！
