@@ -21,36 +21,32 @@ type Props = {
 
 const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
   <Layout>
-    <div className="space-y-2 bg-slate-50">
-      <section className=" border-slate-100">
-        <div className="container mx-auto py-4">
+    <div className="container mx-auto flex flex-col space-y-2 bg-slate-50 md:flex-row">
+      <section className="w-full min-w-fit bg-white md:w-1/3 md:max-w-sm">
+        <div className="static top-0 mx-auto py-4 md:sticky">
           <Navigation />
         </div>
       </section>
-      <section className=" border-slate-100 ">
-        <div className="container mx-auto ">
-          <div className="p-6">
-            <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
-            <TodayEpisodeList data={todayEpisodes} />
-            <Text
-              align="center"
-              className="mt-6 flex w-full items-center justify-center hover:underline"
-              component="p"
-              ff="Hiragino Sans"
-            >
-              <Link className="text-base md:text-lg" href="/list/todayEpisodes">
-                今日のエピソードをもっと見る
-              </Link>
-              <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
-            </Text>
-          </div>
-        </div>
-      </section>
-      <section className="">
-        <div className="container mx-auto ">
+      <div className="container mx-auto ">
+        <section className="p-6">
+          <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
+          <TodayEpisodeList data={todayEpisodes} />
+          <Text
+            align="center"
+            className="mt-6 flex w-full items-center justify-center hover:underline"
+            component="p"
+            ff="Hiragino Sans"
+          >
+            <Link className="text-base md:text-lg" href="/list/todayEpisodes">
+              今日のエピソードをもっと見る
+            </Link>
+            <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
+          </Text>
+        </section>
+        <section className="container mx-auto ">
           <div className="px-6 pb-12 pt-6">
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />
-            <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-4  lg:grid-cols-3">
+            <ul className="grid grid-cols-1 gap-2  md:gap-4  lg:grid-cols-2">
               {seasonWorks.works?.map((work) => (
                 <WorkItem key={`work-${work.id}`} work={work} />
               ))}
@@ -67,8 +63,8 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
               <ArrowSmallRightIcon className="ml-1 h-6 w-6" />
             </Text>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   </Layout>
 );
