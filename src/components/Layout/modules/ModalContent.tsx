@@ -5,7 +5,6 @@ import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { GoogleIcon } from "src/components/Icon/GoogleIcon";
-import { Logo } from "src/components/Icon/Logo";
 import { TwitterIcon } from "src/components/Icon/TwitterIcon";
 import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -15,13 +14,12 @@ export const ModalContent: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="mx-auto flex w-4/5 flex-col  items-center justify-center space-y-5 rounded-md bg-white p-6 shadow-sm md:max-w-md">
+    <div className="flex flex-col  items-center justify-center space-y-3 rounded-md bg-white p-6 shadow-sm md:max-w-md">
       <header className="flex w-full items-center justify-center">
-        <Text
-          className="flex flex-1 items-center justify-center font-bold"
-          size="lg"
-        >
-          <Logo />
+        <Text className="flex flex-1 items-center justify-center font-bold">
+          <span className="inline-block bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-xl text-transparent md:text-2xl">
+            Nerd
+          </span>
         </Text>
         <XMarkIcon
           className="h-5 w-5 cursor-pointer"
