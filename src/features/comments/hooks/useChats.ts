@@ -19,11 +19,10 @@ export const useChats = ({ episode_id }: Args) => {
   const interval = useTimerState((state) => state.interval);
   const { ref, entry } = useInterSection({
     root: null,
-    rootMargin: "100px",
+    rootMargin: "",
     threshold: 1,
   });
   const [isBottom, setIsBottom] = useState<boolean>(true);
-  // const prefetchFinishComments = usePrefetchFinishEpisode();
 
   const chatCommentData = useMemo(() => {
     if (!data?.pages) return [];
@@ -37,19 +36,9 @@ export const useChats = ({ episode_id }: Args) => {
   const deferredData = useDeferredValue(filteredData);
 
   useEffect(() => {
-    if (!entry) return;
-
-    setIsBottom(entry.isIntersecting);
-  }, [entry]);
-
-  useEffect(() => {
-    if (!isBottom) return;
-
-    entry?.target.scrollIntoView({ behavior: "smooth" });
-  }, [deferredData.length, entry?.target, isBottom]);
-
-  useEffect(() => {
     if (!chatCommentData) setFilteredData([]);
+    if (entry) setIsBottom(entry.isIntersecting);
+    if (isBottom) entry?.target.scrollIntoView({ behavior: "smooth" });
 
     if (isMenuOpen && !interval?.active) {
       setFilteredData((oldData) => [...oldData]);
@@ -59,21 +48,23 @@ export const useChats = ({ episode_id }: Args) => {
       );
     }
 
-    // eslint-disable-next-line no-useless-return
-    if (time % 300 !== 0 || time === 0) return;
-
-    fetchNextPage({
-      pageParam: {
-        _gte: time,
-        _lt: time + 300,
-      },
-    });
-  }, [chatCommentData, fetchNextPage, interval?.active, isMenuOpen, time]);
-
-  // useEffect(() => {
-  // TODO prefetchの秒数どうするか問題
-  //   if (time === 600) prefetchFinishComments(episode_id);
-  // }, [time, prefetchFinishComments, episode_id]);
+    if (time % 300 === 0 && time !== 0) {
+      fetchNextPage({
+        pageParam: {
+          _gte: time,
+          _lt: time + 300,
+        },
+      });
+    }
+  }, [
+    chatCommentData,
+    entry,
+    fetchNextPage,
+    interval?.active,
+    isBottom,
+    isMenuOpen,
+    time,
+  ]);
 
   return {
     data: deferredData,

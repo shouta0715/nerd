@@ -10,13 +10,10 @@ export const useCountUp = () => {
 
   useEffect(() => {
     setInterval(interval);
-
-    return () => {
-      if (interval.active) {
-        interval.stop();
-      }
-    };
   }, [interval, setInterval, interval.active]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => interval.stop(), []);
 
   return {
     minutes: time.minutes.toString().padStart(2, "0"),

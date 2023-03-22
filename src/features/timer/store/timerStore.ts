@@ -1,7 +1,6 @@
 /* eslint-disable no-nested-ternary */
 
 import create from "zustand";
-import { useInterval } from "src/features/timer/hooks/useInterval";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 
 const { timeToSecond, secondToTime } = timeProcessing();
@@ -17,6 +16,13 @@ type TimerCount = {
   hours: number;
 };
 
+type Interval = {
+  active: boolean;
+  start: () => void;
+  stop: () => void;
+  toggle: () => void;
+};
+
 type TimerState = {
   time: TimerCount;
   episodeId: string;
@@ -26,8 +32,8 @@ type TimerState = {
   getTime: () => number;
   setEpisodeId: (episodeId: string) => void;
   restEpisodeId: () => void;
-  interval: null | ReturnType<typeof useInterval>;
-  setInterval: (interval: ReturnType<typeof useInterval>) => void;
+  interval: null | Interval;
+  setInterval: (interval: Interval | null) => void;
   changeTenTime: (formula: "add" | "minus") => void;
   changeTime: (time: number) => void;
   getPadStartTime: () => string;
@@ -56,7 +62,7 @@ export const useTimerState = create<TimerState>((set, get) => ({
   setEpisodeId: (episodeId: string) => set({ episodeId }),
   restEpisodeId: () => set({ episodeId: "" }),
   interval: null,
-  setInterval: (interval: ReturnType<typeof useInterval>) => set({ interval }),
+  setInterval: (interval) => set({ interval }),
   changeTenTime: (formula: "add" | "minus") => {
     const time = get().getTime();
     const newTime =
