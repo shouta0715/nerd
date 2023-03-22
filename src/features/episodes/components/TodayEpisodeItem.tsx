@@ -25,7 +25,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   const { getTimeStatus } = useTimerStatus();
 
   return (
-    <li className="relative mx-auto max-w-md flex-1  rounded-md border border-solid border-slate-200 bg-white p-4 shadow hover:bg-slate-50 md:px-6">
+    <li className="relative flex-1  rounded-md border border-solid border-slate-200 bg-white p-4 shadow hover:bg-slate-50 md:px-6">
       <Link
         className="absolute inset-0 rounded-md"
         href={`/episode/${episode.id}?category=live`}
