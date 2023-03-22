@@ -1,5 +1,3 @@
-import { utcToZonedTime } from "date-fns-tz";
-
 type Season = "WINTER" | "SPRING" | "SUMMER" | "AUTUMN";
 
 type SeasonDate = {
@@ -8,7 +6,7 @@ type SeasonDate = {
 };
 
 export const returningSeason = (): SeasonDate => {
-  const today = utcToZonedTime(new Date(), "Asia/Tokyo");
+  const today = new Date();
 
   const month = today.getMonth() + 1;
   const year = today.getFullYear();

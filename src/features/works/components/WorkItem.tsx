@@ -17,7 +17,7 @@ type Props = {
 export const WorkItem: FC<Props> = ({ work }) => (
   <li
     key={`works-${work.id}`}
-    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 drop-shadow-sm md:p-4"
+    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <Link

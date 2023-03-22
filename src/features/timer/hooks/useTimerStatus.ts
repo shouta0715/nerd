@@ -1,4 +1,3 @@
-import { utcToZonedTime } from "date-fns-tz";
 import { useCallback } from "react";
 
 type Args = {
@@ -12,8 +11,8 @@ type GetIsArchiveArgs = {
 };
 
 export const useTimerStatus = () => {
-  const getTimeStatus = useCallback(({ start_time, end_time }: Args) => {
-    const now = utcToZonedTime(new Date(), "Asia/Tokyo");
+  const getTimeStatus = ({ start_time, end_time }: Args) => {
+    const now = new Date();
     const startTime = new Date(start_time);
     const endTime = new Date(end_time);
     if (now.getTime() < startTime.getTime()) {
@@ -33,11 +32,11 @@ export const useTimerStatus = () => {
       timer: true,
       status: "終了まで",
     };
-  }, []);
+  };
 
   const getIsFinished = useCallback(
     ({ end_time }: Omit<Args, "start_time">) => {
-      const now = utcToZonedTime(new Date(), "Asia/Tokyo");
+      const now = new Date();
       const endTime = new Date(end_time);
 
       return now.getTime() > endTime.getTime();

@@ -20,10 +20,15 @@ export const TodayEpisodeList: FC<Props> = ({ data }) => {
   const { deferredFilterEpisodes } = useTodayEpisodes({ data });
 
   return (
-    <ul className="flex flex-wrap gap-4">
-      {deferredFilterEpisodes?.map((episode) => (
-        <DynamicTodayEpisodeItem key={episode.id} episode={episode} />
-      ))}
-    </ul>
+    <>
+      <ul className="peer flex flex-wrap gap-4">
+        {deferredFilterEpisodes?.map((episode) => (
+          <DynamicTodayEpisodeItem key={episode.id} episode={episode} />
+        ))}
+      </ul>
+      <p className="peer-empty:decoration-slice-1 hidden text-center text-xl font-bold peer-empty:mt-8 peer-empty:block peer-empty:text-gray-500">
+        今日放送のエピソードはありません。
+      </p>
+    </>
   );
 };

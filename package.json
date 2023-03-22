@@ -29,7 +29,6 @@
     "boring-avatars": "^1.7.0",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
-    "date-fns-tz": "^2.0.0",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-next": "13.1.1",
     "fast-xml-parser": "^4.1.1",

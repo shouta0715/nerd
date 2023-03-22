@@ -19,7 +19,7 @@ export const useChats = ({ episode_id }: Args) => {
   const interval = useTimerState((state) => state.interval);
   const { ref, entry } = useInterSection({
     root: null,
-    rootMargin: "",
+    rootMargin: "100px",
     threshold: 1,
   });
   const [isBottom, setIsBottom] = useState<boolean>(true);
