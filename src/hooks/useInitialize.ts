@@ -8,9 +8,9 @@ import { useUserState } from "../store/user/userState";
 import { client } from "src/libs/graphqlClient";
 import { useGlobalState } from "src/store/global/globalStore";
 
-const useInitialize = () => {
-  const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
+const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
 
+const useInitialize = () => {
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
 
@@ -61,7 +61,7 @@ const useInitialize = () => {
     return () => {
       unSubUser();
     };
-  }, [TOKEN_KEY, setUser, setAuthLoading]);
+  }, [setUser, setAuthLoading]);
 };
 
 export default useInitialize;

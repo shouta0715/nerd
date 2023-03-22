@@ -38,6 +38,7 @@ export const useTodayEpisodes = ({ data }: Props) => {
   const limit = indexPage ? 8 : data?.episodes?.length;
   const searchInput = useSearchInputState((state) => state.searchInput);
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
+
   const filterEpisodes = useMemo(
     () =>
       data?.episodes

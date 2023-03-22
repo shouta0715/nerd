@@ -4,7 +4,7 @@ import {
   Square3Stack3DIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
@@ -14,7 +14,7 @@ type Props = {
   work: Work;
 };
 
-export const WorkItem: FC<Props> = memo(({ work }) => (
+export const WorkItem: FC<Props> = ({ work }) => (
   <li
     key={`works-${work.id}`}
     className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 drop-shadow-sm md:p-4"
@@ -72,4 +72,4 @@ export const WorkItem: FC<Props> = memo(({ work }) => (
       </div>
     </div>
   </li>
-));
+);

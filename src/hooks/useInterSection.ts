@@ -27,8 +27,8 @@ export const useInterSection = <T extends HTMLElement = any>(
 
       observer.current.observe(element);
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [options?.rootMargin, options?.root, options?.threshold]
+
+    [options]
   );
 
   return { ref, entry };
