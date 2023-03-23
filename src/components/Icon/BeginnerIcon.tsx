@@ -1,9 +1,9 @@
 /* eslint-disable react/style-prop-object */
 import React from "react";
 
-export const BeginnerIcon = () => (
+export const BeginnerIcon = ({ className = "" }) => (
   <svg
-    className="h-5 w-5 md:h-6 md:w-6"
+    className={className}
     id="_x32_"
     version="1.1"
     viewBox="0 0 512 512"

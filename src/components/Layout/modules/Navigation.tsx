@@ -20,7 +20,7 @@ const mockNavigation = [
   },
   {
     name: "今期のアニメ",
-    href: "/list/thisSeason",
+    href: "/list/seasonWorks",
     icon: RocketLaunchIcon,
     color: " stroke-red-500",
   },
@@ -54,10 +54,13 @@ const mockNavigation = [
 const navList = mockNavigation.map((item) => (
   <li
     key={item.name}
-    className="group border-b bg-white  py-2 text-xs font-bold hover:border-indigo-500 md:text-sm"
+    className="group flex items-center  justify-center space-x-2 bg-white text-xs font-bold  md:text-sm"
   >
-    <Link className="flex items-center space-x-4" href={`${item.href}`}>
-      <item.icon className={`h-5 w-5 md:h-6 md:w-6 ${item.color}`} />
+    <item.icon className={`h-full w-6 ${item.color}`} />
+    <Link
+      className="flex flex-1 items-center border-b py-2 group-hover:border-indigo-500"
+      href={`${item.href}`}
+    >
       <span className="mt-1 inline-block flex-1">{item.name}</span>
       <ChevronRightIcon className="h-4 w-4 stroke-slate-300 group-hover:stroke-indigo-500 md:h-6 md:w-6 " />
     </Link>
