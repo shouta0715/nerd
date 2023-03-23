@@ -19,7 +19,7 @@ export const Header: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <header className="w-full md:border md:border-slate-200">
+    <header className="w-full bg-white md:border md:border-slate-200">
       <div className="container mx-auto px-6 py-2 md:px-10">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">

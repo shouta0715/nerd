@@ -1,4 +1,8 @@
-import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowSmallRightIcon,
+  MagnifyingGlassIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { Input } from "src/components/Elements/Input/Input";
@@ -22,17 +26,31 @@ type Props = {
 
 const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
   <Layout>
-    <div className="container mx-auto flex flex-col space-y-2 bg-slate-50 md:flex-row">
-      <section className="w-full min-w-fit bg-white md:w-1/3 md:max-w-sm">
-        <div className="static top-0 mx-auto space-y-2 px-6 py-2 md:sticky md:px-2">
-          <Navigation />
+    <div className="container mx-auto flex flex-col space-y-2  md:flex-row">
+      <section className="w-full min-w-fit md:w-1/3 md:max-w-sm md:border-r">
+        <div className="static top-0 mx-auto space-y-4 px-6 py-2 md:sticky md:px-2">
           <form className="flex w-full space-x-4">
-            <Input className="flex-1" placeholder="タイトルで検索" />
+            <div className="relative flex-1">
+              <MagnifyingGlassIcon className="absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
+              <Input
+                className="peer px-8"
+                placeholder="タイトルで検索"
+                type="text"
+              />
+              <button
+                className="absolute top-1/2 right-2 block -translate-y-1/2 rounded-full bg-indigo-50 p-1 peer-placeholder-shown:hidden"
+                type="button"
+              >
+                <XMarkIcon className=" h-3 w-3  cursor-pointer fill-white stroke-indigo-500 stroke-2" />
+              </button>
+            </div>
           </form>
+
+          <Navigation />
         </div>
       </section>
       <div className="container mx-auto ">
-        <section className="p-6">
+        <section className="px-6 py-2">
           <TopTitle href="/list/todayEpisodes" title="今日放送のエピソード" />
           <TodayEpisodeList data={todayEpisodes} />
           <Text
@@ -48,7 +66,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </Text>
         </section>
         <section className="container mx-auto ">
-          <div className="px-6 pb-12 pt-6">
+          <div className="px-6 pb-12 pt-2">
             <TopTitle href="/list/seasonWorks" title="今期のアニメ" />
             <ul className="grid grid-cols-1 gap-2  md:gap-4  lg:grid-cols-2">
               {seasonWorks.works?.map((work) => (
