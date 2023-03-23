@@ -3,13 +3,17 @@ import React from "react";
 
 export const BeginnerIcon = () => (
   <svg
-    className="h-6 w-6"
+    className="h-5 w-5 md:h-6 md:w-6"
     id="_x32_"
     version="1.1"
     viewBox="0 0 512 512"
     width="512px"
     xmlns="http://www.w3.org/2000/svg"
   >
+    <style>
+      {`	       .st0{fill:#4B4B4B;}
+  `}
+    </style>
     <g>
       <path
         className="st0"
