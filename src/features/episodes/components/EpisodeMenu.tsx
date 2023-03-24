@@ -174,9 +174,7 @@ export const EpisodeMenu: FC<Props> = memo(
                         ? "bg-indigo-500"
                         : "bg-blue-500"
                     }`}
-                    onClick={() =>
-                      interval?.active ? interval.stop() : interval?.start()
-                    }
+                    onClick={() => interval?.toggle()}
                     size="sm"
                   >
                     {interval?.active
