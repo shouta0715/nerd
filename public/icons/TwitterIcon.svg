@@ -1,6 +1,3 @@
-import React, { FC } from "react";
-
-export const TwitterIcon: FC = () => (
   <svg
     color="#00ACEE"
     fill="currentColor"
@@ -14,4 +11,3 @@ export const TwitterIcon: FC = () => (
       fillRule="nonzero"
     />
   </svg>
-);

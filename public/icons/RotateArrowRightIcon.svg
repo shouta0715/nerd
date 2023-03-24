@@ -1,8 +1,5 @@
-import React from "react";
-
-export const RotateArrowRightIcon = ({ className = "" }) => (
   <svg
-    className={className}
+    
     data-name="Layer 1"
     id="Layer_1"
     strokeWidth="1.5"
@@ -11,7 +8,7 @@ export const RotateArrowRightIcon = ({ className = "" }) => (
   >
     <defs>
       <style>
-        {".cls-63ce7424ea57ea6c8380058f-1{fill:none;stroke-miterlimit:10;}"}
+        .cls-63ce7424ea57ea6c8380058f-1{fill:none;stroke-miterlimit:10;}
       </style>
     </defs>
     <path
@@ -23,4 +20,3 @@ export const RotateArrowRightIcon = ({ className = "" }) => (
       points="20.61 0.5 20.61 6.24 14.87 6.24"
     />
   </svg>
-);

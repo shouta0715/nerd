@@ -2,10 +2,10 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
 import React, { FC } from "react";
+import GoogleIcon from "public/icons/GoogleIcon.svg";
+import TwitterIcon from "public/icons/TwitterIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
-import { GoogleIcon } from "src/components/Icon/GoogleIcon";
-import { TwitterIcon } from "src/components/Icon/TwitterIcon";
 import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
 import { useGlobalState } from "src/store/global/globalStore";
 
