@@ -19,6 +19,7 @@ const sizes = {
 };
 
 const rounded = {
+  none: "rounded-none",
   sm: "rounded-sm",
   md: "rounded-md",
   lg: "rounded-lg",
@@ -93,7 +94,7 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
       lh = "normal",
       align = "left",
       valign = "baseline",
-      radius = "md",
+      radius = "none",
       children,
       className = "",
       ...rest

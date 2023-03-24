@@ -52,4 +52,5 @@ export const useQueryWork = ({ slug, series_id, work }: Args) =>
         works: [],
       };
     },
+    staleTime: 1000 * 60 * 5,
   });
