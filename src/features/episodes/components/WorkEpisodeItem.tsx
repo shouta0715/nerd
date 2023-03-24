@@ -5,17 +5,17 @@ import { WorkEpisode } from "src/features/episodes/types";
 
 type Props = {
   episode: WorkEpisode;
-  work_title: string;
+  work_title?: string;
 };
 
 export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
   <li key={episode.id} className="flex h-full flex-col items-center p-2">
     <Link
-      as={`/episode/${episode.id}`}
+      as={`/episodes/${episode.id}`}
       className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"
       color="indigo"
       href={{
-        pathname: `/episode/${episode.id}`,
+        pathname: `/episodes/${episode.id}`,
         query: {
           category: "archive",
           episode: [

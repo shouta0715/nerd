@@ -28,7 +28,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
     <li className="relative flex-1 rounded-md border border-solid border-slate-200 bg-white p-4 shadow  md:px-6">
       <Link
         className="absolute inset-0 rounded-md"
-        href={`/episode/${episode.id}?category=live`}
+        href={`/episodes/${episode.id}?category=live`}
         scroll={false}
       />
       <div className="mx-auto flex min-h-full flex-col items-center justify-between">
@@ -67,7 +67,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <div>
             <Link
               className="mr-4 inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
-              href={`/episode/${episode.id}?category=archive`}
+              href={`/episodes/${episode.id}?category=archive`}
               scroll={false}
             >
               アーカイブで参加する
