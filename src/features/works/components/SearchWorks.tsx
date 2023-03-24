@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import Link from "next/link";
 import React from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
@@ -24,13 +25,21 @@ export const SearchWorks = () => {
           <Link
             as={
               work.series_id
-                ? `/works/${work.id}?series=${work.series_id}`
-                : `/works/${work.id}`
+                ? work.has_episodes
+                  ? `/works/${work.id}?series=${work.series_id}`
+                  : `/works/play/${work.id}?series=${work.series_id}`
+                : work.has_episodes
+                ? `/works/${work.id}`
+                : `/works/play/${work.id}`
             }
             href={{
-              pathname: `/works/${work.id}`,
+              pathname: `${
+                work.has_episodes
+                  ? `/works/${work.id}`
+                  : `/works/play/${work.id}`
+              }`,
               query: {
-                series: work.series_id ?? null,
+                series: work.series_id ?? undefined,
                 work: [work.title, work.series_title],
               },
             }}

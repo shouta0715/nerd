@@ -63,14 +63,14 @@ export const GET_WORK_SERIES = gql`
     }
     works(
       where: { _and: { id: { _neq: $id }, series_id: { _eq: $series_id } } }
-      order_by: { id: asc }
+      order_by: [{ has_episodes: desc }]
     ) {
       id
       title
       series_title
       series_id
       has_episodes
-      episodes(order_by: { id: desc_nulls_last }) {
+      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         title
         start_time
         number

@@ -18,20 +18,26 @@ type Props = {
 export const WorkItem: FC<Props> = ({ work }) => (
   <li
     key={`works-${work.id}`}
-    className="max-w-mds relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
+    className="relative w-full max-w-md flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <Link
         as={
           work.series_id
-            ? `/works/${work.id}?series=${work.series_id}`
-            : `/works/${work.id}`
+            ? work.has_episodes
+              ? `/works/${work.id}?series=${work.series_id}`
+              : `/works/play/${work.id}?series=${work.series_id}`
+            : work.has_episodes
+            ? `/works/${work.id}`
+            : `/works/play/${work.id}`
         }
         className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
         href={{
-          pathname: `/works/${work.id}`,
+          pathname: `${
+            work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
+          }`,
           query: {
-            series: work.series_id ?? null,
+            series: work.series_id ?? undefined,
             work: [work.title, work.series_title],
           },
         }}
@@ -51,14 +57,20 @@ export const WorkItem: FC<Props> = ({ work }) => (
         <ButtonLink
           as={
             work.series_id
-              ? `/works/${work.id}?series=${work.series_id}`
-              : `/works/${work.id}`
+              ? work.has_episodes
+                ? `/works/${work.id}?series=${work.series_id}`
+                : `/works/play/${work.id}?series=${work.series_id}`
+              : work.has_episodes
+              ? `/works/${work.id}`
+              : `/works/play/${work.id}`
           }
           className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
           href={{
-            pathname: `/works/${work.id}`,
+            pathname: `${
+              work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
+            }`,
             query: {
-              series: work.series_id ?? null,
+              series: work.series_id ?? undefined,
               work: [work.title, work.series_title],
             },
           }}

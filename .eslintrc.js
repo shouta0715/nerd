@@ -119,5 +119,6 @@ module.exports = {
         peerDependencies: false,
       },
     ],
+    "no-nested-ternary": "off",
   },
 };
