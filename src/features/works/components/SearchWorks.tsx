@@ -1,4 +1,6 @@
+import Link from "next/link";
 import React from "react";
+import { Loader } from "src/components/Elements/Loader/Loader";
 import { useSearchWorksState } from "src/features/works/store";
 
 export const SearchWorks = () => {
@@ -8,14 +10,35 @@ export const SearchWorks = () => {
   ]);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return (
+      <div className="w-full">
+        <Loader className="mx-auto" />
+      </div>
+    );
   }
 
   return (
-    <div>
+    <ul className="space-y-2">
       {data.map((work) => (
-        <div key={work.id}>{work.series_title}</div>
+        <li key={work.id}>
+          <Link
+            as={
+              work.series_id
+                ? `/works/${work.id}?series=${work.series_id}`
+                : `/works/${work.id}`
+            }
+            href={{
+              pathname: `/works/${work.id}`,
+              query: {
+                series: work.series_id ?? null,
+                work: [work.title, work.series_title],
+              },
+            }}
+          >
+            {work.series_title}
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

@@ -6,6 +6,7 @@ import {
 import Link from "next/link";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
+import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { Work } from "src/features/works/types";
@@ -21,10 +22,19 @@ export const WorkItem: FC<Props> = ({ work }) => (
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <Link
+        as={
+          work.series_id
+            ? `/works/${work.id}?series=${work.series_id}`
+            : `/works/${work.id}`
+        }
         className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
-        color="dark"
-        href="/"
-        scroll={false}
+        href={{
+          pathname: `/works/${work.id}`,
+          query: {
+            series: work.series_id ?? null,
+            work: [work.title, work.series_title],
+          },
+        }}
       >
         {work.series_title}
       </Link>
@@ -38,13 +48,25 @@ export const WorkItem: FC<Props> = ({ work }) => (
             />
           ))}
         </ul>
-        <Button
+        <ButtonLink
+          as={
+            work.series_id
+              ? `/works/${work.id}?series=${work.series_id}`
+              : `/works/${work.id}`
+          }
           className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+          href={{
+            pathname: `/works/${work.id}`,
+            query: {
+              series: work.series_id ?? null,
+              work: [work.title, work.series_title],
+            },
+          }}
           leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
           size="xs"
         >
           他のエピソードを見る
-        </Button>
+        </ButtonLink>
       </div>
       <div className="mt-2 flex w-full items-center justify-around md:justify-between">
         <div className="flex flex-col items-center justify-center">
