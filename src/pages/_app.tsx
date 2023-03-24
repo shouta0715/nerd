@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={client}>
       <Head>
-        <title>Anime</title>
+        <title>Nerd</title>
         <meta
           content="minimum-scale=1, initial-scale=1, width=device-width"
           name="viewport"

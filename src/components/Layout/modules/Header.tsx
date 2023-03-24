@@ -20,7 +20,7 @@ export const Header: FC = () => {
 
   return (
     <header className="w-full bg-white md:border md:border-slate-200">
-      <div className="container mx-auto px-6 py-2 md:px-10">
+      <div className="container mx-auto px-6 md:px-10">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
             <Text
@@ -28,7 +28,7 @@ export const Header: FC = () => {
               component="h1"
               ff="Hiragino Sans"
             >
-              <span className="inline-block bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
                 Nerd
               </span>
             </Text>
@@ -53,13 +53,13 @@ export const Header: FC = () => {
           </div>
           <div>
             <Text
-              className="w-md py-1 text-base md:py-2 md:text-lg"
+              className="w-md text-base md:py-2 md:text-lg"
               component="p"
               ff="Hiragino Sans"
             >
               アニメ感想共有サイト
               <Text
-                className="relative text-base font-bold  md:text-lg"
+                className="relative text-base font-semibold  md:text-lg"
                 component="span"
                 ff="Hiragino Sans"
               >
@@ -72,8 +72,10 @@ export const Header: FC = () => {
               component="p"
               ff="Hiragino Sans"
             >
-              <span className="inline-block rounded font-bold">
-                匿名またはログイン
+              <span className="inline-block font-semibold">匿名</span>
+              または
+              <span className="inline-block rounded font-semibold">
+                ログイン
               </span>
               して、アニメ感想を投稿しよう！
             </Text>
