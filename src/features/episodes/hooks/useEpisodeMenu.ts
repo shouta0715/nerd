@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
@@ -47,6 +47,8 @@ export const useEpisodeMenu = () => {
       seconds: +seconds,
     });
   };
+
+  useEffect(() => interval.stop, [interval.stop]);
 
   return {
     isMenuOpen,

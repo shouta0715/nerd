@@ -18,6 +18,7 @@ type TimerCount = {
 
 type Interval = {
   active: boolean;
+  intervalId?: NodeJS.Timer;
   start: () => void;
   stop: () => void;
   toggle: () => void;
@@ -32,8 +33,7 @@ type TimerState = {
   getTime: () => number;
   setEpisodeId: (episodeId: string) => void;
   restEpisodeId: () => void;
-  interval: null | Interval;
-  setInterval: (interval: Interval | null) => void;
+  interval: Interval;
   changeTenTime: (formula: "add" | "minus") => void;
   changeTime: (time: number) => void;
   getPadStartTime: () => string;
@@ -61,8 +61,32 @@ export const useTimerState = create<TimerState>((set, get) => ({
   getTime: () => timeToSecond(get().time),
   setEpisodeId: (episodeId: string) => set({ episodeId }),
   restEpisodeId: () => set({ episodeId: "" }),
-  interval: null,
-  setInterval: (interval) => set({ interval }),
+  interval: {
+    intervalId: undefined,
+    active: false,
+    start: () => {
+      if (!get().interval.active) {
+        set({ interval: { ...get().interval, active: true } });
+        const intervalId = setInterval(() => {
+          get().intervalTime();
+        }, 1000);
+        set({ interval: { ...get().interval, intervalId } });
+      }
+    },
+    stop: () => {
+      if (get().interval.active && get().interval.intervalId) {
+        clearInterval(get().interval.intervalId);
+        set({ interval: { ...get().interval, active: false } });
+      }
+    },
+    toggle: () => {
+      if (get().interval.active) {
+        get().interval.stop();
+      } else {
+        get().interval.start();
+      }
+    },
+  },
   changeTenTime: (formula: "add" | "minus") => {
     const time = get().getTime();
     const newTime =
