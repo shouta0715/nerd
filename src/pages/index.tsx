@@ -26,10 +26,10 @@ type Props = {
 
 const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
   <Layout>
-    <div className="container mx-auto flex flex-col space-y-2  md:flex-row">
-      <section className="w-full min-w-fit md:w-1/3 md:max-w-sm md:border-r">
-        <div className="static top-0 mx-auto space-y-4 px-6 py-2 md:sticky md:px-2">
-          <form className="flex w-full space-x-4">
+    <div className="container mx-auto flex flex-col space-y-2 bg-gray-50  md:flex-row">
+      <section className="w-full min-w-fit bg-white pb-2 md:w-1/3 md:max-w-sm md:border-r">
+        <div className="static top-0 mx-auto px-6 py-2 md:sticky md:space-y-4 md:px-2">
+          <form className="hidden w-full space-x-4 md:flex">
             <div className="relative flex-1">
               <MagnifyingGlassIcon className="absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
               <Input
@@ -86,6 +86,12 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </div>
         </section>
       </div>
+      <Link
+        className="fixed bottom-4 right-4 rounded-full bg-indigo-500 p-3 shadow-md shadow-indigo-400 md:hidden"
+        href="/"
+      >
+        <MagnifyingGlassIcon className="h-6 w-6 stroke-white stroke-2" />
+      </Link>
     </div>
   </Layout>
 );
