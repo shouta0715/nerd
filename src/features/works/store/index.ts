@@ -15,3 +15,13 @@ export const useSearchWorksState = create<SearchWorksState>((set) => ({
   setData: (data) => set({ data }),
   setIsLoading: (isLoading) => set({ isLoading }),
 }));
+
+type SearchWorksInput = {
+  search: string;
+  setSearch: (searching: string) => void;
+};
+
+export const useSearchWorksInput = create<SearchWorksInput>((set) => ({
+  search: "",
+  setSearch: (search) => set({ search }),
+}));
