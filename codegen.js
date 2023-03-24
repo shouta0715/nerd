@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { secret } from "./secrets.json";
+import { secret, endpoint } from "./secrets.json";
 
 // export const overwrite = true;
 export const schema = {
-  "https://anime-app-plus.hasura.app/v1/graphql": {
+  [endpoint]: {
     headers: {
       "x-hasura-admin-secret": secret,
     },

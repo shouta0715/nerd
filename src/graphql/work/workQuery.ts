@@ -30,3 +30,15 @@ export const GET_SEASON_WORKS = gql`
     }
   }
 `;
+
+export const SEARCH_WORKS = gql`
+  query SearchWorks($search: String!, $limit: Int) {
+    search_works(args: { search: $search, _limit: $limit }) {
+      id
+      title
+      series_title
+      has_episodes
+      series_id
+    }
+  }
+`;
