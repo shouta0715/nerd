@@ -9,7 +9,7 @@ import {
 
 import Link from "next/link";
 import { FC } from "react";
-import { BeginnerIcon } from "src/components/Icon/BeginnerIcon";
+import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 
 const mockNavigation = [
   {

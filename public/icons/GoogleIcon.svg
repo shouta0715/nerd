@@ -1,6 +1,3 @@
-import React, { FC } from "react";
-
-export const GoogleIcon: FC = () => (
   <svg
     height="14"
     preserveAspectRatio="xMidYMid"
@@ -25,4 +22,3 @@ export const GoogleIcon: FC = () => (
       fill="#EB4335"
     />
   </svg>
-);

@@ -51,6 +51,7 @@
     "@graphql-codegen/typescript": "^2.8.6",
     "@graphql-codegen/typescript-operations": "^2.5.11",
     "@graphql-codegen/typescript-react-query": "^4.0.6",
+    "@svgr/webpack": "^6.5.1",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "autoprefixer": "^10.4.13",
