@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
-import { Text } from "src/components/Elements/Text";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -23,15 +23,11 @@ export const Header: FC = () => {
       <div className="container mx-auto px-6 md:px-10">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
-            <Text
-              className="my-2 flex-1 text-4xl font-bold  md:text-6xl lg:text-7xl"
-              component="h1"
-              ff="Hiragino Sans"
-            >
+            <Link className="my-2 flex-1 text-4xl font-bold" href="/">
               <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
                 Nerd
               </span>
-            </Text>
+            </Link>
             <div className="order-1 flex items-center justify-between">
               {user && !user.anonymous ? (
                 <DynamicAvatar user_id={user.id} user_name={user.user_name} />
@@ -50,35 +46,6 @@ export const Header: FC = () => {
                 </>
               )}
             </div>
-          </div>
-          <div>
-            <Text
-              className="w-md text-base md:py-2 md:text-lg"
-              component="p"
-              ff="Hiragino Sans"
-            >
-              アニメ感想共有サイト
-              <Text
-                className="relative text-base font-semibold  md:text-lg"
-                component="span"
-                ff="Hiragino Sans"
-              >
-                Nerd
-              </Text>
-              へようこそ！
-            </Text>
-            <Text
-              className="text-base md:text-lg"
-              component="p"
-              ff="Hiragino Sans"
-            >
-              <span className="inline-block font-semibold">匿名</span>
-              または
-              <span className="inline-block rounded font-semibold">
-                ログイン
-              </span>
-              して、アニメ感想を投稿しよう！
-            </Text>
           </div>
         </div>
       </div>

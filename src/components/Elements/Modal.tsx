@@ -3,7 +3,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Transition } from "@headlessui/react";
 import React, { FC } from "react";
-import { ModalContent } from "src/components/Layout/modules/ModalContent";
+import { ModalContent } from "src/components/Elements/ModalContent";
+
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const Modal: FC = () => {

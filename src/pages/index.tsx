@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </Text>
         </section>
         <section className="container mx-auto ">
-          <div className="px-6 pb-12 pt-2">
+          <div className="px-6">
             <TopTitle title="今期のアニメ" />
             <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
               {seasonWorks.works?.map((work) => (
@@ -50,7 +50,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
             </ul>
             <Text
               align="center"
-              className="mt-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
+              className="my-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
               component="p"
               ff="Hiragino Sans"
             >

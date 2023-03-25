@@ -64,7 +64,7 @@ export const Work: FC = () => {
         </ul>
       </div>
       {series && (
-        <div className="mx-auto mt-6">
+        <div className="mt-6">
           <Text
             className="mb-4 grid text-xl font-bold"
             component="h1"

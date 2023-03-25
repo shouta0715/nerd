@@ -6,7 +6,7 @@ import { Work } from "src/features/works/components/Work";
 
 const Index: NextPage = () => (
   <Layout>
-    <section className="min-h-screen bg-gray-50">
+    <section className="bg-gray-50">
       <Suspense
         fallback={
           <div className="w-full">
