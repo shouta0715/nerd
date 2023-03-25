@@ -24,8 +24,8 @@ export const Layout: FC<Props> = ({ children }) => (
             </div>
           </div>
         </aside>
-        <div className="flex flex-1 flex-col bg-gray-50">
-          <main className="flex-1">{children}</main>
+        <div className="flex flex-1 flex-col ">
+          <main className="flex-1 bg-gray-50">{children}</main>
           <Footer />
         </div>
       </div>

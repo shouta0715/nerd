@@ -4,10 +4,10 @@ import { Panel } from "src/features/timer/components/Panel";
 import { useCountUp } from "src/features/timer/hooks/useCountUp";
 
 type Props = {
-  episodeId: string;
+  id?: string | number;
 };
 
-export const CountUpTimer: FC<Props> = ({ episodeId }) => {
+export const CountUpTimer: FC<Props> = ({ id }) => {
   const { minutes, hours, seconds } = useCountUp();
 
   return (
@@ -16,7 +16,7 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {hours.split("").map((character, index) => (
             <Panel
-              key={`hours-${character}-${index}-${episodeId}`}
+              key={`hours-${character}-${index}-${id}`}
               character={character}
             />
           ))}
@@ -27,7 +27,7 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {minutes.split("").map((character, index) => (
             <Panel
-              key={`minutes-${character}-${index}-${episodeId}`}
+              key={`minutes-${character}-${index}-${id}`}
               character={character}
             />
           ))}
@@ -38,7 +38,7 @@ export const CountUpTimer: FC<Props> = ({ episodeId }) => {
         <div className="mb-2 flex space-x-2">
           {seconds.split("").map((character, index) => (
             <Panel
-              key={`seconds-${character}-${index}-${episodeId}`}
+              key={`seconds-${character}-${index}-${id}`}
               character={character}
             />
           ))}

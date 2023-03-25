@@ -1,11 +1,11 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
-import { PlayWork } from "src/features/works/components/PlayWork";
+import { Series } from "src/features/series/components/Series";
 
 const Index: NextPage = () => (
   <section>
     <Suspense fallback={<div>Loading...</div>}>
-      <PlayWork />
+      <Series />
     </Suspense>
   </section>
 );

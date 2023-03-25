@@ -97,12 +97,19 @@ export const WorkItem: FC<Props> = ({ work }) => (
             シェア
           </Text>
         </div>
-        <Button
-          className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
-          size="xs"
-        >
-          シリーズ一覧
-        </Button>
+        {work.series_id && (
+          <ButtonLink
+            as={`/series/${work.series_id}`}
+            className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
+            href={{
+              pathname: `/series/${work.series_id}`,
+              query: { series_title: work.series_title },
+            }}
+            size="xs"
+          >
+            シリーズ一覧
+          </ButtonLink>
+        )}
       </div>
     </div>
   </li>

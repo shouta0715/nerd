@@ -1,16 +1,17 @@
 import { PlusIcon, ShareIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
-import { useQueryWork } from "src/features/works/api/useQueryWork";
+import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
 import { WorkItem } from "src/features/works/components/WorkItem";
 
 export const Work: FC = () => {
   const router = useRouter();
   const { slug, series, work } = router.query;
-  const { data, isPlaceholderData, isLoading } = useQueryWork({
+  const { data, isPlaceholderData, isLoading } = useQuerySeriesWork({
     slug,
     series_id: series,
     work,
@@ -79,14 +80,21 @@ export const Work: FC = () => {
                   series_work.has_episodes ? (
                     <WorkItem key={series_work.id} work={series_work} />
                   ) : (
-                    <li
+                    <Link
                       key={series_work.id}
+                      as={`/works/play/${series_work.id}`}
                       className={`
                       ${index === firstHasEpisodeIndex ? "col-start-1" : ""}
                     `}
+                      href={{
+                        pathname: `${`/works/play/${series_work.id}`}`,
+                        query: {
+                          work: [series_work.title, series_work.series_title],
+                        },
+                      }}
                     >
                       {series_work.series_title}
-                    </li>
+                    </Link>
                   )
                 )}
           </ul>

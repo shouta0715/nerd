@@ -12,7 +12,7 @@ import { Input } from "src/components/Elements/Input/Input";
 import { Text } from "src/components/Elements/Text";
 import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
-import { useEpisodeMenu } from "src/features/episodes/hooks/useEpisodeMenu";
+import { useMenu } from "src/features/episodes/hooks/useMenu";
 
 type Props = {
   episodeTitle?: string;
@@ -36,7 +36,7 @@ export const EpisodeMenu: FC<Props> = memo(
       uuid,
       handleChange,
       changeTenTime,
-    } = useEpisodeMenu();
+    } = useMenu();
 
     return (
       <div>

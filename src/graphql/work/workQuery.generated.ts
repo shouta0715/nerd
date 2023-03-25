@@ -41,7 +41,14 @@ export type GetWorkQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> } | null };
+export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } | null };
+
+export type GetSeriesQueryVariables = Types.Exact<{
+  series_id: Types.Scalars['String'];
+}>;
+
+
+export type GetSeriesQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
 
 
 export const GetSeasonWorksDocument = `
@@ -174,15 +181,6 @@ export const GetWorkDocument = `
     series_title
     series_id
     has_episodes
-    episodes(order_by: {number: desc_nulls_last}) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
-    }
   }
 }
     `;
@@ -201,3 +199,38 @@ export const useGetWorkQuery = <
       options
     );
 useGetWorkQuery.fetcher = (client: GraphQLClient, variables: GetWorkQueryVariables, headers?: RequestInit['headers']) => fetcher<GetWorkQuery, GetWorkQueryVariables>(client, GetWorkDocument, variables, headers);
+export const GetSeriesDocument = `
+    query GetSeries($series_id: String!) {
+  works(where: {series_id: {_eq: $series_id}}, order_by: [{has_episodes: desc}]) {
+    id
+    title
+    series_title
+    series_id
+    has_episodes
+    episodes(order_by: {number: desc_nulls_last}, limit: 8) {
+      title
+      start_time
+      number
+      id
+      has_prev_episode
+      has_next_episode
+      end_time
+    }
+  }
+}
+    `;
+export const useGetSeriesQuery = <
+      TData = GetSeriesQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetSeriesQueryVariables,
+      options?: UseQueryOptions<GetSeriesQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetSeriesQuery, TError, TData>(
+      ['GetSeries', variables],
+      fetcher<GetSeriesQuery, GetSeriesQueryVariables>(client, GetSeriesDocument, variables, headers),
+      options
+    );
+useGetSeriesQuery.fetcher = (client: GraphQLClient, variables: GetSeriesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSeriesQuery, GetSeriesQueryVariables>(client, GetSeriesDocument, variables, headers);

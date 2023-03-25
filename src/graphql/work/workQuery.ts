@@ -94,7 +94,22 @@ export const GET_WORK = gql`
       series_title
       series_id
       has_episodes
-      episodes(order_by: { number: desc_nulls_last }) {
+    }
+  }
+`;
+
+export const GET_SERIES = gql`
+  query GetSeries($series_id: String!) {
+    works(
+      where: { series_id: { _eq: $series_id } }
+      order_by: [{ has_episodes: desc }]
+    ) {
+      id
+      title
+      series_title
+      series_id
+      has_episodes
+      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         title
         start_time
         number

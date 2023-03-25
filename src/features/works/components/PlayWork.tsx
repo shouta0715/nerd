@@ -5,36 +5,27 @@ import React, { FC, Suspense, useState } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
-import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
-import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
-
-import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
-import Chats from "src/features/comments/components/Chats";
-import { InputFiled } from "src/features/comments/components/CommentInput";
-import Comments from "src/features/comments/components/Comments";
-import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
+import { useQueryWork } from "src/features/works/api/useQueryWork";
 
-const DynamicEpisodeMenu = dynamic(
+const DynamicWorkMenu = dynamic(
   () =>
-    import("src/features/episodes/components/EpisodeMenu").then(
-      (mod) => mod.EpisodeMenu
+    import("src/features/works/components/WorkMenu").then(
+      (mod) => mod.WorkMenu
     ),
   {
     ssr: false,
-    loading: () => <EpisodeMenuSkelton />,
   }
 );
 
-export const Episode: FC = () => {
+export const PlayWork: FC = () => {
   const router = useRouter();
-  const { slug, episode } = router.query;
-  const { data, isLoading } = useQueryEpisode(slug, episode);
+  const { slug, work } = router.query;
+  const { data, isLoading } = useQueryWork({ slug, work });
   const [isChat, setIsChat] = useState(true);
-  const prefetchFinishComments = usePrefetchFinishEpisode();
 
   if (isLoading) {
-    return <EpisodeSkelton />;
+    return <div>Loading...</div>;
   }
 
   return (
@@ -45,34 +36,18 @@ export const Episode: FC = () => {
             <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
               <div className="flex w-full flex-1 flex-col items-center gap-2">
                 <Text
-                  className=" text-base font-bold md:text-lg"
+                  className="text-base font-bold md:text-lg"
                   component="h4"
                   ff="Hiragino Sans"
                 >
-                  {data?.episodes_by_pk?.work.series_title}
-                </Text>
-                <Text className="flex" component="div">
-                  <Text
-                    className="mr-2 text-sm md:text-base"
-                    component="p"
-                    ff="Hiragino Sans"
-                  >
-                    第{data?.episodes_by_pk?.number}話
-                  </Text>
-                  <Text
-                    className="flex-1 text-sm md:text-base"
-                    component="p"
-                    ff="Hiragino Sans"
-                  >
-                    {data?.episodes_by_pk?.title}
-                  </Text>
+                  {data?.works_by_pk?.series_title}
                 </Text>
               </div>
               <div className="mx-auto mt-3 flex max-w-max flex-col">
                 <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
                   開始から
                 </Text>
-                <CountUpTimer id={data?.episodes_by_pk?.id} />
+                <CountUpTimer id={data?.works_by_pk?.id} />
               </div>
             </header>
             <nav className="sticky top-0 z-[1] flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
@@ -105,23 +80,14 @@ export const Episode: FC = () => {
                       color="indigo"
                       component="li"
                       onClick={() => setIsChat(false)}
-                      onMouseEnter={() =>
-                        prefetchFinishComments(data?.episodes_by_pk?.id)
-                      }
-                      onTouchStart={() =>
-                        prefetchFinishComments(data?.episodes_by_pk?.id)
-                      }
                     >
                       コメント
                     </Text>
                   </ul>
                 </div>
-
-                <DynamicEpisodeMenu
-                  episodeNumber={data?.episodes_by_pk?.number}
-                  episodeTitle={data?.episodes_by_pk?.title}
-                  nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
-                  workTitle={data?.episodes_by_pk?.work.series_title}
+                <DynamicWorkMenu
+                  series_id={data?.works_by_pk?.series_id}
+                  series_title={data?.works_by_pk?.title}
                 />
               </div>
             </nav>
@@ -133,13 +99,13 @@ export const Episode: FC = () => {
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    <Chats episode_id={data?.episodes_by_pk?.id} />
+                    {/* <Chats episode_id={data?.episodes_by_pk?.id} /> */}
                   </Suspense>
-                  <InputFiled episode_id={data?.episodes_by_pk?.id} />
+                  {/* <InputFiled episode_id={data?.episodes_by_pk?.id} /> */}
                 </>
               ) : (
                 <Suspense fallback={<div>Loading...</div>}>
-                  <Comments episode_id={data?.episodes_by_pk?.id} />
+                  {/* <Comments episode_id={data?.episodes_by_pk?.id} /> */}
                 </Suspense>
               )}
             </div>
