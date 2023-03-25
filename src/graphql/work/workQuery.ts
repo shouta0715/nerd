@@ -94,15 +94,6 @@ export const GET_WORK = gql`
       series_title
       series_id
       has_episodes
-      episodes(order_by: { number: desc_nulls_last }) {
-        title
-        start_time
-        number
-        id
-        has_prev_episode
-        has_next_episode
-        end_time
-      }
     }
   }
 `;

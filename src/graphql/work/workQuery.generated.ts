@@ -41,7 +41,7 @@ export type GetWorkQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> } | null };
+export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } | null };
 
 
 export const GetSeasonWorksDocument = `
@@ -174,15 +174,6 @@ export const GetWorkDocument = `
     series_title
     series_id
     has_episodes
-    episodes(order_by: {number: desc_nulls_last}) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
-    }
   }
 }
     `;
