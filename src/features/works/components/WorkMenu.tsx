@@ -1,8 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
-import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  CubeTransparentIcon,
+  PencilIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import React, { FC } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
@@ -11,10 +16,11 @@ import { Text } from "src/components/Elements/Text";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
 
 type Props = {
-  series_id?: string;
+  series_id?: string | null;
+  series_title?: string | null;
 };
 
-export const WorkMenu: FC = ({ series_id }: Props) => {
+export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
   const {
     isMenuOpen,
     time,
@@ -189,15 +195,24 @@ export const WorkMenu: FC = ({ series_id }: Props) => {
               </div>
             </div>
           </section>
-          <div className="h-[1px] w-full bg-slate-200" />
-          {/* <Suspense fallback={<NextEpisodeMenuSkelton />}>
-            <NextEpisodeMenu
-              episodeNumber={episodeNumber}
-              episodeTitle={episodeTitle}
-              nextEpisodeId={nextEpisodeId}
-              workTitle={workTitle}
-            />
-          </Suspense> */}
+
+          {series_id && (
+            <nav className="group relative flex cursor-pointer items-center justify-center p-2">
+              <CubeTransparentIcon className="absolute right-4 h-6 w-6 stroke-slate-300 group-hover:stroke-blue-500" />
+              <div className="absolute top-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
+              <Link
+                as={`/series/${series_id}`}
+                className="w-full text-center"
+                href={{
+                  pathname: `/series/${series_id}`,
+                  query: { series_title },
+                }}
+              >
+                シリーズ一覧へ
+              </Link>
+              <div className="absolute bottom-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
+            </nav>
+          )}
         </div>
       </div>
     </div>

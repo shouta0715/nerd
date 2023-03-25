@@ -532,6 +532,13 @@ export type Chats_By_Episode_Id_Args = {
   get_limit?: InputMaybe<Scalars['Int']>;
 };
 
+export type Chats_By_Work_Id_Args = {
+  _gte?: InputMaybe<Scalars['Int']>;
+  _lt?: InputMaybe<Scalars['Int']>;
+  _work_id?: InputMaybe<Scalars['Int']>;
+  get_limit?: InputMaybe<Scalars['Int']>;
+};
+
 /** unique or primary key constraints on table "chats" */
 export enum Chats_Constraint {
   /** unique or primary key constraint on columns "id" */
@@ -2454,6 +2461,8 @@ export type Media_Types_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** execute VOLATILE function "chats_by_work_id" which returns "chats" */
+  chats_by_work_id: Array<Chats>;
   /** delete data from the table: "bads" */
   delete_bads?: Maybe<Bads_Mutation_Response>;
   /** delete single row from the table: "bads" */
@@ -2566,6 +2575,17 @@ export type Mutation_Root = {
   update_works_by_pk?: Maybe<Works>;
   /** update multiples rows of table: "works" */
   update_works_many?: Maybe<Array<Maybe<Works_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootChats_By_Work_IdArgs = {
+  args: Chats_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chats_Order_By>>;
+  where?: InputMaybe<Chats_Bool_Exp>;
 };
 
 

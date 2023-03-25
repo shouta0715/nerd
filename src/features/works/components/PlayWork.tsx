@@ -85,7 +85,10 @@ export const PlayWork: FC = () => {
                     </Text>
                   </ul>
                 </div>
-                <DynamicWorkMenu />
+                <DynamicWorkMenu
+                  series_id={data?.works_by_pk?.series_id}
+                  series_title={data?.works_by_pk?.title}
+                />
               </div>
             </nav>
           </div>
