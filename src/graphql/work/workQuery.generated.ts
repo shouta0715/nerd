@@ -85,7 +85,10 @@ export const useGetSeasonWorksQuery = <
 useGetSeasonWorksQuery.fetcher = (client: GraphQLClient, variables: GetSeasonWorksQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>(client, GetSeasonWorksDocument, variables, headers);
 export const SearchWorksDocument = `
     query SearchWorks($search: String!, $limit: Int) {
-  search_works(args: {search: $search, _limit: $limit}) {
+  search_works(
+    args: {search: $search, _limit: $limit}
+    order_by: {series_title: asc}
+  ) {
     id
     title
     series_title

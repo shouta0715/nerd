@@ -13,7 +13,13 @@ export const useSearchWorks = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const result = await mutateAsync(search);
+    if (search.trim().length === 0) {
+      setData(null);
+      setIsLoading(false);
+
+      return;
+    }
+    const result = await mutateAsync(search.trim());
     setData(result.search_works);
     setIsLoading(false);
   };

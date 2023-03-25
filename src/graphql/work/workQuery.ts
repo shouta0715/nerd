@@ -33,7 +33,10 @@ export const GET_SEASON_WORKS = gql`
 
 export const SEARCH_WORKS = gql`
   query SearchWorks($search: String!, $limit: Int) {
-    search_works(args: { search: $search, _limit: $limit }) {
+    search_works(
+      args: { search: $search, _limit: $limit }
+      order_by: { series_title: asc }
+    ) {
       id
       title
       series_title

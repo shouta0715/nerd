@@ -19,6 +19,7 @@ module.exports = {
         modal: "modal 0.25s ease-out",
         fadeUp: "fadeUp 0.25s ease-out",
         fadeIn: "fadeIn 0.25s ease-out forwards",
+        border: "border 0.25s ease-out forwards",
       },
       keyframes: {
         comment: {
@@ -36,6 +37,10 @@ module.exports = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        border: {
+          "0%": { width: "0", backgroundColor: "transparent" },
+          "100%": { width: "100%", backgroundColor: "rgb(29, 161, 242)" },
         },
       },
       height: {
