@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 export const Footer: FC = () => (
-  <footer className="my-4 bg-white">
+  <footer className="z-20 bg-white py-4">
     <div className="container mx-auto flex flex-col items-center justify-center">
       <div className="flex w-full items-center space-x-10 border-b border-slate-200 px-6 pb-4 text-xs md:text-sm">
         <div className="flex-1">
