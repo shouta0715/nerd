@@ -5,17 +5,22 @@ import { useUserState } from "src/store/user/userState";
 
 const InitialUserName = localStorage.getItem("user_name");
 
-export const useEpisodeMenu = () => {
-  const isMenuOpen = useOpenState((state) => state.isMenuOpen);
-  const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
-  const user = useUserState((state) => state.user);
-  const setUser = useUserState((state) => state.setUser);
-  const time = useTimerState((state) => state.time);
-  const padTime = useTimerState((state) => state.getPadStartTime());
-  const setTime = useTimerState((state) => state.setTime);
-  const interval = useTimerState((state) => state.interval);
+export const useMenu = () => {
+  const [isMenuOpen, setIsMenuOpen] = useOpenState((state) => [
+    state.isMenuOpen,
+    state.setIsMenuOpen,
+  ]);
+  const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
+  const { time, padTime, setTime, interval, changeTenTime } = useTimerState(
+    (state) => ({
+      time: state.time,
+      padTime: state.getPadStartTime(),
+      setTime: state.setTime,
+      interval: state.interval,
+      changeTenTime: state.changeTenTime,
+    })
+  );
   const uuid = useId();
-  const changeTenTime = useTimerState((state) => state.changeTenTime);
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {

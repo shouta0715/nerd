@@ -43,7 +43,7 @@ export const Episode: FC = () => {
         <div className="container contents lg:mx-auto lg:flex">
           <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
             <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
-              <div className="flex w-full flex-1  flex-col gap-2">
+              <div className="flex w-full flex-1 flex-col items-center gap-2">
                 <Text
                   className=" text-base font-bold md:text-lg"
                   component="h4"
@@ -72,7 +72,7 @@ export const Episode: FC = () => {
                 <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
                   開始から
                 </Text>
-                <CountUpTimer episodeId={data?.episodes_by_pk?.id} />
+                <CountUpTimer id={data?.episodes_by_pk?.id} />
               </div>
             </header>
             <nav className="sticky top-0 z-[1] flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
