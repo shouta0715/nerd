@@ -198,8 +198,8 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
 
           {series_id && (
             <nav className="group relative flex cursor-pointer items-center justify-center p-2">
-              <CubeTransparentIcon className="absolute right-4 h-6 w-6 stroke-slate-300 group-hover:stroke-blue-500" />
-              <div className="absolute top-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
+              <CubeTransparentIcon className="absolute right-4 h-6 w-6 stroke-slate-300 transition-transform group-hover:rotate-90 group-hover:stroke-indigo-500" />
+              <div className="absolute top-0 left-0 h-[1px] w-full bg-slate-200  group-hover:animate-border " />
               <Link
                 as={`/series/${series_id}`}
                 className="w-full text-center"
@@ -210,7 +210,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
               >
                 シリーズ一覧へ
               </Link>
-              <div className="absolute bottom-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
+              <div className="absolute bottom-0 right-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
             </nav>
           )}
         </div>

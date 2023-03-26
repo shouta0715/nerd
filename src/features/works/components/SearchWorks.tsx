@@ -31,7 +31,7 @@ export const SearchWorks = () => {
         {data?.map((work) => (
           <li key={work.id} className="group relative py-2">
             <div className="absolute bottom-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
-            <CubeTransparentIcon className="absolute right-0 h-6 w-6 stroke-gray-300 transition-transform group-hover:rotate-90 group-hover:stroke-blue-500" />
+            <CubeTransparentIcon className="absolute right-0 h-6 w-6 stroke-gray-300 transition-transform group-hover:rotate-90 group-hover:stroke-indigo-500" />
             <Link
               as={
                 work.series_id

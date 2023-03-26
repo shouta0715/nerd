@@ -1,7 +1,4 @@
-import {
-  ChevronRightIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 import { Text } from "src/components/Elements/Text";
@@ -62,12 +59,6 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
           </div>
         </section>
       </div>
-      <Link
-        className="fixed bottom-4 right-4 z-10 grid h-12 w-12 place-items-center rounded-full bg-indigo-500  shadow-md shadow-indigo-400 md:hidden"
-        href="/search"
-      >
-        <MagnifyingGlassIcon className="h-6 w-6 stroke-white stroke-2" />
-      </Link>
     </div>
   </Layout>
 );
