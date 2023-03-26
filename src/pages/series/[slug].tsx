@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import { Series } from "src/features/series/components/Series";
 
 const Index: NextPage = () => (
-  <section>
+  <section className="flex min-h-screen flex-col">
     <Suspense fallback={<div>Loading...</div>}>
       <Series />
     </Suspense>

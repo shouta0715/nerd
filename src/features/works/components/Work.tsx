@@ -1,12 +1,11 @@
 import { PlusIcon, ShareIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
+import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
-import { WorkItem } from "src/features/works/components/WorkItem";
 
 export const Work: FC = () => {
   const router = useRouter();
@@ -76,27 +75,13 @@ export const Work: FC = () => {
           <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
             {isPlaceholderData
               ? "Loading"
-              : data?.works.map((series_work, index) =>
-                  series_work.has_episodes ? (
-                    <WorkItem key={series_work.id} work={series_work} />
-                  ) : (
-                    <Link
-                      key={series_work.id}
-                      as={`/works/play/${series_work.id}`}
-                      className={`
-                      ${index === firstHasEpisodeIndex ? "col-start-1" : ""}
-                    `}
-                      href={{
-                        pathname: `${`/works/play/${series_work.id}`}`,
-                        query: {
-                          work: [series_work.title, series_work.series_title],
-                        },
-                      }}
-                    >
-                      {series_work.series_title}
-                    </Link>
-                  )
-                )}
+              : data?.works.map((series_work, index) => (
+                  <SeriesItem
+                    key={series_work.id}
+                    isFirstHasEpisodeIndex={firstHasEpisodeIndex === index}
+                    series_work={series_work}
+                  />
+                ))}
           </ul>
         </div>
       )}
