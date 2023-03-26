@@ -1,10 +1,8 @@
-import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import { GetStaticProps, NextPage } from "next";
-import Link from "next/link";
 import React from "react";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getTodayEpisodes } from "src/features/lists/api/router";
-import { Autocomplete } from "src/features/lists/components/Autocomplete";
+import { ListHeader } from "src/features/lists/components/ListHeader";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
@@ -15,17 +13,8 @@ type Props = {
 };
 
 const TodayEpisodes: NextPage<Props> = ({ autoCompleteData, data }) => (
-  <section className="min-h-screen animate-fadeUp bg-sky-50/70">
-    <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-indigo-200 bg-white/95">
-      <div className="container mx-auto bg-transparent py-3">
-        <div className="relative flex w-full items-center px-4">
-          <Link className="mr-6 flex justify-center md:mr-4 " href="/">
-            <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
-          </Link>
-          <Autocomplete autoCompleteData={autoCompleteData} />
-        </div>
-      </div>
-    </header>
+  <section className="min-h-screen animate-fadeUp bg-gray-50">
+    <ListHeader autoCompleteData={autoCompleteData} />
     <div className="container mx-auto">
       <div className="p-6">
         <ListTitle title="今日放送のエピソード" />

@@ -1,4 +1,8 @@
-import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowSmallLeftIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
@@ -15,16 +19,25 @@ export const Series: FC = () => {
 
   return (
     <section className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-10 border-b bg-white">
-        <div className="container mx-auto flex px-2 py-4">
-          <ArrowSmallLeftIcon className="h-6 w-6" onClick={router.back} />
+      <header className="sticky top-0 z-10 border-b bg-white/95">
+        <div className="container mx-auto flex px-4 py-2.5 md:py-3.5">
+          <ArrowSmallLeftIcon
+            className="h-6 w-11 cursor-pointer"
+            onClick={router.back}
+          />
           <Text
-            className="grid flex-1 place-items-center text-lg font-bold"
+            className="grid flex-1 place-items-center text-base font-bold md:text-lg"
             component="p"
             ff="Hiragino Sans"
           >
             {series_title ?? data?.works[0].title}の作品一覧
           </Text>
+          <Link
+            className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-bold text-transparent"
+            href="/"
+          >
+            Nerd
+          </Link>
         </div>
       </header>
       <main className="flex-1 bg-gray-50">
@@ -40,6 +53,12 @@ export const Series: FC = () => {
           </ul>
         </div>
       </main>
+      <Link
+        className="fixed bottom-4 right-4 z-10 grid h-12 w-12 place-items-center rounded-full bg-indigo-500  shadow-md shadow-indigo-400 md:hidden"
+        href="/search"
+      >
+        <MagnifyingGlassIcon className="h-6 w-6 stroke-white stroke-2" />
+      </Link>
     </section>
   );
 };

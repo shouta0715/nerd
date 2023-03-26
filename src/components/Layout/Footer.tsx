@@ -8,7 +8,7 @@ export const Footer: FC = () => (
         <div className="flex-1">
           <ul className="flex items-center justify-between space-x-4">
             <li className="text-base">
-              <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
+              <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-bold text-transparent">
                 Nerd
               </span>
             </li>

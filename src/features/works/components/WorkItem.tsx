@@ -103,7 +103,7 @@ export const WorkItem: FC<Props> = ({ work }) => (
             className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
             href={{
               pathname: `/series/${work.series_id}`,
-              query: { series_title: work.series_title },
+              query: { series_title: work.title },
             }}
             size="xs"
           >
