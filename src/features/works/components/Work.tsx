@@ -28,7 +28,7 @@ export const Work: FC = () => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col  px-6 py-4">
+    <div className="container mx-auto flex h-full flex-col  px-6 py-4">
       <Text
         className="mb-4 grid place-content-center text-xl font-bold"
         component="h1"
@@ -40,7 +40,7 @@ export const Work: FC = () => {
       {isPlaceholderData ? (
         <WorkSkelton />
       ) : (
-        <ul className="mx-auto grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
           {data?.works_by_pk?.episodes.map((episode) => (
             <WorkEpisodeItem key={episode.id} episode={episode} />
           ))}
