@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
 import { Layout } from "src/components/Layout/Layout";
+import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
 import { Work } from "src/features/works/components/Work";
 
 const Index: NextPage = () => (
@@ -9,8 +9,9 @@ const Index: NextPage = () => (
     <section className="flex-1 bg-gray-50">
       <Suspense
         fallback={
-          <div className="w-full">
-            <Loader className="mx-auto" />
+          <div className="container mx-auto flex flex-col  px-6 py-4">
+            <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
+            <WorkSkelton />
           </div>
         }
       >

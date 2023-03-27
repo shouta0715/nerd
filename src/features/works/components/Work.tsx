@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { FC } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
 import { Text } from "src/components/Elements/Text";
+import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
@@ -20,32 +20,33 @@ export const Work: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="w-full">
-        <Loader className="mx-auto" />
+      <div className="container mx-auto flex flex-col  px-6 py-4">
+        <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
+        <WorkSkelton />
       </div>
     );
   }
 
   return (
     <div className="container mx-auto flex flex-col  px-6 py-4">
-      <div>
-        <Text
-          className="mb-4 grid place-content-center text-xl font-bold"
-          component="h1"
-          ff="Hiragino Sans"
-        >
-          {data?.works_by_pk?.series_title}
-        </Text>
-        {isPlaceholderData ? (
-          "Loading..."
-        ) : (
-          <ul className="mx-auto grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
-            {data?.works_by_pk?.episodes.map((episode) => (
-              <WorkEpisodeItem key={episode.id} episode={episode} />
-            ))}
-          </ul>
-        )}
-      </div>
+      <Text
+        className="mb-4 grid place-content-center text-xl font-bold"
+        component="h1"
+        ff="Hiragino Sans"
+      >
+        {data?.works_by_pk?.series_title}
+      </Text>
+
+      {isPlaceholderData ? (
+        <WorkSkelton />
+      ) : (
+        <ul className="mx-auto grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
+          {data?.works_by_pk?.episodes.map((episode) => (
+            <WorkEpisodeItem key={episode.id} episode={episode} />
+          ))}
+        </ul>
+      )}
+
       {series && (
         <div className="mt-6">
           <Text

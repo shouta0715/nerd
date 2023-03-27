@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
-  <li key={episode.id} className="flex h-full flex-col items-center p-2">
+  <li className="flex h-full flex-col items-center p-2">
     <Link
       as={`/episodes/${episode.id}`}
       className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"

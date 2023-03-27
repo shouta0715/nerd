@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
+import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
 import { useWeeklyWorks } from "src/features/lists/components/hooks/useWeeklyWorks";
 import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
 
@@ -12,6 +13,7 @@ const DynamicWorkItem = dynamic(
     ),
   {
     ssr: true,
+    loading: () => <WorkSkelton />,
   }
 );
 
