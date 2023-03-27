@@ -61,31 +61,27 @@ export const WorkItem: FC<Props> = ({ work }) => (
             シリーズ一覧へ
           </ButtonLink>
         )}
-        <ButtonLink
-          as={
-            work.series_id
-              ? work.has_episodes
+        {work.has_episodes && (
+          <ButtonLink
+            as={
+              work.series_id
                 ? `/works/${work.id}?series=${work.series_id}`
-                : `/works/play/${work.id}?series=${work.series_id}`
-              : work.has_episodes
-              ? `/works/${work.id}`
-              : `/works/play/${work.id}`
-          }
-          className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
-          href={{
-            pathname: `${
-              work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
-            }`,
-            query: {
-              series: work.series_id ?? undefined,
-              work: [work.title, work.series_title],
-            },
-          }}
-          leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-          size="xs"
-        >
-          他のエピソードを見る
-        </ButtonLink>
+                : `/works/${work.id}`
+            }
+            className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+            href={{
+              pathname: `${`/works/${work.id}`}`,
+              query: {
+                series: work.series_id ?? undefined,
+                work: [work.title, work.series_title],
+              },
+            }}
+            leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
+            size="xs"
+          >
+            他のエピソードを見る
+          </ButtonLink>
+        )}
       </div>
     </div>
   </li>

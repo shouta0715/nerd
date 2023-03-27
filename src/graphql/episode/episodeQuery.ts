@@ -32,7 +32,11 @@ export const GET_EPISODE = gql`
       has_next_episode
       next_episode_id
       work {
+        id
+        title
         series_title
+        series_id
+        has_episodes
       }
     }
   }

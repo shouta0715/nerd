@@ -26,6 +26,10 @@ export const useQueryEpisode = (
             has_next_episode: has_next_episode === "true",
             work: {
               series_title,
+              title,
+              id: 0,
+              series_id: series_title,
+              has_episodes: true,
             },
           },
         };

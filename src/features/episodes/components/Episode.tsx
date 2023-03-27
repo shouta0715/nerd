@@ -117,12 +117,7 @@ export const Episode: FC = () => {
                   </ul>
                 </div>
 
-                <DynamicEpisodeMenu
-                  episodeNumber={data?.episodes_by_pk?.number}
-                  episodeTitle={data?.episodes_by_pk?.title}
-                  nextEpisodeId={data?.episodes_by_pk?.next_episode_id}
-                  workTitle={data?.episodes_by_pk?.work.series_title}
-                />
+                <DynamicEpisodeMenu episode={data?.episodes_by_pk} />
               </div>
             </nav>
           </div>
