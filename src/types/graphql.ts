@@ -3042,6 +3042,10 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+  /** execute function "weekly_works" which returns "works" */
+  weekly_works: Array<Works>;
+  /** execute function "weekly_works" and query aggregates on result of table type "works" */
+  weekly_works_aggregate: Works_Aggregate;
   /** An array relationship */
   works: Array<Works>;
   /** An aggregate relationship */
@@ -3272,6 +3276,26 @@ export type Query_RootUsers_By_PkArgs = {
 };
 
 
+export type Query_RootWeekly_WorksArgs = {
+  args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootWeekly_Works_AggregateArgs = {
+  args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
 export type Query_RootWorksArgs = {
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3375,6 +3399,10 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+  /** execute function "weekly_works" which returns "works" */
+  weekly_works: Array<Works>;
+  /** execute function "weekly_works" and query aggregates on result of table type "works" */
+  weekly_works_aggregate: Works_Aggregate;
   /** An array relationship */
   works: Array<Works>;
   /** An aggregate relationship */
@@ -3653,6 +3681,26 @@ export type Subscription_RootUsers_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>;
   where?: InputMaybe<Users_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_WorksArgs = {
+  args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_Works_AggregateArgs = {
+  args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
 };
 
 
@@ -4033,6 +4081,10 @@ export type Uuid_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['uuid']>;
   _neq?: InputMaybe<Scalars['uuid']>;
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
+};
+
+export type Weekly_Works_Args = {
+  limit_num?: InputMaybe<Scalars['Int']>;
 };
 
 /** columns and relationships of "works" */

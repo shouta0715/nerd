@@ -121,3 +121,24 @@ export const GET_SERIES = gql`
     }
   }
 `;
+
+export const GET_WEEKLY_WORKS = gql`
+  query GetWeeklyWorks($limit: Int) {
+    weekly_works(args: { limit_num: $limit }) {
+      id
+      title
+      series_title
+      series_id
+      has_episodes
+      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
+        title
+        start_time
+        number
+        id
+        has_prev_episode
+        has_next_episode
+        end_time
+      }
+    }
+  }
+`;

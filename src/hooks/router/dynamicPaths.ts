@@ -24,39 +24,3 @@ export const getTodayData = async () => {
 
   return query;
 };
-
-// export const getTodaysAndSeasonsIds = async () => {
-//   const todayDataQuery = await getTodayData();
-//   const { request: client } = getClient();
-
-//   const todayEpisodeFetcher = useGetTodayEpisodesQuery.fetcher(client, {
-//     where: todayDataQuery,
-//   });
-
-//   const todayEpisodes = await todayEpisodeFetcher();
-//   const todayIds: string[] = todayEpisodes.episodes.map(
-//     (episode) => episode.id
-//   );
-
-//   const seasonData = returningSeason();
-//   const seasonsFetcher = useGetSeasonWorksQuery.fetcher(client, {
-//     season: seasonData.season,
-//     year: seasonData.year,
-//   });
-//   const seasons = await seasonsFetcher();
-//   const seasonsIds: string[] = seasons.works
-//     .map((work) => {
-//       const episodeIds = work.episodes.map((episode) => episode.id);
-
-//       return episodeIds;
-//     })
-//     .flat();
-
-//   const allIds = [...todayIds, ...seasonsIds];
-
-//   const paths = allIds.map((id) => ({
-//     params: { slug: id },
-//   }));
-
-//   return paths;
-// };

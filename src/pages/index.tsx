@@ -7,18 +7,23 @@ import { Layout } from "src/components/Layout/Layout";
 import {
   getSeasonWorks,
   getTodayEpisodes,
+  getWeeklyWorks,
 } from "src/features/lists/api/router";
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";
 import { WorkItem } from "src/features/works/components/WorkItem";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import {
+  GetSeasonWorksQuery,
+  GetWeeklyWorksQuery,
+} from "src/graphql/work/workQuery.generated";
 
 type Props = {
   todayEpisodes: GetTodayEpisodesQuery;
   seasonWorks: GetSeasonWorksQuery;
+  weeklyWorks: GetWeeklyWorksQuery;
 };
 
-const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
+const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
   <Layout>
     <div className="container mx-auto flex flex-col space-y-2 bg-gray-50  md:flex-row">
       <div className="container mx-auto ">
@@ -58,6 +63,27 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks }) => (
             </Text>
           </div>
         </section>
+        <section className="container mx-auto ">
+          <div className="px-6">
+            <TopTitle title="今週のアニメ" />
+            <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
+              {weeklyWorks?.weekly_works?.map((work) => (
+                <WorkItem key={`work-${work.id}`} work={work} />
+              ))}
+            </ul>
+            <Text
+              align="center"
+              className="my-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
+              component="p"
+              ff="Hiragino Sans"
+            >
+              <Link className="text-base md:text-lg" href="/list/weeklyWorks">
+                今週のアニメをもっと見る
+              </Link>
+              <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
+            </Text>
+          </div>
+        </section>
       </div>
     </div>
   </Layout>
@@ -67,11 +93,13 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   const todayEpisodes = await getTodayEpisodes();
   const seasonWorks = await getSeasonWorks(18);
+  const weeklyWorks = await getWeeklyWorks(10);
 
   return {
     props: {
       todayEpisodes,
       seasonWorks,
+      weeklyWorks,
     },
   };
 };

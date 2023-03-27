@@ -1,13 +1,12 @@
 import React, { FC } from "react";
-import { useSeasonWorks } from "src/features/lists/components/hooks/useSeasonWorks";
+import { useWeeklyWorks } from "src/features/lists/components/hooks/useWeeklyWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
+import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
 
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+type Props = { data: GetWeeklyWorksQuery };
 
-type Props = { data: GetSeasonWorksQuery };
-
-export const SeasonWorksList: FC<Props> = ({ data }) => {
-  const { filterWorks } = useSeasonWorks({ data });
+export const WeeklyWorksList: FC<Props> = ({ data }) => {
+  const { filterWorks } = useWeeklyWorks({ data });
 
   return (
     <>
@@ -17,7 +16,7 @@ export const SeasonWorksList: FC<Props> = ({ data }) => {
         ))}
       </ul>
       <p className="peer-empty:decoration-slice-1 hidden text-center text-xl font-bold peer-empty:mt-8 peer-empty:block peer-empty:text-gray-500">
-        今期のアニメはありません。
+        今週のアニメはありません。
       </p>
     </>
   );

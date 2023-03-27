@@ -1,5 +1,8 @@
 import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useGetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import {
+  useGetSeasonWorksQuery,
+  useGetWeeklyWorksQuery,
+} from "src/graphql/work/workQuery.generated";
 import { getTodayData } from "src/hooks/router/dynamicPaths";
 import { getClient } from "src/utils/getClient";
 import { returningSeason } from "src/utils/returningSeason";
@@ -22,6 +25,18 @@ export const getSeasonWorks = async (limit: number | null) => {
   const fetcher = useGetSeasonWorksQuery.fetcher(request, {
     season,
     year,
+    limit,
+  });
+
+  const data = await fetcher();
+
+  return data;
+};
+
+export const getWeeklyWorks = async (limit: number | null) => {
+  const { request } = getClient();
+
+  const fetcher = useGetWeeklyWorksQuery.fetcher(request, {
     limit,
   });
 
