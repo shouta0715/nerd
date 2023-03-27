@@ -18,7 +18,7 @@ export const Layout: FC<Props> = ({ children }) => (
       <Header />
       <div className="container mx-auto flex flex-1 flex-col md:flex-row">
         <aside className="top-0 max-h-screen overflow-y-auto bg-white pb-2 md:sticky md:w-1/3 md:max-w-sm md:border-r">
-          <div className="mx-auto px-6 py-2 md:space-y-4">
+          <div className="mx-auto px-6 md:space-y-4">
             <Navigation />
             <SearchWorksForm />
             <div className="hidden max-w-full overflow-hidden md:block">
@@ -27,7 +27,7 @@ export const Layout: FC<Props> = ({ children }) => (
           </div>
         </aside>
         <div className="flex flex-1 flex-col ">
-          <main className="relative flex-1 bg-gray-50">
+          <main className="relative flex-1">
             {children}
             <Link
               className="fixed bottom-4 right-4 z-10 grid h-12 w-12 place-items-center rounded-full bg-indigo-500  shadow-md shadow-indigo-400 md:hidden"
