@@ -16,7 +16,7 @@ export const ModalContent: FC = () => {
   return (
     <div className="flex flex-col  items-center justify-center space-y-3 rounded-md bg-white p-6 shadow-sm md:max-w-md">
       <header className="flex w-full items-center justify-center">
-        <Text className="flex flex-1 items-center justify-center font-bold">
+        <Text className="-mr-5 flex flex-1 items-center justify-center font-bold">
           <span className="inline-block bg-gradient-to-r from-indigo-500 to-pink-500 bg-clip-text text-xl text-transparent md:text-2xl">
             Nerd
           </span>

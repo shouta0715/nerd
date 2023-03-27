@@ -7,9 +7,10 @@ import { Work } from "src/features/works/types";
 
 type Props = {
   work: Work;
+  isSeriesPage?: boolean;
 };
 
-export const WorkItem: FC<Props> = ({ work }) => (
+export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   <li
     key={`works-${work.id}`}
     className="relative w-full flex-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
@@ -48,7 +49,7 @@ export const WorkItem: FC<Props> = ({ work }) => (
             />
           ))}
         </ul>
-        {work.series_id && (
+        {work.series_id && !isSeriesPage && (
           <ButtonLink
             as={`/series/${work.series_id}`}
             className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"

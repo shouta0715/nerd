@@ -1,4 +1,3 @@
-import { PlusIcon, ShareIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader/Loader";
@@ -28,7 +27,7 @@ export const Work: FC = () => {
   }
 
   return (
-    <div className="container mx-auto flex flex-col px-6 py-4">
+    <div className="container mx-auto flex flex-col  px-6 py-4">
       <div>
         <Text
           className="mb-4 grid place-content-center text-xl font-bold"
@@ -37,42 +36,26 @@ export const Work: FC = () => {
         >
           {data?.works_by_pk?.series_title}
         </Text>
-        <ul className="mx-auto grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
-          {isPlaceholderData
-            ? "Loading..."
-            : data?.works_by_pk?.episodes.map((episode) => (
-                <WorkEpisodeItem key={episode.id} episode={episode} />
-              ))}
-          <div className="col-span-2 flex w-full items-center justify-between border-t px-2 pt-4 md:col-span-3 lg:col-span-4">
-            <div className="flex items-center justify-center space-x-2">
-              <button className="mb-1 border-none">
-                <PlusIcon className="h-5 w-5 stroke-2 md:h-6 md:w-6" />
-              </button>
-              <Text className="text-xs" component="span">
-                マイリスト
-              </Text>
-            </div>
-            <div className="flex items-center justify-center space-x-2">
-              <button className="mb-1 border-none">
-                <ShareIcon className=" h-5 w-5 stroke-2 md:h-6 md:w-6" />
-              </button>
-              <Text className="text-xs" component="span">
-                シェア
-              </Text>
-            </div>
-          </div>
-        </ul>
+        {isPlaceholderData ? (
+          "Loading..."
+        ) : (
+          <ul className="mx-auto grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
+            {data?.works_by_pk?.episodes.map((episode) => (
+              <WorkEpisodeItem key={episode.id} episode={episode} />
+            ))}
+          </ul>
+        )}
       </div>
       {series && (
         <div className="mt-6">
           <Text
-            className="mb-4 grid text-xl font-bold"
+            className="mb-4 text-xl font-bold"
             component="h1"
             ff="Hiragino Sans"
           >
             シリーズ一覧
           </Text>
-          <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-[repeat(auto-fit,minmax(calc(50%-1rem),1fr))]">
             {isPlaceholderData
               ? "Loading"
               : data?.works.map((series_work, index) => (

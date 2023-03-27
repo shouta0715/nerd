@@ -1,10 +1,10 @@
 import {
   ChevronRightIcon,
   Cog8ToothIcon,
-  DocumentArrowUpIcon,
   ListBulletIcon,
   RocketLaunchIcon,
   TvIcon,
+  ViewfinderCircleIcon,
 } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
@@ -28,7 +28,7 @@ const mockNavigation = [
   {
     name: "作品要望",
     href: "/",
-    icon: DocumentArrowUpIcon,
+    icon: ViewfinderCircleIcon,
     color: "stroke-green-500",
   },
   {

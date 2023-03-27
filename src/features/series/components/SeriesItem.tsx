@@ -13,7 +13,7 @@ export const SeriesItem: FC<Props> = ({
   isFirstHasEpisodeIndex,
 }) =>
   series_work.has_episodes ? (
-    <WorkItem work={series_work} />
+    <WorkItem isSeriesPage work={series_work} />
   ) : (
     <li
       className={`group relative flex items-center space-x-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4 ${
