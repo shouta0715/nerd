@@ -15,12 +15,9 @@ export const ListHeader: FC<Props> = ({ autoCompleteData }) => {
   return (
     <header className="sticky top-0 z-[100] border-x-0 border-y-0 border-b border-solid border-b-slate-200 bg-white/95">
       <div className="container mx-auto bg-transparent py-3">
-        <div className="relative flex w-full items-center space-x-2 px-2">
-          <button
-            className="flex justify-center md:mr-4 "
-            onClick={router.back}
-          >
-            <ArrowSmallLeftIcon className="h-6 w-11 text-black" />
+        <div className="relative flex w-full items-center space-x-2.5 pl-2 pr-4">
+          <button className="flex justify-center " onClick={router.back}>
+            <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
           </button>
           <div className="flex-1">
             <Autocomplete autoCompleteData={autoCompleteData} />

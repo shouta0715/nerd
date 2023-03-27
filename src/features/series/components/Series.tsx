@@ -20,17 +20,16 @@ export const Series: FC = () => {
   return (
     <section className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-10 border-b bg-white/95">
-        <div className="container mx-auto flex px-4 py-2.5 md:py-3.5">
-          <ArrowSmallLeftIcon
-            className="h-6 w-11 cursor-pointer"
-            onClick={router.back}
-          />
+        <div className="relative flex w-full items-center space-x-4 py-3 pl-2 pr-4">
+          <button className="flex justify-center " onClick={router.back}>
+            <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
+          </button>
           <Text
             className="grid flex-1 place-items-center text-base font-bold md:text-lg"
             component="p"
             ff="Hiragino Sans"
           >
-            {series_title ?? data?.works[0].title}の作品一覧
+            {series_title ?? data?.works[0].title}
           </Text>
           <Link
             className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-bold text-transparent"

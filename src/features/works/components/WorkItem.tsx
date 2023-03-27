@@ -1,13 +1,7 @@
-import {
-  PlusIcon,
-  ShareIcon,
-  Square3Stack3DIcon,
-} from "@heroicons/react/24/outline";
+import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { FC } from "react";
-import { Button } from "src/components/Elements/Button";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { Work } from "src/features/works/types";
 
@@ -44,7 +38,7 @@ export const WorkItem: FC<Props> = ({ work }) => (
       >
         {work.series_title}
       </Link>
-      <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0 border-b border-solid border-slate-200 pb-2">
+      <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  pb-2">
         <ul className="mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
           {work.episodes.map((episode) => (
             <WorkEpisodeItem
@@ -54,6 +48,19 @@ export const WorkItem: FC<Props> = ({ work }) => (
             />
           ))}
         </ul>
+        {work.series_id && (
+          <ButtonLink
+            as={`/series/${work.series_id}`}
+            className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
+            href={{
+              pathname: `/series/${work.series_id}`,
+              query: { series_title: work.title },
+            }}
+            size="xs"
+          >
+            シリーズ一覧へ
+          </ButtonLink>
+        )}
         <ButtonLink
           as={
             work.series_id
@@ -79,37 +86,6 @@ export const WorkItem: FC<Props> = ({ work }) => (
         >
           他のエピソードを見る
         </ButtonLink>
-      </div>
-      <div className="mt-2 flex w-full items-center justify-around md:justify-between">
-        <div className="flex flex-col items-center justify-center">
-          <Button className="mb-1 border-none">
-            <PlusIcon className="h-5 w-5 stroke-2 md:h-6 md:w-6" />
-          </Button>
-          <Text className="text-xs" component="span">
-            マイリスト
-          </Text>
-        </div>
-        <div className="flex flex-col items-center justify-center ">
-          <Button className="mb-1 border-none">
-            <ShareIcon className=" h-5 w-5 stroke-2 md:h-6 md:w-6" />
-          </Button>
-          <Text className="text-xs" component="span">
-            シェア
-          </Text>
-        </div>
-        {work.series_id && (
-          <ButtonLink
-            as={`/series/${work.series_id}`}
-            className="flex flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
-            href={{
-              pathname: `/series/${work.series_id}`,
-              query: { series_title: work.title },
-            }}
-            size="xs"
-          >
-            シリーズ一覧
-          </ButtonLink>
-        )}
       </div>
     </div>
   </li>

@@ -50,6 +50,13 @@ export type GetSeriesQueryVariables = Types.Exact<{
 
 export type GetSeriesQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
 
+export type GetWeeklyWorksQueryVariables = Types.Exact<{
+  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+}>;
+
+
+export type GetWeeklyWorksQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+
 
 export const GetSeasonWorksDocument = `
     query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
@@ -234,3 +241,38 @@ export const useGetSeriesQuery = <
       options
     );
 useGetSeriesQuery.fetcher = (client: GraphQLClient, variables: GetSeriesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetSeriesQuery, GetSeriesQueryVariables>(client, GetSeriesDocument, variables, headers);
+export const GetWeeklyWorksDocument = `
+    query GetWeeklyWorks($limit: Int) {
+  weekly_works(args: {limit_num: $limit}) {
+    id
+    title
+    series_title
+    series_id
+    has_episodes
+    episodes(order_by: {number: desc_nulls_last}, limit: 8) {
+      title
+      start_time
+      number
+      id
+      has_prev_episode
+      has_next_episode
+      end_time
+    }
+  }
+}
+    `;
+export const useGetWeeklyWorksQuery = <
+      TData = GetWeeklyWorksQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables?: GetWeeklyWorksQueryVariables,
+      options?: UseQueryOptions<GetWeeklyWorksQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetWeeklyWorksQuery, TError, TData>(
+      variables === undefined ? ['GetWeeklyWorks'] : ['GetWeeklyWorks', variables],
+      fetcher<GetWeeklyWorksQuery, GetWeeklyWorksQueryVariables>(client, GetWeeklyWorksDocument, variables, headers),
+      options
+    );
+useGetWeeklyWorksQuery.fetcher = (client: GraphQLClient, variables?: GetWeeklyWorksQueryVariables, headers?: RequestInit['headers']) => fetcher<GetWeeklyWorksQuery, GetWeeklyWorksQueryVariables>(client, GetWeeklyWorksDocument, variables, headers);
