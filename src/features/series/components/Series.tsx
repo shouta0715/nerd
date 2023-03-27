@@ -18,11 +18,11 @@ export const Series: FC = () => {
   );
 
   return (
-    <section className="flex min-h-screen flex-col">
+    <section className="flex min-h-screen animate-fadeUp flex-col">
       <header className="sticky top-0 z-10 border-b bg-white/95">
         <div className="relative flex w-full items-center space-x-4 py-3 pl-2 pr-4">
           <button className="flex justify-center " onClick={router.back}>
-            <ArrowSmallLeftIcon className="h-6 w-6 text-black" />
+            <ArrowSmallLeftIcon className="h-6 w-11 text-black" />
           </button>
           <Text
             className="grid flex-1 place-items-center text-base font-bold md:text-lg"

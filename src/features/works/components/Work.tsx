@@ -28,7 +28,7 @@ export const Work: FC = () => {
   }
 
   return (
-    <div className="container mx-auto flex h-full flex-col  px-6 py-4">
+    <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-6 py-4">
       <Text
         className="mb-4 grid place-content-center text-xl font-bold"
         component="h1"
