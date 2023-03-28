@@ -18,6 +18,9 @@ export const SearchButton = () => {
           q: search,
         },
       });
+
+      setIsSearchOpen(false);
+      setSearch("");
     }
   };
 
