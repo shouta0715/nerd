@@ -7,9 +7,8 @@ import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
 import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
-
+import EpisodeChats from "src/features/chats/components/EpisodeChats";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
-import Chats from "src/features/comments/components/Chats";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 import Comments from "src/features/comments/components/Comments";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
@@ -128,7 +127,7 @@ export const Episode: FC = () => {
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    <Chats episode_id={data?.episodes_by_pk?.id} />
+                    <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
                   </Suspense>
                   <InputFiled episode_id={data?.episodes_by_pk?.id} />
                 </>

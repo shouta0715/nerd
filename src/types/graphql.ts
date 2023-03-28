@@ -2461,8 +2461,6 @@ export type Media_Types_Variance_Fields = {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
-  /** execute VOLATILE function "chats_by_work_id" which returns "chats" */
-  chats_by_work_id: Array<Chats>;
   /** delete data from the table: "bads" */
   delete_bads?: Maybe<Bads_Mutation_Response>;
   /** delete single row from the table: "bads" */
@@ -2575,17 +2573,6 @@ export type Mutation_Root = {
   update_works_by_pk?: Maybe<Works>;
   /** update multiples rows of table: "works" */
   update_works_many?: Maybe<Array<Maybe<Works_Mutation_Response>>>;
-};
-
-
-/** mutation root */
-export type Mutation_RootChats_By_Work_IdArgs = {
-  args: Chats_By_Work_Id_Args;
-  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Chats_Order_By>>;
-  where?: InputMaybe<Chats_Bool_Exp>;
 };
 
 
@@ -3004,6 +2991,10 @@ export type Query_Root = {
   chats_by_episode_id_aggregate: Chats_Aggregate;
   /** fetch data from the table: "chats" using primary key columns */
   chats_by_pk?: Maybe<Chats>;
+  /** execute function "chats_by_work_id" which returns "chats" */
+  chats_by_work_id: Array<Chats>;
+  /** execute function "chats_by_work_id" and query aggregates on result of table type "chats" */
+  chats_by_work_id_aggregate: Chats_Aggregate;
   /** An array relationship */
   comments: Array<Comments>;
   /** An aggregate relationship */
@@ -3118,6 +3109,26 @@ export type Query_RootChats_By_Episode_Id_AggregateArgs = {
 
 export type Query_RootChats_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Query_RootChats_By_Work_IdArgs = {
+  args: Chats_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chats_Order_By>>;
+  where?: InputMaybe<Chats_Bool_Exp>;
+};
+
+
+export type Query_RootChats_By_Work_Id_AggregateArgs = {
+  args: Chats_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chats_Order_By>>;
+  where?: InputMaybe<Chats_Bool_Exp>;
 };
 
 
@@ -3349,6 +3360,10 @@ export type Subscription_Root = {
   chats_by_episode_id_aggregate: Chats_Aggregate;
   /** fetch data from the table: "chats" using primary key columns */
   chats_by_pk?: Maybe<Chats>;
+  /** execute function "chats_by_work_id" which returns "chats" */
+  chats_by_work_id: Array<Chats>;
+  /** execute function "chats_by_work_id" and query aggregates on result of table type "chats" */
+  chats_by_work_id_aggregate: Chats_Aggregate;
   /** fetch data from the table in a streaming manner: "chats" */
   chats_stream: Array<Chats>;
   /** An array relationship */
@@ -3484,6 +3499,26 @@ export type Subscription_RootChats_By_Episode_Id_AggregateArgs = {
 
 export type Subscription_RootChats_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootChats_By_Work_IdArgs = {
+  args: Chats_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chats_Order_By>>;
+  where?: InputMaybe<Chats_Bool_Exp>;
+};
+
+
+export type Subscription_RootChats_By_Work_Id_AggregateArgs = {
+  args: Chats_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Chats_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Chats_Order_By>>;
+  where?: InputMaybe<Chats_Bool_Exp>;
 };
 
 

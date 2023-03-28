@@ -18,16 +18,6 @@ export type InsertChatMutationVariables = Types.Exact<{
 
 export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
-export type GetChatsQueryVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  get_limit: Types.Scalars['Int'];
-  _lt: Types.Scalars['Int'];
-  _gte: Types.Scalars['Int'];
-}>;
-
-
-export type GetChatsQuery = { __typename?: 'query_root', chats_by_episode_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
-
 export type GetCommentsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
@@ -81,43 +71,6 @@ export const useInsertChatMutation = <
       options
     );
 useInsertChatMutation.fetcher = (client: GraphQLClient, variables: InsertChatMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatMutation, InsertChatMutationVariables>(client, InsertChatDocument, variables, headers);
-export const GetChatsDocument = `
-    query GetChats($episode_id: uuid!, $get_limit: Int!, $_lt: Int!, $_gte: Int!) {
-  chats_by_episode_id(
-    args: {_episode_id: $episode_id, get_limit: $get_limit, _gte: $_gte, _lt: $_lt}
-    order_by: {comment_time: asc}
-  ) {
-    content
-    work_id
-    user_id
-    comment_time
-    id
-    episode_id
-    created_at
-    commenter_name
-    user {
-      anonymous
-      user_name
-      id
-    }
-  }
-}
-    `;
-export const useGetChatsQuery = <
-      TData = GetChatsQuery,
-      TError = unknown
-    >(
-      client: GraphQLClient,
-      variables: GetChatsQueryVariables,
-      options?: UseQueryOptions<GetChatsQuery, TError, TData>,
-      headers?: RequestInit['headers']
-    ) =>
-    useQuery<GetChatsQuery, TError, TData>(
-      ['GetChats', variables],
-      fetcher<GetChatsQuery, GetChatsQueryVariables>(client, GetChatsDocument, variables, headers),
-      options
-    );
-useGetChatsQuery.fetcher = (client: GraphQLClient, variables: GetChatsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetChatsQuery, GetChatsQueryVariables>(client, GetChatsDocument, variables, headers);
 export const GetCommentsDocument = `
     query GetComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
   comments(
