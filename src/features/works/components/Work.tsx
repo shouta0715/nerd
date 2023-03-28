@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
 import { Text } from "src/components/Elements/Text";
-import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";

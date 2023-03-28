@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from "react";
-import { WorkEpisodeSkelton } from "src/components/Layout/loading/WorkEpisodeSkelton";
+import { WorkEpisodeSkelton } from "src/components/Elements/Loader/loaders/WorkEpisodeSkelton";
 
 export const WorkSkelton = ({ is_short = false, isButton = false }) => (
   <ul className="mx-auto grid w-full grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">

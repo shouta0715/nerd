@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
+import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
 import { Layout } from "src/components/Layout/Layout";
-import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
 import { Work } from "src/features/works/components/Work";
 
 const Index: NextPage = () => (

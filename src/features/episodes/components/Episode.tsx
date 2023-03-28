@@ -2,11 +2,12 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
+import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
+import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
-import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
-import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
+
 import EpisodeChats from "src/features/chats/components/EpisodeChats";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import { InputFiled } from "src/features/comments/components/CommentInput";

@@ -2,7 +2,7 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
 import WorkChats from "src/features/chats/components/WorkChats";

@@ -2,8 +2,8 @@
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, RefObject } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
-import { Reply } from "src/features/comments/components/ReplyComment";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Reply } from "src/features/comments/components/Reply";
 import { useComment } from "src/features/comments/hooks/useComment";
 
 type Props = {

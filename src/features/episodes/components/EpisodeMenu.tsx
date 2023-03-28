@@ -9,8 +9,9 @@ import React, { FC, memo, Suspense } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
+import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
-import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
+
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";

@@ -3,7 +3,7 @@ import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Loader } from "src/components/Elements/Loader/Loader";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Text } from "src/components/Elements/Text";
 import { Comment as TypeComment } from "src/features/comments/types";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";

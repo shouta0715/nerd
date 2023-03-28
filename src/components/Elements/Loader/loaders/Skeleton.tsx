@@ -1,8 +1,8 @@
 import React, { FC } from "react";
-import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 
 export const Skeleton: FC = () => (
-  <li className="mx-auto max-w-lg flex-1 rounded-md bg-white p-4  shadow md:px-6">
+  <li className=" flex-1 rounded-md bg-white p-4  shadow md:px-6">
     <div className="mx-auto flex animate-pulse flex-col items-center justify-between">
       <div className="mb-1 h-6 w-52 rounded-md bg-slate-200 md:mb-2" />
       <div className="mb-2 flex h-4 w-full  ">

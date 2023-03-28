@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Loader } from "src/components/Elements/Loader/Loader";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Comment } from "src/features/comments/components/Comment";
 import { useComments } from "src/features/comments/hooks/useComments";
 

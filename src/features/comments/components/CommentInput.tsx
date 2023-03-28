@@ -7,7 +7,7 @@ import React, { FC, memo } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Loader } from "src/components/Elements/Loader/Loader";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
 import { useOpenState } from "src/features/episodes/store";

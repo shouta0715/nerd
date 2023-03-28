@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { useSeasonWorks } from "src/features/lists/components/hooks/useSeasonWorks";
+import { useSeasonWorks } from "src/features/lists/hooks/useSeasonWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
 
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";

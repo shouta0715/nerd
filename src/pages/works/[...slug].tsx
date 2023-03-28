@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
-import { EpisodeSkelton } from "src/components/Layout/loading/EpisodeSkelton";
+import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { PlayWork } from "src/features/works/components/PlayWork";
 
 const Index: NextPage = () => (

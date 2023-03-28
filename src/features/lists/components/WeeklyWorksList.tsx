@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { WorkSkelton } from "src/components/Layout/loading/WorkSkelton";
-import { useWeeklyWorks } from "src/features/lists/components/hooks/useWeeklyWorks";
+import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
+import { useWeeklyWorks } from "src/features/lists/hooks/useWeeklyWorks";
 import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
 
 type Props = { data: GetWeeklyWorksQuery };
