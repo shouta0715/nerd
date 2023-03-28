@@ -1,4 +1,4 @@
-import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
+import { useMutateSearchWorks } from "src/features/works/api/useMutateSearchWorks";
 import {
   useSearchWorksInput,
   useSearchWorksState,
@@ -6,7 +6,7 @@ import {
 
 export const useSearchWorks = () => {
   const { search, setSearch } = useSearchWorksInput();
-  const { data, mutateAsync } = useQuerySearchWorks();
+  const { data, mutateAsync } = useMutateSearchWorks();
   const setData = useSearchWorksState((state) => state.setData);
   const setIsLoading = useSearchWorksState((state) => state.setIsLoading);
 
