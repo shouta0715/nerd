@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { TimerSkelton } from "src/components/Layout/loading/TimerSkelton";
 
 export const Skeleton: FC = () => (
   <li className="mx-auto max-w-lg flex-1 rounded-md bg-white p-4  shadow md:px-6">

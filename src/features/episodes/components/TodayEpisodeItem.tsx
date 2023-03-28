@@ -2,7 +2,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, memo } from "react";
 import { Text } from "src/components/Elements/Text";
-import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { TimerSkelton } from "src/components/Layout/loading/TimerSkelton";
+
 import { Episode } from "src/features/episodes/types";
 import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
 

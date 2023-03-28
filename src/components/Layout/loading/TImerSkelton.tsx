@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 
 const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   <div
@@ -12,6 +12,7 @@ const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
     <span className="h-2 w-10 rounded-md bg-slate-200" />
   </div>
 ));
-export const TimerSkelton: FC = () => (
+
+export const TimerSkelton = () => (
   <div className="flex space-x-4 md:space-x-6">{skeltonTimers}</div>
 );

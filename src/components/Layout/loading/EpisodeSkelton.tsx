@@ -2,7 +2,7 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 
 import React, { FC } from "react";
 import { EpisodeMenuSkelton } from "src/components/Layout/loading/EpisodeMenuSkelton";
-import { TimerSkelton } from "src/components/Layout/loading/TImerSkelton";
+import { TimerSkelton } from "src/components/Layout/loading/TimerSkelton";
 
 export const EpisodeSkelton: FC = () => (
   <div className="flex flex-col bg-white">
