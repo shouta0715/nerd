@@ -2,7 +2,7 @@ import * as Types from '../../types/graphql';
 
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 
 function fetcher<TData, TVariables extends { [key: string]: any }>(client: GraphQLClient, query: string, variables?: TVariables, requestHeaders?: RequestInit['headers']) {
   return async (): Promise<TData> => client.request({
@@ -30,6 +30,13 @@ export type GetChatsWorkQueryVariables = Types.Exact<{
 
 
 export type GetChatsWorkQuery = { __typename?: 'query_root', chats_by_work_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+
+export type InsertChatMutationVariables = Types.Exact<{
+  object: Types.Chats_Insert_Input;
+}>;
+
+
+export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
 
 export const GetChatsEpisodeDocument = `
@@ -106,3 +113,37 @@ export const useGetChatsWorkQuery = <
       options
     );
 useGetChatsWorkQuery.fetcher = (client: GraphQLClient, variables: GetChatsWorkQueryVariables, headers?: RequestInit['headers']) => fetcher<GetChatsWorkQuery, GetChatsWorkQueryVariables>(client, GetChatsWorkDocument, variables, headers);
+export const InsertChatDocument = `
+    mutation InsertChat($object: chats_insert_input!) {
+  insert_chats_one(object: $object) {
+    content
+    work_id
+    user_id
+    comment_time
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      photo_url
+      id
+    }
+  }
+}
+    `;
+export const useInsertChatMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<InsertChatMutation, TError, InsertChatMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<InsertChatMutation, TError, InsertChatMutationVariables, TContext>(
+      ['InsertChat'],
+      (variables?: InsertChatMutationVariables) => fetcher<InsertChatMutation, InsertChatMutationVariables>(client, InsertChatDocument, variables, headers)(),
+      options
+    );
+useInsertChatMutation.fetcher = (client: GraphQLClient, variables: InsertChatMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatMutation, InsertChatMutationVariables>(client, InsertChatDocument, variables, headers);

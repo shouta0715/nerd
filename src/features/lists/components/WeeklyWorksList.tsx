@@ -12,7 +12,7 @@ const DynamicWorkItem = dynamic(
       (mod) => mod.WorkItem
     ),
   {
-    ssr: true,
+    ssr: false,
     loading: () => <WorkSkelton />,
   }
 );

@@ -5,6 +5,7 @@ import React, { FC, Suspense, useState } from "react";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
+import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 import { useQueryWork } from "src/features/works/api/useQueryWork";
@@ -102,7 +103,7 @@ export const PlayWork: FC = () => {
                   >
                     <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
                   </Suspense>
-                  {/* <InputFiled episode_id={data?.episodes_by_pk?.id} /> */}
+                  <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
                 </>
               ) : (
                 <Suspense fallback={<div>Loading...</div>}>
