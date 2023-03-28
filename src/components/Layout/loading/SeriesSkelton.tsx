@@ -31,7 +31,7 @@ export const SeriesSkelton = () => {
       <main className="flex-1 bg-gray-50">
         <div className="container mx-auto px-6 pb-12 pt-4">
           <ul className="grid grid-cols-1 gap-4 ">
-            <WorkSkelton isButton />
+            <WorkSkelton is_short isButton />
           </ul>
         </div>
       </main>

@@ -1,17 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useInputCommentState } from "src/features/comments/store";
-import {
-  GetChatsQuery,
-  useInsertChatMutation,
-} from "src/graphql/comment/commentQuery.generated";
+import { GetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
+import { useInsertChatMutation } from "src/graphql/comment/commentQuery.generated";
 
 import { client } from "src/libs/graphqlClient";
 
 import { useUserState } from "src/store/user/userState";
 
 type PrevData = {
-  pages: GetChatsQuery[];
+  pages: GetChatsEpisodeQuery[];
   pageParams: {
     _gte: number;
     _lt: number;
@@ -56,7 +54,7 @@ export const useMutateChats = () => {
                 (comment) => comment.comment_time >= comment_time
               );
 
-              const newPages: GetChatsQuery = {
+              const newPages: GetChatsEpisodeQuery = {
                 chats_by_episode_id: [...page.chats_by_episode_id],
               };
 

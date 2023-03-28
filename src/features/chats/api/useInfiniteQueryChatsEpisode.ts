@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useGetChatsQuery } from "src/graphql/comment/commentQuery.generated";
+import { useGetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
 
 import { client } from "src/libs/graphqlClient";
 
@@ -8,7 +8,7 @@ type Args = {
   enabled: boolean;
 };
 
-type GetChatCommentsArgs = {
+type GetChatsEpisodeArgs = {
   episode_id: string;
   pageParam: {
     _gte: number;
@@ -21,12 +21,9 @@ const InitialPageParam = {
   _lt: 300,
 };
 
-const getChatComments = async ({
-  episode_id,
-  pageParam,
-}: GetChatCommentsArgs) => {
+const getChat = async ({ episode_id, pageParam }: GetChatsEpisodeArgs) => {
   const { _gte, _lt } = pageParam;
-  const fetcher = useGetChatsQuery.fetcher(client, {
+  const fetcher = useGetChatsEpisodeQuery.fetcher(client, {
     episode_id,
     get_limit: 40,
     _gte,
@@ -38,11 +35,11 @@ const getChatComments = async ({
   return data;
 };
 
-export const useInfiniteQueryChats = ({ episode_id, enabled }: Args) =>
+export const useInfiniteQueryChatsEpisode = ({ episode_id, enabled }: Args) =>
   useInfiniteQuery({
     queryKey: ["chats", { episode_id }],
     queryFn: ({ pageParam = InitialPageParam }) =>
-      getChatComments({
+      getChat({
         episode_id,
         pageParam,
       }),

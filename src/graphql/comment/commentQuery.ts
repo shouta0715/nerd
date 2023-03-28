@@ -21,39 +21,6 @@ export const INSERT_CHAT = gql`
   }
 `;
 
-export const GET_CHATS = gql`
-  query GetChats(
-    $episode_id: uuid!
-    $get_limit: Int!
-    $_lt: Int!
-    $_gte: Int!
-  ) {
-    chats_by_episode_id(
-      args: {
-        _episode_id: $episode_id
-        get_limit: $get_limit
-        _gte: $_gte
-        _lt: $_lt
-      }
-      order_by: { comment_time: asc }
-    ) {
-      content
-      work_id
-      user_id
-      comment_time
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        id
-      }
-    }
-  }
-`;
-
 export const GET_COMMENTS = gql`
   query GetComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
     comments(

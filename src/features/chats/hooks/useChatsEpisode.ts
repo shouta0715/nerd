@@ -1,29 +1,21 @@
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
-import { useOpenState } from "../../episodes/store/index";
+import { useInfiniteQueryChatsEpisode } from "src/features/chats/api/useInfiniteQueryChatsEpisode";
+import { useChats } from "src/features/chats/hooks/useChats";
 
-import { useInfiniteQueryChats } from "src/features/comments/api/useInfiniteQueryChatComments";
-import { useTimerState } from "src/features/timer/store/timerStore";
-import { useInterSection } from "src/hooks/useInterSection";
-
-type Args = {
-  episode_id: string;
-};
-
-export const useChats = ({ episode_id }: Args) => {
-  const { data, fetchNextPage, isLoading } = useInfiniteQueryChats({
+export const useChatsEpisode = (episode_id: string) => {
+  const {
+    entry,
+    isBottom,
+    isMenuOpen,
+    time,
+    setIsBottom,
+    interval,
+    bottomRef,
+  } = useChats();
+  const { data, fetchNextPage } = useInfiniteQueryChatsEpisode({
     episode_id,
     enabled: !!episode_id,
   });
-  const time = useTimerState((state) => state.getTime());
-  const isMenuOpen = useOpenState((state) => state.isMenuOpen);
-  const interval = useTimerState((state) => state.interval);
-  const { ref, entry } = useInterSection({
-    root: null,
-    rootMargin: "100px",
-    threshold: 1,
-  });
-  const [isBottom, setIsBottom] = useState<boolean>(true);
-
   const chatCommentData = useMemo(() => {
     if (!data?.pages) return [];
 
@@ -63,17 +55,9 @@ export const useChats = ({ episode_id }: Args) => {
     interval?.active,
     isBottom,
     isMenuOpen,
+    setIsBottom,
     time,
   ]);
 
-  return {
-    data: deferredData,
-    isLoading,
-    bottomRef: ref,
-    isBottom,
-    setIsBottom,
-    entry,
-    interval,
-    time,
-  };
+  return { data: deferredData, bottomRef, isBottom, entry, time };
 };

@@ -1,26 +1,34 @@
-import { ArrowDownIcon } from "@heroicons/react/24/solid";
-import React, { FC, memo } from "react";
+import { ArrowDownIcon } from "@heroicons/react/24/outline";
+import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
-import { useChats } from "src/features/comments/hooks/useChats";
+import { Chat } from "src/features/chats/types";
 import { timeProcessing } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
-  episode_id: string;
+  chats: Chat[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  bottomRef: (element: any) => void;
+  isBottom: boolean;
+  entry: IntersectionObserverEntry | null;
+  time: number;
 };
 
-const Chats: FC<Props> = memo(({ episode_id }) => {
-  const { data, bottomRef, isBottom, entry, time } = useChats({
-    episode_id,
-  });
+export const Chats: FC<Props> = ({
+  chats,
+  bottomRef,
+  isBottom,
+  entry,
+  time,
+}) => {
   const { timeCommented } = timeProcessing();
 
   const user = useUserState((state) => state.user);
 
   return (
     <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1 md:max-w-xl">
-      {data?.map((comment) => (
+      {chats?.map((comment) => (
         <li
           key={comment.id}
           className={`flex w-full animate-comment transition-all ${
@@ -79,6 +87,4 @@ const Chats: FC<Props> = memo(({ episode_id }) => {
       <div ref={bottomRef} className="absolute bottom-0 opacity-0" />
     </ul>
   );
-});
-
-export default Chats;
+};
