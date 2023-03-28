@@ -1,19 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { useMutateChats } from "src/features/comments/api/useMutateChatComments";
-import { useInputCommentState } from "src/features/comments/store";
-import { useTimerState } from "src/features/timer/store/timerStore";
-import { useUserState } from "src/store/user/userState";
+import { useMutateChatEpisode } from "src/features/chats/api/useMutateChatEpisode";
+import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
 
 type Args = {
   episode_id: string;
 };
 
-export const useSubmitComment = ({ episode_id }: Args) => {
-  const { insertChat } = useMutateChats();
-  const getTime = useTimerState((state) => state.getTime);
-  const { content } = useInputCommentState((state) => state.inputComment);
-  const user = useUserState((state) => state.user);
+export const useSubmitChatEpisode = ({ episode_id }: Args) => {
+  const { insertChat } = useMutateChatEpisode();
+  const { content, user, getTime } = useSubmitChat();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

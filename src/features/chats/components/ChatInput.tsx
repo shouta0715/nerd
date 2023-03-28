@@ -1,14 +1,11 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Cog8ToothIcon } from "@heroicons/react/24/outline";
-import { ArrowUpIcon } from "@heroicons/react/24/solid";
-import React, { FC, memo } from "react";
-import TextareaAutosize from "react-textarea-autosize";
+import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
+import React, { FC } from "react";
+import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
-import { useSubmitComment } from "src/features/comments/hooks/useSubmitComment";
 import { useInputCommentState } from "src/features/comments/store";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
@@ -16,30 +13,33 @@ import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
-  episode_id: string;
+  onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
 };
 
-export const InputFiled: FC<Props> = memo(({ episode_id }) => {
-  const { content } = useInputCommentState((state) => state.inputComment);
-  const setInputComment = useInputCommentState(
-    (state) => state.setInputComment
-  );
-  const { onSubmitHandler, isLoading } = useSubmitComment({ episode_id });
+export const ChatInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   const user = useUserState((state) => state.user);
-  const setIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
-  const authLoading = useGlobalState((state) => state.authLoading);
-  const setIsMenuOpen = useOpenState((state) => state.setIsMenuOpen);
-  const isMenuOpen = useOpenState((state) => state.isMenuOpen);
+  const { authLoading, setIsOpenModal } = useGlobalState((state) => ({
+    authLoading: state.authLoading,
+    setIsOpenModal: state.setIsOpenModal,
+  }));
+  const [isMenuOpen, setIsMenuOpen] = useOpenState((state) => [
+    state.isMenuOpen,
+    state.setIsMenuOpen,
+  ]);
   const time = useTimerState((state) => state.getTime());
+  const [{ content }, setInputComment] = useInputCommentState((state) => [
+    state.inputComment,
+    state.setInputComment,
+  ]);
 
   return (
-    <div className="fixed left-0 bottom-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white px-4 py-2">
+    <div className="fixed left-0 bottom-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white p-2">
       <form
-        className="container mx-auto flex items-center justify-center opacity-100"
+        className="container mx-auto flex items-center justify-center space-x-2 opacity-100"
         onSubmit={onSubmitHandler}
       >
         <figure
-          className="m-0 mr-2"
           onClick={() => {
             if (user?.anonymous) setIsOpenModal(true);
           }}
@@ -54,7 +54,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
           )}
         </figure>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
-          <TextareaAutosize
+          <ReactTextareaAutosize
             className="w-full resize-none appearance-none rounded-full border  border-gray-300 py-2 px-4 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={time === 0 || !user}
             maxLength={100}
@@ -79,7 +79,7 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
               className={`text-xs transition-opacity ${
                 content.length === 100 ? "text-red-400" : "text-gray-500"
               }
-                  ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
+            ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
             >
               {content.length > 50 && content.length.toString()}
             </div>
@@ -105,4 +105,4 @@ export const InputFiled: FC<Props> = memo(({ episode_id }) => {
       </form>
     </div>
   );
-});
+};

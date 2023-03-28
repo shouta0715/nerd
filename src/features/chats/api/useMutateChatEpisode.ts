@@ -1,12 +1,15 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useInputCommentState } from "src/features/comments/store";
-import { GetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
-import { useInsertChatMutation } from "src/graphql/comment/commentQuery.generated";
+import {
+  GetChatsEpisodeQuery,
+  useInsertChatMutation,
+} from "src/graphql/chat/chatQuery.generated";
 
 import { client } from "src/libs/graphqlClient";
 
 import { useUserState } from "src/store/user/userState";
+import { genRandomId } from "src/utils/genRandomId";
 
 type PrevData = {
   pages: GetChatsEpisodeQuery[];
@@ -16,7 +19,7 @@ type PrevData = {
   }[];
 };
 
-export const useMutateChats = () => {
+export const useMutateChatEpisode = () => {
   const queryClient = useQueryClient();
   const resetInputComment = useInputCommentState(
     (state) => state.resetInputComment
@@ -24,7 +27,7 @@ export const useMutateChats = () => {
   const user = useUserState((state) => state.user);
   const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
-      const fake_id = Math.random().toString(36).substring(7);
+      const fake_id = genRandomId();
       const { episode_id, comment_time, content, commenter_name } =
         newComment.object;
 
@@ -96,12 +99,6 @@ export const useMutateChats = () => {
         user,
       };
     },
-    onSuccess: (newData, __) => {
-      // TODO: ここでコメントを追加する
-      const episode_id = newData.insert_chats_one?.episode_id;
-      queryClient.invalidateQueries(["chats", { episode_id }]);
-    },
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (_: any, newComment, context) => {
       const { episode_id } = newComment.object;

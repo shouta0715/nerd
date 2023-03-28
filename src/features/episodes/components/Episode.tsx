@@ -7,10 +7,11 @@ import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSk
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
+import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
-import { InputFiled } from "src/features/comments/components/CommentInput";
+
 import Comments from "src/features/comments/components/Comments";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
@@ -130,7 +131,7 @@ export const Episode: FC = () => {
                   >
                     <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
                   </Suspense>
-                  <InputFiled episode_id={data?.episodes_by_pk?.id} />
+                  <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
                 </>
               ) : (
                 <Suspense fallback={<div>Loading...</div>}>

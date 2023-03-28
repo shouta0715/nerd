@@ -1,26 +1,5 @@
 import { gql } from "graphql-request";
 
-export const INSERT_CHAT = gql`
-  mutation InsertChat($object: chats_insert_input!) {
-    insert_chats_one(object: $object) {
-      content
-      work_id
-      user_id
-      comment_time
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        photo_url
-        id
-      }
-    }
-  }
-`;
-
 export const GET_COMMENTS = gql`
   query GetComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
     comments(

@@ -19,8 +19,8 @@ export const Layout: FC<Props> = ({ children }) => (
       <div className="container mx-auto flex flex-1 flex-col md:flex-row">
         <aside className="top-0 max-h-screen overflow-y-auto bg-white pb-2 md:sticky md:w-1/3 md:max-w-sm md:border-r md:py-2">
           <div className="mx-auto px-6 md:space-y-4">
-            <Navigation />
             <SearchWorksForm />
+            <Navigation />
             <div className="hidden max-w-full overflow-hidden md:block">
               <SearchWorks />
             </div>
