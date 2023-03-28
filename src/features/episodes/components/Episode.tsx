@@ -8,7 +8,7 @@ import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
 
-import EpisodeChats from "src/features/chats/components/EpisodeChats";
+import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 import { InputFiled } from "src/features/comments/components/CommentInput";
 import Comments from "src/features/comments/components/Comments";

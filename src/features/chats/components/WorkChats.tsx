@@ -6,7 +6,7 @@ type Props = {
   work_id: number;
 };
 
-const WorkChats: FC<Props> = memo(({ work_id }) => {
+export const WorkChats: FC<Props> = memo(({ work_id }) => {
   const { data, bottomRef, isBottom, entry, time } = useChatsWork(work_id);
 
   return (
@@ -19,5 +19,3 @@ const WorkChats: FC<Props> = memo(({ work_id }) => {
     />
   );
 });
-
-export default WorkChats;

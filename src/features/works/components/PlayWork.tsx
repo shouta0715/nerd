@@ -5,7 +5,7 @@ import React, { FC, Suspense, useState } from "react";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
-import WorkChats from "src/features/chats/components/WorkChats";
+import { WorkChats } from "src/features/chats/components/WorkChats";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 import { useQueryWork } from "src/features/works/api/useQueryWork";
 

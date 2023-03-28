@@ -6,7 +6,7 @@ type Props = {
   episode_id: string;
 };
 
-const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
+export const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
   const { data, bottomRef, isBottom, entry, time } =
     useChatsEpisode(episode_id);
 
@@ -20,5 +20,3 @@ const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
     />
   );
 });
-
-export default EpisodeChats;
