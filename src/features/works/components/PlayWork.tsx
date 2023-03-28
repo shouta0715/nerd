@@ -2,6 +2,7 @@ import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
+import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
@@ -27,7 +28,7 @@ export const PlayWork: FC = () => {
   const [isChat, setIsChat] = useState(true);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <EpisodeSkelton />;
   }
 
   return (
