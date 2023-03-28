@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { Skeleton } from "src/components/Layout/loading/Skeleton";
+import { Skeleton } from "src/components/Elements/Loader/loaders/Skeleton";
+
 import { useTodayEpisodes } from "src/features/episodes/hooks/useTodayEpisodes";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 

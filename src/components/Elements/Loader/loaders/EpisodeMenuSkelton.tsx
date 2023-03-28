@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { NextEpisodeMenuSkelton } from "src/components/Layout/loading/NextEpisodeMenuSkelton";
+import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 
 const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   <div
