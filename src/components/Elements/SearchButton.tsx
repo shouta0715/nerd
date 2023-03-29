@@ -56,7 +56,7 @@ export const SearchButton = () => {
         >
           <form className="flex w-full " onSubmit={submitHandler}>
             <div className="relative flex-1">
-              <MagnifyingGlassIcon className="absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
+              <MagnifyingGlassIcon className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
               <Input
                 className="peer rounded-r-none px-8"
                 onChange={(e) => setSearch(e.target.value)}
@@ -65,7 +65,7 @@ export const SearchButton = () => {
                 value={search}
               />
               <button
-                className="absolute top-1/2 right-2 block -translate-y-1/2 rounded-full bg-indigo-50 p-1 peer-placeholder-shown:hidden"
+                className="absolute right-2 top-1/2 block -translate-y-1/2 rounded-full bg-indigo-50 p-1 peer-placeholder-shown:hidden"
                 onClick={() => setSearch("")}
                 type="button"
               >
@@ -87,7 +87,7 @@ export const SearchButton = () => {
           leaveTo="opacity-0 scale-0"
         >
           <button
-            className="absolute top-1/2 left-1/2 grid h-12 w-12 translate-y-20 -translate-x-1/2 place-items-center rounded-full bg-white"
+            className="absolute left-1/2 top-1/2 grid h-12 w-12 -translate-x-1/2 translate-y-20 place-items-center rounded-full bg-white"
             onClick={() => setIsSearchOpen(false)}
           >
             <XMarkIcon className="h-6 w-6 stroke-2" />

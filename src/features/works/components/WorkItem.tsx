@@ -69,7 +69,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
                 ? `/works/${work.id}?series=${work.series_id}`
                 : `/works/${work.id}`
             }
-            className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+            className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
             href={{
               pathname: `${`/works/${work.id}`}`,
               query: {

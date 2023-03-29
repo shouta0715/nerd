@@ -11,7 +11,7 @@ const Comments: FC<Props> = ({ episode_id }) => {
   const { data, ref, hasNextPage } = useComments(episode_id);
 
   return (
-    <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pt-4 pb-1  md:max-w-xl">
+    <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pb-1 pt-4  md:max-w-xl">
       {data?.pages.map((page) =>
         page.comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />

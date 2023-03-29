@@ -57,7 +57,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               start_time={episode.start_time}
             />
             <Link
-              className="light-bg mt-2 ml-auto rounded-md px-3 py-2 text-sm font-bold "
+              className="light-bg ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold "
               href={`/episode/${episode.id}?category=archive`}
             >
               参加する

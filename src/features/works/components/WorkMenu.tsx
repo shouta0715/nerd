@@ -42,7 +42,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
       }}
     >
       <div
-        className={`mx-auto h-max max-h-[90vh] w-4/5 max-w-md animate-modal overflow-y-auto  rounded-md border border-solid border-slate-100 bg-white px-4 py-4 shadow lg:static  lg:h-auto lg:max-h-fit lg:w-full lg:translate-y-0 lg:translate-x-0 lg:animate-none lg:border-0 lg:shadow-none lg:transition-none ${
+        className={`mx-auto h-max max-h-[90vh] w-4/5 max-w-md animate-modal overflow-y-auto  rounded-md border border-solid border-slate-100 bg-white px-4 py-4 shadow lg:static  lg:h-auto lg:max-h-fit lg:w-full lg:translate-x-0 lg:translate-y-0 lg:animate-none lg:border-0 lg:shadow-none lg:transition-none ${
           isMenuOpen ? "block" : "  hidden lg:block"
         }`}
       >
@@ -99,7 +99,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
               </Text>
               <div className="relative bg-red-500">
                 <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6 text-gray-500" />
-                <div className="absolute bottom-8 -left-7 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:top-full before:left-1/2 before:h-0   before:w-0  before:-translate-x-1/2 before:border-r-[6px] before:border-l-[6px] before:border-t-[6px] before:border-b-0 before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
+                <div className="absolute -left-7 bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
                   下の数字をタップすると時間を変更できます。
                 </div>
               </div>
@@ -109,7 +109,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
                 {padTime.split("").map((digit, index) => (
                   <input
                     key={`${uuid}-${index}`}
-                    className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:mr-2 odd:ml-5 "
+                    className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
                     id={`${uuid}-${index + 1}`}
                     inputMode="numeric"
                     onChange={(e) => {
@@ -183,7 +183,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
           <nav className="group relative my-2 flex cursor-pointer items-center justify-center">
             <ButtonLink
               as={`/series/${series_id}`}
-              className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:py-2 md:px-4 md:text-sm"
+              className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
               href={{
                 pathname: `/series/${series_id}`,
                 query: { series_title },

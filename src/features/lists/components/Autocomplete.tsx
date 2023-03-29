@@ -36,7 +36,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
             />
           </button>
           <Combobox.Input
-            className=" w-full appearance-none rounded-full border  border-gray-300 py-1.5 px-8 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  "
+            className=" w-full appearance-none rounded-full border  border-gray-300 px-8 py-1.5 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  "
             onChange={(e) => {
               setComboboxValue(e.target.value);
               if (e.target.value === "") setSearchInput("");
@@ -62,7 +62,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
           leaveTo=" scale-y-0 "
           show={comboboxValue !== "" && filteredData.length !== 0}
         >
-          <Combobox.Options className="absolute top-[2.625rem] left-1/2  z-20 block max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black shadow-md hover:!block peer-[&:not(:focus-within)]:hidden ">
+          <Combobox.Options className="absolute left-1/2 top-[2.625rem]  z-20 block max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black shadow-md hover:!block peer-[&:not(:focus-within)]:hidden ">
             {filteredData.map((item) => (
               <Combobox.Option
                 key={item.title}
