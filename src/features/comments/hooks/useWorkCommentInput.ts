@@ -1,21 +1,21 @@
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
 
-export const useEpisodeCommentInput = (episode_id: string) => {
+export const useWorkCommentInput = (work_id: number) => {
   const {
     content,
     reply_to,
     replied_to_commenter_name,
     user,
     reset,
-    insertEpisodeComment,
+    insertWorkComment,
   } = useCommentInput();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (content === "") return;
-    await insertEpisodeComment.mutateAsync({
-      episode_id,
+    await insertWorkComment.mutateAsync({
+      work_id,
       content,
       reply_to,
       replied_to_commenter_name,
@@ -27,6 +27,6 @@ export const useEpisodeCommentInput = (episode_id: string) => {
 
   return {
     onSubmitHandler,
-    isLoading: insertEpisodeComment.isLoading,
+    isLoading: insertWorkComment.isLoading,
   };
 };

@@ -31,7 +31,7 @@ export const getComments = async ({
   return data;
 };
 
-export const useInfiniteQueryComments = (episode_id: string) =>
+export const useInfiniteCommentsEpisode = (episode_id: string) =>
   useInfiniteQuery({
     queryKey: ["comments", { episode_id }],
     queryFn: ({ pageParam = InitialPageParam }) =>
