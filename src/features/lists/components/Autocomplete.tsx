@@ -11,12 +11,12 @@ type Props = {
 
 export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
-  const searchInput = useSearchInputState((state) => state.searchInput);
+  const [comboboxValue, setComboboxValue] = React.useState("");
 
   const filteredData = autoCompleteData.filter(
     (item) =>
-      item.title.includes(searchInput.toLowerCase().trim()) ||
-      item.episodeTitle?.includes(searchInput.toLowerCase().trim())
+      item.title.includes(comboboxValue.toLowerCase().trim()) ||
+      item.episodeTitle?.includes(comboboxValue.toLowerCase().trim())
   );
 
   return (
@@ -24,8 +24,9 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
       <Combobox
         onChange={(value) => {
           setSearchInput(value);
+          setComboboxValue(value);
         }}
-        value={searchInput}
+        value={comboboxValue}
       >
         <div className="peer relative mx-auto w-full max-w-md">
           <button className="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -36,14 +37,18 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
           </button>
           <Combobox.Input
             className=" w-full appearance-none rounded-full border  border-gray-300 py-1.5 px-8 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500  "
-            onChange={(event) => {
-              setSearchInput(event.target.value);
+            onChange={(e) => {
+              setComboboxValue(e.target.value);
+              if (e.target.value === "") setSearchInput("");
             }}
           />
           <button className="absolute inset-y-0 right-0 flex items-center pr-2">
             <XMarkIcon
               className="h-5 w-5 text-gray-400"
-              onClick={() => setSearchInput("")}
+              onClick={() => {
+                setSearchInput("");
+                setComboboxValue("");
+              }}
             />
           </button>
         </div>
@@ -55,7 +60,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
           leave="transition ease-in duration-75 origin-top"
           leaveFrom=" scale-y-1"
           leaveTo=" scale-y-0 "
-          show={searchInput !== "" && filteredData.length !== 0}
+          show={comboboxValue !== "" && filteredData.length !== 0}
         >
           <Combobox.Options className="absolute top-[2.625rem] left-1/2  z-20 block max-h-96 w-full max-w-md -translate-x-1/2 overflow-y-hidden rounded-md border bg-white p-2 text-black shadow-md hover:!block peer-[&:not(:focus-within)]:hidden ">
             {filteredData.map((item) => (
