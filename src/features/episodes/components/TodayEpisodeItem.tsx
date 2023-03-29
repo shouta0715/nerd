@@ -1,6 +1,8 @@
+import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, memo } from "react";
+import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Text } from "src/components/Elements/Text";
 import { Episode } from "src/features/episodes/types";
@@ -35,9 +37,21 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         <h3 className="mb-1 font-hiragino-sans text-base font-bold md:mb-2 md:text-lg">
           {episode.work.series_title}
         </h3>
-        <div className="mb-2 flex w-full text-sm md:text-base">
-          <Text className="mr-4">{episode.number}.</Text>
-          <Text ff="Hiragino Sans">{episode.title}</Text>
+        <div className="mb-2 flex w-full items-center justify-center text-sm md:text-base">
+          <Text
+            className="mr-2 text-sm md:text-base"
+            component="p"
+            ff="Hiragino Sans"
+          >
+            第{episode.number}話
+          </Text>
+          <Text
+            className=" text-sm md:text-base"
+            component="p"
+            ff="Hiragino Sans"
+          >
+            {episode.title}
+          </Text>
         </div>
         {getTimeStatus({
           start_time: episode.start_time,
@@ -64,14 +78,32 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             </Link>
           </div>
         ) : (
-          <div>
-            <Link
-              className="mr-4 inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
+          <div className="z-10 flex w-full flex-col items-center space-y-3">
+            <ButtonLink
+              className="inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
               href={`/episodes/${episode.id}?category=archive`}
-              scroll={false}
             >
               アーカイブで参加する
-            </Link>
+            </ButtonLink>
+            <ButtonLink
+              as={
+                episode.work.series_id
+                  ? `/works/${episode.work.id}?series=${episode.work.series_id}`
+                  : `/works/${episode.work.id}`
+              }
+              className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
+              href={{
+                pathname: `${`/works/${episode.work.id}`}`,
+                query: {
+                  series: episode.work.series_id ?? undefined,
+                  work: [episode.work.title, episode.work.series_title],
+                },
+              }}
+              leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
+              size="xs"
+            >
+              他のエピソードを見る
+            </ButtonLink>
           </div>
         )}
       </div>
