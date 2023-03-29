@@ -1,11 +1,21 @@
+import dynamic from "next/dynamic";
 import React, { FC, ReactNode } from "react";
-import { SearchButton } from "src/components/Elements/SearchButton";
 import { Footer } from "src/components/Layout/Footer";
 import { Header } from "src/components/Layout/Header";
 import { Navigation } from "src/components/Layout/Navigation";
 
 import { SearchWorks } from "src/features/works/components/SearchWorks";
 import { SearchWorksForm } from "src/features/works/components/SearchWorksForm";
+
+const DynamicSearchButton = dynamic(
+  () =>
+    import("src/components/Elements/SearchButton").then(
+      (mod) => mod.SearchButton
+    ),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   children: ReactNode;
@@ -30,7 +40,7 @@ export const Layout: FC<Props> = ({ children }) => (
           <Footer />
         </div>
       </div>
-      <SearchButton />
+      <DynamicSearchButton />
     </div>
   </div>
 );
