@@ -10,9 +10,10 @@ import { Text } from "src/components/Elements/Text";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
-import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
+import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
 
-import Comments from "src/features/comments/components/Comments";
+import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
+import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 
@@ -32,7 +33,7 @@ export const Episode: FC = () => {
   const { slug, episode } = router.query;
   const { data, isLoading } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
-  const prefetchFinishComments = usePrefetchFinishEpisode();
+  const prefetchComments = usePrefetchCommentEpisode();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -107,10 +108,10 @@ export const Episode: FC = () => {
                       component="li"
                       onClick={() => setIsChat(false)}
                       onMouseEnter={() =>
-                        prefetchFinishComments(data?.episodes_by_pk?.id)
+                        prefetchComments(data?.episodes_by_pk?.id)
                       }
                       onTouchStart={() =>
-                        prefetchFinishComments(data?.episodes_by_pk?.id)
+                        prefetchComments(data?.episodes_by_pk?.id)
                       }
                     >
                       コメント
@@ -134,9 +135,14 @@ export const Episode: FC = () => {
                   <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
                 </>
               ) : (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Comments episode_id={data?.episodes_by_pk?.id} />
-                </Suspense>
+                <>
+                  <Suspense
+                    fallback={<Loader className="m-auto" variant="dots" />}
+                  >
+                    <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                  </Suspense>
+                  <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+                </>
               )}
             </div>
           </main>

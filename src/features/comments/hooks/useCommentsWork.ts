@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useInfiniteQueryComments } from "src/features/comments/api/useInfiniteComments";
+import { useInfiniteCommentsWork } from "src/features/comments/api/useInfiniteCommentsWork";
 import { useInterSection } from "src/hooks/useInterSection";
 
-export const useComments = (episode_id: string) => {
+export const useCommentsWork = (work_id: number) => {
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useInfiniteQueryComments(episode_id);
+    useInfiniteCommentsWork(work_id);
 
   const { ref, entry } = useInterSection({
     root: null,

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import { HandThumbDownIcon, HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
@@ -5,6 +7,7 @@ import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Text } from "src/components/Elements/Text";
+import { useInputCommentState, useRefState } from "src/features/comments/store";
 import { Comment as TypeComment } from "src/features/comments/types";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
@@ -14,9 +17,25 @@ type Props = {
 
 export const Comment: FC<Props> = ({ comment }) => {
   const content = useRef<HTMLParagraphElement>(null);
+  const focus = useRefState((state) => state.focusRef);
+  const [inputState, setInputState] = useInputCommentState((state) => [
+    state.inputComment,
+    state.setInputComment,
+  ]);
 
   return (
-    <li className="flex w-full animate-comment">
+    <li
+      className="flex w-full animate-comment"
+      onClick={() => {
+        setInputState({
+          ...inputState,
+          reply_to: comment.id,
+          replied_to_commenter_name: comment.commenter_name,
+        });
+        focus();
+      }}
+      role="button"
+    >
       <figure className="m-0 mr-2">
         <Avatar user_id={comment.user?.id} user_name={comment.commenter_name} />
       </figure>
@@ -28,7 +47,7 @@ export const Comment: FC<Props> = ({ comment }) => {
           ref={(comment.reply_count ?? -1) > 0 ? content : null}
           className=" scroll-mt-20 break-words py-1 font-hiragino-sans text-base lg:scroll-mt-10"
         >
-          {comment.content} lorem
+          {comment.content}
         </p>
         <Text
           className="flex items-center space-x-1 text-dimmed"

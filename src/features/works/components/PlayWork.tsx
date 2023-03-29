@@ -8,6 +8,9 @@ import { Modal } from "src/components/Elements/Modal";
 import { Text } from "src/components/Elements/Text";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
+import { usePrefetchCommentWork } from "src/features/comments/api/usePrefetchCommentWork";
+import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
+import { WorkComments } from "src/features/comments/components/WorkComments";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 import { useQueryWork } from "src/features/works/api/useQueryWork";
 
@@ -26,6 +29,7 @@ export const PlayWork: FC = () => {
   const { slug, work } = router.query;
   const { data, isLoading } = useQueryWork({ slug, work });
   const [isChat, setIsChat] = useState(true);
+  const prefetchComments = usePrefetchCommentWork();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -83,6 +87,12 @@ export const PlayWork: FC = () => {
                       color="indigo"
                       component="li"
                       onClick={() => setIsChat(false)}
+                      onMouseEnter={() =>
+                        prefetchComments(data?.works_by_pk?.id ?? 0)
+                      }
+                      onTouchStart={() =>
+                        prefetchComments(data?.works_by_pk?.id ?? 0)
+                      }
                     >
                       コメント
                     </Text>
@@ -107,9 +117,12 @@ export const PlayWork: FC = () => {
                   <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
                 </>
               ) : (
-                <Suspense fallback={<div>Loading...</div>}>
-                  {/* <Comments episode_id={data?.episodes_by_pk?.id} /> */}
-                </Suspense>
+                <>
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <WorkComments work_id={data?.works_by_pk?.id ?? 0} />
+                  </Suspense>
+                  <WorkCommentInput work_id={data?.works_by_pk?.id ?? 0} />
+                </>
               )}
             </div>
           </main>

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { HandThumbDownIcon, HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -11,7 +13,7 @@ type Props = {
 };
 
 export const Reply: FC<Props> = ({ reply, original_id }) => (
-  <li className="flex w-full">
+  <li className="flex w-full" role="button">
     <figure className="m-0 mr-2">
       <Avatar
         size="sm"

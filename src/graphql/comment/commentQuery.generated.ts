@@ -2,7 +2,7 @@ import * as Types from '../../types/graphql';
 
 import { GraphQLClient } from 'graphql-request';
 import { RequestInit } from 'graphql-request/dist/types.dom';
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, useMutation, UseQueryOptions, UseMutationOptions } from '@tanstack/react-query';
 
 function fetcher<TData, TVariables extends { [key: string]: any }>(client: GraphQLClient, query: string, variables?: TVariables, requestHeaders?: RequestInit['headers']) {
   return async (): Promise<TData> => client.request({
@@ -11,14 +11,23 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
     requestHeaders
   });
 }
-export type GetCommentsQueryVariables = Types.Exact<{
+export type GetCommentsEpisodeQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
   limit: Types.Scalars['Int'];
 }>;
 
 
-export type GetCommentsQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetCommentsEpisodeQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+
+export type GetCommentsWorkQueryVariables = Types.Exact<{
+  work_id: Types.Scalars['Int'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  limit: Types.Scalars['Int'];
+}>;
+
+
+export type GetCommentsWorkQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
   _reply_to: Types.Scalars['uuid'];
@@ -29,9 +38,31 @@ export type GetRepliesQueryVariables = Types.Exact<{
 
 export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
+export type MutateEpisodeCommentMutationVariables = Types.Exact<{
+  episode_id: Types.Scalars['uuid'];
+  content: Types.Scalars['String'];
+  reply_to?: Types.InputMaybe<Types.Scalars['uuid']>;
+  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']>;
+  commenter_name: Types.Scalars['String'];
+}>;
 
-export const GetCommentsDocument = `
-    query GetComments($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
+
+export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null } | null };
+
+export type MutateWorkCommentMutationVariables = Types.Exact<{
+  work_id: Types.Scalars['Int'];
+  content: Types.Scalars['String'];
+  reply_to?: Types.InputMaybe<Types.Scalars['uuid']>;
+  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']>;
+  commenter_name: Types.Scalars['String'];
+}>;
+
+
+export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null } | null };
+
+
+export const GetCommentsEpisodeDocument = `
+    query GetCommentsEpisode($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
   comments(
     where: {episode_id: {_eq: $episode_id}, created_at: {_lt: $cursor}, reply_to: {_is_null: true}}
     order_by: {created_at: desc}
@@ -53,21 +84,59 @@ export const GetCommentsDocument = `
   }
 }
     `;
-export const useGetCommentsQuery = <
-      TData = GetCommentsQuery,
+export const useGetCommentsEpisodeQuery = <
+      TData = GetCommentsEpisodeQuery,
       TError = unknown
     >(
       client: GraphQLClient,
-      variables: GetCommentsQueryVariables,
-      options?: UseQueryOptions<GetCommentsQuery, TError, TData>,
+      variables: GetCommentsEpisodeQueryVariables,
+      options?: UseQueryOptions<GetCommentsEpisodeQuery, TError, TData>,
       headers?: RequestInit['headers']
     ) =>
-    useQuery<GetCommentsQuery, TError, TData>(
-      ['GetComments', variables],
-      fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers),
+    useQuery<GetCommentsEpisodeQuery, TError, TData>(
+      ['GetCommentsEpisode', variables],
+      fetcher<GetCommentsEpisodeQuery, GetCommentsEpisodeQueryVariables>(client, GetCommentsEpisodeDocument, variables, headers),
       options
     );
-useGetCommentsQuery.fetcher = (client: GraphQLClient, variables: GetCommentsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsQuery, GetCommentsQueryVariables>(client, GetCommentsDocument, variables, headers);
+useGetCommentsEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetCommentsEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsEpisodeQuery, GetCommentsEpisodeQueryVariables>(client, GetCommentsEpisodeDocument, variables, headers);
+export const GetCommentsWorkDocument = `
+    query GetCommentsWork($work_id: Int!, $cursor: timestamptz, $limit: Int!) {
+  comments(
+    where: {work_id: {_eq: $work_id}, created_at: {_lt: $cursor}, reply_to: {_is_null: true}}
+    order_by: {created_at: desc}
+    limit: $limit
+  ) {
+    content
+    work_id
+    user_id
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      id
+    }
+    reply_count
+  }
+}
+    `;
+export const useGetCommentsWorkQuery = <
+      TData = GetCommentsWorkQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCommentsWorkQueryVariables,
+      options?: UseQueryOptions<GetCommentsWorkQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCommentsWorkQuery, TError, TData>(
+      ['GetCommentsWork', variables],
+      fetcher<GetCommentsWorkQuery, GetCommentsWorkQueryVariables>(client, GetCommentsWorkDocument, variables, headers),
+      options
+    );
+useGetCommentsWorkQuery.fetcher = (client: GraphQLClient, variables: GetCommentsWorkQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsWorkQuery, GetCommentsWorkQueryVariables>(client, GetCommentsWorkDocument, variables, headers);
 export const GetRepliesDocument = `
     query GetReplies($_reply_to: uuid!, $cursor: timestamptz!, $reply_limit: Int!) {
   replies(
@@ -105,3 +174,55 @@ export const useGetRepliesQuery = <
       options
     );
 useGetRepliesQuery.fetcher = (client: GraphQLClient, variables: GetRepliesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetRepliesQuery, GetRepliesQueryVariables>(client, GetRepliesDocument, variables, headers);
+export const MutateEpisodeCommentDocument = `
+    mutation MutateEpisodeComment($episode_id: uuid!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!) {
+  insert_comments_one(
+    object: {episode_id: $episode_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name}
+  ) {
+    id
+    content
+    reply_to
+    replied_to_commenter_name
+  }
+}
+    `;
+export const useMutateEpisodeCommentMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<MutateEpisodeCommentMutation, TError, MutateEpisodeCommentMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<MutateEpisodeCommentMutation, TError, MutateEpisodeCommentMutationVariables, TContext>(
+      ['MutateEpisodeComment'],
+      (variables?: MutateEpisodeCommentMutationVariables) => fetcher<MutateEpisodeCommentMutation, MutateEpisodeCommentMutationVariables>(client, MutateEpisodeCommentDocument, variables, headers)(),
+      options
+    );
+useMutateEpisodeCommentMutation.fetcher = (client: GraphQLClient, variables: MutateEpisodeCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<MutateEpisodeCommentMutation, MutateEpisodeCommentMutationVariables>(client, MutateEpisodeCommentDocument, variables, headers);
+export const MutateWorkCommentDocument = `
+    mutation MutateWorkComment($work_id: Int!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!) {
+  insert_comments_one(
+    object: {work_id: $work_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name}
+  ) {
+    id
+    content
+    reply_to
+    replied_to_commenter_name
+  }
+}
+    `;
+export const useMutateWorkCommentMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient,
+      options?: UseMutationOptions<MutateWorkCommentMutation, TError, MutateWorkCommentMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) =>
+    useMutation<MutateWorkCommentMutation, TError, MutateWorkCommentMutationVariables, TContext>(
+      ['MutateWorkComment'],
+      (variables?: MutateWorkCommentMutationVariables) => fetcher<MutateWorkCommentMutation, MutateWorkCommentMutationVariables>(client, MutateWorkCommentDocument, variables, headers)(),
+      options
+    );
+useMutateWorkCommentMutation.fetcher = (client: GraphQLClient, variables: MutateWorkCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<MutateWorkCommentMutation, MutateWorkCommentMutationVariables>(client, MutateWorkCommentDocument, variables, headers);
