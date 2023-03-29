@@ -41,7 +41,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
             leaveTo="opacity-0"
             show={isOpen}
           >
-            <Disclosure.Panel as="ul" className="py-1" static>
+            <Disclosure.Panel as="ul" className="space-y-2 py-1" static>
               {data?.pages
                 .slice(0, showCount)
                 .map((page) =>

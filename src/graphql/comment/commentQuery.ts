@@ -112,6 +112,7 @@ export const MUTATE_EPISODE_COMMENT = gql`
       content
       reply_to
       replied_to_commenter_name
+      episode_id
     }
   }
 `;
@@ -137,6 +138,7 @@ export const MUTATE_WORK_COMMENT = gql`
       content
       reply_to
       replied_to_commenter_name
+      work_id
     }
   }
 `;
