@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useGetCommentsQuery } from "src/graphql/comment/commentQuery.generated";
+import { useGetCommentsEpisodeQuery } from "src/graphql/comment/commentQuery.generated";
 
 import { client } from "src/libs/graphqlClient";
 
@@ -20,7 +20,7 @@ export const getComments = async ({
 }: GetFinishCommentsArgs) => {
   const { cursor } = pageParam;
 
-  const fetcher = useGetCommentsQuery.fetcher(client, {
+  const fetcher = useGetCommentsEpisodeQuery.fetcher(client, {
     episode_id,
     cursor,
     limit: 100,

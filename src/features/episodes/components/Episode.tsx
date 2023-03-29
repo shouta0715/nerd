@@ -13,6 +13,7 @@ import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
 import { usePrefetchFinishEpisode } from "src/features/comments/api/usePrefetchFinishEpisode";
 
 import Comments from "src/features/comments/components/Comments";
+import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
 
@@ -134,9 +135,14 @@ export const Episode: FC = () => {
                   <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
                 </>
               ) : (
-                <Suspense fallback={<div>Loading...</div>}>
-                  <Comments episode_id={data?.episodes_by_pk?.id} />
-                </Suspense>
+                <>
+                  <Suspense
+                    fallback={<Loader className="m-auto" variant="dots" />}
+                  >
+                    <Comments episode_id={data?.episodes_by_pk?.id} />
+                  </Suspense>
+                  <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+                </>
               )}
             </div>
           </main>
