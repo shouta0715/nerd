@@ -47,7 +47,7 @@ export type MutateEpisodeCommentMutationVariables = Types.Exact<{
 }>;
 
 
-export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null } | null };
+export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, episode_id?: any | null } | null };
 
 export type MutateWorkCommentMutationVariables = Types.Exact<{
   work_id: Types.Scalars['Int'];
@@ -58,7 +58,7 @@ export type MutateWorkCommentMutationVariables = Types.Exact<{
 }>;
 
 
-export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null } | null };
+export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, work_id?: number | null } | null };
 
 
 export const GetCommentsEpisodeDocument = `
@@ -183,6 +183,7 @@ export const MutateEpisodeCommentDocument = `
     content
     reply_to
     replied_to_commenter_name
+    episode_id
   }
 }
     `;
@@ -209,6 +210,7 @@ export const MutateWorkCommentDocument = `
     content
     reply_to
     replied_to_commenter_name
+    work_id
   }
 }
     `;
