@@ -22,6 +22,7 @@ type Interval = {
   start: () => void;
   stop: () => void;
   toggle: () => void;
+  reset: () => void;
 };
 
 type TimerState = {
@@ -85,6 +86,10 @@ export const useTimerState = create<TimerState>((set, get) => ({
       } else {
         get().interval.start();
       }
+    },
+    reset: () => {
+      get().interval.stop();
+      get().resetTime();
     },
   },
   changeTenTime: (formula: "add" | "minus") => {
