@@ -31,16 +31,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     <>
       {reply_count !== 0 && (
         <Disclosure>
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-200 origin-top"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition ease-in duration-150 origin-bottom"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-            show={isOpen}
-          >
+          <Transition as={Fragment} show={isOpen}>
             <Disclosure.Panel as="ul" className="space-y-2 py-1" static>
               {data?.pages
                 .slice(0, showCount)
@@ -68,10 +59,8 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
               {controlLabel()}
               <span>
                 <ChevronUpIcon
-                  className={`h-4 w-4 ${
-                    controlLabel() === "返信を閉じる"
-                      ? ""
-                      : "rotate-180 transform"
+                  className={`h-4 w-4 transform transition-transform ${
+                    controlLabel() === "返信を閉じる" ? "" : "rotate-180 "
                   }
 
                   `}

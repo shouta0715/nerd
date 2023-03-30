@@ -7,7 +7,7 @@ type Props = {
   content: RefObject<HTMLParagraphElement>;
 };
 
-export const useComment = ({ reply_count, reply_id, content }: Props) => {
+export const useComment = ({ reply_count, reply_id }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryReplies(reply_id, isOpen);
@@ -36,13 +36,13 @@ export const useComment = ({ reply_count, reply_id, content }: Props) => {
       setReplyCount(0);
       setShowCount(1);
 
-      // TODO ユーザーの設定によりの設定により変更する
-      if (content.current) {
-        content.current.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+      // // TODO ユーザーの設定によりの設定により変更する
+      // if (content.current) {
+      //   content.current.scrollIntoView({
+      //     behavior: "smooth",
+      //     block: "start",
+      //   });
+      // }
 
       return;
     }
@@ -51,7 +51,7 @@ export const useComment = ({ reply_count, reply_id, content }: Props) => {
       setIsOpen(true);
       setReplyCount((prev) => prev + 10);
     }
-  }, [data, isOpen, replyCount, reply_count, fetchNextPage, content]);
+  }, [data, isOpen, replyCount, reply_count, fetchNextPage]);
 
   const controlLabel = useCallback((): string => {
     if (!reply_count) return "返信を表示";
@@ -71,14 +71,14 @@ export const useComment = ({ reply_count, reply_id, content }: Props) => {
     setReplyCount(0);
     setShowCount(1);
 
-    // TODO ユーザーの設定によりの設定により変更する
-    if (content.current) {
-      content.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, [content]);
+    // // TODO ユーザーの設定によりの設定により変更する
+    // if (content.current) {
+    //   content.current.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "start",
+    //   });
+    // }
+  }, []);
 
   return {
     isOpen,
