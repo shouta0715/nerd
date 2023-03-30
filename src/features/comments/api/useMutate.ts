@@ -28,7 +28,7 @@ export const useMutateComment = () => {
 
       const fakeId = genRandomId();
       if (reply_to) {
-        return { fakeId };
+        return { fakeId, reply: true };
       }
 
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
@@ -78,6 +78,11 @@ export const useMutateComment = () => {
       return { fakeId };
     },
     onSuccess: (data, variables, context) => {
+      if (context?.reply) {
+        queryClient.invalidateQueries({
+          queryKey: ["replies"],
+        });
+      }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
         { episode_id: variables.episode_id },
@@ -124,7 +129,7 @@ export const useMutateComment = () => {
 
       const fakeId = genRandomId();
       if (reply_to) {
-        return { fakeId };
+        return { fakeId, reply: true };
       }
 
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
@@ -174,6 +179,11 @@ export const useMutateComment = () => {
       return { fakeId };
     },
     onSuccess: (data, variables, context) => {
+      if (context?.reply) {
+        queryClient.invalidateQueries({
+          queryKey: ["replies"],
+        });
+      }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
         { work_id: variables.work_id },
