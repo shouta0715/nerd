@@ -28,7 +28,7 @@ export const useMutateComment = () => {
 
       const fakeId = genRandomId();
       if (reply_to) {
-        return { fakeId, reply: true };
+        return { fakeId, reply: true, episode_id };
       }
 
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
@@ -81,6 +81,10 @@ export const useMutateComment = () => {
       if (context?.reply) {
         queryClient.invalidateQueries({
           queryKey: ["replies"],
+        });
+        queryClient.invalidateQueries({
+          queryKey: ["comments", { episode_id: context.episode_id }],
+          exact: true,
         });
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([

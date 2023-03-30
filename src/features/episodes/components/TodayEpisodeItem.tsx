@@ -34,23 +34,29 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         scroll={false}
       />
       <div className="mx-auto flex min-h-full flex-col items-center justify-between">
-        <h3 className="mb-1 font-hiragino-sans text-base font-bold md:mb-2 md:text-lg">
-          {episode.work.series_title}
-        </h3>
-        <div className="mb-2 flex w-full items-center justify-center text-sm md:text-base">
+        <div className="flex w-full flex-1 flex-col items-center gap-2">
           <Text
-            className="mr-2 text-sm md:text-base"
-            component="p"
+            className=" text-base font-bold md:text-lg"
+            component="h4"
             ff="Hiragino Sans"
           >
-            第{episode.number}話
+            {episode?.work.series_title}
           </Text>
-          <Text
-            className=" text-sm md:text-base"
-            component="p"
-            ff="Hiragino Sans"
-          >
-            {episode.title}
+          <Text className="flex" component="div">
+            <Text
+              className="mr-2 text-sm md:text-base"
+              component="p"
+              ff="Hiragino Sans"
+            >
+              第{episode?.number}話
+            </Text>
+            <Text
+              className="flex-1 text-sm md:text-base"
+              component="p"
+              ff="Hiragino Sans"
+            >
+              {episode?.title}
+            </Text>
           </Text>
         </div>
         {getTimeStatus({
