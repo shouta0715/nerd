@@ -20,6 +20,7 @@ module.exports = {
         fadeUp: "fadeUp 0.25s ease-out",
         fadeIn: "fadeIn 0.25s ease-out forwards",
         border: "border 0.25s ease-out forwards",
+        like: "like 1s ease-out forwards",
       },
       keyframes: {
         comment: {
@@ -41,6 +42,10 @@ module.exports = {
         border: {
           "0%": { width: "0", backgroundColor: "transparent" },
           "100%": { width: "100%", backgroundColor: "rgb(99 102 241)" },
+        },
+        like: {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.5)" },
         },
       },
       height: {

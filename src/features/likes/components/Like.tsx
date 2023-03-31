@@ -16,14 +16,18 @@ export const Like: FC<Props> = ({ is_like, like_count, comment_id }) => {
   });
 
   return (
-    <button className="flex items-center" onClick={handleLike}>
+    <button className="group flex items-center" onClick={handleLike}>
       <HeartIcon
-        className={`h-5 w-5 ${
-          isLike ? "fill-pink-500 text-pink-500" : "text-gray-500"
+        className={`h-5 w-5 transition-transform group-active:scale-90 ${
+          isLike
+            ? "fill-pink-500 text-pink-500 group-hover:fill-white"
+            : "text-gray-500 group-hover:text-pink-500"
         }`}
       />
       <span
-        className={`ml-1 text-sm ${isLike ? "text-pink-500" : "text-gray-500"}`}
+        className={`ml-1 text-sm ${
+          isLike ? "text-pink-500 " : "text-gray-500 group-hover:text-pink-500"
+        }`}
       >
         {likeCount}
       </span>
