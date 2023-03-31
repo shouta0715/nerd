@@ -4,7 +4,7 @@ import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, RefObject } from "react";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Reply } from "src/features/comments/components/Reply";
-import { useComment } from "src/features/comments/hooks/useComment";
+import { useReplies } from "src/features/comments/hooks/useReplies";
 
 type Props = {
   reply_count: number;
@@ -22,7 +22,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     isFetchingNextPage,
     isFetching,
     closeClickHandler,
-  } = useComment({
+  } = useReplies({
     reply_id,
     reply_count,
     content,

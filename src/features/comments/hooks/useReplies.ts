@@ -7,7 +7,7 @@ type Props = {
   content: RefObject<HTMLParagraphElement>;
 };
 
-export const useComment = ({ reply_count, reply_id }: Props) => {
+export const useReplies = ({ reply_count, reply_id }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQueryReplies(reply_id, isOpen);
