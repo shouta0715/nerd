@@ -49,6 +49,7 @@ export const useCountDown = (startTime: string) => {
       clearInterval(interval.current);
       interval.current = null;
       setIsCountDown(false);
+      globalInterval.start();
     }
 
     return () => {
