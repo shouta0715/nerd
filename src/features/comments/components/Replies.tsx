@@ -53,9 +53,9 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
             </Disclosure.Panel>
           </Transition>
           {!isFetchingNextPage && !isFetching && (
-            <div className="mt-2 flex w-full justify-between">
+            <div className="mt-2 flex w-full justify-between font-hiragino-sans">
               <Disclosure.Button
-                className="flex w-max items-center justify-end space-x-1 p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
+                className="flex w-max items-center justify-end space-x-1 p-0 text-xs font-semibold text-indigo-500 hover:bg-transparent md:text-sm"
                 onClick={clickHandler}
               >
                 {controlLabel()}
@@ -70,7 +70,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                 </span>
               </Disclosure.Button>
               <button
-                className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
+                className={`flex items-center space-x-1  text-xs font-bold text-indigo-500 md:text-sm ${
                   controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
                 }`}
                 onClick={closeClickHandler}

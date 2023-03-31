@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
 import { useInputCommentState, useRefState } from "src/features/comments/store";
 import { Reply as TypeReply } from "src/features/comments/types";
+import { Like } from "src/features/likes/components/Like";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 
 type Props = {
@@ -67,20 +67,11 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           <span className="text-dimmed">
             {formatTimeDistance(reply.created_at)}
           </span>
-          <div className="flex items-center text-dimmed">
-            <HeartIcon
-              className={`h-5 w-5 ${
-                reply.is_like ? "fill-pink-500 text-pink-500" : "text-gray-500"
-              }`}
-            />
-            <span
-              className={`ml-1 text-sm ${
-                reply.is_like ? "text-pink-500" : "text-gray-500"
-              }`}
-            >
-              {reply.likes_aggregate.aggregate?.count}
-            </span>
-          </div>
+          <Like
+            comment_id={reply.id}
+            is_like={reply.is_like || false}
+            like_count={reply.likes_aggregate.aggregate?.count || 0}
+          />
         </Text>
       </div>
     </li>
