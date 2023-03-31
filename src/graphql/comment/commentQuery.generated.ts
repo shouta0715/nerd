@@ -18,7 +18,7 @@ export type GetCommentsEpisodeQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetCommentsEpisodeQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetCommentsEpisodeQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetCommentsWorkQueryVariables = Types.Exact<{
   work_id: Types.Scalars['Int'];
@@ -27,7 +27,7 @@ export type GetCommentsWorkQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetCommentsWorkQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetCommentsWorkQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
   _reply_to: Types.Scalars['uuid'];
@@ -36,7 +36,7 @@ export type GetRepliesQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type MutateEpisodeCommentMutationVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
@@ -81,6 +81,12 @@ export const GetCommentsEpisodeDocument = `
       id
     }
     reply_count
+    is_like
+    likes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
 }
     `;
@@ -119,6 +125,12 @@ export const GetCommentsWorkDocument = `
       id
     }
     reply_count
+    is_like
+    likes_aggregate {
+      aggregate {
+        count
+      }
+    }
   }
 }
     `;
@@ -155,6 +167,12 @@ export const GetRepliesDocument = `
       anonymous
       user_name
       id
+    }
+    is_like
+    likes_aggregate {
+      aggregate {
+        count
+      }
     }
   }
 }

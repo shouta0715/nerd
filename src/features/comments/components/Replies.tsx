@@ -20,6 +20,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     data,
     showCount,
     isFetchingNextPage,
+    isFetching,
     closeClickHandler,
   } = useComment({
     reply_id,
@@ -32,7 +33,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
       {reply_count !== 0 && (
         <Disclosure>
           <Transition as={Fragment} show={isOpen}>
-            <Disclosure.Panel as="ul" className="space-y-2 py-1" static>
+            <Disclosure.Panel as="ul" className="mt-4 space-y-4" static>
               {data?.pages
                 .slice(0, showCount)
                 .map((page) =>
@@ -44,39 +45,41 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                     />
                   ))
                 )}
-              {isFetchingNextPage && (
+              {isFetchingNextPage && isFetching && (
                 <div className="flex w-full">
                   <Loader className="mx-auto" variant="dots" />
                 </div>
               )}
             </Disclosure.Panel>
           </Transition>
-          <div className="flex w-full justify-between">
-            <Disclosure.Button
-              className="mt-1 flex w-max items-center justify-end space-x-1 p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
-              onClick={clickHandler}
-            >
-              {controlLabel()}
-              <span>
-                <ChevronUpIcon
-                  className={`h-4 w-4 transform transition-transform ${
-                    controlLabel() === "返信を閉じる" ? "" : "rotate-180 "
-                  }
+          {!isFetchingNextPage && !isFetching && (
+            <div className="mt-2 flex w-full justify-between">
+              <Disclosure.Button
+                className="flex w-max items-center justify-end space-x-1 p-0 text-xs text-indigo-500 hover:bg-transparent md:text-sm"
+                onClick={clickHandler}
+              >
+                {controlLabel()}
+                <span>
+                  <ChevronUpIcon
+                    className={`h-4 w-4 transform transition-transform ${
+                      controlLabel() === "返信を閉じる" ? "" : "rotate-180 "
+                    }
 
                   `}
-                />
-              </span>
-            </Disclosure.Button>
-            <button
-              className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
-                controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
-              }`}
-              onClick={closeClickHandler}
-            >
-              <span>閉じる</span>
-              <ChevronUpIcon className="h-4 w-4" />
-            </button>
-          </div>
+                  />
+                </span>
+              </Disclosure.Button>
+              <button
+                className={`flex items-center space-x-1 text-xs text-indigo-500 md:text-sm ${
+                  controlLabel() === "返信を閉じる" || !isOpen ? "hidden" : ""
+                }`}
+                onClick={closeClickHandler}
+              >
+                <span>閉じる</span>
+                <ChevronUpIcon className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </Disclosure>
       )}
     </>

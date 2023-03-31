@@ -9,7 +9,7 @@ type Props = {
 
 export const useComment = ({ reply_count, reply_id }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQueryReplies(reply_id, isOpen);
   const [replyCount, setReplyCount] = useState(0);
   const [showCount, setShowCount] = useState(1);
@@ -91,5 +91,6 @@ export const useComment = ({ reply_count, reply_id }: Props) => {
     replyCount,
     showCount,
     closeClickHandler,
+    isFetching,
   };
 };

@@ -5,6 +5,7 @@ import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentWork } from "src/features/comments/api/usePrefetchCommentWork";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { useUserState } from "src/store/user/userState";
 
 const DynamicWorkMenu = dynamic(
   () =>
@@ -26,6 +27,7 @@ type Props = {
 export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
   const prefetchComments = usePrefetchCommentWork();
   const router = useRouter();
+  const user = useUserState((state) => state.user);
 
   return (
     <nav className="sticky top-0 z-[1] flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
@@ -58,8 +60,12 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 setIsChat(false);
                 stop();
               }}
-              onMouseEnter={() => prefetchComments(data?.works_by_pk?.id ?? 0)}
-              onTouchStart={() => prefetchComments(data?.works_by_pk?.id ?? 0)}
+              onMouseEnter={() =>
+                user && prefetchComments(data?.works_by_pk?.id ?? 0)
+              }
+              onTouchStart={() =>
+                user && prefetchComments(data?.works_by_pk?.id ?? 0)
+              }
             >
               コメント
             </Text>

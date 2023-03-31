@@ -28,6 +28,12 @@ export const GET_COMMENTS_EPISODE = gql`
         id
       }
       reply_count
+      is_like
+      likes_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
@@ -56,6 +62,12 @@ export const GET_COMMENTS_WORK = gql`
         id
       }
       reply_count
+      is_like
+      likes_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
@@ -86,6 +98,12 @@ export const GET_REPLIES = gql`
         anonymous
         user_name
         id
+      }
+      is_like
+      likes_aggregate {
+        aggregate {
+          count
+        }
       }
     }
   }

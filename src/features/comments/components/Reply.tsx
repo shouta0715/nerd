@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { HandThumbDownIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
@@ -64,17 +64,22 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           ff="Hiragino Sans"
           size="xs"
         >
-          <span>{formatTimeDistance(reply.created_at)}</span>
-          <div className="flex place-items-center">
-            <div className="flex items-center">
-              <HeartIcon className="h-5 w-5" />
-              <span>1</span>
-            </div>
-            <div className="flex items-center">
-              <HandThumbDownIcon className="h-5 w-5" />
-
-              <span>100</span>
-            </div>
+          <span className="text-dimmed">
+            {formatTimeDistance(reply.created_at)}
+          </span>
+          <div className="flex items-center text-dimmed">
+            <HeartIcon
+              className={`h-5 w-5 ${
+                reply.is_like ? "fill-pink-500 text-pink-500" : "text-gray-500"
+              }`}
+            />
+            <span
+              className={`ml-1 text-sm ${
+                reply.is_like ? "text-pink-500" : "text-gray-500"
+              }`}
+            >
+              {reply.likes_aggregate.aggregate?.count}
+            </span>
           </div>
         </Text>
       </div>

@@ -61,6 +61,11 @@ export const useMutateComment = () => {
                         user_name: user?.user_name ?? "匿名",
                         anonymous: user?.anonymous ?? false,
                       },
+                      likes_aggregate: {
+                        aggregate: {
+                          count: 0,
+                        },
+                      },
                     },
                     ...page.comments,
                   ],
@@ -165,6 +170,11 @@ export const useMutateComment = () => {
                         id: user?.id ?? "",
                         user_name: user?.user_name ?? "匿名",
                         anonymous: user?.anonymous ?? false,
+                      },
+                      likes_aggregate: {
+                        aggregate: {
+                          count: 0,
+                        },
                       },
                     },
                     ...page.comments,

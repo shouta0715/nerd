@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useGetCommentsEpisodeQuery } from "src/graphql/comment/commentQuery.generated";
 
 import { client } from "src/libs/graphqlClient";
+import { useUserState } from "src/store/user/userState";
 
 type GetFinishCommentsArgs = {
   episode_id: string;
@@ -31,8 +32,10 @@ export const getComments = async ({
   return data;
 };
 
-export const useInfiniteCommentsEpisode = (episode_id: string) =>
-  useInfiniteQuery({
+export const useInfiniteCommentsEpisode = (episode_id: string) => {
+  const user = useUserState((state) => state.user);
+
+  return useInfiniteQuery({
     queryKey: ["comments", { episode_id }],
     queryFn: ({ pageParam = InitialPageParam }) =>
       getComments({
@@ -49,5 +52,6 @@ export const useInfiniteCommentsEpisode = (episode_id: string) =>
       };
     },
     suspense: true,
-    enabled: !!episode_id,
+    enabled: !!episode_id && !!user,
   });
+};
