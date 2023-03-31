@@ -4,8 +4,8 @@ import { Panel } from "./Panel";
 import { useCountDown } from "src/features/timer/hooks/useCountDown";
 
 type Props = {
-  start_time: string;
-  id: string;
+  start_time?: string;
+  id?: string;
 };
 
 export const CountDownTimer: FC<Props> = ({ start_time, id }) => {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useTimerState } from "src/features/timer/store/timerStore";
 
 const calcTimeToStart = (startTime: string) => {
   const now = new Date();
@@ -18,8 +19,9 @@ const calcTimeToStart = (startTime: string) => {
 
 export const useCountDown = (startTime: string) => {
   const [time, setTime] = useState(calcTimeToStart(startTime));
-
   const interval = useRef<NodeJS.Timeout | null>(null);
+  const setIsCountDown = useTimerState((state) => state.setIsCountDown);
+  const globalInterval = useTimerState((state) => state.interval);
 
   useEffect(() => {
     interval.current = setInterval(() => {
@@ -45,12 +47,23 @@ export const useCountDown = (startTime: string) => {
       time.seconds === 0
     ) {
       clearInterval(interval.current);
+      interval.current = null;
+      setIsCountDown(false);
     }
 
     return () => {
       if (interval.current) clearInterval(interval.current);
+      interval.current = null;
     };
-  }, [time.day, time.hours, time.minutes, time.seconds]);
+  }, [
+    globalInterval,
+    setIsCountDown,
+    time,
+    time.day,
+    time.hours,
+    time.minutes,
+    time.seconds,
+  ]);
 
   return {
     minutes: time.minutes.toString().padStart(2, "0"),

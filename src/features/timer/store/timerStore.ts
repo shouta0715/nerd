@@ -27,22 +27,20 @@ type Interval = {
 
 type TimerState = {
   time: TimerCount;
-  episodeId: string;
   intervalTime: () => void;
   resetTime: () => void;
   setTime: (time: TimerCount) => void;
   getTime: () => number;
-  setEpisodeId: (episodeId: string) => void;
-  restEpisodeId: () => void;
   interval: Interval;
   changeTenTime: (formula: "add" | "minus") => void;
   changeTime: (time: number) => void;
   getPadStartTime: () => string;
+  isCountDown: boolean;
+  setIsCountDown: (isCountDown: boolean) => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
   time: InitialTimerCount,
-  episodeId: "",
   intervalTime: () =>
     set({
       time: {
@@ -60,8 +58,6 @@ export const useTimerState = create<TimerState>((set, get) => ({
     set({ time: InitialTimerCount });
   },
   getTime: () => timeToSecond(get().time),
-  setEpisodeId: (episodeId: string) => set({ episodeId }),
-  restEpisodeId: () => set({ episodeId: "" }),
   interval: {
     intervalId: undefined,
     active: false,
@@ -110,4 +106,6 @@ export const useTimerState = create<TimerState>((set, get) => ({
       .toString()
       .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
   },
+  isCountDown: true,
+  setIsCountDown: (isCountDown: boolean) => set({ isCountDown }),
 }));
