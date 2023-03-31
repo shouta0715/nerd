@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useGetCommentsWorkQuery } from "src/graphql/comment/commentQuery.generated";
 import { client } from "src/libs/graphqlClient";
+import { useUserState } from "src/store/user/userState";
 
 type GetFinishCommentsArgs = {
   work_id: number;
@@ -30,8 +31,10 @@ export const getComments = async ({
   return data;
 };
 
-export const useInfiniteCommentsWork = (work_id: number) =>
-  useInfiniteQuery({
+export const useInfiniteCommentsWork = (work_id: number) => {
+  const user = useUserState((state) => state.user);
+
+  return useInfiniteQuery({
     queryKey: ["comments", { work_id }],
     queryFn: ({ pageParam = InitialPageParam }) =>
       getComments({
@@ -48,5 +51,6 @@ export const useInfiniteCommentsWork = (work_id: number) =>
       };
     },
     suspense: true,
-    enabled: !!work_id,
+    enabled: !!work_id && !!user,
   });
+};

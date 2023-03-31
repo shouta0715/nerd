@@ -1,18 +1,20 @@
 /* eslint-disable no-self-assign */
 
+import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
-import { useEffect } from "react";
-import { auth } from "../libs/firebase";
+import { FC, useEffect } from "react";
+import { auth } from "../../../libs/firebase";
 
-import { useUserState } from "../store/user/userState";
+import { useUserState } from "../../../store/user/userState";
 import { client } from "src/libs/graphqlClient";
 import { useGlobalState } from "src/store/global/globalStore";
 
 const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
 
-const useInitialize = () => {
+export const Initialize: FC = () => {
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const localUserName = localStorage.getItem("user_name");
@@ -50,6 +52,10 @@ const useInitialize = () => {
         if (!localUserName && user.displayName) {
           localStorage.setItem("user_name", user.displayName);
         }
+        if (!user.isAnonymous) {
+          queryClient.invalidateQueries(["comments"]);
+          queryClient.invalidateQueries(["replies"]);
+        }
         setAuthLoading(false);
       } else {
         (async () => {
@@ -61,7 +67,7 @@ const useInitialize = () => {
     return () => {
       unSubUser();
     };
-  }, [setUser, setAuthLoading]);
-};
+  }, [setUser, setAuthLoading, queryClient]);
 
-export default useInitialize;
+  return null;
+};

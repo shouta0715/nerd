@@ -7,6 +7,7 @@ import {
   GetCommentsEpisodeQuery,
   GetCommentsWorkQuery,
 } from "src/graphql/comment/commentQuery.generated";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   data?: InfiniteData<GetCommentsEpisodeQuery | GetCommentsWorkQuery>;
@@ -14,20 +15,28 @@ type Props = {
   hasNextPage?: boolean;
 };
 
-export const Comments = forwardRef<any, Props>(({ data, hasNextPage }, ref) => (
-  <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pb-1 pt-4  md:max-w-xl">
-    {data?.pages.map((page) =>
-      page.comments.map((comment) => (
-        <Comment key={comment.id} comment={comment} />
-      ))
-    )}
-    <div
-      ref={ref}
-      className={`flex h-20 items-center justify-center text-center  ${
-        hasNextPage ? "block" : "hidden"
-      }`}
-    >
-      <Loader variant="oval" />
-    </div>
-  </ul>
-));
+export const Comments = forwardRef<any, Props>(({ data, hasNextPage }, ref) => {
+  const user = useUserState((state) => state.user);
+
+  if (!user) {
+    return <Loader className="m-auto" variant="dots" />;
+  }
+
+  return (
+    <ul className="relative mx-auto w-full flex-1 space-y-6 px-4 pb-1 pt-4  md:max-w-xl">
+      {data?.pages.map((page) =>
+        page.comments.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))
+      )}
+      <div
+        ref={ref}
+        className={`flex h-20 items-center justify-center text-center  ${
+          hasNextPage ? "block" : "hidden"
+        }`}
+      >
+        <Loader variant="oval" />
+      </div>
+    </ul>
+  );
+});

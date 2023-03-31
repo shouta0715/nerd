@@ -6,6 +6,7 @@ import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/Episo
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { useUserState } from "src/store/user/userState";
 
 const DynamicEpisodeMenu = dynamic(
   () =>
@@ -28,6 +29,7 @@ type Props = {
 export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
   const prefetchComments = usePrefetchCommentEpisode();
   const router = useRouter();
+  const user = useUserState((state) => state.user);
 
   return (
     <nav className="sticky top-0 z-[1] flex h-10 items-center justify-between border-0 border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
@@ -60,8 +62,12 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 setIsChat(false);
                 stop();
               }}
-              onMouseEnter={() => prefetchComments(data?.episodes_by_pk?.id)}
-              onTouchStart={() => prefetchComments(data?.episodes_by_pk?.id)}
+              onMouseEnter={() =>
+                user && prefetchComments(data?.episodes_by_pk?.id)
+              }
+              onTouchStart={() =>
+                user && prefetchComments(data?.episodes_by_pk?.id)
+              }
             >
               コメント
             </Text>

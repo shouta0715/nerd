@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-import { HandThumbDownIcon, HeartIcon } from "@heroicons/react/24/outline";
+import { HeartIcon } from "@heroicons/react/24/outline";
 import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -60,12 +60,20 @@ export const Comment: FC<Props> = ({ comment }) => {
             <span>{formatTimeDistance(comment.created_at)}</span>
             <Button className="border-none p-0 text-sm text-black">返信</Button>
             <div className="flex items-center">
-              <HeartIcon className="h-5 w-5" />
-              <span>1</span>
-            </div>
-            <div className="flex items-center">
-              <HandThumbDownIcon className="h-5 w-5" />
-              <span>100</span>
+              <HeartIcon
+                className={`h-5 w-5 ${
+                  comment.is_like
+                    ? "fill-pink-500 text-pink-500"
+                    : "text-gray-500"
+                }`}
+              />
+              <span
+                className={`ml-1 text-sm ${
+                  comment.is_like ? "text-pink-500" : "text-gray-500"
+                }`}
+              >
+                {comment.likes_aggregate.aggregate?.count}
+              </span>
             </div>
           </Text>
         </div>
