@@ -42,24 +42,28 @@ export const useCountDown = ({ startTime, setIsCountDown }: Props) => {
       }));
     }, 1000);
 
+    if (
+      time.day === 0 &&
+      time.hours === 0 &&
+      time.minutes === 0 &&
+      time.seconds === 0
+    ) {
+      if (interval.current) clearInterval(interval.current);
+      interval.current = null;
+      if (setIsCountDown) {
+        setIsCountDown((prev) => {
+          if (prev) return !prev;
+
+          return prev;
+        });
+      }
+    }
+
     return () => {
       if (interval.current) clearInterval(interval.current);
       interval.current = null;
     };
-  }, [time, time.day, time.hours, time.minutes, time.seconds]);
-
-  if (
-    time.day === 0 &&
-    time.hours === 0 &&
-    time.minutes === 0 &&
-    time.seconds === 0
-  ) {
-    if (interval.current) clearInterval(interval.current);
-    interval.current = null;
-    if (setIsCountDown) {
-      setIsCountDown(false);
-    }
-  }
+  }, [setIsCountDown, time, time.day, time.hours, time.minutes, time.seconds]);
 
   return {
     minutes: time.minutes.toString().padStart(2, "0"),
