@@ -18,6 +18,7 @@ export const ZeroTimeChats: FC<Props> = ({ episode_id }) => {
 
   return (
     <ul className="relative mx-auto w-full flex-1 space-y-3 px-4 pb-1 pt-4 md:max-w-xl">
+      ZeroTime
       {data?.pages.map((page) =>
         page.chats.map((comment) => (
           <li

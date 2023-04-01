@@ -22,7 +22,7 @@ const Timer: FC<Props> = ({
       start_time={start_time}
     />
   ) : (
-    <CountUpTimer id={episodeId} initialStart />
+    <CountUpTimer id={episodeId} />
   );
 
 export default Timer;

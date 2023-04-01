@@ -28,10 +28,14 @@ export const useChatsEpisode = (episode_id: string) => {
   const deferredData = useDeferredValue(filteredData);
 
   useEffect(() => {
+    if (!isBottom) return;
+
+    entry?.target.scrollIntoView({ behavior: "smooth" });
+  }, [deferredData.length, entry?.target, isBottom]);
+
+  useEffect(() => {
     if (!chatCommentData) setFilteredData([]);
     if (entry) setIsBottom(entry.isIntersecting);
-    if (isBottom) entry?.target.scrollIntoView({ behavior: "smooth" });
-
     if (isMenuOpen && !interval?.active) {
       setFilteredData((oldData) => [...oldData]);
     } else {
@@ -51,6 +55,7 @@ export const useChatsEpisode = (episode_id: string) => {
   }, [
     chatCommentData,
     entry,
+    entry?.target,
     fetchNextPage,
     interval?.active,
     isBottom,

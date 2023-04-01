@@ -5,11 +5,10 @@ import { useCountUp } from "src/features/timer/hooks/useCountUp";
 
 type Props = {
   id?: string | number;
-  initialStart?: boolean;
 };
 
-export const CountUpTimer: FC<Props> = ({ id, initialStart = false }) => {
-  const { minutes, hours, seconds } = useCountUp(initialStart);
+export const CountUpTimer: FC<Props> = ({ id }) => {
+  const { minutes, hours, seconds } = useCountUp();
 
   return (
     <div className="flex space-x-4 md:space-x-6">
