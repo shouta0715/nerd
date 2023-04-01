@@ -10,6 +10,12 @@ const InitialTimerCount = {
   minutes: 0,
   hours: 0,
 };
+
+const MaxTime = {
+  seconds: 0,
+  minutes: 0,
+  hours: 10,
+};
 type TimerCount = {
   seconds: number;
   minutes: number;
@@ -33,15 +39,21 @@ type TimerState = {
   getTime: () => number;
   interval: Interval;
   changeTenTime: (formula: "add" | "minus") => void;
-  changeTime: (time: number) => void;
   getPadStartTime: () => string;
-  isCountDown: boolean;
-  setIsCountDown: (isCountDown: boolean) => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
   time: InitialTimerCount,
-  intervalTime: () =>
+  intervalTime: () => {
+    if (
+      get().time.hours === 10 &&
+      get().time.minutes === 0 &&
+      get().time.seconds === 0
+    ) {
+      get().interval.stop();
+
+      return;
+    }
     set({
       time: {
         seconds: get().time.seconds === 59 ? 0 : get().time.seconds + 1,
@@ -52,8 +64,18 @@ export const useTimerState = create<TimerState>((set, get) => ({
         hours:
           get().time.minutes === 59 ? get().time.hours + 1 : get().time.hours,
       },
-    }),
-  setTime: (time: TimerCount) => set({ time }),
+    });
+  },
+  setTime: (time: TimerCount) => {
+    if (time.hours >= 10) {
+      set({
+        time: MaxTime,
+      });
+
+      return;
+    }
+    set({ time });
+  },
   resetTime: () => {
     set({ time: InitialTimerCount });
   },
@@ -93,10 +115,12 @@ export const useTimerState = create<TimerState>((set, get) => ({
     const newTime =
       formula === "add" ? time + 10 : time - 10 > 0 ? time - 10 : 0;
     const { hours, minutes, seconds } = secondToTime(newTime);
-    set({ time: { hours, minutes, seconds } });
-  },
-  changeTime: (time: number) => {
-    const { hours, minutes, seconds } = secondToTime(time);
+
+    if (hours >= 10) {
+      set({ time: MaxTime });
+
+      return;
+    }
     set({ time: { hours, minutes, seconds } });
   },
   getPadStartTime: () => {
@@ -106,6 +130,4 @@ export const useTimerState = create<TimerState>((set, get) => ({
       .toString()
       .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
   },
-  isCountDown: true,
-  setIsCountDown: (isCountDown: boolean) => set({ isCountDown }),
 }));

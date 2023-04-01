@@ -1,14 +1,23 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
+import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Modal } from "src/components/Elements/Modal";
+import { LiveChat } from "src/features/live/components/LiveChat";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isThread, setIsThread, isPlaceholderData } =
-    useLive();
+  const {
+    data,
+    isLoading,
+    isChat,
+    setIsChat,
+    isPlaceholderData,
+    isCountDown,
+    setIsCountDown,
+  } = useLive();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -26,34 +35,39 @@ export const Live = () => {
                 episode_number={data?.episodes_by_pk?.number}
                 episode_title={data?.episodes_by_pk?.title}
                 id={data?.episodes_by_pk?.id}
+                isCountDown={isCountDown}
+                setIsCountDown={setIsCountDown}
                 start_time={data?.episodes_by_pk?.start_time}
                 title={data?.episodes_by_pk?.work.series_title}
               />
             )}
 
-            <LiveNav isThread={isThread} setIsThread={setIsThread} />
+            <LiveNav data={data} isChat={isChat} setIsChat={setIsChat} />
           </div>
           <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
-              {/* {isChat ? (
+              {isChat ? (
                 <>
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
+                    <LiveChat
+                      episode_id={data?.episodes_by_pk?.id}
+                      isCountDown={isCountDown}
+                    />
                   </Suspense>
-                  <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
+                  {/* <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} /> */}
                 </>
               ) : (
                 <>
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                    {/* <EpisodeComments episode_id={data?.episodes_by_pk?.id} /> */}
                   </Suspense>
-                  <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+                  {/* <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} /> */}
                 </>
-              )} */}
+              )}
             </div>
           </main>
         </div>

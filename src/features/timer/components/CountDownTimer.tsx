@@ -6,12 +6,18 @@ import { useCountDown } from "src/features/timer/hooks/useCountDown";
 type Props = {
   start_time?: string;
   id?: string;
+  setIsCountDown?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CountDownTimer: FC<Props> = ({ start_time, id }) => {
-  const { hours, minutes, seconds } = useCountDown(
-    start_time ?? "2000-01-01T00:00:00+00:00"
-  );
+export const CountDownTimer: FC<Props> = ({
+  start_time,
+  id,
+  setIsCountDown,
+}) => {
+  const { hours, minutes, seconds } = useCountDown({
+    startTime: start_time ?? "2000-01-01T00:00:00+00:00",
+    setIsCountDown,
+  });
 
   return (
     <div className="flex space-x-4 md:space-x-6">

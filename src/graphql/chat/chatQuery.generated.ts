@@ -38,6 +38,15 @@ export type InsertChatMutationVariables = Types.Exact<{
 
 export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
+export type GetZeroTimeChatsQueryVariables = Types.Exact<{
+  episode_id: Types.Scalars['uuid'];
+  limit: Types.Scalars['Int'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+}>;
+
+
+export type GetZeroTimeChatsQuery = { __typename?: 'query_root', chats: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
+
 
 export const GetChatsEpisodeDocument = `
     query GetChatsEpisode($episode_id: uuid!, $get_limit: Int!, $_lt: Int!, $_gte: Int!) {
@@ -147,3 +156,41 @@ export const useInsertChatMutation = <
       options
     );
 useInsertChatMutation.fetcher = (client: GraphQLClient, variables: InsertChatMutationVariables, headers?: RequestInit['headers']) => fetcher<InsertChatMutation, InsertChatMutationVariables>(client, InsertChatDocument, variables, headers);
+export const GetZeroTimeChatsDocument = `
+    query GetZeroTimeChats($episode_id: uuid!, $limit: Int!, $cursor: timestamptz) {
+  chats(
+    where: {episode_id: {_eq: $episode_id}, comment_time: {_eq: 0}, created_at: {_gt: $cursor}}
+    order_by: {created_at: desc}
+    limit: $limit
+  ) {
+    content
+    work_id
+    user_id
+    comment_time
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      id
+    }
+  }
+}
+    `;
+export const useGetZeroTimeChatsQuery = <
+      TData = GetZeroTimeChatsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetZeroTimeChatsQueryVariables,
+      options?: UseQueryOptions<GetZeroTimeChatsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetZeroTimeChatsQuery, TError, TData>(
+      ['GetZeroTimeChats', variables],
+      fetcher<GetZeroTimeChatsQuery, GetZeroTimeChatsQueryVariables>(client, GetZeroTimeChatsDocument, variables, headers),
+      options
+    );
+useGetZeroTimeChatsQuery.fetcher = (client: GraphQLClient, variables: GetZeroTimeChatsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetZeroTimeChatsQuery, GetZeroTimeChatsQueryVariables>(client, GetZeroTimeChatsDocument, variables, headers);

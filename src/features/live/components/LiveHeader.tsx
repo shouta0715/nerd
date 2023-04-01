@@ -8,6 +8,8 @@ type Props = {
   episode_number?: number;
   id?: string;
   start_time: string;
+  isCountDown: boolean;
+  setIsCountDown: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const LiveHeader: FC<Props> = ({
@@ -16,6 +18,8 @@ export const LiveHeader: FC<Props> = ({
   episode_title,
   id,
   start_time,
+  isCountDown,
+  setIsCountDown,
 }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
@@ -47,7 +51,12 @@ export const LiveHeader: FC<Props> = ({
       <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
         開始から
       </Text>
-      <Timer episodeId={id} start_time={start_time} />
+      <Timer
+        episodeId={id}
+        isCountDown={isCountDown}
+        setIsCountDown={setIsCountDown}
+        start_time={start_time}
+      />
     </div>
   </header>
 );

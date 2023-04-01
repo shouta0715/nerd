@@ -86,3 +86,35 @@ export const INSERT_CHAT = gql`
     }
   }
 `;
+
+export const GET_ZERO_TIME_CHATS = gql`
+  query GetZeroTimeChats(
+    $episode_id: uuid!
+    $limit: Int!
+    $cursor: timestamptz
+  ) {
+    chats(
+      where: {
+        episode_id: { _eq: $episode_id }
+        comment_time: { _eq: 0 }
+        created_at: { _gt: $cursor }
+      }
+      order_by: { created_at: desc }
+      limit: $limit
+    ) {
+      content
+      work_id
+      user_id
+      comment_time
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        user_name
+        id
+      }
+    }
+  }
+`;
