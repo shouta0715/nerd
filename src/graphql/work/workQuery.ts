@@ -4,11 +4,7 @@ export const GET_SEASON_WORKS = gql`
   query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
     works(
       where: {
-        _and: {
-          season_year: { _eq: $year }
-          season_name: { _eq: $season }
-          has_episodes: { _eq: true }
-        }
+        _and: { season_year: { _eq: $year }, season_name: { _eq: $season } }
       }
       limit: $limit
     ) {

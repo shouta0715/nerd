@@ -22,6 +22,7 @@ export const getTodayEpisodes = async () => {
 export const getSeasonWorks = async (limit: number | null) => {
   const { request } = getClient();
   const { season, year } = returningSeason();
+
   const fetcher = useGetSeasonWorksQuery.fetcher(request, {
     season,
     year,
