@@ -8,10 +8,20 @@ export const useLive = () => {
   const { slug, episode } = router.query;
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
-  const globalInterval = useTimerState((state) => state.interval);
+  const interval = useTimerState((state) => state.interval);
   const [isCountDown, setIsCountDown] = useState(true);
 
-  useEffect(() => globalInterval.reset, [globalInterval]);
+  useEffect(() => {
+    if (!isCountDown) {
+      interval.start();
+    }
+
+    return () => {
+      interval.reset();
+    };
+    //! eslint-disable-next-line react-hooks/exhaustive-deps
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [isCountDown]);
 
   return {
     data,
