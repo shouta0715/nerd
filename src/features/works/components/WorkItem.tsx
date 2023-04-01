@@ -16,39 +16,53 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
     className="relative w-full flex-1 animate-fadeUp rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
-      <Link
-        as={
-          work.series_id
-            ? work.has_episodes
-              ? `/works/${work.id}?series=${work.series_id}`
-              : `/works/play/${work.id}?series=${work.series_id}`
-            : work.has_episodes
-            ? `/works/${work.id}`
-            : `/works/play/${work.id}`
-        }
-        className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
-        href={{
-          pathname: `${
-            work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
-          }`,
-          query: {
-            series: work.series_id ?? undefined,
-            work: [work.title, work.series_title],
-          },
-        }}
-      >
-        {work.series_title}
-      </Link>
+      {work.has_episodes ? (
+        <Link
+          as={
+            work.series_id
+              ? work.has_episodes
+                ? `/works/${work.id}?series=${work.series_id}`
+                : `/works/play/${work.id}?series=${work.series_id}`
+              : work.has_episodes
+              ? `/works/${work.id}`
+              : `/works/play/${work.id}`
+          }
+          className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
+          href={{
+            pathname: `${
+              work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
+            }`,
+            query: {
+              series: work.series_id ?? undefined,
+              work: [work.title, work.series_title],
+            },
+          }}
+        >
+          {work.series_title}
+        </Link>
+      ) : (
+        <div className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base">
+          {work.series_title}
+        </div>
+      )}
+
       <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  pb-2">
-        <ul className="mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
-          {work.episodes.map((episode) => (
-            <WorkEpisodeItem
-              key={`work-${episode.id}`}
-              episode={episode}
-              work_title={work.series_title}
-            />
-          ))}
-        </ul>
+        {work.episodes.length > 0 ? (
+          <ul className="peer mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
+            {work.episodes.map((episode) => (
+              <WorkEpisodeItem
+                key={`work-${episode.id}`}
+                episode={episode}
+                work_title={work.series_title}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="mb-2 flex h-full items-center justify-center text-sm text-dimmed">
+            テレビ放送のアニメは放送日時になるとエピソードが追加されます。
+          </p>
+        )}
+
         {work.series_id && !isSeriesPage && (
           <ButtonLink
             as={`/series/${work.series_id}`}
@@ -62,7 +76,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
             シリーズ一覧へ
           </ButtonLink>
         )}
-        {work.has_episodes && (
+        {work.has_episodes && work.episodes.length > 7 && (
           <ButtonLink
             as={
               work.series_id

@@ -28,11 +28,6 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
 
   return (
     <li className="relative flex-1 rounded-md border border-solid border-slate-200 bg-white p-4 shadow  md:px-6">
-      <Link
-        className="absolute inset-0 rounded-md"
-        href={`/episodes/${episode.id}?category=live`}
-        scroll={false}
-      />
       <div className="mx-auto flex min-h-full flex-col items-center justify-between">
         <div className="flex w-full flex-1 flex-col items-center gap-2">
           <Text
@@ -77,17 +72,41 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               start_time={episode.start_time}
             />
             <Link
+              as={`/episodes/live/${episode.id}`}
               className="light-bg ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold "
-              href={`/episode/${episode.id}?category=archive`}
+              href={{
+                pathname: `/episodes/live/${episode.id}`,
+                query: {
+                  episode: [
+                    episode.work.series_title,
+                    episode.title,
+                    episode.number.toString(),
+                    episode.id,
+                    episode.has_next_episode,
+                  ],
+                },
+              }}
             >
               参加する
             </Link>
           </div>
         ) : (
-          <div className="z-10 flex w-full flex-col items-center space-y-3">
+          <div className="z-10 mt-3 flex w-full flex-col items-center space-y-3">
             <ButtonLink
+              as={`/episodes/${episode.id}`}
               className="inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
-              href={`/episodes/${episode.id}?category=archive`}
+              href={{
+                pathname: `/episodes/${episode.id}`,
+                query: {
+                  episode: [
+                    episode.work.series_title,
+                    episode.title,
+                    episode.number.toString(),
+                    episode.id,
+                    episode.has_next_episode,
+                  ],
+                },
+              }}
             >
               アーカイブで参加する
             </ButtonLink>

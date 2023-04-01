@@ -1,19 +1,21 @@
-import { FC, memo } from "react";
+import { FC } from "react";
 import { CountDownTimer } from "src/features/timer/components/CountDownTimer";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
+import { useTimerState } from "src/features/timer/store/timerStore";
 
 type Props = {
   start_time: string;
-  episodeId: string;
-  isCountUp: boolean;
+  episodeId?: string;
 };
 
-const Timer: FC<Props> = memo(({ start_time, episodeId, isCountUp }) =>
-  isCountUp ? (
-    <CountUpTimer id={episodeId} />
-  ) : (
+const Timer: FC<Props> = ({ start_time, episodeId }) => {
+  const isCountDown = useTimerState((state) => state.isCountDown);
+
+  return isCountDown ? (
     <CountDownTimer id={episodeId} start_time={start_time} />
-  )
-);
+  ) : (
+    <CountUpTimer id={episodeId} />
+  );
+};
 
 export default Timer;

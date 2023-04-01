@@ -15,7 +15,13 @@ export const getTodayData = async () => {
   const todayData = parseXml(data);
 
   const todayDataQuery: Episodes_Bool_Exp[] = todayData.map((item) => ({
-    _and: [{ number: { _eq: item.number }, work: { tid: { _eq: item.TID } } }],
+    _and: [
+      {
+        number: { _eq: item.number },
+        work: { tid: { _eq: item.TID } },
+        has_next_episode: { _eq: false },
+      },
+    ],
   }));
 
   const query = {
