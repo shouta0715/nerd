@@ -7,16 +7,16 @@ export const useLive = () => {
   const router = useRouter();
   const { slug, episode } = router.query;
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
-  const [isThread, setIsThread] = useState(false);
+  const [isChat, setIsChat] = useState(true);
   const globalInterval = useTimerState((state) => state.interval);
 
-  useEffect(() => globalInterval.stop, [globalInterval]);
+  useEffect(() => globalInterval.reset, [globalInterval]);
 
   return {
     data,
     isLoading,
-    isThread,
-    setIsThread,
+    isChat,
+    setIsChat,
     isPlaceholderData,
   };
 };

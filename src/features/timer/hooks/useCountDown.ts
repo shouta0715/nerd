@@ -40,18 +40,6 @@ export const useCountDown = (startTime: string) => {
       }));
     }, 1000);
 
-    if (
-      time.day === 0 &&
-      time.hours === 0 &&
-      time.minutes === 0 &&
-      time.seconds === 0
-    ) {
-      clearInterval(interval.current);
-      interval.current = null;
-      setIsCountDown(false);
-      globalInterval.start();
-    }
-
     return () => {
       if (interval.current) clearInterval(interval.current);
       interval.current = null;
@@ -65,6 +53,18 @@ export const useCountDown = (startTime: string) => {
     time.minutes,
     time.seconds,
   ]);
+
+  if (
+    time.day === 0 &&
+    time.hours === 0 &&
+    time.minutes === 0 &&
+    time.seconds === 0
+  ) {
+    if (interval.current) clearInterval(interval.current);
+    interval.current = null;
+    setIsCountDown(false);
+    globalInterval.start();
+  }
 
   return {
     minutes: time.minutes.toString().padStart(2, "0"),

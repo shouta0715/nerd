@@ -1,15 +1,27 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
+import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
-  isThread: boolean;
-  setIsThread: React.Dispatch<React.SetStateAction<boolean>>;
-  // data?: GetEpisodeQuery;
+  isChat: boolean;
+  setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
+  data?: GetEpisodeQuery;
 };
 
-export const LiveNav: FC<Props> = ({ setIsThread, isThread }) => {
+const DynamicLiveMenu = dynamic(
+  () =>
+    import("src/features/live/components/LiveMenu").then((mod) => mod.LiveMenu),
+  {
+    ssr: false,
+    loading: () => <EpisodeMenuSkelton />,
+  }
+);
+
+export const LiveNav: FC<Props> = ({ isChat, setIsChat, data }) => {
   const router = useRouter();
 
   return (
@@ -22,33 +34,32 @@ export const LiveNav: FC<Props> = ({ setIsThread, isThread }) => {
           <ul className=" flex h-full flex-1 items-center justify-around">
             <Text
               className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold text-indigo-500 md:text-base  ${
-                isThread
+                isChat
                   ? "border-0 border-b-2 border-solid border-indigo-500"
                   : "border-none"
               }`}
               component="button"
-              onClick={() => setIsThread(true)}
+              onClick={() => setIsChat(true)}
             >
               チャット
             </Text>
             <Text
               className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 md:text-base ${
-                !isThread
+                !isChat
                   ? "border-0 border-b-2 border-solid border-indigo-500"
                   : "border-none"
               }`}
               color="indigo"
               component="li"
               onClick={() => {
-                setIsThread(false);
+                setIsChat(false);
               }}
             >
               スレッド
             </Text>
           </ul>
         </div>
-
-        {/* <DynamicEpisodeMenu episode={data?.episodes_by_pk} /> */}
+        <DynamicLiveMenu episode={data?.episodes_by_pk} />
       </div>
     </nav>
   );

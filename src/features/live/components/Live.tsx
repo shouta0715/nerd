@@ -7,8 +7,7 @@ import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isThread, setIsThread, isPlaceholderData } =
-    useLive();
+  const { data, isLoading, isChat, setIsChat, isPlaceholderData } = useLive();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -31,7 +30,7 @@ export const Live = () => {
               />
             )}
 
-            <LiveNav isThread={isThread} setIsThread={setIsThread} />
+            <LiveNav data={data} isChat={isChat} setIsChat={setIsChat} />
           </div>
           <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
