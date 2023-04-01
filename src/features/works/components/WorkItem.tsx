@@ -76,7 +76,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
             シリーズ一覧へ
           </ButtonLink>
         )}
-        {work.has_episodes && (
+        {work.has_episodes && work.episodes.length > 7 && (
           <ButtonLink
             as={
               work.series_id
