@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useTimerState } from "src/features/timer/store/timerStore";
 
 const calcTimeToStart = (startTime: string) => {
   const now = new Date();
@@ -17,11 +16,14 @@ const calcTimeToStart = (startTime: string) => {
   return { day, hours, minutes, seconds };
 };
 
-export const useCountDown = (startTime: string) => {
+type Props = {
+  startTime: string;
+  setIsCountDown?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const useCountDown = ({ startTime, setIsCountDown }: Props) => {
   const [time, setTime] = useState(calcTimeToStart(startTime));
   const interval = useRef<NodeJS.Timeout | null>(null);
-  const setIsCountDown = useTimerState((state) => state.setIsCountDown);
-  const globalInterval = useTimerState((state) => state.interval);
 
   useEffect(() => {
     interval.current = setInterval(() => {
@@ -44,15 +46,7 @@ export const useCountDown = (startTime: string) => {
       if (interval.current) clearInterval(interval.current);
       interval.current = null;
     };
-  }, [
-    globalInterval,
-    setIsCountDown,
-    time,
-    time.day,
-    time.hours,
-    time.minutes,
-    time.seconds,
-  ]);
+  }, [time, time.day, time.hours, time.minutes, time.seconds]);
 
   if (
     time.day === 0 &&
@@ -62,8 +56,9 @@ export const useCountDown = (startTime: string) => {
   ) {
     if (interval.current) clearInterval(interval.current);
     interval.current = null;
-    setIsCountDown(false);
-    globalInterval.start();
+    if (setIsCountDown) {
+      setIsCountDown(false);
+    }
   }
 
   return {

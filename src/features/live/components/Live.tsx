@@ -9,7 +9,15 @@ import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isChat, setIsChat, isPlaceholderData } = useLive();
+  const {
+    data,
+    isLoading,
+    isChat,
+    setIsChat,
+    isPlaceholderData,
+    isCountDown,
+    setIsCountDown,
+  } = useLive();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -27,6 +35,8 @@ export const Live = () => {
                 episode_number={data?.episodes_by_pk?.number}
                 episode_title={data?.episodes_by_pk?.title}
                 id={data?.episodes_by_pk?.id}
+                isCountDown={isCountDown}
+                setIsCountDown={setIsCountDown}
                 start_time={data?.episodes_by_pk?.start_time}
                 title={data?.episodes_by_pk?.work.series_title}
               />
@@ -41,7 +51,10 @@ export const Live = () => {
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    <LiveChat episode_id={data?.episodes_by_pk?.id} />
+                    <LiveChat
+                      episode_id={data?.episodes_by_pk?.id}
+                      isCountDown={isCountDown}
+                    />
                   </Suspense>
                   {/* <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} /> */}
                 </>

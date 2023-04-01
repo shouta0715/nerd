@@ -9,6 +9,7 @@ export const useLive = () => {
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
   const globalInterval = useTimerState((state) => state.interval);
+  const [isCountDown, setIsCountDown] = useState(true);
 
   useEffect(() => globalInterval.reset, [globalInterval]);
 
@@ -18,5 +19,7 @@ export const useLive = () => {
     isChat,
     setIsChat,
     isPlaceholderData,
+    isCountDown,
+    setIsCountDown,
   };
 };

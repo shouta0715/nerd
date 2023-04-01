@@ -40,8 +40,6 @@ type TimerState = {
   interval: Interval;
   changeTenTime: (formula: "add" | "minus") => void;
   getPadStartTime: () => string;
-  isCountDown: boolean;
-  setIsCountDown: (isCountDown: boolean) => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
@@ -132,6 +130,4 @@ export const useTimerState = create<TimerState>((set, get) => ({
       .toString()
       .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
   },
-  isCountDown: true,
-  setIsCountDown: (isCountDown: boolean) => set({ isCountDown }),
 }));
