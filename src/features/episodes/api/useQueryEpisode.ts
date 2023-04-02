@@ -15,8 +15,15 @@ export const useQueryEpisode = (
 
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
-        const [series_title, title, number, episode_id, has_next_episode] =
-          episode;
+        const [
+          series_title,
+          title,
+          number,
+          episode_id,
+          has_next_episode,
+          start_time,
+          end_time,
+        ] = episode;
 
         return {
           episodes_by_pk: {
@@ -24,6 +31,8 @@ export const useQueryEpisode = (
             title,
             number: +number,
             has_next_episode: has_next_episode === "true",
+            start_time,
+            end_time,
             work: {
               series_title,
               title,
