@@ -12,7 +12,6 @@ export type PadTime = {
 export type LiveTimer = {
   mode: "down" | "up" | "finish";
   time: PadTime;
-  isTime: boolean;
 };
 
 export type Time = {

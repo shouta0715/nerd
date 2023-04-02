@@ -30,6 +30,8 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
             episode.number.toString(),
             episode.id,
             episode.has_next_episode,
+            episode.start_time,
+            episode.end_time,
           ],
         },
       }}

@@ -8,10 +8,16 @@ type Props = {
   minutes: string;
   seconds: string;
   id: string;
-  isTime: boolean;
+  isTimeLoading: boolean;
 };
-export const Timer: FC<Props> = ({ hours, minutes, seconds, id, isTime }) => {
-  if (!isTime) {
+export const Timer: FC<Props> = ({
+  hours,
+  minutes,
+  seconds,
+  id,
+  isTimeLoading,
+}) => {
+  if (isTimeLoading) {
     return <TimerSkelton />;
   }
 

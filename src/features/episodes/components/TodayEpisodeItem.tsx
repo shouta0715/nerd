@@ -21,7 +21,7 @@ type Props = {
 };
 
 const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
-  const { mode, time, isTime } = useLiveTimer({
+  const { mode, time } = useLiveTimer({
     start_time: episode.start_time,
     end_time: episode.end_time,
   });
@@ -62,7 +62,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             <DynamicTimer
               hours={time.hours}
               id={episode.id}
-              isTime={isTime}
+              isTimeLoading={false}
               minutes={time.minutes}
               seconds={time.seconds}
             />

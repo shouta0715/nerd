@@ -18,7 +18,7 @@ type Props = {
   episode_number?: number;
   time: PadTime;
   id: string;
-  isTime: boolean;
+  isTimeLoading: boolean;
 };
 
 export const LiveHeader: FC<Props> = ({
@@ -27,7 +27,7 @@ export const LiveHeader: FC<Props> = ({
   episode_title,
   time,
   id,
-  isTime,
+  isTimeLoading,
 }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
@@ -62,7 +62,7 @@ export const LiveHeader: FC<Props> = ({
       <DynamicTimer
         hours={time.hours}
         id={id}
-        isTime={isTime}
+        isTimeLoading={isTimeLoading}
         minutes={time.minutes}
         seconds={time.seconds}
       />

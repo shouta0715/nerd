@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTimer } from "src/features/timer/hooks/useTimer";
 import { LiveTimer, LiveTimerProps, Time } from "src/features/timer/types";
 import { getInitialTime } from "src/features/timer/utils/getInitialTime";
-import { getIsStarted } from "src/features/timer/utils/getIsStarted";
+import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 
 export const useLiveTimer = ({
@@ -12,17 +12,16 @@ export const useLiveTimer = ({
 }: LiveTimerProps): LiveTimer => {
   const { countDown, countUp } = useTimer();
   const [mode, setMode] = useState<LiveTimer["mode"]>(
-    getIsStarted(start_time) ? "up" : "down"
+    getIsStatus({ start_time, end_time })
   );
   const [time, setTime] = useState<Time>(getInitialTime(start_time));
   const intervalId = useRef<NodeJS.Timeout | null>(null);
-  const [isTime, setIsTime] = useState<boolean>(false);
 
   useEffect(() => {
     if (!start_time || !end_time) return;
 
     setTime(getInitialTime(start_time));
-    setIsTime(true);
+    setMode(getIsStatus({ start_time, end_time }));
   }, [end_time, start_time]);
 
   useEffect(() => {
@@ -37,16 +36,17 @@ export const useLiveTimer = ({
       };
     }
 
-    intervalId.current = setInterval(() => {
-      setTime((prevTime) =>
-        countUp({
-          prevTime,
-          setMode,
-          intervalId,
-          maxTime: getMaxCountUpTime({ start_time, end_time }),
-        })
-      );
-    }, 1000);
+    if (mode === "up")
+      intervalId.current = setInterval(() => {
+        setTime((prevTime) =>
+          countUp({
+            prevTime,
+            setMode,
+            intervalId,
+            maxTime: getMaxCountUpTime({ start_time, end_time }),
+          })
+        );
+      }, 1000);
 
     return () => {
       if (intervalId.current) clearInterval(intervalId.current);
@@ -69,6 +69,5 @@ export const useLiveTimer = ({
       minutes: time.minutes.toString().padStart(2, "0"),
       seconds: time.seconds.toString().padStart(2, "0"),
     },
-    isTime,
   };
 };
