@@ -16,11 +16,13 @@ export const useLiveTimer = ({
   );
   const [time, setTime] = useState<Time>(getInitialTime(start_time));
   const intervalId = useRef<NodeJS.Timeout | null>(null);
+  const [isTime, setIsTime] = useState<boolean>(false);
 
   useEffect(() => {
     if (!start_time || !end_time) return;
 
     setTime(getInitialTime(start_time));
+    setIsTime(true);
   }, [end_time, start_time]);
 
   useEffect(() => {
@@ -67,5 +69,6 @@ export const useLiveTimer = ({
       minutes: time.minutes.toString().padStart(2, "0"),
       seconds: time.seconds.toString().padStart(2, "0"),
     },
+    isTime,
   };
 };

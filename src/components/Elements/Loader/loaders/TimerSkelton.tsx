@@ -13,5 +13,7 @@ const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   </div>
 ));
 export const TimerSkelton: FC = () => (
-  <div className="flex space-x-4 md:space-x-6">{skeltonTimers}</div>
+  <div className="flex animate-pulse space-x-4 md:space-x-6">
+    {skeltonTimers}
+  </div>
 );
