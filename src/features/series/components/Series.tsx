@@ -18,7 +18,7 @@ export const Series: FC = () => {
   );
 
   return (
-    <section className="flex min-h-screen animate-fadeUp flex-col">
+    <section className="flex min-h-screen animate-fadeUp flex-col bg-gray-50">
       <header className="sticky top-0 z-10 border-b bg-white/95">
         <div className="relative flex w-full items-center space-x-4 py-3 pl-2 pr-4">
           <button className="flex justify-center " onClick={router.back}>
@@ -39,7 +39,7 @@ export const Series: FC = () => {
           </Link>
         </div>
       </header>
-      <main className="flex-1 bg-gray-50">
+      <main className="flex-1 ">
         <div className="container mx-auto px-6 pb-12 pt-4">
           <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {data?.works.map((series_work, index) => (

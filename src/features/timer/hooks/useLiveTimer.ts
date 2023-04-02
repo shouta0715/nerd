@@ -25,8 +25,8 @@ const countDown = ({ prevTime, setMode, intervalId }: CountDownProps): Time => {
   // 一秒ずつ減らしていく
   return {
     seconds: seconds === 0 ? 59 : seconds - 1,
-    minutes: seconds === 0 ? minutes - 1 : minutes,
-    hours: minutes === 0 ? hours - 1 : hours,
+    minutes: seconds === 0 ? (minutes - 1 > 0 ? minutes - 1 : 59) : minutes,
+    hours: minutes === 0 ? (hours - 1 > 0 ? hours - 1 : 0) : hours,
   };
 };
 

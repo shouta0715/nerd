@@ -56,7 +56,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         </div>
         {mode !== "finish" ? (
           <div className="flex flex-col">
-            <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
+            <Text className="m-0 mx-auto mb-1.5 mt-2 px-10 text-sm font-bold text-indigo-500 md:text-base">
               {mode === "down" ? "開始まで" : "終了まで"}
             </Text>
             <DynamicTimer
