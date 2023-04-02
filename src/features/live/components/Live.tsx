@@ -7,7 +7,8 @@ import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isChat, setIsChat, time } = useLive();
+  const { data, isLoading, isChat, setIsChat, time, isPlaceholderData } =
+    useLive();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -22,7 +23,7 @@ export const Live = () => {
               episode_number={data?.episodes_by_pk?.number}
               episode_title={data?.episodes_by_pk?.title}
               id={data?.episodes_by_pk?.id}
-              isTimeLoading={isLoading}
+              isTimeLoading={isLoading || isPlaceholderData}
               time={time}
               title={data?.episodes_by_pk?.work.series_title}
             />
