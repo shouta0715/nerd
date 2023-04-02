@@ -1,27 +1,18 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useLiveTimer } from "src/features/live/hooks/useLiveTimer";
 
 export const useLive = () => {
   const router = useRouter();
   const { slug, episode } = router.query;
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
-  const interval = useTimerState((state) => state.interval);
-  const [isCountDown, setIsCountDown] = useState(true);
 
-  useEffect(() => {
-    if (!isCountDown) {
-      interval.start();
-    }
-
-    return () => {
-      interval.reset();
-    };
-    //! eslint-disable-next-line react-hooks/exhaustive-deps
-    /* eslint-disable react-hooks/exhaustive-deps */
-  }, [isCountDown]);
+  const { mode, time } = useLiveTimer({
+    start_time: data?.episodes_by_pk?.start_time,
+    end_time: data?.episodes_by_pk?.end_time,
+  });
 
   return {
     data,
@@ -29,7 +20,7 @@ export const useLive = () => {
     isChat,
     setIsChat,
     isPlaceholderData,
-    isCountDown,
-    setIsCountDown,
+    mode,
+    time,
   };
 };

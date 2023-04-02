@@ -82,6 +82,4 @@ export const ZeroTimeChats: FC<Props> = ({ episode_id }) => {
       <div ref={bottomRef} className="absolute bottom-0 opacity-0" /> */}
     </ul>
   );
-
-  return <div>ZeroTimeChats</div>;
 };

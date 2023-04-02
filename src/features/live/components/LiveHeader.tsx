@@ -1,25 +1,22 @@
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
+import { PadTime } from "src/features/live/types";
 import Timer from "src/features/timer/components/Timer";
 
 type Props = {
   title?: string;
   episode_title?: string;
   episode_number?: number;
-  id?: string;
-  start_time: string;
-  isCountDown: boolean;
-  setIsCountDown: React.Dispatch<React.SetStateAction<boolean>>;
+  time: PadTime;
+  id: string;
 };
 
 export const LiveHeader: FC<Props> = ({
   title,
   episode_number,
   episode_title,
+  time,
   id,
-  start_time,
-  isCountDown,
-  setIsCountDown,
 }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
@@ -52,10 +49,10 @@ export const LiveHeader: FC<Props> = ({
         開始から
       </Text>
       <Timer
-        episodeId={id}
-        isCountDown={isCountDown}
-        setIsCountDown={setIsCountDown}
-        start_time={start_time}
+        hours={time.hours}
+        id={id}
+        minutes={time.minutes}
+        seconds={time.seconds}
       />
     </div>
   </header>

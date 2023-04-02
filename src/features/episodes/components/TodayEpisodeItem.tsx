@@ -6,13 +6,10 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Text } from "src/components/Elements/Text";
 import { Episode } from "src/features/episodes/types";
-import { useTimerStatus } from "src/features/timer/hooks/useTimerStatus";
+import { useLiveTimer } from "src/features/live/hooks/useLiveTimer";
 
-const DynamicCountDownTimer = dynamic(
-  () =>
-    import("src/features/timer/components/CountDownTimer").then(
-      (mod) => mod.CountDownTimer
-    ),
+const DynamicTimer = dynamic(
+  () => import("src/features/timer/components/Timer"),
   {
     ssr: false,
     loading: () => <TimerSkelton />,
@@ -24,7 +21,10 @@ type Props = {
 };
 
 const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
-  const { getTimeStatus } = useTimerStatus();
+  const { mode, time } = useLiveTimer({
+    start_time: episode.start_time,
+    end_time: episode.end_time,
+  });
 
   return (
     <li className="relative flex-1 rounded-md border border-solid border-slate-200 bg-white p-4 shadow  md:px-6">
@@ -54,22 +54,16 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             </Text>
           </Text>
         </div>
-        {getTimeStatus({
-          start_time: episode.start_time,
-          end_time: episode.end_time,
-        }).timer ? (
+        {mode !== "finish" ? (
           <div className="flex flex-col">
             <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
-              {
-                getTimeStatus({
-                  start_time: episode.start_time,
-                  end_time: episode.end_time,
-                }).status
-              }
+              {mode === "down" ? "開始まで" : "終了まで"}
             </Text>
-            <DynamicCountDownTimer
+            <DynamicTimer
+              hours={time.hours}
               id={episode.id}
-              start_time={episode.start_time}
+              minutes={time.minutes}
+              seconds={time.seconds}
             />
             <Link
               as={`/episodes/live/${episode.id}`}
@@ -104,6 +98,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                     episode.number.toString(),
                     episode.id,
                     episode.has_next_episode,
+                    episode.start_time,
+                    episode.end_time,
                   ],
                 },
               }}
