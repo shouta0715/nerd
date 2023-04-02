@@ -62,6 +62,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             <DynamicTimer
               hours={time.hours}
               id={episode.id}
+              isTimeLoading={false}
               minutes={time.minutes}
               seconds={time.seconds}
             />

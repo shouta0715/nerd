@@ -22,6 +22,7 @@ export const Live = () => {
               episode_number={data?.episodes_by_pk?.number}
               episode_title={data?.episodes_by_pk?.title}
               id={data?.episodes_by_pk?.id}
+              isTimeLoading={isLoading}
               time={time}
               title={data?.episodes_by_pk?.work.series_title}
             />

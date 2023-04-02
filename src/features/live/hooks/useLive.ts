@@ -22,5 +22,6 @@ export const useLive = () => {
     isPlaceholderData,
     mode,
     time,
+    isTimeLoading: isLoading,
   };
 };

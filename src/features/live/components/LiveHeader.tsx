@@ -1,7 +1,16 @@
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
+import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Text } from "src/components/Elements/Text";
-import { Timer } from "src/features/timer/components/Timer";
 import { PadTime } from "src/features/timer/types";
+
+const DynamicTimer = dynamic(
+  () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
+  {
+    ssr: false,
+    loading: () => <TimerSkelton />,
+  }
+);
 
 type Props = {
   title?: string;
@@ -9,6 +18,7 @@ type Props = {
   episode_number?: number;
   time: PadTime;
   id: string;
+  isTimeLoading: boolean;
 };
 
 export const LiveHeader: FC<Props> = ({
@@ -17,6 +27,7 @@ export const LiveHeader: FC<Props> = ({
   episode_title,
   time,
   id,
+  isTimeLoading,
 }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
@@ -48,9 +59,10 @@ export const LiveHeader: FC<Props> = ({
       <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
         開始から
       </Text>
-      <Timer
+      <DynamicTimer
         hours={time.hours}
         id={id}
+        isTimeLoading={isTimeLoading}
         minutes={time.minutes}
         seconds={time.seconds}
       />
