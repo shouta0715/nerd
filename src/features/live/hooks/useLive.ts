@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
-import { useLiveTimer } from "src/features/live/hooks/useLiveTimer";
+import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 
 export const useLive = () => {
   const router = useRouter();

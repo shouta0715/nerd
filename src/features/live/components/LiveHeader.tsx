@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
-import { PadTime } from "src/features/live/types";
-import Timer from "src/features/timer/components/Timer";
+import { Timer } from "src/features/timer/components/Timer";
+import { PadTime } from "src/features/timer/types";
 
 type Props = {
   title?: string;

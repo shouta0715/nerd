@@ -1,4 +1,4 @@
-import { Time } from "src/features/live/types";
+import { Time } from "src/features/timer/types";
 
 export const getInitialTime = (start_time: string): Time => {
   const now = new Date();

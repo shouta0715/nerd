@@ -8,8 +8,7 @@ type Props = {
   seconds: string;
   id: string;
 };
-
-const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => (
+export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => (
   <div className="flex space-x-4 md:space-x-6">
     <div className="flex flex-col items-center justify-center">
       <div className="mb-2 flex space-x-2">
@@ -46,5 +45,3 @@ const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => (
     </div>
   </div>
 );
-
-export default Timer;

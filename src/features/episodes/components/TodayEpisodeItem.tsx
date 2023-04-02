@@ -6,10 +6,10 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Text } from "src/components/Elements/Text";
 import { Episode } from "src/features/episodes/types";
-import { useLiveTimer } from "src/features/live/hooks/useLiveTimer";
+import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 
 const DynamicTimer = dynamic(
-  () => import("src/features/timer/components/Timer"),
+  () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
   {
     ssr: false,
     loading: () => <TimerSkelton />,

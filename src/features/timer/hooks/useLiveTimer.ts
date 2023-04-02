@@ -1,10 +1,10 @@
 /* eslint-disable consistent-return */
 import { useEffect, useRef, useState } from "react";
-import { LiveTimer, LiveTimerProps, Time } from "src/features/live/types";
-import { getInitialTime } from "src/features/live/utils/getInitialTime";
-import { getIsStarted } from "src/features/live/utils/getIsStarted";
-import { getMaxCountUpTime } from "src/features/live/utils/getMaxCountUpTime";
 import { useTimer } from "src/features/timer/hooks/useTimer";
+import { LiveTimer, LiveTimerProps, Time } from "src/features/timer/types";
+import { getInitialTime } from "src/features/timer/utils/getInitialTime";
+import { getIsStarted } from "src/features/timer/utils/getIsStarted";
+import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 
 export const useLiveTimer = ({
   start_time,

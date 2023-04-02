@@ -1,4 +1,4 @@
-import { CountDownProps, CountUpProps, Time } from "src/features/live/types";
+import { CountDownProps, CountUpProps, Time } from "src/features/timer/types";
 
 export const useTimer = () => {
   const countDown = ({

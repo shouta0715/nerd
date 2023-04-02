@@ -1,4 +1,4 @@
-import { LiveTimerProps, Time } from "src/features/live/types";
+import { LiveTimerProps, Time } from "src/features/timer/types";
 
 export const getMaxCountUpTime = ({
   end_time,
