@@ -8,13 +8,15 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
   episode?: GetEpisodeQuery["episodes_by_pk"];
+  mode?: LiveTimer["mode"];
 };
 
-export const NextEpisodeMenu: FC<Props> = ({ episode }) => {
+export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
   const { data } = useQueryEpisode(episode?.next_episode_id, undefined);
 
   return (
@@ -37,6 +39,16 @@ export const NextEpisodeMenu: FC<Props> = ({ episode }) => {
           </div>
         )}
       </Text>
+      {mode && mode === "finish" && (
+        <ButtonLink
+          className="mb-2 flex w-max items-center space-x-2 border-none bg-red-500  p-2 text-xs font-bold text-white shadow-none"
+          href={`${episode?.id}`}
+          leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
+          size="xs"
+        >
+          もう一度見る
+        </ButtonLink>
+      )}
       {episode?.next_episode_id && (
         <ButtonLink
           className="mb-2 flex w-max items-center space-x-2 border-none bg-indigo-500  p-2 text-xs font-bold text-white shadow-none"

@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
+import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
   data?: GetEpisodeQuery;
+  mode: LiveTimer["mode"];
 };
 
 const DynamicLiveMenu = dynamic(
@@ -21,7 +23,7 @@ const DynamicLiveMenu = dynamic(
   }
 );
 
-export const LiveNav: FC<Props> = ({ isChat, setIsChat, data }) => {
+export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
   const router = useRouter();
 
   return (
@@ -59,7 +61,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data }) => {
             </Text>
           </ul>
         </div>
-        <DynamicLiveMenu episode={data?.episodes_by_pk} />
+        <DynamicLiveMenu episode={data?.episodes_by_pk} mode={mode} />
       </div>
     </nav>
   );

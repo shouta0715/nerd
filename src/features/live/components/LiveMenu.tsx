@@ -8,21 +8,21 @@ import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/N
 import { Text } from "src/components/Elements/Text";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
+import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
   episode: GetEpisodeQuery["episodes_by_pk"];
+  mode: LiveTimer["mode"];
 };
 
-export const LiveMenu: FC<Props> = ({ episode }) => {
+export const LiveMenu: FC<Props> = ({ episode, mode }) => {
   const {
     isMenuOpen,
-
     setIsMenuOpen,
     onSubmitHandler,
     setInputValue,
     user,
-
     inputValue,
   } = useMenu();
 
@@ -94,7 +94,7 @@ export const LiveMenu: FC<Props> = ({ episode }) => {
           </section>
           <div className="h-[1px] w-full bg-slate-200" />
           <Suspense fallback={<NextEpisodeMenuSkelton />}>
-            <NextEpisodeMenu episode={episode} />
+            <NextEpisodeMenu episode={episode} mode={mode} />
           </Suspense>
         </div>
       </div>

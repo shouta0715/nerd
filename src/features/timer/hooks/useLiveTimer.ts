@@ -11,13 +11,21 @@ import { getInitialTime } from "src/features/timer/utils/getInitialTime";
 import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 
+const clearTimerInterval = (
+  intervalId: React.MutableRefObject<NodeJS.Timeout | null>
+) => {
+  if (intervalId.current) {
+    clearInterval(intervalId.current);
+  }
+};
+
 const countDown = ({ prevTime, setMode, intervalId }: CountDownProps): Time => {
   const { hours, minutes, seconds } = prevTime;
 
   if (hours === 0 && minutes === 0 && seconds === 0) {
     setMode("up");
 
-    if (intervalId.current) clearInterval(intervalId.current);
+    clearTimerInterval(intervalId);
 
     return prevTime;
   }
@@ -26,7 +34,8 @@ const countDown = ({ prevTime, setMode, intervalId }: CountDownProps): Time => {
   return {
     seconds: seconds === 0 ? 59 : seconds - 1,
     minutes: seconds === 0 ? (minutes - 1 > 0 ? minutes - 1 : 59) : minutes,
-    hours: minutes === 0 ? (hours - 1 > 0 ? hours - 1 : 0) : hours,
+    hours:
+      seconds === 0 && minutes === 0 ? (hours - 1 > 0 ? hours - 1 : 0) : hours,
   };
 };
 
@@ -45,7 +54,7 @@ const countUp = ({
   ) {
     setMode("finish");
 
-    if (intervalId.current) clearInterval(intervalId.current);
+    clearTimerInterval(intervalId);
 
     return prevTime;
   }
@@ -54,7 +63,7 @@ const countUp = ({
   return {
     seconds: seconds === 59 ? 0 : seconds + 1,
     minutes: seconds === 59 ? minutes + 1 : minutes,
-    hours: minutes === 59 ? hours + 1 : hours,
+    hours: seconds === 59 && minutes === 59 ? hours + 1 : hours,
   };
 };
 
@@ -83,7 +92,7 @@ export const useLiveTimer = ({
       }, 1000);
 
       return () => {
-        if (intervalId.current) clearInterval(intervalId.current);
+        clearTimerInterval(intervalId);
       };
     }
 
@@ -100,9 +109,9 @@ export const useLiveTimer = ({
       }, 1000);
 
     return () => {
-      if (intervalId.current) clearInterval(intervalId.current);
+      clearTimerInterval(intervalId);
     };
-  }, [end_time, mode, start_time, time.hours, time.minutes, time.seconds]);
+  }, [end_time, mode, start_time]);
 
   return {
     mode,

@@ -7,7 +7,7 @@ import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isChat, setIsChat, time } = useLive();
+  const { data, isLoading, isChat, setIsChat, time, mode } = useLive();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -23,10 +23,16 @@ export const Live = () => {
               episode_title={data?.episodes_by_pk?.title}
               id={data?.episodes_by_pk?.id}
               isTimeLoading={isLoading}
+              mode={mode}
               time={time}
               title={data?.episodes_by_pk?.work.series_title}
             />
-            <LiveNav data={data} isChat={isChat} setIsChat={setIsChat} />
+            <LiveNav
+              data={data}
+              isChat={isChat}
+              mode={mode}
+              setIsChat={setIsChat}
+            />
           </div>
           <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">

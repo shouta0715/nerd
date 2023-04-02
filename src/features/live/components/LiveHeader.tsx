@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { Text } from "src/components/Elements/Text";
-import { PadTime } from "src/features/timer/types";
+import { LiveTimer, PadTime } from "src/features/timer/types";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
@@ -19,6 +19,7 @@ type Props = {
   time: PadTime;
   id: string;
   isTimeLoading: boolean;
+  mode: LiveTimer["mode"];
 };
 
 export const LiveHeader: FC<Props> = ({
@@ -28,6 +29,7 @@ export const LiveHeader: FC<Props> = ({
   time,
   id,
   isTimeLoading,
+  mode,
 }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
@@ -56,8 +58,18 @@ export const LiveHeader: FC<Props> = ({
       </Text>
     </div>
     <div className="mx-auto mt-3 flex max-w-max flex-col">
-      <Text className="m-0 mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 md:text-base">
-        開始から
+      <Text
+        className={`m-0 mx-auto mb-1.5 px-10 text-sm font-bold  md:text-base ${
+          mode === "down"
+            ? "text-indigo-500"
+            : mode === "up"
+            ? "text-orange-500"
+            : "text-gray-500"
+        }`}
+      >
+        {mode === "up" && "開始から"}
+        {mode === "down" && "開始まで"}
+        {mode === "finish" && "終了しました"}
       </Text>
       <DynamicTimer
         hours={time.hours}

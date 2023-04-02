@@ -4,13 +4,13 @@ export const getIsStatus = ({
   start_time,
   end_time,
 }: LiveTimerProps): LiveTimer["mode"] => {
-  const now = new Date();
-  const start = new Date(start_time);
-  const end = new Date(end_time);
+  const nowTime = new Date().getTime();
+  const start = new Date(start_time).getTime();
+  const end = new Date(end_time).getTime();
 
-  if (now.getTime() < start.getTime()) return "down";
+  if (nowTime < start) return "down";
 
-  if (now.getTime() > end.getTime()) return "finish";
+  if (nowTime > end) return "finish";
 
   return "up";
 };
