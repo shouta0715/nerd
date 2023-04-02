@@ -56,8 +56,12 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         </div>
         {mode !== "finish" ? (
           <div className="flex flex-col">
-            <Text className="m-0 mx-auto mb-1.5 mt-2 px-10 text-sm font-bold text-indigo-500 md:text-base">
-              {mode === "down" ? "開始まで" : "終了まで"}
+            <Text
+              className={`m-0 mx-auto mb-1.5 mt-2 px-10 text-sm font-bold  md:text-base ${
+                mode === "down" ? "text-indigo-500" : "text-orange-500"
+              }`}
+            >
+              {mode === "down" ? "開始まで" : "開始から"}
             </Text>
             <DynamicTimer
               hours={time.hours}
@@ -68,7 +72,11 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             />
             <Link
               as={`/episodes/live/${episode.id}`}
-              className="light-bg ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold "
+              className={`${
+                mode === "down"
+                  ? "bg-indigo-50 text-indigo-500"
+                  : "bg-orange-50 text-orange-500"
+              } ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
                 query: {
