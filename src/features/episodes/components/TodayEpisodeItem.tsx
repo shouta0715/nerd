@@ -78,6 +78,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                     episode.number.toString(),
                     episode.id,
                     episode.has_next_episode,
+                    episode.start_time,
+                    episode.end_time,
                   ],
                 },
               }}
