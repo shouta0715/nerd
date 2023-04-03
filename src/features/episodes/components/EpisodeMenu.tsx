@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
@@ -5,7 +6,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import React, { FC, memo, Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
@@ -20,7 +21,7 @@ type Props = {
   episode: GetEpisodeQuery["episodes_by_pk"];
 };
 
-export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
+export const EpisodeMenu: FC<Props> = ({ episode }) => {
   const {
     isMenuOpen,
     time,
@@ -34,6 +35,9 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
     uuid,
     handleChange,
     changeTenTime,
+    onSubmitChangeTime,
+    isChangeTime,
+    inputTime,
   } = useMenu();
 
   return (
@@ -115,22 +119,35 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
               </div>
               <div className="flex flex-col items-center space-y-1">
                 <div className=" w-full">
-                  {padTime.split("").map((digit, index) => (
-                    <input
-                      key={`${uuid}-${index}`}
-                      className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
-                      id={`${uuid}-${index + 1}`}
-                      inputMode="numeric"
-                      onChange={(e) => {
-                        handleChange(e, index);
-                      }}
-                      onFocus={() => {
-                        interval?.stop();
-                      }}
-                      type="number"
-                      value={digit}
-                    />
-                  ))}
+                  {inputTime
+                    ? inputTime.split("").map((digit, index) => (
+                        <input
+                          key={`${uuid}-${index}`}
+                          className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+                          id={`${uuid}-${index + 1}`}
+                          onChange={(e) => {
+                            handleChange(e, index);
+                          }}
+                          onFocus={() => {
+                            interval?.stop();
+                          }}
+                          value={digit}
+                        />
+                      ))
+                    : padTime.split("").map((digit, index) => (
+                        <input
+                          key={`${uuid}-${index}`}
+                          className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+                          id={`${uuid}-${index + 1}`}
+                          onChange={(e) => {
+                            handleChange(e, index);
+                          }}
+                          onFocus={() => {
+                            interval?.stop();
+                          }}
+                          value={digit}
+                        />
+                      ))}
                 </div>
                 <div className="flex w-full">
                   <Text
@@ -150,7 +167,6 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
                   </Text>
                 </div>
               </div>
-
               <div className="grid w-full grid-cols-3 items-center justify-between">
                 <Button
                   className="relative mx-auto h-12 w-12 border-none"
@@ -163,7 +179,9 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
                 </Button>
                 <Button
                   className={`relative w-full text-xs font-bold text-white ${
-                    interval?.active
+                    isChangeTime
+                      ? "bg-green-500"
+                      : interval?.active
                       ? "bg-red-500"
                       : time.hours === 0 &&
                         time.minutes === 0 &&
@@ -171,10 +189,14 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
                       ? "bg-indigo-500"
                       : "bg-blue-500"
                   }`}
-                  onClick={() => interval?.toggle()}
+                  onClick={() => {
+                    isChangeTime ? onSubmitChangeTime() : interval?.toggle();
+                  }}
                   size="sm"
                 >
-                  {interval?.active
+                  {isChangeTime
+                    ? "変更する"
+                    : interval?.active
                     ? "一時停止"
                     : time.hours === 0 &&
                       time.minutes === 0 &&
@@ -203,4 +225,4 @@ export const EpisodeMenu: FC<Props> = memo(({ episode }) => {
       </div>
     </div>
   );
-});
+};

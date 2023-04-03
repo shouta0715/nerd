@@ -20,13 +20,20 @@ export const LiveChats: FC<Props> = ({
   mode,
   isTimerLoading,
 }) => {
-  const { data, isBottom, entry, isRefetching, handleRefetch, isLoading, ref } =
-    useLiveChats({
-      time,
-      episode_id,
-      mode,
-      isTimerLoading,
-    });
+  const {
+    data,
+    isBottom,
+    entry,
+    isRefetching,
+    handleRefetch,
+    isLoading,
+    bottomRef,
+  } = useLiveChats({
+    time,
+    episode_id,
+    mode,
+    isTimerLoading,
+  });
   const user = useUserState((state) => state.user);
 
   if (!user || isLoading) {
@@ -53,7 +60,7 @@ export const LiveChats: FC<Props> = ({
           <Loader className="mx-auto" variant="dots" />
         ) : (
           <Button
-            ref={ref}
+            ref={bottomRef}
             className="mx-auto bg-indigo-500 text-white"
             onClick={handleRefetch}
             size="sm"

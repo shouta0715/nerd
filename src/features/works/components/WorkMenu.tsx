@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
@@ -30,6 +31,9 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
     uuid,
     handleChange,
     changeTenTime,
+    onSubmitChangeTime,
+    isChangeTime,
+    inputTime,
   } = useMenu();
 
   return (
@@ -106,22 +110,35 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
             </div>
             <div className="flex flex-col items-center space-y-1">
               <div className=" w-full">
-                {padTime.split("").map((digit, index) => (
-                  <input
-                    key={`${uuid}-${index}`}
-                    className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
-                    id={`${uuid}-${index + 1}`}
-                    inputMode="numeric"
-                    onChange={(e) => {
-                      handleChange(e, index);
-                    }}
-                    onFocus={() => {
-                      interval?.stop();
-                    }}
-                    type="number"
-                    value={digit}
-                  />
-                ))}
+                {inputTime
+                  ? inputTime.split("").map((digit, index) => (
+                      <input
+                        key={`${uuid}-${index}`}
+                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+                        id={`${uuid}-${index + 1}`}
+                        onChange={(e) => {
+                          handleChange(e, index);
+                        }}
+                        onFocus={() => {
+                          interval?.stop();
+                        }}
+                        value={digit}
+                      />
+                    ))
+                  : padTime.split("").map((digit, index) => (
+                      <input
+                        key={`${uuid}-${index}`}
+                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+                        id={`${uuid}-${index + 1}`}
+                        onChange={(e) => {
+                          handleChange(e, index);
+                        }}
+                        onFocus={() => {
+                          interval?.stop();
+                        }}
+                        value={digit}
+                      />
+                    ))}
               </div>
               <div className="flex w-full">
                 <Text className="w-1/3 pr-4 text-center text-dimmed" size="xs">
@@ -135,7 +152,6 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
                 </Text>
               </div>
             </div>
-
             <div className="grid w-full grid-cols-3 items-center justify-between">
               <Button
                 className="relative mx-auto h-12 w-12 border-none"
@@ -148,7 +164,9 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
               </Button>
               <Button
                 className={`relative w-full text-xs font-bold text-white ${
-                  interval?.active
+                  isChangeTime
+                    ? "bg-green-500"
+                    : interval?.active
                     ? "bg-red-500"
                     : time.hours === 0 &&
                       time.minutes === 0 &&
@@ -156,10 +174,14 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
                     ? "bg-indigo-500"
                     : "bg-blue-500"
                 }`}
-                onClick={() => interval?.toggle()}
+                onClick={() => {
+                  isChangeTime ? onSubmitChangeTime() : interval?.toggle();
+                }}
                 size="sm"
               >
-                {interval?.active
+                {isChangeTime
+                  ? "変更する"
+                  : interval?.active
                   ? "一時停止"
                   : time.hours === 0 && time.minutes === 0 && time.seconds === 0
                   ? "開始"
