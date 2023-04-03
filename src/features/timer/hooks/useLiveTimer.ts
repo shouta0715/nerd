@@ -76,11 +76,15 @@ export const useLiveTimer = ({
   );
   const [time, setTime] = useState<Time>(getInitialTime(start_time));
   const intervalId = useRef<NodeJS.Timeout | null>(null);
+  const [isTimeLoading, setIsTimeLoading] = useState<boolean>(
+    !start_time || !end_time
+  );
 
   useEffect(() => {
     if (!start_time || !end_time) return;
 
     setTime(getInitialTime(start_time));
+    setIsTimeLoading(false);
     setMode(getIsStatus({ start_time, end_time }));
   }, [end_time, start_time]);
 
@@ -116,9 +120,11 @@ export const useLiveTimer = ({
   return {
     mode,
     time: {
-      hours: time.hours.toString().padStart(2, "0"),
-      minutes: time.minutes.toString().padStart(2, "0"),
-      seconds: time.seconds.toString().padStart(2, "0"),
+      hours: time.hours,
+      minutes: time.minutes,
+      seconds: time.seconds,
     },
+    isTimeLoading,
+    isFinished: mode === "finish",
   };
 };

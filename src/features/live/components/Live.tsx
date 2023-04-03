@@ -2,14 +2,16 @@ import React, { Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
+import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isChat, setIsChat, time, mode } = useLive();
+  const { data, isLoading, isChat, setIsChat, time, mode, isTimeLoading } =
+    useLive();
 
-  if (isLoading) {
+  if (isLoading || isTimeLoading) {
     return <EpisodeSkelton />;
   }
 
@@ -22,9 +24,13 @@ export const Live = () => {
               episode_number={data?.episodes_by_pk?.number}
               episode_title={data?.episodes_by_pk?.title}
               id={data?.episodes_by_pk?.id}
-              isTimeLoading={isLoading}
+              isTimeLoading={isTimeLoading}
               mode={mode}
-              time={time}
+              time={{
+                hours: time?.hours.toString().padStart(2, "0"),
+                minutes: time?.minutes.toString().padStart(2, "0"),
+                seconds: time?.seconds.toString().padStart(2, "0"),
+              }}
               title={data?.episodes_by_pk?.work.series_title}
             />
             <LiveNav
@@ -41,7 +47,12 @@ export const Live = () => {
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    {/* <LiveChat episode_id={data?.episodes_by_pk?.id} /> */}
+                    <LiveChats
+                      episode_id={data?.episodes_by_pk?.id}
+                      isTimerLoading={isTimeLoading}
+                      mode={mode}
+                      time={time}
+                    />
                   </Suspense>
                   {/* <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} /> */}
                 </>

@@ -64,11 +64,11 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               {mode === "down" ? "開始まで" : "開始から"}
             </Text>
             <DynamicTimer
-              hours={time.hours}
+              hours={time.hours.toString().padStart(2, "0")}
               id={episode.id}
               isTimeLoading={false}
-              minutes={time.minutes}
-              seconds={time.seconds}
+              minutes={time.minutes.toString().padStart(2, "0")}
+              seconds={time.seconds.toString().padStart(2, "0")}
             />
             <Link
               as={`/episodes/live/${episode.id}`}

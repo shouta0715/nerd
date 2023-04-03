@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
 
 import create from "zustand";
-import { timeProcessing } from "src/features/timer/utils/timeProcessing";
-
-const { timeToSecond, secondToTime } = timeProcessing();
+import {
+  secondToTime,
+  timeToSecond,
+} from "src/features/timer/utils/timeProcessing";
 
 const InitialTimerCount = {
   seconds: 0,
