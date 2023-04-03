@@ -17,7 +17,7 @@ export const useLiveChats = ({
   mode,
   isTimerLoading,
 }: Props) => {
-  const { isMenuOpen, isBottom, bottomRef, entry, setIsBottom } = useChats();
+  const { isBottom, bottomRef, entry, setIsBottom } = useChats();
   const NumberTime = timeToSecond(
     mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
   );
@@ -75,7 +75,6 @@ export const useLiveChats = ({
   return {
     data: chats,
     isBottom,
-    isMenuOpen,
     handleRefetch,
     isRefetching,
     isLoading,

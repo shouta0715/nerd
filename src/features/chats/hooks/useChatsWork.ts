@@ -3,15 +3,7 @@ import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQue
 import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsWork = (work_id: number) => {
-  const {
-    entry,
-    isBottom,
-    isMenuOpen,
-    time,
-    setIsBottom,
-    interval,
-    bottomRef,
-  } = useChats();
+  const { entry, isBottom, time, setIsBottom, bottomRef } = useChats();
   const { data, fetchNextPage } = useInfiniteQueryChatsWork({
     work_id,
     enabled: !!work_id,
@@ -46,17 +38,7 @@ export const useChatsWork = (work_id: number) => {
         },
       });
     }
-  }, [
-    chats,
-    entry,
-    entry?.target,
-    fetchNextPage,
-    interval?.active,
-    isBottom,
-    isMenuOpen,
-    setIsBottom,
-    time,
-  ]);
+  }, [entry, fetchNextPage, setIsBottom, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time };
 };
