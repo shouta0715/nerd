@@ -41,6 +41,7 @@ type TimerState = {
   interval: Interval;
   changeTenTime: (formula: "add" | "minus") => void;
   getPadStartTime: () => string;
+  timeToPadTime: (time: TimerCount) => string;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
@@ -126,6 +127,13 @@ export const useTimerState = create<TimerState>((set, get) => ({
   },
   getPadStartTime: () => {
     const { hours, minutes, seconds } = get().time;
+
+    return `${hours.toString().padStart(2, "0")}${minutes
+      .toString()
+      .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
+  },
+  timeToPadTime: (time: TimerCount) => {
+    const { hours, minutes, seconds } = time;
 
     return `${hours.toString().padStart(2, "0")}${minutes
       .toString()

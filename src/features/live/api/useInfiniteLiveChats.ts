@@ -28,9 +28,11 @@ const createInitialPageParams = ({
     mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
   );
 
+  // upの場合は、0から現在の時間の200秒後の四捨五入までのデータを取得
+
   const InitialPageParams =
     mode === "up"
-      ? { _gte: NumberTime, _lt: 100 }
+      ? { _gte: 0, _lt: Math.round(NumberTime / 100) * 100 + 200 }
       : {
           _gte: 0,
           _lt: 1,
