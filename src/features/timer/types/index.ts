@@ -9,15 +9,17 @@ export type PadTime = {
   seconds: string;
 };
 
-export type LiveTimer = {
-  mode: "down" | "up" | "finish";
-  time: PadTime;
-};
-
 export type Time = {
   hours: number;
   minutes: number;
   seconds: number;
+};
+
+export type LiveTimer = {
+  mode: "down" | "up" | "finish";
+  time: Time;
+  isTimeLoading: boolean;
+  isFinished: boolean;
 };
 
 export type CountDownProps = {

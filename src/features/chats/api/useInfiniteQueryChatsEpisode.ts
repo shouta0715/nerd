@@ -8,7 +8,7 @@ type Args = {
   enabled: boolean;
 };
 
-type GetChatsEpisodeArgs = {
+export type GetChatsEpisodeArgs = {
   episode_id: string;
   pageParam: {
     _gte: number;

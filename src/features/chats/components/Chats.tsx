@@ -3,7 +3,8 @@ import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
 import { Chat } from "src/features/chats/types";
-import { timeProcessing } from "src/features/timer/utils/timeProcessing";
+import { timeCommented } from "src/features/timer/utils/timeProcessing";
+
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
@@ -22,8 +23,6 @@ export const Chats: FC<Props> = ({
   entry,
   time,
 }) => {
-  const { timeCommented } = timeProcessing();
-
   const user = useUserState((state) => state.user);
 
   return (
