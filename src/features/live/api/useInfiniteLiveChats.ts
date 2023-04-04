@@ -4,16 +4,16 @@ import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
 import { client } from "src/libs/graphqlClient";
 
+type PageParam = {
+  _gte: number;
+  _lt: number;
+};
+
 type UseInfiniteLiveChats = {
   episode_id: string;
   mode: LiveTimer["mode"];
   time: LiveTimer["time"];
   enabled: boolean;
-};
-
-type PageParam = {
-  _gte: number;
-  _lt: number;
 };
 
 type GetChats = {
@@ -64,7 +64,7 @@ export const useInfiniteLiveChats = ({
 }: UseInfiniteLiveChats) => {
   const InitialPageParams = createInitialPageParams({ mode, time });
 
-  return useInfiniteQuery({
+  const query = useInfiniteQuery({
     queryKey: ["LiveChats", { episode_id }],
     queryFn: ({ pageParam = InitialPageParams }) =>
       getChats({
@@ -75,4 +75,6 @@ export const useInfiniteLiveChats = ({
     keepPreviousData: true,
     enabled: mode !== "finish" && !!episode_id && enabled,
   });
+
+  return { ...query, InitialPageParams };
 };

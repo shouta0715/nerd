@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useMemo, useState } from "react";
 import { useChats } from "src/features/chats/hooks/useChats";
 import { useInfiniteLiveChats } from "src/features/live/api/useInfiniteLiveChats";
 import { LiveTimer } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
+import { GetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
 
 type Props = {
   time: LiveTimer["time"];
@@ -11,28 +13,44 @@ type Props = {
   isTimerLoading: boolean;
 };
 
+type PageParam = {
+  _gte: number;
+  _lt: number;
+};
+
+type InfiniteLiveChats = {
+  pageParam: PageParam[] | undefined[];
+  pages: GetChatsEpisodeQuery[];
+};
+
 export const useLiveChats = ({
   time,
   episode_id,
   mode,
   isTimerLoading,
 }: Props) => {
-  const { isBottom, bottomRef, entry, setIsBottom } = useChats();
+  const { isBottom, bottomRef, entry } = useChats();
   const NumberTime = timeToSecond(
     mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
   );
 
-  const InitialLt = useRef<number | null>(
-    mode === "up" ? Math.round(NumberTime / 100) * 100 + 200 : 0
-  );
+  const queryClient = useQueryClient();
 
-  const { data, fetchNextPage, refetch, isRefetching, isLoading } =
-    useInfiniteLiveChats({
-      time,
-      episode_id,
-      mode,
-      enabled: !isTimerLoading,
-    });
+  const {
+    data,
+    fetchNextPage,
+    refetch,
+    isRefetching,
+    isLoading,
+    InitialPageParams,
+  } = useInfiniteLiveChats({
+    time,
+    episode_id,
+    mode,
+    enabled: !isTimerLoading,
+  });
+  const [prevPageParam, setPrevPageParam] =
+    useState<PageParam>(InitialPageParams);
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -49,26 +67,60 @@ export const useLiveChats = ({
     return resultData;
   }, [NumberTime, data?.pages, mode]);
 
-  useEffect(() => {
-    if (entry) setIsBottom(entry.isIntersecting);
+  const handleRefetch = async () => {
+    if (mode === "up") {
+      const { _lt } = prevPageParam;
+      const newPageParam = { _gte: _lt, _lt: NumberTime + 1 };
+      setPrevPageParam(newPageParam);
 
-    if (NumberTime % 200 === 0 && NumberTime !== 0 && mode === "up") {
       fetchNextPage({
         pageParam: {
-          _gte: InitialLt.current ?? NumberTime,
-          _lt: NumberTime + 200,
+          _gte: _lt,
+          _lt: NumberTime + 1,
         },
       });
 
-      InitialLt.current = null;
+      return;
     }
-  }, [NumberTime, entry, fetchNextPage, mode, setIsBottom]);
 
-  const handleRefetch = async () => {
-    if (mode === "down" && NumberTime === 0) {
-      await refetch({
+    if (mode === "down") {
+      const prevData = queryClient.getQueryData<InfiniteLiveChats>([
+        "LiveChats",
+        { episode_id },
+      ]);
+
+      if (!prevData) return;
+
+      const prevChats = prevData.pages[0].chats_by_episode_id;
+
+      const { data: refetchData } = await refetch({
         refetchPage: (_, index) => index === 0,
       });
+
+      const newData = refetchData?.pages[0];
+
+      const newChats = newData?.chats_by_episode_id.filter((newChat) => {
+        const isExist = prevChats.find(
+          (prevChat) => prevChat.id === newChat.id
+        );
+
+        return !isExist;
+      });
+
+      if (!newChats) return;
+
+      queryClient.setQueryData<InfiniteLiveChats>(
+        ["LiveChats", { episode_id }],
+        {
+          ...prevData,
+          pages: [
+            {
+              ...prevData.pages[0],
+              chats_by_episode_id: [...newChats, ...prevChats],
+            },
+          ],
+        }
+      );
     }
   };
 

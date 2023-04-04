@@ -11,7 +11,7 @@ type Props = {
   chats: Chat[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   bottomRef: (element: any) => void;
-  isBottom: boolean;
+  isBottom?: boolean;
   entry: IntersectionObserverEntry | null;
   time: number;
 };

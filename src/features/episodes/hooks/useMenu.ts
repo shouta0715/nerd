@@ -51,6 +51,10 @@ export const useMenu = () => {
   ) => {
     const inputNumber = event.target.value;
 
+    const regex = /^[0-9]*$/;
+
+    if (!regex.test(inputNumber)) return;
+
     const nextChar =
       inputNumber.length > 1
         ? inputNumber.split("")[inputNumber.length - 1]
