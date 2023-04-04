@@ -3,16 +3,18 @@ import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQue
 import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsWork = (work_id: number) => {
-  const { entry, isBottom, time, setIsBottom, bottomRef } = useChats();
-  const { data, fetchNextPage } = useInfiniteQueryChatsWork({
-    work_id,
-    enabled: !!work_id,
-  });
+  const { entry, isBottom, time, bottomRef } = useChats();
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQueryChatsWork(
+    {
+      work_id,
+      enabled: !!work_id,
+    }
+  );
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
 
-    const flatData = data.pages.map((page) => page.chats_by_work_id).flat();
+    const flatData = data.pages.flatMap((page) => page.chats_by_work_id);
 
     const resultData = flatData.filter((chat) => chat.comment_time <= time);
 
@@ -28,9 +30,7 @@ export const useChatsWork = (work_id: number) => {
   }, [entry?.target, isBottom, chats.length]);
 
   useEffect(() => {
-    if (entry) setIsBottom(entry.isIntersecting);
-
-    if (time % 300 === 0 && time !== 0) {
+    if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
       fetchNextPage({
         pageParam: {
           _gte: time,
@@ -38,7 +38,7 @@ export const useChatsWork = (work_id: number) => {
         },
       });
     }
-  }, [entry, fetchNextPage, setIsBottom, time]);
+  }, [fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time };
 };

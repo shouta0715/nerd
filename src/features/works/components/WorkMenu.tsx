@@ -130,12 +130,17 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
                         key={`${uuid}-${index}`}
                         className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
                         id={`${uuid}-${index + 1}`}
+                        inputMode="numeric"
+                        max="9"
+                        min="0"
                         onChange={(e) => {
                           handleChange(e, index);
                         }}
                         onFocus={() => {
                           interval?.stop();
                         }}
+                        pattern="[0-9]*"
+                        type="number"
                         value={digit}
                       />
                     ))}

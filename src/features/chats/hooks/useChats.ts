@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useInterSection } from "src/hooks/useInterSection";
 
@@ -10,12 +8,10 @@ export const useChats = () => {
     rootMargin: "100px",
     threshold: 1,
   });
-  const [isBottom, setIsBottom] = useState<boolean>(true);
 
   return {
     bottomRef: ref,
-    isBottom,
-    setIsBottom,
+    isBottom: entry?.isIntersecting,
     entry,
     time,
   };
