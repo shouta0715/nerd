@@ -32,7 +32,7 @@ const createInitialPageParams = ({
 
   const InitialPageParams =
     mode === "up"
-      ? { _gte: 0, _lt: Math.round(NumberTime / 100) * 100 + 200 }
+      ? { _gte: 0, _lt: NumberTime + 1 }
       : {
           _gte: 0,
           _lt: 1,

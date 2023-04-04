@@ -66,7 +66,6 @@ export const SpSearchWorks = () => {
         )}
         {data && data.search_works.length === 0 && (
           <p className="text-center text-gray-500">
-            {/* ''で囲む */}
             &apos;{q}&apos;に一致する作品は見つかりませんでした。
           </p>
         )}

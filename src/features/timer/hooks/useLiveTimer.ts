@@ -117,6 +117,13 @@ export const useLiveTimer = ({
     };
   }, [end_time, mode, start_time]);
 
+  if (
+    mode === "finish" &&
+    !(time.hours === 0 && time.minutes === 0 && time.seconds === 0)
+  ) {
+    setTime({ hours: 0, minutes: 0, seconds: 0 });
+  }
+
   return {
     mode,
     time: {

@@ -16,7 +16,7 @@ const DynamicSearchButton = dynamic(
 
 const Index: NextPage = () => (
   <>
-    <section className="flex min-h-screen flex-col">
+    <section className="flex min-h-screen flex-col bg-gray-50">
       <Suspense fallback={<SeriesSkelton />}>
         <Series />
       </Suspense>

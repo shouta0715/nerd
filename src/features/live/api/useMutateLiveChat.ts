@@ -8,7 +8,7 @@ import { useUserState } from "src/store/user/userState";
 import { genRandomId } from "src/utils/genRandomId";
 
 type InfiniteLiveChats = {
-  pageParam: [];
+  pageParams: [];
   pages: GetChatsEpisodeQuery[];
 };
 export const useMutateLiveChat = () => {
@@ -39,7 +39,7 @@ export const useMutateLiveChat = () => {
       ]);
 
       if (prevData) {
-        if (comment_time !== 0) {
+        if (comment_time === 0) {
           const prevChats = prevData.pages[0].chats_by_episode_id;
           queryClient.setQueryData(["LiveChats", { episode_id }], {
             pages: [
@@ -69,7 +69,6 @@ export const useMutateLiveChat = () => {
 
         queryClient.setQueryData(["LiveChats", { episode_id }], {
           pages: [
-            ...prevData.pages.slice(0, lastPageIndex),
             {
               chats_by_episode_id: [
                 {
@@ -85,7 +84,9 @@ export const useMutateLiveChat = () => {
                 ...prevChats,
               ],
             },
+            ...prevData.pages.slice(0, lastPageIndex),
           ],
+          pageParams: prevData.pageParams,
         });
       }
 
@@ -118,6 +119,7 @@ export const useMutateLiveChat = () => {
               }),
             },
           ],
+          pageParams: prevData.pageParams,
         });
       }
     },
