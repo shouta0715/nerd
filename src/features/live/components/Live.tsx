@@ -46,20 +46,20 @@ export const Live = () => {
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
                 <>
-                  {mode === "finish" ? (
-                    <FinishLive episode={data?.episodes_by_pk} />
-                  ) : (
-                    <Suspense
-                      fallback={<Loader className="m-auto" variant="dots" />}
-                    >
+                  <Suspense
+                    fallback={<Loader className="m-auto" variant="dots" />}
+                  >
+                    {mode === "finish" ? (
+                      <FinishLive episode={data?.episodes_by_pk} />
+                    ) : (
                       <LiveChats
                         episode_id={data?.episodes_by_pk?.id}
                         isTimerLoading={isTimeLoading}
                         mode={mode}
                         time={time}
                       />
-                    </Suspense>
-                  )}
+                    )}
+                  </Suspense>
                   <LiveChatInput
                     episode_id={data?.episodes_by_pk?.id}
                     isTimerLoading={isTimeLoading}
