@@ -89,6 +89,8 @@ export const useLiveChats = ({
         { episode_id },
       ]);
 
+      console.log(prevData);
+
       if (!prevData) return;
 
       const prevChats = prevData.pages[0].chats_by_episode_id;

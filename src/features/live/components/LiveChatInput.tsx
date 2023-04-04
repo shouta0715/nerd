@@ -1,22 +1,35 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
-import { useInputCommentState, useRefState } from "src/features/comments/store";
 import { useOpenState } from "src/features/episodes/store";
+import { useLiveChatInput } from "src/features/live/hooks/useLiveChatInput";
+import { LiveTimer, Time } from "src/features/timer/types";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
-  onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
-  isLoading: boolean;
+  mode: LiveTimer["mode"];
+  episode_id: string;
+  time: Time;
+  isTimerLoading: boolean;
 };
 
-export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
+export const LiveChatInput: FC<Props> = ({
+  mode,
+  episode_id,
+  time,
+  isTimerLoading,
+}) => {
+  const { content, setContent, onSubmitHandler, isLoading } = useLiveChatInput({
+    mode,
+    episode_id,
+    time,
+  });
   const user = useUserState((state) => state.user);
   const { authLoading, setIsOpenModal } = useGlobalState((state) => ({
     authLoading: state.authLoading,
@@ -26,16 +39,6 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
     state.isMenuOpen,
     state.setIsMenuOpen,
   ]);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
-  const setInputRef = useRefState((state) => state.setInputRef);
-  const [inputState, setInputComment] = useInputCommentState((state) => [
-    state.inputComment,
-    state.setInputComment,
-  ]);
-
-  useEffect(() => {
-    setInputRef(inputRef);
-  }, [setInputRef]);
 
   return (
     <div className="fixed bottom-0 left-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white p-2">
@@ -59,44 +62,24 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         </figure>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
           <ReactTextareaAutosize
-            ref={inputRef}
             className="w-full resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
-            disabled={!user}
+            disabled={!user || isTimerLoading}
             maxLength={100}
             maxRows={4}
-            onBlur={() => {
-              if (!inputState.content) {
-                setInputComment({
-                  ...inputState,
-                  replied_to_commenter_name: null,
-                  reply_to: null,
-                });
-              }
-            }}
             onChange={(e) =>
-              setInputComment({
-                ...inputState,
-                content: e.target.value,
-              })
+              content.length <= 100 && setContent(e.currentTarget.value)
             }
-            placeholder={
-              inputState.replied_to_commenter_name
-                ? `${inputState.replied_to_commenter_name}さんに返信`
-                : `コメントを入力してください`
-            }
-            value={inputState.content}
+            placeholder={mode === "finish" ? "終了しました" : "コメントを投稿"}
+            value={content}
           />
           <div className="absolute right-2 flex flex-col ">
             <div
               className={`ml-1 text-xs transition-opacity ${
-                inputState.content.length === 100
-                  ? "text-red-400"
-                  : "text-gray-500"
+                content.length === 100 ? "text-red-400" : "text-gray-500"
               }
-        ${inputState.content.length < 50 ? "opacity-0" : "opacity-100"}`}
+        ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
             >
-              {inputState.content.length > 50 &&
-                inputState.content.length.toString()}
+              {content.length > 50 && content.length.toString()}
             </div>
             <Button
               className="h-8 w-8 border-none bg-teal-50 p-0 active:translate-y-0"

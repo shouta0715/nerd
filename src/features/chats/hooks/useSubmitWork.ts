@@ -7,7 +7,7 @@ type Args = {
 
 export const useSubmitWork = ({ work_id }: Args) => {
   const { insertChat } = useMutateChatWork();
-  const { content, user, getTime } = useSubmitChat();
+  const { content, user, getTime, setContent } = useSubmitChat();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +22,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
       await insertChat.mutateAsync({
         object,
       });
+      setContent("");
     } catch (error) {
       //
     }
@@ -30,5 +31,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
   return {
     onSubmitHandler,
     isLoading: insertChat.isLoading,
+    setContent,
+    content,
   };
 };

@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
+import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
@@ -54,7 +55,12 @@ export const Live = () => {
                       time={time}
                     />
                   </Suspense>
-                  {/* <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} /> */}
+                  <LiveChatInput
+                    episode_id={data?.episodes_by_pk?.id}
+                    isTimerLoading={isTimeLoading}
+                    mode={mode}
+                    time={time}
+                  />
                 </>
               ) : (
                 <>
