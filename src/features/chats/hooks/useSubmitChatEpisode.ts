@@ -9,7 +9,7 @@ type Args = {
 
 export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   const { insertChat } = useMutateChatEpisode();
-  const { content, user, getTime } = useSubmitChat();
+  const { content, user, getTime, setContent } = useSubmitChat();
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +24,7 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
       await insertChat.mutateAsync({
         object,
       });
+      setContent("");
     } catch (error) {
       //
     }
@@ -32,5 +33,7 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   return {
     onSubmitHandler,
     isLoading: insertChat.isLoading,
+    setContent,
+    content,
   };
 };

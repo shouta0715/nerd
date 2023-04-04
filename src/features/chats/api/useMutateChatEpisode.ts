@@ -1,6 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useInputCommentState } from "src/features/comments/store";
 import {
   GetChatsEpisodeQuery,
   useInsertChatMutation,
@@ -21,9 +20,6 @@ type PrevData = {
 
 export const useMutateChatEpisode = () => {
   const queryClient = useQueryClient();
-  const resetInputComment = useInputCommentState(
-    (state) => state.resetInputComment
-  );
   const user = useUserState((state) => state.user);
   const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
@@ -90,7 +86,6 @@ export const useMutateChatEpisode = () => {
           }),
         });
       }
-      resetInputComment();
 
       return {
         pages: prevData?.pages,

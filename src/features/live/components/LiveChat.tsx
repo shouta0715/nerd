@@ -37,7 +37,9 @@ export const LiveChat: FC<Props> = memo(({ chat }) => {
 
         <Text
           align="inherit"
-          className="max-w-full break-words"
+          className={`max-w-full break-words ${
+            user?.id === chat.user?.id ? "inline-block text-left" : ""
+          }`}
           component="p"
           ff="Hiragino Sans"
           size="sm"

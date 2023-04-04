@@ -6,7 +6,6 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
-import { useInputChatState } from "src/features/chats/store";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -15,9 +14,16 @@ import { useUserState } from "src/store/user/userState";
 type Props = {
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   isLoading: boolean;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const ChatInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
+export const ChatInput: FC<Props> = ({
+  onSubmitHandler,
+  isLoading,
+  content,
+  setContent,
+}) => {
   const user = useUserState((state) => state.user);
   const { authLoading, setIsOpenModal } = useGlobalState((state) => ({
     authLoading: state.authLoading,
@@ -28,10 +34,6 @@ export const ChatInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
     state.setIsMenuOpen,
   ]);
   const time = useTimerState((state) => state.getTime());
-  const [{ content }, setInputComment] = useInputChatState((state) => [
-    state.inputComment,
-    state.setInputComment,
-  ]);
 
   return (
     <div className="fixed bottom-0 left-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white p-2">
@@ -55,15 +57,12 @@ export const ChatInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         </figure>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
           <ReactTextareaAutosize
-            className="w-full resize-none appearance-none rounded-full border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
+            className="w-full resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={time === 0 || !user}
             maxLength={100}
             maxRows={4}
             onChange={(e) =>
-              content.length <= 100 &&
-              setInputComment({
-                content: e.currentTarget.value,
-              })
+              content.length <= 100 && setContent(e.currentTarget.value)
             }
             placeholder={
               user && time !== 0
@@ -76,7 +75,7 @@ export const ChatInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           />
           <div className="absolute right-2 flex flex-col ">
             <div
-              className={`text-xs transition-opacity ${
+              className={`ml-1 text-xs transition-opacity ${
                 content.length === 100 ? "text-red-400" : "text-gray-500"
               }
             ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
