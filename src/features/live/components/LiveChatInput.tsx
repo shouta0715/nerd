@@ -41,7 +41,7 @@ export const LiveChatInput: FC<Props> = ({
   ]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white p-2">
+    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white p-2">
       <form
         className="container mx-auto flex items-center justify-center space-x-2 opacity-100"
         onSubmit={onSubmitHandler}
@@ -76,8 +76,7 @@ export const LiveChatInput: FC<Props> = ({
             <div
               className={`ml-1 text-xs transition-opacity ${
                 content.length === 100 ? "text-red-400" : "text-gray-500"
-              }
-        ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
+              } ${content.length < 50 ? "opacity-0" : "opacity-100"}`}
             >
               {content.length > 50 && content.length.toString()}
             </div>
