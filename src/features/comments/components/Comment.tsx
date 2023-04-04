@@ -21,7 +21,7 @@ export const Comment: FC<Props> = ({ comment }) => {
   const { handleClick } = useReply();
 
   return (
-    <li className="flex w-full animate-comment">
+    <li className="flex w-full">
       <figure className="m-0 mr-2">
         <Avatar user_id={comment.user?.id} user_name={comment.commenter_name} />
       </figure>

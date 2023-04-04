@@ -1,20 +1,21 @@
-import React, { FC, memo } from "react";
+import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
-import { Chat } from "src/features/chats/types";
+import { Chat as ChatType } from "src/features/chats/types";
 import { timeCommented } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
-  chat: Chat;
+  chat: ChatType;
+  animate: boolean;
 };
 
-export const LiveChat: FC<Props> = memo(({ chat }) => {
+export const Chat: FC<Props> = ({ chat, animate }) => {
   const user = useUserState((state) => state.user);
 
   return (
     <li
-      className={`flex w-full animate-comment transition-all ${
+      className={`flex w-full ${animate ? "animate-comment" : ""} ${
         user?.id === chat.user?.id ? "flex-row-reverse" : ""
       }`}
     >
@@ -52,4 +53,4 @@ export const LiveChat: FC<Props> = memo(({ chat }) => {
       </div>
     </li>
   );
-});
+};

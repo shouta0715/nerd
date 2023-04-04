@@ -30,9 +30,6 @@ export const useLiveChats = ({
   isTimerLoading,
 }: Props) => {
   const { isBottom, bottomRef, entry } = useChats();
-  const NumberTime = timeToSecond(
-    mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
-  );
 
   const queryClient = useQueryClient();
 
@@ -49,10 +46,14 @@ export const useLiveChats = ({
     mode,
     enabled: !isTimerLoading,
   });
+
   const [prevPageParam, setPrevPageParam] =
     useState<PageParam>(InitialPageParams);
 
   const chats = useMemo(() => {
+    const NumberTime = timeToSecond(
+      mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
+    );
     if (!data?.pages) return [];
 
     if (mode === "down")
@@ -65,19 +66,21 @@ export const useLiveChats = ({
     );
 
     return resultData;
-  }, [NumberTime, data?.pages, mode]);
+  }, [data?.pages, mode, time]);
 
   const handleRefetch = async () => {
     if (mode === "up") {
+      const NumberTime = timeToSecond(
+        mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
+      );
+
       const { _lt } = prevPageParam;
+
       const newPageParam = { _gte: _lt, _lt: NumberTime + 1 };
       setPrevPageParam(newPageParam);
 
       fetchNextPage({
-        pageParam: {
-          _gte: _lt,
-          _lt: NumberTime + 1,
-        },
+        pageParam: newPageParam,
       });
 
       return;
@@ -88,8 +91,6 @@ export const useLiveChats = ({
         "LiveChats",
         { episode_id },
       ]);
-
-      console.log(prevData);
 
       if (!prevData) return;
 

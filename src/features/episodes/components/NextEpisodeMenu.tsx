@@ -39,10 +39,10 @@ export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
           </div>
         )}
       </Text>
-      <div className="flex flex-wrap  space-x-2">
+      <div className="flex flex-col py-2">
         {mode && mode === "finish" && (
           <ButtonLink
-            className="mb-2 flex w-max items-center space-x-2 border-none bg-red-500  p-2 text-xs font-bold text-white shadow-none"
+            className="mb-2 mr-auto flex w-max items-center space-x-2 border-none bg-red-500  p-2 text-xs font-bold text-white shadow-none"
             href={`/episodes/${episode?.id}`}
             leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
             size="xs"
@@ -52,7 +52,7 @@ export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
         )}
         {episode?.next_episode_id && (
           <ButtonLink
-            className="mb-2 flex h-full w-max items-center space-x-2 border-none bg-indigo-500  p-2 text-xs font-bold text-white shadow-none"
+            className="mb-2 mr-auto flex h-full w-max items-center space-x-2 border-none bg-indigo-500  p-2 text-xs font-bold text-white shadow-none"
             href={`${data?.episodes_by_pk?.id}`}
             leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
             size="xs"
@@ -67,7 +67,7 @@ export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
                 ? `/works/${episode?.work.id}?series=${episode?.work.series_id}`
                 : `/works/${episode?.work.id}`
             }
-            className="flex h-full w-max items-center space-x-2 border-none bg-black p-2 text-xs font-bold  text-white shadow-none"
+            className="mr-auto flex w-max items-center space-x-2 border-none bg-black p-2 text-xs font-bold text-white shadow-none"
             href={{
               pathname: `${`/works/${episode?.work.id}`}`,
               query: {

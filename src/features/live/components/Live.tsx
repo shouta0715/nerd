@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
+import { FinishLive } from "src/features/live/components/FinishLive";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
@@ -45,16 +46,20 @@ export const Live = () => {
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
                 <>
-                  <Suspense
-                    fallback={<Loader className="m-auto" variant="dots" />}
-                  >
-                    <LiveChats
-                      episode_id={data?.episodes_by_pk?.id}
-                      isTimerLoading={isTimeLoading}
-                      mode={mode}
-                      time={time}
-                    />
-                  </Suspense>
+                  {mode === "finish" ? (
+                    <FinishLive episode={data?.episodes_by_pk} />
+                  ) : (
+                    <Suspense
+                      fallback={<Loader className="m-auto" variant="dots" />}
+                    >
+                      <LiveChats
+                        episode_id={data?.episodes_by_pk?.id}
+                        isTimerLoading={isTimeLoading}
+                        mode={mode}
+                        time={time}
+                      />
+                    </Suspense>
+                  )}
                   <LiveChatInput
                     episode_id={data?.episodes_by_pk?.id}
                     isTimerLoading={isTimeLoading}
@@ -63,14 +68,11 @@ export const Live = () => {
                   />
                 </>
               ) : (
-                <>
-                  <Suspense
-                    fallback={<Loader className="m-auto" variant="dots" />}
-                  >
-                    {/* <EpisodeComments episode_id={data?.episodes_by_pk?.id} /> */}
-                  </Suspense>
-                  {/* <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} /> */}
-                </>
+                <Suspense
+                  fallback={<Loader className="m-auto" variant="dots" />}
+                >
+                  {/* <EpisodeComments episode_id={data?.episodes_by_pk?.id} /> */}
+                </Suspense>
               )}
             </div>
           </main>
