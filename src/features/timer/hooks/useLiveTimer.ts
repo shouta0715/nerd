@@ -7,6 +7,7 @@ import {
   LiveTimerProps,
   Time,
 } from "src/features/timer/types";
+import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 import { getInitialTime } from "src/features/timer/utils/getInitialTime";
 import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
@@ -79,6 +80,7 @@ export const useLiveTimer = ({
   const [isTimeLoading, setIsTimeLoading] = useState<boolean>(
     !start_time || !end_time
   );
+  const isAlreadyFinished = useRef<null | boolean>(null);
 
   useEffect(() => {
     if (!start_time || !end_time) return;
@@ -86,6 +88,10 @@ export const useLiveTimer = ({
     setTime(getInitialTime(start_time));
     setIsTimeLoading(false);
     setMode(getIsStatus({ start_time, end_time }));
+
+    if (isAlreadyFinished.current === null) {
+      isAlreadyFinished.current = getIsAlreadyFinished(end_time);
+    }
   }, [end_time, start_time]);
 
   useEffect(() => {
@@ -133,5 +139,6 @@ export const useLiveTimer = ({
     },
     isTimeLoading,
     isFinished: mode === "finish",
+    isAlreadyFinished: isAlreadyFinished.current,
   };
 };

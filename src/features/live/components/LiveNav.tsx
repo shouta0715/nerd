@@ -57,7 +57,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
                 setIsChat(false);
               }}
             >
-              スレッド
+              コメント
             </Text>
           </ul>
         </div>

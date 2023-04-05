@@ -42,6 +42,7 @@ class GraphQLRequest extends GraphQLClient {
         this.retry < 1
       ) {
         this.retry += 1;
+        console.log("retry", this.retry);
         const data = await this.refreshToken();
         if (data.message === "ok") {
           this.setHeader("Authorization", `Bearer ${data.idToken}`);

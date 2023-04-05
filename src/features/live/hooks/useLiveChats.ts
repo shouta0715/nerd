@@ -51,22 +51,13 @@ export const useLiveChats = ({
     useState<PageParam>(InitialPageParams);
 
   const chats = useMemo(() => {
-    const NumberTime = timeToSecond(
-      mode === "up" ? time : { hours: 0, minutes: 0, seconds: 0 }
-    );
     if (!data?.pages) return [];
 
     if (mode === "down")
       return [...data.pages[0].chats_by_episode_id].reverse();
 
-    const flatData = data.pages.map((page) => page.chats_by_episode_id).flat();
-
-    const resultData = flatData.filter(
-      (chat) => chat.comment_time <= NumberTime
-    );
-
-    return resultData;
-  }, [data?.pages, mode, time]);
+    return data.pages.flatMap((page) => page.chats_by_episode_id);
+  }, [data?.pages, mode]);
 
   const handleRefetch = async () => {
     if (mode === "up") {

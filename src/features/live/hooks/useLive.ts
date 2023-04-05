@@ -9,7 +9,7 @@ export const useLive = () => {
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
   const [isChat, setIsChat] = useState(true);
 
-  const { mode, time, isTimeLoading } = useLiveTimer({
+  const { mode, time, isTimeLoading, isAlreadyFinished } = useLiveTimer({
     start_time: data?.episodes_by_pk?.start_time,
     end_time: data?.episodes_by_pk?.end_time,
   });
@@ -23,5 +23,6 @@ export const useLive = () => {
     mode,
     time,
     isTimeLoading,
+    isAlreadyFinished,
   };
 };

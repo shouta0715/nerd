@@ -20,6 +20,7 @@ export type LiveTimer = {
   time: Time;
   isTimeLoading: boolean;
   isFinished: boolean;
+  isAlreadyFinished: boolean | null;
 };
 
 export type CountDownProps = {

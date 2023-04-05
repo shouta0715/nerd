@@ -2,16 +2,27 @@ import React, { Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Modal } from "src/components/Elements/Modal";
+import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
+import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/FinishLive";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveChats } from "src/features/live/components/LiveChats";
+import { LiveComment } from "src/features/live/components/LiveComment";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 
 export const Live = () => {
-  const { data, isLoading, isChat, setIsChat, time, mode, isTimeLoading } =
-    useLive();
+  const {
+    data,
+    isLoading,
+    isChat,
+    setIsChat,
+    time,
+    mode,
+    isTimeLoading,
+    isAlreadyFinished,
+  } = useLive();
 
   if (isLoading || isTimeLoading) {
     return <EpisodeSkelton />;
@@ -49,7 +60,7 @@ export const Live = () => {
                   <Suspense
                     fallback={<Loader className="m-auto" variant="dots" />}
                   >
-                    {mode === "finish" ? (
+                    {isAlreadyFinished ? (
                       <FinishLive episode={data?.episodes_by_pk} />
                     ) : (
                       <LiveChats
@@ -70,7 +81,18 @@ export const Live = () => {
               ) : (
                 <Suspense
                   fallback={<Loader className="m-auto" variant="dots" />}
-                />
+                >
+                  {mode === "finish" ? (
+                    <>
+                      <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                      <EpisodeCommentInput
+                        episode_id={data?.episodes_by_pk?.id}
+                      />
+                    </>
+                  ) : (
+                    <LiveComment />
+                  )}
+                </Suspense>
               )}
             </div>
           </main>

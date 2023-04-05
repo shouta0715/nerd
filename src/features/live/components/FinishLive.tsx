@@ -1,5 +1,8 @@
-import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
-import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
+import {
+  ChevronDoubleRightIcon,
+  Square3Stack3DIcon,
+} from "@heroicons/react/24/outline";
+
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";

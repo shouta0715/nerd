@@ -53,7 +53,7 @@ export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
         {episode?.next_episode_id && (
           <ButtonLink
             className="mb-2 mr-auto flex h-full w-max items-center space-x-2 border-none bg-indigo-500  p-2 text-xs font-bold text-white shadow-none"
-            href={`${data?.episodes_by_pk?.id}`}
+            href={`/episodes/${data?.episodes_by_pk?.id}`}
             leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
             size="xs"
           >
