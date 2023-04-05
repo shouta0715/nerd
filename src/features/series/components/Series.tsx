@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
 import { Text } from "src/components/Elements/Text";
 import { useQuerySeries } from "src/features/series/api/useQuerySeries";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
@@ -9,10 +10,20 @@ import { SeriesItem } from "src/features/series/components/SeriesItem";
 export const Series: FC = () => {
   const router = useRouter();
   const { slug, series_title } = router.query;
-  const { data } = useQuerySeries({ slug: slug ?? null });
+  const { data, isLoading } = useQuerySeries({ slug: slug ?? null });
   const firstHasEpisodeIndex = data?.works?.findIndex(
     (episode) => !episode.has_episodes
   );
+
+  if (isLoading) {
+    return (
+      <div className="space-y-2 p-2">
+        <p className="mb-1 font-hiragino-sans font-semibold">シリーズ一覧</p>
+        <p className="mx-auto h-2 w-1/2 animate-pulse bg-slate-200" />
+        <WorkSkelton is_short />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-3 py-4 md:px-6">
