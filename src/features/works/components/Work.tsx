@@ -30,7 +30,7 @@ export const Work: FC = () => {
   return (
     <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-6 py-4">
       <Text
-        className="mb-4 grid place-content-center text-xl font-bold"
+        className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
         component="h1"
         ff="Hiragino Sans"
       >

@@ -6,8 +6,8 @@ type Props = {
 };
 
 export const ListTitle: FC<Props> = ({ title }) => (
-  <h2 className="mb-3 items-center ">
-    <Text className="text-base font-bold  md:text-2xl" component="span">
+  <h2 className="mb-4 items-center ">
+    <Text className="text-lg font-bold  md:text-xl" component="span">
       {title}
     </Text>
   </h2>

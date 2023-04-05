@@ -6,7 +6,7 @@ import GoogleIcon from "public/icons/GoogleIcon.svg";
 import TwitterIcon from "public/icons/TwitterIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
-import { useGoogleSignIn } from "src/hooks/auth/useGoogleSignIn";
+import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const ModalContent: FC = () => {

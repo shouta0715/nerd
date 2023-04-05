@@ -1,5 +1,4 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { AutoCompleteData } from "src/features/episodes/types";
@@ -22,12 +21,6 @@ export const ListHeader: FC<Props> = ({ autoCompleteData }) => {
           <div className="flex-1">
             <Autocomplete autoCompleteData={autoCompleteData} />
           </div>
-          <Link
-            className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-bold text-transparent"
-            href="/"
-          >
-            Nerd
-          </Link>
         </div>
       </div>
     </header>

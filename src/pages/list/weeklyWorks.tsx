@@ -28,7 +28,7 @@ const WeeklyWorks: NextPage<Props> = ({ data, autoCompleteData }) => (
     <section className="min-h-screen animate-fadeUp bg-gray-50">
       <ListHeader autoCompleteData={autoCompleteData} />
       <div className="container mx-auto">
-        <div className="p-6">
+        <div className="px-6 py-4">
           <ListTitle title="今週のアニメ" />
           <WeeklyWorksList data={data} />
         </div>

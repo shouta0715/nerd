@@ -42,7 +42,7 @@ export const Live = () => {
               setIsChat={setIsChat}
             />
           </div>
-          <main className="flex flex-1  flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
+          <main className="flex flex-1 flex-col bg-gray-50  lg:min-h-screen lg:w-[36rem] lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
                 <>

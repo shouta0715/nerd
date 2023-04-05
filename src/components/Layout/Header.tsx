@@ -23,7 +23,10 @@ export const Header: FC = () => {
       <div className="container mx-auto px-6 md:px-10">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
-            <Link className="my-2 flex-1 text-4xl font-bold" href="/">
+            <Link
+              className="my-2 flex-1 font-hiragino-sans text-3xl font-bold"
+              href="/"
+            >
               <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
                 Nerd
               </span>

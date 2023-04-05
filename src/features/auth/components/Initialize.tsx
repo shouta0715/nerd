@@ -3,13 +3,10 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { FC, useEffect } from "react";
-import { auth } from "../../../libs/firebase";
-
-import { useUserState } from "../../../store/user/userState";
+import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
 import { useGlobalState } from "src/store/global/globalStore";
-
-const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
+import { useUserState } from "src/store/user/userState";
 
 export const Initialize: FC = () => {
   const setUser = useUserState((state) => state.setUser);
@@ -22,26 +19,22 @@ export const Initialize: FC = () => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
         const idTokenResult = await user.getIdTokenResult(true);
-        const isHasClaims = idTokenResult.claims[TOKEN_KEY];
-        if (idTokenResult.token && isHasClaims) {
-          client.setHeader("Authorization", `Bearer ${idTokenResult.token}`);
-        } else {
-          const res = await fetch("/api/auth/setCustomClaims", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              idToken: idTokenResult.token,
-              refreshToken: user.refreshToken,
-            }),
-          });
+        const res = await fetch("/api/auth/setCustomClaims", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idToken: idTokenResult.token,
+            refreshToken: user.refreshToken,
+          }),
+        });
 
-          if (res.status === 200 && res.ok) {
-            const token = await auth.currentUser?.getIdToken(true);
-            client.setHeader("Authorization", `Bearer ${token}`);
-          }
+        if (res.status === 200 && res.ok) {
+          const token = await auth.currentUser?.getIdToken(true);
+          client.setHeader("Authorization", `Bearer ${token}`);
         }
+
         setUser({
           id: user.uid,
           anonymous: user.isAnonymous,
@@ -67,7 +60,7 @@ export const Initialize: FC = () => {
     return () => {
       unSubUser();
     };
-  }, [setUser, setAuthLoading, queryClient]);
+  }, [queryClient, setAuthLoading, setUser]);
 
   return null;
 };

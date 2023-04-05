@@ -21,7 +21,7 @@ export const Episode: FC = () => {
 
   return (
     <>
-      <div className="flex min-h-screen animate-fadeUp flex-col ">
+      <div className="flex min-h-screen animate-fadeUp flex-col  ">
         <div className="container contents lg:mx-auto lg:flex">
           <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
             <EpisodeHeader
@@ -37,7 +37,7 @@ export const Episode: FC = () => {
               stop={interval.stop}
             />
           </div>
-          <main className="flex flex-1 flex-col lg:w-[36rem] lg:flex-none lg:pb-16">
+          <main className="flex flex-1 flex-col  bg-gray-50 lg:min-h-screen lg:w-[36rem] lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
                 <>
