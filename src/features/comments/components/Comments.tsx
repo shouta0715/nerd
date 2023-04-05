@@ -23,7 +23,7 @@ export const Comments = forwardRef<any, Props>(({ data, hasNextPage }, ref) => {
   }
 
   return (
-    <ul className="relative mx-auto w-full flex-1 space-y-6 px-4 pb-1 pt-4  md:max-w-xl">
+    <ul className="relative mx-auto w-full flex-1 space-y-6 px-2 pb-1 pt-4 md:max-w-xl  md:px-4">
       {data?.pages.map((page) =>
         page.comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />

@@ -20,7 +20,7 @@ export const Work: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto flex flex-col  px-6 py-4">
+      <div className="container mx-auto flex flex-col px-3 py-4 md:px-6">
         <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
         <WorkSkelton />
       </div>
@@ -28,7 +28,7 @@ export const Work: FC = () => {
   }
 
   return (
-    <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-6 py-4">
+    <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-3 py-4 md:px-6">
       <Text
         className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
         component="h1"
