@@ -14,12 +14,12 @@ export const Modal: FC = () => {
   return (
     <Transition
       className="fixed inset-0 z-50   flex place-items-center bg-black/20"
-      enter="transition-opacity duration-100"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="transition-opacity duration-300"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
+      enter="transition ease-out duration-100"
+      enterFrom="transform opacity-0 scale-95"
+      enterTo="transform opacity-100 scale-100"
+      leave="transition ease-in duration-75"
+      leaveFrom="transform opacity-100 scale-100"
+      leaveTo="transform opacity-0 scale-95"
       onClick={(e) => {
         if (e.target === e.currentTarget) changeIsOpenModal(false);
       }}

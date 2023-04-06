@@ -10,12 +10,12 @@ interface ItemProps {
 }
 export const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
   ({ title, number, episodeTitle }, ref) => (
-    <div ref={ref} className="cursor-pointer p-2 hover:bg-slate-100">
-      <Text className="mb-1 text-sm md:text-base" ff="Hiragino Sans">
+    <div ref={ref} className="cursor-pointer rounded p-2 hover:bg-slate-100">
+      <Text className="mb-1 text-sm font-bold md:text-base" ff="Hiragino Sans">
         {title}
       </Text>
       {episodeTitle && (
-        <div className="flex items-center">
+        <div className="flex ">
           <Text className="mr-1 text-dimmed" ff="Hiragino Sans" size="xs">
             {number}.
           </Text>

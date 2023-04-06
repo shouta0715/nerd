@@ -6,7 +6,13 @@ import { gql, GraphQLClient } from "graphql-request";
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "nookies";
 
-export const CREATE_USER = gql`
+const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
+const client = new GraphQLClient(url, {
+  headers: {
+    "x-hasura-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET as string,
+  },
+});
+const CREATE_USER = gql`
   mutation createUser(
     $id: String!
     $anonymous: Boolean!
@@ -22,11 +28,38 @@ export const CREATE_USER = gql`
         user_name: $user_name
         ip: $ip
       }
+      on_conflict: {
+        constraint: users_pkey
+        update_columns: [anonymous, photo_url, updated_at, user_name]
+      }
     ) {
       id
+      photo_url
     }
   }
 `;
+
+const GET_USER = gql`
+  query getUser($id: String!) {
+    users_by_pk(id: $id) {
+      id
+      photo_url
+      user_name
+    }
+  }
+`;
+
+const createCustomClaims = (uid: any, isAnonymous: boolean) => {
+  const customClaims = {
+    "https://hasura.io/jwt/claims": {
+      "x-hasura-default-role": isAnonymous ? "anonymous" : "user",
+      "x-hasura-allowed-roles": ["user", "anonymous"],
+      "x-hasura-user-id": uid,
+    },
+  };
+
+  return customClaims;
+};
 
 const firebaseConfig = {
   credential: cert({
@@ -46,53 +79,46 @@ const options = {
 
 const _ = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { idToken, refreshToken } = req.body;
+  const { idToken, refreshToken, isInitialLogin } = req.body;
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-  if (!idToken) {
+  if (!idToken || !refreshToken) {
     return res.status(400).send("No idToken");
   }
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const idTokenResult = await getAuth().verifyIdToken(idToken);
   const isHasClaims = idTokenResult[TOKEN_KEY];
-
-  if (isHasClaims) {
-    setCookie({ res }, "refreshToken", refreshToken, options);
-
-    return res.status(200).send("ok");
-  }
-
   const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
 
-  const customClaims = {
-    "https://hasura.io/jwt/claims": {
-      "x-hasura-default-role": "user",
-      "x-hasura-allowed-roles": ["user", "anonymous"],
-      "x-hasura-role": isAnonymous ? "anonymous" : "user",
-      "x-hasura-user-id": idTokenResult.uid,
-    },
-  };
+  if (isHasClaims && !isInitialLogin) {
+    const data = await client.request(GET_USER, {
+      id: idTokenResult.uid,
+    });
 
-  const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
-  const client = new GraphQLClient(url, {
-    headers: {
-      "x-hasura-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET as string,
-    },
-  });
+    setCookie({ res }, "refreshToken", refreshToken, options);
+
+    return res.status(200).send({ message: "ok", data });
+  }
+
+  const customClaims = createCustomClaims(idTokenResult.uid, isAnonymous);
 
   try {
     await getAuth().setCustomUserClaims(idTokenResult.uid, customClaims);
-    await client.request(CREATE_USER, {
+    const user = isAnonymous
+      ? null
+      : (await getAuth().getUser(idTokenResult.uid)).providerData[0];
+
+    const data = await client.request(CREATE_USER, {
       id: idTokenResult.uid,
       anonymous: isAnonymous,
-      photo_url: idTokenResult.picture ?? null,
-      user_name: idTokenResult.name ?? "匿名",
+      photo_url: user ? user.photoURL ?? null : null,
+      user_name: user ? user.displayName ?? "匿名" : "匿名",
       ip: ip ?? null,
     });
 
     setCookie({ res }, "refreshToken", refreshToken, options);
 
-    return res.status(200).json({ message: "ok" });
+    return res.status(200).json({ message: "ok", data });
   } catch (err: any) {
     return res.status(500).json({ message: err.message });
   }
