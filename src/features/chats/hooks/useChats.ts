@@ -6,7 +6,7 @@ export const useChats = () => {
   const { ref, entry } = useInterSection({
     root: null,
     rootMargin: "100px",
-    threshold: 1,
+    threshold: 0,
   });
 
   return {

@@ -14,8 +14,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { refreshToken } = req.cookies;
 
   if (!refreshToken) {
-    console.log("No refreshToken");
-
     return res.status(400).send("No refreshToken");
   }
 
@@ -33,8 +31,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const { id_token: idToken } = JSON.parse(data);
     setCookie({ res }, "refreshToken", refreshToken, options);
-
-    console.log("refreshToken", refreshToken);
 
     return res.status(200).json({ message: "ok", idToken });
   } catch (err: any) {
