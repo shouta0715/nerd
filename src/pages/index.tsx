@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
         </Text>
       </section>
-      <section className="bg-gray-50 px-3 pb-6 pt-4 md:px-6">
+      <section className="bg-indigo-50 px-3 pb-6 pt-4 md:px-6">
         <TopTitle title="今期のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
           {seasonWorks.works?.map((work) => (
