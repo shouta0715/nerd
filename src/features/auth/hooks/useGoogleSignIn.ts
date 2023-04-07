@@ -1,9 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../../../libs/firebase";
+import { useGlobalState } from "src/store/global/globalStore";
+import { useUserState } from "src/store/user/userState";
 
 export const useGoogleSignIn = () => {
+  const [authLoading, setAuthLoading] = useGlobalState((state) => [
+    state.authLoading,
+    state.setAuthLoading,
+  ]);
+  const user = useUserState((state) => state.user);
   const signInGoogle = async () => {
+    setAuthLoading(true);
     const provider = new GoogleAuthProvider();
 
     try {
@@ -13,18 +21,21 @@ export const useGoogleSignIn = () => {
       await signInWithPopup(auth, provider);
     } catch (error: any) {
       if (error.code === "auth/popup-closed-by-user") {
-        console.log("Googleアカウントでのログインをキャンセルしました");
+        setAuthLoading(false);
+      }
+    } finally {
+      if (!user?.anonymous && authLoading) {
+        setAuthLoading(false);
       }
     }
   };
 
   const signOutGoogle = async () => {
     try {
+      setAuthLoading(true);
       await signOut(auth);
-
-      console.log("Googleアカウントとの連携を解除しました");
     } catch (error) {
-      console.log("Googleアカウントとの連携を解除できませんでした");
+      //
     }
   };
 

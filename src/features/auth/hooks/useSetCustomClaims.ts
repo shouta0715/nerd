@@ -9,9 +9,11 @@ import { useUserState } from "src/store/user/userState";
 export const useSetCustomClaims = () => {
   const setUser = useUserState((state) => state.setUser);
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
+
   const queryClient = useQueryClient();
 
   const setCustomClaims = async (user: User, isInitialLogin: boolean) => {
+    setAuthLoading(true);
     const idTokenResult = await user.getIdTokenResult(true);
 
     const res = await fetch("/api/auth/setCustomClaims", {
@@ -58,7 +60,6 @@ export const useSetCustomClaims = () => {
         queryClient.invalidateQueries(["comments"]);
         queryClient.invalidateQueries(["replies"]);
       }
-
       setAuthLoading(false);
 
       return;
