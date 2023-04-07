@@ -4,4 +4,5 @@ export type User = {
   photo_url: string | null;
   anonymous: boolean;
   provider_user_name: string | null;
+  isDefaultPhoto: boolean;
 };

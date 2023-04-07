@@ -1,6 +1,5 @@
 import {
   ChevronRightIcon,
-  Cog8ToothIcon,
   RocketLaunchIcon,
   RssIcon,
   ViewfinderCircleIcon,
@@ -32,19 +31,13 @@ const mockNavigation = [
   },
   {
     name: "作品要望",
-    href: "/",
+    href: "/request",
     icon: ViewfinderCircleIcon,
     color: "stroke-pink-500",
   },
   {
-    name: "設定",
-    href: "/",
-    icon: Cog8ToothIcon,
-    color: "stroke-gray-500",
-  },
-  {
     name: "使い方",
-    href: "/",
+    href: "/usage",
     icon: BeginnerIcon,
     color: "fill-green-700",
   },

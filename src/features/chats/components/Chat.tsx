@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Text } from "src/components/Elements/Text";
@@ -20,7 +21,17 @@ export const Chat: FC<Props> = ({ chat, animate }) => {
       }`}
     >
       <figure className={`m-0 ${user?.id === chat.user?.id ? "ml-2" : "mr-2"}`}>
-        <Avatar user_id={chat.user?.id} user_name={chat.commenter_name} />
+        {user?.isDefaultPhoto && user?.id === chat.user?.id ? (
+          <Image
+            alt="avatar"
+            className="rounded-full object-contain"
+            height={38}
+            src={user?.photo_url ?? ""}
+            width={38}
+          />
+        ) : (
+          <Avatar user_id={chat.user?.id} user_name={chat.commenter_name} />
+        )}
       </figure>
       <div
         className={`max-w-[calc(100%-92px)] flex-1 ${

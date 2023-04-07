@@ -18,6 +18,10 @@ const DynamicAccountMenu = dynamic(() =>
   import("src/components/Elements/AccountMenu").then((mod) => mod.AccountMenu)
 );
 
+const DynamicImage = dynamic(() =>
+  import("next/image").then((mod) => mod.default)
+);
+
 export const Header: FC = () => {
   const user = useUserState((state) => state.user);
   const authLoading = useGlobalState((state) => state.authLoading);
@@ -42,7 +46,7 @@ export const Header: FC = () => {
   }, []);
 
   return (
-    <header className="w-full bg-white md:border md:border-slate-200 md:pb-2">
+    <header className="w-full border-b border-slate-200">
       <div className="container mx-auto px-6 md:px-10">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
@@ -60,14 +64,21 @@ export const Header: FC = () => {
                   {authLoading ? (
                     <Loader className="animate-fadeIn" />
                   ) : (
-                    <button
-                      className="animate-fadeIn"
-                      onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                    >
-                      <DynamicAvatar
-                        user_id={user.id}
-                        user_name={user.user_name}
-                      />
+                    <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+                      {user.isDefaultPhoto ? (
+                        <DynamicImage
+                          alt="avatar"
+                          className="rounded-full object-contain"
+                          height={38}
+                          src={user?.photo_url ?? ""}
+                          width={38}
+                        />
+                      ) : (
+                        <DynamicAvatar
+                          user_id={user.id}
+                          user_name={user.user_name}
+                        />
+                      )}
                     </button>
                   )}
                   <DynamicAccountMenu

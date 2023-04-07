@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import Image from "next/image";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
@@ -9,6 +10,7 @@ import { useReply } from "src/features/comments/hooks/useReply";
 import { Reply as TypeReply } from "src/features/comments/types";
 import { Like } from "src/features/likes/components/Like";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   reply: TypeReply;
@@ -17,15 +19,26 @@ type Props = {
 
 export const Reply: FC<Props> = ({ reply, original_id }) => {
   const { handleClick } = useReply();
+  const user = useUserState((state) => state.user);
 
   return (
     <li className="flex w-full">
       <figure className="m-0 mr-2">
-        <Avatar
-          size="sm"
-          user_id={reply.user?.id}
-          user_name={reply.commenter_name}
-        />
+        {user?.isDefaultPhoto && user?.id === reply.user?.id ? (
+          <Image
+            alt="avatar"
+            className="rounded-full object-contain"
+            height={32}
+            src={user?.photo_url ?? ""}
+            width={32}
+          />
+        ) : (
+          <Avatar
+            size="sm"
+            user_id={reply.user?.id}
+            user_name={reply.commenter_name}
+          />
+        )}
       </figure>
       <div className="max-w-[calc(100%-46px)] flex-1">
         <div

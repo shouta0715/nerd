@@ -26,7 +26,7 @@ export const Layout: FC<Props> = ({ children }) => (
     <div className="flex min-h-screen max-w-full flex-1 flex-col">
       <Header />
       <div className="flex flex-1 flex-col md:flex-row">
-        <aside className="top-0 max-h-screen overflow-y-auto  border-b border-slate-200 bg-white pb-2 md:sticky md:w-1/3 md:max-w-sm md:border-b-0 md:border-r md:py-2 ">
+        <aside className="top-0 max-h-screen overflow-y-auto  border-b border-slate-200 bg-white py-2 md:sticky md:w-1/3 md:max-w-sm md:border-b-0 md:border-r">
           <div className="container mx-auto px-4 md:space-y-4">
             <SearchWorksForm />
             <Navigation />

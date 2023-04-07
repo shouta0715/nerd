@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import React, { FC } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -24,7 +25,7 @@ export const ChatInput: FC<Props> = ({
   content,
   setContent,
 }) => {
-  const user = useUserState((state) => state.user);
+  const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const { authLoading, setIsOpenModal } = useGlobalState((state) => ({
     authLoading: state.authLoading,
     setIsOpenModal: state.setIsOpenModal,
@@ -41,20 +42,31 @@ export const ChatInput: FC<Props> = ({
         className="container mx-auto flex items-center justify-center space-x-2 opacity-100"
         onSubmit={onSubmitHandler}
       >
-        <figure
+        <button
           onClick={() => {
             if (user?.anonymous) setIsOpenModal(true);
+
+            if (!user?.anonymous && user)
+              setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
           }}
         >
           {authLoading ? (
             <Loader />
+          ) : user?.isDefaultPhoto ? (
+            <Image
+              alt="avatar"
+              className="rounded-full object-contain"
+              height={38}
+              src={user?.photo_url ?? ""}
+              width={38}
+            />
           ) : (
             <Avatar
               user_id={user?.id ?? ""}
               user_name={user?.user_name ?? ""}
             />
           )}
-        </figure>
+        </button>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
           <ReactTextareaAutosize
             className="w-full resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"

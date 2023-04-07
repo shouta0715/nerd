@@ -1,5 +1,6 @@
 import { Transition } from "@headlessui/react";
 import {
+  ArrowPathIcon,
   ArrowRightOnRectangleIcon,
   Cog8ToothIcon,
 } from "@heroicons/react/24/outline";
@@ -20,7 +21,7 @@ export const AccountMenu: FC<Props> = ({
   setIsUserMenuOpen,
 }) => {
   const { signOutGoogle } = useGoogleSignIn();
-  const user = useUserState((state) => state.user);
+  const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
 
   return (
     <Transition
@@ -63,9 +64,24 @@ export const AccountMenu: FC<Props> = ({
         </div>
       </div>
       <div className="border-t border-slate-200">
+        <button
+          className="flex w-full items-center space-x-2 px-2 py-3 text-sm hover:bg-gray-100"
+          onClick={() => {
+            if (user) {
+              setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
+            }
+          }}
+        >
+          <ArrowPathIcon className="ml-1 h-5 w-5 text-dimmed" />
+          <Text className="text-xs" component="span" ff="Hiragino Sans">
+            {user?.isDefaultPhoto
+              ? "デフォルトの画像に変更"
+              : "自分の画像に変更"}
+          </Text>
+        </button>
         <Link
           className="flex items-center space-x-2 px-2 py-3 text-sm hover:bg-gray-50"
-          href="/"
+          href={`/${user?.id}/setting`}
         >
           <Cog8ToothIcon className="ml-1 h-5 w-5 text-dimmed" />
           <Text className="text-xs" component="span" ff="Hiragino Sans">

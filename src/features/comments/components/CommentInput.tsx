@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import React, { FC, useEffect, useRef } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -17,7 +18,7 @@ type Props = {
 };
 
 export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
-  const user = useUserState((state) => state.user);
+  const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const { authLoading, setIsOpenModal } = useGlobalState((state) => ({
     authLoading: state.authLoading,
     setIsOpenModal: state.setIsOpenModal,
@@ -43,20 +44,31 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         className="container mx-auto flex items-center justify-center space-x-2 opacity-100"
         onSubmit={onSubmitHandler}
       >
-        <figure
+        <button
           onClick={() => {
             if (user?.anonymous) setIsOpenModal(true);
+
+            if (!user?.anonymous && user)
+              setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
           }}
         >
           {authLoading ? (
             <Loader />
+          ) : user?.isDefaultPhoto ? (
+            <Image
+              alt="avatar"
+              className="rounded-full object-contain"
+              height={38}
+              src={user?.photo_url ?? ""}
+              width={38}
+            />
           ) : (
             <Avatar
               user_id={user?.id ?? ""}
               user_name={user?.user_name ?? ""}
             />
           )}
-        </figure>
+        </button>
         <div className="relative mr-2  flex max-w-sm flex-1 items-center">
           <ReactTextareaAutosize
             ref={inputRef}
