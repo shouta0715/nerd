@@ -46,7 +46,7 @@ const mockNavigation = [
 const navList = mockNavigation.map((item) => (
   <Link
     key={item.name}
-    className="group relative flex items-center  justify-center rounded-md  px-2 py-1 font-hiragino-sans text-xs font-medium hover:bg-gray-100 md:py-2 md:text-sm"
+    className="group relative flex items-center  justify-center rounded-md  px-2 py-1.5 font-hiragino-sans text-xs font-medium hover:bg-gray-100 md:py-2 md:text-sm"
     href={`${item.href}`}
   >
     <div className="absolute bottom-0 left-0 h-[1px] w-0" />
