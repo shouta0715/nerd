@@ -4,7 +4,7 @@ import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsEpisode = (episode_id: string) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, fetchNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQueryChatsEpisode({
       episode_id,
       enabled: !!episode_id,
@@ -39,5 +39,5 @@ export const useChatsEpisode = (episode_id: string) => {
     }
   }, [fetchNextPage, isFetchingNextPage, time]);
 
-  return { data: chats, bottomRef, isBottom, entry, time };
+  return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };

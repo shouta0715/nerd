@@ -4,12 +4,11 @@ import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsWork = (work_id: number) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQueryChatsWork(
-    {
+  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteQueryChatsWork({
       work_id,
       enabled: !!work_id,
-    }
-  );
+    });
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -40,5 +39,5 @@ export const useChatsWork = (work_id: number) => {
     }
   }, [fetchNextPage, isFetchingNextPage, time]);
 
-  return { data: chats, bottomRef, isBottom, entry, time };
+  return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };

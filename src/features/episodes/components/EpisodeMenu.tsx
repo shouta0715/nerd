@@ -191,7 +191,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                       : time.hours === 0 &&
                         time.minutes === 0 &&
                         time.seconds === 0
-                      ? "bg-indigo-500"
+                      ? " invisible bg-indigo-500"
                       : "bg-blue-500"
                   }`}
                   onClick={() => {

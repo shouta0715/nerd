@@ -7,7 +7,8 @@ type Props = {
 };
 
 export const WorkChats: FC<Props> = memo(({ work_id }) => {
-  const { data, bottomRef, isBottom, entry, time } = useChatsWork(work_id);
+  const { data, bottomRef, isBottom, entry, time, isLoading } =
+    useChatsWork(work_id);
 
   return (
     <Chats
@@ -15,6 +16,7 @@ export const WorkChats: FC<Props> = memo(({ work_id }) => {
       chats={data}
       entry={entry}
       isBottom={isBottom}
+      isLoading={isLoading}
       time={time}
     />
   );
