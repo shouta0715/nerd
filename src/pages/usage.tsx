@@ -67,10 +67,10 @@ const Usage: NextPage = () => {
                   4
                 </div>
                 <p className="flex-1 self-center">
-                  動画が終了したら、コメントを選択タブを選択し、アニメ全体の感想を投稿できます。
+                  動画が終了したら、コメントタブを選択し、アニメ全体の感想を投稿できます。
                   <br />
                   <span className="text-sm underline decoration-pink-500 decoration-dashed underline-offset-2 before:inline-block before:content-['※']">
-                    テレビ放送が終了しているアニメの感想は、いつでも投稿できます。
+                    テレビ放送が終了しているアニメのコメントは、いつでも投稿できます。
                   </span>
                 </p>
               </li>
