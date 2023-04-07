@@ -27,12 +27,12 @@ export const Modal: FC = () => {
     >
       <Transition.Child
         className="mx-auto w-4/5 max-w-md rounded-md bg-white"
-        enter="transition-all duration-200"
-        enterFrom="opacity-0 scale-0"
-        enterTo="opacity-100 scale-100"
-        leave="transition-all duration-150"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-0"
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
       >
         <ModalContent />
       </Transition.Child>
