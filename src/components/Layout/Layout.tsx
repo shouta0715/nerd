@@ -19,9 +19,10 @@ const DynamicSearchButton = dynamic(
 
 type Props = {
   children: ReactNode;
+  isShowSearchMenu?: boolean;
 };
 
-export const Layout: FC<Props> = ({ children }) => (
+export const Layout: FC<Props> = ({ children, isShowSearchMenu = true }) => (
   <div className="flex w-full">
     <div className="flex min-h-screen max-w-full flex-1 flex-col">
       <Header />
@@ -42,7 +43,7 @@ export const Layout: FC<Props> = ({ children }) => (
           <Footer />
         </div>
       </div>
-      <DynamicSearchButton />
+      <DynamicSearchButton isShowSearchMenu={isShowSearchMenu} />
     </div>
   </div>
 );

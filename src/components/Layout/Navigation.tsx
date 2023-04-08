@@ -44,7 +44,7 @@ const mockNavigation = [
   },
   {
     name: "よくある質問",
-    href: "/qa",
+    href: "/faq",
     icon: LightBulbIcon,
     color: "stroke-amber-500",
   },

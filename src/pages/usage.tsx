@@ -18,9 +18,9 @@ const Usage: NextPage = () => {
   return (
     <>
       <Layout>
-        <div className="flex-1 bg-gray-50 py-4">
+        <div className="container mx-auto flex-1 bg-gray-50 pb-8 pt-4">
           <section className="px-3 font-hiragino-sans md:px-6">
-            <h2 className="pb-4 pt-2 text-center font-hiragino-sans text-xl font-bold">
+            <h2 className="pb-4 text-center font-hiragino-sans text-xl font-bold">
               使い方
             </h2>
             <ol className="text-sm md:text-base">

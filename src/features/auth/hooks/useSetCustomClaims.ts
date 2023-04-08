@@ -32,6 +32,7 @@ export const useSetCustomClaims = () => {
 
       if (res.status === 200 && res.ok) {
         const localUserName = localStorage.getItem("user_name");
+
         const token = await auth.currentUser?.getIdToken(true);
 
         const resUser: ResData = await res.json().then((data) => data.data);
@@ -49,9 +50,10 @@ export const useSetCustomClaims = () => {
             ? resUser.insert_users_one?.photo_url ?? null
             : resUser.users_by_pk?.photo_url ?? null,
           user_name:
-            localUserName ?? isInitialLogin
+            localUserName ??
+            (isInitialLogin
               ? resUser.insert_users_one?.user_name ?? "匿名"
-              : resUser.users_by_pk?.user_name ?? "匿名",
+              : resUser.users_by_pk?.user_name ?? "匿名"),
           provider_user_name: user.displayName ?? null,
           isDefaultPhoto: false,
         });

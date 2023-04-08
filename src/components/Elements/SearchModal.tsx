@@ -19,7 +19,7 @@ export const SearchModal: FC<Props> = ({
   submitHandler,
 }) => (
   <Transition
-    className="fixed inset-0 z-50 flex   place-items-center bg-black/50 md:hidden"
+    className="fixed inset-0 z-50 flex place-items-center   bg-black/50 md:hidden"
     enter="transition-opacity duration-100"
     enterFrom="opacity-0"
     enterTo="opacity-100"
