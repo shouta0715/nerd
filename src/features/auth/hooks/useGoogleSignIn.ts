@@ -20,9 +20,7 @@ export const useGoogleSignIn = () => {
       }
       await signInWithPopup(auth, provider);
     } catch (error: any) {
-      if (error.code === "auth/popup-closed-by-user") {
-        setAuthLoading(false);
-      }
+      setAuthLoading(false);
     } finally {
       if (!user?.anonymous && authLoading) {
         setAuthLoading(false);
@@ -35,7 +33,7 @@ export const useGoogleSignIn = () => {
       setAuthLoading(true);
       await signOut(auth);
     } catch (error) {
-      //
+      setAuthLoading(false);
     }
   };
 

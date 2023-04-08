@@ -8,21 +8,6 @@
     scroll-behavior: smooth;
   }
 
-  li {
-    @apply m-0 list-none p-0;
-  }
-
-  ul {
-    @apply m-0 p-0;
-  }
-
-  p {
-    @apply m-0 p-0;
-  }
-
-  a {
-    @apply bg-transparent text-inherit no-underline;
-  }
   .btn-primary {
     @apply border-indigo-500 bg-indigo-500 font-bold text-white hover:bg-indigo-600;
   }

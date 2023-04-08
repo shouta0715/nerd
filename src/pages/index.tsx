@@ -25,7 +25,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
   <Layout>
-    <div className="container mx-auto space-y-1 bg-white">
+    <div className=" space-y-1 bg-white">
       <section className="bg-gray-50 px-3 pb-6 pt-4 md:px-6">
         <TopTitle title="今日放送のエピソード" />
         <TodayEpisodeList data={todayEpisodes} />
@@ -41,9 +41,9 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
         </Text>
       </section>
-      <section className="bg-indigo-50 px-3 pb-6 pt-4 md:px-6">
+      <section className=" bg-indigo-50 px-3 pb-6 pt-4 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
         <TopTitle title="今期のアニメ" />
-        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {seasonWorks.works?.map((work) => (
             <WorkItem
               key={`work-${work.id}`}
@@ -66,7 +66,7 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
       </section>
       <section className="bg-gray-50 px-3 pb-6 pt-4 md:px-6">
         <TopTitle title="今週のアニメ" />
-        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {weeklyWorks?.weekly_works?.map((work) => (
             <WorkItem key={`work-${work.id}`} work={work} />
           ))}

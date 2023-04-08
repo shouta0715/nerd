@@ -1,5 +1,6 @@
 import {
   ChevronRightIcon,
+  LightBulbIcon,
   RocketLaunchIcon,
   RssIcon,
   ViewfinderCircleIcon,
@@ -39,7 +40,13 @@ const mockNavigation = [
     name: "使い方",
     href: "/usage",
     icon: BeginnerIcon,
-    color: "fill-green-700",
+    color: "fill-teal-600",
+  },
+  {
+    name: "よくある質問",
+    href: "/faq",
+    icon: LightBulbIcon,
+    color: "stroke-amber-500",
   },
 ];
 
@@ -53,7 +60,7 @@ const navList = mockNavigation.map((item) => (
     <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
     <div className="flex h-full flex-1 items-center">
       <span className="inline-block flex-1">{item.name}</span>
-      <ChevronRightIcon className="h-4 w-4 stroke-slate-300 group-hover:stroke-black md:h-6 md:w-6" />
+      <ChevronRightIcon className=" h-4 w-4 stroke-slate-300 group-hover:stroke-black md:h-6 md:w-6" />
     </div>
   </Link>
 ));

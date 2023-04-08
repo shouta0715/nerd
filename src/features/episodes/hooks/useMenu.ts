@@ -21,6 +21,7 @@ export const useMenu = () => {
       timeToPadTime: state.timeToPadTime,
     }));
   const uuid = useId();
+
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
   const [inputTime, setInputTime] = useState<string | null>(null);
 

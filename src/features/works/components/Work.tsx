@@ -28,7 +28,7 @@ export const Work: FC = () => {
   }
 
   return (
-    <div className="container mx-auto flex h-full animate-fadeUp flex-col  px-3 py-4 md:px-6">
+    <div className=" flex h-full animate-fadeUp flex-col  px-3 py-4 md:px-6">
       <Text
         className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
         component="h1"
@@ -40,7 +40,7 @@ export const Work: FC = () => {
       {isPlaceholderData ? (
         <WorkSkelton />
       ) : (
-        <ul className="grid grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {data?.works_by_pk?.episodes.map((episode) => (
             <WorkEpisodeItem key={episode.id} episode={episode} />
           ))}
@@ -56,7 +56,7 @@ export const Work: FC = () => {
           >
             シリーズ一覧
           </Text>
-          <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-[repeat(auto-fit,minmax(calc(50%-1rem),1fr))]">
+          <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {isPlaceholderData
               ? "Loading"
               : data?.works.map((series_work, index) => (

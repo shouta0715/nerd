@@ -54,6 +54,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           className
         )
       )}
+      disabled={loading}
       type={type}
       {...props}
     >
