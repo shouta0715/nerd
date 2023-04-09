@@ -96,6 +96,12 @@ export const ChatInput: FC<Props> = ({
             </div>
             <Button
               className="h-8 w-8 border-none bg-teal-50 p-0 active:translate-y-0"
+              disabled={
+                time === 0 ||
+                !user ||
+                content.length === 0 ||
+                content.length > 100
+              }
               radius="full"
               type="submit"
             >

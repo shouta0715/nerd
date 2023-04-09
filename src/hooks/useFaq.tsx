@@ -153,16 +153,7 @@ export const useFaq = () => {
     },
     {
       question: "今日放送のアニメの時間がずれている",
-      answer:
-        "画面をリロードすると直る場合があります。それでも直らない場合、放送時間が変更されている可能性があります。お問い合わせをお願いします。",
-      components: (
-        <Link
-          className="mt-2 inline-block text-blue-500 underline"
-          href="/contact"
-        >
-          お問い合わせはこちら
-        </Link>
-      ),
+      answer: "画面をリロードすると直る場合があります。",
       key: "faq-8",
     },
   ];
