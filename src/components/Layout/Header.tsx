@@ -46,8 +46,8 @@ export const Header: FC = () => {
   }, []);
 
   return (
-    <header className="z-20 w-full border-slate-200 md:border-b">
-      <div className="container mx-auto px-6 md:px-10">
+    <header className="w-full md:border-b md:border-slate-200">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
             <Link

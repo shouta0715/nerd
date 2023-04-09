@@ -45,7 +45,7 @@ export const useFaq = () => {
             <p className="mr-2">現在の投稿名</p>
             <p className="flex-1">{user ? user.user_name : "匿名"}</p>
           </div>
-          <form className="mt-2 flex space-x-2" onSubmit={onSubmit}>
+          <form className="mt-2 flex max-w-md space-x-2" onSubmit={onSubmit}>
             <Input
               className="flex-1 bg-white py-1"
               maxLength={30}
@@ -78,7 +78,7 @@ export const useFaq = () => {
             左の検索フォームにタイトルを入力すると、そのタイトルのアニメを検索できます。
           </p>
           <button
-            className="mt-2 text-indigo-500 underline md:hidden"
+            className="mt-2 text-blue-500 underline md:hidden"
             onClick={() => setIsSearchOpen(true)}
           >
             こちらから検索できます。
@@ -129,7 +129,7 @@ export const useFaq = () => {
         "誤字脱字がないか確認してください。それでも見つからない場合、登録されていない可能性があります。リクエストフォームから作品の追加要望を送ってください。",
       components: (
         <Link
-          className="mt-2 inline-block text-indigo-500 underline"
+          className="mt-2 inline-block text-blue-500 underline"
           href="/request"
         >
           リクエストフォームはこちら
@@ -143,7 +143,7 @@ export const useFaq = () => {
         "リクエストフォームから作品の追加要望を送ってください。追加されるまでに時間がかかる場合があります。",
       components: (
         <Link
-          className="mt-2 inline-block text-indigo-500 underline"
+          className="mt-2 inline-block  text-blue-500 underline"
           href="/request"
         >
           リクエストフォームはこちら
@@ -157,7 +157,7 @@ export const useFaq = () => {
         "画面をリロードすると直る場合があります。それでも直らない場合、放送時間が変更されている可能性があります。お問い合わせをお願いします。",
       components: (
         <Link
-          className="mt-2 inline-block text-indigo-500 underline"
+          className="mt-2 inline-block text-blue-500 underline"
           href="/contact"
         >
           お問い合わせはこちら

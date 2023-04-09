@@ -1,9 +1,6 @@
-import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { Text } from "src/components/Elements/Text";
 import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
 
 export const SpSearchWorks = () => {
@@ -12,6 +9,14 @@ export const SpSearchWorks = () => {
   const { data } = useQuerySearchWorks(q === undefined ? "" : q.toString());
 
   useEffect(() => {
+    const onResize = () => {
+      const width = window.innerWidth;
+
+      if (width > 768) {
+        router.back();
+      }
+    };
+
     if (
       window.innerWidth > 768 &&
       router.pathname === "/search" &&
@@ -19,53 +24,21 @@ export const SpSearchWorks = () => {
     ) {
       router.back();
     }
-    window.addEventListener("resize", () => {
-      const width = window.innerWidth;
-
-      if (width > 768) {
-        router.back();
-      }
-    });
+    window.addEventListener("resize", onResize);
 
     return () => {
-      window.removeEventListener("resize", () => {
-        const width = window.innerWidth;
-
-        if (width > 768) {
-          router.back();
-        }
-      });
+      window.removeEventListener("resize", onResize);
     };
   }, [router]);
 
   return (
-    <section className="min-h-screen bg-gray-50">
-      <header className="sticky top-0 z-10 border-b bg-white/95">
-        <div className="relative flex w-full items-center space-x-4 py-3 pl-2 pr-4">
-          <button className="flex justify-center " onClick={router.back}>
-            <ArrowSmallLeftIcon className="h-6 w-11 text-black" />
-          </button>
-          <Text
-            className="grid flex-1 place-items-center text-base font-bold md:text-lg"
-            component="p"
-            ff="Hiragino Sans"
-          >
-            {q}
-          </Text>
-          <Link
-            className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-bold text-transparent"
-            href="/"
-          >
-            Nerd
-          </Link>
-        </div>
-      </header>
-      <div className="container mx-auto p-4 pb-20">
+    <section className="flex-1 bg-gray-50">
+      <div className="container mx-auto p-4">
         {data && data.search_works.length > 0 && (
-          <p className="text-center font-bold">検索結果</p>
+          <p className="grid place-items-center font-bold">{q}の検索結果</p>
         )}
         {data && data.search_works.length === 0 && (
-          <p className="text-center text-gray-500">
+          <p className="text-center text-dimmed">
             &apos;{q}&apos;に一致する作品は見つかりませんでした。
           </p>
         )}
@@ -86,7 +59,7 @@ export const SpSearchWorks = () => {
                     ? `/works/${work.id}`
                     : `/works/play/${work.id}`
                 }
-                className={`h-max font-bold  ${
+                className={`h-max py-1.5 font-bold  ${
                   work.has_episodes
                     ? "bg-indigo-50 text-indigo-500"
                     : "bg-indigo-500 text-white"
