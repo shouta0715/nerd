@@ -8,7 +8,7 @@ export const SearchButton = () => {
     useSearch();
 
   return (
-    <div className="sticky bottom-4 left-[86%] h-12 w-12 bg-transparent">
+    <div className="sticky bottom-4 left-[86%] z-40 h-12 w-12 bg-transparent">
       <button
         className="grid h-12 w-12 place-items-center rounded-full border-none bg-indigo-500 shadow-md shadow-indigo-400 outline-none md:hidden"
         onClick={() => setIsSearchOpen(!isSearchOpen)}
