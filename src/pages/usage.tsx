@@ -18,7 +18,7 @@ const Usage: NextPage = () => {
   return (
     <>
       <Layout>
-        <div className="container mx-auto flex-1 bg-gray-50 pb-8 pt-4">
+        <div className="container mx-auto flex-1 bg-gray-50  py-4">
           <section className="px-3 font-hiragino-sans md:px-6">
             <h2 className="pb-4 text-center font-hiragino-sans text-xl font-bold">
               使い方
@@ -26,7 +26,7 @@ const Usage: NextPage = () => {
             <ol className="text-sm md:text-base">
               <li className="relative flex pb-8">
                 <div className="absolute left-5 z-0 h-full w-0.5 bg-slate-200" />
-                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-indigo-500 font-futura ">
+                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-blue-500 font-futura ">
                   <MagnifyingGlassIcon className="h-6 w-6 fill-white stroke-white" />
                 </div>
                 <p className="flex-1 pt-1">
@@ -44,7 +44,7 @@ const Usage: NextPage = () => {
               </li>
               <li className="relative flex pb-8">
                 <div className="absolute left-5 z-0 h-full w-0.5 bg-slate-200" />
-                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-teal-500 font-futura ">
+                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-green-500 font-futura ">
                   <PlayIcon className="h-6 w-6 fill-white stroke-white" />
                 </div>
                 <p className="flex-1 pt-1">
@@ -56,7 +56,7 @@ const Usage: NextPage = () => {
               </li>
               <li className="relative flex pb-8">
                 <div className="absolute left-5 z-0 h-full w-0.5 bg-slate-200" />
-                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-indigo-500 font-futura ">
+                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-blue-500 font-futura ">
                   <PaperAirplaneIcon className="h-6 w-6 fill-white stroke-white" />
                 </div>
                 <p className="flex-1 pt-1">
@@ -69,7 +69,7 @@ const Usage: NextPage = () => {
               </li>
               <li className="relative flex pb-8">
                 <div className="absolute left-5 z-0 h-full w-0.5 bg-slate-200" />
-                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-teal-500 font-futura ">
+                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-green-500 font-futura ">
                   <ChatBubbleLeftRightIcon className="h-6 w-6 fill-white stroke-white" />
                 </div>
                 <p className="flex-1 pt-1">
@@ -85,7 +85,7 @@ const Usage: NextPage = () => {
                 </p>
               </li>
               <li className="relative flex ">
-                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-red-500 font-futura ">
+                <div className="z-10 mr-4 grid h-10 w-10 place-items-center rounded-full bg-pink-500 font-futura ">
                   <HandThumbUpIcon className="h-6 w-6 fill-white stroke-white" />
                 </div>
                 <p className="flex-1 pt-1">
