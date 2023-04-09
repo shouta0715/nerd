@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  deleteUser,
+  signInWithPopup,
+  signOut,
+  reauthenticateWithCredential,
+} from "firebase/auth";
 import { auth } from "../../../libs/firebase";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -37,5 +43,25 @@ export const useGoogleSignIn = () => {
     }
   };
 
-  return { signInGoogle, signOutGoogle };
+  const deleteGoogleUser = async () => {
+    try {
+      setAuthLoading(true);
+      if (auth.currentUser) await deleteUser(auth.currentUser);
+      localStorage.removeItem("user_name");
+    } catch (error: any) {
+      setAuthLoading(false);
+      if (error.code === "auth/requires-recent-login") {
+        console.log("auth/requires-recent-login");
+        if (auth.currentUser) {
+          await reauthenticateWithCredential(
+            auth.currentUser,
+            GoogleAuthProvider.credential()
+          );
+          await deleteUser(auth.currentUser);
+        }
+      }
+    }
+  };
+
+  return { signInGoogle, signOutGoogle, deleteGoogleUser };
 };
