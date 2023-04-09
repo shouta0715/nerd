@@ -18,8 +18,11 @@ const DynamicAccountMenu = dynamic(() =>
   import("src/components/Elements/AccountMenu").then((mod) => mod.AccountMenu)
 );
 
-const DynamicImage = dynamic(() =>
-  import("next/image").then((mod) => mod.default)
+const DynamicImage = dynamic(
+  () => import("next/image").then((mod) => mod.default),
+  {
+    loading: () => <Loader className="h-[38px] w-[38px] animate-fadeIn" />,
+  }
 );
 
 export const Header: FC = () => {

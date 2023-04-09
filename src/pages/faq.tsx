@@ -2,6 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
 
 import { NextPage } from "next";
+import Link from "next/link";
 import React from "react";
 import { Layout } from "src/components/Layout/Layout";
 import { useFaq } from "src/hooks/useFaq";
@@ -49,6 +50,12 @@ const Faq: NextPage = () => {
               </Disclosure>
             ))}
           </ul>
+          <p className="mt-6 text-sm text-dimmed">
+            上記の内容で解決しない場合は、お問い合わせフォームよりお問い合わせください。
+            <Link className="text-sm text-indigo-500 underline" href="/">
+              お問い合わせフォーム
+            </Link>
+          </p>
         </section>
       </div>
     </Layout>

@@ -25,7 +25,7 @@ export const AccountMenu: FC<Props> = ({
 
   return (
     <Transition
-      className="absolute right-0 z-10 w-64 rounded-md border-2 border-slate-200 bg-white shadow"
+      className="absolute right-0 z-20 w-64 rounded-md border-2 border-slate-200 bg-white shadow"
       enter="transition ease-out duration-100"
       enterFrom="transform opacity-0 scale-95"
       enterTo="transform opacity-100 scale-100"
