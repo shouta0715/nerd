@@ -61,10 +61,9 @@ export const useSetCustomClaims = () => {
         if (!localUserName && user.displayName) {
           localStorage.setItem("user_name", user.displayName);
         }
-        if (!user.isAnonymous) {
-          queryClient.invalidateQueries(["comments"]);
-          queryClient.invalidateQueries(["replies"]);
-        }
+
+        queryClient.invalidateQueries(["comments"]);
+        queryClient.invalidateQueries(["replies"]);
         setAuthLoading(false);
 
         return;

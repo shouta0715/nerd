@@ -51,13 +51,14 @@ export const useGoogleSignIn = () => {
     } catch (error: any) {
       setAuthLoading(false);
       if (error.code === "auth/requires-recent-login") {
-        console.log("auth/requires-recent-login");
         if (auth.currentUser) {
-          await reauthenticateWithCredential(
-            auth.currentUser,
-            GoogleAuthProvider.credential()
-          );
-          await deleteUser(auth.currentUser);
+          const provider = new GoogleAuthProvider();
+          const result = await signInWithPopup(auth, provider);
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          if (credential) {
+            await reauthenticateWithCredential(auth.currentUser, credential);
+            await deleteUser(auth.currentUser);
+          }
         }
       }
     }
