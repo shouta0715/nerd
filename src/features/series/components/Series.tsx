@@ -33,7 +33,7 @@ export const Series: FC = () => {
         component="h1"
         ff="Hiragino Sans"
       >
-        {series_title ?? data?.works[0].title}
+        {series_title ?? data?.works[0]?.title}
       </Text>
 
       <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

@@ -1,17 +1,34 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useRouter } from "next/router";
 import { useGetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { client } from "src/libs/graphqlClient";
 
 export const useQueryEpisode = (
   id: string | string[] | undefined,
   episode: string | string[] | undefined
-) =>
-  useGetEpisodeQuery(
+) => {
+  const router = useRouter();
+
+  return useGetEpisodeQuery(
     client,
     {
       id,
     },
     {
       enabled: !!id,
+      onSuccess: (data) => {
+        if (!data.episodes_by_pk) {
+          router.replace("/404");
+        }
+      },
+
+      onError: (error: any) => {
+        const message = error?.message;
+
+        if (message.includes("invalid input syntax for type uuid")) {
+          router.replace("/404");
+        }
+      },
 
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
@@ -45,3 +62,4 @@ export const useQueryEpisode = (
       },
     }
   );
+};
