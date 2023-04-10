@@ -71,6 +71,7 @@ export const useMutateLiveChat = () => {
           pages: [
             {
               chats_by_episode_id: [
+                ...prevChats,
                 {
                   id: fake_id,
                   episode_id,
@@ -81,7 +82,6 @@ export const useMutateLiveChat = () => {
                   user_id: user.id,
                   user,
                 },
-                ...prevChats,
               ],
             },
             ...prevData.pages.slice(0, lastPageIndex),
