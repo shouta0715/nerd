@@ -27,7 +27,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   });
 
   return (
-    <li className="relative flex-1 rounded-md border border-solid border-slate-200 bg-white p-4 shadow  md:px-6">
+    <li className="relative flex-1 animate-fadeUp rounded-md border border-slate-200 bg-white p-4  md:px-6">
       <div className="mx-auto flex min-h-full flex-col items-center justify-between">
         <div className="flex w-full flex-1 flex-col items-center gap-2">
           <Text
