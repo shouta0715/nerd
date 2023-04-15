@@ -27,8 +27,39 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   });
 
   return (
-    <li className="relative flex-1 animate-fadeUp rounded-md border border-slate-200 bg-white p-4  md:px-6">
-      <div className="mx-auto flex min-h-full flex-col items-center justify-between">
+    <li className="relative flex-1 animate-fadeUp rounded-md border border-slate-200 bg-white p-4">
+      <div className="mx-auto flex flex-col items-center ">
+        {mode === "up" && (
+          <Text
+            className="mb-2 inline-block self-start bg-amber-50 px-1.5 py-1 text-xs font-medium text-amber-500"
+            component="span"
+          >
+            開始中
+          </Text>
+        )}
+        {mode === "down" && (
+          <Text
+            className="mb-2 inline-block self-start bg-teal-50 px-1.5 py-1 text-xs font-medium text-teal-500"
+            component="span"
+          >
+            {new Date(episode.start_time).toLocaleString("ja-JP", {
+              month: "narrow",
+              day: "numeric",
+              hour: "numeric",
+              minute: "numeric",
+              hour12: true,
+            })}
+            より開始
+          </Text>
+        )}
+        {mode === "finish" && (
+          <Text
+            className="mb-2 inline-block self-start bg-pink-50 px-1.5 py-1 text-xs font-medium text-pink-500"
+            component="span"
+          >
+            終了しました
+          </Text>
+        )}
         <div className="flex w-full flex-1 flex-col items-center gap-2">
           <Text
             className=" text-base font-bold md:text-lg"
@@ -74,8 +105,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               as={`/episodes/live/${episode.id}`}
               className={`${
                 mode === "down"
-                  ? "bg-indigo-50 text-indigo-500"
-                  : "bg-orange-50 text-orange-500"
+                  ? "bg-indigo-500 text-white"
+                  : "bg-orange-500 text-white"
               } ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
@@ -99,7 +130,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <div className="z-10 mt-3 flex w-full flex-col items-center space-y-3">
             <ButtonLink
               as={`/episodes/${episode.id}`}
-              className="inline-block w-max rounded-md bg-red-50 px-3 py-2 text-sm font-bold text-red-500"
+              className="inline-block w-max rounded-md bg-pink-500 px-3 py-2 text-sm font-bold text-white"
               href={{
                 pathname: `/episodes/${episode.id}`,
                 query: {
