@@ -39,7 +39,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         )}
         {mode === "down" && (
           <Text
-            className="mb-2 inline-block self-start bg-teal-50 px-1.5 py-1 text-xs font-medium text-teal-500"
+            className="mb-2 inline-block self-start bg-indigo-50 px-1.5 py-1 text-xs font-medium text-indigo-500"
             component="span"
           >
             {new Date(episode.start_time).toLocaleString("ja-JP", {

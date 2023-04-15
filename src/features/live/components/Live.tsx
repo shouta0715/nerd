@@ -90,7 +90,7 @@ export const Live = () => {
                       />
                     </>
                   ) : (
-                    <LiveComment />
+                    <LiveComment setIsChat={setIsChat} />
                   )}
                 </Suspense>
               )}
