@@ -31,7 +31,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
       <div className="mx-auto flex flex-col items-center ">
         {mode === "up" && (
           <Text
-            className="mb-2 inline-block self-start bg-amber-50 px-1.5 py-1 text-xs font-medium text-amber-500"
+            className="mb-2 inline-block self-start rounded-md bg-amber-50 px-1.5 py-1 text-xs font-semibold text-amber-500"
             component="span"
           >
             開始中
@@ -39,7 +39,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         )}
         {mode === "down" && (
           <Text
-            className="mb-2 inline-block self-start bg-indigo-50 px-1.5 py-1 text-xs font-medium text-indigo-500"
+            className="mb-2 inline-block self-start rounded-md bg-indigo-50 px-1.5 py-1 text-xs font-semibold text-indigo-500"
             component="span"
           >
             {new Date(episode.start_time).toLocaleString("ja-JP", {
@@ -54,7 +54,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         )}
         {mode === "finish" && (
           <Text
-            className="mb-2 inline-block self-start bg-pink-50 px-1.5 py-1 text-xs font-medium text-pink-500"
+            className="mb-2 inline-block self-start rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
             component="span"
           >
             終了しました
