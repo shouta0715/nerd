@@ -3,12 +3,23 @@ import { CubeTransparentIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
-import LottieMovie from "public/lottie/70319-movie-camera.json";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 
 import { useSearchWorksState } from "src/features/works/store";
 
-const DynamicLottie = dynamic(() => import("lottie-react"), { ssr: true });
+const DynamicLottieResult = dynamic(
+  () =>
+    import("public/lottie/70319-movie-camera.json").then((data) => {
+      const DynamicLottie = dynamic(() => import("lottie-react"));
+
+      return () => (
+        <DynamicLottie animationData={data} className="mx-auto w-1/2" />
+      );
+    }),
+  {
+    ssr: false,
+  }
+);
 
 export const SearchWorks = () => {
   const [data, isLoading] = useSearchWorksState((state) => [
@@ -67,7 +78,7 @@ export const SearchWorks = () => {
           ))}
         </ul>
       </div>
-      <DynamicLottie animationData={LottieMovie} className="mx-auto w-1/2" />
+      <DynamicLottieResult />
     </>
   );
 };

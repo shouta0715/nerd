@@ -61,7 +61,7 @@ export const Header: FC = () => {
                 Nerd
               </span>
             </Link>
-            <div className="order-1 flex items-center justify-between">
+            <div className="flex items-center justify-between">
               {user && !user.anonymous ? (
                 <div ref={elementRef} className="relative">
                   {authLoading ? (
