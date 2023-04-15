@@ -1,19 +1,8 @@
 import { NextPage } from "next";
-import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
 import { Layout } from "src/components/Layout/Layout";
 import { Series } from "src/features/series/components/Series";
-
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
-);
 
 const Index: NextPage = () => (
   <Layout>
@@ -32,7 +21,6 @@ const Index: NextPage = () => (
         <Series />
       </Suspense>
     </section>
-    <DynamicSearchButton />
   </Layout>
 );
 

@@ -21,28 +21,34 @@ type Props = {
   todayEpisodes: GetTodayEpisodesQuery;
   seasonWorks: GetSeasonWorksQuery;
   weeklyWorks: GetWeeklyWorksQuery;
+  buildDate: string;
 };
 
-const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
+const Home: NextPage<Props> = ({
+  todayEpisodes,
+  seasonWorks,
+  weeklyWorks,
+  buildDate,
+}) => (
   <Layout>
-    <div className=" space-y-1 bg-white">
-      <section className="bg-gray-50 px-3 pb-6 pt-4 md:px-6">
-        <TopTitle title="今日放送のエピソード" />
+    <div className="space-y-1 bg-white md:py-0">
+      <section className=" bg-gray-50 px-3 py-6 md:px-6">
+        <TopTitle buildDate={buildDate} title="今日放送のエピソード" />
         <TodayEpisodeList data={todayEpisodes} />
         <Text
           align="center"
-          className="mt-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
+          className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
           component="p"
           ff="Hiragino Sans"
         >
-          <Link className="text-base md:text-lg" href="/list/todayEpisodes">
+          <Link className="text-base  md:text-lg" href="/list/todayEpisodes">
             今日のエピソードをもっと見る
           </Link>
-          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
+          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
-      <section className=" bg-indigo-50 px-3 pb-6 pt-4 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
-        <TopTitle title="今期のアニメ" />
+      <section className=" bg-sky-50 px-3 pb-6 pt-4 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
+        <TopTitle buildDate={buildDate} title="今期のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {seasonWorks.works?.map((work) => (
             <WorkItem
@@ -54,18 +60,18 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
         </ul>
         <Text
           align="center"
-          className="mt-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
+          className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
           component="p"
           ff="Hiragino Sans"
         >
           <Link className="text-base md:text-lg" href="/list/seasonWorks">
             今期のアニメをもっと見る
           </Link>
-          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
+          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
-      <section className="bg-gray-50 px-3 pt-4 md:px-6">
-        <TopTitle title="今週のアニメ" />
+      <section className=" bg-gray-50 px-3 pt-4 md:px-6">
+        <TopTitle buildDate={buildDate} title="今週のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {weeklyWorks?.weekly_works?.map((work) => (
             <WorkItem key={`work-${work.id}`} work={work} />
@@ -73,14 +79,14 @@ const Home: NextPage<Props> = ({ todayEpisodes, seasonWorks, weeklyWorks }) => (
         </ul>
         <Text
           align="center"
-          className="mt-6 flex w-full items-center justify-center  text-blue-500 hover:underline"
+          className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
           component="p"
           ff="Hiragino Sans"
         >
           <Link className="text-base md:text-lg" href="/list/weeklyWorks">
             今週のアニメをもっと見る
           </Link>
-          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-blue-500" />
+          <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
     </div>
@@ -92,12 +98,20 @@ export const getStaticProps: GetStaticProps = async () => {
   const todayEpisodes = await getTodayEpisodes();
   const seasonWorks = await getSeasonWorks(18);
   const weeklyWorks = await getWeeklyWorks(10);
+  const buildDate = new Date().toLocaleDateString("ja-JP", {
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Tokyo",
+    hour: "numeric",
+    minute: "numeric",
+  });
 
   return {
     props: {
       todayEpisodes,
       seasonWorks,
       weeklyWorks,
+      buildDate: `${buildDate}`,
     },
   };
 };

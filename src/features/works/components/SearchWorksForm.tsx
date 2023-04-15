@@ -16,9 +16,9 @@ export const SearchWorksForm = () => {
       <div className="relative flex-1">
         <MagnifyingGlassIcon className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
         <Input
-          className="peer px-8"
+          className="peer rounded-full bg-gray-50 px-8 "
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="タイトルで検索"
+          placeholder="タイトルで検索..."
           type="text"
           value={search}
         />
