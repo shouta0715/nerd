@@ -43,7 +43,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               : ""
           } ${
             mode === "up"
-              ? "bg-gradient-to-br from-amber-500 to-yellow-500"
+              ? "bg-gradient-to-br from-orange-400 to-amber-400"
               : ""
           } ${
             mode === "finish"
