@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { FC, memo } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
+import { ModeBadge } from "src/components/Elements/ModeBadge";
 import { Text } from "src/components/Elements/Text";
 import { Episode } from "src/features/episodes/types";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
@@ -27,68 +28,60 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
   });
 
   return (
-    <li className="relative flex-1 animate-fadeUp rounded-md border border-slate-200 bg-white p-4">
-      <div className="mx-auto flex flex-col items-center ">
-        {mode === "up" && (
-          <Text
-            className="mb-2 inline-block self-start rounded-md bg-amber-50 px-1.5 py-1 text-xs font-semibold text-amber-500"
-            component="span"
-          >
-            開始中
-          </Text>
-        )}
-        {mode === "down" && (
-          <Text
-            className="mb-2 inline-block self-start rounded-md bg-indigo-50 px-1.5 py-1 text-xs font-semibold text-indigo-500"
-            component="span"
-          >
-            {new Date(episode.start_time).toLocaleString("ja-JP", {
-              month: "narrow",
-              day: "numeric",
-              hour: "numeric",
-              minute: "numeric",
-              hour12: true,
-            })}
-            より開始
-          </Text>
-        )}
-        {mode === "finish" && (
-          <Text
-            className="mb-2 inline-block self-start rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
-            component="span"
-          >
-            終了しました
-          </Text>
-        )}
-        <div className="flex w-full flex-1 flex-col items-center gap-2">
-          <Text
-            className=" text-base font-bold md:text-lg"
-            component="h4"
-            ff="Hiragino Sans"
-          >
-            {episode?.work.series_title}
-          </Text>
-          <Text className="flex" component="div">
+    <li
+      className={`relative flex-1 animate-fadeUp rounded-xl border bg-white pb-4 ${
+        mode === "down" ? "border-indigo-200" : ""
+      } ${mode === "up" ? "border-amber-200" : ""} ${
+        mode === "finish" ? "border-pink-200" : ""
+      }`}
+    >
+      <div className="mx-auto flex flex-col items-center">
+        <div
+          className={`mb-2 flex w-full flex-1 flex-col rounded-t-xl p-4 ${
+            mode === "down"
+              ? "bg-gradient-to-br from-indigo-500 to-blue-600"
+              : ""
+          } ${
+            mode === "up"
+              ? "bg-gradient-to-br from-amber-500 to-yellow-500"
+              : ""
+          } ${
+            mode === "finish"
+              ? "bg-gradient-to-br from-red-400 to-pink-500"
+              : ""
+          }`}
+        >
+          <ModeBadge mode={mode} start_time={episode.start_time} />
+          <div className="flex w-full flex-1 flex-col items-center gap-1">
             <Text
-              className="mr-2 text-sm md:text-base"
-              component="p"
+              className=" text-base font-bold text-white md:text-lg"
+              component="h4"
               ff="Hiragino Sans"
             >
-              第{episode?.number}話
+              {episode?.work.series_title}
             </Text>
-            <Text
-              className="flex-1 text-sm md:text-base"
-              component="p"
-              ff="Hiragino Sans"
-            >
-              {episode?.title}
+            <Text className="flex text-white" component="div">
+              <Text
+                className="mr-2 text-sm md:text-base"
+                component="p"
+                ff="Hiragino Sans"
+              >
+                第{episode?.number}話
+              </Text>
+              <Text
+                className="flex-1 text-sm md:text-base"
+                component="p"
+                ff="Hiragino Sans"
+              >
+                {episode?.title}
+              </Text>
             </Text>
-          </Text>
+          </div>
         </div>
         {mode !== "finish" ? (
           <div className="flex flex-col">
             <Text
-              className={`m-0 mx-auto mb-1.5 mt-2 px-10 text-sm font-bold  md:text-base ${
+              className={`mx-auto mb-1.5 text-sm font-bold  md:text-base ${
                 mode === "down" ? "text-indigo-500" : "text-orange-500"
               }`}
             >
