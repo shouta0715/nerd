@@ -21,15 +21,6 @@ export const useQueryEpisode = (
           router.replace("/404");
         }
       },
-
-      onError: (error: any) => {
-        const message = error?.message;
-
-        if (message.includes("invalid input syntax for type uuid")) {
-          router.replace("/404");
-        }
-      },
-
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
         const [
