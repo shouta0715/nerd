@@ -11,7 +11,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
   <>
     {mode === "up" && (
       <Text
-        className="mb-1.5 inline-block self-start rounded-md bg-amber-50 px-1.5 py-1 text-xs font-semibold text-amber-500"
+        className="-ml-1 -mt-1 mb-1.5 inline-block self-start rounded-md bg-orange-50 px-1.5 py-1 text-xs font-semibold text-orange-500"
         component="span"
       >
         開始中
@@ -19,7 +19,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
     )}
     {mode === "down" && (
       <Text
-        className="mb-1.5 inline-block self-start rounded-md bg-indigo-50 px-1.5 py-1 text-xs font-semibold text-indigo-500"
+        className="-ml-1 -mt-1 mb-1.5 inline-block self-start rounded-md bg-indigo-50 px-1.5 py-1 text-xs font-semibold text-indigo-500"
         component="span"
       >
         {new Date(start_time).toLocaleString("ja-JP", {
@@ -34,7 +34,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
     )}
     {mode === "finish" && (
       <Text
-        className="mb-1.5 inline-block self-start rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
+        className="-ml-1 -mt-1 mb-1.5 inline-block self-start rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
         component="span"
       >
         終了しました

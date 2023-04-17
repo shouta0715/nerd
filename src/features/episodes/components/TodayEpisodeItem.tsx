@@ -31,24 +31,16 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
     <li
       className={`relative flex-1 animate-fadeUp rounded-xl border bg-white pb-4 ${
         mode === "down" ? "border-indigo-200" : ""
-      } ${mode === "up" ? "border-amber-200" : ""} ${
+      } ${mode === "up" ? "border-orange-200" : ""} ${
         mode === "finish" ? "border-pink-200" : ""
       }`}
     >
       <div className="mx-auto flex flex-col items-center">
         <div
           className={`mb-2 flex w-full flex-1 flex-col rounded-t-xl p-4 ${
-            mode === "down"
-              ? "bg-gradient-to-br from-indigo-500 to-blue-600"
-              : ""
-          } ${
-            mode === "up"
-              ? "bg-gradient-to-br from-orange-400 to-amber-400"
-              : ""
-          } ${
-            mode === "finish"
-              ? "bg-gradient-to-br from-red-400 to-pink-500"
-              : ""
+            mode === "down" ? "bg-indigo-500" : ""
+          } ${mode === "up" ? "bg-orange-500" : ""} ${
+            mode === "finish" ? "bg-pink-500" : ""
           }`}
         >
           <ModeBadge mode={mode} start_time={episode.start_time} />
