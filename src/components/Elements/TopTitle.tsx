@@ -19,7 +19,7 @@ export const TopTitle: FC<Props> = ({ title, buildDate }) => (
     </h2>
     <p>
       <Text
-        className="rounded-md bg-pink-50 p-2 text-xs font-semibold text-pink-500"
+        className="rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
         component="span"
         ff="Hiragino Sans"
         size="xs"
