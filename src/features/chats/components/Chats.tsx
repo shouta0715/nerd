@@ -28,7 +28,7 @@ export const Chats: FC<Props> = ({
   const interval = useTimerState((state) => state.interval);
 
   return (
-    <ul className="relative mx-auto flex w-full flex-1 flex-col space-y-3 px-2 pb-1 pt-4 md:max-w-xl md:px-4">
+    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2 pb-1 pt-4 md:px-4">
       <Transition
         as="button"
         className="m-auto grid place-items-center rounded-full border bg-black p-4 transition-all"

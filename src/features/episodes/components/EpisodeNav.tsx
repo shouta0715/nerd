@@ -73,7 +73,6 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
             </Text>
           </ul>
         </div>
-
         <DynamicEpisodeMenu episode={data?.episodes_by_pk} />
       </div>
     </nav>
