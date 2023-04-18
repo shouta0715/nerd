@@ -36,7 +36,11 @@ export const Episode: FC = () => {
               setIsChat={setIsChat}
               stop={interval.stop}
             />
-            <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
+            {isChat ? (
+              <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
+            ) : (
+              <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+            )}
           </div>
           <main className="flex flex-1 flex-col  bg-gray-50 lg:min-h-screen lg:w-1/2 lg:flex-none">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
@@ -47,14 +51,11 @@ export const Episode: FC = () => {
                   <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
                 </Suspense>
               ) : (
-                <>
-                  <Suspense
-                    fallback={<Loader className="m-auto" variant="dots" />}
-                  >
-                    <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
-                  </Suspense>
-                  <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
-                </>
+                <Suspense
+                  fallback={<Loader className="m-auto" variant="dots" />}
+                >
+                  <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                </Suspense>
               )}
             </div>
           </main>

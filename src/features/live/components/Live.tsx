@@ -52,12 +52,16 @@ export const Live = () => {
               mode={mode}
               setIsChat={setIsChat}
             />
-            <LiveChatInput
-              episode_id={data?.episodes_by_pk?.id}
-              isTimerLoading={isTimeLoading}
-              mode={mode}
-              time={time}
-            />
+            {isChat ? (
+              <LiveChatInput
+                episode_id={data?.episodes_by_pk?.id}
+                isTimerLoading={isTimeLoading}
+                mode={mode}
+                time={time}
+              />
+            ) : (
+              <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+            )}
           </div>
           <main className="flex flex-1 flex-col bg-gray-50  lg:min-h-screen lg:w-1/2 lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
@@ -81,12 +85,7 @@ export const Live = () => {
                   fallback={<Loader className="m-auto" variant="dots" />}
                 >
                   {mode === "finish" ? (
-                    <>
-                      <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
-                      <EpisodeCommentInput
-                        episode_id={data?.episodes_by_pk?.id}
-                      />
-                    </>
+                    <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
                   ) : (
                     <LiveComment setIsChat={setIsChat} />
                   )}
