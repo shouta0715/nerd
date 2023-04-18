@@ -1,4 +1,5 @@
 import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, memo } from "react";
@@ -35,9 +36,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         mode === "finish" ? "border-pink-200" : ""
       }`}
     >
-      <div className="mx-auto flex flex-col items-center">
+      <div className="mx-auto flex h-full flex-col items-center">
         <div
-          className={`mb-2 flex w-full flex-1 flex-col rounded-t-xl p-4 ${
+          className={`mb-2 flex w-full flex-col rounded-t-xl p-4 ${
             mode === "down" ? "bg-indigo-500" : ""
           } ${mode === "up" ? "bg-orange-500" : ""} ${
             mode === "finish" ? "bg-pink-500" : ""
@@ -61,7 +62,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 第{episode?.number}話
               </Text>
               <Text
-                className="flex-1 text-sm md:text-base"
+                className="line-clamp-1 flex-1 text-sm md:text-base"
                 component="p"
                 ff="Hiragino Sans"
               >
@@ -71,7 +72,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           </div>
         </div>
         {mode !== "finish" ? (
-          <div className="flex flex-col">
+          <div className="flex flex-1 flex-col">
             <Text
               className={`mx-auto mb-1.5 text-sm font-bold  md:text-base ${
                 mode === "down" ? "text-indigo-500" : "text-orange-500"
@@ -112,10 +113,10 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             </Link>
           </div>
         ) : (
-          <div className="z-10 mt-3 flex w-full flex-col items-center space-y-3">
+          <div className=" mt-3 flex w-full flex-1 flex-col items-center justify-end space-y-3">
             <ButtonLink
               as={`/episodes/${episode.id}`}
-              className="inline-block w-max rounded-md bg-pink-500 px-3 py-2 text-sm font-bold text-white"
+              className=" w-max rounded-md bg-pink-500 px-4 py-2 text-sm font-bold text-white"
               href={{
                 pathname: `/episodes/${episode.id}`,
                 query: {
@@ -130,6 +131,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                   ],
                 },
               }}
+              leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
             >
               アーカイブで参加する
             </ButtonLink>
