@@ -32,18 +32,16 @@ export const PlayWork: FC = () => {
               setIsChat={setIsChat}
               stop={interval.stop}
             />
+            <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
           </div>
-          <main className="flex flex-1 flex-col bg-gray-50 lg:min-h-screen lg:w-1/2 lg:flex-none lg:pb-16">
+          <main className="flex flex-1 flex-col bg-gray-50 lg:min-h-screen lg:w-1/2 lg:flex-none">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
-                <>
-                  <Suspense
-                    fallback={<Loader className="m-auto" variant="dots" />}
-                  >
-                    <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
-                  </Suspense>
-                  <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
-                </>
+                <Suspense
+                  fallback={<Loader className="m-auto" variant="dots" />}
+                >
+                  <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
+                </Suspense>
               ) : (
                 <>
                   <Suspense fallback={<div>Loading...</div>}>

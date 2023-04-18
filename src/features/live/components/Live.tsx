@@ -52,32 +52,30 @@ export const Live = () => {
               mode={mode}
               setIsChat={setIsChat}
             />
+            <LiveChatInput
+              episode_id={data?.episodes_by_pk?.id}
+              isTimerLoading={isTimeLoading}
+              mode={mode}
+              time={time}
+            />
           </div>
           <main className="flex flex-1 flex-col bg-gray-50  lg:min-h-screen lg:w-1/2 lg:flex-none lg:pb-16">
             <div className="container  mx-auto mb-16 flex flex-1  lg:contents">
               {isChat ? (
-                <>
-                  <Suspense
-                    fallback={<Loader className="m-auto" variant="dots" />}
-                  >
-                    {isAlreadyFinished ? (
-                      <FinishLive episode={data?.episodes_by_pk} />
-                    ) : (
-                      <LiveChats
-                        episode_id={data?.episodes_by_pk?.id}
-                        isTimerLoading={isTimeLoading}
-                        mode={mode}
-                        time={time}
-                      />
-                    )}
-                  </Suspense>
-                  <LiveChatInput
-                    episode_id={data?.episodes_by_pk?.id}
-                    isTimerLoading={isTimeLoading}
-                    mode={mode}
-                    time={time}
-                  />
-                </>
+                <Suspense
+                  fallback={<Loader className="m-auto" variant="dots" />}
+                >
+                  {isAlreadyFinished ? (
+                    <FinishLive episode={data?.episodes_by_pk} />
+                  ) : (
+                    <LiveChats
+                      episode_id={data?.episodes_by_pk?.id}
+                      isTimerLoading={isTimeLoading}
+                      mode={mode}
+                      time={time}
+                    />
+                  )}
+                </Suspense>
               ) : (
                 <Suspense
                   fallback={<Loader className="m-auto" variant="dots" />}

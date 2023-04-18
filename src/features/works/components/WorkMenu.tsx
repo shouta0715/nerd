@@ -50,7 +50,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
           isMenuOpen ? "block" : "  hidden lg:block"
         }`}
       >
-        <section>
+        <section className="px-4 py-2">
           <div className="mb-2 flex items-center justify-between">
             <Text className="text-dimmed" size="sm">
               メニュー
