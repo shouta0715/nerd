@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { FC, useEffect, useRef } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
@@ -39,9 +40,9 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   }, [setInputRef]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full animate-fadeIn border-0 border-t border-solid border-slate-200 bg-white p-2">
+    <div className="fixed bottom-0 left-0 w-full animate-fadeIn border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
       <form
-        className="container mx-auto flex items-center justify-center space-x-2 opacity-100"
+        className="flex items-center justify-center space-x-2 opacity-100 lg:justify-between lg:space-x-6"
         onSubmit={onSubmitHandler}
       >
         <button
@@ -69,10 +70,9 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
             />
           )}
         </button>
-        <div className="relative mr-2  flex max-w-sm flex-1 items-center">
+        <div className="relative mr-2  flex  flex-1 items-center">
           <ReactTextareaAutosize
-            ref={inputRef}
-            className="w-full resize-none	 appearance-none rounded-md border border-gray-300 px-4  py-2 pr-10 placeholder:line-clamp-1  placeholder:whitespace-nowrap placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
+            className="w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={!user}
             maxLength={100}
             maxRows={4}
@@ -112,14 +112,14 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
                 inputState.content.length.toString()}
             </div>
             <Button
-              className="h-8 w-8 border-none bg-teal-50 p-0 active:translate-y-0"
+              className="h-8 w-8 border-none bg-teal-500 p-0 active:translate-y-0 lg:hidden"
               radius="full"
               type="submit"
             >
               {isLoading ? (
                 <Loader color="green" size="sm" />
               ) : (
-                <ArrowUpIcon className=" h-4 w-4 stroke-teal-500" />
+                <PaperAirplaneIcon className=" h-4 w-4 fill-white stroke-white" />
               )}
             </Button>
           </div>
@@ -130,6 +130,16 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           className="h-6 w-6 cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
+        <Button
+          className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
+          type="submit"
+        >
+          {isLoading || !user ? (
+            <Loader color="white" size="sm" />
+          ) : (
+            <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+          )}
+        </Button>
       </form>
     </div>
   );
