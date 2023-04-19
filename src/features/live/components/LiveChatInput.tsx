@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { ArrowUpIcon, Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { Cog8ToothIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { FC } from "react";
@@ -43,7 +43,7 @@ export const LiveChatInput: FC<Props> = ({
   ]);
 
   return (
-    <div className="fixed bottom-0 left-0 w-full border-0 border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
+    <div className="fixed bottom-0 left-0 z-[1]  w-full border-0 border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
       <form
         className="flex items-center justify-center space-x-2 opacity-100 lg:justify-between lg:space-x-6"
         onSubmit={onSubmitHandler}
@@ -94,14 +94,13 @@ export const LiveChatInput: FC<Props> = ({
               {content.length > 50 && content.length.toString()}
             </div>
             <Button
-              className="h-8 w-8 border-none bg-teal-500 p-0 active:translate-y-0 lg:hidden"
-              radius="full"
+              className="h-8 w-8 rounded-full border-none bg-teal-500 p-0 active:translate-y-0 lg:hidden"
               type="submit"
             >
-              {isLoading ? (
-                <Loader color="green" size="sm" />
+              {isLoading || !user ? (
+                <Loader color="white" size="sm" />
               ) : (
-                <ArrowUpIcon className=" h-4 w-4 stroke-teal-500" />
+                <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
               )}
             </Button>
           </div>
