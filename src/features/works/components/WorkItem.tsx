@@ -28,7 +28,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
                 ? `/works/${work.id}`
                 : `/works/play/${work.id}`
             }
-            className="line-clamp-2 font-hiragino-sans text-sm font-bold md:text-base"
+            className="line-clamp-2 font-hiragino-sans text-base font-bold"
             href={{
               pathname: `${
                 work.has_episodes
@@ -44,7 +44,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
             {work.series_title}
           </Link>
         ) : (
-          <div className="line-clamp-2 font-hiragino-sans text-sm font-bold md:text-base">
+          <div className="line-clamp-2 font-hiragino-sans text-base font-bold">
             {work.series_title}
           </div>
         )}

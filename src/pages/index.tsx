@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
-      <section className=" bg-sky-50 px-3 pb-6 pt-4 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
+      <section className=" bg-indigo-50 px-3 py-10 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
         <TopTitle buildDate={buildDate} title="今期のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {seasonWorks.works?.map((work) => (
@@ -70,7 +70,7 @@ const Home: NextPage<Props> = ({
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
-      <section className=" bg-gray-50 px-3 pt-4 md:px-6">
+      <section className=" bg-gray-50 px-3 pt-10 md:px-6">
         <TopTitle buildDate={buildDate} title="今週のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {weeklyWorks?.weekly_works?.map((work) => (
