@@ -47,7 +47,9 @@ export const PlayWork: FC = () => {
                   <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
                 </Suspense>
               ) : (
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense
+                  fallback={<Loader className="m-auto" variant="dots" />}
+                >
                   <WorkComments work_id={data?.works_by_pk?.id ?? 0} />
                 </Suspense>
               )}
