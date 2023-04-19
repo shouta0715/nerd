@@ -13,40 +13,43 @@ type Props = {
 export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   <li
     key={`works-${work.id}`}
-    className="relative w-full flex-1 animate-fadeUp rounded-md border  border-slate-200 bg-white p-3  md:p-4"
+    className="relative w-full flex-1 animate-fadeUp rounded-xl border  border-slate-200 bg-white"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
-      {work.has_episodes ? (
-        <Link
-          as={
-            work.series_id
-              ? work.has_episodes
-                ? `/works/${work.id}?series=${work.series_id}`
-                : `/works/play/${work.id}?series=${work.series_id}`
-              : work.has_episodes
-              ? `/works/${work.id}`
-              : `/works/play/${work.id}`
-          }
-          className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base"
-          href={{
-            pathname: `${
-              work.has_episodes ? `/works/${work.id}` : `/works/play/${work.id}`
-            }`,
-            query: {
-              series: work.series_id ?? undefined,
-              work: [work.title, work.series_title],
-            },
-          }}
-        >
-          {work.series_title}
-        </Link>
-      ) : (
-        <div className="mb-2 font-hiragino-sans text-sm font-bold md:mb-3 md:text-base">
-          {work.series_title}
-        </div>
-      )}
-
-      <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  pb-2">
+      <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">
+        {work.has_episodes ? (
+          <Link
+            as={
+              work.series_id
+                ? work.has_episodes
+                  ? `/works/${work.id}?series=${work.series_id}`
+                  : `/works/play/${work.id}?series=${work.series_id}`
+                : work.has_episodes
+                ? `/works/${work.id}`
+                : `/works/play/${work.id}`
+            }
+            className="line-clamp-2 font-hiragino-sans text-sm font-bold md:text-base"
+            href={{
+              pathname: `${
+                work.has_episodes
+                  ? `/works/${work.id}`
+                  : `/works/play/${work.id}`
+              }`,
+              query: {
+                series: work.series_id ?? undefined,
+                work: [work.title, work.series_title],
+              },
+            }}
+          >
+            {work.series_title}
+          </Link>
+        ) : (
+          <div className="line-clamp-2 font-hiragino-sans text-sm font-bold md:text-base">
+            {work.series_title}
+          </div>
+        )}
+      </div>
+      <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  p-3  md:p-4">
         {work.episodes.length > 0 ? (
           <ul className="peer mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
             {work.episodes.map((episode) => (
