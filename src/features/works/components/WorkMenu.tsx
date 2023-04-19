@@ -46,7 +46,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
       }}
     >
       <div
-        className={` mx-auto h-max max-h-[90vh] w-4/5 max-w-md animate-modal overflow-y-auto rounded-md  border border-solid border-slate-100 bg-white shadow lg:static lg:mx-0 lg:h-auto lg:max-h-fit  lg:w-full lg:max-w-none lg:translate-x-0 lg:translate-y-0 lg:animate-none lg:border-0 lg:shadow-none lg:transition-none ${
+        className={`mx-auto h-max max-h-[90vh] w-4/5 max-w-md animate-modal overflow-y-auto rounded-md  border border-solid border-slate-100 bg-white shadow lg:static lg:mx-0 lg:h-auto lg:max-h-fit  lg:w-full lg:max-w-none lg:translate-x-0 lg:translate-y-0 lg:animate-none lg:border-0 lg:shadow-none lg:transition-none ${
           isMenuOpen ? "block" : "  hidden lg:block"
         }`}
       >
@@ -207,7 +207,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
         </section>
 
         {series_id && (
-          <nav className="group relative my-2 flex cursor-pointer items-center justify-center">
+          <nav className="group relative my-2 flex cursor-pointer items-center justify-center pb-2">
             <ButtonLink
               as={`/series/${series_id}`}
               className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
