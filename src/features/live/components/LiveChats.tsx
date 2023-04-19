@@ -49,9 +49,9 @@ export const LiveChats: FC<Props> = ({
         <Chat key={chats.id} animate={mode === "up"} chat={chats} />
       ))}
       <button
-        className={`fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2 animate-fadeIn cursor-pointer items-center  justify-center rounded-full border-none bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
+        className={`fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2 cursor-pointer items-center justify-center   rounded-full border-none  bg-indigo-500 shadow-md shadow-black/[0.3] transition-all active:translate-y-1 lg:bottom-10  lg:left-3/4 lg:-translate-x-3/4 ${
           isBottom || isBottom === undefined
-            ? "translate-y-16 opacity-0"
+            ? "translate-y-10 opacity-0 lg:hidden"
             : "opacity-1 translate-y-0"
         }`}
         onClick={() => {

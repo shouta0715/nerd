@@ -28,7 +28,7 @@ export const Chats: FC<Props> = ({
   const interval = useTimerState((state) => state.interval);
 
   return (
-    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2 pb-1 pt-4 md:px-4">
+    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2 pb-1 pt-4 md:px-4 lg:pb-20">
       <Transition
         as="button"
         className="m-auto grid place-items-center rounded-full border bg-black p-4 transition-all"
@@ -53,9 +53,9 @@ export const Chats: FC<Props> = ({
         <Chat key={comment.id} animate chat={comment} />
       ))}
       <button
-        className={`fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2   cursor-pointer items-center  justify-center rounded-full border-none bg-indigo-500 shadow-md shadow-black/[0.3]  transition-all active:translate-y-1 ${
+        className={`fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2 cursor-pointer items-center justify-center   rounded-full border-none  bg-indigo-500 shadow-md shadow-black/[0.3] transition-all active:translate-y-1 lg:bottom-10  lg:left-3/4 lg:-translate-x-3/4 ${
           isBottom || time === 0
-            ? "translate-y-10 opacity-0"
+            ? "translate-y-10 opacity-0 lg:hidden"
             : "opacity-1 translate-y-0"
         }`}
         onClick={() => {

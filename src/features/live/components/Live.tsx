@@ -60,7 +60,9 @@ export const Live = () => {
                 time={time}
               />
             ) : (
-              <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+              mode === "finish" && (
+                <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+              )
             )}
           </div>
           <main className="flex flex-1 flex-col bg-gray-50  lg:min-h-screen lg:w-1/2 lg:flex-none lg:pb-16">

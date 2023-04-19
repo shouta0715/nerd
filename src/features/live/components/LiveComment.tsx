@@ -1,20 +1,5 @@
-import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
-
-const DynamicLottieResult = dynamic(
-  () =>
-    import("public/lottie/70319-movie-camera.json").then((data) => {
-      const DynamicLottie = dynamic(() => import("lottie-react"));
-
-      return () => (
-        <DynamicLottie animationData={data} className="mx-auto w-56" />
-      );
-    }),
-  {
-    ssr: false,
-  }
-);
 
 type Props = {
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +16,5 @@ export const LiveComment: FC<Props> = ({ setIsChat }) => (
     >
       チャットに戻る
     </Button>
-
-    <DynamicLottieResult />
   </div>
 );
