@@ -37,6 +37,20 @@ export const ChatInput: FC<Props> = ({
   ]);
   const time = useTimerState((state) => state.getTime());
 
+  const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // 候補が表示されているときはEnterで候補を選択する
+
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      const { form } = e.currentTarget;
+      if (form) {
+        form.dispatchEvent(
+          new Event("submit", { cancelable: true, bubbles: true })
+        );
+      }
+    }
+  };
+
   return (
     <div className="fixed bottom-0 left-0 z-[1] w-full border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
       <form
@@ -70,6 +84,7 @@ export const ChatInput: FC<Props> = ({
         </button>
         <div className="relative mr-2  flex  flex-1 items-center">
           <ReactTextareaAutosize
+            aria-label="コメントを入力"
             className="w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={time === 0 || !user}
             maxLength={100}
@@ -77,6 +92,7 @@ export const ChatInput: FC<Props> = ({
             onChange={(e) =>
               content.length <= 100 && setContent(e.currentTarget.value)
             }
+            onKeyDown={onHandleKeyDown}
             placeholder={
               user && time !== 0
                 ? `コメントを入力`

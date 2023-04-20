@@ -42,6 +42,18 @@ export const LiveChatInput: FC<Props> = ({
     state.setIsMenuOpen,
   ]);
 
+  const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      const { form } = e.currentTarget;
+      if (form) {
+        form.dispatchEvent(
+          new Event("submit", { cancelable: true, bubbles: true })
+        );
+      }
+    }
+  };
+
   return (
     <div className="fixed bottom-0 left-0 z-[1]  w-full border-0 border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
       <form
@@ -82,6 +94,7 @@ export const LiveChatInput: FC<Props> = ({
             onChange={(e) =>
               content.length <= 100 && setContent(e.currentTarget.value)
             }
+            onKeyDown={onHandleKeyDown}
             placeholder={mode === "finish" ? "終了しました" : "コメントを投稿"}
             value={content}
           />

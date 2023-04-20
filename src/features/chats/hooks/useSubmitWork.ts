@@ -15,11 +15,11 @@ export const useSubmitWork = ({ work_id }: Args) => {
       if (!content.trim()) return;
       const object = {
         work_id,
-        content: content.trim(),
+        content,
         comment_time: getTime(),
         commenter_name: user?.user_name || "匿名",
       };
-      await insertChat.mutateAsync({
+      insertChat.mutateAsync({
         object,
       });
       setContent("");

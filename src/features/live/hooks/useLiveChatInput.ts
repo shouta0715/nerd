@@ -19,13 +19,14 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
     e.preventDefault();
     try {
       if (!content.trim()) return;
+
       const object = {
         episode_id,
-        content: content.trim(),
+        content,
         comment_time: mode === "down" ? 0 : timeToSecond(time),
         commenter_name: user?.user_name || "匿名",
       };
-      await insetChat.mutateAsync({
+      insetChat.mutateAsync({
         object,
       });
       setContent("");

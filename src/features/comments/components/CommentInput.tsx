@@ -35,6 +35,18 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
     state.setInputComment,
   ]);
 
+  const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+      e.preventDefault();
+      const { form } = e.currentTarget;
+      if (form) {
+        form.dispatchEvent(
+          new Event("submit", { cancelable: true, bubbles: true })
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     setInputRef(inputRef);
   }, [setInputRef]);
@@ -92,6 +104,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
                 content: e.target.value,
               })
             }
+            onKeyDown={onHandleKeyDown}
             placeholder={
               inputState.replied_to_commenter_name
                 ? `${inputState.replied_to_commenter_name}さんに返信`

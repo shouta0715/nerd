@@ -17,11 +17,11 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
       if (!content.trim()) return;
       const object = {
         episode_id,
-        content: content.trim(),
+        content,
         comment_time: getTime(),
         commenter_name: user?.user_name || "匿名",
       };
-      await insertChat.mutateAsync({
+      insertChat.mutateAsync({
         object,
       });
       setContent("");
