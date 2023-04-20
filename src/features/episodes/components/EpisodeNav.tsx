@@ -32,7 +32,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
   const user = useUserState((state) => state.user);
 
   return (
-    <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:h-auto lg:border-none">
+    <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto lg:border-none">
       <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
         <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 after:h-7 after:w-7 after:content-['']">
           <button className="h-7 w-7 border-none" onClick={() => router.back()}>
