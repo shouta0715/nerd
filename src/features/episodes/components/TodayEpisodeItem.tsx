@@ -47,7 +47,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <ModeBadge mode={mode} start_time={episode.start_time} />
           <div className="flex w-full flex-1 flex-col items-center gap-1">
             <Text
-              className=" text-base font-bold text-white md:text-lg"
+              className="line-clamp-1 text-base font-bold text-white md:text-lg"
               component="h4"
               ff="Hiragino Sans"
             >
