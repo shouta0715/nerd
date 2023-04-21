@@ -1,7 +1,6 @@
 import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import React, { FC, memo } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
@@ -87,13 +86,13 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               minutes={time.minutes.toString().padStart(2, "0")}
               seconds={time.seconds.toString().padStart(2, "0")}
             />
-            <Link
+            <ButtonLink
               as={`/episodes/live/${episode.id}`}
               className={`${
                 mode === "down"
                   ? "bg-indigo-500 text-white"
                   : "bg-orange-500 text-white"
-              } ml-auto mt-2 rounded-md px-3 py-2 text-sm font-bold`}
+              } ml-auto mt-2 rounded-md px-2 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
                 query: {
@@ -110,7 +109,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               }}
             >
               参加する
-            </Link>
+            </ButtonLink>
           </div>
         ) : (
           <div className=" mt-3 flex w-full flex-1 flex-col items-center justify-end space-y-3">

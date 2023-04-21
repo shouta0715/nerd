@@ -42,6 +42,15 @@ export const SEARCH_WORKS = gql`
       series_title
       has_episodes
       series_id
+      episodes(order_by: { number: desc_nulls_last }, limit: 8) {
+        title
+        start_time
+        number
+        id
+        has_prev_episode
+        has_next_episode
+        end_time
+      }
     }
   }
 `;

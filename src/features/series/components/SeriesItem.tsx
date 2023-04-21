@@ -17,7 +17,7 @@ export const SeriesItem: FC<Props> = ({
     <WorkItem isSeriesPage work={series_work} />
   ) : (
     <li
-      className={`group relative flex flex-col items-center space-x-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4 ${
+      className={`group relative flex animate-fadeUp flex-col items-center space-x-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4 ${
         isFirstHasEpisodeIndex ? "col-start-1" : ""
       }`}
     >

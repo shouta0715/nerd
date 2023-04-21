@@ -1,5 +1,4 @@
 import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
@@ -17,37 +16,9 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">
-        {work.has_episodes ? (
-          <Link
-            as={
-              work.series_id
-                ? work.has_episodes
-                  ? `/works/${work.id}?series=${work.series_id}`
-                  : `/works/play/${work.id}?series=${work.series_id}`
-                : work.has_episodes
-                ? `/works/${work.id}`
-                : `/works/play/${work.id}`
-            }
-            className="line-clamp-2 font-hiragino-sans text-base font-bold"
-            href={{
-              pathname: `${
-                work.has_episodes
-                  ? `/works/${work.id}`
-                  : `/works/play/${work.id}`
-              }`,
-              query: {
-                series: work.series_id ?? undefined,
-                work: [work.title, work.series_title],
-              },
-            }}
-          >
-            {work.series_title}
-          </Link>
-        ) : (
-          <div className="line-clamp-2 font-hiragino-sans text-base font-bold">
-            {work.series_title}
-          </div>
-        )}
+        <h3 className="line-clamp-2 font-hiragino-sans text-base font-bold">
+          {work.series_title}
+        </h3>
       </div>
       <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  p-3  md:p-4">
         {work.episodes.length > 0 ? (

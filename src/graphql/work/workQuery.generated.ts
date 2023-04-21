@@ -26,7 +26,7 @@ export type SearchWorksQueryVariables = Types.Exact<{
 }>;
 
 
-export type SearchWorksQuery = { __typename?: 'query_root', search_works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, has_episodes?: boolean | null, series_id?: string | null }> };
+export type SearchWorksQuery = { __typename?: 'query_root', search_works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, has_episodes?: boolean | null, series_id?: string | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
 
 export type GetWorkSeriesQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
@@ -108,6 +108,15 @@ export const SearchWorksDocument = `
     series_title
     has_episodes
     series_id
+    episodes(order_by: {number: desc_nulls_last}, limit: 8) {
+      title
+      start_time
+      number
+      id
+      has_prev_episode
+      has_next_episode
+      end_time
+    }
   }
 }
     `;

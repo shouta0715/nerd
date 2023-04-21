@@ -2153,6 +2153,10 @@ export type Mutation_Root = {
   delete_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** delete single row from the table: "media_types" */
   delete_media_types_by_pk?: Maybe<Media_Types>;
+  /** delete data from the table: "request_works" */
+  delete_request_works?: Maybe<Request_Works_Mutation_Response>;
+  /** delete single row from the table: "request_works" */
+  delete_request_works_by_pk?: Maybe<Request_Works>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -2181,6 +2185,10 @@ export type Mutation_Root = {
   insert_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** insert a single row into the table: "media_types" */
   insert_media_types_one?: Maybe<Media_Types>;
+  /** insert data into the table: "request_works" */
+  insert_request_works?: Maybe<Request_Works_Mutation_Response>;
+  /** insert a single row into the table: "request_works" */
+  insert_request_works_one?: Maybe<Request_Works>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -2219,6 +2227,12 @@ export type Mutation_Root = {
   update_media_types_by_pk?: Maybe<Media_Types>;
   /** update multiples rows of table: "media_types" */
   update_media_types_many?: Maybe<Array<Maybe<Media_Types_Mutation_Response>>>;
+  /** update data of the table: "request_works" */
+  update_request_works?: Maybe<Request_Works_Mutation_Response>;
+  /** update single row of the table: "request_works" */
+  update_request_works_by_pk?: Maybe<Request_Works>;
+  /** update multiples rows of table: "request_works" */
+  update_request_works_many?: Maybe<Array<Maybe<Request_Works_Mutation_Response>>>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -2290,6 +2304,18 @@ export type Mutation_RootDelete_Media_TypesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Media_Types_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Request_WorksArgs = {
+  where: Request_Works_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Request_Works_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -2385,6 +2411,20 @@ export type Mutation_RootInsert_Media_TypesArgs = {
 export type Mutation_RootInsert_Media_Types_OneArgs = {
   object: Media_Types_Insert_Input;
   on_conflict?: InputMaybe<Media_Types_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Request_WorksArgs = {
+  objects: Array<Request_Works_Insert_Input>;
+  on_conflict?: InputMaybe<Request_Works_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Request_Works_OneArgs = {
+  object: Request_Works_Insert_Input;
+  on_conflict?: InputMaybe<Request_Works_On_Conflict>;
 };
 
 
@@ -2527,6 +2567,28 @@ export type Mutation_RootUpdate_Media_Types_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Request_WorksArgs = {
+  _inc?: InputMaybe<Request_Works_Inc_Input>;
+  _set?: InputMaybe<Request_Works_Set_Input>;
+  where: Request_Works_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Request_Works_By_PkArgs = {
+  _inc?: InputMaybe<Request_Works_Inc_Input>;
+  _set?: InputMaybe<Request_Works_Set_Input>;
+  pk_columns: Request_Works_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Request_Works_ManyArgs = {
+  updates: Array<Request_Works_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: InputMaybe<Users_Set_Input>;
   where: Users_Bool_Exp;
@@ -2627,6 +2689,12 @@ export type Query_Root = {
   replies: Array<Comments>;
   /** execute function "replies" and query aggregates on result of table type "comments" */
   replies_aggregate: Comments_Aggregate;
+  /** An array relationship */
+  request_works: Array<Request_Works>;
+  /** An aggregate relationship */
+  request_works_aggregate: Request_Works_Aggregate;
+  /** fetch data from the table: "request_works" using primary key columns */
+  request_works_by_pk?: Maybe<Request_Works>;
   /** execute function "search_works" which returns "works" */
   search_works: Array<Works>;
   /** execute function "search_works" and query aggregates on result of table type "works" */
@@ -2825,6 +2893,29 @@ export type Query_RootReplies_AggregateArgs = {
 };
 
 
+export type Query_RootRequest_WorksArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+export type Query_RootRequest_Works_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+export type Query_RootRequest_Works_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
 export type Query_RootSearch_WorksArgs = {
   args: Search_Works_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
@@ -2916,6 +3007,363 @@ export type Replies_Args = {
   reply_limit?: InputMaybe<Scalars['Int']>;
 };
 
+/** columns and relationships of "request_works" */
+export type Request_Works = {
+  __typename?: 'request_works';
+  created_at: Scalars['timestamptz'];
+  detail?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  official_url?: Maybe<Scalars['String']>;
+  updated_at: Scalars['timestamptz'];
+  /** An object relationship */
+  user: Users;
+  user_id: Scalars['String'];
+  work_title: Scalars['String'];
+};
+
+/** aggregated selection of "request_works" */
+export type Request_Works_Aggregate = {
+  __typename?: 'request_works_aggregate';
+  aggregate?: Maybe<Request_Works_Aggregate_Fields>;
+  nodes: Array<Request_Works>;
+};
+
+export type Request_Works_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Request_Works_Aggregate_Bool_Exp_Count>;
+};
+
+export type Request_Works_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Request_Works_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+  filter?: InputMaybe<Request_Works_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "request_works" */
+export type Request_Works_Aggregate_Fields = {
+  __typename?: 'request_works_aggregate_fields';
+  avg?: Maybe<Request_Works_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Request_Works_Max_Fields>;
+  min?: Maybe<Request_Works_Min_Fields>;
+  stddev?: Maybe<Request_Works_Stddev_Fields>;
+  stddev_pop?: Maybe<Request_Works_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Request_Works_Stddev_Samp_Fields>;
+  sum?: Maybe<Request_Works_Sum_Fields>;
+  var_pop?: Maybe<Request_Works_Var_Pop_Fields>;
+  var_samp?: Maybe<Request_Works_Var_Samp_Fields>;
+  variance?: Maybe<Request_Works_Variance_Fields>;
+};
+
+
+/** aggregate fields of "request_works" */
+export type Request_Works_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Request_Works_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "request_works" */
+export type Request_Works_Aggregate_Order_By = {
+  avg?: InputMaybe<Request_Works_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Request_Works_Max_Order_By>;
+  min?: InputMaybe<Request_Works_Min_Order_By>;
+  stddev?: InputMaybe<Request_Works_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Request_Works_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Request_Works_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Request_Works_Sum_Order_By>;
+  var_pop?: InputMaybe<Request_Works_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Request_Works_Var_Samp_Order_By>;
+  variance?: InputMaybe<Request_Works_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "request_works" */
+export type Request_Works_Arr_Rel_Insert_Input = {
+  data: Array<Request_Works_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Request_Works_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Request_Works_Avg_Fields = {
+  __typename?: 'request_works_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "request_works" */
+export type Request_Works_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "request_works". All fields are combined with a logical 'AND'. */
+export type Request_Works_Bool_Exp = {
+  _and?: InputMaybe<Array<Request_Works_Bool_Exp>>;
+  _not?: InputMaybe<Request_Works_Bool_Exp>;
+  _or?: InputMaybe<Array<Request_Works_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  detail?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  official_url?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+  work_title?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "request_works" */
+export enum Request_Works_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  RequestWorksPkey = 'request_works_pkey'
+}
+
+/** input type for incrementing numeric columns in table "request_works" */
+export type Request_Works_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "request_works" */
+export type Request_Works_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  detail?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  official_url?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_title?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Request_Works_Max_Fields = {
+  __typename?: 'request_works_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  official_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_title?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "request_works" */
+export type Request_Works_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  detail?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  official_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_title?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Request_Works_Min_Fields = {
+  __typename?: 'request_works_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  official_url?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+  user_id?: Maybe<Scalars['String']>;
+  work_title?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "request_works" */
+export type Request_Works_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  detail?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  official_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_title?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "request_works" */
+export type Request_Works_Mutation_Response = {
+  __typename?: 'request_works_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Request_Works>;
+};
+
+/** on_conflict condition type for table "request_works" */
+export type Request_Works_On_Conflict = {
+  constraint: Request_Works_Constraint;
+  update_columns?: Array<Request_Works_Update_Column>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "request_works". */
+export type Request_Works_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  detail?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  official_url?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_title?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: request_works */
+export type Request_Works_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "request_works" */
+export enum Request_Works_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Detail = 'detail',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OfficialUrl = 'official_url',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkTitle = 'work_title'
+}
+
+/** input type for updating data in table "request_works" */
+export type Request_Works_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  detail?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  official_url?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_title?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate stddev on columns */
+export type Request_Works_Stddev_Fields = {
+  __typename?: 'request_works_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "request_works" */
+export type Request_Works_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Request_Works_Stddev_Pop_Fields = {
+  __typename?: 'request_works_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "request_works" */
+export type Request_Works_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Request_Works_Stddev_Samp_Fields = {
+  __typename?: 'request_works_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "request_works" */
+export type Request_Works_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "request_works" */
+export type Request_Works_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Request_Works_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Request_Works_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  detail?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  official_url?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+  user_id?: InputMaybe<Scalars['String']>;
+  work_title?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate sum on columns */
+export type Request_Works_Sum_Fields = {
+  __typename?: 'request_works_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "request_works" */
+export type Request_Works_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "request_works" */
+export enum Request_Works_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Detail = 'detail',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  OfficialUrl = 'official_url',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkTitle = 'work_title'
+}
+
+export type Request_Works_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Request_Works_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Request_Works_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Request_Works_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Request_Works_Var_Pop_Fields = {
+  __typename?: 'request_works_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "request_works" */
+export type Request_Works_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Request_Works_Var_Samp_Fields = {
+  __typename?: 'request_works_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "request_works" */
+export type Request_Works_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Request_Works_Variance_Fields = {
+  __typename?: 'request_works_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "request_works" */
+export type Request_Works_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
 export type Search_Works_Args = {
   _limit?: InputMaybe<Scalars['Int']>;
   search?: InputMaybe<Scalars['String']>;
@@ -2975,6 +3423,14 @@ export type Subscription_Root = {
   replies: Array<Comments>;
   /** execute function "replies" and query aggregates on result of table type "comments" */
   replies_aggregate: Comments_Aggregate;
+  /** An array relationship */
+  request_works: Array<Request_Works>;
+  /** An aggregate relationship */
+  request_works_aggregate: Request_Works_Aggregate;
+  /** fetch data from the table: "request_works" using primary key columns */
+  request_works_by_pk?: Maybe<Request_Works>;
+  /** fetch data from the table in a streaming manner: "request_works" */
+  request_works_stream: Array<Request_Works>;
   /** execute function "search_works" which returns "works" */
   search_works: Array<Works>;
   /** execute function "search_works" and query aggregates on result of table type "works" */
@@ -3212,6 +3668,36 @@ export type Subscription_RootReplies_AggregateArgs = {
 };
 
 
+export type Subscription_RootRequest_WorksArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootRequest_Works_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootRequest_Works_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootRequest_Works_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Request_Works_Stream_Cursor_Input>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
 export type Subscription_RootSearch_WorksArgs = {
   args: Search_Works_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
@@ -3357,6 +3843,10 @@ export type Users = {
   /** An aggregate relationship */
   likes_aggregate: Likes_Aggregate;
   photo_url?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  request_works: Array<Request_Works>;
+  /** An aggregate relationship */
+  request_works_aggregate: Request_Works_Aggregate;
   updated_at: Scalars['timestamptz'];
   user_name: Scalars['String'];
 };
@@ -3421,6 +3911,26 @@ export type UsersLikes_AggregateArgs = {
   where?: InputMaybe<Likes_Bool_Exp>;
 };
 
+
+/** columns and relationships of "users" */
+export type UsersRequest_WorksArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersRequest_Works_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
 /** aggregated selection of "users" */
 export type Users_Aggregate = {
   __typename?: 'users_aggregate';
@@ -3459,6 +3969,8 @@ export type Users_Bool_Exp = {
   likes?: InputMaybe<Likes_Bool_Exp>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
   photo_url?: InputMaybe<String_Comparison_Exp>;
+  request_works?: InputMaybe<Request_Works_Bool_Exp>;
+  request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user_name?: InputMaybe<String_Comparison_Exp>;
 };
@@ -3479,6 +3991,7 @@ export type Users_Insert_Input = {
   ip?: InputMaybe<Scalars['String']>;
   likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
   photo_url?: InputMaybe<Scalars['String']>;
+  request_works?: InputMaybe<Request_Works_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_name?: InputMaybe<Scalars['String']>;
 };
@@ -3538,6 +4051,7 @@ export type Users_Order_By = {
   ip?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   photo_url?: InputMaybe<Order_By>;
+  request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
   user_name?: InputMaybe<Order_By>;
 };

@@ -40,7 +40,12 @@ export const ChatInput: FC<Props> = ({
   const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // 候補が表示されているときはEnterで候補を選択する
 
-    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+    if (
+      e.key === "Enter" &&
+      !e.shiftKey &&
+      !e.nativeEvent.isComposing &&
+      !isLoading
+    ) {
       e.preventDefault();
       const { form } = e.currentTarget;
       if (form) {

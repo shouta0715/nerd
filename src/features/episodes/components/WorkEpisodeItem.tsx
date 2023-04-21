@@ -17,7 +17,7 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`
       }
-      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 md:text-base"
+      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 transition-all hover:text-indigo-600 hover:underline md:text-base"
       color="indigo"
       href={{
         pathname: getIsFinished(episode.end_time)

@@ -1,8 +1,10 @@
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
+import { WorkItem } from "src/features/works/components/WorkItem";
 
 const DynamicLottieResult = dynamic(
   () =>
@@ -61,44 +63,34 @@ export const SpSearchWorks = () => {
           </>
         )}
         <ul className="mt-4 space-y-4">
-          {data?.search_works.map((work) => (
-            <li
-              key={work.id}
-              className="group relative flex space-x-2 rounded-md bg-white  p-4 shadow"
-            >
-              <p className="flex-1">{work.series_title}</p>
-              <ButtonLink
-                as={
-                  work.series_id
-                    ? work.has_episodes
-                      ? `/works/${work.id}?series=${work.series_id}`
-                      : `/works/play/${work.id}?series=${work.series_id}`
-                    : work.has_episodes
-                    ? `/works/${work.id}`
-                    : `/works/play/${work.id}`
-                }
-                className={`h-max py-1.5 font-bold  ${
-                  work.has_episodes
-                    ? "bg-indigo-50 text-indigo-500"
-                    : "bg-indigo-500 text-white"
-                }`}
-                href={{
-                  pathname: `${
-                    work.has_episodes
-                      ? `/works/${work.id}`
-                      : `/works/play/${work.id}`
-                  }`,
-                  query: {
-                    series: work.series_id ?? undefined,
-                    work: [work.title, work.series_title],
-                  },
-                }}
-                size="xs"
+          {data?.search_works.map((work) =>
+            work.has_episodes ? (
+              <WorkItem key={work.id} work={work} />
+            ) : (
+              <li
+                key={work.id}
+                className="group relative flex animate-fadeUp flex-col items-center space-x-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:p-4"
               >
-                {work.has_episodes ? "エピソード一覧へ" : "視聴する"}
-              </ButtonLink>
-            </li>
-          ))}
+                <span className="mb-2.5 inline-block flex-1 font-bold">
+                  {work.series_title}
+                </span>
+                <ButtonLink
+                  as={`/works/play/${work.id}`}
+                  className="h-max border-white bg-indigo-500 font-bold text-white hover:bg-indigo-600"
+                  href={{
+                    pathname: `${`/works/play/${work.id}`}`,
+                    query: {
+                      work: [work.title, work.series_title],
+                    },
+                  }}
+                  leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
+                  size="sm"
+                >
+                  視聴する
+                </ButtonLink>
+              </li>
+            )
+          )}
         </ul>
       </div>
     </section>
