@@ -19,7 +19,6 @@ export const getTodayData = async () => {
       {
         number: { _eq: item.number },
         work: { tid: { _eq: item.TID } },
-        has_next_episode: { _eq: false },
       },
     ],
   }));

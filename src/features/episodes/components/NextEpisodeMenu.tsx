@@ -8,6 +8,7 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
+import { useTimerState } from "src/features/timer/store/timerStore";
 import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -18,6 +19,7 @@ type Props = {
 
 export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
   const { data } = useQueryEpisode(episode?.next_episode_id, undefined);
+  const interval = useTimerState((state) => state.interval);
 
   return (
     <section className="border-0 border-b border-solid border-slate-200 px-4 py-2">
@@ -55,6 +57,7 @@ export const NextEpisodeMenu: FC<Props> = ({ episode, mode }) => {
             className="mb-2 mr-auto flex h-full w-max items-center space-x-2 border-none bg-indigo-500  p-2 text-xs font-bold text-white shadow-none"
             href={`/episodes/${data?.episodes_by_pk?.id}`}
             leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
+            onClick={interval.reset}
             size="xs"
           >
             次のエピソードへ
