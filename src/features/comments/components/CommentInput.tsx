@@ -37,7 +37,12 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   ]);
 
   const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+    if (
+      e.key === "Enter" &&
+      !e.shiftKey &&
+      !e.nativeEvent.isComposing &&
+      !isLoading
+    ) {
       e.preventDefault();
       const { form } = e.currentTarget;
       if (form) {

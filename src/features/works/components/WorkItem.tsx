@@ -12,7 +12,7 @@ type Props = {
 export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   <li
     key={`works-${work.id}`}
-    className="relative w-full flex-1 animate-fadeUp rounded-xl border  border-slate-200 bg-white"
+    className="relative w-full flex-1 animate-fadeUp  rounded-xl border border-slate-200 bg-white"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">
@@ -20,7 +20,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
           {work.series_title}
         </h3>
       </div>
-      <div className="flex h-full w-full flex-1 flex-col border-x-0 border-y-0  p-3  md:p-4">
+      <div className="flex h-full w-full flex-1 flex-col p-3  md:p-4">
         {work.episodes.length > 0 ? (
           <ul className="peer mb-2 grid h-full w-full flex-1  grid-cols-2 items-center justify-around text-base">
             {work.episodes.map((episode) => (

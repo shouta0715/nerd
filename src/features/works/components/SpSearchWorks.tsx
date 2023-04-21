@@ -49,8 +49,8 @@ export const SpSearchWorks = () => {
   }, [router]);
 
   return (
-    <section className="flex-1 bg-gray-50">
-      <div className="container mx-auto p-4">
+    <section className="h-full flex-1 bg-gray-50">
+      <div className="container mx-auto h-full p-4">
         {data && data.search_works.length > 0 && (
           <p className="grid place-items-center font-bold">{q}の検索結果</p>
         )}
@@ -62,7 +62,7 @@ export const SpSearchWorks = () => {
             <DynamicLottieResult />
           </>
         )}
-        <ul className="mt-4 space-y-4">
+        <ul className="mt-4 grid grid-cols-1 space-y-4">
           {data?.search_works.map((work) =>
             work.has_episodes ? (
               <WorkItem key={work.id} work={work} />
