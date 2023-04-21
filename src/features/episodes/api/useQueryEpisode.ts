@@ -39,8 +39,8 @@ export const useQueryEpisode = (
             title,
             number: +number,
             has_next_episode: has_next_episode === "true",
-            start_time,
-            end_time,
+            start_time: start_time === "" ? null : start_time,
+            end_time: end_time === "" ? null : end_time,
             work: {
               series_title,
               title,

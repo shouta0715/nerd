@@ -7,6 +7,7 @@ type HandleClick = {
 
 export const useReply = () => {
   const focus = useRefState((state) => state.focusRef);
+
   const [inputState, setInputState] = useInputCommentState((state) => [
     state.inputComment,
     state.setInputComment,

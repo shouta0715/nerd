@@ -70,6 +70,7 @@ export const LiveHeader: FC<Props> = ({
         {mode === "up" && "開始から"}
         {mode === "down" && "開始まで"}
         {mode === "finish" && "終了しました"}
+        {mode === "notRegister" && "放送日までお待ち下さい"}
       </Text>
       <DynamicTimer
         hours={time.hours}

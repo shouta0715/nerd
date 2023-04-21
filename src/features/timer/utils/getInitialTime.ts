@@ -1,6 +1,7 @@
 import { Time } from "src/features/timer/types";
 
 export const getInitialTime = (start_time: string): Time => {
+  if (start_time === null) return { hours: 0, minutes: 0, seconds: 0 };
   const now = new Date();
   const start = new Date(start_time);
 

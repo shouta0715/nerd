@@ -64,7 +64,7 @@ export const Live = () => {
           )
         )}
       </div>
-      <MainWrapper>
+      <MainWrapper isLiveComment={mode !== "finish" && !isChat}>
         {isChat ? (
           <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
             {isAlreadyFinished ? (

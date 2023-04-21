@@ -6,7 +6,9 @@ import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 export const useLive = () => {
   const router = useRouter();
   const { slug, episode } = router.query;
+
   const { data, isLoading, isPlaceholderData } = useQueryEpisode(slug, episode);
+
   const [isChat, setIsChat] = useState(true);
 
   const { mode, time, isTimeLoading, isAlreadyFinished } = useLiveTimer({

@@ -6,6 +6,7 @@ import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Chat } from "src/features/chats/components/Chat";
 import { Chat as TypeChat } from "src/features/chats/types";
 import { useTimerState } from "src/features/timer/store/timerStore";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   chats: TypeChat[];
@@ -26,9 +27,10 @@ export const Chats: FC<Props> = ({
   isLoading,
 }) => {
   const interval = useTimerState((state) => state.interval);
+  const user = useUserState((state) => state.user);
 
   return (
-    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2 pb-1 pt-4 md:px-4 lg:pb-20">
+    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2  py-4 md:px-4">
       <Transition
         as="button"
         className="m-auto grid place-items-center rounded-full border bg-black p-4 transition-all"
@@ -42,7 +44,7 @@ export const Chats: FC<Props> = ({
         onClick={interval.start}
         show={time === 0 && !interval.active}
       >
-        {isLoading ? (
+        {isLoading || !user ? (
           <Loader color="white" size="lg" />
         ) : (
           <PlayIcon className="h-10 w-10 fill-white" />

@@ -73,7 +73,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
               </label>
               <Button
                 className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
-                  inputValue === user?.user_name || !inputValue.trim()
+                  inputValue === user?.user_name || !inputValue.trim() || !user
                     ? "pointer-events-none opacity-0"
                     : "opacity-100"
                 }`}

@@ -41,7 +41,7 @@ export const LiveChats: FC<Props> = ({
   }
 
   return (
-    <ul className=" relative w-full flex-1 animate-fadeIn space-y-3 px-4 pb-1 pt-4">
+    <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2  py-4 md:px-4">
       <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
         右下のボタンを押すと、最新のコメントを読み込めます。
       </p>

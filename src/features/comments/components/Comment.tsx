@@ -76,7 +76,7 @@ export const Comment: FC<Props> = ({ comment }) => {
               {formatTimeDistance(comment.created_at)}
             </span>
             <Button
-              className="border-none p-0 text-sm text-black"
+              className="border-none p-0 text-xs text-black"
               onClick={() =>
                 handleClick({
                   reply_to: comment.id,

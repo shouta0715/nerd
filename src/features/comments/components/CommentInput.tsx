@@ -29,6 +29,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
     state.setIsMenuOpen,
   ]);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
   const setInputRef = useRefState((state) => state.setInputRef);
   const [inputState, setInputComment] = useInputCommentState((state) => [
     state.inputComment,
@@ -84,6 +85,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         </button>
         <div className="relative mr-2  flex  flex-1 items-center">
           <ReactTextareaAutosize
+            ref={inputRef}
             className="w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
             disabled={!user}
             maxLength={100}

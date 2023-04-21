@@ -31,8 +31,8 @@ const Home: NextPage<Props> = ({
   buildDate,
 }) => (
   <Layout>
-    <div className="space-y-1 bg-white md:py-0">
-      <section className=" bg-gray-50 px-3 py-6 md:px-6">
+    <div className="space-y-1 bg-white">
+      <section className="bg-gray-50 px-3 py-6 md:px-6">
         <TopTitle buildDate={buildDate} title="今日放送のエピソード" />
         <TodayEpisodeList data={todayEpisodes} />
         <Text
@@ -70,7 +70,7 @@ const Home: NextPage<Props> = ({
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
         </Text>
       </section>
-      <section className=" bg-gray-50 px-3 pt-10 md:px-6">
+      <section className=" bg-gray-50 px-3 pt-10 md:px-6 md:pb-10">
         <TopTitle buildDate={buildDate} title="今週のアニメ" />
         <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {weeklyWorks?.weekly_works?.map((work) => (
