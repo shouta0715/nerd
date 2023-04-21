@@ -39,7 +39,7 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
       第{episode.number}話
     </Link>
     <Text
-      className="line-clamp-3 flex-1 text-xs md:text-sm"
+      className="line-clamp-3 flex-1 text-sm md:text-sm"
       component="p"
       ff="Hiragino Sans"
     >
