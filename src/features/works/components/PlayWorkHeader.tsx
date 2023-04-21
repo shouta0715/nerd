@@ -11,7 +11,7 @@ export const PlayWorkHeader: FC<Props> = ({ title, id }) => (
   <header className="container mx-auto mb-2 flex flex-col bg-white p-6 pb-0">
     <div className="flex w-full flex-1 flex-col items-center gap-2">
       <Text
-        className="text-base font-bold md:text-lg"
+        className="line-clamp-3 text-base font-bold md:text-lg"
         component="h4"
         ff="Hiragino Sans"
       >

@@ -33,7 +33,7 @@ export const EpisodeHeader: FC<Props> = ({
           第{episode_number}話
         </Text>
         <Text
-          className="flex-1 text-sm md:text-base"
+          className="line-clamp-3 flex-1 text-sm md:text-base"
           component="p"
           ff="Hiragino Sans"
         >
