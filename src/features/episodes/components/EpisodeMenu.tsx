@@ -39,6 +39,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
     onSubmitChangeTime,
     isChangeTime,
     inputTime,
+    mode,
   } = useMenu();
 
   return (
@@ -103,10 +104,15 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
           </form>
           <div className="flex flex-col items-center space-y-1">
             <div className="flex">
-              <Text className="text-indigo-500" size="sm">
+              <Text
+                className={` text-sm transition-colors duration-300 ${
+                  mode === "up" ? "text-pink-500" : "text-indigo-500"
+                }`}
+                ff="Hiragino Sans"
+              >
                 開始から
               </Text>
-              <div className="relative bg-red-500">
+              <div className="relative">
                 <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6 text-gray-500" />
                 <div className="absolute -left-7 bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
                   下の数字をタップすると時間を変更できます。
@@ -167,7 +173,11 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                 className="relative mx-auto h-12 w-12 border-none"
                 onClick={() => changeTenTime("minus")}
               >
-                <RotateArrowRightIcon className="h-8 w-8 fill-none stroke-indigo-500 stroke-[2]  [transform:rotateY(180deg)_rotateZ(-45deg)]" />
+                <RotateArrowRightIcon
+                  className={`h-8 w-8 fill-none stroke-[2] transition-colors duration-300  [transform:rotateY(180deg)_rotateZ(-45deg)] ${
+                    mode === "up" ? "stroke-pink-500" : "stroke-indigo-500"
+                  }`}
+                />
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                   10
                 </span>
@@ -201,7 +211,11 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                 className="relative mx-auto h-12 w-12 border-none"
                 onClick={() => changeTenTime("add")}
               >
-                <RotateArrowRightIcon className="h-8 w-8 -rotate-45 fill-none stroke-indigo-500 stroke-[2]" />
+                <RotateArrowRightIcon
+                  className={`h-8 w-8 -rotate-45 fill-none stroke-[2] transition-colors  duration-300 ${
+                    mode === "up" ? "stroke-pink-500" : "stroke-indigo-500"
+                  }`}
+                />
 
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                   10

@@ -11,15 +11,23 @@ export const useMenu = () => {
     state.setIsMenuOpen,
   ]);
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
-  const { time, padTime, setTime, interval, changeTenTime, timeToPadTime } =
-    useTimerState((state) => ({
-      time: state.time,
-      padTime: state.getPadStartTime(),
-      setTime: state.setTime,
-      interval: state.interval,
-      changeTenTime: state.changeTenTime,
-      timeToPadTime: state.timeToPadTime,
-    }));
+  const {
+    time,
+    padTime,
+    mode,
+    setTime,
+    interval,
+    changeTenTime,
+    timeToPadTime,
+  } = useTimerState((state) => ({
+    time: state.time,
+    padTime: state.getPadStartTime(),
+    setTime: state.setTime,
+    interval: state.interval,
+    changeTenTime: state.changeTenTime,
+    timeToPadTime: state.timeToPadTime,
+    mode: state.mode,
+  }));
   const uuid = useId();
 
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
@@ -96,5 +104,6 @@ export const useMenu = () => {
     onSubmitChangeTime,
     inputTime,
     isChangeTime,
+    mode,
   };
 };

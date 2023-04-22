@@ -5,6 +5,7 @@ import React, { FC } from "react";
 import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
+import { useTimerState } from "src/features/timer/store/timerStore";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useUserState } from "src/store/user/userState";
 
@@ -30,6 +31,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
   const prefetchComments = usePrefetchCommentEpisode();
   const router = useRouter();
   const user = useUserState((state) => state.user);
+  const mode = useTimerState((state) => state.mode);
 
   return (
     <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto lg:border-none">
@@ -40,10 +42,12 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
           </button>
           <div className=" flex h-full flex-1 items-center justify-around">
             <Text
-              className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold text-indigo-500 md:text-base  ${
-                isChat
-                  ? "border-0 border-b-2 border-solid border-indigo-500"
-                  : "border-none"
+              className={`inline-block cursor-pointer rounded-none py-2 text-sm  font-bold text-indigo-500 transition-colors duration-300 md:text-base  ${
+                isChat ? "border-0 border-b-2 border-solid" : "border-none"
+              } ${
+                mode === "up"
+                  ? "border-b-pink-500 text-pink-500"
+                  : "border-b-indigo-500 text-indigo-500"
               }`}
               component="button"
               onClick={() => setIsChat(true)}
@@ -51,10 +55,12 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
               チャット
             </Text>
             <Text
-              className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 md:text-base ${
-                !isChat
-                  ? "border-0 border-b-2 border-solid border-indigo-500"
-                  : "border-none"
+              className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 transition-colors duration-300 md:text-base ${
+                !isChat ? "border-0 border-b-2 border-solid " : "border-none"
+              } ${
+                mode === "up"
+                  ? "border-b-pink-500 text-pink-500"
+                  : "border-b-indigo-500 text-indigo-500"
               }`}
               color="indigo"
               component="button"
