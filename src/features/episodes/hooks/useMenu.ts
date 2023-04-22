@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
@@ -28,7 +28,6 @@ export const useMenu = () => {
     timeToPadTime: state.timeToPadTime,
     mode: state.mode,
   }));
-  const uuid = useId();
 
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
   const [inputTime, setInputTime] = useState<string | null>(null);
@@ -98,7 +97,7 @@ export const useMenu = () => {
     padTime,
     interval,
     handleChange,
-    uuid,
+
     time,
     changeTenTime,
     onSubmitChangeTime,

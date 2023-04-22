@@ -9,6 +9,7 @@ import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Input } from "src/components/Elements/Input/Input";
+import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
@@ -29,7 +30,7 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
     padTime,
     inputValue,
     interval,
-    uuid,
+
     handleChange,
     changeTenTime,
     onSubmitChangeTime,
@@ -111,40 +112,11 @@ export const WorkMenu: FC<Props> = ({ series_id, series_title }) => {
             </div>
             <div className="flex flex-col items-center space-y-1">
               <div className=" w-full">
-                {inputTime
-                  ? inputTime.split("").map((digit, index) => (
-                      <input
-                        key={`${uuid}-${index}`}
-                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
-                        id={`${uuid}-${index + 1}`}
-                        onChange={(e) => {
-                          handleChange(e, index);
-                        }}
-                        onFocus={() => {
-                          interval?.stop();
-                        }}
-                        value={digit}
-                      />
-                    ))
-                  : padTime.split("").map((digit, index) => (
-                      <input
-                        key={`${uuid}-${index}`}
-                        className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
-                        id={`${uuid}-${index + 1}`}
-                        inputMode="numeric"
-                        max="9"
-                        min="0"
-                        onChange={(e) => {
-                          handleChange(e, index);
-                        }}
-                        onFocus={() => {
-                          interval?.stop();
-                        }}
-                        pattern="[0-9]*"
-                        type="number"
-                        value={digit}
-                      />
-                    ))}
+                <PinInput
+                  handleChange={handleChange}
+                  inputTime={inputTime}
+                  padTime={padTime}
+                />
               </div>
               <div className="flex w-full">
                 <Text className="w-1/3 pr-4 text-center text-dimmed" size="xs">

@@ -75,6 +75,8 @@ export const useTimerState = create<TimerState>((set, get) => ({
         downSeconds === 0 &&
         get().mode === "down"
       ) {
+        get().interval.stop();
+
         return {
           InitialTimerCount,
         };
