@@ -60,11 +60,14 @@ export const LiveChats: FC<Props> = ({
       >
         <ArrowDownIcon className="h-4 w-4 fill-white stroke-white stroke-2 text-white" />
       </button>
-      <div className="fixed bottom-20 right-2 grid h-10 w-10 place-items-center rounded-full bg-indigo-500 shadow-md shadow-indigo-400">
+      <div className="fixed bottom-20 right-2 grid h-11 w-11 place-items-center rounded-full bg-indigo-500 shadow-md shadow-indigo-400 transition-transform active:translate-y-1 lg:right-14">
         {isRefetching ? (
           <Loader color="white" size="sm" />
         ) : (
-          <button className="mx-auto text-white" onClick={handleRefetch}>
+          <button
+            className="grid h-full w-full place-items-center text-white "
+            onClick={handleRefetch}
+          >
             <RotateArrowIcon className="h-5 w-5 fill-transparent stroke-white stroke-2" />
           </button>
         )}

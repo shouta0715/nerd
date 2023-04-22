@@ -1,7 +1,7 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
 const Document = () => (
-  <Html>
+  <Html lang="ja-JP">
     <Head>
       <meta charSet="utf-8" />
       <link href="/favicon.ico" rel="icon" />
