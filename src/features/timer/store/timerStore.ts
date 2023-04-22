@@ -34,6 +34,8 @@ type Interval = {
 
 type TimerState = {
   time: TimerCount;
+  downInitialTime: TimerCount;
+  setDownInitialTime: (time: TimerCount) => void;
   intervalTime: () => void;
   resetTime: () => void;
   setTime: (time: TimerCount) => void;
@@ -42,30 +44,59 @@ type TimerState = {
   changeTenTime: (formula: "add" | "minus") => void;
   getPadStartTime: () => string;
   timeToPadTime: (time: TimerCount) => string;
+  mode: "up" | "down";
+  changeMode: () => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
+  mode: "up",
   time: InitialTimerCount,
+  downInitialTime: InitialTimerCount,
+  setDownInitialTime: (time) => {
+    set({ time });
+  },
   intervalTime: () => {
-    if (
-      get().time.hours === 10 &&
-      get().time.minutes === 0 &&
-      get().time.seconds === 0
-    ) {
+    const { hours, minutes, seconds } = get().time;
+    if (hours === 10 && minutes === 0 && seconds === 0) {
       get().interval.stop();
 
       return;
     }
-    set({
-      time: {
-        seconds: get().time.seconds === 59 ? 0 : get().time.seconds + 1,
-        minutes:
-          get().time.seconds === 59
-            ? get().time.minutes + 1
-            : get().time.minutes,
-        hours:
-          get().time.minutes === 59 ? get().time.hours + 1 : get().time.hours,
-      },
+    set(() => {
+      const {
+        hours: downHours,
+        minutes: downMinutes,
+        seconds: downSeconds,
+      } = get().downInitialTime;
+
+      if (
+        downHours === 0 &&
+        downMinutes === 0 &&
+        downSeconds === 0 &&
+        get().mode === "down"
+      ) {
+        return {
+          InitialTimerCount,
+        };
+      }
+
+      if (get().mode === "down") {
+        return {
+          time: {
+            seconds: seconds === 0 ? 59 : seconds - 1,
+            minutes: seconds === 0 ? minutes - 1 : minutes,
+            hours: minutes === 0 ? hours - 1 : hours,
+          },
+        };
+      }
+
+      return {
+        time: {
+          seconds: seconds === 59 ? 0 : seconds + 1,
+          minutes: seconds === 59 ? minutes + 1 : minutes,
+          hours: minutes === 59 ? hours + 1 : hours,
+        },
+      };
     });
   },
   setTime: (time: TimerCount) => {
@@ -114,9 +145,22 @@ export const useTimerState = create<TimerState>((set, get) => ({
   },
   changeTenTime: (formula: "add" | "minus") => {
     const time = get().getTime();
+    const { mode } = get();
     const newTime =
-      formula === "add" ? time + 10 : time - 10 > 0 ? time - 10 : 0;
+      mode === "down"
+        ? formula === "add"
+          ? time - 10
+          : time + 10
+        : formula === "add"
+        ? time + 10
+        : time - 10;
     const { hours, minutes, seconds } = secondToTime(newTime);
+
+    if (newTime < 0) {
+      set({ time: InitialTimerCount });
+
+      return;
+    }
 
     if (hours >= 10) {
       set({ time: MaxTime });
@@ -125,6 +169,7 @@ export const useTimerState = create<TimerState>((set, get) => ({
     }
     set({ time: { hours, minutes, seconds } });
   },
+
   getPadStartTime: () => {
     const { hours, minutes, seconds } = get().time;
 
@@ -138,5 +183,11 @@ export const useTimerState = create<TimerState>((set, get) => ({
     return `${hours.toString().padStart(2, "0")}${minutes
       .toString()
       .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
+  },
+
+  changeMode: () => {
+    set({
+      mode: get().mode === "up" ? "down" : "up",
+    });
   },
 }));

@@ -38,7 +38,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
           <button className="h-7 w-7 border-none" onClick={() => router.back()}>
             <ArrowSmallLeftIcon className="h-full w-full" />
           </button>
-          <ul className=" flex h-full flex-1 items-center justify-around">
+          <div className=" flex h-full flex-1 items-center justify-around">
             <Text
               className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold text-indigo-500 md:text-base  ${
                 isChat
@@ -57,7 +57,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                   : "border-none"
               }`}
               color="indigo"
-              component="li"
+              component="button"
               onClick={() => {
                 setIsChat(false);
                 stop();
@@ -71,7 +71,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
             >
               コメント
             </Text>
-          </ul>
+          </div>
         </div>
         <DynamicEpisodeMenu episode={data?.episodes_by_pk} />
       </div>

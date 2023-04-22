@@ -15,6 +15,7 @@ import { Text } from "src/components/Elements/Text";
 
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
+import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
@@ -208,6 +209,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
               </Button>
             </div>
           </div>
+          <ModeSwitch />
         </section>
         <div className="h-[1px] w-full bg-slate-200" />
         <Suspense fallback={<NextEpisodeMenuSkelton />}>
