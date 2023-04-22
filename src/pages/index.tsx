@@ -49,7 +49,7 @@ const Home: NextPage<Props> = ({
       </section>
       <section className=" bg-indigo-50 px-3 py-10 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
         <TopTitle buildDate={buildDate} title="今期のアニメ" />
-        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {seasonWorks.works?.map((work) => (
             <WorkItem
               key={`work-${work.id}`}
@@ -72,7 +72,7 @@ const Home: NextPage<Props> = ({
       </section>
       <section className=" bg-gray-50 px-3 pt-10 md:px-6 md:pb-10">
         <TopTitle buildDate={buildDate} title="今週のアニメ" />
-        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-6  md:gap-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {weeklyWorks?.weekly_works?.map((work) => (
             <WorkItem key={`work-${work.id}`} work={work} />
           ))}
