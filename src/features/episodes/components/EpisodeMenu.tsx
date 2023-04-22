@@ -167,7 +167,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                 className="relative mx-auto h-12 w-12 border-none"
                 onClick={() => changeTenTime("minus")}
               >
-                <RotateArrowRightIcon className="stroke-4 h-8 w-8 fill-none stroke-indigo-500  [transform:rotateY(180deg)_rotateZ(-45deg)]" />
+                <RotateArrowRightIcon className="h-8 w-8 fill-none stroke-indigo-500 stroke-[2]  [transform:rotateY(180deg)_rotateZ(-45deg)]" />
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                   10
                 </span>
@@ -181,8 +181,8 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                     : time.hours === 0 &&
                       time.minutes === 0 &&
                       time.seconds === 0
-                    ? " invisible bg-indigo-500"
-                    : "bg-blue-500"
+                    ? " invisible"
+                    : "bg-indigo-500"
                 }`}
                 onClick={() => {
                   isChangeTime ? onSubmitChangeTime() : interval?.toggle();
@@ -201,7 +201,7 @@ export const EpisodeMenu: FC<Props> = ({ episode }) => {
                 className="relative mx-auto h-12 w-12 border-none"
                 onClick={() => changeTenTime("add")}
               >
-                <RotateArrowRightIcon className="stroke-4 h-8 w-8 -rotate-45 fill-none stroke-indigo-500" />
+                <RotateArrowRightIcon className="h-8 w-8 -rotate-45 fill-none stroke-indigo-500 stroke-[2]" />
 
                 <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
                   10
