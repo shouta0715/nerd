@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput";
+import { Text } from "src/components/Elements/Text";
 import { useDownModal } from "src/features/timer/hooks/useDownModal";
 
 type Props = {
@@ -26,12 +27,26 @@ export const CountDownModalContent: FC<Props> = ({ isOpen, setIsOpen }) => {
         </span>
       </p>
       <div className="w-full">
-        <div className="mx-auto w-max">
-          <PinInput
-            handleChange={handleChange}
-            inputTime={inputTime}
-            padTime={padTime}
-          />
+        <div className="flex flex-col items-center space-y-1">
+          <div className="mx-auto">
+            <PinInput
+              handleChange={handleChange}
+              inputTime={inputTime}
+              padTime={padTime}
+            />
+
+            <div className="mt-1.5 flex">
+              <Text className="w-1/3 pr-4 text-center text-dimmed" size="xs">
+                時間
+              </Text>
+              <Text className="w-1/3 text-center text-dimmed" size="xs">
+                分
+              </Text>
+              <Text className="w-1/3 pl-3 text-center text-dimmed" size="xs">
+                秒
+              </Text>
+            </div>
+          </div>
         </div>
         <Button
           className="mx-auto mt-4 bg-indigo-500 font-bold text-white"
