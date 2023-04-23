@@ -11,6 +11,7 @@ export const usePlayTimeInput = () => {
     changeTenTime,
     setTime,
     timeToPadTime,
+    downInitialTime,
   } = useTimerState((state) => ({
     time: state.time,
     padTime: state.getPadStartTime(),
@@ -19,6 +20,7 @@ export const usePlayTimeInput = () => {
     setTime: state.setTime,
     mode: state.mode,
     timeToPadTime: state.timeToPadTime,
+    downInitialTime: state.downInitialTime,
   }));
 
   const onSubmitChangeTime = () => {
@@ -78,5 +80,6 @@ export const usePlayTimeInput = () => {
     interval,
     changeTenTime,
     padTime,
+    downInitialTime,
   };
 };

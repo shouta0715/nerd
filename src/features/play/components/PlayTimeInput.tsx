@@ -6,6 +6,8 @@ import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";
+import { getTimeButton } from "src/features/play/utils/getTimeButton";
+import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
 export const PlayTimeInput = () => {
   const {
@@ -18,6 +20,7 @@ export const PlayTimeInput = () => {
     changeTenTime,
     time,
     padTime,
+    downInitialTime,
   } = usePlayTimeInput();
 
   return (
@@ -74,26 +77,29 @@ export const PlayTimeInput = () => {
         </Button>
         <Button
           className={`relative w-full text-xs font-bold text-white ${
-            isChangeTime
-              ? "bg-green-500"
-              : interval?.active
-              ? "bg-red-500"
-              : time.hours === 0 && time.minutes === 0 && time.seconds === 0
-              ? "invisible"
-              : "bg-blue-500"
+            getTimeButton({
+              isChangeTime,
+              mode,
+              downInitialTime,
+              time,
+              active: interval.active,
+            }).color
           }`}
           onClick={() => {
+            if (timeToSecond(time) === 0 && mode === "down") return;
             isChangeTime ? onSubmitChangeTime() : interval?.toggle();
           }}
           size="sm"
         >
-          {isChangeTime
-            ? "変更する"
-            : interval?.active
-            ? "一時停止"
-            : time.hours === 0 && time.minutes === 0 && time.seconds === 0
-            ? "開始"
-            : "再開"}
+          {
+            getTimeButton({
+              isChangeTime,
+              mode,
+              downInitialTime,
+              time,
+              active: interval.active,
+            }).text
+          }
         </Button>
         <Button
           className="relative mx-auto h-12 w-12 border-none"
