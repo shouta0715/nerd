@@ -11,8 +11,8 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Input } from "src/components/Elements/Input/Input";
 import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
-import { CountDownModal } from "src/components/Elements/timer/CountDownModal";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
+import { CountDownModal } from "src/features/timer/components/CountDownModal";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 
 type Props = {

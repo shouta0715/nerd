@@ -19,7 +19,7 @@ export const PinInput: FC<Props> = ({ inputTime, padTime, handleChange }) => {
         ? inputTime.split("").map((digit, index) => (
             <input
               key={`${uuid}-${index}`}
-              className="inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+              className="0 inline-block h-8 w-8 rounded-md border border-slate-200 text-center font-futura text-[16px] outline-indigo-500 first:!ml-0 odd:ml-5 odd:mr-2 "
               id={`${uuid}-${index + 1}`}
               onChange={(e) => {
                 handleChange(e, index);
@@ -33,7 +33,7 @@ export const PinInput: FC<Props> = ({ inputTime, padTime, handleChange }) => {
         : padTime.split("").map((digit, index) => (
             <input
               key={`${uuid}-${index}`}
-              className=" inline-block h-8 w-8 rounded-sm border border-slate-200 text-center font-futura text-[16px] first:!ml-0 odd:ml-5 odd:mr-2 "
+              className="inline-block h-8 w-8 rounded-md border border-slate-200  text-center font-futura text-[16px] outline-indigo-500 first:!ml-0 odd:ml-5 odd:mr-2 "
               id={`${uuid}-${index + 1}`}
               inputMode="numeric"
               max={9}

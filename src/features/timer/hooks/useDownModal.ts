@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { Button } from "src/components/Elements/Button";
-import { PinInput } from "src/components/Elements/PinInput";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
-export const CountDownModalContent = () => {
+type Props = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const useDownModal = ({ setIsOpen, isOpen }: Props) => {
   const { downInitialTime, setDownInitialTime, timeToPadTime, setTime } =
     useTimerState((state) => ({
       downInitialTime: state.downInitialTime,
@@ -64,18 +67,13 @@ export const CountDownModalContent = () => {
       seconds: +seconds,
     });
     setInputTime(null);
+    if (isOpen) setIsOpen(false);
   };
 
-  return (
-    <div className="w-full">
-      <PinInput
-        handleChange={handleChange}
-        inputTime={inputTime}
-        padTime={padTime}
-      />
-      <Button onClick={onSubmitHandler} type="submit">
-        設定
-      </Button>
-    </div>
-  );
+  return {
+    handleChange,
+    onSubmitHandler,
+    inputTime,
+    padTime,
+  };
 };

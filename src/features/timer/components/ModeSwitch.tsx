@@ -3,6 +3,7 @@ import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import React, { FC } from "react";
 import { useTimerState } from "src/features/timer/store/timerStore";
+import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
 type Props = {
   isOpen: boolean;
@@ -10,20 +11,25 @@ type Props = {
 };
 
 export const ModeSwitch: FC<Props> = ({ isOpen, setIsOpen }) => {
-  const { mode, changeMode, interval } = useTimerState((state) => ({
-    mode: state.mode,
-    changeMode: state.changeMode,
-    downInitialTime: state.downInitialTime,
-    interval: state.interval,
-  }));
+  const { mode, changeMode, interval, downInitialTime, resetTime } =
+    useTimerState((state) => ({
+      mode: state.mode,
+      changeMode: state.changeMode,
+      downInitialTime: state.downInitialTime,
+      interval: state.interval,
+      resetTime: state.resetTime,
+    }));
 
   const isUp = mode === "up";
 
   const toggleMode = () => {
     interval.stop();
-    if (mode === "up" && !isOpen) {
+
+    const isSettingDown = timeToSecond(downInitialTime) !== 0;
+    if (mode === "up" && !isOpen && !isSettingDown) {
       setIsOpen(true);
     }
+    resetTime();
     changeMode();
   };
 

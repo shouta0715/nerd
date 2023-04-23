@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react";
 import React, { FC } from "react";
-import { CountDownModalContent } from "src/components/Elements/timer/CountDownModalContent";
+import { CountDownModalContent } from "src/features/timer/components/CountDownModalContent";
 
 type Props = {
   isOpen: boolean;
@@ -30,7 +30,7 @@ export const CountDownModal: FC<Props> = ({ isOpen, setIsOpen }) => (
       leaveFrom="transform opacity-100 scale-100"
       leaveTo="transform opacity-0 scale-95"
     >
-      <CountDownModalContent />
+      <CountDownModalContent isOpen={isOpen} setIsOpen={setIsOpen} />
     </Transition.Child>
   </Transition>
 );

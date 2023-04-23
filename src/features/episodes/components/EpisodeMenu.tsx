@@ -13,10 +13,9 @@ import { Input } from "src/components/Elements/Input/Input";
 import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
-
-import { CountDownModal } from "src/components/Elements/timer/CountDownModal";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useMenu } from "src/features/episodes/hooks/useMenu";
+import { CountDownModal } from "src/features/timer/components/CountDownModal";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
