@@ -10,6 +10,7 @@ import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
+import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -35,7 +36,20 @@ export const ChatInput: FC<Props> = ({
     state.isMenuOpen,
     state.setIsMenuOpen,
   ]);
-  const time = useTimerState((state) => state.getTime());
+  const [timeObj, downInitialTime] = useTimerState((state) => [
+    state.time,
+    state.downInitialTime,
+  ]);
+  const time = timeToSecond(timeObj);
+  const downTime = timeToSecond(downInitialTime);
+
+  const getPlaceholder = () => {
+    if (!user || authLoading) return "ロード中です";
+
+    if (time === 0 || time === downTime) return "再生してください";
+
+    return "コメントを入力";
+  };
 
   const onHandleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // 候補が表示されているときはEnterで候補を選択する
@@ -91,20 +105,14 @@ export const ChatInput: FC<Props> = ({
           <ReactTextareaAutosize
             aria-label="コメントを入力"
             className="w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
-            disabled={time === 0 || !user}
+            disabled={time === 0 || authLoading || time === downTime}
             maxLength={100}
             maxRows={4}
             onChange={(e) =>
               content.length <= 100 && setContent(e.currentTarget.value)
             }
             onKeyDown={onHandleKeyDown}
-            placeholder={
-              user && time !== 0
-                ? `コメントを入力`
-                : !user
-                ? "ログイン中です"
-                : "再生してください"
-            }
+            placeholder={getPlaceholder()}
             value={content}
           />
           <div className="absolute right-2 flex flex-col ">

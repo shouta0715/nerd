@@ -1,12 +1,12 @@
 import React, { FC, Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
-import { MainWrapper } from "src/components/Elements/play/MainWrapper";
-import { PlayWrapper } from "src/components/Elements/play/PlayWrapper";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { WorkComments } from "src/features/comments/components/WorkComments";
+import { MainWrapper } from "src/features/play/components/MainWrapper";
+import { PlayWrapper } from "src/features/play/components/PlayWrapper";
 import { PlayWorkHeader } from "src/features/works/components/PlayWorkHeader";
 import { PlayWorkNav } from "src/features/works/components/PlayWorkNav";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";
@@ -20,7 +20,7 @@ export const PlayWork: FC = () => {
 
   return (
     <PlayWrapper>
-      <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
+      <div className="sticky top-0 z-[11] contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
         <PlayWorkHeader
           id={data?.works_by_pk?.id}
           title={data?.works_by_pk?.series_title}

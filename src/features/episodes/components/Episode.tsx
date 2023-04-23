@@ -1,8 +1,6 @@
 import React, { FC, Suspense } from "react";
 import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
-import { MainWrapper } from "src/components/Elements/play/MainWrapper";
-import { PlayWrapper } from "src/components/Elements/play/PlayWrapper";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
@@ -12,6 +10,8 @@ import { EpisodeComments } from "src/features/comments/components/EpisodeComment
 import { EpisodeHeader } from "src/features/episodes/components/EpisodeHeader";
 import { EpisodeNav } from "src/features/episodes/components/EpisodeNav";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
+import { MainWrapper } from "src/features/play/components/MainWrapper";
+import { PlayWrapper } from "src/features/play/components/PlayWrapper";
 
 export const Episode: FC = () => {
   const { data, isLoading, isChat, setIsChat, interval } = useEpisode();
