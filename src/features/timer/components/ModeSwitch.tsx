@@ -60,9 +60,7 @@ export const ModeSwitch: FC<Props> = ({ isOpen, setIsOpen }) => {
         </p>
         <Button
           className={`-mr-20 ml-6 bg-teal-500 py-1.5 font-bold text-white transition-opacity duration-300 ${
-            isSettingDown && mode === "down"
-              ? "opacity-100"
-              : "pointer-events-none opacity-0"
+            mode === "down" ? "opacity-100" : "pointer-events-none opacity-0"
           }`}
           onClick={() => {
             setIsOpen(true);

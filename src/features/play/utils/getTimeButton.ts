@@ -7,8 +7,9 @@ type Result = {
     | "bg-red-500"
     | "bg-green-500"
     | "bg-blue-500"
-    | "bg-yellow-500";
-  text: "開始" | "再生" | "一時停止" | "変更" | "終了しました";
+    | "bg-teal-500"
+    | "bg-gray-500";
+  text: "開始" | "再生" | "一時停止" | "変更" | "終了しました" | "設定";
 };
 
 type Props = {
@@ -40,6 +41,13 @@ export const getTimeButton = ({
     };
   }
 
+  if (mode === "down" && timeToSecond(downInitialTime) === 0) {
+    return {
+      color: "bg-teal-500",
+      text: "設定",
+    };
+  }
+
   if (mode === "up") {
     const { hours, seconds, minutes } = time;
 
@@ -66,7 +74,7 @@ export const getTimeButton = ({
 
     if (timeToSecond(time) === 0) {
       return {
-        color: "bg-yellow-500",
+        color: "bg-gray-500",
         text: "終了しました",
       };
     }
@@ -78,7 +86,7 @@ export const getTimeButton = ({
   }
 
   return {
-    color: "bg-yellow-500",
+    color: "bg-gray-500",
     text: "終了しました",
   };
 };

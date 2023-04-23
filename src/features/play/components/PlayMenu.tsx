@@ -21,21 +21,25 @@ export const PlayMenu: FC<Props> = ({
     useInputMenu();
 
   return (
-    <section className="px-4 py-2">
+    <section className="p-4">
       <div className="mb-2 flex items-center justify-between">
-        <Text className="text-dimmed" size="sm">
+        <Text className="font-medium" ff="Hiragino Sans" size="sm">
           メニュー
         </Text>
         <XMarkIcon
           aria-label="Close modal"
-          className="h-4 w-4 cursor-pointer text-dimmed lg:hidden"
+          className="h-4 w-4 cursor-pointer lg:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       </div>
       <form className="mb-3 space-y-1" onSubmit={onSubmitHandler}>
         <label className="flex items-center" htmlFor="commenter-name-input">
           <PencilIcon className="mr-1 h-4 w-4" />
-          <Text className="text-xs" component="span">
+          <Text
+            className="text-xs font-medium"
+            component="span"
+            ff="Hiragino Sans"
+          >
             投稿名の変更
           </Text>
           <Button
@@ -67,7 +71,7 @@ export const PlayMenu: FC<Props> = ({
           value={inputValue}
         />
       </form>
-      <PlayTimeInput />
+      <PlayTimeInput setIsCountDownModalOpen={setIsCountDownModalOpen} />
       <ModeSwitch
         isOpen={isCountDownModalOpen}
         setIsOpen={setIsCountDownModalOpen}

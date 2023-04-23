@@ -51,7 +51,7 @@ export const EpisodeHeader: FC<Props> = ({
             mode === "up" ? "text-pink-500" : "text-indigo-500"
           }`}
         >
-          開始から
+          {mode === "up" ? "開始から" : "終了まで"}
         </Text>
         <CountUpTimer id={id} />
       </div>

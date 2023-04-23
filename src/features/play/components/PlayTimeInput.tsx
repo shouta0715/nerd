@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import React, { FC } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput";
@@ -9,7 +9,11 @@ import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";
 import { getTimeButton } from "src/features/play/utils/getTimeButton";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
-export const PlayTimeInput = () => {
+type Props = {
+  setIsCountDownModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const PlayTimeInput: FC<Props> = ({ setIsCountDownModalOpen }) => {
   const {
     handleChange,
     inputTime,
@@ -32,10 +36,10 @@ export const PlayTimeInput = () => {
           }`}
           ff="Hiragino Sans"
         >
-          開始から
+          {mode === "up" ? "開始から" : "終了まで"}
         </Text>
         <div className="relative bg-red-500">
-          <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6 text-gray-500" />
+          <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6" />
           <div className="absolute -left-7 bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
             下の数字をタップすると時間を変更できます。
           </div>
@@ -86,8 +90,13 @@ export const PlayTimeInput = () => {
             }).color
           }`}
           onClick={() => {
-            if (timeToSecond(time) === 0 && mode === "down" && !isChangeTime)
+            if (mode === "down" && timeToSecond(downInitialTime) === 0)
+              setIsCountDownModalOpen(true);
+
+            if (timeToSecond(time) === 0 && mode === "down") {
               return;
+            }
+
             isChangeTime ? onSubmitChangeTime() : interval?.toggle();
           }}
           size="sm"
