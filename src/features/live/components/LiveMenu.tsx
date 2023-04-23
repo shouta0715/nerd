@@ -7,7 +7,7 @@ import { Input } from "src/components/Elements/Input/Input";
 import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
-import { useMenu } from "src/features/episodes/hooks/useMenu";
+import { useInputMenu } from "src/features/play/hooks/useInputMenu";
 import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -24,7 +24,7 @@ export const LiveMenu: FC<Props> = ({ episode, mode }) => {
     setInputValue,
     user,
     inputValue,
-  } = useMenu();
+  } = useInputMenu();
 
   return (
     <div

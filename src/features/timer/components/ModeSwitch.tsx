@@ -2,6 +2,7 @@ import { Switch } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 import React, { FC } from "react";
+import { Button } from "src/components/Elements/Button";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
@@ -11,25 +12,23 @@ type Props = {
 };
 
 export const ModeSwitch: FC<Props> = ({ isOpen, setIsOpen }) => {
-  const { mode, changeMode, interval, downInitialTime, resetTime } =
-    useTimerState((state) => ({
+  const { mode, changeMode, downInitialTime, interval } = useTimerState(
+    (state) => ({
       mode: state.mode,
       changeMode: state.changeMode,
       downInitialTime: state.downInitialTime,
       interval: state.interval,
-      resetTime: state.resetTime,
-    }));
+    })
+  );
 
   const isUp = mode === "up";
+  const isSettingDown = timeToSecond(downInitialTime) !== 0;
 
   const toggleMode = () => {
-    interval.stop();
-
-    const isSettingDown = timeToSecond(downInitialTime) !== 0;
     if (mode === "up" && !isOpen && !isSettingDown) {
       setIsOpen(true);
     }
-    resetTime();
+
     changeMode();
   };
 
@@ -51,13 +50,29 @@ export const ModeSwitch: FC<Props> = ({ isOpen, setIsOpen }) => {
           <MinusIcon className=" h-4 w-4 flex-none stroke-[3] transition-all duration-300 ui-checked:-mr-4 ui-checked:scale-0 ui-checked:opacity-0 ui-not-checked:mr-4 ui-not-checked:scale-100 ui-not-checked:stroke-indigo-500 ui-not-checked:opacity-100 lg:h-5 lg:w-5 lg:ui-checked:-mr-5 lg:ui-not-checked:mr-5" />
         </span>
       </Switch>
-      <p
-        className={`ml-2 mt-1.5 font-hiragino-sans text-xs font-medium lg:text-sm ${
-          isUp ? "text-pink-500" : "text-indigo-500"
-        }`}
-      >
-        カウント{isUp ? "アップ" : "ダウン"}モード
-      </p>
+      <div className="mt-1.5 flex w-full items-center justify-center">
+        <p
+          className={`font-hiragino-sans text-xs font-medium lg:text-sm ${
+            isUp ? "text-pink-500" : "text-indigo-500"
+          }`}
+        >
+          カウント{isUp ? "アップ" : "ダウン"}モード
+        </p>
+        <Button
+          className={`-mr-20 ml-6 bg-teal-500 py-1.5 font-bold text-white transition-opacity duration-300 ${
+            isSettingDown && mode === "down"
+              ? "opacity-100"
+              : "pointer-events-none opacity-0"
+          }`}
+          onClick={() => {
+            setIsOpen(true);
+            interval.stop();
+          }}
+          size="xs"
+        >
+          設定
+        </Button>
+      </div>
     </div>
   );
 };

@@ -18,7 +18,10 @@ export const CountDownModalContent: FC<Props> = ({ isOpen, setIsOpen }) => {
     <div className="w-full space-y-4 p-6">
       <p className="grid place-items-center font-bold">
         放送時間を入力してください。
-        <span className="mt-2 inline-block text-xs text-red-500 underline decoration-dotted">
+        <span className="mt-2 inline-block text-xs font-normal md:text-sm">
+          設定した時間を0秒としてコメントが表示されます。
+        </span>
+        <span className="mt-0.5 inline-block text-xs text-red-500 underline decoration-dotted md:text-sm">
           ※正しい時間が入力されていない場合異なる時間のコメントが表示されます。
         </span>
       </p>

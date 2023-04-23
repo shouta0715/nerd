@@ -250,8 +250,11 @@ export const useTimerState = create<TimerState>((set, get) => ({
   },
 
   changeMode: () => {
+    const { mode, downInitialTime, interval } = get();
+    interval.stop();
     set({
-      mode: get().mode === "up" ? "down" : "up",
+      mode: mode === "up" ? "down" : "up",
+      time: mode === "up" ? downInitialTime : InitialTimerCount,
     });
   },
 }));
