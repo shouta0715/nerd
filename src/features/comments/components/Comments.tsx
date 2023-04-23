@@ -2,6 +2,7 @@
 import { InfiniteData } from "@tanstack/react-query";
 import React, { forwardRef } from "react";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Text } from "src/components/Elements/Text";
 import { Comment } from "src/features/comments/components/Comment";
 import {
   GetCommentsEpisodeQuery,
@@ -23,20 +24,36 @@ export const Comments = forwardRef<any, Props>(({ data, hasNextPage }, ref) => {
   }
 
   return (
-    <ul className="relative mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl  md:px-4">
-      {data?.pages.map((page) =>
-        page.comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))
-      )}
-      <div
-        ref={ref}
-        className={`flex h-20 items-center justify-center text-center  ${
-          hasNextPage ? "block" : "hidden"
+    <>
+      <ul
+        className={`relative mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4 ${
+          data?.pages[0].comments.length === 0 ? "hidden" : "block"
         }`}
       >
-        <Loader variant="oval" />
-      </div>
-    </ul>
+        {data?.pages.map((page) =>
+          page.comments.map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          ))
+        )}
+        <div
+          ref={ref}
+          className={`flex h-20 items-center justify-center text-center  ${
+            hasNextPage ? "block" : "hidden"
+          }`}
+        >
+          <Loader variant="oval" />
+        </div>
+      </ul>
+      <Text
+        className={`${
+          data?.pages[0].comments.length === 0
+            ? "grid w-full flex-1 place-items-center text-lg font-semibold"
+            : "hidden"
+        }`}
+        ff="Hiragino Sans"
+      >
+        一番最初のコメントを書いてみよう！
+      </Text>
+    </>
   );
 });
