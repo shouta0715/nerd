@@ -22,7 +22,7 @@ export const Episode: FC = () => {
 
   return (
     <PlayWrapper>
-      <div className="sticky top-0 contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto lg:pb-0">
+      <div className="sticky top-0 z-[11] contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto lg:pb-0">
         <EpisodeHeader
           episode_number={data?.episodes_by_pk?.number}
           episode_title={data?.episodes_by_pk?.title}

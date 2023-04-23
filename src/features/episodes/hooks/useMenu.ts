@@ -31,6 +31,7 @@ export const useMenu = () => {
 
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
   const [inputTime, setInputTime] = useState<string | null>(null);
+  const [isCountDownModalOpen, setIsCountDownModalOpen] = useState(false);
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,12 +98,13 @@ export const useMenu = () => {
     padTime,
     interval,
     handleChange,
-
     time,
     changeTenTime,
     onSubmitChangeTime,
     inputTime,
     isChangeTime,
     mode,
+    isCountDownModalOpen,
+    setIsCountDownModalOpen,
   };
 };

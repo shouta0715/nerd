@@ -1,10 +1,15 @@
 import { Switch } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-import React from "react";
+import React, { FC } from "react";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
-export const ModeSwitch = () => {
+type Props = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const ModeSwitch: FC<Props> = ({ isOpen, setIsOpen }) => {
   const { mode, changeMode, interval } = useTimerState((state) => ({
     mode: state.mode,
     changeMode: state.changeMode,
@@ -16,6 +21,9 @@ export const ModeSwitch = () => {
 
   const toggleMode = () => {
     interval.stop();
+    if (mode === "up" && !isOpen) {
+      setIsOpen(true);
+    }
     changeMode();
   };
 

@@ -53,41 +53,60 @@ export const useTimerState = create<TimerState>((set, get) => ({
   time: InitialTimerCount,
   downInitialTime: InitialTimerCount,
   setDownInitialTime: (time) => {
-    set({ time });
+    set({ downInitialTime: time });
   },
   intervalTime: () => {
-    const { hours, minutes, seconds } = get().time;
+    const { time, interval, downInitialTime, mode } = get();
+    const { hours, minutes, seconds } = time;
+
     if (hours === 10 && minutes === 0 && seconds === 0) {
-      get().interval.stop();
+      interval.stop();
 
       return;
     }
+
     set(() => {
       const {
         hours: downHours,
         minutes: downMinutes,
         seconds: downSeconds,
-      } = get().downInitialTime;
+      } = downInitialTime;
 
-      if (
-        downHours === 0 &&
-        downMinutes === 0 &&
-        downSeconds === 0 &&
-        get().mode === "down"
-      ) {
+      const isFinished =
+        downHours === 0 && downMinutes === 0 && downSeconds === 0;
+
+      if (isFinished && mode === "down") {
         get().interval.stop();
 
         return {
-          InitialTimerCount,
+          time: InitialTimerCount,
         };
       }
 
-      if (get().mode === "down") {
+      if (mode === "down") {
+        if (hours === 0 && minutes === 0 && seconds === 0) {
+          interval.stop();
+
+          return {
+            time: InitialTimerCount,
+          };
+        }
+
+        const newSeconds = seconds === 0 ? 59 : seconds - 1;
+        const newMinutes =
+          seconds === 0 ? (minutes === 0 ? 59 : minutes - 1) : minutes;
+        const newHours =
+          seconds === 0 && minutes === 0
+            ? hours === 0
+              ? 23
+              : hours - 1
+            : hours;
+
         return {
           time: {
-            seconds: seconds === 0 ? 59 : seconds - 1,
-            minutes: seconds === 0 ? minutes - 1 : minutes,
-            hours: minutes === 0 ? hours - 1 : hours,
+            seconds: newSeconds,
+            minutes: newMinutes,
+            hours: newHours,
           },
         };
       }
@@ -101,20 +120,50 @@ export const useTimerState = create<TimerState>((set, get) => ({
       };
     });
   },
+
   setTime: (time: TimerCount) => {
-    if (time.hours >= 10) {
+    if (timeToSecond(time) < 0) {
+      set({
+        time: InitialTimerCount,
+      });
+
+      return;
+    }
+
+    if (timeToSecond(time) > timeToSecond(MaxTime)) {
       set({
         time: MaxTime,
       });
 
       return;
     }
+
+    const { mode, downInitialTime } = get();
+
+    if (mode === "down" && timeToSecond(time) > timeToSecond(downInitialTime)) {
+      set({
+        time: downInitialTime,
+      });
+
+      return;
+    }
+
     set({ time });
   },
   resetTime: () => {
-    set({ time: InitialTimerCount });
+    set({ time: InitialTimerCount, downInitialTime: InitialTimerCount });
   },
-  getTime: () => timeToSecond(get().time),
+  getTime: () => {
+    const { mode, time, downInitialTime } = get();
+    if (mode === "down") {
+      const maxTime = downInitialTime;
+      const { hours, minutes, seconds } = time;
+
+      return timeToSecond(maxTime) - timeToSecond({ hours, minutes, seconds });
+    }
+
+    return timeToSecond(time);
+  },
   interval: {
     intervalId: undefined,
     active: false,
@@ -128,38 +177,51 @@ export const useTimerState = create<TimerState>((set, get) => ({
       }
     },
     stop: () => {
-      if (get().interval.active && get().interval.intervalId) {
-        clearInterval(get().interval.intervalId);
+      const { active, intervalId } = get().interval;
+      if (active && intervalId) {
+        clearInterval(intervalId);
         set({ interval: { ...get().interval, active: false } });
       }
     },
     toggle: () => {
-      if (get().interval.active) {
-        get().interval.stop();
+      const { active, stop, start } = get().interval;
+      if (active) {
+        stop();
       } else {
-        get().interval.start();
+        start();
       }
     },
     reset: () => {
-      get().interval.stop();
-      get().resetTime();
+      const { interval, resetTime, mode } = get();
+      interval.stop();
+      if (mode === "down") {
+        set({ mode: "up" });
+      }
+      resetTime();
     },
   },
   changeTenTime: (formula: "add" | "minus") => {
-    const time = get().getTime();
-    const { mode } = get();
+    const { mode, time } = get();
+
     const newTime =
       mode === "down"
         ? formula === "add"
-          ? time - 10
-          : time + 10
+          ? timeToSecond(time) - 10
+          : timeToSecond(time) + 10
         : formula === "add"
-        ? time + 10
-        : time - 10;
+        ? timeToSecond(time) + 10
+        : timeToSecond(time) - 10;
+
     const { hours, minutes, seconds } = secondToTime(newTime);
 
     if (newTime < 0) {
       set({ time: InitialTimerCount });
+
+      return;
+    }
+
+    if (mode === "down" && newTime > timeToSecond(get().downInitialTime)) {
+      set({ time: get().downInitialTime });
 
       return;
     }
