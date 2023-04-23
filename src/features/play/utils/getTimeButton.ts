@@ -2,8 +2,13 @@ import { LiveTimer } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
 type Result = {
-  color: "bg-indigo-500" | "bg-red-500" | "bg-green-500" | "bg-blue-500";
-  text: "開始" | "再生" | "一時停止" | "変更" | "終了";
+  color:
+    | "bg-indigo-500"
+    | "bg-red-500"
+    | "bg-green-500"
+    | "bg-blue-500"
+    | "bg-yellow-500";
+  text: "開始" | "再生" | "一時停止" | "変更" | "終了しました";
 };
 
 type Props = {
@@ -61,8 +66,8 @@ export const getTimeButton = ({
 
     if (timeToSecond(time) === 0) {
       return {
-        color: "bg-red-500",
-        text: "終了",
+        color: "bg-yellow-500",
+        text: "終了しました",
       };
     }
 
@@ -73,7 +78,7 @@ export const getTimeButton = ({
   }
 
   return {
-    color: "bg-red-500",
-    text: "終了",
+    color: "bg-yellow-500",
+    text: "終了しました",
   };
 };

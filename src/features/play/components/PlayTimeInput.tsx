@@ -86,7 +86,8 @@ export const PlayTimeInput = () => {
             }).color
           }`}
           onClick={() => {
-            if (timeToSecond(time) === 0 && mode === "down") return;
+            if (timeToSecond(time) === 0 && mode === "down" && !isChangeTime)
+              return;
             isChangeTime ? onSubmitChangeTime() : interval?.toggle();
           }}
           size="sm"
