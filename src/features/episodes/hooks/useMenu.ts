@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { useUserState } from "src/store/user/userState";
@@ -11,19 +11,27 @@ export const useMenu = () => {
     state.setIsMenuOpen,
   ]);
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
-  const { time, padTime, setTime, interval, changeTenTime, timeToPadTime } =
-    useTimerState((state) => ({
-      time: state.time,
-      padTime: state.getPadStartTime(),
-      setTime: state.setTime,
-      interval: state.interval,
-      changeTenTime: state.changeTenTime,
-      timeToPadTime: state.timeToPadTime,
-    }));
-  const uuid = useId();
+  const {
+    time,
+    padTime,
+    mode,
+    setTime,
+    interval,
+    changeTenTime,
+    timeToPadTime,
+  } = useTimerState((state) => ({
+    time: state.time,
+    padTime: state.getPadStartTime(),
+    setTime: state.setTime,
+    interval: state.interval,
+    changeTenTime: state.changeTenTime,
+    timeToPadTime: state.timeToPadTime,
+    mode: state.mode,
+  }));
 
   const [inputValue, setInputValue] = useState<string>(InitialUserName ?? "");
   const [inputTime, setInputTime] = useState<string | null>(null);
+  const [isCountDownModalOpen, setIsCountDownModalOpen] = useState(false);
 
   const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,11 +98,13 @@ export const useMenu = () => {
     padTime,
     interval,
     handleChange,
-    uuid,
     time,
     changeTenTime,
     onSubmitChangeTime,
     inputTime,
     isChangeTime,
+    mode,
+    isCountDownModalOpen,
+    setIsCountDownModalOpen,
   };
 };

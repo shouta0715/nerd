@@ -34,6 +34,8 @@ type Interval = {
 
 type TimerState = {
   time: TimerCount;
+  downInitialTime: TimerCount;
+  setDownInitialTime: (time: TimerCount) => void;
   intervalTime: () => void;
   resetTime: () => void;
   setTime: (time: TimerCount) => void;
@@ -42,46 +44,126 @@ type TimerState = {
   changeTenTime: (formula: "add" | "minus") => void;
   getPadStartTime: () => string;
   timeToPadTime: (time: TimerCount) => string;
+  mode: "up" | "down";
+  changeMode: () => void;
 };
 
 export const useTimerState = create<TimerState>((set, get) => ({
+  mode: "up",
   time: InitialTimerCount,
+  downInitialTime: InitialTimerCount,
+  setDownInitialTime: (time) => {
+    set({ downInitialTime: time });
+  },
   intervalTime: () => {
-    if (
-      get().time.hours === 10 &&
-      get().time.minutes === 0 &&
-      get().time.seconds === 0
-    ) {
-      get().interval.stop();
+    const { time, interval, downInitialTime, mode } = get();
+    const { hours, minutes, seconds } = time;
+
+    if (hours === 10 && minutes === 0 && seconds === 0) {
+      interval.stop();
 
       return;
     }
-    set({
-      time: {
-        seconds: get().time.seconds === 59 ? 0 : get().time.seconds + 1,
-        minutes:
-          get().time.seconds === 59
-            ? get().time.minutes + 1
-            : get().time.minutes,
-        hours:
-          get().time.minutes === 59 ? get().time.hours + 1 : get().time.hours,
-      },
+
+    set(() => {
+      const {
+        hours: downHours,
+        minutes: downMinutes,
+        seconds: downSeconds,
+      } = downInitialTime;
+
+      const isFinished =
+        downHours === 0 && downMinutes === 0 && downSeconds === 0;
+
+      if (isFinished && mode === "down") {
+        get().interval.stop();
+
+        return {
+          time: InitialTimerCount,
+        };
+      }
+
+      if (mode === "down") {
+        if (hours === 0 && minutes === 0 && seconds === 0) {
+          interval.stop();
+
+          return {
+            time: InitialTimerCount,
+          };
+        }
+
+        const newSeconds = seconds === 0 ? 59 : seconds - 1;
+        const newMinutes =
+          seconds === 0 ? (minutes === 0 ? 59 : minutes - 1) : minutes;
+        const newHours =
+          seconds === 0 && minutes === 0
+            ? hours === 0
+              ? 23
+              : hours - 1
+            : hours;
+
+        return {
+          time: {
+            seconds: newSeconds,
+            minutes: newMinutes,
+            hours: newHours,
+          },
+        };
+      }
+
+      return {
+        time: {
+          seconds: seconds === 59 ? 0 : seconds + 1,
+          minutes: seconds === 59 ? minutes + 1 : minutes,
+          hours: minutes === 59 ? hours + 1 : hours,
+        },
+      };
     });
   },
+
   setTime: (time: TimerCount) => {
-    if (time.hours >= 10) {
+    if (timeToSecond(time) < 0) {
+      set({
+        time: InitialTimerCount,
+      });
+
+      return;
+    }
+
+    if (timeToSecond(time) > timeToSecond(MaxTime)) {
       set({
         time: MaxTime,
       });
 
       return;
     }
+
+    const { mode, downInitialTime } = get();
+
+    if (mode === "down" && timeToSecond(time) > timeToSecond(downInitialTime)) {
+      set({
+        time: downInitialTime,
+      });
+
+      return;
+    }
+
     set({ time });
   },
   resetTime: () => {
-    set({ time: InitialTimerCount });
+    set({ time: InitialTimerCount, downInitialTime: InitialTimerCount });
   },
-  getTime: () => timeToSecond(get().time),
+  getTime: () => {
+    const { mode, time, downInitialTime } = get();
+    if (mode === "down") {
+      const maxTime = downInitialTime;
+      const { hours, minutes, seconds } = time;
+
+      return timeToSecond(maxTime) - timeToSecond({ hours, minutes, seconds });
+    }
+
+    return timeToSecond(time);
+  },
   interval: {
     intervalId: undefined,
     active: false,
@@ -95,28 +177,54 @@ export const useTimerState = create<TimerState>((set, get) => ({
       }
     },
     stop: () => {
-      if (get().interval.active && get().interval.intervalId) {
-        clearInterval(get().interval.intervalId);
+      const { active, intervalId } = get().interval;
+      if (active && intervalId) {
+        clearInterval(intervalId);
         set({ interval: { ...get().interval, active: false } });
       }
     },
     toggle: () => {
-      if (get().interval.active) {
-        get().interval.stop();
+      const { active, stop, start } = get().interval;
+      if (active) {
+        stop();
       } else {
-        get().interval.start();
+        start();
       }
     },
     reset: () => {
-      get().interval.stop();
-      get().resetTime();
+      const { interval, resetTime, mode } = get();
+      interval.stop();
+      if (mode === "down") {
+        set({ mode: "up" });
+      }
+      resetTime();
     },
   },
   changeTenTime: (formula: "add" | "minus") => {
-    const time = get().getTime();
+    const { mode, time } = get();
+
     const newTime =
-      formula === "add" ? time + 10 : time - 10 > 0 ? time - 10 : 0;
+      mode === "down"
+        ? formula === "add"
+          ? timeToSecond(time) - 10
+          : timeToSecond(time) + 10
+        : formula === "add"
+        ? timeToSecond(time) + 10
+        : timeToSecond(time) - 10;
+
     const { hours, minutes, seconds } = secondToTime(newTime);
+
+    if (newTime < 0) {
+      set({ time: InitialTimerCount });
+
+      return;
+    }
+
+    if (mode === "down" && newTime > timeToSecond(get().downInitialTime)) {
+      set({ time: get().downInitialTime });
+
+      return;
+    }
 
     if (hours >= 10) {
       set({ time: MaxTime });
@@ -125,6 +233,7 @@ export const useTimerState = create<TimerState>((set, get) => ({
     }
     set({ time: { hours, minutes, seconds } });
   },
+
   getPadStartTime: () => {
     const { hours, minutes, seconds } = get().time;
 
@@ -138,5 +247,11 @@ export const useTimerState = create<TimerState>((set, get) => ({
     return `${hours.toString().padStart(2, "0")}${minutes
       .toString()
       .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;
+  },
+
+  changeMode: () => {
+    set({
+      mode: get().mode === "up" ? "down" : "up",
+    });
   },
 }));
