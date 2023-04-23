@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import React from "react";
 import { Layout } from "src/components/Layout/Layout";
+import { Request } from "src/features/request/components/Request";
 
-const Request: NextPage = () => (
+const Index: NextPage = () => (
   <Layout>
-    <div className="container mx-auto flex-1 bg-gray-50 py-4">
-      <section className="px-3 font-hiragino-sans md:px-6">a</section>
-    </div>
+    <Request />
   </Layout>
 );
 
-export default Request;
+export default Index;
