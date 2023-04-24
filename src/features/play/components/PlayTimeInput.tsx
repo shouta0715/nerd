@@ -6,14 +6,11 @@ import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";
+import { useCountDownModal } from "src/features/play/store";
 import { getTimeButton } from "src/features/play/utils/getTimeButton";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
-type Props = {
-  setIsCountDownModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const PlayTimeInput: FC<Props> = ({ setIsCountDownModalOpen }) => {
+export const PlayTimeInput: FC = () => {
   const {
     handleChange,
     inputTime,
@@ -26,6 +23,8 @@ export const PlayTimeInput: FC<Props> = ({ setIsCountDownModalOpen }) => {
     padTime,
     downInitialTime,
   } = usePlayTimeInput();
+
+  const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
   return (
     <div className="flex flex-col items-center space-y-1">
@@ -91,7 +90,7 @@ export const PlayTimeInput: FC<Props> = ({ setIsCountDownModalOpen }) => {
           }`}
           onClick={() => {
             if (mode === "down" && timeToSecond(downInitialTime) === 0)
-              setIsCountDownModalOpen(true);
+              setIsOpen(true);
 
             if (timeToSecond(time) === 0 && mode === "down") {
               return;

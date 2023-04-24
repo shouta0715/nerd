@@ -1,19 +1,23 @@
 import React, { useState } from "react";
+import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 
-type Props = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export const useDownModal = () => {
+  const {
+    downInitialTime,
+    setDownInitialTime,
+    timeToPadTime,
+    setTime,
+    changeMode,
+  } = useTimerState((state) => ({
+    downInitialTime: state.downInitialTime,
+    setDownInitialTime: state.setDownInitialTime,
+    timeToPadTime: state.timeToPadTime,
+    setTime: state.setTime,
+    changeMode: state.changeMode,
+  }));
 
-export const useDownModal = ({ setIsOpen, isOpen }: Props) => {
-  const { downInitialTime, setDownInitialTime, timeToPadTime, setTime } =
-    useTimerState((state) => ({
-      downInitialTime: state.downInitialTime,
-      setDownInitialTime: state.setDownInitialTime,
-      timeToPadTime: state.timeToPadTime,
-      setTime: state.setTime,
-    }));
+  const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
   const padTime = timeToPadTime(downInitialTime);
   const [inputTime, setInputTime] = useState<string | null>(null);
@@ -45,13 +49,30 @@ export const useDownModal = ({ setIsOpen, isOpen }: Props) => {
       seconds: +seconds,
     });
 
-    if (newPadTime === "000000" && padTime === "000000") return;
+    if (newPadTime === "000000" && padTime === "000000") {
+      setInputTime(null);
+
+      return;
+    }
 
     setInputTime(newPadTime);
   };
 
   const onSubmitHandler = () => {
-    if (!inputTime?.trim()) return;
+    if (!inputTime?.trim()) {
+      setIsOpen(false);
+
+      if (padTime === "000000") changeMode();
+
+      return;
+    }
+
+    if (padTime === inputTime || inputTime === "000000") {
+      changeMode();
+      setIsOpen(false);
+
+      return;
+    }
     const digits = inputTime.match(/.{1,2}/g);
     if (!digits) return;
     const [hours, minutes, seconds] = digits;
@@ -67,7 +88,8 @@ export const useDownModal = ({ setIsOpen, isOpen }: Props) => {
       seconds: +seconds,
     });
     setInputTime(null);
-    if (isOpen) setIsOpen(false);
+
+    setIsOpen(false);
   };
 
   return {

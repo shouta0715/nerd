@@ -1,19 +1,12 @@
+/* eslint-disable no-unused-expressions */
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { useDownModal } from "src/features/timer/hooks/useDownModal";
 
-type Props = {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const CountDownModalContent: FC<Props> = ({ isOpen, setIsOpen }) => {
-  const { inputTime, padTime, handleChange, onSubmitHandler } = useDownModal({
-    setIsOpen,
-    isOpen,
-  });
+export const CountDownModalContent: FC = () => {
+  const { inputTime, padTime, handleChange, onSubmitHandler } = useDownModal();
 
   return (
     <div className="w-full space-y-4 p-6">
@@ -54,7 +47,9 @@ export const CountDownModalContent: FC<Props> = ({ isOpen, setIsOpen }) => {
           size="sm"
           type="submit"
         >
-          設定
+          {(inputTime === "000000" || !inputTime) && padTime === "000000"
+            ? "キャンセル"
+            : "設定"}
         </Button>
       </div>
     </div>

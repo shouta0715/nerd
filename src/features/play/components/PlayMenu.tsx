@@ -8,20 +8,12 @@ import { PlayTimeInput } from "src/features/play/components/PlayTimeInput";
 import { useInputMenu } from "src/features/play/hooks/useInputMenu";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 
-type Props = {
-  setIsCountDownModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isCountDownModalOpen: boolean;
-};
-
-export const PlayMenu: FC<Props> = ({
-  setIsCountDownModalOpen,
-  isCountDownModalOpen,
-}) => {
+export const PlayMenu: FC = () => {
   const { onSubmitHandler, inputValue, setInputValue, setIsMenuOpen, user } =
     useInputMenu();
 
   return (
-    <section className="p-4">
+    <section className="p-2">
       <div className="mb-2 flex items-center justify-between">
         <Text className="font-medium" ff="Hiragino Sans" size="sm">
           メニュー
@@ -71,11 +63,8 @@ export const PlayMenu: FC<Props> = ({
           value={inputValue}
         />
       </form>
-      <PlayTimeInput setIsCountDownModalOpen={setIsCountDownModalOpen} />
-      <ModeSwitch
-        isOpen={isCountDownModalOpen}
-        setIsOpen={setIsCountDownModalOpen}
-      />
+      <PlayTimeInput />
+      <ModeSwitch />
     </section>
   );
 };

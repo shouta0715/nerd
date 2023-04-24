@@ -12,6 +12,7 @@ import { EpisodeNav } from "src/features/episodes/components/EpisodeNav";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
 import { PlayWrapper } from "src/features/play/components/PlayWrapper";
+import { CountDownModal } from "src/features/timer/components/CountDownModal";
 
 export const Episode: FC = () => {
   const { data, isLoading, isChat, setIsChat, interval } = useEpisode();
@@ -21,37 +22,40 @@ export const Episode: FC = () => {
   }
 
   return (
-    <PlayWrapper>
-      <div className="sticky top-0 z-[11] contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto lg:pb-0">
-        <EpisodeHeader
-          episode_number={data?.episodes_by_pk?.number}
-          episode_title={data?.episodes_by_pk?.title}
-          id={data?.episodes_by_pk?.id}
-          title={data?.episodes_by_pk?.work.series_title}
-        />
-        <EpisodeNav
-          data={data}
-          isChat={isChat}
-          setIsChat={setIsChat}
-          stop={interval.stop}
-        />
-        {isChat ? (
-          <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
-        ) : (
-          <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
-        )}
-      </div>
-      <MainWrapper>
-        {isChat ? (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
-            <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
-          </Suspense>
-        ) : (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
-            <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
-          </Suspense>
-        )}
-      </MainWrapper>
-    </PlayWrapper>
+    <>
+      <PlayWrapper>
+        <div className="sticky top-0 z-[11] contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto lg:pb-0">
+          <EpisodeHeader
+            episode_number={data?.episodes_by_pk?.number}
+            episode_title={data?.episodes_by_pk?.title}
+            id={data?.episodes_by_pk?.id}
+            title={data?.episodes_by_pk?.work.series_title}
+          />
+          <EpisodeNav
+            data={data}
+            isChat={isChat}
+            setIsChat={setIsChat}
+            stop={interval.stop}
+          />
+          {isChat ? (
+            <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
+          ) : (
+            <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+          )}
+        </div>
+        <MainWrapper>
+          {isChat ? (
+            <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+              <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
+            </Suspense>
+          ) : (
+            <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+              <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+            </Suspense>
+          )}
+        </MainWrapper>
+      </PlayWrapper>
+      <CountDownModal />
+    </>
   );
 };
