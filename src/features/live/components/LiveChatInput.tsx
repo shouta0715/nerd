@@ -60,7 +60,7 @@ export const LiveChatInput: FC<Props> = ({
   };
 
   return (
-    <div className="fixed bottom-0 left-0 z-[1]  w-full border-0 border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:mt-4 lg:border-0">
+    <div className="fixed bottom-0 left-0 z-[1]  w-full border-0 border-t border-solid border-slate-200 bg-white p-2 lg:sticky lg:mt-4 lg:border-0">
       <form
         className="flex items-center justify-center space-x-2 opacity-100 lg:justify-between lg:space-x-6"
         onSubmit={onSubmitHandler}
