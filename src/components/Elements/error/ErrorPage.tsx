@@ -8,5 +8,5 @@ export const ErrorPage = ({ error }: FallbackProps) => {
     return <NotFoundPage />;
   }
 
-  return <SeverErrorPage />;
+  return <SeverErrorPage error={error} />;
 };
