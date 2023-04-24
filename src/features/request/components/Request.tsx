@@ -4,7 +4,7 @@ import { Input } from "src/components/Elements/Input/Input";
 import { useRequest } from "src/features/request/hooks/useRequest";
 
 export const Request = () => {
-  const { onSubmitHandler } = useRequest();
+  const { onSubmitHandler, register, errors, isLoading } = useRequest();
 
   return (
     <div className="container mx-auto flex-1 bg-gray-50 py-4">
@@ -19,27 +19,45 @@ export const Request = () => {
               htmlFor="work_title"
             >
               作品のタイトル
+              <span className="mt-0.5 inline-block text-xs text-indigo-500">
+                ※略称は使わないでください。例: ヒロアカ5期 →
+                僕のヒーローアカデミア5期
+              </span>
             </label>
             <Input
+              {...register("work_title", { required: true })}
+              className="placeholder:text-xs"
               id="work_title"
               name="work_title"
-              placeholder="作品のタイトルを入力してください"
+              placeholder="例: 僕のヒーローアカデミア5期"
               type="text"
             />
+            {errors.work_title && (
+              <p className="mt-1 px-2 text-xs text-red-500">
+                {errors.work_title.message}
+              </p>
+            )}
           </div>
           <div>
             <label
               className="mb-1 inline-block text-sm md:text-base"
               htmlFor="work_url"
             >
-              公式のURL&nbsp;(任意)
+              公式URLまたは公式TwitterのURL
             </label>
             <Input
+              {...register("work_url")}
+              className="placeholder:text-xs"
               id="work_url"
               name="work_url"
-              placeholder="作品のURLを入力してください"
+              placeholder="例: https://heroaca.com/"
               type="text"
             />
+            {errors.work_url && (
+              <p className="mt-1 px-2 text-xs text-red-500">
+                {errors.work_url.message}
+              </p>
+            )}
           </div>
           <div>
             <label
@@ -49,6 +67,7 @@ export const Request = () => {
               作品の説明&nbsp;(任意)
             </label>
             <textarea
+              {...register("work_description")}
               className="block w-full resize-none appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
               id="work_description"
               name="work_description"
@@ -57,6 +76,7 @@ export const Request = () => {
           </div>
           <Button
             className="mx-auto w-full max-w-xs bg-indigo-500 text-white hover:bg-indigo-600"
+            loading={isLoading}
             type="submit"
           >
             送信する
