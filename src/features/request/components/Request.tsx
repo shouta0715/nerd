@@ -2,9 +2,11 @@ import React from "react";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
 import { useRequest } from "src/features/request/hooks/useRequest";
+import { useUserState } from "src/store/user/userState";
 
 export const Request = () => {
   const { onSubmitHandler, register, errors, isLoading } = useRequest();
+  const user = useUserState((state) => state.user);
 
   return (
     <div className="container mx-auto flex-1 bg-gray-50 py-4">
@@ -19,7 +21,7 @@ export const Request = () => {
               htmlFor="work_title"
             >
               作品のタイトル
-              <span className="mt-0.5 inline-block text-xs text-indigo-500">
+              <span className="mt-0.5 block text-xs text-indigo-500">
                 ※略称は使わないでください。例: ヒロアカ5期 →
                 僕のヒーローアカデミア5期
               </span>
@@ -76,10 +78,11 @@ export const Request = () => {
           </div>
           <Button
             className="mx-auto w-full max-w-xs bg-indigo-500 text-white hover:bg-indigo-600"
+            disabled={isLoading || !user}
             loading={isLoading}
             type="submit"
           >
-            送信する
+            {!user ? "ロード中..." : isLoading ? "送信中..." : "送信する"}
           </Button>
         </form>
       </section>
