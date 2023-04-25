@@ -86,7 +86,7 @@ export const Notification: FC<NotificationProps> = ({
     <Transition
       className={twMerge(
         clsx(
-          "pointer-events-auto fixed right-0 top-0 z-[200] mx-4 mt-4 flex w-96 max-w-full items-center overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg",
+          "pointer-events-auto fixed right-0 top-0 z-[200] mx-2 mt-4 flex w-96 max-w-full items-center overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg md:mx-4",
           className
         )
       )}
