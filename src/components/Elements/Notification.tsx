@@ -86,7 +86,7 @@ export const Notification: FC<NotificationProps> = ({
     <Transition
       className={twMerge(
         clsx(
-          "pointer-events-auto fixed right-0 top-0 z-[200] mx-2 mt-4 flex w-96 max-w-full items-center overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg md:mx-4",
+          "pointer-events-auto fixed right-0 top-0 z-[200] flex w-96 items-center overflow-hidden  rounded-lg border border-slate-200 bg-white px-2 shadow-lg md:mx-4 md:mt-4",
           className
         )
       )}
@@ -103,7 +103,7 @@ export const Notification: FC<NotificationProps> = ({
           className: clsx("w-7 h-7 m-2", TypeColors[type]),
         })}
       </div>
-      <div className="flex w-[calc(100%-3.25rem-1.75rem)] flex-1 flex-col space-y-2 break-words py-2.5">
+      <div className="flex w-[calc(100%-3.25rem-1.75rem)] flex-1 flex-col space-y-2 break-words py-1.5 md:py-2.5">
         <h3
           className={twMerge(
             clsx("w-full max-w-full break-words px-4 text-sm font-bold"),
@@ -126,7 +126,7 @@ export const Notification: FC<NotificationProps> = ({
       </div>
       <button className="self-start">
         <XMarkIcon
-          className="mx-2 mt-3 h-5 w-5  text-slate-400 hover:text-slate-500"
+          className="mt-3 h-5 w-5  text-slate-400 hover:text-slate-500"
           onClick={() => setIsShow(false)}
         />
       </button>
