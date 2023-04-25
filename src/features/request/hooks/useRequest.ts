@@ -36,6 +36,6 @@ export const useRequest = () => {
     onSubmitHandler,
     register,
     errors,
-    isLoading: insertRequest.isLoading,
+    ...insertRequest,
   };
 };

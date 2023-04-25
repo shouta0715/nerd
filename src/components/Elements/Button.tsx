@@ -27,6 +27,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   radius?: keyof typeof rounded;
   size?: keyof typeof sizes;
   loading?: boolean;
+  loaderClassName?: string;
 } & IconProps;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -39,6 +40,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       leftIcon,
       rightIcon,
+      loaderClassName,
       ...props
     },
     ref
@@ -58,7 +60,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       type={type}
       {...props}
     >
-      {loading && <Loader color="white" size={size} variant="oval" />}
+      {loading && (
+        <Loader
+          className={clsx(loaderClassName)}
+          color="white"
+          size={size}
+          variant="oval"
+        />
+      )}
       {!loading && leftIcon}
       <span className="mx-2">{props.children}</span> {loading && rightIcon}
     </button>
