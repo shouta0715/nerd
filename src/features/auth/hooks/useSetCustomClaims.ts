@@ -31,6 +31,7 @@ export const useSetCustomClaims = () => {
       });
 
       if (res.status === 200 && res.ok) {
+        console.log("Firebase: Success (auth/setCustomClaims).");
         const localUserName = localStorage.getItem("user_name");
 
         const token = await auth.currentUser?.getIdToken(true);
@@ -69,6 +70,7 @@ export const useSetCustomClaims = () => {
         return;
       }
 
+      console.error("Firebase: Error (auth/setCustomClaims).");
       throw new Error("Firebase: Error (auth/popup-closed-by-user).");
     },
     [queryClient, setAuthLoading, setUser]
