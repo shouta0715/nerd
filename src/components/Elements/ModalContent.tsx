@@ -3,7 +3,6 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { FC } from "react";
 import GoogleIcon from "public/icons/GoogleIcon.svg";
-import TwitterIcon from "public/icons/TwitterIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
@@ -45,13 +44,6 @@ export const ModalContent: FC = () => {
         radius="full"
       >
         Googleでログイン
-      </Button>
-      <Button
-        className="font-hiragino-sans text-sm font-bold shadow"
-        leftIcon={<TwitterIcon />}
-        radius="full"
-      >
-        Twitterでログイン
       </Button>
       <Text className="font-medium text-dimmed" size="sm">
         <Link

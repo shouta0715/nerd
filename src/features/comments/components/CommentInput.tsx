@@ -161,6 +161,9 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           )}
         </Button>
       </form>
+      <p className="mt-4 hidden place-items-center text-sm text-dimmed lg:grid">
+        ルールを守って良識のあるコメントをしましょう
+      </p>
     </div>
   );
 };
