@@ -46,3 +46,16 @@ export const formatTimeDistance = (time: string): string => {
 
   return `${distance.replace("約", "")}`;
 };
+
+export const timeToPadTime = ({
+  hours,
+  minutes,
+  seconds,
+}: {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}) =>
+  `${hours.toString().padStart(2, "0")}${minutes
+    .toString()
+    .padStart(2, "0")}${seconds.toString().padStart(2, "0")}`;

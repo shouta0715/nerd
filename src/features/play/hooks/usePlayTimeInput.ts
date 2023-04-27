@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTimerState } from "src/features/timer/store/timerStore";
+import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
 
 export const usePlayTimeInput = () => {
   const [inputTime, setInputTime] = useState<string | null>(null);
@@ -10,7 +11,6 @@ export const usePlayTimeInput = () => {
     interval,
     changeTenTime,
     setTime,
-    timeToPadTime,
     downInitialTime,
   } = useTimerState((state) => ({
     time: state.time,
@@ -19,7 +19,6 @@ export const usePlayTimeInput = () => {
     changeTenTime: state.changeTenTime,
     setTime: state.setTime,
     mode: state.mode,
-    timeToPadTime: state.timeToPadTime,
     downInitialTime: state.downInitialTime,
   }));
 
