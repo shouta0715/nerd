@@ -14,8 +14,34 @@ const regex = /^[0-9]*$/;
 
 const testRegex = (value: string) => regex.test(value);
 
-const getNextChar = (value: string) =>
-  value.length > 1 ? value.split("").at(-1) : value;
+const getMaxValue = (index: number) => {
+  switch (index) {
+    case 0:
+      return 9;
+    case 1:
+      return 9;
+    case 2:
+      return 5;
+    case 3:
+      return 9;
+    case 4:
+      return 5;
+    case 5:
+      return 9;
+    default:
+      return 0;
+  }
+};
+
+const getNextChar = (value: string, index: number) => {
+  const maxValue = getMaxValue(index);
+
+  const lastValue = value.length > 1 ? value.split("").at(-1) : value;
+
+  if (!lastValue) return undefined;
+
+  return +lastValue > maxValue ? maxValue.toString() : lastValue;
+};
 
 const getDigits = (value: string[]) => value.join("").match(/.{1,2}/g);
 
@@ -82,7 +108,7 @@ export const usePinInput = ({
 
     if (!testRegex(value)) return;
 
-    const nextChar = getNextChar(value);
+    const nextChar = getNextChar(value, index);
 
     if (!nextChar) return;
 
