@@ -43,13 +43,29 @@ export const useGoogleSignIn = () => {
     }
   };
 
+  const deleteToken = async (id: string) => {
+    fetch("/api/auth/deleteUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+  };
+
   const deleteGoogleUser = async () => {
     try {
       setAuthLoading(true);
-      if (auth.currentUser) await deleteUser(auth.currentUser);
+
+      if (auth.currentUser) {
+        await deleteToken(auth.currentUser.uid);
+        await deleteUser(auth.currentUser);
+      } else {
+        throw new Error("Firebase: Error (auth/user-not-found).");
+      }
+
       localStorage.removeItem("user_name");
     } catch (error: any) {
-      setAuthLoading(false);
       if (error.code === "auth/requires-recent-login") {
         if (auth.currentUser) {
           const provider = new GoogleAuthProvider();
@@ -57,10 +73,20 @@ export const useGoogleSignIn = () => {
           const credential = GoogleAuthProvider.credentialFromResult(result);
           if (credential) {
             await reauthenticateWithCredential(auth.currentUser, credential);
+            await deleteToken(auth.currentUser.uid);
             await deleteUser(auth.currentUser);
           }
         }
+      } else if (error.code === "auth/user-not-found") {
+        if (auth.currentUser) {
+          await deleteToken(auth.currentUser.uid);
+          await deleteUser(auth.currentUser);
+        }
       }
+
+      setAuthLoading(false);
+
+      throw new Error(error);
     }
   };
 

@@ -5,6 +5,8 @@ import type { AppProps } from "next/app";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorPage } from "src/components/Elements/error/ErrorPage";
 import queryClient from "src/libs/queryClient";
 
 const DynamicInitialize = dynamic(
@@ -22,7 +24,6 @@ const App = ({ Component, pageProps }: AppProps) => {
 
   return (
     <QueryClientProvider client={client}>
-      <DynamicInitialize />
       <Head>
         <title>Nerd</title>
         <meta
@@ -30,8 +31,12 @@ const App = ({ Component, pageProps }: AppProps) => {
           name="viewport"
         />
       </Head>
-      <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ErrorBoundary FallbackComponent={ErrorPage}>
+        <DynamicInitialize />
+
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </ErrorBoundary>
     </QueryClientProvider>
   );
 };
