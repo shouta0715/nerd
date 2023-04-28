@@ -7,9 +7,15 @@ type Props = {
   input: string | null;
   time: string;
   changeHandler: (newTime: string) => void;
+  submitHandler?: () => void;
 };
 
-export const PinInput: FC<Props> = ({ input, time, changeHandler }) => {
+export const PinInput: FC<Props> = ({
+  input,
+  time,
+  changeHandler,
+  submitHandler,
+}) => {
   const {
     onFocusHandler,
     showComponent,
@@ -21,6 +27,7 @@ export const PinInput: FC<Props> = ({ input, time, changeHandler }) => {
     input,
     time,
     changeHandler,
+    submitHandler,
   });
 
   return (

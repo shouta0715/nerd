@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
-import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
+import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
 export const usePlayTimeInput = () => {
   const [inputTime, setInputTime] = useState<string | null>(null);
@@ -21,58 +22,43 @@ export const usePlayTimeInput = () => {
     mode: state.mode,
     downInitialTime: state.downInitialTime,
   }));
+  const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
-  const onSubmitChangeTime = () => {
-    if (!inputTime?.trim()) return;
-    const digits = inputTime.match(/.{1,2}/g);
+  const setChangeTime = () => {
+    const digits = inputTime?.match(/.{1,2}/g);
     if (!digits) return;
+
     const [hours, minutes, seconds] = digits;
+
     setTime({
       hours: +hours,
       minutes: +minutes,
       seconds: +seconds,
     });
+  };
+
+  const changeHandler = (newTime: string) => setInputTime(newTime);
+
+  const isChangeTime = inputTime !== null && inputTime !== padTime;
+
+  const onSubmitChangeTime = () => {
+    if (mode === "down" && timeToSecond(downInitialTime) === 0) setIsOpen(true);
+
+    if (timeToSecond(time) === 0 && mode === "down") return;
+
+    if (isChangeTime) {
+      setChangeTime();
+    } else {
+      interval.toggle();
+    }
+
     setInputTime(null);
   };
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const inputNumber = event.target.value;
-
-    const regex = /^[0-9]*$/;
-
-    if (!regex.test(inputNumber)) return;
-
-    const nextChar =
-      inputNumber.length > 1
-        ? inputNumber.split("")[inputNumber.length - 1]
-        : inputNumber;
-
-    const nextTime = inputTime?.split("") ?? padTime.split("");
-    nextTime[index] = nextChar;
-    const digits = nextTime?.join("").match(/.{1,2}/g);
-    if (!digits) return;
-    const [hours, minutes, seconds] = digits;
-    const newPadTime = timeToPadTime({
-      hours: +hours,
-      minutes: +minutes,
-      seconds: +seconds,
-    });
-
-    if (newPadTime === "000000" && padTime === "000000") return;
-
-    setInputTime(newPadTime);
-  };
-
-  const isChangeTime =
-    (inputTime !== null && inputTime !== padTime) || inputTime === "000000";
 
   return {
     inputTime,
     onSubmitChangeTime,
-    handleChange,
+    changeHandler,
     isChangeTime,
     time,
     mode,

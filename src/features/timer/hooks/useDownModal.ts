@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
@@ -17,58 +17,29 @@ export const useDownModal = () => {
   const padTime = timeToPadTime(downInitialTime);
   const [inputTime, setInputTime] = useState<string | null>(null);
 
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    event.preventDefault();
-    const inputNumber = event.target.value;
+  const handleChange = (newTime: string) => setInputTime(newTime);
 
-    const regex = /^[0-9]*$/;
-
-    if (!regex.test(inputNumber)) return;
-
-    const nextChar =
-      inputNumber.length > 1
-        ? inputNumber.split("")[inputNumber.length - 1]
-        : inputNumber;
-
-    const nextTime = inputTime?.split("") ?? padTime.split("");
-    nextTime[index] = nextChar;
-    const digits = nextTime?.join("").match(/.{1,2}/g);
-    if (!digits) return;
-    const [hours, minutes, seconds] = digits;
-    const newPadTime = timeToPadTime({
-      hours: +hours,
-      minutes: +minutes,
-      seconds: +seconds,
-    });
-
-    if (newPadTime === "000000" && padTime === "000000") {
-      setInputTime(null);
-
-      return;
-    }
-
-    setInputTime(newPadTime);
-  };
-
-  const onSubmitHandler = () => {
+  const getIsChangeTime = (): boolean => {
     if (!inputTime?.trim()) {
       setIsOpen(false);
 
       if (padTime === "000000") changeMode();
 
-      return;
+      return false;
     }
 
     if (padTime === inputTime || inputTime === "000000") {
       changeMode();
       setIsOpen(false);
 
-      return;
+      return false;
     }
-    const digits = inputTime.match(/.{1,2}/g);
+
+    return true;
+  };
+
+  const changeTime = () => {
+    const digits = inputTime?.match(/.{1,2}/g);
     if (!digits) return;
     const [hours, minutes, seconds] = digits;
 
@@ -82,7 +53,13 @@ export const useDownModal = () => {
       minutes: +minutes,
       seconds: +seconds,
     });
-    setInputTime(null);
+  };
+
+  const onSubmitHandler = () => {
+    if (getIsChangeTime()) {
+      changeTime();
+      setInputTime(null);
+    }
 
     setIsOpen(false);
   };

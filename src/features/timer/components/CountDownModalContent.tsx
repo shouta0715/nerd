@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
-import { PinInput } from "src/components/Elements/PinInput";
+import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { useDownModal } from "src/features/timer/hooks/useDownModal";
 
@@ -23,9 +23,10 @@ export const CountDownModalContent: FC = () => {
         <div className="flex flex-col items-center space-y-1">
           <div className="mx-auto">
             <PinInput
-              handleChange={handleChange}
-              inputTime={inputTime}
-              padTime={padTime}
+              changeHandler={handleChange}
+              input={inputTime}
+              submitHandler={onSubmitHandler}
+              time={padTime}
             />
 
             <div className="mt-1.5 flex">

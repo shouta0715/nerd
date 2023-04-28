@@ -3,16 +3,14 @@ import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
-import { PinInput } from "src/components/Elements/PinInput";
+import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";
-import { useCountDownModal } from "src/features/play/store";
 import { getTimeButton } from "src/features/play/utils/getTimeButton";
-import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
 export const PlayTimeInput: FC = () => {
   const {
-    handleChange,
+    changeHandler,
     inputTime,
     isChangeTime,
     onSubmitChangeTime,
@@ -23,8 +21,6 @@ export const PlayTimeInput: FC = () => {
     padTime,
     downInitialTime,
   } = usePlayTimeInput();
-
-  const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
   return (
     <div className="flex flex-col items-center space-y-1">
@@ -47,9 +43,10 @@ export const PlayTimeInput: FC = () => {
       <div className="flex flex-col items-center space-y-1">
         <div className=" w-full">
           <PinInput
-            handleChange={handleChange}
-            inputTime={inputTime}
-            padTime={padTime}
+            changeHandler={changeHandler}
+            input={inputTime}
+            submitHandler={isChangeTime ? onSubmitChangeTime : undefined}
+            time={padTime}
           />
         </div>
         <div className="flex w-full">
@@ -88,16 +85,7 @@ export const PlayTimeInput: FC = () => {
               active: interval.active,
             }).color
           }`}
-          onClick={() => {
-            if (mode === "down" && timeToSecond(downInitialTime) === 0)
-              setIsOpen(true);
-
-            if (timeToSecond(time) === 0 && mode === "down") {
-              return;
-            }
-
-            isChangeTime ? onSubmitChangeTime() : interval?.toggle();
-          }}
+          onClick={onSubmitChangeTime}
           size="sm"
         >
           {

@@ -7,6 +7,7 @@ type Props = {
   changeHandler: (newTime: string) => void;
   input: string | null;
   time: string;
+  submitHandler?: () => void;
 };
 
 const regex = /^[0-9]*$/;
@@ -43,7 +44,12 @@ const getNewTime = ({
   });
 };
 
-export const usePinInput = ({ changeHandler, input, time }: Props) => {
+export const usePinInput = ({
+  changeHandler,
+  input,
+  time,
+  submitHandler,
+}: Props) => {
   const interval = useTimerState((state) => state.interval);
   const showComponent = input || time;
   const uuid = useId();
@@ -108,6 +114,22 @@ export const usePinInput = ({ changeHandler, input, time }: Props) => {
 
       changeHandler(newTime);
       focusPinInput("prev", index);
+
+      return;
+    }
+
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+
+      focusPinInput(event.key === "ArrowLeft" ? "prev" : "next", index);
+
+      return;
+    }
+
+    if (event.key === "Enter" && submitHandler) {
+      event.preventDefault();
+
+      submitHandler();
     }
   };
 
