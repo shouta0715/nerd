@@ -6,13 +6,22 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorPage } from "src/components/Elements/error/ErrorPage";
 import queryClient from "src/libs/queryClient";
 
 const DynamicInitialize = dynamic(
   () =>
     import("src/features/auth/components/Initialize").then(
       (mod) => mod.Initialize
+    ),
+  {
+    ssr: false,
+  }
+);
+
+const DynamicErrorPage = dynamic(
+  () =>
+    import("src/components/Elements/error/ErrorPage").then(
+      (mod) => mod.ErrorPage
     ),
   {
     ssr: false,
@@ -31,7 +40,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           name="viewport"
         />
       </Head>
-      <ErrorBoundary FallbackComponent={ErrorPage}>
+      <ErrorBoundary FallbackComponent={DynamicErrorPage}>
         <DynamicInitialize />
 
         <Component {...pageProps} />
