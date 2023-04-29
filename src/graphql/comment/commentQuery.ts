@@ -1,5 +1,29 @@
 import { gql } from "graphql-request";
 
+const _ = gql`
+  fragment CommentFragment on comments {
+    content
+    work_id
+    user_id
+    id
+    episode_id
+    created_at
+    commenter_name
+    user {
+      anonymous
+      user_name
+      id
+    }
+    reply_count
+    is_like
+    likes_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export const GET_COMMENTS_EPISODE = gql`
   query GetCommentsEpisode(
     $episode_id: uuid!
@@ -16,25 +40,32 @@ export const GET_COMMENTS_EPISODE = gql`
       order_by: $order_by
       limit: $limit
     ) {
-      content
-      work_id
-      user_id
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        id
-      }
-      reply_count
-      is_like
-      likes_aggregate {
-        aggregate {
-          count
+      ...CommentFragment
+    }
+  }
+`;
+
+export const GET_COMMENTS_EPISODE_BY_LIKES = gql`
+  query GetCommentsEpisodeByLikes(
+    $episode_id: uuid!
+    $cursor: timestamptz
+    $likes_cursor: Int
+    $limit: Int!
+    $order_by: [comments_order_by!]
+  ) {
+    comments(
+      where: {
+        episode_id: { _eq: $episode_id }
+        _and: {
+          created_at: { _lt: $cursor }
+          likes_aggregate: { count: { predicate: { _lte: $likes_cursor } } }
         }
+        reply_to: { _is_null: true }
       }
+      order_by: $order_by
+      limit: $limit
+    ) {
+      ...CommentFragment
     }
   }
 `;
@@ -55,25 +86,32 @@ export const GET_COMMENTS_WORK = gql`
       order_by: $order_by
       limit: $limit
     ) {
-      content
-      work_id
-      user_id
-      id
-      episode_id
-      created_at
-      commenter_name
-      user {
-        anonymous
-        user_name
-        id
-      }
-      reply_count
-      is_like
-      likes_aggregate {
-        aggregate {
-          count
+      ...CommentFragment
+    }
+  }
+`;
+
+export const GET_COMMENTS_WORK_BY_LIKES = gql`
+  query GetCommentsWorkByLikes(
+    $work_id: Int!
+    $cursor: timestamptz
+    $likes_cursor: Int
+    $limit: Int!
+    $order_by: [comments_order_by!]
+  ) {
+    comments(
+      where: {
+        work_id: { _eq: $work_id }
+        _and: {
+          created_at: { _lt: $cursor }
+          likes_aggregate: { count: { predicate: { _lte: $likes_cursor } } }
         }
+        reply_to: { _is_null: true }
       }
+      order_by: $order_by
+      limit: $limit
+    ) {
+      ...CommentFragment
     }
   }
 `;

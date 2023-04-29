@@ -94,7 +94,7 @@ export const useMutateComment = (filter: CommentsFilter) => {
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
-        { episode_id: variables.episode_id },
+        { episode_id: variables.episode_id, filter },
       ]);
 
       if (prevData) {

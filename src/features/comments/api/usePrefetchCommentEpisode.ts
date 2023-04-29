@@ -10,7 +10,6 @@ export const usePrefetchCommentEpisode = () => {
       queryFn: () =>
         getComments({
           episode_id,
-          pageParam: { cursor: new Date().toISOString() },
           filter: "new",
         }),
       staleTime: 1000 * 60 * 30,
