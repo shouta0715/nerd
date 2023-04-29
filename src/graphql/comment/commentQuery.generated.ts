@@ -11,6 +11,8 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
     requestHeaders
   });
 }
+export type CommentFragmentFragment = { __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } };
+
 export type GetCommentsEpisodeQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
@@ -21,6 +23,17 @@ export type GetCommentsEpisodeQueryVariables = Types.Exact<{
 
 export type GetCommentsEpisodeQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
+export type GetCommentsEpisodeByLikesQueryVariables = Types.Exact<{
+  episode_id: Types.Scalars['uuid'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']>;
+  limit: Types.Scalars['Int'];
+  order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
+}>;
+
+
+export type GetCommentsEpisodeByLikesQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
+
 export type GetCommentsWorkQueryVariables = Types.Exact<{
   work_id: Types.Scalars['Int'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
@@ -30,6 +43,17 @@ export type GetCommentsWorkQueryVariables = Types.Exact<{
 
 
 export type GetCommentsWorkQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
+
+export type GetCommentsWorkByLikesQueryVariables = Types.Exact<{
+  work_id: Types.Scalars['Int'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']>;
+  limit: Types.Scalars['Int'];
+  order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
+}>;
+
+
+export type GetCommentsWorkByLikesQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
   _reply_to: Types.Scalars['uuid'];
@@ -62,7 +86,29 @@ export type MutateWorkCommentMutationVariables = Types.Exact<{
 
 export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, work_id?: number | null } | null };
 
-
+export const CommentFragmentFragmentDoc = `
+    fragment CommentFragment on comments {
+  content
+  work_id
+  user_id
+  id
+  episode_id
+  created_at
+  commenter_name
+  user {
+    anonymous
+    user_name
+    id
+  }
+  reply_count
+  is_like
+  likes_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
 export const GetCommentsEpisodeDocument = `
     query GetCommentsEpisode($episode_id: uuid!, $cursor: timestamptz, $limit: Int!, $order_by: [comments_order_by!]) {
   comments(
@@ -70,28 +116,10 @@ export const GetCommentsEpisodeDocument = `
     order_by: $order_by
     limit: $limit
   ) {
-    content
-    work_id
-    user_id
-    id
-    episode_id
-    created_at
-    commenter_name
-    user {
-      anonymous
-      user_name
-      id
-    }
-    reply_count
-    is_like
-    likes_aggregate {
-      aggregate {
-        count
-      }
-    }
+    ...CommentFragment
   }
 }
-    `;
+    ${CommentFragmentFragmentDoc}`;
 export const useGetCommentsEpisodeQuery = <
       TData = GetCommentsEpisodeQuery,
       TError = unknown
@@ -107,6 +135,32 @@ export const useGetCommentsEpisodeQuery = <
       options
     );
 useGetCommentsEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetCommentsEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsEpisodeQuery, GetCommentsEpisodeQueryVariables>(client, GetCommentsEpisodeDocument, variables, headers);
+export const GetCommentsEpisodeByLikesDocument = `
+    query GetCommentsEpisodeByLikes($episode_id: uuid!, $cursor: timestamptz, $likes_cursor: Int, $limit: Int!, $order_by: [comments_order_by!]) {
+  comments(
+    where: {episode_id: {_eq: $episode_id}, _and: {created_at: {_lt: $cursor}, likes_aggregate: {count: {predicate: {_lte: $likes_cursor}}}}, reply_to: {_is_null: true}}
+    order_by: $order_by
+    limit: $limit
+  ) {
+    ...CommentFragment
+  }
+}
+    ${CommentFragmentFragmentDoc}`;
+export const useGetCommentsEpisodeByLikesQuery = <
+      TData = GetCommentsEpisodeByLikesQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCommentsEpisodeByLikesQueryVariables,
+      options?: UseQueryOptions<GetCommentsEpisodeByLikesQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCommentsEpisodeByLikesQuery, TError, TData>(
+      ['GetCommentsEpisodeByLikes', variables],
+      fetcher<GetCommentsEpisodeByLikesQuery, GetCommentsEpisodeByLikesQueryVariables>(client, GetCommentsEpisodeByLikesDocument, variables, headers),
+      options
+    );
+useGetCommentsEpisodeByLikesQuery.fetcher = (client: GraphQLClient, variables: GetCommentsEpisodeByLikesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsEpisodeByLikesQuery, GetCommentsEpisodeByLikesQueryVariables>(client, GetCommentsEpisodeByLikesDocument, variables, headers);
 export const GetCommentsWorkDocument = `
     query GetCommentsWork($work_id: Int!, $cursor: timestamptz, $limit: Int!, $order_by: [comments_order_by!]) {
   comments(
@@ -114,28 +168,10 @@ export const GetCommentsWorkDocument = `
     order_by: $order_by
     limit: $limit
   ) {
-    content
-    work_id
-    user_id
-    id
-    episode_id
-    created_at
-    commenter_name
-    user {
-      anonymous
-      user_name
-      id
-    }
-    reply_count
-    is_like
-    likes_aggregate {
-      aggregate {
-        count
-      }
-    }
+    ...CommentFragment
   }
 }
-    `;
+    ${CommentFragmentFragmentDoc}`;
 export const useGetCommentsWorkQuery = <
       TData = GetCommentsWorkQuery,
       TError = unknown
@@ -151,6 +187,32 @@ export const useGetCommentsWorkQuery = <
       options
     );
 useGetCommentsWorkQuery.fetcher = (client: GraphQLClient, variables: GetCommentsWorkQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsWorkQuery, GetCommentsWorkQueryVariables>(client, GetCommentsWorkDocument, variables, headers);
+export const GetCommentsWorkByLikesDocument = `
+    query GetCommentsWorkByLikes($work_id: Int!, $cursor: timestamptz, $likes_cursor: Int, $limit: Int!, $order_by: [comments_order_by!]) {
+  comments(
+    where: {work_id: {_eq: $work_id}, _and: {created_at: {_lt: $cursor}, likes_aggregate: {count: {predicate: {_lte: $likes_cursor}}}}, reply_to: {_is_null: true}}
+    order_by: $order_by
+    limit: $limit
+  ) {
+    ...CommentFragment
+  }
+}
+    ${CommentFragmentFragmentDoc}`;
+export const useGetCommentsWorkByLikesQuery = <
+      TData = GetCommentsWorkByLikesQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetCommentsWorkByLikesQueryVariables,
+      options?: UseQueryOptions<GetCommentsWorkByLikesQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetCommentsWorkByLikesQuery, TError, TData>(
+      ['GetCommentsWorkByLikes', variables],
+      fetcher<GetCommentsWorkByLikesQuery, GetCommentsWorkByLikesQueryVariables>(client, GetCommentsWorkByLikesDocument, variables, headers),
+      options
+    );
+useGetCommentsWorkByLikesQuery.fetcher = (client: GraphQLClient, variables: GetCommentsWorkByLikesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsWorkByLikesQuery, GetCommentsWorkByLikesQueryVariables>(client, GetCommentsWorkByLikesDocument, variables, headers);
 export const GetRepliesDocument = `
     query GetReplies($_reply_to: uuid!, $cursor: timestamptz!, $reply_limit: Int!) {
   replies(

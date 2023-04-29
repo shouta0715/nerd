@@ -1,46 +1,64 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { CommentsFilter } from "src/features/comments/types";
-import { useGetCommentsWorkQuery } from "src/graphql/comment/commentQuery.generated";
+import {
+  useGetCommentsWorkByLikesQuery,
+  useGetCommentsWorkQuery,
+} from "src/graphql/comment/commentQuery.generated";
 import { client } from "src/libs/graphqlClient";
 import { useUserState } from "src/store/user/userState";
 import { Order_By } from "src/types/graphql";
 
 type GetFinishCommentsArgs = {
   work_id: number;
-  pageParam: {
+  pageParam?: {
     cursor: string;
+    likes_cursor: number;
   };
   filter: CommentsFilter;
 };
 
-const InitialPageParam = {
+const getInitialPageParam = () => ({
   cursor: new Date().toISOString(),
-};
+  likes_cursor: 100000,
+});
 
 export const getComments = async ({
   work_id,
   pageParam,
   filter,
 }: GetFinishCommentsArgs) => {
-  const { cursor } = pageParam;
+  const { cursor, likes_cursor } = pageParam ?? getInitialPageParam();
   const isPopular = filter === "popular";
 
   const order_by = isPopular
-    ? {
-        likes_aggregate: {
-          count: Order_By.Desc,
+    ? [
+        {
+          likes_aggregate: {
+            count: Order_By.Desc,
+          },
         },
-      }
+        {
+          created_at: Order_By.Desc,
+        },
+      ]
     : {
         created_at: Order_By.Desc,
       };
 
-  const fetcher = useGetCommentsWorkQuery.fetcher(client, {
-    work_id,
-    cursor,
-    limit: 100,
-    order_by,
-  });
+  const fetcher = isPopular
+    ? useGetCommentsWorkByLikesQuery.fetcher(client, {
+        work_id,
+        cursor,
+        limit: 100,
+        order_by,
+        likes_cursor,
+      })
+    : useGetCommentsWorkQuery.fetcher(client, {
+        work_id,
+        cursor,
+        limit: 100,
+        order_by,
+      });
 
   const data = await fetcher();
 
@@ -55,7 +73,7 @@ export const useInfiniteCommentsWork = (
 
   return useInfiniteQuery({
     queryKey: ["comments", { work_id, filter }],
-    queryFn: ({ pageParam = InitialPageParam }) =>
+    queryFn: ({ pageParam }) =>
       getComments({
         work_id,
         pageParam,
@@ -68,6 +86,7 @@ export const useInfiniteCommentsWork = (
 
       return {
         cursor: lastFinishComments?.created_at,
+        likes_cursor: lastFinishComments?.likes_aggregate.aggregate?.count,
       };
     },
     keepPreviousData: true,
