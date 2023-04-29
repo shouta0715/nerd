@@ -1,6 +1,10 @@
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
+import { CommentsFilter } from "src/features/comments/types";
 
-export const useWorkCommentInput = (work_id: number) => {
+export const useWorkCommentInput = (
+  work_id: number,
+  filter: CommentsFilter
+) => {
   const {
     content,
     reply_to,
@@ -8,7 +12,7 @@ export const useWorkCommentInput = (work_id: number) => {
     user,
     reset,
     insertWorkComment,
-  } = useCommentInput();
+  } = useCommentInput(filter);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -38,7 +38,7 @@ export const ModeSwitch: FC = () => {
           as="button"
           checked={isUp}
           className={`${
-            isUp ? "bg-pink-500" : "bg-indigo-500"
+            isUp ? "bg-orange-500" : "bg-indigo-500"
           } relative inline-flex h-6 w-11 items-center rounded-full`}
           onChange={toggleMode}
         >
@@ -66,7 +66,7 @@ export const ModeSwitch: FC = () => {
       </div>
       <p
         className={`mt-1 font-hiragino-sans text-xs font-medium lg:text-sm ${
-          isUp ? "text-pink-500" : "text-indigo-500"
+          isUp ? "text-orange-500" : "text-indigo-500"
         }`}
       >
         カウント{isUp ? "アップ" : "ダウン"}モード

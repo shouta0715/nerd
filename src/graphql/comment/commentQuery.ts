@@ -5,6 +5,7 @@ export const GET_COMMENTS_EPISODE = gql`
     $episode_id: uuid!
     $cursor: timestamptz
     $limit: Int!
+    $order_by: [comments_order_by!]
   ) {
     comments(
       where: {
@@ -12,7 +13,7 @@ export const GET_COMMENTS_EPISODE = gql`
         created_at: { _lt: $cursor }
         reply_to: { _is_null: true }
       }
-      order_by: { created_at: desc }
+      order_by: $order_by
       limit: $limit
     ) {
       content
@@ -39,14 +40,19 @@ export const GET_COMMENTS_EPISODE = gql`
 `;
 
 export const GET_COMMENTS_WORK = gql`
-  query GetCommentsWork($work_id: Int!, $cursor: timestamptz, $limit: Int!) {
+  query GetCommentsWork(
+    $work_id: Int!
+    $cursor: timestamptz
+    $limit: Int!
+    $order_by: [comments_order_by!]
+  ) {
     comments(
       where: {
         work_id: { _eq: $work_id }
         created_at: { _lt: $cursor }
         reply_to: { _is_null: true }
       }
-      order_by: { created_at: desc }
+      order_by: $order_by
       limit: $limit
     ) {
       content

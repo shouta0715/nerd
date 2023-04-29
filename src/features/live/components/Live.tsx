@@ -23,6 +23,8 @@ export const Live = () => {
     mode,
     isTimeLoading,
     isAlreadyFinished,
+    filter,
+    setFilter,
   } = useLive();
 
   if (isLoading || isTimeLoading) {
@@ -60,7 +62,10 @@ export const Live = () => {
           />
         ) : (
           mode === "finish" && (
-            <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+            <EpisodeCommentInput
+              episode_id={data?.episodes_by_pk?.id}
+              filter={filter}
+            />
           )
         )}
       </div>
@@ -81,7 +86,11 @@ export const Live = () => {
         ) : (
           <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
             {mode === "finish" ? (
-              <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+              <EpisodeComments
+                episode_id={data?.episodes_by_pk?.id}
+                filter={filter}
+                setFilter={setFilter}
+              />
             ) : (
               <LiveComment setIsChat={setIsChat} />
             )}

@@ -15,6 +15,7 @@ export type GetCommentsEpisodeQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
   limit: Types.Scalars['Int'];
+  order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
 
@@ -24,6 +25,7 @@ export type GetCommentsWorkQueryVariables = Types.Exact<{
   work_id: Types.Scalars['Int'];
   cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
   limit: Types.Scalars['Int'];
+  order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
 
@@ -62,10 +64,10 @@ export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_c
 
 
 export const GetCommentsEpisodeDocument = `
-    query GetCommentsEpisode($episode_id: uuid!, $cursor: timestamptz, $limit: Int!) {
+    query GetCommentsEpisode($episode_id: uuid!, $cursor: timestamptz, $limit: Int!, $order_by: [comments_order_by!]) {
   comments(
     where: {episode_id: {_eq: $episode_id}, created_at: {_lt: $cursor}, reply_to: {_is_null: true}}
-    order_by: {created_at: desc}
+    order_by: $order_by
     limit: $limit
   ) {
     content
@@ -106,10 +108,10 @@ export const useGetCommentsEpisodeQuery = <
     );
 useGetCommentsEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetCommentsEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetCommentsEpisodeQuery, GetCommentsEpisodeQueryVariables>(client, GetCommentsEpisodeDocument, variables, headers);
 export const GetCommentsWorkDocument = `
-    query GetCommentsWork($work_id: Int!, $cursor: timestamptz, $limit: Int!) {
+    query GetCommentsWork($work_id: Int!, $cursor: timestamptz, $limit: Int!, $order_by: [comments_order_by!]) {
   comments(
     where: {work_id: {_eq: $work_id}, created_at: {_lt: $cursor}, reply_to: {_is_null: true}}
-    order_by: {created_at: desc}
+    order_by: $order_by
     limit: $limit
   ) {
     content

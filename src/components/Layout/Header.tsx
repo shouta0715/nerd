@@ -25,7 +25,11 @@ const DynamicImage = dynamic(
   }
 );
 
-export const Header: FC = () => {
+type Props = {
+  size?: "sm" | "md";
+};
+
+export const Header: FC<Props> = ({ size = "md" }) => {
   const user = useUserState((state) => state.user);
   const authLoading = useGlobalState((state) => state.authLoading);
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
@@ -54,7 +58,9 @@ export const Header: FC = () => {
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
             <Link
-              className="my-2 inline-block font-hiragino-sans text-3xl font-bold"
+              className={`my-2 inline-block font-hiragino-sans font-bold ${
+                size === "sm" ? "text-2xl md:text-3xl" : "text-3xl"
+              }`}
               href="/"
             >
               <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
@@ -92,7 +98,9 @@ export const Header: FC = () => {
               ) : (
                 <>
                   <Button
-                    className="btn-primary text-sm"
+                    className={`btn-primary ${
+                      size === "sm" ? "text-xs md:text-sm" : "text-sm"
+                    }`}
                     loading={authLoading}
                     onClick={() => changeIsOpenModal(true)}
                     radius="md"

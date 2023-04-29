@@ -9,7 +9,7 @@ type Result = {
     | "bg-blue-500"
     | "bg-teal-500"
     | "bg-gray-500";
-  text: "開始" | "再生" | "一時停止" | "変更" | "終了しました" | "設定";
+  text: "開始" | "再生" | "一時停止" | "変更" | "終了" | "設定";
 };
 
 type Props = {
@@ -75,7 +75,7 @@ export const getTimeButton = ({
     if (timeToSecond(time) === 0) {
       return {
         color: "bg-gray-500",
-        text: "終了しました",
+        text: "終了",
       };
     }
 
@@ -87,6 +87,6 @@ export const getTimeButton = ({
 
   return {
     color: "bg-gray-500",
-    text: "終了しました",
+    text: "終了",
   };
 };

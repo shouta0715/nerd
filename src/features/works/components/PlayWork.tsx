@@ -12,7 +12,8 @@ import { PlayWorkNav } from "src/features/works/components/PlayWorkNav";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";
 
 export const PlayWork: FC = () => {
-  const { isChat, isLoading, setIsChat, interval, data } = usePlayWork();
+  const { isChat, isLoading, setIsChat, interval, data, filter, setFilter } =
+    usePlayWork();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -34,7 +35,10 @@ export const PlayWork: FC = () => {
         {isChat ? (
           <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (
-          <WorkCommentInput work_id={data?.works_by_pk?.id ?? 0} />
+          <WorkCommentInput
+            filter={filter}
+            work_id={data?.works_by_pk?.id ?? 0}
+          />
         )}
       </div>
       <MainWrapper>
@@ -44,7 +48,11 @@ export const PlayWork: FC = () => {
           </Suspense>
         ) : (
           <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
-            <WorkComments work_id={data?.works_by_pk?.id ?? 0} />
+            <WorkComments
+              filter={filter}
+              setFilter={setFilter}
+              work_id={data?.works_by_pk?.id ?? 0}
+            />
           </Suspense>
         )}
       </MainWrapper>
