@@ -35,10 +35,12 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
           </button>
           <ul className=" flex h-full flex-1 items-center justify-around">
             <Text
-              className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold text-indigo-500 md:text-base  ${
-                isChat
-                  ? "border-0 border-b-2 border-solid border-indigo-500"
-                  : "border-none"
+              className={`inline-block cursor-pointer rounded-none  py-2 text-sm font-bold  md:text-base  ${
+                isChat ? "border-0 border-b-2 border-solid" : "border-none"
+              } ${
+                mode === "up"
+                  ? "border-orange-500 text-orange-500"
+                  : "border-indigo-500 text-indigo-500"
               }`}
               component="button"
               onClick={() => setIsChat(true)}
@@ -46,10 +48,12 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
               チャット
             </Text>
             <Text
-              className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 md:text-base ${
-                !isChat
-                  ? "border-0 border-b-2 border-solid border-indigo-500"
-                  : "border-none"
+              className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold md:text-base ${
+                !isChat ? "border-0 border-b-2 border-solid " : "border-none"
+              } ${
+                mode === "up"
+                  ? "border-orange-500 text-orange-500"
+                  : "border-indigo-500 text-indigo-500"
               }`}
               color="indigo"
               component="li"

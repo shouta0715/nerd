@@ -24,18 +24,18 @@ export const PlayTimeInput: FC = () => {
 
   return (
     <div className="flex flex-col items-center space-y-1">
-      <div className="flex">
+      <div className="flex items-center">
         <Text
-          className={` text-sm transition-colors duration-300 ${
-            mode === "up" ? "text-pink-500" : "text-indigo-500"
+          className={`text-sm  transition-colors duration-300 ${
+            mode === "up" ? "text-orange-500" : "text-indigo-500"
           }`}
           ff="Hiragino Sans"
         >
           {mode === "up" ? "開始から" : "終了まで"}
         </Text>
-        <div className="relative bg-red-500">
+        <div className="relative">
           <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6" />
-          <div className="absolute -left-7 bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
+          <div className="absolute -left-7  bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
             下の数字をタップすると時間を変更できます。
           </div>
         </div>
@@ -68,7 +68,7 @@ export const PlayTimeInput: FC = () => {
         >
           <RotateArrowRightIcon
             className={`h-8 w-8 fill-none stroke-[2] transition-colors duration-300  [transform:rotateY(180deg)_rotateZ(-45deg)] ${
-              mode === "up" ? "stroke-pink-500" : "stroke-indigo-500"
+              mode === "up" ? "stroke-orange-500" : "stroke-indigo-500"
             }`}
           />
           <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs">
@@ -76,7 +76,7 @@ export const PlayTimeInput: FC = () => {
           </span>
         </Button>
         <Button
-          className={`relative w-full text-xs font-bold text-white ${
+          className={`relative mx-auto w-4/5 text-sm font-bold text-white ${
             getTimeButton({
               isChangeTime,
               mode,
@@ -104,7 +104,7 @@ export const PlayTimeInput: FC = () => {
         >
           <RotateArrowRightIcon
             className={`h-8 w-8 -rotate-45 fill-none stroke-[2] transition-colors  duration-300 ${
-              mode === "up" ? "stroke-pink-500" : "stroke-indigo-500"
+              mode === "up" ? "stroke-orange-500" : "stroke-indigo-500"
             }`}
           />
 

@@ -44,10 +44,11 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 isChat ? "border-0 border-b-2 border-solid " : "border-none"
               } ${
                 mode === "up"
-                  ? "border-pink-500 text-pink-500"
+                  ? "border-orange-500 text-orange-500"
                   : "border-indigo-500 text-indigo-500"
               }`}
               component="button"
+              ff="Hiragino Sans"
               onClick={() => setIsChat(true)}
             >
               チャット
@@ -57,11 +58,12 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 !isChat ? "border-0 border-b-2 border-solid" : "border-none"
               } ${
                 mode === "up"
-                  ? "border-pink-500 text-pink-500"
+                  ? "border-orange-500 text-orange-500"
                   : "border-indigo-500 text-indigo-500"
               }`}
               color="indigo"
               component="li"
+              ff="Hiragino Sans"
               onClick={() => {
                 setIsChat(false);
                 stop();

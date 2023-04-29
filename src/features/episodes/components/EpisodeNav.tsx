@@ -46,10 +46,11 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 isChat ? "border-0 border-b-2 border-solid" : "border-none"
               } ${
                 mode === "up"
-                  ? "border-b-pink-500 text-pink-500"
+                  ? "border-b-orange-500 text-orange-500"
                   : "border-b-indigo-500 text-indigo-500"
               }`}
               component="button"
+              ff="Hiragino Sans"
               onClick={() => setIsChat(true)}
             >
               チャット
@@ -59,11 +60,11 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
                 !isChat ? "border-0 border-b-2 border-solid " : "border-none"
               } ${
                 mode === "up"
-                  ? "border-b-pink-500 text-pink-500"
+                  ? "border-b-orange-500 text-orange-500"
                   : "border-b-indigo-500 text-indigo-500"
               }`}
-              color="indigo"
               component="button"
+              ff="Hiragino Sans"
               onClick={() => {
                 setIsChat(false);
                 stop();
