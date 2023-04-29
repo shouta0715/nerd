@@ -76,7 +76,7 @@ export const PlayTimeInput: FC = () => {
           </span>
         </Button>
         <Button
-          className={`relative mx-auto w-4/5 text-sm font-bold text-white ${
+          className={`relative w-full text-sm font-bold text-white ${
             getTimeButton({
               isChangeTime,
               mode,
