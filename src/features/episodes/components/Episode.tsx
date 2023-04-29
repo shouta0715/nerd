@@ -15,7 +15,8 @@ import { PlayWrapper } from "src/features/play/components/PlayWrapper";
 import { CountDownModal } from "src/features/timer/components/CountDownModal";
 
 export const Episode: FC = () => {
-  const { data, isLoading, isChat, setIsChat, interval } = useEpisode();
+  const { data, isLoading, isChat, setIsChat, interval, filter, setFilter } =
+    useEpisode();
 
   if (isLoading) {
     return <EpisodeSkelton />;
@@ -40,7 +41,10 @@ export const Episode: FC = () => {
           {isChat ? (
             <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
           ) : (
-            <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
+            <EpisodeCommentInput
+              episode_id={data?.episodes_by_pk?.id}
+              filter={filter}
+            />
           )}
         </div>
         <MainWrapper>
@@ -50,7 +54,11 @@ export const Episode: FC = () => {
             </Suspense>
           ) : (
             <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
-              <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+              <EpisodeComments
+                episode_id={data?.episodes_by_pk?.id}
+                filter={filter}
+                setFilter={setFilter}
+              />
             </Suspense>
           )}
         </MainWrapper>

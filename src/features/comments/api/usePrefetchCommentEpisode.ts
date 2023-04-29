@@ -6,11 +6,12 @@ export const usePrefetchCommentEpisode = () => {
 
   return async (episode_id: string) => {
     await queryClient.prefetchInfiniteQuery({
-      queryKey: ["comments", { episode_id }],
+      queryKey: ["comments", { episode_id, filter: "new" }],
       queryFn: () =>
         getComments({
           episode_id,
           pageParam: { cursor: new Date().toISOString() },
+          filter: "new",
         }),
       staleTime: 1000 * 60 * 30,
     });

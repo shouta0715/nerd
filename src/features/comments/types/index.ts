@@ -6,3 +6,5 @@ import {
 export type Comment = GetCommentsEpisodeQuery["comments"][0];
 
 export type Reply = GetRepliesQuery["replies"][0];
+
+export type CommentsFilter = "new" | "popular";

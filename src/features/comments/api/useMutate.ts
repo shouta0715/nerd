@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { CommentsFilter } from "src/features/comments/types";
 import {
   GetCommentsEpisodeQuery,
   useMutateEpisodeCommentMutation,
@@ -13,7 +14,7 @@ type InfiniteCommentEpisode = {
   pages: GetCommentsEpisodeQuery[];
 };
 
-export const useMutateComment = () => {
+export const useMutateComment = (filter: CommentsFilter) => {
   const user = useUserState((state) => state.user);
   const queryClient = useQueryClient();
   const insertEpisodeComment = useMutateEpisodeCommentMutation(client, {
@@ -33,13 +34,13 @@ export const useMutateComment = () => {
 
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
-        { episode_id },
+        { episode_id, filter },
       ]);
 
       if (prevData) {
         // pagesの[0]の一番上に追加する
         queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { episode_id }],
+          ["comments", { episode_id, filter }],
           {
             pageParam: prevData.pageParam,
             pages: prevData.pages.map((page, index) => {
@@ -89,7 +90,6 @@ export const useMutateComment = () => {
         });
         queryClient.invalidateQueries({
           queryKey: ["comments", { episode_id: context.episode_id }],
-          exact: true,
         });
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
@@ -100,7 +100,7 @@ export const useMutateComment = () => {
       if (prevData) {
         // idを更新する
         queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { episode_id: variables.episode_id }],
+          ["comments", { episode_id: variables.episode_id, filter }],
           {
             pageParam: prevData.pageParam,
             pages: prevData.pages.map((page, index) => {
@@ -143,13 +143,13 @@ export const useMutateComment = () => {
 
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
-        { work_id },
+        { work_id, filter },
       ]);
 
       if (prevData) {
         // pagesの[0]の一番上に追加する
         queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { work_id }],
+          ["comments", { work_id, filter }],
           {
             pageParam: prevData.pageParam,
             pages: prevData.pages.map((page, index) => {
@@ -199,18 +199,17 @@ export const useMutateComment = () => {
         });
         queryClient.invalidateQueries({
           queryKey: ["comments", { work_id: context.work_id }],
-          exact: true,
         });
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
-        { work_id: variables.work_id },
+        { work_id: variables.work_id, filter },
       ]);
 
       if (prevData) {
         // idを更新する
         queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { work_id: variables.work_id }],
+          ["comments", { work_id: variables.work_id, filter }],
           {
             pageParam: prevData.pageParam,
             pages: prevData.pages.map((page, index) => {

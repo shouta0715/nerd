@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useInfiniteCommentsWork } from "src/features/comments/api/useInfiniteCommentsWork";
+import { CommentsFilter } from "src/features/comments/types";
 import { useInterSection } from "src/hooks/useInterSection";
 
-export const useCommentsWork = (work_id: number) => {
-  const { data, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useInfiniteCommentsWork(work_id);
+export const useCommentsWork = (work_id: number, filter: CommentsFilter) => {
+  const { data, isFetchingNextPage, fetchNextPage, hasNextPage, isFetching } =
+    useInfiniteCommentsWork(work_id, filter);
 
   const { ref, entry } = useInterSection({
     root: null,
@@ -23,5 +24,6 @@ export const useCommentsWork = (work_id: number) => {
     isFetchingNextPage,
     ref,
     hasNextPage,
+    isLoading: isFetching,
   };
 };

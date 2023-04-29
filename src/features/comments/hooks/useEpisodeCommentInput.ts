@@ -1,6 +1,10 @@
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
+import { CommentsFilter } from "src/features/comments/types";
 
-export const useEpisodeCommentInput = (episode_id: string) => {
+export const useEpisodeCommentInput = (
+  episode_id: string,
+  filter: CommentsFilter
+) => {
   const {
     content,
     reply_to,
@@ -8,7 +12,7 @@ export const useEpisodeCommentInput = (episode_id: string) => {
     user,
     reset,
     insertEpisodeComment,
-  } = useCommentInput();
+  } = useCommentInput(filter);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
