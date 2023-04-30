@@ -19,7 +19,7 @@ export const EpisodeHeader: FC<Props> = ({
   const mode = useTimerState((state) => state.mode);
 
   return (
-    <header className="container mx-auto mb-1 flex flex-col bg-white md:pt-4">
+    <header className="container mx-auto mb-1 flex flex-col bg-white px-4 md:px-6 md:pt-4">
       <div className="flex w-full flex-1 flex-col items-center gap-1">
         <Text
           className=" text-base font-bold md:text-lg"
