@@ -16,7 +16,7 @@ export const PlayMenu: FC = () => {
     <section className="px-6 py-5">
       <div className="mb-2 flex items-center justify-between">
         <Text className="text-dimmed" size="sm">
-          エピソード
+          メニュー
         </Text>
         <button
           className="h-5 w-5 transition-transform active:translate-y-0.5 lg:hidden"
