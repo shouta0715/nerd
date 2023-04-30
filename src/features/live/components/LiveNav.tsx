@@ -79,7 +79,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
         </div>
         <DynamicLiveMenu />
         <div className="hidden h-px w-full bg-slate-200 lg:block" />
-        <Suspense fallback={<NextEpisodeMenuSkelton />}>
+        <Suspense fallback={<NextEpisodeMenuSkelton isHidden />}>
           <NextEpisodeMenu
             episode={data?.episodes_by_pk}
             isOpen={isEpisodeMenuOpen}
