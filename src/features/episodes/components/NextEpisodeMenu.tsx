@@ -9,6 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { NextEpisodeMenuWrapper } from "src/features/play/components/NextEpisodeMenuWrapper";
@@ -29,9 +30,20 @@ export const NextEpisodeMenu: FC<Props> = ({
   isOpen,
   setIsOpen,
 }) => {
-  const { data } = useQueryEpisode(episode?.next_episode_id, undefined);
+  const { data, isLoading } = useQueryEpisode(
+    episode?.next_episode_id,
+    undefined
+  );
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
+
+  if (isOpen && isLoading) {
+    return (
+      <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
+        <NextEpisodeMenuSkelton />
+      </NextEpisodeMenuWrapper>
+    );
+  }
 
   return (
     <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
