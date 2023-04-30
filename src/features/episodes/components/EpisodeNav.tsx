@@ -1,24 +1,17 @@
-import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
+import {
+  ArrowSmallLeftIcon,
+  ListBulletIcon,
+} from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
-import React, { FC } from "react";
-import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
+import React, { FC, Suspense, useState } from "react";
+import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
+import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
+import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useUserState } from "src/store/user/userState";
-
-const DynamicEpisodeMenu = dynamic(
-  () =>
-    import("src/features/episodes/components/EpisodeMenu").then(
-      (mod) => mod.EpisodeMenu
-    ),
-  {
-    ssr: false,
-    loading: () => <EpisodeMenuSkelton />,
-  }
-);
 
 type Props = {
   isChat: boolean;
@@ -32,11 +25,12 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
   const router = useRouter();
   const user = useUserState((state) => state.user);
   const mode = useTimerState((state) => state.mode);
+  const [isEpisodeMenuOpen, setIsEpisodeMenuOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto lg:border-none">
       <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
-        <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 after:h-7 after:w-7 after:content-['']">
+        <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 lg:after:h-7 lg:after:w-7 lg:after:content-['']">
           <button className="h-7 w-7 border-none" onClick={() => router.back()}>
             <ArrowSmallLeftIcon className="h-full w-full" />
           </button>
@@ -79,8 +73,22 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
               コメント
             </Text>
           </div>
+          <button
+            className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
+            onClick={() => setIsEpisodeMenuOpen(!isEpisodeMenuOpen)}
+          >
+            <ListBulletIcon />
+          </button>
         </div>
-        <DynamicEpisodeMenu episode={data?.episodes_by_pk} />
+        <EpisodeMenu />
+        <div className="hidden h-px w-full bg-slate-200 lg:block" />
+        <Suspense fallback={<NextEpisodeMenuSkelton />}>
+          <NextEpisodeMenu
+            episode={data?.episodes_by_pk}
+            isOpen={isEpisodeMenuOpen}
+            setIsOpen={setIsEpisodeMenuOpen}
+          />
+        </Suspense>
       </div>
     </nav>
   );

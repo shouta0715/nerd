@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { Cog8ToothIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { FC } from "react";
@@ -143,11 +143,13 @@ export const ChatInput: FC<Props> = ({
           </div>
         </div>
 
-        <Cog8ToothIcon
+        <button
           aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
-          className="h-6 w-6 cursor-pointer stroke-indigo-500 transition-transform active:scale-90 lg:hidden"
+          className="h-6 w-6 cursor-pointer transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-        />
+        >
+          <AdjustmentsHorizontalIcon />
+        </button>
         <Button
           className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
           disabled={

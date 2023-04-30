@@ -13,16 +13,18 @@ export const PlayMenu: FC = () => {
     useInputMenu();
 
   return (
-    <section className="p-2">
+    <section className="px-6 py-5">
       <div className="mb-2 flex items-center justify-between">
-        <Text className="font-medium" ff="Hiragino Sans" size="sm">
-          メニュー
+        <Text className="text-dimmed" size="sm">
+          エピソード
         </Text>
-        <XMarkIcon
-          aria-label="Close modal"
-          className="h-4 w-4 cursor-pointer lg:hidden"
+        <button
+          className="h-5 w-5 transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsMenuOpen(false)}
-        />
+          type="button"
+        >
+          <XMarkIcon />
+        </button>
       </div>
       <form className="mb-3 space-y-1" onSubmit={onSubmitHandler}>
         <label className="flex items-center" htmlFor="commenter-name-input">

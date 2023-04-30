@@ -1,22 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import React, { FC, Suspense } from "react";
+import React from "react";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
-import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
 import { Text } from "src/components/Elements/Text";
-import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useInputMenu } from "src/features/play/hooks/useInputMenu";
-import { LiveTimer } from "src/features/timer/types";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
-type Props = {
-  episode: GetEpisodeQuery["episodes_by_pk"];
-  mode: LiveTimer["mode"];
-};
-
-export const LiveMenu: FC<Props> = ({ episode, mode }) => {
+export const LiveMenu = () => {
   const {
     isMenuOpen,
     setIsMenuOpen,
@@ -87,10 +78,6 @@ export const LiveMenu: FC<Props> = ({ episode, mode }) => {
             />
           </form>
         </section>
-        <div className="h-[1px] w-full bg-slate-200" />
-        <Suspense fallback={<NextEpisodeMenuSkelton />}>
-          <NextEpisodeMenu episode={episode} mode={mode} />
-        </Suspense>
       </div>
     </div>
   );
