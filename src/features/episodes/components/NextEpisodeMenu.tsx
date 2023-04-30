@@ -34,10 +34,11 @@ export const NextEpisodeMenu: FC<Props> = ({
     episode?.next_episode_id,
     undefined
   );
+
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
 
-  if (isOpen && isLoading) {
+  if (isOpen && isLoading && episode?.next_episode_id) {
     return (
       <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
         <NextEpisodeMenuSkelton />
