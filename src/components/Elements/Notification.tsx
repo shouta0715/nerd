@@ -64,11 +64,13 @@ export const Notification: FC<NotificationProps> = ({
   isPersistent = false,
   show,
 }) => {
-  const [isShow, setIsShow] = React.useState(true);
+  const [isShow, setIsShow] = React.useState(show);
 
   const intervalId = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
+    setIsShow(show);
+
     if (show && !isPersistent) {
       intervalId.current = setTimeout(() => {
         setIsShow(false);
