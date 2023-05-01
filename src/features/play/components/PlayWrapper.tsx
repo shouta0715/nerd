@@ -10,7 +10,7 @@ export const PlayWrapper: FC<Props> = ({ children }) => (
   <>
     <div className="flex min-h-screen animate-fadeUp flex-col ">
       <Header size="sm" />
-      <div className="container contents flex-1 lg:mx-auto lg:flex">
+      <div className="container relative contents flex-1 lg:mx-auto lg:flex">
         {children}
       </div>
     </div>

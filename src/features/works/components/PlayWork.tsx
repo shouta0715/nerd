@@ -21,7 +21,7 @@ export const PlayWork: FC = () => {
 
   return (
     <PlayWrapper>
-      <div className="sticky top-0 z-[11] contents h-full flex-1 pb-16 lg:block lg:max-h-screen lg:overflow-y-auto">
+      <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <PlayWorkHeader
           id={data?.works_by_pk?.id}
           title={data?.works_by_pk?.series_title}

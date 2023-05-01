@@ -33,7 +33,7 @@ export const Live = () => {
 
   return (
     <PlayWrapper>
-      <div className="sticky top-0 contents h-full flex-1 lg:block lg:max-h-screen lg:overflow-y-auto">
+      <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <LiveHeader
           episode_number={data?.episodes_by_pk?.number}
           episode_title={data?.episodes_by_pk?.title}
