@@ -96,8 +96,8 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const todayEpisodes = await getTodayEpisodes();
-  const seasonWorks = await getSeasonWorks(18);
-  const weeklyWorks = await getWeeklyWorks(10);
+  const seasonWorks = await getSeasonWorks(12);
+  const weeklyWorks = await getWeeklyWorks(12);
   const buildDate = new Date().toLocaleDateString("ja-JP", {
     month: "long",
     day: "numeric",
