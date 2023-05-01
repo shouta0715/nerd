@@ -2,22 +2,12 @@ import "../styles/tailwind.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
-import dynamic from "next/dynamic";
 import Head from "next/head";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorPage } from "src/components/Elements/error/ErrorPage";
+import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
-
-const DynamicInitialize = dynamic(
-  () =>
-    import("src/features/auth/components/Initialize").then(
-      (mod) => mod.Initialize
-    ),
-  {
-    ssr: false,
-  }
-);
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [client] = useState(() => queryClient);
@@ -32,9 +22,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ErrorBoundary FallbackComponent={ErrorPage}>
-        <DynamicInitialize />
-
-        <Component {...pageProps} />
+        <FirebaseAuth>
+          <Component {...pageProps} />
+        </FirebaseAuth>
         <ReactQueryDevtools initialIsOpen={false} />
       </ErrorBoundary>
     </QueryClientProvider>
