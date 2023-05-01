@@ -1,8 +1,20 @@
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC } from "react";
-import data from "public/lottie/error.json";
 
+const DynamicLottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
+
+const DynamicLottieResult = dynamic(
+  () =>
+    import("public/lottie/error.json").then((mod) => () => (
+      <DynamicLottie animationData={mod} />
+    )),
+  {
+    ssr: false,
+  }
+);
 type Props = {
   error: Error;
 };
@@ -14,7 +26,7 @@ export const SeverErrorPage: FC<Props> = ({ error }) => (
         申し訳ありません。予期せぬエラーが発生しました。 再度お試しください。
         {error.message}
       </p>
-      <Lottie animationData={data} />
+      <DynamicLottieResult />
       <Link
         className=" mt-4 text-xl font-bold text-indigo-500 underline"
         href="/"

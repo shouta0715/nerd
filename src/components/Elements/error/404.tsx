@@ -1,7 +1,20 @@
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
-import data from "public/lottie/404.json";
+
+const DynamicLottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+});
+
+const DynamicLottieResult = dynamic(
+  () =>
+    import("public/lottie/404.json").then((mod) => () => (
+      <DynamicLottie animationData={mod} className="max-w-xl" />
+    )),
+  {
+    ssr: false,
+  }
+);
 
 export const NotFoundPage = () => (
   <div className="flex min-h-screen bg-gray-50 p-10">
@@ -9,7 +22,7 @@ export const NotFoundPage = () => (
       <p className="text-center text-xl font-bold">
         お探しのページは見つかりませんでした。
       </p>
-      <Lottie animationData={data} className="max-w-xl" />
+      <DynamicLottieResult />
       <Link
         className=" mt-4 text-xl font-bold text-indigo-500 underline"
         href="/"
