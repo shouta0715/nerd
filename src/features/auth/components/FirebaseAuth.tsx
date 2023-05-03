@@ -24,7 +24,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
         const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
 
-        setCustomClaims(user, !isHasClaims);
+        await setCustomClaims(user, !isHasClaims);
       } else {
         (async () => {
           await signInAnonymously(auth).then((result) => result.user);
