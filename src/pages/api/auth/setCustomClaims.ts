@@ -83,7 +83,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   if (!idToken || !refreshToken) {
-    return res.status(400).send("idToken or refreshToken is empty.");
+    return res.status(400).json("idToken or refreshToken is empty.");
   }
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const idTokenResult = await getAuth().verifyIdToken(idToken);
