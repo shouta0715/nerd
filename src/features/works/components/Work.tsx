@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
@@ -58,7 +59,9 @@ export const Work: FC = () => {
           </Text>
           <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
             {isPlaceholderData
-              ? "Loading"
+              ? Array.from({ length: 8 }).map((_, index) => (
+                  <WorkSkelton key={`work-skelton-${index}`} is_short />
+                ))
               : data?.works.map((series_work, index) => (
                   <SeriesItem
                     key={series_work.id}
