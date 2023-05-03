@@ -1,17 +1,21 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "firebase/auth";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { ResData } from "src/features/auth/types";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
+import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 export const useSetCustomClaims = () => {
   const setUser = useUserState((state) => state.setUser);
   const queryClient = useQueryClient();
+  const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
+  const [_, setAuthError] = useState<null>(null);
 
   const setCustomClaims = useCallback(
     async (user: User, isInitialLogin: boolean) => {
+      setAuthLoading(true);
       const idTokenResult = await user.getIdTokenResult(true);
 
       const res = await fetch("/api/auth/setCustomClaims", {
@@ -60,15 +64,30 @@ export const useSetCustomClaims = () => {
 
         queryClient.invalidateQueries(["comments"]);
         queryClient.invalidateQueries(["replies"]);
+
+        setAuthLoading(false);
+
+        return;
       }
 
       if (res.status === 400) {
-        throw new Error("Firebase: Error (auth/invalid-custom-token).");
+        setAuthError(() => {
+          throw new Error("Firebase:Auth Error (400).");
+        });
       }
 
-      throw new Error("Firebase: Error (auth/user-not-found).");
+      if (res.status === 500) {
+        setAuthError(() => {
+          throw new Error("Firebase:Auth Error (500).");
+        });
+      }
+
+      setAuthLoading(false);
+      setAuthError(() => {
+        throw new Error("Firebase:Auth Error (403).");
+      });
     },
-    [queryClient, setUser]
+    [queryClient, setAuthLoading, setUser]
   );
 
   return { setCustomClaims };
