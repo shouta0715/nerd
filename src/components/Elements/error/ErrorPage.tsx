@@ -10,8 +10,8 @@ export const ErrorPage = ({ error }: FallbackProps) => {
   }
 
   if (error.message.includes("403")) {
-    return <ForbiddenPage />;
+    return <ForbiddenPage error={error} />;
   }
 
-  return <SeverErrorPage />;
+  return <SeverErrorPage error={error} />;
 };
