@@ -75,10 +75,12 @@ export const useSetCustomClaims = () => {
 
           return;
         }
+
+        throw new Error("/api/auth/setCustomClaims Error");
       } catch (error: any) {
         setAuthLoading(false);
         setAuthError(() => {
-          throw new Error(`${error.message} (403).`);
+          throw new Error(`${error.message} API Error (403).`);
         });
       }
 

@@ -49,6 +49,8 @@ class GraphQLRequest extends GraphQLClient {
               ...variablesAndRequestHeaders
             );
           }
+
+          throw new Error("Refresh token error.");
         }
 
         return await super.request(

@@ -14,7 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { refreshToken } = req.cookies;
 
   if (!refreshToken) {
-    return res.status(400).send("No refreshToken");
+    return res.status(400).json("No refreshToken");
   }
 
   try {

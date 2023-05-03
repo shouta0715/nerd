@@ -83,7 +83,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   if (!idToken || !refreshToken) {
-    return res.status(400).send("No idToken");
+    return res.status(400).send("idToken or refreshToken is empty.");
   }
   const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
   const idTokenResult = await getAuth().verifyIdToken(idToken);
@@ -97,7 +97,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     setCookie({ res }, "refreshToken", refreshToken, options);
 
-    return res.status(200).send({ message: "ok", data });
+    return res.status(200).json({ message: "ok", data });
   }
 
   const customClaims = createCustomClaims(idTokenResult.uid, isAnonymous);
@@ -120,7 +120,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({ message: "ok", data });
   } catch (err: any) {
-    return res.status(500).json({ message: err.message });
+    return res.status(500).json({
+      message: `${err.message + err.code}setCustomUserClaimsによるエラー`,
+    });
   }
 };
 
