@@ -136,7 +136,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
               radius="full"
               type="submit"
             >
-              {isLoading ? (
+              {isLoading || authLoading ? (
                 <Loader color="green" size="sm" />
               ) : (
                 <PaperAirplaneIcon className=" h-4 w-4 fill-white stroke-white" />
@@ -156,7 +156,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
           type="submit"
         >
-          {isLoading || !user ? (
+          {isLoading || authLoading ? (
             <Loader color="white" size="sm" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />

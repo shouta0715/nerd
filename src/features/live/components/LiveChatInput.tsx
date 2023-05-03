@@ -115,7 +115,7 @@ export const LiveChatInput: FC<Props> = ({
               className="h-8 w-8 rounded-full border-none bg-teal-500 p-0 active:translate-y-0 lg:hidden"
               type="submit"
             >
-              {isLoading || !user ? (
+              {isLoading || authLoading ? (
                 <Loader color="white" size="sm" />
               ) : (
                 <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
@@ -136,7 +136,7 @@ export const LiveChatInput: FC<Props> = ({
           disabled={!user || isTimerLoading || mode === "finish"}
           type="submit"
         >
-          {isLoading || !user ? (
+          {isLoading || authLoading ? (
             <Loader color="white" size="sm" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />

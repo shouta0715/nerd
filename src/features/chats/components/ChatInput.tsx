@@ -134,7 +134,7 @@ export const ChatInput: FC<Props> = ({
               }
               type="submit"
             >
-              {isLoading || !user ? (
+              {isLoading || authLoading ? (
                 <Loader color="white" size="sm" />
               ) : (
                 <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
@@ -157,7 +157,7 @@ export const ChatInput: FC<Props> = ({
           }
           type="submit"
         >
-          {isLoading || !user ? (
+          {isLoading || authLoading ? (
             <Loader color="white" size="sm" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
