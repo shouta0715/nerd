@@ -60,11 +60,13 @@ export const useSetCustomClaims = () => {
 
         queryClient.invalidateQueries(["comments"]);
         queryClient.invalidateQueries(["replies"]);
-
-        return;
       }
 
-      throw new Error("Firebase: Error (auth/popup-closed-by-user).");
+      if (res.status === 400) {
+        throw new Error("Firebase: Error (auth/invalid-custom-token).");
+      }
+
+      throw new Error("Firebase: Error (auth/user-not-found).");
     },
     [queryClient, setUser]
   );
