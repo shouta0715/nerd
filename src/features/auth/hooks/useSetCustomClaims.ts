@@ -19,17 +19,18 @@ export const useSetCustomClaims = () => {
       setAuthLoading(true);
       const idTokenResult = await user.getIdTokenResult(true);
 
+      const body = JSON.stringify({
+        idToken: idTokenResult.token,
+        refreshToken: user.refreshToken,
+      });
+
       try {
         const res = await fetch("/api/auth/setCustomClaims", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            idToken: idTokenResult.token,
-            refreshToken: user.refreshToken,
-            isInitialLogin,
-          }),
+          body,
         });
 
         if (res.status === 200 && res.ok) {
@@ -95,11 +96,10 @@ export const useSetCustomClaims = () => {
         );
       } catch (error: any) {
         setAuthLoading(false);
-        const ErroridTokenResult = await user.getIdTokenResult(true);
 
         setAuthError(() => {
           throw new Error(
-            `${error.message} API Error (403) ${idTokenResult.token} ${ErroridTokenResult.token}`
+            `${error.message} API Error (403) ${idTokenResult.token}`
           );
         });
       }
