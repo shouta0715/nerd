@@ -96,9 +96,7 @@ export const useSetCustomClaims = () => {
       } catch (error: any) {
         setAuthLoading(false);
         setAuthError(() => {
-          throw new Error(
-            `${error.message} API Error (403).${error.response.data} ${idTokenResult}`
-          );
+          throw new Error(`${error.message} API Error (403) ${idTokenResult}`);
         });
       }
 
