@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { cert, getApp, getApps, initializeApp } from "firebase-admin/app";
-import { getAuth } from "firebase-admin/auth";
+import { UserInfo, getAuth } from "firebase-admin/auth";
 import { gql, GraphQLClient } from "graphql-request";
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "nookies";
@@ -35,6 +35,7 @@ const CREATE_USER = gql`
     ) {
       id
       photo_url
+      user_name
     }
   }
 `;
@@ -77,6 +78,34 @@ const options = {
   path: "/",
 };
 
+type GetUser = {
+  user: UserInfo | null;
+  id: string;
+  isCreate: boolean;
+  isAnonymous: boolean;
+  ip?: string | string[];
+};
+
+const getUser = async ({ isCreate, user, id, isAnonymous }: GetUser) => {
+  if (isCreate) {
+    const data = await client.request(CREATE_USER, {
+      id,
+      anonymous: isAnonymous,
+      photo_url: user ? user.photoURL ?? null : null,
+      user_name: user ? user.displayName ?? "匿名" : "匿名",
+      ip: null,
+    });
+
+    return data;
+  }
+
+  const data = await client.request(GET_USER, {
+    id,
+  });
+
+  return data;
+};
+
 const _ = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { idToken, refreshToken, isInitialLogin } = req.body;
@@ -87,43 +116,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       message: "idTokenとrefreshTokenが必要です",
     });
   }
-  const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
-  const idTokenResult = await getAuth().verifyIdToken(idToken);
-  const isHasClaims = idTokenResult[TOKEN_KEY];
-  const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
-
-  if (isHasClaims && !isInitialLogin) {
-    try {
-      const data = await client.request(GET_USER, {
-        id: idTokenResult.uid,
-      });
-
-      setCookie({ res }, "refreshToken", refreshToken, options);
-
-      return res.status(200).json({ message: "ok", data });
-    } catch (error: any) {
-      return res.status(500).json({
-        message: `${
-          error.message + error.code
-        } isInitialLogin = falseの場合におけるエラー ${isHasClaims}`,
-      });
-    }
-  }
-
-  const customClaims = createCustomClaims(idTokenResult.uid, isAnonymous);
 
   try {
+    const idTokenResult = await getAuth().verifyIdToken(idToken);
+    const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
+    const customClaims = createCustomClaims(idTokenResult.uid, isAnonymous);
+
     await getAuth().setCustomUserClaims(idTokenResult.uid, customClaims);
     const user = isAnonymous
       ? null
       : (await getAuth().getUser(idTokenResult.uid)).providerData[0];
 
-    const data = await client.request(CREATE_USER, {
+    const data = await getUser({
+      user,
       id: idTokenResult.uid,
-      anonymous: isAnonymous,
-      photo_url: user ? user.photoURL ?? null : null,
-      user_name: user ? user.displayName ?? "匿名" : "匿名",
-      ip: ip ?? null,
+      isCreate: isInitialLogin,
+      isAnonymous,
+      ip,
     });
 
     setCookie({ res }, "refreshToken", refreshToken, options);
