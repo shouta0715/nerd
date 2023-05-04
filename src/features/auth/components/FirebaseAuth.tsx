@@ -89,10 +89,10 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
             return;
           }
 
-          const error = await res.json();
+          const error = await res.text();
           setAuthError(() => {
             throw new Error(
-              `${res.status} ${res.statusText} server error ${error.message}`
+              `${res.status} ${res.statusText} server error ${error}`
             );
           });
         } catch (error: any) {
