@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
       }
-    ).then((r) => r.json());
+    ).then((r) => r.text());
 
     const { id_token: idToken } = JSON.parse(data);
     setCookie({ res }, "refreshToken", refreshToken, options);

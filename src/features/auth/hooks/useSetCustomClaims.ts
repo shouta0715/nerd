@@ -22,6 +22,7 @@ export const useSetCustomClaims = () => {
       const body = JSON.stringify({
         idToken: idTokenResult.token,
         refreshToken: user.refreshToken,
+        isInitialLogin,
       });
 
       try {
@@ -87,30 +88,23 @@ export const useSetCustomClaims = () => {
           return;
         }
 
-        const error = await res.json().then((data) => data.error);
+        const error = await res.json().then((err) => err);
 
         throw new Error(
-          `${
-            error.message
-          } API Error /api/auth/setCustomClaims (403).${res.json()}`
+          `${error.message} API Error /api/auth/setCustomClaims (403).`
         );
       } catch (error: any) {
         setAuthLoading(false);
 
         setAuthError(() => {
-          throw new Error(
-            `${error.message} API Error (403) ${idTokenResult.token}`
-          );
+          throw new Error(`${error} API Error (403) ${idTokenResult.token}`);
         });
       }
 
       setAuthLoading(false);
-      const ErroridTokenResult = await user.getIdTokenResult(true);
 
       setAuthError(() => {
-        throw new Error(
-          `Firebase:Auth Error (403).${idTokenResult.token} ${ErroridTokenResult}`
-        );
+        throw new Error(`Firebase:Auth Error (403).${idTokenResult.token} `);
       });
     },
     [queryClient, setAuthLoading, setUser]
