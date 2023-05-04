@@ -93,13 +93,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
 
   if (isHasClaims && !isInitialLogin) {
-    const data = await client.request(GET_USER, {
-      id: idTokenResult.uid,
-    });
+    try {
+      const data = await client.request(GET_USER, {
+        id: idTokenResult.uid,
+      });
 
-    setCookie({ res }, "refreshToken", refreshToken, options);
+      setCookie({ res }, "refreshToken", refreshToken, options);
 
-    return res.status(200).json({ message: "ok", data });
+      return res.status(200).json({ message: "ok", data });
+    } catch (error: any) {
+      return res.status(500).json({
+        message: `${
+          error.message + error.code
+        } isInitialLogin = falseの場合におけるエラー ${isHasClaims}`,
+      });
+    }
   }
 
   const customClaims = createCustomClaims(idTokenResult.uid, isAnonymous);

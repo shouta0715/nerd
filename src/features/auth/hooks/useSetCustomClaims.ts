@@ -102,7 +102,7 @@ export const useSetCustomClaims = () => {
 
       setAuthLoading(false);
       setAuthError(() => {
-        throw new Error("Firebase:Auth Error (403).");
+        throw new Error(`Firebase:Auth Error (403).${idTokenResult}`);
       });
     },
     [queryClient, setAuthLoading, setUser]
