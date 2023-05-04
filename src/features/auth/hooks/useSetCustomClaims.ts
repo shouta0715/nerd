@@ -37,32 +37,42 @@ export const useSetCustomClaims = () => {
 
           const token = await auth.currentUser?.getIdToken(true);
 
-          const resUser: ResData = await res.json().then((data) => data.data);
+          try {
+            const resUser: ResData = await res
+              .json()
+              .then((result) => result.data);
 
-          if (!isInitialLogin && resUser.users_by_pk?.id !== user.uid) {
-            throw new Error("Firebase: Error (auth/user-not-found).");
+            if (!isInitialLogin && resUser.users_by_pk?.id !== user.uid) {
+              throw new Error("Firebase: Error (auth/user-not-found).");
+            }
+
+            client.setHeader("Authorization", `Bearer ${token}`);
+
+            const photo_url = isInitialLogin
+              ? resUser.insert_users_one?.photo_url
+              : resUser.users_by_pk?.photo_url ?? null;
+
+            const initialLoginName = isInitialLogin
+              ? resUser.insert_users_one?.user_name
+              : resUser.users_by_pk?.user_name;
+
+            const user_name = localUserName ?? initialLoginName ?? "匿名";
+
+            setUser({
+              id: user.uid,
+              anonymous: user.isAnonymous,
+              photo_url,
+              user_name,
+              provider_user_name: user.displayName ?? null,
+              isDefaultPhoto: false,
+            });
+          } catch (error: any) {
+            setAuthError(() => {
+              throw new Error(
+                `${error.message} resUser Error  API Error (403).${res.json()}`
+              );
+            });
           }
-
-          client.setHeader("Authorization", `Bearer ${token}`);
-
-          const photo_url = isInitialLogin
-            ? resUser.insert_users_one?.photo_url
-            : resUser.users_by_pk?.photo_url ?? null;
-
-          const initialLoginName = isInitialLogin
-            ? resUser.insert_users_one?.user_name
-            : resUser.users_by_pk?.user_name;
-
-          const user_name = localUserName ?? initialLoginName ?? "匿名";
-
-          setUser({
-            id: user.uid,
-            anonymous: user.isAnonymous,
-            photo_url,
-            user_name,
-            provider_user_name: user.displayName ?? null,
-            isDefaultPhoto: false,
-          });
 
           if (!localUserName && user.displayName) {
             localStorage.setItem("user_name", user.displayName);
@@ -79,7 +89,9 @@ export const useSetCustomClaims = () => {
         const error = await res.json().then((data) => data.error);
 
         throw new Error(
-          `${error.message} API Error /api/auth/setCustomClaims (403).`
+          `${
+            error.message
+          } API Error /api/auth/setCustomClaims (403).${res.json()}`
         );
       } catch (error: any) {
         setAuthLoading(false);
