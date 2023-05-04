@@ -39,6 +39,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
         try {
           const res = await fetch("/api/auth/setCustomClaims", {
             method: "POST",
+            credentials: "same-origin",
             headers: {
               "Content-Type": "application/json",
             },
