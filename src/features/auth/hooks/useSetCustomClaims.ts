@@ -101,8 +101,12 @@ export const useSetCustomClaims = () => {
       }
 
       setAuthLoading(false);
+      const ErroridTokenResult = await user.getIdTokenResult(true);
+
       setAuthError(() => {
-        throw new Error(`Firebase:Auth Error (403).${idTokenResult}`);
+        throw new Error(
+          `Firebase:Auth Error (403).${idTokenResult.token} ${ErroridTokenResult}`
+        );
       });
     },
     [queryClient, setAuthLoading, setUser]
