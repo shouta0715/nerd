@@ -6,5 +6,5 @@ type ResUser = {
 
 export type ResData = {
   users_by_pk: ResUser | null;
-  insert_users_one: ResUser;
+  insert_users_one: ResUser | null;
 };
