@@ -20,21 +20,19 @@ const handler = async (
 ) => {
   try {
     validate(req.body, createClaimsSchema);
-    const { idToken, refreshToken } = req.body;
+    const { user, refreshToken } = req.body;
 
-    const idTokenResult = await getAuth().verifyIdToken(idToken);
-    const isAnonymous = idTokenResult.firebase.sign_in_provider === "anonymous";
-    const { customClaims, options } = createOptions(
-      idTokenResult.uid,
-      isAnonymous
-    );
+    const { isAnonymous } = user;
+    const { customClaims, options } = createOptions(user.id, isAnonymous);
 
-    await getAuth().setCustomUserClaims(idTokenResult.uid, customClaims);
+    await getAuth().setCustomUserClaims(user.id, customClaims);
 
     setCookie({ res }, "refreshToken", refreshToken, options);
 
     return res.status(200).json({ message: "ok" });
   } catch (err: any) {
+    console.error(err);
+
     if (err instanceof ZodError) {
       return res.status(400).json({
         message: `idToken が必要です: ${err.message}`,

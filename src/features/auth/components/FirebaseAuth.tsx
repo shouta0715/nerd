@@ -7,6 +7,7 @@ import { signInAnonymously } from "firebase/auth";
 import { FC, useEffect, useState } from "react";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
+import { CreateClaimsSchema } from "src/libs/server/types";
 import { createUser } from "src/libs/server/user/createUser";
 import { getUser } from "src/libs/server/user/getUser";
 
@@ -64,15 +65,20 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
         }
 
         try {
+          const body: CreateClaimsSchema = {
+            user: {
+              id: user.uid,
+              isAnonymous: user.isAnonymous,
+            },
+
+            refreshToken: user.refreshToken,
+          };
           const setClaims = await fetch("/api/auth/setCustomClaims", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              idToken: idTokenResult.token,
-              refreshToken: user.refreshToken,
-            }),
+            body: JSON.stringify(body),
           });
 
           if (!setClaims.ok) throw new Error("setClaims is not ok (403)");
