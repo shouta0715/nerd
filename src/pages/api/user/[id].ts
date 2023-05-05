@@ -33,6 +33,7 @@ const getHandler = async (
       message: "ok",
     });
   } catch (error) {
+    console.error(error);
     if (error instanceof ZodError) {
       return res.status(400).json({
         message: "id が必要です",
