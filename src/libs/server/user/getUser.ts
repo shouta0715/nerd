@@ -1,20 +1,9 @@
+import request from "graphql-request";
+import { GET_USER } from "src/graphql/user/userQuery";
+import { GetUserQuery } from "src/graphql/user/userQuery.generated";
 import { ReturnGetUser } from "src/libs/server/types";
 
-export const getUser = async (id: string): Promise<ReturnGetUser> => {
-  const res = await fetch(`/api/user/${id}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
-  if (!res.ok) {
-    const { message } = await res.json();
-
-    throw new Error(message);
-  }
-
-  const user = (await res.json()) as ReturnGetUser;
-
-  return user;
-};
+export const getUser = async (id: string): Promise<ReturnGetUser> =>
+  request<GetUserQuery>(url, GET_USER, { id });

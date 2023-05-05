@@ -37,7 +37,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
           try {
             const userData = await getUser(user.uid);
 
-            const { users_by_pk } = userData.data;
+            const { users_by_pk } = userData;
 
             if (!users_by_pk) throw new Error("users_by_pk is not found");
 
