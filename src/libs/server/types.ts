@@ -12,10 +12,7 @@ export const getUserSchema = z.object({
 
 export type GetUserSchema = z.infer<typeof getUserSchema>;
 
-export type ReturnGetUser = {
-  data: GetUserQuery;
-  message: string;
-};
+export type ReturnGetUser = GetUserQuery;
 
 export const createUserSchema = z.object({
   id: z.string(),
