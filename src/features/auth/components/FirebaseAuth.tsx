@@ -5,8 +5,11 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { FC, useEffect, useState } from "react";
-import { ResData } from "src/features/auth/types";
 import { auth } from "src/libs/firebase";
+import { client } from "src/libs/graphqlClient";
+import { createUser } from "src/libs/server/user/createUser";
+import { getUser } from "src/libs/server/user/getUser";
+
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -25,80 +28,89 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
         setAuthLoading(true);
-
+        const prevName = localStorage.getItem("user_name");
         const idTokenResult = await user.getIdTokenResult(true);
         const isHasClaims = idTokenResult.claims[TOKEN_KEY];
-        const isInitialLogin = !isHasClaims;
 
-        const body = JSON.stringify({
-          idToken: idTokenResult.token,
-          refreshToken: user.refreshToken,
-          isInitialLogin: !isHasClaims,
-        });
+        if (isHasClaims) {
+          try {
+            const userData = await getUser(user.uid);
 
-        try {
-          const res = await fetch("/api/auth/setCustomClaims", {
-            method: "POST",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body,
-          });
+            const { users_by_pk } = userData.data;
 
-          if (res.status === 200 && res.ok) {
-            const newestToken = await auth.currentUser?.getIdToken(true);
-            const prevName = localStorage.getItem("user_name");
+            if (!users_by_pk) throw new Error("users_by_pk is not found");
 
-            if (!newestToken) throw new Error("newestToken is not found");
-
-            const { users_by_pk, insert_users_one }: ResData = await res
-              .json()
-              .then((r) => r.data);
-
-            if (!isHasClaims && users_by_pk?.id !== user.uid)
-              throw new Error("user id is not match");
-
-            const photo_url = isInitialLogin
-              ? insert_users_one?.photo_url
-              : users_by_pk?.photo_url;
-
-            const initialLoginName = isInitialLogin
-              ? insert_users_one?.user_name
-              : users_by_pk?.user_name;
-
-            const user_name = prevName ?? initialLoginName ?? "匿名";
+            const { photo_url, id, user_name } = users_by_pk;
 
             setUser({
-              id: user.uid,
+              id,
               anonymous: user.isAnonymous,
               photo_url: photo_url ?? null,
-              user_name,
+              user_name: prevName ?? user_name,
               provider_user_name: user.displayName ?? null,
               isDefaultPhoto: false,
             });
 
-            if (!prevName && user.displayName) {
-              localStorage.setItem("user_name", user.displayName);
-            }
-
-            queryClient.invalidateQueries(["comments"]);
-            queryClient.invalidateQueries(["replies"]);
+            client.setHeader("authorization", `Bearer ${idTokenResult.token}`);
 
             setAuthLoading(false);
 
             return;
+          } catch (error: any) {
+            setAuthError(() => {
+              throw new Error(`${error.message}  (403)`);
+            });
           }
+        }
 
-          const error = await res.text();
-          setAuthError(() => {
-            throw new Error(
-              `${res.status} ${res.statusText} server error ${error}`
-            );
+        try {
+          const setClaims = await fetch("/api/auth/setCustomClaims", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              idToken: idTokenResult.token,
+              refreshToken: user.refreshToken,
+            }),
           });
+
+          if (!setClaims.ok) throw new Error("setClaims is not ok (403)");
+
+          const newestToken = await auth.currentUser?.getIdToken(true);
+
+          if (!newestToken) throw new Error("newestToken is not found");
+
+          const userData = await createUser({
+            id: user.uid,
+            user_name: user.displayName ?? null,
+            photo_url: user.photoURL ?? null,
+          });
+
+          const { insert_users_one } = userData.data;
+
+          if (!insert_users_one)
+            throw new Error("insert_users_one is not found");
+
+          const { photo_url, id, user_name } = insert_users_one;
+
+          setUser({
+            id,
+            anonymous: user.isAnonymous,
+            photo_url: photo_url ?? null,
+            user_name: prevName ?? user_name,
+            provider_user_name: user.displayName ?? null,
+            isDefaultPhoto: false,
+          });
+
+          client.setHeader("authorization", `Bearer ${newestToken}`);
+
+          queryClient.invalidateQueries(["comments"]);
+          queryClient.invalidateQueries(["replies"]);
+          setAuthLoading(false);
         } catch (error: any) {
           setAuthError(() => {
-            throw new Error(`${error.message} setCustomClaims (403)`);
+            throw new Error(`${error.message}  (403)`);
           });
         }
       } else {

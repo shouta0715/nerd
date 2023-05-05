@@ -44,8 +44,8 @@ export const useGoogleSignIn = () => {
   };
 
   const deleteToken = async (id: string) => {
-    fetch("/api/auth/deleteUser", {
-      method: "POST",
+    fetch("/api/user", {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
