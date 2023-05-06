@@ -3,6 +3,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import NextNProgress from "nextjs-progressbar";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorPage } from "src/components/Elements/error/ErrorPage";
@@ -25,6 +26,11 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ErrorBoundary FallbackComponent={ErrorPage}>
         <NotificationProvider>
           <FirebaseAuth>
+            <NextNProgress
+              color="#6366f1"
+              height={2}
+              options={{ showSpinner: false }}
+            />
             <Component {...pageProps} />
           </FirebaseAuth>
         </NotificationProvider>
