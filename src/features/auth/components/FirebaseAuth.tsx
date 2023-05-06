@@ -66,13 +66,11 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
 
         try {
           const body: CreateClaimsSchema = {
-            user: {
-              id: user.uid,
-              isAnonymous: user.isAnonymous,
-            },
-
+            id: user.uid,
+            isAnonymous: user.isAnonymous,
             refreshToken: user.refreshToken,
           };
+
           const setClaims = await fetch("/api/auth/setCustomClaims", {
             method: "POST",
             headers: {
