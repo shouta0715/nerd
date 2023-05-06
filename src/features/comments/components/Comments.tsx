@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { InfiniteData } from "@tanstack/react-query";
-import React, { forwardRef } from "react";
+import React, { Fragment, forwardRef } from "react";
+import {
+  ListBox,
+  ListBoxOption,
+} from "src/components/Elements/Listbox/Listbox";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { Text } from "src/components/Elements/Text";
 import { Comment } from "src/features/comments/components/Comment";
@@ -10,6 +14,16 @@ import {
   GetCommentsWorkQuery,
 } from "src/graphql/comment/commentQuery.generated";
 import { useUserState } from "src/store/user/userState";
+
+interface OptionProps extends ListBoxOption {
+  id: string;
+  name: string;
+}
+
+const options: OptionProps[] = [
+  { id: "new", name: "新しい順" },
+  { id: "popular", name: "いいね順" },
+];
 
 type Props = {
   data?: InfiniteData<GetCommentsEpisodeQuery | GetCommentsWorkQuery>;
@@ -34,38 +48,16 @@ export const Comments = forwardRef<any, Props>(
             data?.pages[0].comments.length === 0 ? "hidden" : "block"
           }`}
         >
-          <div
-            className="flex items-center justify-center"
-            onChange={() => {
-              setFilter(filter === "new" ? "popular" : "new");
-            }}
-          >
-            <button
-              className={`flex items-center rounded-l-md px-4 py-1.5 font-hiragino-sans text-sm ${
-                filter === "new"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-indigo-400 text-white hover:bg-indigo-700"
-              }`}
-              onClick={() => setFilter("new")}
-            >
-              {isLoading && filter === "new" && (
-                <Loader className="mr-2" color="white" size="xs" />
-              )}
-              <span>新しい順</span>
-            </button>
-            <button
-              className={`flex items-center rounded-r-md px-4 py-1.5 font-hiragino-sans text-sm ${
-                filter === "popular"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-indigo-400 text-white hover:bg-indigo-700"
-              }`}
-              onClick={() => setFilter("popular")}
-            >
-              <span>いいね順</span>
-              {isLoading && filter === "popular" && (
-                <Loader className="ml-2" color="white" size="xs" />
-              )}
-            </button>
+          <div className="flex items-center justify-end space-x-4 px-2">
+            <ListBox<CommentsFilter, OptionProps>
+              buttonLabel={(value) =>
+                value === "new" ? "新しい順" : "いいね順"
+              }
+              filter={filter}
+              isLoading={isLoading}
+              options={options}
+              setFilter={setFilter}
+            />
           </div>
           {data?.pages.map((page) =>
             page.comments.map((comment) => (
