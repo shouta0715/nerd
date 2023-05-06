@@ -7,6 +7,7 @@ import {
   reauthenticateWithCredential,
 } from "firebase/auth";
 import { auth } from "../../../libs/firebase";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -15,6 +16,8 @@ export const useGoogleSignIn = () => {
     state.authLoading,
     state.setAuthLoading,
   ]);
+  const onShow = useNotificationState((state) => state.onShow);
+
   const user = useUserState((state) => state.user);
   const signInGoogle = async () => {
     setAuthLoading(true);
@@ -25,6 +28,11 @@ export const useGoogleSignIn = () => {
         throw new Error("Firebase: Error (auth/user-not-found).");
       }
       await signInWithPopup(auth, provider);
+      onShow({
+        title: "ログインしました",
+        type: "success",
+        duration: 3000,
+      });
     } catch (error: any) {
       setAuthLoading(false);
     } finally {
@@ -38,6 +46,11 @@ export const useGoogleSignIn = () => {
     try {
       setAuthLoading(true);
       await signOut(auth);
+      onShow({
+        title: "ログアウトしました",
+        type: "success",
+        duration: 3000,
+      });
     } catch (error) {
       setAuthLoading(false);
     }
@@ -60,6 +73,10 @@ export const useGoogleSignIn = () => {
       if (auth.currentUser) {
         await deleteToken(auth.currentUser.uid);
         await deleteUser(auth.currentUser);
+        onShow({
+          title: "アカウントを消去しました",
+          type: "success",
+        });
       } else {
         throw new Error("Firebase: Error (auth/user-not-found).");
       }

@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorPage } from "src/components/Elements/error/ErrorPage";
+import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
 import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
 
@@ -22,9 +23,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
       </Head>
       <ErrorBoundary FallbackComponent={ErrorPage}>
-        <FirebaseAuth>
-          <Component {...pageProps} />
-        </FirebaseAuth>
+        <NotificationProvider>
+          <FirebaseAuth>
+            <Component {...pageProps} />
+          </FirebaseAuth>
+        </NotificationProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </ErrorBoundary>
     </QueryClientProvider>
