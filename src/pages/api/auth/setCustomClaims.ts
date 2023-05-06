@@ -20,12 +20,11 @@ const handler = async (
 ) => {
   try {
     validate(req.body, createClaimsSchema);
-    const { user, refreshToken } = req.body;
+    const { id, isAnonymous, refreshToken } = req.body;
 
-    const { isAnonymous } = user;
-    const { customClaims, options } = createOptions(user.id, isAnonymous);
+    const { customClaims, options } = createOptions(id, isAnonymous);
 
-    await getAuth().setCustomUserClaims(user.id, customClaims);
+    await getAuth().setCustomUserClaims(id, customClaims);
 
     setCookie({ res }, "refreshToken", refreshToken, options);
 

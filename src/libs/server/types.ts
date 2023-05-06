@@ -39,10 +39,8 @@ export type ReturnDeleteUser = {
 };
 
 export const createClaimsSchema = z.object({
-  user: z.object({
-    id: z.string(),
-    isAnonymous: z.boolean(),
-  }),
+  id: z.string(),
+  isAnonymous: z.boolean(),
   refreshToken: z.string(),
 });
 
