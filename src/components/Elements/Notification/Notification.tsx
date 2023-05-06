@@ -6,29 +6,12 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
-import React, { FC } from "react";
+import React from "react";
 import { twMerge } from "tailwind-merge";
-
-type TextProps = {
-  title: string;
-  message?: string;
-};
-
-type NotificationType = "success" | "error" | "info";
-
-type ClassNames = {
-  title?: string;
-  message?: string;
-};
-
-type NotificationProps = {
-  duration?: number;
-  className?: string;
-  classNames?: ClassNames;
-  type?: NotificationType;
-  show: boolean;
-  isPersistent?: boolean;
-} & TextProps;
+import {
+  NotificationType,
+  useNotificationState,
+} from "src/components/Elements/Notification/store";
 
 const TypeIcons = {
   success: CheckCircleIcon,
@@ -54,26 +37,35 @@ const getTypeIcons = (type: NotificationType): React.FC => {
   return (props) => <Icon {...props} />;
 };
 
-export const Notification: FC<NotificationProps> = ({
-  title,
-  message,
-  className,
-  classNames,
-  duration = 3000,
-  type = "info",
-  isPersistent = false,
-  show,
-}) => {
-  const [isShow, setIsShow] = React.useState(show);
+export const Notification = () => {
+  const {
+    isShown: show,
+    title,
+    message,
+    type,
+    duration,
+    isPersistent,
+    onHide,
+    className,
+    classNames,
+  } = useNotificationState((state) => ({
+    isShown: state.isShown,
+    title: state.title,
+    message: state.message,
+    type: state.type,
+    duration: state.duration,
+    isPersistent: state.isPersistent,
+    onHide: state.onHide,
+    className: state.className,
+    classNames: state.classNames,
+  }));
 
   const intervalId = React.useRef<NodeJS.Timeout | null>(null);
 
   React.useEffect(() => {
-    setIsShow(show);
-
     if (show && !isPersistent) {
       intervalId.current = setTimeout(() => {
-        setIsShow(false);
+        onHide();
       }, duration);
     }
 
@@ -82,7 +74,7 @@ export const Notification: FC<NotificationProps> = ({
         clearTimeout(intervalId.current);
       }
     };
-  }, [duration, isPersistent, show]);
+  }, [duration, isPersistent, onHide, show]);
 
   return (
     <Transition
@@ -98,7 +90,7 @@ export const Notification: FC<NotificationProps> = ({
       leave="transform transition-all ease-in-out duration-300"
       leaveFrom="translate-y-0 opacity-100"
       leaveTo="translate-y-2 opacity-0"
-      show={isShow && show}
+      show={show}
     >
       <div className="w-max self-start">
         {getTypeIcons(type)({
@@ -129,7 +121,7 @@ export const Notification: FC<NotificationProps> = ({
       <button className="self-start">
         <XMarkIcon
           className="mt-3 h-5 w-5  text-slate-400 hover:text-slate-500"
-          onClick={() => setIsShow(false)}
+          onClick={onHide}
         />
       </button>
     </Transition>
