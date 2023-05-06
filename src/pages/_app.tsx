@@ -30,6 +30,7 @@ const App = ({ Component, pageProps }: AppProps) => {
               color="#6366f1"
               height={2}
               options={{ showSpinner: false }}
+              startPosition={0.1}
             />
             <Component {...pageProps} />
           </FirebaseAuth>
