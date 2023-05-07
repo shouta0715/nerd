@@ -41,3 +41,5 @@ lib/**/*.js
 lib/**/*.js.map
 
 secrets.json
+
+__reports__

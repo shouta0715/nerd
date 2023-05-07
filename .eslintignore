@@ -9,3 +9,5 @@ functions
 *.config.*
 *.generated.ts
 graphql.ts
+__reports__
+coverage

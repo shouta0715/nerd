@@ -1,7 +1,7 @@
 import { Switch } from "@headlessui/react";
 
 import React, { FC } from "react";
-import { Button } from "src/components/Elements/Button/Button";
+import { Button } from "src/components/Elements/Button";
 import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
