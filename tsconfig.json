@@ -14,8 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "."
+    "baseUrl": ".",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.js"],
-  "exclude": ["node_modules","functions"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.js", "jest.config.ts"],
+  "exclude": ["node_modules"]
 }

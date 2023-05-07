@@ -32,6 +32,8 @@ module.exports = {
     "react-hooks",
     "unused-imports",
     "@typescript-eslint",
+    "jest-dom",
+    "testing-library",
   ],
   rules: {
     "react/jsx-sort-props": "error",
