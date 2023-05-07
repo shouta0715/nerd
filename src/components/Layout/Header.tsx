@@ -98,13 +98,12 @@ export const Header: FC<Props> = ({ size = "md" }) => {
               ) : (
                 <>
                   <Button
-                    className={`btn-primary ${
-                      size === "sm" ? "text-xs md:text-sm" : "text-sm"
-                    }`}
+                    className="font-bold"
                     loading={authLoading}
                     onClick={() => changeIsOpenModal(true)}
                     radius="md"
-                    size="xs"
+                    size="sm"
+                    theme="primary"
                   >
                     ログイン
                   </Button>

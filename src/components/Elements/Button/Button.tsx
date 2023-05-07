@@ -45,6 +45,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
   loaderClassName?: string;
   theme?: keyof typeof themes;
+  textClassName?: string;
 } & IconProps;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -58,6 +59,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       loaderClassName,
+      textClassName = "",
       theme = "transparent",
       ...props
     },
@@ -88,7 +90,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         />
       )}
       {!loading && leftIcon}
-      <span className={twMerge(clsx("mx-2", textSizes[size]))}>
+      <span className={twMerge(clsx("mx-2", textSizes[size], textClassName))}>
         {props.children}
       </span>
       {loading && rightIcon}

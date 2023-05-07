@@ -13,8 +13,8 @@ export const ModalContent: FC = () => {
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
 
   return (
-    <div className="flex flex-col  items-center justify-center space-y-3 rounded-md bg-white p-6 shadow-sm md:max-w-md">
-      <header className="flex w-full items-center justify-center">
+    <div className="flex flex-col items-center  justify-center rounded-xl   bg-white p-6 shadow-sm md:max-w-md">
+      <header className="mb-3 flex w-full items-center justify-center">
         <Text className="-mr-5 flex flex-1 items-center justify-center font-bold">
           <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-hiragino-sans  text-xl text-transparent md:text-2xl">
             Nerd
@@ -35,13 +35,14 @@ export const ModalContent: FC = () => {
         </Link>
       </Text>
       <Button
-        className="font-hiragino-sans text-sm font-bold shadow"
+        className="my-6 font-hiragino-sans font-bold shadow"
         leftIcon={<GoogleIcon />}
         onClick={async () => {
           await signInGoogle();
           changeIsOpenModal(false);
         }}
         radius="full"
+        textClassName="text-sm"
       >
         Googleでログイン
       </Button>
