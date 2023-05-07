@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { FC, useEffect, useRef } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { useInputCommentState, useRefState } from "src/features/comments/store";
 import { useOpenState } from "src/features/episodes/store";

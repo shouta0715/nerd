@@ -14,6 +14,7 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:@typescript-eslint/recommended",
     "prettier",
+    "plugin:storybook/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -100,7 +101,10 @@ module.exports = {
     "import/order": [
       "error",
       {
-        alphabetize: { order: "asc", caseInsensitive: true },
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true,
+        },
       },
     ],
     "react/require-default-props": "off",
@@ -114,7 +118,7 @@ module.exports = {
     "import/no-extraneous-dependencies": [
       "error",
       {
-        devDependencies: false,
+        devDependencies: ["**/*.stories.*", "**/.storybook/**/*.*"],
         optionalDependencies: false,
         peerDependencies: false,
       },

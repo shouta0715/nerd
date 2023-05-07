@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 
 type Props = {
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;

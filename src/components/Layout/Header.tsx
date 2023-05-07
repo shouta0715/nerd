@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, useEffect } from "react";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -98,13 +98,12 @@ export const Header: FC<Props> = ({ size = "md" }) => {
               ) : (
                 <>
                   <Button
-                    className={`btn-primary ${
-                      size === "sm" ? "text-xs md:text-sm" : "text-sm"
-                    }`}
+                    className="font-bold"
                     loading={authLoading}
                     onClick={() => changeIsOpenModal(true)}
                     radius="md"
-                    size="xs"
+                    size="sm"
+                    theme="primary"
                   >
                     ログイン
                   </Button>
