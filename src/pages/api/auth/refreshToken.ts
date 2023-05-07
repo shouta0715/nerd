@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "nookies";
-
-const options = {
-  maxAge: 14 * 24 * 60 * 60, // 14 days
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
-  path: "/",
-};
+import { createOption } from "src/libs/server/options";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { refreshToken } = req.cookies;
@@ -30,7 +23,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ).then((r) => r.text());
 
     const { id_token: idToken } = JSON.parse(data);
-    setCookie({ res }, "refreshToken", refreshToken, options);
+    const option = createOption();
+    setCookie({ res }, "refreshToken", refreshToken, option);
 
     return res.status(200).json({ message: "ok", idToken });
   } catch (err: any) {

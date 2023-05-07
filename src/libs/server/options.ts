@@ -1,3 +1,4 @@
+import * as cookie from "cookie";
 import { cert } from "firebase-admin/app";
 
 export const firebaseConfig = {
@@ -8,25 +9,18 @@ export const firebaseConfig = {
   }),
 };
 
-export const createOptions = (uid: string, isAnonymous: boolean) => {
-  const options = {
-    maxAge: 14 * 24 * 60 * 60, // 14 days
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    path: "/",
-  };
+export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
+  "https://hasura.io/jwt/claims": {
+    "x-hasura-default-role": isAnonymous ? "anonymous" : "user",
+    "x-hasura-allowed-roles": ["user", "anonymous"],
+    "x-hasura-user-id": uid,
+  },
+});
 
-  const customClaims = {
-    "https://hasura.io/jwt/claims": {
-      "x-hasura-default-role": isAnonymous ? "anonymous" : "user",
-      "x-hasura-allowed-roles": ["user", "anonymous"],
-      "x-hasura-user-id": uid,
-    },
-  };
-
-  return {
-    options,
-    customClaims,
-  };
-};
+export const createOption = (): cookie.CookieSerializeOptions => ({
+  maxAge: 14 * 24 * 60 * 60, // 14 days
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict",
+  path: "/",
+});

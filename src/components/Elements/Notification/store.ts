@@ -14,7 +14,7 @@ type ClassNames = {
   message?: string;
 };
 
-type NotificationState = {
+export type NotificationState = {
   duration: number;
   className: string;
   classNames: ClassNames;
@@ -36,7 +36,6 @@ const defaultState: NotificationState = {
   duration: 5000,
   className: "",
   isShown: false,
-
   classNames: {
     title: "",
     message: "",

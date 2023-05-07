@@ -5,7 +5,11 @@ import { getAuth } from "firebase-admin/auth";
 import { NextApiRequest } from "next";
 import { setCookie } from "nookies";
 import { ZodError } from "zod";
-import { createOptions, firebaseConfig } from "src/libs/server/options";
+import {
+  createCustomClaims,
+  createOption,
+  firebaseConfig,
+} from "src/libs/server/options";
 import {
   ApiResponse,
   ReturnCreateClaims,
@@ -22,11 +26,12 @@ const handler = async (
     validate(req.body, createClaimsSchema);
     const { id, isAnonymous, refreshToken } = req.body;
 
-    const { customClaims, options } = createOptions(id, isAnonymous);
+    const option = createOption();
+    const customClaims = createCustomClaims(id, isAnonymous);
 
     await getAuth().setCustomUserClaims(id, customClaims);
 
-    setCookie({ res }, "refreshToken", refreshToken, options);
+    setCookie({ res }, "refreshToken", refreshToken, option);
 
     return res.status(200).json({ message: "ok" });
   } catch (err: any) {

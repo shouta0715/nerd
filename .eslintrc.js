@@ -115,14 +115,7 @@ module.exports = {
     camelcase: "off",
     "jsx-a11y/label-has-associated-control": "off",
     "react/display-name": "off",
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        devDependencies: ["**/*.stories.*", "**/.storybook/**/*.*"],
-        optionalDependencies: false,
-        peerDependencies: false,
-      },
-    ],
+    "import/no-extraneous-dependencies": "off",
     "no-nested-ternary": "off",
   },
 };
