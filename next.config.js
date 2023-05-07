@@ -5,6 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
@@ -24,9 +25,6 @@ const nextConfig = {
         pathname: "/a/**",
       },
     ],
-  },
-  experimental: {
-    scrollRestoration: true,
   },
   eslint: {
     dirs: ["src"],
