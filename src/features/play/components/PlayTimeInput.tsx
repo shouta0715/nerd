@@ -2,7 +2,7 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";

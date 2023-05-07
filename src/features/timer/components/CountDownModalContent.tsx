@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 import React, { FC } from "react";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { useDownModal } from "src/features/timer/hooks/useDownModal";

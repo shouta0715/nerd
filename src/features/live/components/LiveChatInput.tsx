@@ -6,7 +6,7 @@ import Image from "next/image";
 import React, { FC } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { Loader } from "src/components/Elements/Loader/loaders/Loader";
 import { useOpenState } from "src/features/episodes/store";
 import { useLiveChatInput } from "src/features/live/hooks/useLiveChatInput";

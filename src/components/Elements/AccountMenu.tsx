@@ -6,7 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React, { FC, useState } from "react";
-import { Button } from "src/components/Elements/Button";
+import { Button } from "src/components/Elements/Button/Button";
 import { Text } from "src/components/Elements/Text";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
 import { useUserState } from "src/store/user/userState";
