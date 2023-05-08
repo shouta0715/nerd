@@ -1,14 +1,16 @@
-import { NextPage } from "next";
 import React, { Suspense } from "react";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { Live } from "src/features/live/components/Live";
 
-const Index: NextPage = () => (
-  <section>
-    <Suspense fallback={<Skeleton theme="episode" />}>
-      <Live />
-    </Suspense>
-  </section>
+import { NextPageWithLayout } from "src/libs/next/types";
+
+const Page: NextPageWithLayout = () => (
+  <Suspense fallback={<Skeleton theme="episode" />}>
+    <Live />
+  </Suspense>
 );
 
-export default Index;
+Page.getLayout = BasicLayoutOnlyHeader;
+
+export default Page;

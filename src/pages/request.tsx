@@ -1,12 +1,11 @@
-import { NextPage } from "next";
 import React from "react";
-import { Layout } from "src/components/Layout/Layout";
+import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import { Request } from "src/features/request/components/Request";
 
-const Index: NextPage = () => (
-  <Layout>
-    <Request />
-  </Layout>
-);
+import { NextPageWithLayout } from "src/libs/next/types";
 
-export default Index;
+const Page: NextPageWithLayout = () => <Request />;
+
+Page.getLayout = BasicLayout;
+
+export default Page;

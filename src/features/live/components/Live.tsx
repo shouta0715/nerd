@@ -12,7 +12,6 @@ import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
-import { PlayWrapper } from "src/features/play/components/PlayWrapper";
 
 export const Live = () => {
   const {
@@ -33,7 +32,7 @@ export const Live = () => {
   }
 
   return (
-    <PlayWrapper>
+    <>
       <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <LiveHeader
           episode_number={data?.episodes_by_pk?.number}
@@ -98,6 +97,6 @@ export const Live = () => {
           </Suspense>
         )}
       </MainWrapper>
-    </PlayWrapper>
+    </>
   );
 };
