@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "src/components/Elements/Button";
-import { Input } from "src/components/Elements/Input/Input";
+import { Input } from "src/components/Elements/Input";
 import { useRequest } from "src/features/request/hooks/useRequest";
 import { useUserState } from "src/store/user/userState";
 

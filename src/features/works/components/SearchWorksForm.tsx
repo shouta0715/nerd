@@ -1,6 +1,6 @@
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import { Input } from "src/components/Elements/Input/Input";
+import { Input } from "src/components/Elements/Input";
 import { useSearchWorks } from "src/features/works/hooks/useSearchWorks";
 import { useSearchWorksState } from "src/features/works/store";
 
