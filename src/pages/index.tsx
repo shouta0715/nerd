@@ -16,6 +16,7 @@ import {
   GetSeasonWorksQuery,
   GetWeeklyWorksQuery,
 } from "src/graphql/work/workQuery.generated";
+import { Meta } from "src/libs/meta";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 type Props = {
@@ -89,6 +90,7 @@ const Page: NextPageWithLayout<Props> = ({
 );
 
 Page.getLayout = BasicLayout;
+Page.getTitle = Meta(() => "Nerd");
 
 export default Page;
 

@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import { Series } from "src/features/series/components/Series";
+import { Meta } from "src/libs/meta";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 const Page: NextPageWithLayout = () => (
@@ -21,5 +22,6 @@ const Page: NextPageWithLayout = () => (
 );
 
 Page.getLayout = BasicLayout;
+Page.getTitle = Meta(() => "Nerd");
 
 export default Page;

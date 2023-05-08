@@ -11,6 +11,7 @@ import { MainWrapper } from "src/features/play/components/MainWrapper";
 import { PlayWorkHeader } from "src/features/works/components/PlayWorkHeader";
 import { PlayWorkNav } from "src/features/works/components/PlayWorkNav";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";
+import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const PlayWork: FC = () => {
   const { isChat, isLoading, setIsChat, interval, data, filter, setFilter } =
@@ -22,6 +23,7 @@ export const PlayWork: FC = () => {
 
   return (
     <>
+      <DetailTitle title={data?.works_by_pk?.series_title} />
       <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <PlayWorkHeader
           id={data?.works_by_pk?.id}

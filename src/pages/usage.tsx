@@ -9,6 +9,7 @@ import React from "react";
 import { SearchModal } from "src/components/Elements/SearchModal";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import { useSearch } from "src/hooks/useSearch";
+import { Meta } from "src/libs/meta";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 const Page: NextPageWithLayout = () => {
@@ -122,5 +123,6 @@ const Page: NextPageWithLayout = () => {
 };
 
 Page.getLayout = BasicLayout;
+Page.getTitle = Meta(() => "使い方 - Nerd");
 
 export default Page;

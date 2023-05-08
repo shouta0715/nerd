@@ -12,6 +12,7 @@ import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
+import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const Live = () => {
   const {
@@ -33,6 +34,11 @@ export const Live = () => {
 
   return (
     <>
+      <DetailTitle
+        number={data?.episodes_by_pk?.number}
+        subtitle={data?.episodes_by_pk?.title}
+        title={data?.episodes_by_pk?.work.series_title}
+      />
       <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <LiveHeader
           episode_number={data?.episodes_by_pk?.number}

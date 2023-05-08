@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
-import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
+import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getSeasonWorks } from "src/features/lists/api/router";
 import { ListHeader } from "src/features/lists/components/ListHeader";
@@ -9,6 +9,7 @@ import { ListTitle } from "src/features/lists/components/ListTitle";
 import { SeasonWorksList } from "src/features/lists/components/SeasonWorks";
 
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { Meta } from "src/libs/meta";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 const DynamicSearchButton = dynamic(
@@ -39,7 +40,8 @@ const Page: NextPageWithLayout<Props> = ({ data, autoCompleteData }) => (
   </section>
 );
 
-Page.getLayout = BasicLayoutOnlyHeader;
+Page.getLayout = BasicListLayout;
+Page.getTitle = Meta(() => "今期放送のアニメ一覧 - Nerd");
 
 export default Page;
 
