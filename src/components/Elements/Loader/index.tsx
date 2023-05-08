@@ -1,6 +1,6 @@
-import { LoaderProps } from "src/components/Elements/Loader";
-import { Dots } from "src/components/Elements/Loader/loaders/Dots";
-import { Oval } from "src/components/Elements/Loader/loaders/Oval";
+import { Dots } from "src/components/Elements/Loader/items/Dots";
+import { Oval } from "src/components/Elements/Loader/items/Oval";
+import type { LoaderProps } from "src/components/Elements/Loader/type";
 
 export const Loader = ({
   variant = "oval",

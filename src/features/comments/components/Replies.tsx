@@ -2,7 +2,7 @@
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, RefObject } from "react";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { Reply } from "src/features/comments/components/Reply";
 import { useReplies } from "src/features/comments/hooks/useReplies";
 

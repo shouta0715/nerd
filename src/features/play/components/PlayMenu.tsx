@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
-import { Button } from "src/components/Elements/Button/Button";
+import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input/Input";
 import { Text } from "src/components/Elements/Text";
 import { PlayTimeInput } from "src/features/play/components/PlayTimeInput";

@@ -1,7 +1,11 @@
 import clsx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { colors, LoaderProps, sizes } from "src/components/Elements/Loader";
+import {
+  colors,
+  LoaderProps,
+  sizes,
+} from "src/components/Elements/Loader/type";
 
 export const Dots = ({
   color = "indigo",
@@ -9,6 +13,7 @@ export const Dots = ({
   className,
 }: LoaderProps) => (
   <svg
+    aria-hidden="true"
     className={twMerge(clsx(colors[color], sizes[size], className))}
     viewBox="0 0 120 30"
     xmlns="http://www.w3.org/2000/svg"

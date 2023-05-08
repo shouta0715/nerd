@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
-import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { Layout } from "src/components/Layout/Layout";
 import { Series } from "src/features/series/components/Series";
 
@@ -14,7 +15,7 @@ const Index: NextPage = () => (
               シリーズ一覧
             </p>
             <p className="mx-auto h-2 w-1/2 animate-pulse bg-slate-200" />
-            <WorkSkelton is_short />
+            <Skeleton props={{ is_short: true }} theme="work" />
           </div>
         }
       >

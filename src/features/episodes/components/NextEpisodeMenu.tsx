@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { NextEpisodeMenuWrapper } from "src/features/play/components/NextEpisodeMenuWrapper";
@@ -41,7 +41,7 @@ export const NextEpisodeMenu: FC<Props> = ({
   if (isOpen && isLoading && episode?.next_episode_id) {
     return (
       <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
-        <NextEpisodeMenuSkelton />
+        <Skeleton theme="nextMenu" />
       </NextEpisodeMenuWrapper>
     );
   }

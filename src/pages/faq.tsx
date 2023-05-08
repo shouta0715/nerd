@@ -1,11 +1,9 @@
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
-
 import { NextPage } from "next";
 import Link from "next/link";
 import React from "react";
 import { Layout } from "src/components/Layout/Layout";
-
 import { useFaq } from "src/hooks/useFaq";
 
 const Faq: NextPage = () => {

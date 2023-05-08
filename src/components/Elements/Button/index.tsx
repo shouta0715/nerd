@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 
 const textSizes = {
   xs: "text-xs",
@@ -67,6 +67,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ) => (
     <button
       ref={ref}
+      aria-busy={loading}
       className={twMerge(
         clsx(
           "flex items-center justify-center border transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",

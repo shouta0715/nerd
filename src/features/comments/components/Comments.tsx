@@ -5,7 +5,7 @@ import {
   ListBox,
   ListBoxOption,
 } from "src/components/Elements/Listbox/Listbox";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
 import { Comment } from "src/features/comments/components/Comment";
 import { CommentsFilter } from "src/features/comments/types";

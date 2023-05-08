@@ -1,7 +1,7 @@
-import React, { FC } from "react";
-import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
+import React from "react";
+import { NextEpisodeMenuSkeleton } from "src/components/Elements/Skeleton/items/NextEpisodeMenuSkeleton";
 
-const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
+const skeletonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   <div
     key={`skelton-${i}-pin`}
     className="flex flex-col items-center justify-center"
@@ -14,8 +14,8 @@ const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   </div>
 ));
 
-export const EpisodeMenuSkelton: FC = () => (
-  <div className="hidden bg-white lg:block">
+export const EpisodeMenuSkeleton = () => (
+  <div className="hidden bg-white lg:block" role="status">
     <section className="px-4 py-2">
       <div className="flex items-center justify-between">
         <div className="mb-2 h-2 w-16 rounded-md bg-slate-200" />
@@ -30,7 +30,7 @@ export const EpisodeMenuSkelton: FC = () => (
       </div>
       <div className="flex flex-col items-center space-y-1">
         <div className="h-2 w-16 rounded-md bg-slate-200" />
-        <div className="flex space-x-4 md:space-x-6">{skeltonTimers}</div>
+        <div className="flex space-x-4 md:space-x-6">{skeletonTimers}</div>
         <div className="grid w-full grid-cols-3 items-center justify-between">
           <div className="mx-auto h-10 w-10  rounded-full bg-slate-200" />
           <div className="h-4 w-full rounded-md bg-slate-200" />
@@ -39,6 +39,6 @@ export const EpisodeMenuSkelton: FC = () => (
       </div>
     </section>
     <div className="h-[1px] w-full bg-slate-200" />
-    <NextEpisodeMenuSkelton />
+    <NextEpisodeMenuSkeleton />
   </div>
 );

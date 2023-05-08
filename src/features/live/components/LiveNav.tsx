@@ -5,8 +5,8 @@ import {
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
-import { EpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/EpisodeMenuSkelton";
-import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { Text } from "src/components/Elements/Text";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { LiveTimer } from "src/features/timer/types";
@@ -24,7 +24,7 @@ const DynamicLiveMenu = dynamic(
     import("src/features/live/components/LiveMenu").then((mod) => mod.LiveMenu),
   {
     ssr: false,
-    loading: () => <EpisodeMenuSkelton />,
+    loading: () => <Skeleton theme="episodeMenu" />,
   }
 );
 
@@ -79,7 +79,9 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
         </div>
         <DynamicLiveMenu />
         <div className="hidden h-px w-full bg-slate-200 lg:block" />
-        <Suspense fallback={<NextEpisodeMenuSkelton isHidden />}>
+        <Suspense
+          fallback={<Skeleton props={{ isHidden: true }} theme="nextMenu" />}
+        >
           <NextEpisodeMenu
             episode={data?.episodes_by_pk}
             isOpen={isEpisodeMenuOpen}

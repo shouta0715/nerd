@@ -1,6 +1,7 @@
 import React, { FC, Suspense } from "react";
-import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+
+import { Loader } from "src/components/Elements/Loader";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
@@ -16,7 +17,7 @@ export const PlayWork: FC = () => {
     usePlayWork();
 
   if (isLoading) {
-    return <EpisodeSkelton />;
+    return <Skeleton theme="episode" />;
   }
 
   return (

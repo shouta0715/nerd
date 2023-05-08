@@ -1,3 +1,4 @@
+import { TailwindStory } from "../src/test/storybook";
 import type { Preview } from "@storybook/react";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 import "../src/styles/tailwind.css";
@@ -9,6 +10,7 @@ export const decorators = [mswDecorator];
 const preview: Preview = {
   parameters: {
     // actionに表示されものはonの後に大文字で始まるものだけ
+    ...TailwindStory.parameters,
     actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {

@@ -1,12 +1,11 @@
 import { NextPage } from "next";
 import React, { Suspense } from "react";
-
-import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { Live } from "src/features/live/components/Live";
 
 const Index: NextPage = () => (
   <section>
-    <Suspense fallback={<EpisodeSkelton />}>
+    <Suspense fallback={<Skeleton theme="episode" />}>
       <Live />
     </Suspense>
   </section>

@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { WorkSkelton } from "src/components/Elements/Loader/loaders/WorkSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { useWeeklyWorks } from "src/features/lists/hooks/useWeeklyWorks";
 import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
 
@@ -13,7 +14,7 @@ const DynamicWorkItem = dynamic(
     ),
   {
     ssr: false,
-    loading: () => <WorkSkelton />,
+    loading: () => <Skeleton theme="work" />,
   }
 );
 

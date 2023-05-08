@@ -4,7 +4,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
-import { NextEpisodeMenuSkelton } from "src/components/Elements/Loader/loaders/NextEpisodeMenuSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
 import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
@@ -82,7 +82,16 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
         </div>
         <EpisodeMenu />
         <div className="hidden h-px w-full bg-slate-200 lg:block" />
-        <Suspense fallback={<NextEpisodeMenuSkelton isHidden />}>
+        <Suspense
+          fallback={
+            <Skeleton
+              props={{
+                isHidden: true,
+              }}
+              theme="nextMenu"
+            />
+          }
+        >
           <NextEpisodeMenu
             episode={data?.episodes_by_pk}
             isOpen={isEpisodeMenuOpen}

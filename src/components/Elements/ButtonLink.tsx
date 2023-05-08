@@ -2,7 +2,7 @@ import clsx from "clsx";
 import NLink from "next/link";
 import React, { FC } from "react";
 import { twMerge } from "tailwind-merge";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 
 const sizes = {
   xs: "text-xs px-1.5 py-1",

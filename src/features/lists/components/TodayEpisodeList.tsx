@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { Skeleton } from "src/components/Elements/Loader/loaders/Skeleton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { useTodayEpisodes } from "src/features/episodes/hooks/useTodayEpisodes";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -12,7 +13,7 @@ const DynamicTodayEpisodeItem = dynamic(
   () => import("src/features/episodes/components/TodayEpisodeItem"),
   {
     ssr: false,
-    loading: () => <Skeleton />,
+    loading: () => <Skeleton theme="today" />,
   }
 );
 
