@@ -1,12 +1,14 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
+import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getWeeklyWorks } from "src/features/lists/api/router";
 import { ListHeader } from "src/features/lists/components/ListHeader";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { WeeklyWorksList } from "src/features/lists/components/WeeklyWorksList";
 import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { NextPageWithLayout } from "src/libs/next/types";
 
 const DynamicSearchButton = dynamic(
   () =>
@@ -23,7 +25,7 @@ type Props = {
   autoCompleteData: AutoCompleteData[];
 };
 
-const WeeklyWorks: NextPage<Props> = ({ data, autoCompleteData }) => (
+const Page: NextPageWithLayout<Props> = ({ data, autoCompleteData }) => (
   <section className="min-h-screen animate-fadeUp bg-gray-50">
     <ListHeader autoCompleteData={autoCompleteData} />
     <div className="container mx-auto">
@@ -53,4 +55,6 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default WeeklyWorks;
+Page.getLayout = BasicLayoutOnlyHeader;
+
+export default Page;

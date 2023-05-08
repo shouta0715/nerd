@@ -7,7 +7,7 @@ import { WorkChats } from "src/features/chats/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { WorkComments } from "src/features/comments/components/WorkComments";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
-import { PlayWrapper } from "src/features/play/components/PlayWrapper";
+
 import { PlayWorkHeader } from "src/features/works/components/PlayWorkHeader";
 import { PlayWorkNav } from "src/features/works/components/PlayWorkNav";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";
@@ -21,7 +21,7 @@ export const PlayWork: FC = () => {
   }
 
   return (
-    <PlayWrapper>
+    <>
       <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <PlayWorkHeader
           id={data?.works_by_pk?.id}
@@ -57,6 +57,6 @@ export const PlayWork: FC = () => {
           </Suspense>
         )}
       </MainWrapper>
-    </PlayWrapper>
+    </>
   );
 };

@@ -1,12 +1,15 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
+import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getTodayEpisodes } from "src/features/lists/api/router";
 import { ListHeader } from "src/features/lists/components/ListHeader";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";
+
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { NextPageWithLayout } from "src/libs/next/types";
 
 const DynamicSearchButton = dynamic(
   () =>
@@ -23,7 +26,7 @@ type Props = {
   autoCompleteData: AutoCompleteData[];
 };
 
-const TodayEpisodes: NextPage<Props> = ({ autoCompleteData, data }) => (
+const Page: NextPageWithLayout<Props> = ({ autoCompleteData, data }) => (
   <section className="min-h-screen animate-fadeUp bg-gray-50">
     <ListHeader autoCompleteData={autoCompleteData} />
     <div className="container mx-auto">
@@ -36,7 +39,9 @@ const TodayEpisodes: NextPage<Props> = ({ autoCompleteData, data }) => (
   </section>
 );
 
-export default TodayEpisodes;
+Page.getLayout = BasicLayoutOnlyHeader;
+
+export default Page;
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await getTodayEpisodes();
