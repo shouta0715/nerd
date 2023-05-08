@@ -3,7 +3,7 @@
 import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { Button } from "src/components/Elements/Button";
-import { Input } from "src/components/Elements/Input/Input";
+import { Input } from "src/components/Elements/Input";
 import { Text } from "src/components/Elements/Text";
 import { useInputMenu } from "src/features/play/hooks/useInputMenu";
 

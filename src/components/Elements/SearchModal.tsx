@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { FC, Fragment } from "react";
-import { Input } from "src/components/Elements/Input/Input";
+import { Input } from "src/components/Elements/Input";
 
 type Props = {
   isSearchOpen: boolean;
