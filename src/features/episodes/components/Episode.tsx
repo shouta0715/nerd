@@ -13,6 +13,7 @@ import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
 
 import { CountDownModal } from "src/features/timer/components/CountDownModal";
+import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const Episode: FC = () => {
   const { data, isLoading, isChat, setIsChat, interval, filter, setFilter } =
@@ -24,6 +25,11 @@ export const Episode: FC = () => {
 
   return (
     <>
+      <DetailTitle
+        number={data?.episodes_by_pk?.number}
+        subtitle={data?.episodes_by_pk?.title}
+        title={data?.episodes_by_pk?.work.series_title}
+      />
       <div className="sticky top-0 z-[11] contents  h-full flex-1 lg:block lg:max-h-[calc(100dvh-3.5rem)] lg:overflow-y-auto">
         <EpisodeHeader
           episode_number={data?.episodes_by_pk?.number}
