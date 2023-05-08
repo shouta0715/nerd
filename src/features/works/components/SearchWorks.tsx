@@ -2,7 +2,7 @@
 import { CubeTransparentIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React from "react";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { useSearchWorksState } from "src/features/works/store";
 
 export const SearchWorks = () => {

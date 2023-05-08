@@ -3,8 +3,8 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
 import React, { FC, memo } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
 import { ModeBadge } from "src/components/Elements/ModeBadge";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { Episode } from "src/features/episodes/types";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
@@ -13,7 +13,7 @@ const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
   {
     ssr: false,
-    loading: () => <TimerSkelton />,
+    loading: () => <Skeleton theme="timer" />,
   }
 );
 

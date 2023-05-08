@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 
-const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
+const skeletonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
   <div
     key={`skelton-${i}`}
     className="flex flex-col items-center justify-center"
@@ -12,8 +12,8 @@ const skeltonTimers = Array.from({ length: 3 }, (_, i) => i).map((i) => (
     <span className="h-2 w-10 rounded-md bg-slate-200" />
   </div>
 ));
-export const TimerSkelton: FC = () => (
-  <div className="flex animate-pulse space-x-4 md:space-x-6">
-    {skeltonTimers}
+export const TimerSkeleton = () => (
+  <div className="flex animate-pulse space-x-4 md:space-x-6" role="status">
+    {skeletonTimers}
   </div>
 );

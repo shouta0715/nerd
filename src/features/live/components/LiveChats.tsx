@@ -1,7 +1,7 @@
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import RotateArrowIcon from "public/icons/RotateArrowRightIcon.svg";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/components/Chat";
 import { useLiveChats } from "src/features/live/hooks/useLiveChats";
 import { LiveTimer } from "src/features/timer/types";

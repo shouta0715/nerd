@@ -4,8 +4,10 @@ node_modules
 yarn.lock
 package-lock.json
 public
-tsconfig.json
 generated
 functions
+*.config.*
 *.generated.ts
 graphql.ts
+__reports__
+coverage

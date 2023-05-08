@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { FC } from "react";
-import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { Panel } from "src/features/timer/components/Panel";
 
 type Props = {
@@ -18,7 +19,7 @@ export const Timer: FC<Props> = ({
   isTimeLoading,
 }) => {
   if (isTimeLoading || !id) {
-    return <TimerSkelton />;
+    return <Skeleton theme="timer" />;
   }
 
   return (

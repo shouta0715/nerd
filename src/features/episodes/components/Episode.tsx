@@ -1,6 +1,6 @@
 import React, { FC, Suspense } from "react";
-import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
@@ -19,7 +19,7 @@ export const Episode: FC = () => {
     useEpisode();
 
   if (isLoading) {
-    return <EpisodeSkelton />;
+    return <Skeleton theme="episode" />;
   }
 
   return (

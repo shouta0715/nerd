@@ -7,7 +7,7 @@ import React, { FC } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { useOpenState } from "src/features/episodes/store";
 import { useLiveChatInput } from "src/features/live/hooks/useLiveChatInput";
 import { LiveTimer, Time } from "src/features/timer/types";

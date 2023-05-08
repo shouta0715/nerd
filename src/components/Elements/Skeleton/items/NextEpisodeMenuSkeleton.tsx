@@ -4,11 +4,12 @@ type Props = {
   isHidden?: boolean;
 };
 
-export const NextEpisodeMenuSkelton: FC<Props> = ({ isHidden = false }) => (
+export const NextEpisodeMenuSkeleton: FC<Props> = ({ isHidden = false }) => (
   <section
     className={`animate-pulse px-6 py-4 lg:block lg:px-4 lg:py-2 ${
       isHidden ? "hidden lg:block" : ""
     }`}
+    role="status"
   >
     <div className="mb-2 h-2 w-16 rounded-md bg-slate-200" />
     <div className="mb-2 h-3 w-4/5 rounded-md bg-slate-200" />

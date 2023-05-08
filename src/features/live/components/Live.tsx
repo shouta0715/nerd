@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
-import { EpisodeSkelton } from "src/components/Elements/Loader/loaders/EpisodeSkelton";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+
+import { Loader } from "src/components/Elements/Loader";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/FinishLive";
@@ -28,7 +29,7 @@ export const Live = () => {
   } = useLive();
 
   if (isLoading || isTimeLoading) {
-    return <EpisodeSkelton />;
+    return <Skeleton theme="episode" />;
   }
 
   return (

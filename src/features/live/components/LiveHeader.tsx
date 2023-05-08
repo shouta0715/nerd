@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { TimerSkelton } from "src/components/Elements/Loader/loaders/TimerSkelton";
+import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { Text } from "src/components/Elements/Text";
 import { LiveTimer, PadTime } from "src/features/timer/types";
 
@@ -8,7 +9,7 @@ const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
   {
     ssr: false,
-    loading: () => <TimerSkelton />,
+    loading: () => <Skeleton theme="timer" />,
   }
 );
 

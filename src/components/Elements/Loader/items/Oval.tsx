@@ -1,7 +1,11 @@
 import clsx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { colors, LoaderProps, sizes } from "src/components/Elements/Loader";
+import {
+  colors,
+  LoaderProps,
+  sizes,
+} from "src/components/Elements/Loader/type";
 
 export const Oval = ({
   color = "indigo",

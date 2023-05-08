@@ -6,7 +6,7 @@ import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
 import { useReply } from "src/features/comments/hooks/useReply";
 import { Comment as TypeComment } from "src/features/comments/types";

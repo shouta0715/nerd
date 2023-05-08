@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { Loader } from "src/components/Elements/Loader/loaders/Loader";
+import { Loader } from "src/components/Elements/Loader";
 
 const textSizes = {
   xs: "text-xs",
