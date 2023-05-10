@@ -57,10 +57,10 @@ const defaultClassNames: ClassNames = {
 type SwitchProps = {
   className?: string;
   defaultChecked?: boolean;
-  onChange: (checked: boolean) => void;
+  onChange?: (checked: boolean) => void;
   disabled?: boolean;
-  enabledSrOnlyChar: string;
-  disabledSrOnlyChar: string;
+  enabledSrOnlyChar?: string;
+  disabledSrOnlyChar?: string;
   theme?: SwitchTheme;
   size?: SwitchSize;
   classNames?: ClassNames;
@@ -81,6 +81,10 @@ export const Switch: FC<SwitchProps> = ({
 
   return (
     <TSwitch
+      aria-checked={checkedState}
+      aria-label={checkedState ? enabledSrOnlyChar : disabledSrOnlyChar}
+      aria-roledescription="switch"
+      as="button"
       checked={checkedState}
       className={twMerge(
         clsx(
@@ -94,7 +98,7 @@ export const Switch: FC<SwitchProps> = ({
       disabled={disabled}
       onChange={(checked) => {
         setCheckedState(checked);
-        onChange(checked);
+        onChange?.(checked);
       }}
     >
       <span className="sr-only">
