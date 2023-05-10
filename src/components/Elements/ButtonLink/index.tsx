@@ -4,12 +4,20 @@ import React, { FC } from "react";
 import { twMerge } from "tailwind-merge";
 import { Loader } from "src/components/Elements/Loader";
 
+const textSizes = {
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+};
+
 const sizes = {
   xs: "text-xs px-1.5 py-1",
-  sm: "text-sm px-2.5 py-1.5",
-  md: "text-base px-3.5 py-2.5",
-  lg: "text-lg px-4 py-3.5",
-  xl: "text-xl px-6 py-5",
+  sm: "text-sm px-2 py-1.5",
+  md: "text-base px-2.5 py-2",
+  lg: "text-lg px-2.5 py-2",
+  xl: "text-xl px-3 py-2.5",
 };
 
 const rounded = {
@@ -17,6 +25,14 @@ const rounded = {
   md: "rounded-md",
   lg: "rounded-lg",
   full: "rounded-full",
+};
+
+const themes = {
+  primary: "bg-indigo-500 text-white hover:bg-indigo-600",
+  secondary: "bg-pink-500 text-white hover:bg-pink-600",
+  success: "bg-green-500 text-white hover:bg-green-600",
+  danger: "bg-red-500 text-white hover:bg-red-600",
+  transparent: "bg-transparent ",
 };
 
 type IconProps =
@@ -28,6 +44,9 @@ export type LinkProps = {
   radius?: keyof typeof rounded;
   size?: keyof typeof sizes;
   loading?: boolean;
+  loaderClassName?: string;
+  theme?: keyof typeof themes;
+  textClassName?: string;
 } & IconProps &
   React.ComponentProps<typeof NLink>;
 
@@ -38,6 +57,9 @@ export const ButtonLink: FC<LinkProps> = ({
   loading = false,
   leftIcon,
   rightIcon,
+  loaderClassName = "",
+  textClassName = "",
+  theme = "transparent",
   ...props
 }) => (
   <NLink
@@ -47,13 +69,24 @@ export const ButtonLink: FC<LinkProps> = ({
         sizes[size],
         rounded[radius],
         loading && "cursor-wait opacity-60",
+        themes[theme],
         className
       )
     )}
     {...props}
   >
-    {loading && <Loader color="white" size={size} variant="oval" />}
+    {loading && (
+      <Loader
+        className={clsx(loaderClassName)}
+        color="white"
+        size={size}
+        variant="oval"
+      />
+    )}
     {!loading && leftIcon}
-    <span className="mx-2">{props.children}</span> {loading && rightIcon}
+    <span className={twMerge(clsx("mx-2", textSizes[size], textClassName))}>
+      {props.children}
+    </span>
+    {loading && rightIcon}
   </NLink>
 );

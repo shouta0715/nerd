@@ -1,7 +1,6 @@
-import { Switch } from "@headlessui/react";
-
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
+import { Switch } from "src/components/Elements/Switch";
 import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
@@ -23,10 +22,8 @@ export const ModeSwitch: FC = () => {
   const isUp = mode === "up";
   const isSettingDown = timeToSecond(downInitialTime) !== 0;
 
-  const toggleMode = () => {
-    if (mode === "up" && !isOpen && !isSettingDown) {
-      setIsOpen(true);
-    }
+  const toggleMode = (checked: boolean) => {
+    if (mode === "up" && !isOpen && !isSettingDown && !checked) setIsOpen(true);
 
     changeMode();
   };
@@ -35,22 +32,13 @@ export const ModeSwitch: FC = () => {
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex items-center">
         <Switch
-          as="button"
-          checked={isUp}
-          className={`${
-            isUp ? "bg-orange-500" : "bg-indigo-500"
-          } relative inline-flex h-6 w-11 items-center rounded-full`}
+          defaultChecked={isUp}
+          disabledSrOnlyChar="カウントダウンモード"
+          enabledSrOnlyChar="カウントアップモード"
           onChange={toggleMode}
-        >
-          <span className="sr-only">
-            {isUp ? "カウントアップモード" : "カウントダウンモード"}
-          </span>
-          <span
-            className={`${
-              isUp ? "translate-x-1" : "translate-x-6"
-            } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-          />
-        </Switch>
+          size="sm"
+          theme="timer"
+        />
         <Button
           className={`-mr-20 ml-6 bg-teal-500 py-1.5 font-bold text-white transition-opacity duration-300 ${
             mode === "down" ? "opacity-100" : "pointer-events-none opacity-0"
