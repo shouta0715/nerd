@@ -75,6 +75,7 @@ const defaultClassNames: ClassNames = {
 type SwitchProps = {
   className?: string;
   defaultChecked?: boolean;
+  checked?: boolean;
   onChange?: (checked: boolean) => void;
   disabled?: boolean;
   enabledSrOnlyChar?: string;
@@ -93,6 +94,7 @@ export const Switch: FC<SwitchProps> = ({
   disabledSrOnlyChar = "無効",
   theme = "primary",
   size = "md",
+  checked,
   classNames = defaultClassNames,
 }) => {
   const [checkedState, setCheckedState] = useState(defaultChecked);
@@ -103,7 +105,7 @@ export const Switch: FC<SwitchProps> = ({
       aria-label={checkedState ? enabledSrOnlyChar : disabledSrOnlyChar}
       aria-roledescription="switch"
       as="button"
-      checked={checkedState}
+      checked={typeof checked === "boolean" ? checked : checkedState}
       className={twMerge(
         clsx(
           "w- relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
@@ -114,9 +116,10 @@ export const Switch: FC<SwitchProps> = ({
         )
       )}
       disabled={disabled}
-      onChange={(checked) => {
-        setCheckedState(checked);
-        onChange?.(checked);
+      onChange={(flag) => {
+        if (typeof checked !== "boolean") setCheckedState(flag);
+
+        onChange?.(flag);
       }}
     >
       <span className="sr-only">

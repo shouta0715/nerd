@@ -7,6 +7,14 @@ import { useSearch } from "src/hooks/useSearch";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
+type Faq = {
+  question: string;
+  answer?: string;
+  components?: React.ReactNode;
+  key: string;
+  defaultOpen?: boolean;
+};
+
 export const useFaq = () => {
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const [name, setName] = React.useState("");
@@ -34,7 +42,30 @@ export const useFaq = () => {
     setName("");
   };
 
-  const faqMock = [
+  const faqMock: Faq[] = [
+    {
+      question: "このサイトは何をするためのサイトですか？",
+      answer: "アニメの感想を話し合うサイトです！",
+      components: (
+        <div className="mt-2">
+          <p className="font-semibold">
+            Netflixなどの配信サービスのタイムコードやテレビの放送時間に合わせて他のユーザーが投稿したチャットが表示されるので、
+            <span className="text-pink-500">
+              リアルタイムでなくてもリアルタイムで感想を共有しているような感覚で楽しめます。
+            </span>
+            <br />
+            その他にもアニメ全体のコメントを投稿することができます。
+            <br />
+            また、当日放送のアニメに関してはリアルタイムでチャットをすることができます。
+          </p>
+          <p className="mt-2 text-xs text-dimmed">
+            ※このサイトは感想を共有するサービスのみを提供しています。アニメの動画配信は提供していません。
+          </p>
+        </div>
+      ),
+      key: "faq-0",
+      defaultOpen: true,
+    },
     {
       question: "投稿名はどこで変更できますか？",
       answer:

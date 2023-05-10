@@ -22,8 +22,8 @@ export const ModeSwitch: FC = () => {
   const isUp = mode === "up";
   const isSettingDown = timeToSecond(downInitialTime) !== 0;
 
-  const toggleMode = (checked: boolean) => {
-    if (mode === "up" && !isOpen && !isSettingDown && !checked) setIsOpen(true);
+  const toggleMode = () => {
+    if (mode === "up" && !isOpen && !isSettingDown) setIsOpen(true);
 
     changeMode();
   };
@@ -32,6 +32,7 @@ export const ModeSwitch: FC = () => {
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex items-center">
         <Switch
+          checked={isUp}
           defaultChecked={isUp}
           disabledSrOnlyChar="カウントダウンモード"
           enabledSrOnlyChar="カウントアップモード"
