@@ -23,6 +23,7 @@ const Page: NextPageWithLayout = () => {
               key={item.key}
               as="li"
               className="mt-7 rounded-md border border-slate-200 bg-white p-3 shadow first:mt-0 md:p-4"
+              defaultOpen={item.defaultOpen}
             >
               {({ open }) => (
                 <>
