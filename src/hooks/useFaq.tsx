@@ -48,14 +48,14 @@ export const useFaq = () => {
       answer: "アニメの感想を話し合うサイトです！",
       components: (
         <div className="mt-2">
-          <p className="font-semibold">
+          <p>
             Netflixなどの配信サービスのタイムコードやテレビの放送時間に合わせて他のユーザーが投稿したチャットが表示されるので、
             <span className="text-pink-500">
               リアルタイムでなくてもリアルタイムで感想を共有しているような感覚で楽しめます。
             </span>
-            <br />
+          </p>
+          <p className="mt-1.5">
             その他にもアニメ全体のコメントを投稿することができます。
-            <br />
             また、当日放送のアニメに関してはリアルタイムでチャットをすることができます。
           </p>
           <p className="mt-2 text-xs text-dimmed">
