@@ -14,12 +14,30 @@ type SwitchTheme =
 type SwitchSize = "sm" | "md" | "lg" | "xl";
 
 const themes = {
-  primary: "ui-checked:bg-indigo-500 ui-not-checked:bg-gray-200",
-  secondary: "ui-checked:bg-pink-500 ui-not-checked:bg-gray-200",
-  success: "ui-checked:bg-green-500 ui-not-checked:bg-gray-200",
-  danger: "ui-checked:bg-red-500 ui-not-checked:bg-gray-200",
-  transparent: "ui-checked:bg-transparent ui-not-checked:bg-transparent",
-  timer: "ui-not-checked:bg-indigo-500 ui-checked:bg-orange-500",
+  primary: {
+    switch: "ui-checked:bg-indigo-500 ui-not-checked:bg-gray-200",
+    mark: "bg-white",
+  },
+  secondary: {
+    switch: "ui-checked:bg-pink-500 ui-not-checked:bg-gray-200",
+    mark: "bg-white",
+  },
+  success: {
+    switch: "ui-checked:bg-green-500 ui-not-checked:bg-gray-200",
+    mark: "bg-white",
+  },
+  danger: {
+    switch: "ui-checked:bg-red-500 ui-not-checked:bg-gray-200",
+    mark: "bg-white",
+  },
+  transparent: {
+    switch: "ui-checked:bg-transparent ui-not-checked:bg-transparent border",
+    mark: "bg-black",
+  },
+  timer: {
+    switch: "ui-not-checked:bg-indigo-500 ui-checked:bg-orange-500",
+    mark: "bg-white",
+  },
 };
 
 const sizes = {
@@ -89,7 +107,7 @@ export const Switch: FC<SwitchProps> = ({
       className={twMerge(
         clsx(
           "w- relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
-          themes[theme],
+          themes[theme].switch,
           sizes[size].switch,
           className,
           classNames.switch
@@ -107,7 +125,8 @@ export const Switch: FC<SwitchProps> = ({
       <span
         className={twMerge(
           clsx(
-            "inline-block h-4 w-4 transform rounded-full bg-white transition",
+            "inline-block h-4 w-4 transform rounded-full transition",
+            themes[theme].mark,
             sizes[size].mark,
             classNames.mark
           )
