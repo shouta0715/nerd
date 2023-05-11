@@ -107,6 +107,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                   ],
                 },
               }}
+              size="sm"
             >
               参加する
             </ButtonLink>
@@ -115,7 +116,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <div className=" mt-3 flex w-full flex-1 flex-col items-center justify-end space-y-3">
             <ButtonLink
               as={`/episodes/${episode.id}`}
-              className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-pink-500 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:text-sm"
+              className="py-2"
               href={{
                 pathname: `/episodes/${episode.id}`,
                 query: {
@@ -131,6 +132,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 },
               }}
               leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
+              size="sm"
+              theme="secondary"
             >
               アーカイブで参加する
             </ButtonLink>
@@ -140,7 +143,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                   ? `/works/${episode.work.id}?series=${episode.work.series_id}`
                   : `/works/${episode.work.id}`
               }
-              className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:text-sm"
+              className="py-2"
               href={{
                 pathname: `${`/works/${episode.work.id}`}`,
                 query: {
@@ -149,7 +152,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 },
               }}
               leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-              size="xs"
+              size="sm"
+              theme="dark"
             >
               他のエピソードを見る
             </ButtonLink>

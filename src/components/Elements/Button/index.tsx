@@ -32,6 +32,7 @@ const themes = {
   success: "bg-green-500 text-white hover:bg-green-600",
   danger: "bg-red-500 text-white hover:bg-red-600",
   transparent: "bg-transparent ",
+  dark: "bg-gray-800 text-white hover:bg-gray-900",
 };
 
 type IconProps =
@@ -91,7 +92,11 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         />
       )}
       {!loading && leftIcon}
-      <span className={twMerge(clsx("mx-2", textSizes[size], textClassName))}>
+      <span
+        className={twMerge(
+          clsx("mx-2 font-bold", textSizes[size], textClassName)
+        )}
+      >
         {props.children}
       </span>
       {loading && rightIcon}

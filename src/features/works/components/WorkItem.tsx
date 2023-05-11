@@ -40,12 +40,13 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
         {work.series_id && !isSeriesPage && (
           <ButtonLink
             as={`/series/${work.series_id}`}
-            className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center bg-indigo-500 px-1 py-2 font-bold text-white"
+            className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center"
             href={{
               pathname: `/series/${work.series_id}`,
               query: { series_title: work.title },
             }}
-            size="xs"
+            size="sm"
+            theme="primary"
           >
             シリーズ一覧へ
           </ButtonLink>
@@ -57,7 +58,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
                 ? `/works/${work.id}?series=${work.series_id}`
                 : `/works/${work.id}`
             }
-            className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
+            className="mx-auto flex w-full max-w-max items-center justify-center"
             href={{
               pathname: `${`/works/${work.id}`}`,
               query: {
@@ -66,7 +67,8 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
               },
             }}
             leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-            size="xs"
+            size="sm"
+            theme="dark"
           >
             他のエピソードを見る
           </ButtonLink>

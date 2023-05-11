@@ -13,8 +13,8 @@ const textSizes = {
 };
 
 const sizes = {
-  xs: "text-xs px-1.5 py-1",
-  sm: "text-sm px-2 py-1.5",
+  xs: "text-xs px-1.5 py-1.5",
+  sm: "text-sm px-2 py-2",
   md: "text-base px-2.5 py-2",
   lg: "text-lg px-2.5 py-2",
   xl: "text-xl px-3 py-2.5",
@@ -32,7 +32,8 @@ const themes = {
   secondary: "bg-pink-500 text-white hover:bg-pink-600",
   success: "bg-green-500 text-white hover:bg-green-600",
   danger: "bg-red-500 text-white hover:bg-red-600",
-  transparent: "bg-transparent ",
+  transparent: "bg-transparent border",
+  dark: "bg-gray-800 text-white hover:bg-gray-900",
 };
 
 type IconProps =
@@ -65,7 +66,7 @@ export const ButtonLink: FC<LinkProps> = ({
   <NLink
     className={twMerge(
       clsx(
-        "flex items-center justify-center border transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
+        "flex items-center justify-center transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
         sizes[size],
         rounded[radius],
         loading && "cursor-wait opacity-60",
@@ -84,7 +85,11 @@ export const ButtonLink: FC<LinkProps> = ({
       />
     )}
     {!loading && leftIcon}
-    <span className={twMerge(clsx("mx-2", textSizes[size], textClassName))}>
+    <span
+      className={twMerge(
+        clsx("mx-2 font-bold", textSizes[size], textClassName)
+      )}
+    >
       {props.children}
     </span>
     {loading && rightIcon}
