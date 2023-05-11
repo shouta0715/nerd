@@ -52,7 +52,7 @@ export const PlayMenu: FC = () => {
           </Button>
         </label>
         <Input
-          className="py-1 font-hiragino-sans"
+          className="py-1 font-hiragino-sans text-[16px]"
           id="commenter-name-input"
           inputSize="xs"
           maxLength={30}

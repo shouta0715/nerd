@@ -57,13 +57,14 @@ export const LiveMenu = () => {
                 onClick={() => {
                   if (!inputValue.trim()) setInputValue(user?.user_name ?? "");
                 }}
+                size="xs"
                 type="submit"
               >
                 変更
               </Button>
             </label>
             <Input
-              className="py-1 font-hiragino-sans"
+              className="py-1 font-hiragino-sans text-[16px]"
               id="commenter-name-input"
               inputSize="xs"
               maxLength={30}
