@@ -6,6 +6,7 @@ import {
   ViewfinderCircleIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 
