@@ -136,13 +136,12 @@ export const useFaq = () => {
         "コメントにいいねをつけることができます。また、自分のログインしたアカウントの画像を表示することができます。",
       components: (
         <Button
-          className={`btn-primary mt-2 text-sm ${
-            user?.anonymous ? "" : "hidden"
-          }`}
+          className={`mt-2 text-sm ${user?.anonymous ? "" : "hidden"}`}
           loading={authLoading}
           onClick={() => changeIsOpenModal(true)}
           radius="md"
-          size="xs"
+          size="sm"
+          theme="primary"
         >
           ログイン
         </Button>
