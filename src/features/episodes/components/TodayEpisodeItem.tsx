@@ -132,7 +132,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 },
               }}
               leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
-              size="sm"
+              size="xs"
               theme="secondary"
             >
               アーカイブで参加する
@@ -152,7 +152,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 },
               }}
               leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-              size="sm"
+              size="xs"
               theme="dark"
             >
               他のエピソードを見る

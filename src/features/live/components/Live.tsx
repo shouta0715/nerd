@@ -77,7 +77,9 @@ export const Live = () => {
       </div>
       <MainWrapper>
         {isChat ? (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+          <Suspense
+            fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+          >
             {isAlreadyFinished ? (
               <FinishLive episode={data?.episodes_by_pk} />
             ) : (
@@ -90,7 +92,9 @@ export const Live = () => {
             )}
           </Suspense>
         ) : (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+          <Suspense
+            fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+          >
             {mode === "finish" ? (
               <EpisodeComments
                 episode_id={data?.episodes_by_pk?.id}

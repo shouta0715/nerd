@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import React, { ReactElement } from "react";
 import { Modal } from "src/components/Elements/Modal";
-import { Header } from "src/components/Layouts/Header/Header";
-import { Navigation } from "src/components/Layouts/Nav/Navigation";
+import { Header } from "src/components/Layouts/Header";
+import { Nav } from "src/components/Layouts/Nav";
 import { Provider } from "src/features/provider";
 import { SearchWorks } from "src/features/works/components/SearchWorks";
 import { SearchWorksForm } from "src/features/works/components/SearchWorksForm";
@@ -30,7 +30,7 @@ export const BasicLayout = (page: ReactElement) => (
           <aside className="top-0 z-10 max-h-screen overflow-y-auto  border-b border-slate-200 bg-white pb-2 md:sticky md:w-1/3 md:max-w-sm md:border-b-0 md:border-r md:py-4 md:shadow">
             <div className="md:x-4 container mx-auto px-2 md:space-y-4">
               <SearchWorksForm />
-              <Navigation />
+              <Nav />
               <div className="hidden max-w-full overflow-hidden md:block">
                 <SearchWorks />
               </div>

@@ -8,7 +8,6 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
-import { FC } from "react";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 
 const mockNavigation = [
@@ -65,7 +64,7 @@ const navList = mockNavigation.map((item) => (
   </Link>
 ));
 
-export const Navigation: FC = () => (
+export const Nav = () => (
   <nav>
     <ul className="grid grid-cols-2 gap-2 md:grid-cols-1">{navList}</ul>
   </nav>

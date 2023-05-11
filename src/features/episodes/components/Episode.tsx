@@ -54,11 +54,15 @@ export const Episode: FC = () => {
       </div>
       <MainWrapper>
         {isChat ? (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+          <Suspense
+            fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+          >
             <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
           </Suspense>
         ) : (
-          <Suspense fallback={<Loader className="m-auto" variant="dots" />}>
+          <Suspense
+            fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+          >
             <EpisodeComments
               episode_id={data?.episodes_by_pk?.id}
               filter={filter}
