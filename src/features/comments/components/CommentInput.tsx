@@ -72,7 +72,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           }}
         >
           {authLoading ? (
-            <Loader />
+            <Loader size="md" />
           ) : user?.isDefaultPhoto ? (
             <Image
               alt="avatar"
@@ -137,7 +137,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
               type="submit"
             >
               {isLoading || authLoading ? (
-                <Loader color="green" size="sm" />
+                <Loader color="white" size="md" />
               ) : (
                 <PaperAirplaneIcon className=" h-4 w-4 fill-white stroke-white" />
               )}
@@ -157,7 +157,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           type="submit"
         >
           {isLoading || authLoading ? (
-            <Loader color="white" size="sm" />
+            <Loader color="white" size="md" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
           )}

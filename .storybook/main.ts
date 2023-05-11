@@ -11,6 +11,17 @@ const config: StorybookConfig = {
     name: "@storybook/nextjs",
     options: {},
   },
+  webpack: (config) => {
+    config?.module?.rules?.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+        },
+      ],
+    });
+    return config;
+  },
   docs: {
     autodocs: "tag",
   },

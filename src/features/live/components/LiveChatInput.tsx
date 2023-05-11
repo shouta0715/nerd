@@ -74,7 +74,7 @@ export const LiveChatInput: FC<Props> = ({
           }}
         >
           {authLoading ? (
-            <Loader />
+            <Loader size="lg" />
           ) : user?.isDefaultPhoto ? (
             <Image
               alt="avatar"
@@ -116,7 +116,7 @@ export const LiveChatInput: FC<Props> = ({
               type="submit"
             >
               {isLoading || authLoading ? (
-                <Loader color="white" size="sm" />
+                <Loader color="white" size="md" />
               ) : (
                 <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
               )}
@@ -137,7 +137,7 @@ export const LiveChatInput: FC<Props> = ({
           type="submit"
         >
           {isLoading || authLoading ? (
-            <Loader color="white" size="sm" />
+            <Loader color="white" size="md" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
           )}

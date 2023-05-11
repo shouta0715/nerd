@@ -91,6 +91,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
                   replied_to_commenter_name: reply.commenter_name,
                 })
               }
+              size="xs"
             >
               返信
             </Button>

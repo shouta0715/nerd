@@ -37,7 +37,7 @@ export const PlayMenu: FC = () => {
             投稿名の変更
           </Text>
           <Button
-            className={`ml-auto rounded bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
+            className={`ml-auto bg-indigo-500 px-2 py-1 text-xs font-bold text-white transition-transform active:translate-y-0.5 ${
               inputValue === user?.user_name || !inputValue.trim()
                 ? "pointer-events-none opacity-0"
                 : "opacity-100"
@@ -45,6 +45,7 @@ export const PlayMenu: FC = () => {
             onClick={() => {
               if (!inputValue.trim()) setInputValue(user?.user_name ?? "");
             }}
+            size="xs"
             type="submit"
           >
             変更
