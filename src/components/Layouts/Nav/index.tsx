@@ -66,6 +66,6 @@ const navList = mockNavigation.map((item) => (
 
 export const Nav = () => (
   <nav>
-    <ul className="grid grid-cols-2 gap-2 md:grid-cols-1">{navList}</ul>
+    <div className="grid grid-cols-2 gap-2 md:grid-cols-1">{navList}</div>
   </nav>
 );
