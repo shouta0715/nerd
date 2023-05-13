@@ -1,3 +1,4 @@
+import { mswDecorator } from "msw-storybook-addon";
 import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
@@ -36,6 +37,8 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+
   staticDirs: ["../public"],
 };
+
 export default config;
