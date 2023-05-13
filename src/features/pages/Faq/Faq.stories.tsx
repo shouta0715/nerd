@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Faq } from "src/components/Elements/Faq";
+import { Faq } from "src/features/pages/Faq";
 
 export default {
-  title: "Elements/Faq",
+  title: "Pages/Faq",
   component: Faq,
 } as Meta<typeof Faq>;
 type Story = StoryObj<typeof Faq>;

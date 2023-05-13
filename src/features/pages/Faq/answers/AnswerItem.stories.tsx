@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { faqs } from "src/components/Elements/Faq";
-import { AnswerItem } from "src/components/Elements/Faq/answers";
+import { faqs } from "src/features/pages/Faq";
+import { AnswerItem } from "src/features/pages/Faq/answers";
 
 export default {
-  title: "Elements/Faq/answers/items",
+  title: "Pages/Faq/Answers",
   component: AnswerItem,
 } as Meta<typeof AnswerItem>;
 
