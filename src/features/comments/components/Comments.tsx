@@ -38,7 +38,7 @@ export const Comments = forwardRef<any, Props>(
     const user = useUserState((state) => state.user);
 
     if (!user) {
-      return <Loader className="m-auto" variant="dots" />;
+      return <Loader className="m-auto" size="xl" variant="dots" />;
     }
 
     return (
