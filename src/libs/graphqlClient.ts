@@ -7,6 +7,7 @@ import {
   RequestOptions,
   VariablesAndRequestHeaders,
 } from "graphql-request/dist/types";
+import { UnauthorizedError } from "src/libs/error";
 import { RefreshTokenResult } from "src/types/dataType";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
@@ -50,7 +51,7 @@ class GraphQLRequest extends GraphQLClient {
             );
           }
 
-          throw new Error("Refresh token error.");
+          throw new UnauthorizedError();
         }
 
         return await super.request(

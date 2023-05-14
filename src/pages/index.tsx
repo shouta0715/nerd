@@ -1,4 +1,4 @@
-import { SsgError } from "src/components/Elements/error/SsgError";
+import { SsgError } from "src/components/Elements/Error/items/SsgError";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import {
   getSeasonWorks,

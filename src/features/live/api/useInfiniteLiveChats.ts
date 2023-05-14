@@ -2,6 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { LiveTimer } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
+import { NotFoundError } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
 
 type PageParam = {
@@ -72,6 +73,9 @@ export const useInfiniteLiveChats = ({
         episode_id,
         pageParam,
       }),
+    onSuccess: (data) => {
+      if (!data?.pages[0].chats_by_episode_id) throw new NotFoundError();
+    },
     keepPreviousData: true,
     enabled: mode !== "finish" && !!episode_id && enabled,
   });

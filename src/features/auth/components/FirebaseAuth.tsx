@@ -5,6 +5,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { FC, useEffect, useState } from "react";
+import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
 import { CreateClaimsSchema } from "src/libs/server/types";
@@ -39,7 +40,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
 
             const { users_by_pk } = userData;
 
-            if (!users_by_pk) throw new Error("users_by_pk is not found");
+            if (!users_by_pk) throw new ForbiddenError();
 
             const { photo_url, id, user_name } = users_by_pk;
 
@@ -59,7 +60,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
             return;
           } catch (error: any) {
             setAuthError(() => {
-              throw new Error(`${error.message}  (403)`);
+              throw new ForbiddenError();
             });
           }
         }
@@ -71,7 +72,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
             refreshToken: user.refreshToken,
           };
 
-          const setClaims = await fetch("/api/auth/setCustomClaims", {
+          await fetch("/api/auth/setCustomClaims", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -79,11 +80,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
             body: JSON.stringify(body),
           });
 
-          if (!setClaims.ok) throw new Error("setClaims is not ok (403)");
-
           const newestToken = await auth.currentUser?.getIdToken(true);
-
-          if (!newestToken) throw new Error("newestToken is not found");
 
           const userData = await createUser({
             id: user.uid,
@@ -93,8 +90,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
 
           const { insert_users_one } = userData.data;
 
-          if (!insert_users_one)
-            throw new Error("insert_users_one is not found");
+          if (!insert_users_one) throw new UnauthorizedError();
 
           const { photo_url, id, user_name } = insert_users_one;
 
@@ -114,7 +110,7 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
           setAuthLoading(false);
         } catch (error: any) {
           setAuthError(() => {
-            throw new Error(`${error.message}  (403)`);
+            throw new UnauthorizedError();
           });
         }
       } else {

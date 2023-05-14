@@ -1,15 +1,13 @@
-import { useRouter } from "next/router";
 import { useGetSeriesQuery } from "src/graphql/work/workQuery.generated";
+import { NotFoundError } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
 
 type Args = {
   slug: string | string[] | null;
 };
 
-export const useQuerySeries = ({ slug }: Args) => {
-  const router = useRouter();
-
-  return useGetSeriesQuery(
+export const useQuerySeries = ({ slug }: Args) =>
+  useGetSeriesQuery(
     client,
     {
       series_id: typeof slug === "string" ? slug : "",
@@ -18,12 +16,8 @@ export const useQuerySeries = ({ slug }: Args) => {
       enabled: !!slug && typeof slug === "string",
       onSuccess: (data) => {
         if (!data.works || !data.works.length) {
-          router.replace("/404");
+          throw new NotFoundError();
         }
-      },
-      onError: () => {
-        router.replace("/404");
       },
     }
   );
-};
