@@ -1,25 +1,10 @@
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
-
-const DynamicLottieResult = dynamic(
-  () =>
-    import("public/lottie/70319-movie-camera.json").then((data) => {
-      const DynamicLottie = dynamic(() => import("lottie-react"));
-
-      return () => (
-        <DynamicLottie animationData={data} className="mx-auto w-1/2" />
-      );
-    }),
-  {
-    ssr: false,
-  }
-);
 
 export const SpSearchWorks = () => {
   const router = useRouter();
@@ -58,12 +43,9 @@ export const SpSearchWorks = () => {
             <p className="grid place-items-center font-bold">{q}の検索結果</p>
           )}
           {data && data.search_works.length === 0 && (
-            <>
-              <p className="text-center text-dimmed">
-                &apos;{q}&apos;に一致する作品は見つかりませんでした。
-              </p>
-              <DynamicLottieResult />
-            </>
+            <p className="text-center text-dimmed">
+              &apos;{q}&apos;に一致する作品は見つかりませんでした。
+            </p>
           )}
           <ul className="mt-4 grid grid-cols-1 space-y-4">
             {data?.search_works.map((work) =>

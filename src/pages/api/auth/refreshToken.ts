@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextApiRequest, NextApiResponse } from "next";
 import { setCookie } from "nookies";
+import { BadRequestError, InternalServerError } from "src/libs/error";
 import { createOption } from "src/libs/server/options";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { refreshToken } = req.cookies;
 
   if (!refreshToken) {
-    return res.status(400).json("No refreshToken");
+    throw new BadRequestError();
   }
 
   try {
@@ -28,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({ message: "ok", idToken });
   } catch (err: any) {
-    return res.status(500).json({ message: err.message });
+    throw new InternalServerError();
   }
 };
 

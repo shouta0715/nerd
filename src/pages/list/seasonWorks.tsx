@@ -1,5 +1,5 @@
 import React from "react";
-import { SsgError } from "src/components/Elements/error/SsgError";
+import { SsgError } from "src/components/Elements/Error/items/SsgError";
 import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getSeasonWorks } from "src/features/lists/api/router";

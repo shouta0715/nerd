@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from "next/router";
 import { useGetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { NotFoundError } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
 
 type Args = {
@@ -8,10 +8,8 @@ type Args = {
   work: string | string[] | undefined;
 };
 
-export const useQueryWork = ({ slug, work }: Args) => {
-  const router = useRouter();
-
-  return useGetWorkQuery(
+export const useQueryWork = ({ slug, work }: Args) =>
+  useGetWorkQuery(
     client,
     {
       id: Number(slug?.at(-1)),
@@ -20,15 +18,7 @@ export const useQueryWork = ({ slug, work }: Args) => {
       enabled: !!slug,
       onSuccess: (data) => {
         if (!data.works_by_pk) {
-          router.replace("/404");
-        }
-      },
-
-      onError: (error: any) => {
-        const message = error?.message;
-
-        if (message.includes("unexpected null value for type")) {
-          router.replace("/404");
+          throw new NotFoundError();
         }
       },
       placeholderData: () => {
@@ -46,4 +36,3 @@ export const useQueryWork = ({ slug, work }: Args) => {
       },
     }
   );
-};

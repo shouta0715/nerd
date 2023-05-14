@@ -6,6 +6,7 @@ import {
   CreateUserMutation,
   DeleteUserMutation,
 } from "src/graphql/user/userQuery.generated";
+import { BadRequestError, InternalServerError } from "src/libs/error";
 import { getClient } from "src/libs/server/client";
 import {
   ApiResponse,
@@ -39,14 +40,10 @@ const postHandler = async (
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(400).json({
-        message: "id が必要です",
-      });
+      throw new BadRequestError();
     }
 
-    return res.status(500).json({
-      message: "エラーが発生しました",
-    });
+    throw new InternalServerError();
   }
 };
 
@@ -73,14 +70,10 @@ const deleteHandler = async (
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      return res.status(400).json({
-        message: "id が必要です",
-      });
+      throw new BadRequestError();
     }
 
-    return res.status(500).json({
-      message: "エラーが発生しました",
-    });
+    throw new InternalServerError();
   }
 };
 const handler = async (

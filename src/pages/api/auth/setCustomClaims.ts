@@ -5,6 +5,7 @@ import { getAuth } from "firebase-admin/auth";
 import { NextApiRequest } from "next";
 import { setCookie } from "nookies";
 import { ZodError } from "zod";
+import { BadRequestError, InternalServerError } from "src/libs/error";
 import {
   createCustomClaims,
   createOption,
@@ -35,17 +36,11 @@ const handler = async (
 
     return res.status(200).json({ message: "ok" });
   } catch (err: any) {
-    console.error(err);
-
     if (err instanceof ZodError) {
-      return res.status(400).json({
-        message: `idToken が必要です: ${err.message}`,
-      });
+      throw new BadRequestError();
     }
 
-    return res.status(500).json({
-      message: `エラーが発生しました: ${err.message}`,
-    });
+    throw new InternalServerError();
   }
 };
 

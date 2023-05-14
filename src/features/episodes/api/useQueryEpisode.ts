@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRouter } from "next/router";
 import { useGetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { NotFoundError } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
 
 export const useQueryEpisode = (
   id: string | string[] | undefined,
   episode: string | string[] | undefined
-) => {
-  const router = useRouter();
-
-  return useGetEpisodeQuery(
+) =>
+  useGetEpisodeQuery(
     client,
     {
       id,
@@ -18,7 +16,7 @@ export const useQueryEpisode = (
       enabled: !!id,
       onSuccess: (data) => {
         if (!data.episodes_by_pk) {
-          router.replace("/404");
+          throw new NotFoundError();
         }
       },
       placeholderData: () => {
@@ -53,4 +51,3 @@ export const useQueryEpisode = (
       },
     }
   );
-};

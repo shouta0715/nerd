@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { FC } from "react";
-import { TodayError } from "src/components/Elements/error/TodayError";
+import { TodayError } from "src/components/Elements/Error/items/TodayError";
 import { Text } from "src/components/Elements/Text";
 import { TopTitle } from "src/components/Elements/TopTitle";
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";

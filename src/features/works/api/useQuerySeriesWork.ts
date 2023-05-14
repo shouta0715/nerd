@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
 import {
   GetWorkSeriesQuery,
   useGetWorkSeriesQuery,
 } from "src/graphql/work/workQuery.generated";
+import { NotFoundError } from "src/libs/error";
 
 import { client } from "src/libs/graphqlClient";
 
@@ -30,21 +30,17 @@ const getSeriesWork = async ({ id, series_id }: GetSeries) => {
   return data;
 };
 
-export const useQuerySeriesWork = ({ slug, series_id, work }: Args) => {
-  const router = useRouter();
-
-  return useQuery<GetWorkSeriesQuery, Error>({
+export const useQuerySeriesWork = ({ slug, series_id, work }: Args) =>
+  useQuery<GetWorkSeriesQuery, Error>({
     queryKey: ["GetSeriesWork", { slug, series_id: series_id ?? null }],
     queryFn: () => getSeriesWork({ id: slug, series_id }),
     enabled: !!slug,
     onSuccess: (data) => {
       if (!data.works_by_pk) {
-        router.replace("/404");
+        throw new NotFoundError();
       }
     },
-    onError: () => {
-      router.replace("/404");
-    },
+
     placeholderData: () => {
       if (!work || typeof work === "string" || !slug) return undefined;
       const [title, series_title] = work;
@@ -63,4 +59,3 @@ export const useQuerySeriesWork = ({ slug, series_id, work }: Args) => {
     },
     staleTime: 1000 * 60 * 5,
   });
-};

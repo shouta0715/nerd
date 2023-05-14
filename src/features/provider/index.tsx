@@ -3,7 +3,7 @@ import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import React, { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorPage } from "src/components/Elements/error/ErrorPage";
+import { Error } from "src/components/Elements/Error";
 import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
 import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
@@ -24,7 +24,7 @@ export const Provider = ({ children }: Props) => {
           name="viewport"
         />
       </Head>
-      <ErrorBoundary FallbackComponent={ErrorPage}>
+      <ErrorBoundary FallbackComponent={Error}>
         <NotificationProvider>
           <FirebaseAuth>
             <NextNProgress
