@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import React from "react";
-import { NotFoundPage } from "src/components/Elements/error/404";
+import { ErrorPage } from "src/components/Elements/Error/items/ErrorPage";
+import { NotFoundError } from "src/libs/error";
 
-const Index: NextPage = () => <NotFoundPage />;
+const Index: NextPage = () => <ErrorPage {...new NotFoundError()} />;
 
 export default Index;
