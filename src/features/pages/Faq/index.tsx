@@ -1,17 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import { AnswerItem } from "src/features/pages/Faq/answers";
+import { AnswerItem } from "src/features/pages/faq/answers";
 
-import { DoNotFind } from "src/features/pages/Faq/answers/DoNotFind";
-import { LoginMeaning } from "src/features/pages/Faq/answers/LoginMeaning";
-import { LoginName } from "src/features/pages/Faq/answers/LoginName";
-import { NotChat } from "src/features/pages/Faq/answers/NotChat";
-import { PostedName } from "src/features/pages/Faq/answers/PostedName";
-import { Search } from "src/features/pages/Faq/answers/Search";
-import { SiteFor } from "src/features/pages/Faq/answers/SiteFor";
-import { TimeIsWrong } from "src/features/pages/Faq/answers/TimeIsWrong";
-import { WillRequest } from "src/features/pages/Faq/answers/WillRequest";
-import type { FaqProps } from "src/features/pages/Faq/types";
+import { DoNotFind } from "src/features/pages/faq/answers/DoNotFind";
+import { LoginMeaning } from "src/features/pages/faq/answers/LoginMeaning";
+import { LoginName } from "src/features/pages/faq/answers/LoginName";
+import { NotChat } from "src/features/pages/faq/answers/NotChat";
+import { PostedName } from "src/features/pages/faq/answers/PostedName";
+import { Search } from "src/features/pages/faq/answers/Search";
+import { SiteFor } from "src/features/pages/faq/answers/SiteFor";
+import { TimeIsWrong } from "src/features/pages/faq/answers/TimeIsWrong";
+import { WillRequest } from "src/features/pages/faq/answers/WillRequest";
+import type { FaqProps } from "src/features/pages/faq/types";
 
 export const faqs: FaqProps[] = [
   {

@@ -63,8 +63,12 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
 
 export const BasicListLayout = (page: ReactElement) => (
   <LayoutProvider>
-    <Header />
-    <section className="min-h-screen animate-fadeUp bg-gray-50">{page}</section>
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex flex-1 animate-fadeUp flex-col bg-gray-50">
+        {page}
+      </main>
+    </div>
     <Modal />
   </LayoutProvider>
 );

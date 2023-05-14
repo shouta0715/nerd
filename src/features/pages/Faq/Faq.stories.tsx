@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Faq } from "src/features/pages/Faq";
+import { Faq } from "src/features/pages/faq";
 import { BasicLayoutDecorator } from "src/test/storybook";
 
 export default {

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { faqs } from "src/features/pages/Faq";
-import { AnswerItem } from "src/features/pages/Faq/answers";
+import { faqs } from "src/features/pages/faq";
+import { AnswerItem } from "src/features/pages/faq/answers";
 
 export default {
   title: "Pages/Faq/Answers",

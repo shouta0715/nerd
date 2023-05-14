@@ -1,7 +1,7 @@
 import { Disclosure } from "@headlessui/react";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
-import { FaqProps } from "src/features/pages/Faq/types";
+import { FaqProps } from "src/features/pages/faq/types";
 
 export const AnswerItem: FC<Omit<FaqProps, "key">> = ({
   question,
