@@ -47,7 +47,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                 )}
               {isFetchingNextPage && isFetching && (
                 <div className="flex w-full">
-                  <Loader className="mx-auto" variant="dots" />
+                  <Loader className="mx-auto" size="lg" variant="dots" />
                 </div>
               )}
             </Disclosure.Panel>

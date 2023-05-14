@@ -1,51 +1,28 @@
-import { GetStaticProps } from "next";
-import dynamic from "next/dynamic";
 import React from "react";
+import { SsgError } from "src/components/Elements/error/SsgError";
 import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getSeasonWorks } from "src/features/lists/api/router";
-import { ListHeader } from "src/features/lists/components/ListHeader";
-import { ListTitle } from "src/features/lists/components/ListTitle";
-import { SeasonWorksList } from "src/features/lists/components/SeasonWorks";
+import { Season } from "src/features/pages/list/season";
 
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { Meta } from "src/libs/meta";
-import { NextPageWithLayout } from "src/libs/next/types";
-
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
-);
+import { NextSSG, NextSSGPage } from "src/libs/next/types";
 
 type Props = {
   data: GetSeasonWorksQuery;
   autoCompleteData: AutoCompleteData[];
 };
 
-const Page: NextPageWithLayout<Props> = ({ data, autoCompleteData }) => (
-  <section className="min-h-screen animate-fadeUp bg-gray-50">
-    <ListHeader autoCompleteData={autoCompleteData} />
-    <div className="container mx-auto">
-      <div className="px-3 py-4 md:px-6">
-        <ListTitle title="今期のアニメ" />
-        <SeasonWorksList data={data} />
-      </div>
-    </div>
-    <DynamicSearchButton />
-  </section>
-);
+const Page: NextSSGPage<Props> = ({ data, error }) =>
+  error ? <SsgError /> : <Season {...data} />;
 
 Page.getLayout = BasicListLayout;
 Page.getTitle = Meta(() => "今期放送のアニメ一覧 - Nerd");
 
 export default Page;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: NextSSG<Props> = async () => {
   const data = await getSeasonWorks(null);
   const autoCompleteData: AutoCompleteData[] = data?.works.map((work) => ({
     title: work.series_title,
@@ -54,8 +31,11 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      data,
-      autoCompleteData,
+      data: {
+        data,
+        autoCompleteData,
+      },
+      error: null,
     },
   };
 };
