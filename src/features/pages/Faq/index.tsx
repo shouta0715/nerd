@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 import { AnswerItem } from "src/features/pages/faq/answers";
-
 import { DoNotFind } from "src/features/pages/faq/answers/DoNotFind";
 import { LoginMeaning } from "src/features/pages/faq/answers/LoginMeaning";
 import { LoginName } from "src/features/pages/faq/answers/LoginName";
