@@ -80,7 +80,7 @@ export const Notification = () => {
     <Transition
       className={twMerge(
         clsx(
-          "pointer-events-auto fixed right-0 top-0 z-[200] flex w-96 items-center overflow-hidden  rounded-lg border border-slate-200 bg-white px-2 shadow-lg md:mx-4 md:mt-4",
+          "pointer-events-auto fixed right-0 top-0 z-[200] flex max-h-36 w-max max-w-full overflow-y-auto rounded-lg border border-slate-200 bg-white px-2 py-1.5 shadow-lg md:mx-4 md:mt-4 md:max-w-xl md:py-2.5",
           className
         )
       )}
@@ -92,15 +92,15 @@ export const Notification = () => {
       leaveTo="translate-y-2 opacity-0"
       show={show}
     >
-      <div className="w-max self-start">
+      <div className="sticky top-0 w-max self-start bg-white">
         {getTypeIcons(type)({
-          className: clsx("w-7 h-7 m-2", TypeColors[type]),
+          className: clsx("w-7 h-7", TypeColors[type]),
         })}
       </div>
-      <div className="flex w-[calc(100%-3.25rem-1.75rem)] flex-1 flex-col space-y-2 break-words py-1.5 md:py-2.5">
+      <div className="flex flex-col space-y-2 break-words ">
         <h3
           className={twMerge(
-            clsx("w-full max-w-full break-words px-4 text-sm font-bold"),
+            clsx("max-w-full break-words px-4 py-1 text-sm font-bold"),
             classNames?.title,
             TypeTextColors[type]
           )}
@@ -110,7 +110,7 @@ export const Notification = () => {
         {message && (
           <p
             className={twMerge(
-              clsx("w-full max-w-full break-words px-4 text-sm text-dimmed"),
+              clsx("w-full max-w-full break-words px-4 text-xs text-dimmed"),
               classNames?.message
             )}
           >
@@ -118,9 +118,9 @@ export const Notification = () => {
           </p>
         )}
       </div>
-      <button className="self-start">
+      <button className="sticky top-0 h-7 w-7 self-start bg-white">
         <XMarkIcon
-          className="mt-3 h-5 w-5  text-slate-400 hover:text-slate-500"
+          className="h-5 w-5  text-slate-400 hover:text-slate-500"
           onClick={onHide}
         />
       </button>
