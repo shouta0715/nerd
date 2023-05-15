@@ -31,13 +31,13 @@ export const Live = () => {
   } = useLive();
 
   if (isLoading || isTimeLoading) {
+    validateData({
+      trigger: !data?.episodes_by_pk && !isLoading,
+      error: new NotFoundError(),
+    });
+
     return <Skeleton theme="episode" />;
   }
-
-  validateData({
-    trigger: !data?.episodes_by_pk,
-    error: new NotFoundError(),
-  });
 
   return (
     <>
