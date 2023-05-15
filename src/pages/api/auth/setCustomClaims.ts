@@ -37,10 +37,10 @@ const handler = async (
     return res.status(200).json({ message: "ok" });
   } catch (err: any) {
     if (err instanceof ZodError) {
-      throw new BadRequestError();
+      return res.status(400).json(new BadRequestError().throwMessage());
     }
 
-    throw new InternalServerError();
+    return res.status(500).json(new InternalServerError().throwMessage());
   }
 };
 

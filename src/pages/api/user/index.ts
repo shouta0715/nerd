@@ -6,7 +6,11 @@ import {
   CreateUserMutation,
   DeleteUserMutation,
 } from "src/graphql/user/userQuery.generated";
-import { BadRequestError, InternalServerError } from "src/libs/error";
+import {
+  BadRequestError,
+  InternalServerError,
+  MethodNotAllowedError,
+} from "src/libs/error";
 import { getClient } from "src/libs/server/client";
 import {
   ApiResponse,
@@ -70,10 +74,10 @@ const deleteHandler = async (
     });
   } catch (error) {
     if (error instanceof ZodError) {
-      throw new BadRequestError();
+      return res.status(400).json(new BadRequestError().throwMessage());
     }
 
-    throw new InternalServerError();
+    return res.status(500).json(new InternalServerError().throwMessage());
   }
 };
 const handler = async (
@@ -86,7 +90,7 @@ const handler = async (
     case "DELETE":
       return deleteHandler(req, res);
     default:
-      return res.status(405).end(`Method ${req.method} Not Allowed`);
+      return res.status(405).json(new MethodNotAllowedError().throwMessage());
   }
 };
 

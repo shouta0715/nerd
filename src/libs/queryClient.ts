@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { QueryClient } from "@tanstack/react-query";
-import { GraphQLError, NotFoundError } from "src/libs/error";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,11 +10,6 @@ const queryClient = new QueryClient({
       retry: false,
       suspense: true,
       useErrorBoundary: true,
-      onError: (error: any) => {
-        if (error.message.include("200")) throw new GraphQLError();
-        if (error.message.includes("unexpected null value for type"))
-          throw new NotFoundError();
-      },
     },
   },
 });

@@ -4,7 +4,9 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { useQuerySeries } from "src/features/series/api/useQuerySeries";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
+import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
+import { validateData } from "src/utils/validateData";
 
 export const Series: FC = () => {
   const router = useRouter();
@@ -19,10 +21,15 @@ export const Series: FC = () => {
       <div className="space-y-2 p-2">
         <p className="mb-1 font-hiragino-sans font-semibold">シリーズ一覧</p>
         <p className="mx-auto h-2 w-1/2 animate-pulse bg-slate-200" />
-        <Skeleton props={{ is_short: true }} theme="work" />
+        <Skeleton theme="work" />
       </div>
     );
   }
+
+  validateData({
+    trigger: !data?.works[0],
+    error: new NotFoundError(),
+  });
 
   return (
     <>

@@ -15,8 +15,11 @@ const errorHandle = (error: Error) => {
     return <ErrorPage {...error} />;
   }
 
-  if (error instanceof NotFoundError) {
-    return <ErrorPage {...error} />;
+  if (
+    error instanceof NotFoundError ||
+    error.message.includes('"status":200')
+  ) {
+    return <ErrorPage {...new NotFoundError()} />;
   }
 
   if (error instanceof InternalServerError) {
@@ -35,9 +38,7 @@ const errorHandle = (error: Error) => {
     return <ErrorPage {...error} />;
   }
 
-  return <ErrorPage {...new InternalServerError()} />;
+  return <ErrorPage {...new BadRequestError()} />;
 };
 
-export const Error = ({ error }: FallbackProps) => (
-  <div>{errorHandle(error)}</div>
-);
+export const Error = ({ error }: FallbackProps) => errorHandle(error);

@@ -12,7 +12,9 @@ import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
+import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
+import { validateData } from "src/utils/validateData";
 
 export const Live = () => {
   const {
@@ -31,6 +33,11 @@ export const Live = () => {
   if (isLoading || isTimeLoading) {
     return <Skeleton theme="episode" />;
   }
+
+  validateData({
+    trigger: !data?.episodes_by_pk,
+    error: new NotFoundError(),
+  });
 
   return (
     <>

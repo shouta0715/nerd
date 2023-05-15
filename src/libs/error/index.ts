@@ -5,6 +5,7 @@ export const errors = {
   401: { message: "Unauthorized" },
   403: { message: "Forbidden" },
   404: { message: "Not Found" },
+  405: { message: "Method Not Allowed" },
   500: { message: "Internal Server Error" },
 } as const;
 
@@ -59,6 +60,12 @@ export class ForbiddenError extends HttpError {
 export class NotFoundError extends HttpError {
   constructor() {
     super(404);
+  }
+}
+
+export class MethodNotAllowedError extends HttpError {
+  constructor() {
+    super(405);
   }
 }
 

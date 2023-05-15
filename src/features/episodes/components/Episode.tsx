@@ -13,7 +13,9 @@ import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { MainWrapper } from "src/features/play/components/MainWrapper";
 
 import { CountDownModal } from "src/features/timer/components/CountDownModal";
+import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
+import { validateData } from "src/utils/validateData";
 
 export const Episode: FC = () => {
   const { data, isLoading, isChat, setIsChat, interval, filter, setFilter } =
@@ -22,6 +24,11 @@ export const Episode: FC = () => {
   if (isLoading) {
     return <Skeleton theme="episode" />;
   }
+
+  validateData({
+    trigger: !data?.episodes_by_pk,
+    error: new GraphQLError(),
+  });
 
   return (
     <>

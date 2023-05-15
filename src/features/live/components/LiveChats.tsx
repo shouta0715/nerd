@@ -37,7 +37,7 @@ export const LiveChats: FC<Props> = ({
   const user = useUserState((state) => state.user);
 
   if (!user || isLoading) {
-    return <Loader className="m-auto" variant="dots" />;
+    return <Loader className="m-auto" size="xl" variant="dots" />;
   }
 
   return (

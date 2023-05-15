@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useGetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
-import { NotFoundError } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
 
 export const useQueryEpisode = (
@@ -14,11 +13,6 @@ export const useQueryEpisode = (
     },
     {
       enabled: !!id,
-      onSuccess: (data) => {
-        if (!data.episodes_by_pk) {
-          throw new NotFoundError();
-        }
-      },
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
         const [

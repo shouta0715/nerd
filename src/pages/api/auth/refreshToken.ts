@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json({ message: "ok", idToken });
   } catch (err: any) {
-    throw new InternalServerError();
+    return res.status(500).json(new InternalServerError().throwMessage());
   }
 };
 

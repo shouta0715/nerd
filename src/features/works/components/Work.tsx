@@ -6,7 +6,9 @@ import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
+import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
+import { validateData } from "src/utils/validateData";
 
 export const Work: FC = () => {
   const router = useRouter();
@@ -28,6 +30,11 @@ export const Work: FC = () => {
       </div>
     );
   }
+
+  validateData({
+    trigger: !data?.works_by_pk,
+    error: new NotFoundError(),
+  });
 
   return (
     <>
