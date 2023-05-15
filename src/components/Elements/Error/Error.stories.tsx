@@ -15,7 +15,11 @@ export default {
 } as Meta<typeof ErrorComponent>;
 type Story = StoryObj<typeof ErrorComponent>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    error: new InternalServerError(),
+  },
+};
 
 export const Forbidden: Story = {
   args: {

@@ -7,7 +7,7 @@ import {
   RequestOptions,
   VariablesAndRequestHeaders,
 } from "graphql-request/dist/types";
-import { UnauthorizedError } from "src/libs/error";
+import { InternalServerError, UnauthorizedError } from "src/libs/error";
 import { RefreshTokenResult } from "src/types/dataType";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
@@ -58,6 +58,10 @@ class GraphQLRequest extends GraphQLClient {
           document as string,
           ...variablesAndRequestHeaders
         );
+      }
+
+      if (error.message === "Network request failed") {
+        throw new InternalServerError();
       }
 
       throw error;

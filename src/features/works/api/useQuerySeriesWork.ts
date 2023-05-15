@@ -3,7 +3,6 @@ import {
   GetWorkSeriesQuery,
   useGetWorkSeriesQuery,
 } from "src/graphql/work/workQuery.generated";
-import { NotFoundError } from "src/libs/error";
 
 import { client } from "src/libs/graphqlClient";
 
@@ -35,12 +34,6 @@ export const useQuerySeriesWork = ({ slug, series_id, work }: Args) =>
     queryKey: ["GetSeriesWork", { slug, series_id: series_id ?? null }],
     queryFn: () => getSeriesWork({ id: slug, series_id }),
     enabled: !!slug,
-    onSuccess: (data) => {
-      if (!data.works_by_pk) {
-        throw new NotFoundError();
-      }
-    },
-
     placeholderData: () => {
       if (!work || typeof work === "string" || !slug) return undefined;
       const [title, series_title] = work;
