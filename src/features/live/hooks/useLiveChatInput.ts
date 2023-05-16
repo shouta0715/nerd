@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useMutateLiveChat } from "src/features/live/api/useMutateLiveChat";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
@@ -14,6 +15,7 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   const [content, setContent] = useState<string>("");
   const user = useUserState((state) => state.user);
   const { insetChat } = useMutateLiveChat();
+  const onNotification = useNotificationState((state) => state.onShow);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +33,11 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
       });
       setContent("");
     } catch (error) {
-      //
+      onNotification({
+        title: "コメントの投稿に失敗しました",
+        type: "error",
+        message: "再度お試しください",
+      });
     }
   };
 
