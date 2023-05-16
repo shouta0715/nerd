@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Faq } from "src/features/pages/faq";
-import { BasicLayoutDecorator } from "src/test/storybook";
+import { BasicLayoutDecorator } from "src/tests/storybook";
 
 export default {
   title: "Pages/Faq",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { TailwindStory } from "src/test/storybook";
+import { TailwindStory } from "src/tests/storybook";
 
 type Story = StoryObj<typeof Skeleton>;
 
