@@ -83,3 +83,13 @@ export const LongTitle: Story = {
     }),
   ],
 };
+
+export const CommentError: Story = {
+  decorators: [
+    createDecorators({
+      title: "コメントの投稿に失敗しました",
+      type: "error",
+      message: "再度お試しください",
+    }),
+  ],
+};
