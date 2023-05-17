@@ -1,10 +1,22 @@
 import { Args, PartialStoryFn } from "@storybook/csf";
 import { ReactRenderer, StoryObj } from "@storybook/react";
-import { BasicLayout } from "src/components/Layouts/BasicLayout";
+import {
+  BasicLayout,
+  BasicLayoutOnlyHeader,
+  BasicListLayout,
+} from "src/components/Layouts/BasicLayout";
 
 export const BasicLayoutDecorator = (
   Story: PartialStoryFn<ReactRenderer, Args>
 ) => BasicLayout(<Story />);
+
+export const BasicLayoutOnlyHeaderDecorator = (
+  Story: PartialStoryFn<ReactRenderer, Args>
+) => BasicLayoutOnlyHeader(<Story />);
+
+export const BasicListLayoutDecorator = (
+  Story: PartialStoryFn<ReactRenderer, Args>
+) => BasicListLayout(<Story />);
 
 // tailwind cssのbreakPointに合わせる
 

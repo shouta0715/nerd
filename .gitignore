@@ -43,3 +43,5 @@ lib/**/*.js.map
 secrets.json
 
 __reports__
+
+__mocks__
