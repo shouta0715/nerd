@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { TailwindStory } from "src/tests/storybook";
+import { BasicLayoutOnlyHeaderDecorator } from "src/tests/storybook";
 
 type Story = StoryObj<typeof Skeleton>;
 
@@ -10,9 +10,6 @@ export default {
 } as Meta<typeof Skeleton>;
 
 export const Default: Story = {
-  parameters: {
-    ...TailwindStory.parameters,
-  },
   args: {
     theme: "work",
   },
@@ -28,6 +25,7 @@ export const Episode: Story = {
   args: {
     theme: "episode",
   },
+  decorators: [BasicLayoutOnlyHeaderDecorator],
 };
 
 export const NextMenu: Story = {
