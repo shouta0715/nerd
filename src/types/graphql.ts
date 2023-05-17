@@ -1076,7 +1076,7 @@ export type Episodes = {
   prev_episode_id?: Maybe<Scalars['uuid']>;
   start_time?: Maybe<Scalars['timestamp']>;
   title: Scalars['String'];
-  updated_at: Scalars['timestamptz'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
   /** An object relationship */
   work: Works;
   work_id: Scalars['Int'];
@@ -3014,7 +3014,6 @@ export type Request_Works = {
   detail?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   official_url?: Maybe<Scalars['String']>;
-  updated_at: Scalars['timestamptz'];
   /** An object relationship */
   user: Users;
   user_id: Scalars['String'];
@@ -3104,7 +3103,6 @@ export type Request_Works_Bool_Exp = {
   detail?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   official_url?: InputMaybe<String_Comparison_Exp>;
-  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
   work_title?: InputMaybe<String_Comparison_Exp>;
@@ -3127,7 +3125,6 @@ export type Request_Works_Insert_Input = {
   detail?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   official_url?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['String']>;
   work_title?: InputMaybe<Scalars['String']>;
@@ -3140,7 +3137,6 @@ export type Request_Works_Max_Fields = {
   detail?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   official_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
   work_title?: Maybe<Scalars['String']>;
 };
@@ -3151,7 +3147,6 @@ export type Request_Works_Max_Order_By = {
   detail?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   official_url?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_title?: InputMaybe<Order_By>;
 };
@@ -3163,7 +3158,6 @@ export type Request_Works_Min_Fields = {
   detail?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   official_url?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['String']>;
   work_title?: Maybe<Scalars['String']>;
 };
@@ -3174,7 +3168,6 @@ export type Request_Works_Min_Order_By = {
   detail?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   official_url?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_title?: InputMaybe<Order_By>;
 };
@@ -3201,7 +3194,6 @@ export type Request_Works_Order_By = {
   detail?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   official_url?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_title?: InputMaybe<Order_By>;
@@ -3223,8 +3215,6 @@ export enum Request_Works_Select_Column {
   /** column name */
   OfficialUrl = 'official_url',
   /** column name */
-  UpdatedAt = 'updated_at',
-  /** column name */
   UserId = 'user_id',
   /** column name */
   WorkTitle = 'work_title'
@@ -3236,7 +3226,6 @@ export type Request_Works_Set_Input = {
   detail?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   official_url?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
   work_title?: InputMaybe<Scalars['String']>;
 };
@@ -3288,7 +3277,6 @@ export type Request_Works_Stream_Cursor_Value_Input = {
   detail?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   official_url?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['timestamptz']>;
   user_id?: InputMaybe<Scalars['String']>;
   work_title?: InputMaybe<Scalars['String']>;
 };
@@ -3314,8 +3302,6 @@ export enum Request_Works_Update_Column {
   Id = 'id',
   /** column name */
   OfficialUrl = 'official_url',
-  /** column name */
-  UpdatedAt = 'updated_at',
   /** column name */
   UserId = 'user_id',
   /** column name */
@@ -3847,7 +3833,7 @@ export type Users = {
   request_works: Array<Request_Works>;
   /** An aggregate relationship */
   request_works_aggregate: Request_Works_Aggregate;
-  updated_at: Scalars['timestamptz'];
+  updated_at?: Maybe<Scalars['timestamptz']>;
   user_name: Scalars['String'];
 };
 

@@ -11,6 +11,10 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
     requestHeaders
   });
 }
+export type FragmentWorkFragment = { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null };
+
+export type FragmentEpisodeFragment = { __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null };
+
 export type GetSeasonWorksQueryVariables = Types.Exact<{
   season: Types.Scalars['String'];
   year: Types.Scalars['Int'];
@@ -18,7 +22,7 @@ export type GetSeasonWorksQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, tid?: number | null, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type SearchWorksQueryVariables = Types.Exact<{
   search: Types.Scalars['String'];
@@ -26,7 +30,7 @@ export type SearchWorksQueryVariables = Types.Exact<{
 }>;
 
 
-export type SearchWorksQuery = { __typename?: 'query_root', search_works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, has_episodes?: boolean | null, series_id?: string | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type SearchWorksQuery = { __typename?: 'query_root', search_works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWorkSeriesQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
@@ -34,54 +38,63 @@ export type GetWorkSeriesQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetWorkSeriesQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> } | null, works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type GetWorkSeriesQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> } | null, works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWorkQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
 }>;
 
 
-export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } | null };
+export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null } | null };
 
 export type GetSeriesQueryVariables = Types.Exact<{
   series_id: Types.Scalars['String'];
 }>;
 
 
-export type GetSeriesQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type GetSeriesQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWeeklyWorksQueryVariables = Types.Exact<{
   limit?: Types.InputMaybe<Types.Scalars['Int']>;
 }>;
 
 
-export type GetWeeklyWorksQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_prev_episode: boolean, has_next_episode: boolean, end_time?: any | null }> }> };
+export type GetWeeklyWorksQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
-
+export const FragmentWorkFragmentDoc = `
+    fragment FragmentWork on works {
+  title
+  series_title
+  series_id
+  id
+  has_episodes
+}
+    `;
+export const FragmentEpisodeFragmentDoc = `
+    fragment FragmentEpisode on episodes {
+  title
+  start_time
+  number
+  id
+  has_next_episode
+  next_episode_id
+  end_time
+}
+    `;
 export const GetSeasonWorksDocument = `
     query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {
   works(
     where: {_and: {season_year: {_eq: $year}, season_name: {_eq: $season}, tid: {_is_null: false}}}
     limit: $limit
   ) {
-    title
-    tid
-    series_title
-    series_id
-    id
-    has_episodes
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}
+${FragmentEpisodeFragmentDoc}`;
 export const useGetSeasonWorksQuery = <
       TData = GetSeasonWorksQuery,
       TError = unknown
@@ -103,23 +116,14 @@ export const SearchWorksDocument = `
     args: {search: $search, _limit: $limit}
     order_by: {series_title: asc}
   ) {
-    id
-    title
-    series_title
-    has_episodes
-    series_id
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}
+${FragmentEpisodeFragmentDoc}`;
 export const useSearchWorksQuery = <
       TData = SearchWorksQuery,
       TError = unknown
@@ -138,42 +142,23 @@ useSearchWorksQuery.fetcher = (client: GraphQLClient, variables: SearchWorksQuer
 export const GetWorkSeriesDocument = `
     query GetWorkSeries($id: Int!, $series_id: String!) {
   works_by_pk(id: $id) {
-    id
-    title
-    series_title
-    series_id
-    has_episodes
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
   works(
     where: {_and: {id: {_neq: $id}, series_id: {_eq: $series_id}}}
     order_by: [{has_episodes: desc}]
   ) {
-    id
-    title
-    series_title
-    series_id
-    has_episodes
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}
+${FragmentEpisodeFragmentDoc}`;
 export const useGetWorkSeriesQuery = <
       TData = GetWorkSeriesQuery,
       TError = unknown
@@ -192,14 +177,10 @@ useGetWorkSeriesQuery.fetcher = (client: GraphQLClient, variables: GetWorkSeries
 export const GetWorkDocument = `
     query GetWork($id: Int!) {
   works_by_pk(id: $id) {
-    id
-    title
-    series_title
-    series_id
-    has_episodes
+    ...FragmentWork
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}`;
 export const useGetWorkQuery = <
       TData = GetWorkQuery,
       TError = unknown
@@ -218,23 +199,14 @@ useGetWorkQuery.fetcher = (client: GraphQLClient, variables: GetWorkQueryVariabl
 export const GetSeriesDocument = `
     query GetSeries($series_id: String!) {
   works(where: {series_id: {_eq: $series_id}}, order_by: [{has_episodes: desc}]) {
-    id
-    title
-    series_title
-    series_id
-    has_episodes
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}
+${FragmentEpisodeFragmentDoc}`;
 export const useGetSeriesQuery = <
       TData = GetSeriesQuery,
       TError = unknown
@@ -253,23 +225,14 @@ useGetSeriesQuery.fetcher = (client: GraphQLClient, variables: GetSeriesQueryVar
 export const GetWeeklyWorksDocument = `
     query GetWeeklyWorks($limit: Int) {
   weekly_works(args: {limit_num: $limit}) {
-    id
-    title
-    series_title
-    series_id
-    has_episodes
+    ...FragmentWork
     episodes(order_by: {number: desc_nulls_last}, limit: 8) {
-      title
-      start_time
-      number
-      id
-      has_prev_episode
-      has_next_episode
-      end_time
+      ...FragmentEpisode
     }
   }
 }
-    `;
+    ${FragmentWorkFragmentDoc}
+${FragmentEpisodeFragmentDoc}`;
 export const useGetWeeklyWorksQuery = <
       TData = GetWeeklyWorksQuery,
       TError = unknown

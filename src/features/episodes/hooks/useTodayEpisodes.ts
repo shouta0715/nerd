@@ -1,12 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
-import { Episode } from "src/features/episodes/types";
+import { TodayEpisode } from "src/features/episodes/types";
 import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 
 import { useSearchInputState } from "src/store/input/searchInput";
 
-const sortFn = (next: Episode, target: Episode) => {
+const sortFn = (next: TodayEpisode, target: TodayEpisode) => {
   const now = new Date();
   const nextEndDate = new Date(next.end_time);
   const targetEndDate = new Date(target.end_time);

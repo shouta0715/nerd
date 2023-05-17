@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisode } from "src/features/episodes/types";
+import { genEpisodePlaceholder } from "src/features/episodes/utils";
 import { getIsFinished } from "src/features/timer/utils/getIsFinished";
 
 type Props = {
@@ -24,15 +25,7 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`,
         query: {
-          episode: [
-            work_title,
-            episode.title,
-            episode.number.toString(),
-            episode.id,
-            episode.has_next_episode,
-            episode.start_time,
-            episode.end_time,
-          ],
+          episode: genEpisodePlaceholder(episode, work_title),
         },
       }}
     >
