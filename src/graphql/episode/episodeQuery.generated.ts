@@ -16,7 +16,7 @@ export type GetTodayEpisodesQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } }> };
+export type GetTodayEpisodesQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', series_title: string, title: string, id: number, series_id?: string | null, tid?: number | null } }> };
 
 export type GetEpisodeQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
@@ -36,6 +36,7 @@ export const GetTodayEpisodesDocument = `
     number
     has_next_episode
     has_prev_episode
+    next_episode_id
     work {
       series_title
       title

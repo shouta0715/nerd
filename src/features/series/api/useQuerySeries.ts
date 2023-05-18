@@ -6,8 +6,8 @@ type Args = {
   slug: string | string[] | null;
 };
 
-export const useQuerySeries = ({ slug }: Args) =>
-  useGetSeriesQuery(
+export const useQuerySeries = ({ slug }: Args) => {
+  return useGetSeriesQuery(
     client,
     {
       series_id: typeof slug === "string" ? slug : "",
@@ -21,3 +21,4 @@ export const useQuerySeries = ({ slug }: Args) =>
       },
     }
   );
+};

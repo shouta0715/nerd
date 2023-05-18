@@ -35,10 +35,10 @@ export const useRequest = () => {
       });
     } catch (error) {
       onShow({
-        title:
-          "エラーが発生しました。時間をおいて再度リクエストをお願いします。",
+        title: "エラー",
         type: "error",
-        message: "エラー",
+        message:
+          "エラーが発生しました。時間をおいて再度リクエストをお願いします。",
       });
     } finally {
       reset();

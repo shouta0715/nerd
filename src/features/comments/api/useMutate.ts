@@ -15,7 +15,9 @@ type InfiniteCommentEpisode = {
 };
 
 export const useMutateComment = (filter: CommentsFilter) => {
-  const user = useUserState((state) => state.user);
+  const user = useUserState((state) => {
+    return state.user;
+  });
   const queryClient = useQueryClient();
   const insertEpisodeComment = useMutateEpisodeCommentMutation(client, {
     onMutate: async (variables) => {

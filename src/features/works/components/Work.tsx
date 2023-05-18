@@ -53,7 +53,11 @@ export const Work: FC = () => {
         ) : (
           <ul className="grid grid-cols-2 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
             {data?.works_by_pk?.episodes.map((episode) => (
-              <WorkEpisodeItem key={episode.id} episode={episode} />
+              <WorkEpisodeItem
+                key={episode.id}
+                episode={episode}
+                work_title={data?.works_by_pk?.series_title}
+              />
             ))}
           </ul>
         )}

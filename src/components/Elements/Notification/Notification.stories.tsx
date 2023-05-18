@@ -53,3 +53,43 @@ export const Info: Story = {
 export const Persistent: Story = {
   decorators: [createDecorators({ title: "Persistent", isPersistent: true })],
 };
+
+export const WithMessage: Story = {
+  decorators: [
+    createDecorators({
+      title: "With Message",
+      message: "This is a message",
+    }),
+  ],
+};
+
+export const LongMessage: Story = {
+  decorators: [
+    createDecorators({
+      title: "Long Message",
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl. ",
+      isPersistent: true,
+    }),
+  ],
+};
+
+export const LongTitle: Story = {
+  decorators: [
+    createDecorators({
+      title:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis aliquam nisl nunc eu nisl.",
+      message: "This is a message",
+    }),
+  ],
+};
+
+export const CommentError: Story = {
+  decorators: [
+    createDecorators({
+      title: "コメントの投稿に失敗しました",
+      type: "error",
+      message: "再度お試しください",
+    }),
+  ],
+};

@@ -35,13 +35,15 @@ const getChat = async ({ episode_id, pageParam }: GetChatsEpisodeArgs) => {
   return data;
 };
 
-export const useInfiniteQueryChatsEpisode = ({ episode_id, enabled }: Args) =>
-  useInfiniteQuery({
+export const useInfiniteQueryChatsEpisode = ({ episode_id, enabled }: Args) => {
+  return useInfiniteQuery({
     queryKey: ["chats", { episode_id }],
-    queryFn: ({ pageParam = InitialPageParam }) =>
-      getChat({
+    queryFn: ({ pageParam = InitialPageParam }) => {
+      return getChat({
         episode_id,
         pageParam,
-      }),
+      });
+    },
     enabled,
   });
+};

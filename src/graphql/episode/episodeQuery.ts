@@ -10,6 +10,7 @@ export const GET_TODAY_EPISODES = gql`
       number
       has_next_episode
       has_prev_episode
+      next_episode_id
       work {
         series_title
         title

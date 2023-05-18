@@ -5,12 +5,14 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { FC, useEffect, useState } from "react";
+import {
+  getUser,
+  createUser,
+  handleSetCustomClaims,
+} from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
-import { CreateClaimsSchema } from "src/libs/server/types";
-import { createUser } from "src/libs/server/user/createUser";
-import { getUser } from "src/libs/server/user/getUser";
 
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -66,18 +68,10 @@ export const FirebaseAuth: FC<Props> = ({ children }) => {
         }
 
         try {
-          const body: CreateClaimsSchema = {
+          await handleSetCustomClaims({
             id: user.uid,
             isAnonymous: user.isAnonymous,
             refreshToken: user.refreshToken,
-          };
-
-          await fetch("/api/auth/setCustomClaims", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
           });
 
           const newestToken = await auth.currentUser?.getIdToken(true);

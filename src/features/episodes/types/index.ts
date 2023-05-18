@@ -1,7 +1,12 @@
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import {
+  GetEpisodeQuery,
+  GetTodayEpisodesQuery,
+} from "src/graphql/episode/episodeQuery.generated";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 
-export type Episode = GetTodayEpisodesQuery["episodes"][0];
+export type Episode = GetEpisodeQuery["episodes_by_pk"];
+
+export type TodayEpisode = GetTodayEpisodesQuery["episodes"][0];
 
 export type WorkEpisode = GetSeasonWorksQuery["works"][0]["episodes"][0];
 

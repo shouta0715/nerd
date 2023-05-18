@@ -6,7 +6,8 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { ModeBadge } from "src/components/Elements/ModeBadge";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
-import { Episode } from "src/features/episodes/types";
+import { TodayEpisode } from "src/features/episodes/types";
+import { genTodayEpisodePlaceholder } from "src/features/episodes/utils";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 
 const DynamicTimer = dynamic(
@@ -18,7 +19,7 @@ const DynamicTimer = dynamic(
 );
 
 type Props = {
-  episode: Episode;
+  episode: TodayEpisode;
 };
 
 const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
@@ -96,15 +97,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               href={{
                 pathname: `/episodes/live/${episode.id}`,
                 query: {
-                  episode: [
-                    episode.work.series_title,
-                    episode.title,
-                    episode.number.toString(),
-                    episode.id,
-                    episode.has_next_episode,
-                    episode.start_time,
-                    episode.end_time,
-                  ],
+                  episode: genTodayEpisodePlaceholder(episode),
                 },
               }}
               size="sm"
