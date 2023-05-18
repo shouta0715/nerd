@@ -110,13 +110,6 @@ module.exports = {
     "react/display-name": "off",
     "import/no-extraneous-dependencies": "off",
     "no-nested-ternary": "off",
+    "arrow-body-style": "off",
   },
-  overrides: [
-    {
-      files: ["**/mocks/**/*.ts", "**/api/**/*.ts"],
-      rules: {
-        "arrow-body-style": ["error", "always"],
-      },
-    },
-  ],
 };
