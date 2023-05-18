@@ -113,7 +113,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["**/mocks/**/*.ts", "**/tests/**/*.ts", "**/api/**/*.ts"],
+      files: ["**/mocks/**/*.ts", "**/api/**/*.ts"],
       rules: {
         "arrow-body-style": ["error", "always"],
       },

@@ -8,8 +8,8 @@ type Args = {
   work: string | string[] | undefined;
 };
 
-export const useQueryWork = ({ slug, work }: Args) =>
-  {return useGetWorkQuery(
+export const useQueryWork = ({ slug, work }: Args) => {
+  return useGetWorkQuery(
     client,
     {
       id: Number(slug?.at(-1)),
@@ -35,4 +35,5 @@ export const useQueryWork = ({ slug, work }: Args) =>
         };
       },
     }
-  )};
+  );
+};

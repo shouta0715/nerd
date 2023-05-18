@@ -7,11 +7,12 @@ export const usePrefetchCommentWork = () => {
   return async (work_id: number) => {
     await queryClient.prefetchInfiniteQuery({
       queryKey: ["comments", { work_id, filter: "new" }],
-      queryFn: () =>
-        {return getComments({
+      queryFn: () => {
+        return getComments({
           work_id,
           filter: "new",
-        })},
+        });
+      },
       staleTime: 1000 * 60 * 30,
     });
   };

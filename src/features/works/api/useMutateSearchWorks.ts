@@ -13,7 +13,8 @@ export const SearchWorks = async (search: string) => {
   return data;
 };
 
-export const useMutateSearchWorks = () =>
-  {return useMutation({
+export const useMutateSearchWorks = () => {
+  return useMutation({
     mutationFn: SearchWorks,
-  })};
+  });
+};

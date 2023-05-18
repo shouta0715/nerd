@@ -20,7 +20,9 @@ type PrevData = {
 
 export const useMutateChatEpisode = () => {
   const queryClient = useQueryClient();
-  const user = useUserState((state) => {return state.user});
+  const user = useUserState((state) => {
+    return state.user;
+  });
   const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
       const fake_id = genRandomId();
@@ -50,7 +52,9 @@ export const useMutateChatEpisode = () => {
           pages: prevData.pages.map((page, index) => {
             if (index === mutateCommentPageIndex) {
               const mutateNextTimeIndex = page.chats_by_episode_id.findIndex(
-                (comment) => {return comment.comment_time >= comment_time}
+                (comment) => {
+                  return comment.comment_time >= comment_time;
+                }
               );
 
               const newPages: GetChatsEpisodeQuery = {

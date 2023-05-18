@@ -18,10 +18,12 @@ type GetFinishCommentsArgs = {
   filter: CommentsFilter;
 };
 
-const getInitialPageParam = () => {return {
-  cursor: new Date().toISOString(),
-  likes_cursor: 100000,
-}};
+const getInitialPageParam = () => {
+  return {
+    cursor: new Date().toISOString(),
+    likes_cursor: 100000,
+  };
+};
 
 export const getComments = async ({
   episode_id,
@@ -71,16 +73,19 @@ export const useInfiniteCommentsEpisode = (
   episode_id: string,
   filter: "new" | "popular"
 ) => {
-  const user = useUserState((state) => {return state.user});
+  const user = useUserState((state) => {
+    return state.user;
+  });
 
   return useInfiniteQuery({
     queryKey: ["comments", { episode_id, filter }],
-    queryFn: ({ pageParam }) =>
-      {return getComments({
+    queryFn: ({ pageParam }) => {
+      return getComments({
         episode_id,
         pageParam,
         filter,
-      })},
+      });
+    },
     getNextPageParam: (lastPage) => {
       const lastFinishComments = lastPage.comments.at(-1);
       if (!lastFinishComments || lastPage.comments.length < 100)

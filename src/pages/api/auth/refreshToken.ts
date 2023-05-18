@@ -21,7 +21,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
         body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
       }
-    ).then((r) => {return r.text()});
+    ).then((r) => {
+      return r.text();
+    });
 
     const { id_token: idToken } = JSON.parse(data);
     const option = createOption();

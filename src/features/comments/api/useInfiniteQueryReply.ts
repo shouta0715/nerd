@@ -34,14 +34,15 @@ export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
   return data;
 };
 
-export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
-  {return useInfiniteQuery({
+export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) => {
+  return useInfiniteQuery({
     queryKey: ["replies", { reply_to }],
-    queryFn: ({ pageParam = InitialPageParam }) =>
-      {return getReplies({
+    queryFn: ({ pageParam = InitialPageParam }) => {
+      return getReplies({
         reply_to,
         pageParam,
-      })},
+      });
+    },
     getNextPageParam: (lastPage): PageParam => {
       const lastReply = lastPage.replies.at(-1);
 
@@ -54,4 +55,5 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) =>
     suspense: true,
     enabled: isOpen && !!reply_to,
     staleTime: 1000 * 60 * 5,
-  })};
+  });
+};
