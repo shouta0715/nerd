@@ -13,7 +13,7 @@ type InfiniteLiveChats = {
 };
 export const useMutateLiveChat = () => {
   const queryClient = useQueryClient();
-  const user = useUserState((state) => state.user);
+  const user = useUserState((state) => {return state.user});
 
   const insetChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {

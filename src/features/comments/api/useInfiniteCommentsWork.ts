@@ -17,10 +17,10 @@ type GetFinishCommentsArgs = {
   filter: CommentsFilter;
 };
 
-const getInitialPageParam = () => ({
+const getInitialPageParam = () => {return {
   cursor: new Date().toISOString(),
   likes_cursor: 100000,
-});
+}};
 
 export const getComments = async ({
   work_id,
@@ -69,16 +69,16 @@ export const useInfiniteCommentsWork = (
   work_id: number,
   filter: CommentsFilter
 ) => {
-  const user = useUserState((state) => state.user);
+  const user = useUserState((state) => {return state.user});
 
   return useInfiniteQuery({
     queryKey: ["comments", { work_id, filter }],
     queryFn: ({ pageParam }) =>
-      getComments({
+      {return getComments({
         work_id,
         pageParam,
         filter,
-      }),
+      })},
     getNextPageParam: (lastPage) => {
       const lastFinishComments = lastPage.comments.at(-1);
       if (!lastFinishComments || lastPage.comments.length < 100)

@@ -27,7 +27,6 @@ module.exports = {
   plugins: [
     "import",
     "jsx-a11y",
-    "prefer-arrow",
     "react",
     "react-hooks",
     "unused-imports",
@@ -56,14 +55,6 @@ module.exports = {
         blankLine: "always",
         prev: "*",
         next: "return",
-      },
-    ],
-    "prefer-arrow/prefer-arrow-functions": [
-      "error",
-      {
-        disallowPrototype: true,
-        singleReturnOnly: false,
-        classPropertiesAllowed: false,
       },
     ],
     "react/function-component-definition": [
@@ -120,4 +111,12 @@ module.exports = {
     "import/no-extraneous-dependencies": "off",
     "no-nested-ternary": "off",
   },
+  overrides: [
+    {
+      files: ["**/mocks/**/*.ts", "**/tests/**/*.ts", "**/api/**/*.ts"],
+      rules: {
+        "arrow-body-style": ["error", "always"],
+      },
+    },
+  ],
 };

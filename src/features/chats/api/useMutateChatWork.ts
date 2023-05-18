@@ -19,9 +19,9 @@ type PrevData = {
 export const useMutateChatWork = () => {
   const queryClient = useQueryClient();
   const resetInputComment = useInputCommentState(
-    (state) => state.resetInputComment
+    (state) => {return state.resetInputComment}
   );
-  const user = useUserState((state) => state.user);
+  const user = useUserState((state) => {return state.user});
 
   const insertChat = useInsertChatMutation(client, {
     onMutate: async (newComment) => {
@@ -52,7 +52,7 @@ export const useMutateChatWork = () => {
           pages: prevData.pages.map((page, index) => {
             if (index === mutateCommentPageIndex) {
               const mutateNextTimeIndex = page.chats_by_work_id.findIndex(
-                (comment) => comment.comment_time >= comment_time
+                (comment) => {return comment.comment_time >= comment_time}
               );
 
               const newPages: GetChatsWorkQuery = {

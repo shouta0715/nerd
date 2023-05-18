@@ -9,7 +9,7 @@ type Args = {
 };
 
 export const useQueryWork = ({ slug, work }: Args) =>
-  useGetWorkQuery(
+  {return useGetWorkQuery(
     client,
     {
       id: Number(slug?.at(-1)),
@@ -35,4 +35,4 @@ export const useQueryWork = ({ slug, work }: Args) =>
         };
       },
     }
-  );
+  )};

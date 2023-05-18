@@ -30,9 +30,9 @@ const getSeriesWork = async ({ id, series_id }: GetSeries) => {
 };
 
 export const useQuerySeriesWork = ({ slug, series_id, work }: Args) =>
-  useQuery<GetWorkSeriesQuery, Error>({
+  {return useQuery<GetWorkSeriesQuery, Error>({
     queryKey: ["GetSeriesWork", { slug, series_id: series_id ?? null }],
-    queryFn: () => getSeriesWork({ id: slug, series_id }),
+    queryFn: () => {return getSeriesWork({ id: slug, series_id })},
     enabled: !!slug,
     placeholderData: () => {
       if (!work || typeof work === "string" || !slug) return undefined;
@@ -51,4 +51,4 @@ export const useQuerySeriesWork = ({ slug, series_id, work }: Args) =>
       };
     },
     staleTime: 1000 * 60 * 5,
-  });
+  })};

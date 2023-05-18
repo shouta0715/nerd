@@ -14,6 +14,6 @@ export const SearchWorks = async (search: string) => {
 };
 
 export const useMutateSearchWorks = () =>
-  useMutation({
+  {return useMutation({
     mutationFn: SearchWorks,
-  });
+  })};

@@ -3,9 +3,9 @@ import { setupServer } from "msw/node";
 
 export const setupMsw = (...handlers: RequestHandler[]) => {
   const server = setupServer(...handlers);
-  beforeAll(() => server.listen());
-  afterEach(() => server.resetHandlers());
-  afterAll(() => server.close());
+  beforeAll(() => {return server.listen()});
+  afterEach(() => {return server.resetHandlers()});
+  afterAll(() => {return server.close()});
 
   return server;
 };

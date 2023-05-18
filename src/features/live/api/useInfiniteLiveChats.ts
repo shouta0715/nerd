@@ -67,11 +67,11 @@ export const useInfiniteLiveChats = ({
   const query = useInfiniteQuery({
     queryKey: ["LiveChats", { episode_id }],
     queryFn: ({ pageParam = InitialPageParams }) =>
-      getChats({
+      {return getChats({
         mode,
         episode_id,
         pageParam,
-      }),
+      })},
     keepPreviousData: true,
     enabled: mode !== "finish" && !!episode_id && enabled,
   });
