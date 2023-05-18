@@ -16,7 +16,9 @@ const preview: Preview = {
       },
     },
     msw: {
-      handlers: authHandlers,
+      handlers: {
+        auth: authHandlers,
+      },
     },
   },
 };

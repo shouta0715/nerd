@@ -15,6 +15,7 @@ export const useQueryEpisode = (
       enabled: !!id,
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
+
         const [
           series_title,
           title,
@@ -25,8 +26,6 @@ export const useQueryEpisode = (
           start_time,
           end_time,
         ] = episode;
-
-        console.log(episode);
 
         return {
           episodes_by_pk: {
