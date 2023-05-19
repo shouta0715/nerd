@@ -1,8 +1,5 @@
 import { handler as authHandlers } from "../src/features/auth/mocks/msw";
-import {
-  TailwindStory,
-  createViewPortParameters,
-} from "../src/tests/storybook";
+import { TailwindStory } from "../src/tests/storybook";
 import type { Preview } from "@storybook/react";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 import "../src/styles/tailwind.css";
