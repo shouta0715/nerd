@@ -1,4 +1,3 @@
-import { mswDecorator } from "msw-storybook-addon";
 import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
@@ -31,7 +30,6 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
   docs: {

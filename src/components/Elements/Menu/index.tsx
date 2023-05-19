@@ -5,19 +5,24 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import dynamic from "next/dynamic";
-import React from "react";
-import { MenuWrapper } from "src/features/play/components/MenuWrapper";
+import React, { FC } from "react";
+import { MenuWrapper } from "src/components/Wrapper/Menu";
 
 const DynamicMenu = dynamic(
   () =>
-    import("src/features/play/components/PlayMenu").then((mod) => mod.PlayMenu),
+    import("src/components/Elements/InputMenu").then((mod) => mod.InputMenu),
   {
     ssr: false,
   }
 );
 
-export const EpisodeMenu = () => (
+type Props = {
+  children?: React.ReactNode;
+};
+
+export const Menu: FC<Props> = ({ children }) => (
   <MenuWrapper>
     <DynamicMenu />
+    {children}
   </MenuWrapper>
 );

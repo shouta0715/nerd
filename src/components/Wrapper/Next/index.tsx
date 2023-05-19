@@ -23,7 +23,7 @@ export const NextEpisodeMenuWrapper: FC<Props> = ({
     }}
   >
     <div
-      className={`mx-6 h-max max-h-[90vh] w-full max-w-full animate-modal overflow-y-auto  rounded-xl bg-white shadow lg:static lg:mx-0 lg:h-auto lg:max-h-fit lg:w-full  lg:max-w-none lg:translate-x-0 lg:translate-y-0 lg:animate-none lg:rounded-none lg:border-0 lg:shadow-none lg:transition-none ${
+      className={`mx-3 h-max max-h-[90vh] w-full max-w-lg animate-modal overflow-y-auto rounded-xl bg-white shadow  sm:mx-auto lg:static lg:mx-0 lg:h-auto lg:max-h-fit lg:w-full   lg:max-w-none lg:translate-x-0 lg:translate-y-0 lg:animate-none lg:rounded-none lg:border-0 lg:shadow-none lg:transition-none ${
         isOpen ? "block" : "  hidden lg:block"
       }`}
     >

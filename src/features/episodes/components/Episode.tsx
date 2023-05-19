@@ -1,6 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { MainWrapper } from "src/components/Wrapper/Main";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
@@ -10,15 +11,13 @@ import { EpisodeComments } from "src/features/comments/components/EpisodeComment
 import { EpisodeHeader } from "src/features/episodes/components/EpisodeHeader";
 import { EpisodeNav } from "src/features/episodes/components/EpisodeNav";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
-import { MainWrapper } from "src/features/play/components/MainWrapper";
 
-import { CountDownModal } from "src/features/timer/components/CountDownModal";
 import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";
 
 export const Episode: FC = () => {
-  const { data, isLoading, isChat, setIsChat, interval, filter, setFilter } =
+  const { data, isLoading, isChat, setIsChat, filter, setFilter } =
     useEpisode();
 
   if (isLoading) {
@@ -44,12 +43,7 @@ export const Episode: FC = () => {
           id={data?.episodes_by_pk?.id}
           title={data?.episodes_by_pk?.work.series_title}
         />
-        <EpisodeNav
-          data={data}
-          isChat={isChat}
-          setIsChat={setIsChat}
-          stop={interval.stop}
-        />
+        <EpisodeNav data={data} isChat={isChat} setIsChat={setIsChat} />
         {isChat ? (
           <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
         ) : (
@@ -78,8 +72,6 @@ export const Episode: FC = () => {
           </Suspense>
         )}
       </MainWrapper>
-
-      <CountDownModal />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Episode } from "src/features/episodes/components/Episode";
-import { handleEpisode } from "src/features/episodes/mocks/msw";
+import { handlers } from "src/features/episodes/mocks/msw";
 import { BasicLayoutOnlyHeaderDecorator } from "src/tests/storybook";
 
 export default {
@@ -25,7 +25,7 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: {
-        episodes: handleEpisode(),
+        episodes: [...handlers],
       },
     },
   },

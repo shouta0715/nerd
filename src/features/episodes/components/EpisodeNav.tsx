@@ -4,10 +4,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
+import { Menu } from "src/components/Elements/Menu";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
-import { EpisodeMenu } from "src/features/episodes/components/EpisodeMenu";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
@@ -17,15 +17,15 @@ type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
   data?: GetEpisodeQuery;
-  stop: () => void;
 };
 
-export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
+export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, data }) => {
   const prefetchComments = usePrefetchCommentEpisode();
   const router = useRouter();
   const user = useUserState((state) => state.user);
   const mode = useTimerState((state) => state.mode);
   const [isEpisodeMenuOpen, setIsEpisodeMenuOpen] = useState(false);
+  const stop = useTimerState((state) => state.interval.stop);
 
   return (
     <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto lg:border-none">
@@ -80,7 +80,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
             <ListBulletIcon />
           </button>
         </div>
-        <EpisodeMenu />
+        <Menu />
         <div className="hidden h-px w-full bg-slate-200 lg:block" />
         <Suspense
           fallback={

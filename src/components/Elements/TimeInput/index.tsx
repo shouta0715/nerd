@@ -5,10 +5,10 @@ import RotateArrowRightIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
-import { usePlayTimeInput } from "src/features/play/hooks/usePlayTimeInput";
-import { getTimeButton } from "src/features/play/utils/getTimeButton";
+import { useTimeInput } from "src/components/Elements/TimeInput/useTimeInput";
+import { getTimeButton } from "src/features/timer/utils/getTimeButton";
 
-export const PlayTimeInput: FC = () => {
+export const TimeInput: FC = () => {
   const {
     changeHandler,
     inputTime,
@@ -20,7 +20,7 @@ export const PlayTimeInput: FC = () => {
     time,
     padTime,
     downInitialTime,
-  } = usePlayTimeInput();
+  } = useTimeInput();
 
   return (
     <div className="flex flex-col items-center space-y-1">

@@ -30,7 +30,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
 
   return (
     <li
-      className={`relative flex-1 animate-fadeUp rounded-xl border bg-white pb-4 ${
+      className={`relative animate-fadeUp rounded-xl border bg-white pb-4 ${
         mode === "down" ? "border-indigo-200" : ""
       } ${mode === "up" ? "border-orange-200" : ""} ${
         mode === "finish" ? "border-pink-200" : ""

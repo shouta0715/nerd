@@ -1,9 +1,10 @@
 import { Transition } from "@headlessui/react";
 import React, { FC } from "react";
-import { useCountDownModal } from "src/features/play/store";
+
 import { CountDownModalContent } from "src/features/timer/components/CountDownModalContent";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
+import { useCountDownModal } from "src/store/global/globalStore";
 
 export const CountDownModal: FC = () => {
   const { mode, downInitialTime, changeMode } = useTimerState((state) => ({

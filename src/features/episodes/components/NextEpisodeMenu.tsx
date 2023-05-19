@@ -11,10 +11,11 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
+import { NextEpisodeMenuWrapper } from "src/components/Wrapper/Next";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
-import { NextEpisodeMenuWrapper } from "src/features/play/components/NextEpisodeMenuWrapper";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { LiveTimer } from "src/features/timer/types";
+import { getIsFinished } from "src/features/timer/utils/getIsFinished";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
@@ -76,23 +77,28 @@ export const NextEpisodeMenu: FC<Props> = ({
             </div>
           )}
         </Text>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 py-2 md:justify-around">
+        <div className="mt-4 flex flex-col items-center justify-between gap-2 py-2 sm:flex-row md:justify-around">
           {mode && mode === "finish" && (
             <ButtonLink
-              className="mr-auto flex w-max items-center space-x-2 border-none bg-red-500"
+              className="mx-auto w-36 space-x-2 py-2  font-bold text-white sm:mx-0 sm:w-max"
               href={`/episodes/${episode?.id}`}
               leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
-              size="sm"
+              size="xs"
+              theme="danger"
             >
               もう一度見る
             </ButtonLink>
           )}
           {episode?.next_episode_id && (
             <ButtonLink
-              className={`flex h-full w-max items-center space-x-2 py-2 font-bold text-white ${
+              className={` flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
                 timerMode === "up" ? "bg-orange-500" : "bg-indigo-500"
               }`}
-              href={`/episodes/${data?.episodes_by_pk?.id}`}
+              href={
+                getIsFinished(data?.episodes_by_pk?.end_time)
+                  ? `/episodes/${data?.episodes_by_pk?.id}`
+                  : `/episodes/live/${data?.episodes_by_pk?.id}`
+              }
               leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
               onClick={interval.reset}
               size="xs"
@@ -107,7 +113,7 @@ export const NextEpisodeMenu: FC<Props> = ({
                   ? `/works/${episode?.work.id}?series=${episode?.work.series_id}`
                   : `/works/${episode?.work.id}`
               }
-              className="flex  w-max items-center space-x-2 py-2 text-white"
+              className="mx-auto flex w-36 items-center space-x-2 py-2 text-white sm:mx-0 sm:w-max"
               href={{
                 pathname: `${`/works/${episode?.work.id}`}`,
                 query: {
