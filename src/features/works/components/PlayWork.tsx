@@ -14,7 +14,7 @@ import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";
 
 export const PlayWork: FC = () => {
-  const { isChat, isLoading, setIsChat, interval, data, filter, setFilter } =
+  const { isChat, isLoading, setIsChat, data, filter, setFilter } =
     usePlayWork();
 
   if (isLoading) {
@@ -34,12 +34,7 @@ export const PlayWork: FC = () => {
           id={data?.works_by_pk?.id}
           title={data?.works_by_pk?.series_title}
         />
-        <PlayWorkNav
-          data={data}
-          isChat={isChat}
-          setIsChat={setIsChat}
-          stop={interval.stop}
-        />
+        <PlayWorkNav data={data} isChat={isChat} setIsChat={setIsChat} />
         {isChat ? (
           <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (

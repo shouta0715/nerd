@@ -81,7 +81,7 @@ export const todayEpisodeData = (mode: Mode = "finished"): TodayEpisode => {
   };
 };
 
-export const workItemData: WorkEpisode = {
+export const workEpisodeItemData: WorkEpisode = {
   __typename: "episodes",
   id: "1",
   title: "緑谷出久：オリジン",
