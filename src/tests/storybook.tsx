@@ -38,7 +38,7 @@ export const ListDecorator = (Story: PartialStoryFn<ReactRenderer, Args>) => (
 const spViewport = {
   name: "sp",
   styles: {
-    width: "320px",
+    width: "375px",
     height: "100%",
   },
 };

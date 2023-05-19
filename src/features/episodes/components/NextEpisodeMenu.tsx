@@ -77,7 +77,7 @@ export const NextEpisodeMenu: FC<Props> = ({
             </div>
           )}
         </Text>
-        <div className="mt-4 flex flex-col items-center justify-between gap-2 py-2 sm:flex-row md:justify-around">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 py-2  md:justify-around">
           {mode && mode === "finish" && (
             <ButtonLink
               className="mx-auto w-36 space-x-2 py-2  font-bold text-white sm:mx-0 sm:w-max"
