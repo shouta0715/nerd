@@ -6,7 +6,7 @@ import { Button } from "src/components/Elements/Button";
 import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { useTimeInput } from "src/components/Elements/TimeInput/useTimeInput";
-import { getTimeButton } from "src/features/play/utils/getTimeButton";
+import { getTimeButton } from "src/features/timer/utils/getTimeButton";
 
 export const TimeInput: FC = () => {
   const {

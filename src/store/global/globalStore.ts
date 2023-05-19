@@ -14,3 +14,13 @@ export const useGlobalState = create<GlobalState>((set) => ({
   authLoading: true,
   setAuthLoading: (authLoading) => set(() => ({ authLoading })),
 }));
+
+type CountDownModal = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+};
+
+export const useCountDownModal = create<CountDownModal>((set) => ({
+  isOpen: false,
+  setIsOpen: (isOpen) => set({ isOpen }),
+}));

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
+import { useCountDownModal } from "src/store/global/globalStore";
 
 export const useTimeInput = () => {
   const [inputTime, setInputTime] = useState<string | null>(null);

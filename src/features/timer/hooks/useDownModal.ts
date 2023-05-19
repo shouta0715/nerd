@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useCountDownModal } from "src/features/play/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
+import { useCountDownModal } from "src/store/global/globalStore";
 
 export const useDownModal = () => {
   const { downInitialTime, setDownInitialTime, setTime, changeMode } =
@@ -13,7 +13,6 @@ export const useDownModal = () => {
     }));
 
   const setIsOpen = useCountDownModal((state) => state.setIsOpen);
-
   const padTime = timeToPadTime(downInitialTime);
   const [inputTime, setInputTime] = useState<string | null>(null);
 

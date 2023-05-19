@@ -1,9 +1,10 @@
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Switch } from "src/components/Elements/Switch";
-import { useCountDownModal } from "src/features/play/store";
+
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
+import { useCountDownModal } from "src/store/global/globalStore";
 
 export const ModeSwitch: FC = () => {
   const { mode, changeMode, downInitialTime, interval } = useTimerState(
