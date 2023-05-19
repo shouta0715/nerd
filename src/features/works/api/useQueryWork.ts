@@ -12,7 +12,7 @@ export const useQueryWork = ({ slug, work }: Args) => {
   return useGetWorkQuery(
     client,
     {
-      id: Number(slug?.at(-1)),
+      id: Number(slug),
     },
     {
       enabled: !!slug,

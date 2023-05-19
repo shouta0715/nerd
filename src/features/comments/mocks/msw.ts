@@ -2,6 +2,8 @@ import { graphql } from "msw";
 import {
   episodeCommentData,
   episodeCommentDataOrderByLike,
+  workCommentData,
+  workCommentDataOrderByLike,
 } from "src/features/comments/mocks/fixture";
 
 export const handleEpisodeComment = (status?: number) => {
@@ -24,4 +26,29 @@ export const handleEpisodeCommentByLikes = (status?: number) => {
   });
 };
 
-export const handlers = [handleEpisodeComment(), handleEpisodeCommentByLikes()];
+const handleWorkComment = (status?: number) => {
+  return graphql.query("GetCommentsWork", (_, res, ctx) => {
+    if (status) {
+      return res(ctx.status(status));
+    }
+
+    return res(ctx.data(workCommentData));
+  });
+};
+
+const handleWorkCommentByLikes = (status?: number) => {
+  return graphql.query("GetCommentsWorkByLikes", (_, res, ctx) => {
+    if (status) {
+      return res(ctx.status(status));
+    }
+
+    return res(ctx.data(workCommentDataOrderByLike));
+  });
+};
+
+export const handlers = [
+  handleEpisodeComment(),
+  handleEpisodeCommentByLikes(),
+  handleWorkComment(),
+  handleWorkCommentByLikes(),
+];
