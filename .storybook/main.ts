@@ -1,4 +1,3 @@
-import { mswDecorator } from "msw-storybook-addon";
 import type { StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
