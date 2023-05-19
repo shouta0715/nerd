@@ -6,7 +6,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { MenuWrapper } from "src/components/Wrapper/Menu/MenuWrapper";
+import { MenuWrapper } from "src/components/Wrapper/Menu";
 
 const DynamicMenu = dynamic(
   () =>

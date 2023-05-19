@@ -11,7 +11,7 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
-import { NextEpisodeMenuWrapper } from "src/components/Wrapper/Next/NextEpisodeMenuWrapper";
+import { NextEpisodeMenuWrapper } from "src/components/Wrapper/Next";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { LiveTimer } from "src/features/timer/types";

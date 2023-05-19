@@ -1,7 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { MainWrapper } from "src/components/Wrapper/Main/MainWrapper";
+import { MainWrapper } from "src/components/Wrapper/Main";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";

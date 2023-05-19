@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { MainWrapper } from "src/components/Wrapper/Main/MainWrapper";
+import { MainWrapper } from "src/components/Wrapper/Main";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/FinishLive";
