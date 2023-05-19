@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { MainWrapper } from "src/components/Wrapper/Main/MainWrapper";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/FinishLive";
@@ -11,7 +12,7 @@ import { LiveComment } from "src/features/live/components/LiveComment";
 import { LiveHeader } from "src/features/live/components/LiveHeader";
 import { LiveNav } from "src/features/live/components/LiveNav";
 import { useLive } from "src/features/live/hooks/useLive";
-import { MainWrapper } from "src/features/play/components/MainWrapper";
+
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";

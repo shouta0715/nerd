@@ -1,22 +1,13 @@
 import { ArrowSmallLeftIcon } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { Menu } from "src/components/Elements/Menu";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentWork } from "src/features/comments/api/usePrefetchCommentWork";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 import { useUserState } from "src/store/user/userState";
-
-const DynamicWorkMenu = dynamic(
-  () =>
-    import("src/features/works/components/WorkMenu").then(
-      (mod) => mod.WorkMenu
-    ),
-  {
-    ssr: false,
-  }
-);
 
 type Props = {
   isChat: boolean;
@@ -79,10 +70,23 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
             </Text>
           </ul>
         </div>
-        <DynamicWorkMenu
-          series_id={data?.works_by_pk?.series_id}
-          series_title={data?.works_by_pk?.title}
-        />
+        <Menu>
+          {data?.works_by_pk?.series_id && (
+            <nav className="group relative my-2 flex cursor-pointer items-center justify-center pb-2">
+              <ButtonLink
+                as={`/series/${data?.works_by_pk?.series_id}`}
+                className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
+                href={{
+                  pathname: `/series/${data?.works_by_pk?.series_id}`,
+                  query: { series_title: data?.works_by_pk?.title },
+                }}
+                size="xs"
+              >
+                シリーズ一覧へ
+              </ButtonLink>
+            </nav>
+          )}
+        </Menu>
       </div>
     </nav>
   );

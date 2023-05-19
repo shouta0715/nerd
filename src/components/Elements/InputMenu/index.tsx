@@ -3,12 +3,12 @@ import { PencilIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Input } from "src/components/Elements/Input";
+import { useInputMenu } from "src/components/Elements/InputMenu/useInputMenu";
 import { Text } from "src/components/Elements/Text";
-import { PlayTimeInput } from "src/features/play/components/PlayTimeInput";
-import { useInputMenu } from "src/features/play/hooks/useInputMenu";
+import { TimeInput } from "src/components/Elements/TimeInput";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 
-export const PlayMenu: FC = () => {
+export const InputMenu: FC = () => {
   const { onSubmitHandler, inputValue, setInputValue, setIsMenuOpen, user } =
     useInputMenu();
 
@@ -66,7 +66,7 @@ export const PlayMenu: FC = () => {
           value={inputValue}
         />
       </form>
-      <PlayTimeInput />
+      <TimeInput />
       <ModeSwitch />
     </section>
   );
