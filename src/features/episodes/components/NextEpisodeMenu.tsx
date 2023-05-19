@@ -15,6 +15,7 @@ import { NextEpisodeMenuWrapper } from "src/components/Wrapper/Next/NextEpisodeM
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { LiveTimer } from "src/features/timer/types";
+import { getIsFinished } from "src/features/timer/utils/getIsFinished";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
@@ -93,7 +94,11 @@ export const NextEpisodeMenu: FC<Props> = ({
               className={` flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
                 timerMode === "up" ? "bg-orange-500" : "bg-indigo-500"
               }`}
-              href={`/episodes/${data?.episodes_by_pk?.id}`}
+              href={
+                getIsFinished(data?.episodes_by_pk?.end_time)
+                  ? `/episodes/${data?.episodes_by_pk?.id}`
+                  : `/episodes/live/${data?.episodes_by_pk?.id}`
+              }
               leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
               onClick={interval.reset}
               size="xs"

@@ -20,7 +20,6 @@ export const useEpisode = () => {
     isLoading,
     isChat,
     setIsChat,
-    interval,
     filter,
     setFilter,
   };

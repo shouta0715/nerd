@@ -17,7 +17,7 @@ const DynamicSearchButton = dynamic(
   }
 );
 
-const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
+export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
   <Provider>{children}</Provider>
 );
 

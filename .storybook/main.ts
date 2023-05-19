@@ -31,7 +31,6 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
   docs: {

@@ -4,6 +4,7 @@ import {
   BasicLayout,
   BasicLayoutOnlyHeader,
   BasicListLayout,
+  LayoutProvider,
 } from "src/components/Layouts/BasicLayout";
 
 export const BasicLayoutDecorator = (
@@ -17,6 +18,20 @@ export const BasicLayoutOnlyHeaderDecorator = (
 export const BasicListLayoutDecorator = (
   Story: PartialStoryFn<ReactRenderer, Args>
 ) => BasicListLayout(<Story />);
+
+export const ProvidersDecorator = (
+  Story: PartialStoryFn<ReactRenderer, Args>
+) => (
+  <LayoutProvider>
+    <Story />
+  </LayoutProvider>
+);
+
+export const ListDecorator = (Story: PartialStoryFn<ReactRenderer, Args>) => (
+  <ol>
+    <Story />
+  </ol>
+);
 
 // tailwind cssのbreakPointに合わせる
 
@@ -69,7 +84,7 @@ const xxlViewport = {
   },
 };
 
-const viewports = {
+export const viewports = {
   sp: spViewport,
   sm: smViewport,
   md: mdViewport,
@@ -85,3 +100,11 @@ export const TailwindStory: StoryObj = {
     },
   },
 };
+
+type defaultViewPorts = keyof typeof viewports;
+
+export const createViewPortParameters = (viewport: defaultViewPorts) => ({
+  viewport: {
+    defaultViewport: viewport,
+  },
+});
