@@ -13,14 +13,13 @@ type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
   data?: GetWorkQuery;
-  stop: () => void;
 };
-
-export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, stop, data }) => {
+export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, data }) => {
   const prefetchComments = usePrefetchCommentWork();
   const router = useRouter();
   const user = useUserState((state) => state.user);
   const mode = useTimerState((state) => state.mode);
+  const stop = useTimerState((state) => state.interval.stop);
 
   return (
     <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto">

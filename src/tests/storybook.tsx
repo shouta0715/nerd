@@ -6,6 +6,7 @@ import {
   BasicListLayout,
   LayoutProvider,
 } from "src/components/Layouts/BasicLayout";
+import { SearchWorksForm } from "src/features/works/components/SearchWorksForm";
 
 export const BasicLayoutDecorator = (
   Story: PartialStoryFn<ReactRenderer, Args>
@@ -33,12 +34,20 @@ export const ListDecorator = (Story: PartialStoryFn<ReactRenderer, Args>) => (
   </ol>
 );
 
+export const SearchDecorator = (Story: PartialStoryFn<ReactRenderer, Args>) =>
+  ProvidersDecorator(() => (
+    <>
+      <SearchWorksForm />
+      <Story />
+    </>
+  ));
+
 // tailwind cssのbreakPointに合わせる
 
 const spViewport = {
   name: "sp",
   styles: {
-    width: "320px",
+    width: "375px",
     height: "100%",
   },
 };

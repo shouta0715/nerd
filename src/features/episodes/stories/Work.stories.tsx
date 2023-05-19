@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
-import { workItemData } from "src/features/episodes/mocks/fixture";
+import { workEpisodeItemData } from "src/features/episodes/mocks/fixture";
 import { ListDecorator } from "src/tests/storybook";
 
 export default {
@@ -12,6 +12,6 @@ type Story = StoryObj<typeof WorkEpisodeItem>;
 
 export const Default: Story = {
   args: {
-    episode: workItemData,
+    episode: workEpisodeItemData,
   },
 };

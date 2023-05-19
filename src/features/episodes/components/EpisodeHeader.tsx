@@ -22,7 +22,7 @@ export const EpisodeHeader: FC<Props> = ({
     <header className="container mx-auto mb-1 flex flex-col bg-white px-4 md:px-6 md:pt-4">
       <div className="flex w-full flex-1 flex-col items-center gap-1">
         <Text
-          className=" line-clamp-2 text-base font-bold md:text-lg"
+          className="line-clamp-2 text-base font-bold md:text-lg"
           component="h4"
           ff="Hiragino Sans"
         >

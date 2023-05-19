@@ -19,7 +19,6 @@ export const usePlayWork = () => {
     isLoading,
     isChat,
     setIsChat,
-    interval,
     filter,
     setFilter,
   };
