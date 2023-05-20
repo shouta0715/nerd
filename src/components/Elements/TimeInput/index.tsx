@@ -35,7 +35,7 @@ export const TimeInput: FC = () => {
         </Text>
         <div className="relative">
           <QuestionMarkCircleIcon className="peer -mr-8 ml-2 h-6 w-6" />
-          <div className="absolute -left-7  bottom-8 w-24  rounded bg-black p-1 text-xs text-white opacity-0  shadow transition-opacity  before:absolute  before:left-1/2 before:top-full before:h-0   before:w-0  before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
+          <div className="pointer-events-none absolute  -left-7 bottom-8  w-24 rounded bg-black p-1 text-xs text-white  opacity-0 shadow  transition-opacity  before:absolute before:left-1/2 before:top-full   before:h-0  before:w-0 before:-translate-x-1/2 before:border-b-0 before:border-l-[6px] before:border-r-[6px] before:border-t-[6px] before:border-solid before:border-black before:border-x-transparent before:content-[''] peer-hover:opacity-100">
             下の数字をタップすると時間を変更できます。
           </div>
         </div>

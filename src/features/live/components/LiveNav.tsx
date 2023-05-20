@@ -2,9 +2,9 @@ import {
   ArrowSmallLeftIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { FC, Suspense, useState } from "react";
+import { Menu } from "src/components/Elements/Menu";
 import { Skeleton } from "src/components/Elements/Skeleton";
 
 import { Text } from "src/components/Elements/Text";
@@ -18,15 +18,6 @@ type Props = {
   data?: GetEpisodeQuery;
   mode: LiveTimer["mode"];
 };
-
-const DynamicLiveMenu = dynamic(
-  () =>
-    import("src/features/live/components/LiveMenu").then((mod) => mod.LiveMenu),
-  {
-    ssr: false,
-    loading: () => <Skeleton theme="episodeMenu" />,
-  }
-);
 
 export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
   const router = useRouter();
@@ -77,7 +68,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
             <ListBulletIcon />
           </button>
         </div>
-        <DynamicLiveMenu />
+        <Menu live />
         <div className="hidden h-px w-full bg-slate-200 lg:block" />
         <Suspense
           fallback={<Skeleton props={{ isHidden: true }} theme="nextMenu" />}
