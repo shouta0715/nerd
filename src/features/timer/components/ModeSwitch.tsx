@@ -30,8 +30,8 @@ export const ModeSwitch: FC = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex items-center">
+    <div className="flex flex-col items-center">
+      <div className="mb-1.5 flex items-center space-x-4">
         <Switch
           checked={isUp}
           defaultChecked={isUp}
@@ -42,9 +42,8 @@ export const ModeSwitch: FC = () => {
           theme="timer"
         />
         <Button
-          className={`-mr-20 ml-6 bg-teal-500 py-1.5 font-bold text-white transition-opacity duration-300 ${
-            mode === "down" ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
+          className="bg-teal-500 font-bold text-white transition-opacity duration-300 disabled:bg-gray-300"
+          disabled={isUp}
           onClick={() => {
             setIsOpen(true);
             interval.stop();
@@ -54,12 +53,8 @@ export const ModeSwitch: FC = () => {
           設定
         </Button>
       </div>
-      <p
-        className={`mt-1 font-hiragino-sans text-xs font-medium lg:text-sm ${
-          isUp ? "text-orange-500" : "text-indigo-500"
-        }`}
-      >
-        カウント{isUp ? "アップ" : "ダウン"}モード
+      <p className="text-sm">
+        {isUp ? "経過時間に合わせて表示中" : "残り時間に合わせて表示中"}
       </p>
     </div>
   );

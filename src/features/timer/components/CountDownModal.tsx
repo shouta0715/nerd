@@ -38,7 +38,7 @@ export const CountDownModal: FC = () => {
       show={isOpen}
     >
       <Transition.Child
-        className="mx-auto w-4/5 max-w-md rounded-md bg-white"
+        className="mx-4 max-w-md rounded-md bg-white"
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
