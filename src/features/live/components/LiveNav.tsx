@@ -85,6 +85,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
           <NextEpisodeMenu
             episode={data?.episodes_by_pk}
             isOpen={isEpisodeMenuOpen}
+            mode={mode}
             setIsOpen={setIsEpisodeMenuOpen}
           />
         </Suspense>

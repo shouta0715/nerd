@@ -7,7 +7,10 @@ import { ModeBadge } from "src/components/Elements/ModeBadge";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { TodayEpisode } from "src/features/episodes/types";
-import { genTodayEpisodePlaceholder } from "src/features/episodes/utils";
+import {
+  genEpisodePlaceholder,
+  genTodayEpisodePlaceholder,
+} from "src/features/episodes/utils";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 
 const DynamicTimer = dynamic(
@@ -113,15 +116,10 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               href={{
                 pathname: `/episodes/${episode.id}`,
                 query: {
-                  episode: [
-                    episode.work.series_title,
-                    episode.title,
-                    episode.number.toString(),
-                    episode.id,
-                    episode.has_next_episode,
-                    episode.start_time,
-                    episode.end_time,
-                  ],
+                  episode: genEpisodePlaceholder(
+                    episode,
+                    episode.work.series_title
+                  ),
                 },
               }}
               leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
