@@ -20,7 +20,7 @@ export const CountDownModal: FC = () => {
 
   return (
     <Transition
-      className="fixed inset-0 z-[200]  flex place-items-center bg-black/70"
+      className="fixed inset-0 z-[200] flex place-items-center bg-black/70 px-4"
       enter="transition ease-out duration-100"
       enterFrom="transform opacity-0 scale-95"
       enterTo="transform opacity-100 scale-100"
@@ -38,7 +38,7 @@ export const CountDownModal: FC = () => {
       show={isOpen}
     >
       <Transition.Child
-        className="mx-4 max-w-md rounded-md bg-white"
+        className="mx-auto max-w-md rounded-md bg-white"
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
