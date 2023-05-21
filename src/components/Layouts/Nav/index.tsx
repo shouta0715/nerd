@@ -13,19 +13,19 @@ import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 const mockNavigation = [
   {
     name: "今日放送",
-    href: "/list/todayEpisodes",
+    href: "/list/today",
     icon: RssIcon,
     color: " stroke-blue-500",
   },
   {
     name: "今期のアニメ",
-    href: "/list/seasonWorks",
+    href: "/list/season",
     icon: RocketLaunchIcon,
     color: " stroke-red-500",
   },
   {
     name: "今週のアニメ",
-    href: "/list/weeklyWorks",
+    href: "/list/weekly",
     icon: WindowIcon,
     color: " stroke-purple-500",
   },

@@ -75,7 +75,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       aria-busy={loading}
       className={twMerge(
         clsx(
-          "flex items-center justify-center border shadow-sm transition-transform duration-75 focus-visible:outline focus-visible:outline-2  focus-visible:outline-offset-2 active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
+          "flex items-center justify-center border transition-transform duration-75 focus-visible:outline focus-visible:outline-2  focus-visible:outline-offset-2 active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
           sizes[size],
           rounded[radius],
           themes[theme],

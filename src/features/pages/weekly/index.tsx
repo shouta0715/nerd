@@ -11,7 +11,7 @@ export const Weekly = ({
   data,
   buildDate,
 }: TopPageList<GetWeeklyWorksQuery>) => (
-  <section className=" bg-gray-50 px-3 pt-10 md:px-6 md:pb-10">
+  <section className="px-3 pt-10 md:px-6 md:pb-10">
     <TopTitle buildDate={buildDate} title="今週のアニメ" />
     <ul className="grid grid-cols-1 gap-6  md:gap-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {data?.weekly_works?.map((work) => (
@@ -23,7 +23,7 @@ export const Weekly = ({
       className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
       component="p"
     >
-      <Link className="text-base md:text-lg" href="/list/weeklyWorks">
+      <Link className="text-base md:text-lg" href="/list/weekly">
         今週のアニメをもっと見る
       </Link>
       <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />

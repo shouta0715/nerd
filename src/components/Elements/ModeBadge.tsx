@@ -11,7 +11,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
   <>
     {mode === "up" && (
       <Text
-        className="-ml-1 -mt-1 mb-1.5 inline-block self-start rounded-md bg-orange-50 px-1.5 py-1 text-xs font-semibold text-orange-500"
+        className="-ml-1 -mt-1 mb-1.5 inline-flex items-center self-start rounded-md bg-orange-50 px-2 py-1 text-xs font-semibold text-orange-700 ring-1 ring-inset ring-orange-700/10"
         component="span"
       >
         開始中
@@ -19,7 +19,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
     )}
     {mode === "down" && (
       <Text
-        className="-ml-1 -mt-1 mb-1.5 inline-flex items-center self-start rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
+        className="-ml-1 -mt-1 mb-1.5 inline-flex items-center self-start rounded-md bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-700/10"
         component="span"
       >
         {new Date(start_time).toLocaleString("ja-JP", {
@@ -34,7 +34,7 @@ export const ModeBadge: FC<Props> = ({ mode, start_time }) => (
     )}
     {mode === "finish" && (
       <Text
-        className="-ml-1 -mt-1 mb-1.5 inline-block self-start rounded-md bg-pink-50 px-1.5 py-1 text-xs font-semibold text-pink-500"
+        className="-ml-1 -mt-1 mb-1.5 inline-flex items-center self-start rounded-md bg-pink-50 px-2 py-1 text-xs font-semibold text-pink-700 ring-1 ring-inset ring-pink-700/10"
         component="span"
       >
         終了しました

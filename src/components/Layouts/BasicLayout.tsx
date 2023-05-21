@@ -27,10 +27,8 @@ export const BasicLayout = (page: ReactElement) => (
         <Header />
         <div className="flex flex-1 flex-col md:flex-row">
           <Aside />
-          <div className="flex flex-1 flex-col bg-gray-50">
-            <main className="relative flex flex-1 flex-col bg-gray-50">
-              {page}
-            </main>
+          <div className="flex flex-1 flex-col">
+            <main className="relative flex flex-1 flex-col">{page}</main>
             <DynamicSearchButton />
             {/* <Footer /> */}
           </div>
@@ -57,9 +55,7 @@ export const BasicListLayout = (page: ReactElement) => (
   <LayoutProvider>
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex flex-1 animate-fadeUp flex-col bg-gray-50">
-        {page}
-      </main>
+      <main className="flex flex-1 animate-fadeUp flex-col">{page}</main>
     </div>
     <AuthModal />
   </LayoutProvider>

@@ -20,7 +20,7 @@ export const Weekly = ({
   data,
   autoCompleteData,
 }: ListPage<GetWeeklyWorksQuery>) => (
-  <section className="animate-fadeUp bg-gray-50">
+  <section className="animate-fadeUp">
     <ListHeader autoCompleteData={autoCompleteData} />
     <div className="container mx-auto">
       <div className="px-3 py-4 md:px-6">

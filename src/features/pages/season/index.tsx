@@ -23,7 +23,7 @@ export const Season = ({
       className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
       component="p"
     >
-      <Link className="text-base md:text-lg" href="/list/seasonWorks">
+      <Link className="text-base md:text-lg" href="/list/season">
         今期のアニメをもっと見る
       </Link>
       <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
