@@ -115,7 +115,7 @@ export const AccountMenu: FC<Props> = ({
         leave="transition ease-in duration-75"
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        onClick={(e) => {
           if (e.target === e.currentTarget) {
             setIsDeleteConfirmationOpen(false);
           }
