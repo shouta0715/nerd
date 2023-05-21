@@ -62,7 +62,12 @@ export const TimerModal = () => {
           </div>
         </div>
       </Modal.Content>
-      <Modal.CancelButton onClose={onSubmitHandler} size="sm" type="submit">
+      <Modal.CancelButton
+        className="mx-auto w-max"
+        onClose={onSubmitHandler}
+        size="md"
+        type="submit"
+      >
         {(inputTime === "000000" || !inputTime) && padTime === "000000"
           ? "キャンセル"
           : "設定"}

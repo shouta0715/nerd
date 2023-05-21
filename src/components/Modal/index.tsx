@@ -28,7 +28,7 @@ export const Modal = ({
 }: ModalProps) => {
   return (
     <Transition.Root as={Fragment} show={open}>
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
+      <Dialog as="div" className="relative z-50 scroll-auto" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -80,7 +80,7 @@ const CancelButton: FC<CancelButtonProps> = ({
     <div className="mt-5 sm:mt-6">
       <Button
         {...props}
-        className={clsx(props.className, "w-full")}
+        className={clsx("w-full", props.className)}
         onClick={onClose}
         theme={props.theme ?? "primary"}
         type="button"
