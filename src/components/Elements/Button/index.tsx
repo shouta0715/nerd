@@ -27,12 +27,16 @@ const rounded = {
 };
 
 const themes = {
-  primary: "bg-indigo-500 text-white hover:bg-indigo-600",
-  secondary: "bg-pink-500 text-white hover:bg-pink-600",
-  success: "bg-green-500 text-white hover:bg-green-600",
-  danger: "bg-red-500 text-white hover:bg-red-600",
+  primary:
+    "bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600",
+  secondary:
+    "bg-pink-600 text-white hover:bg-pink-500 focus-visible:outline-pink-600",
+  success:
+    "bg-green-600 text-white hover:bg-green-500 focus-visible:outline-green-600",
+  danger:
+    "bg-red-600 text-white hover:bg-red-500 focus-visible:outline-red-600",
   transparent: "bg-transparent ",
-  dark: "bg-gray-800 text-white hover:bg-gray-900",
+  dark: "bg-gray-900 text-white hover:bg-gray-800 focus-visible:outline-gray-900",
 };
 
 type IconProps =
@@ -71,7 +75,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       aria-busy={loading}
       className={twMerge(
         clsx(
-          "flex items-center justify-center border transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
+          "flex items-center justify-center border shadow-sm transition-transform duration-75 focus-visible:outline focus-visible:outline-2  focus-visible:outline-offset-2 active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
           sizes[size],
           rounded[radius],
           themes[theme],
