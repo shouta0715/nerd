@@ -45,3 +45,5 @@ secrets.json
 __reports__
 
 __mocks__
+
+storybook-static
