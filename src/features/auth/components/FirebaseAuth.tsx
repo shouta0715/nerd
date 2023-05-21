@@ -4,7 +4,7 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   getUser,
   createUser,
@@ -19,7 +19,11 @@ import { useUserState } from "src/store/user/userState";
 
 const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
 
-export const FirebaseAuth = () => {
+type Props = {
+  children: React.ReactNode;
+};
+
+export const FirebaseAuth: FC<Props> = ({ children }) => {
   const setUser = useUserState((state) => state.setUser);
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
@@ -115,5 +119,5 @@ export const FirebaseAuth = () => {
     };
   }, [queryClient, setAuthLoading, setUser]);
 
-  return null;
+  return <>{children}</>;
 };
