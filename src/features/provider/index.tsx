@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Error } from "src/components/Elements/Error";
 import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
-import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
 import { Inter } from "@next/font/google";
 import dynamic from "next/dynamic";
