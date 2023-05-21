@@ -38,7 +38,7 @@ export const Modal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity">
+          <div className="fixed inset-0 bg-black bg-opacity-50 transition-opacity">
             <span className="sr-only">閉じる</span>
           </div>
         </Transition.Child>

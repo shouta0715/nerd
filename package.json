@@ -16,7 +16,7 @@
     "codegen": "graphql-codegen --config codegen.js",
     "analyze": "ANALYZE=true next build",
     "sb": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "sb:build": "storybook build",
     "test:sb": "test-storybook"
   },
   "dependencies": {

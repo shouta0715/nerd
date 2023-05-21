@@ -9,12 +9,12 @@ export const Request = () => {
   const user = useUserState((state) => state.user);
 
   return (
-    <div className="container mx-auto flex-1 bg-gray-50 py-4">
+    <div className="flex-1 py-4">
       <section className=" px-3 md:px-6">
-        <h1 className=" mb-4 grid w-full place-items-center text-lg font-bold md:text-xl">
-          作品の追加要望
-        </h1>
-        <form className="space-y-4" onSubmit={onSubmitHandler}>
+        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+          作品のリクエスト
+        </h2>
+        <form className="mt-10 space-y-4" onSubmit={onSubmitHandler}>
           <div>
             <label
               className="mb-1 inline-block text-sm md:text-base"
