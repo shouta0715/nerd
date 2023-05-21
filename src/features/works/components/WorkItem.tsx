@@ -40,12 +40,12 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
         {work.series_id && !isSeriesPage && (
           <ButtonLink
             as={`/series/${work.series_id}`}
-            className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center"
+            className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center py-2"
             href={{
               pathname: `/series/${work.series_id}`,
               query: { series_title: work.title },
             }}
-            size="md"
+            size="xs"
             theme="primary"
           >
             シリーズ一覧へ
@@ -58,7 +58,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
                 ? `/works/${work.id}?series=${work.series_id}`
                 : `/works/${work.id}`
             }
-            className="mx-auto flex w-full max-w-max items-center justify-center"
+            className="mx-auto flex w-full max-w-max items-center justify-center py-2"
             href={{
               pathname: `${`/works/${work.id}`}`,
               query: {
@@ -67,7 +67,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
               },
             }}
             leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-            size="md"
+            size="xs"
             theme="dark"
           >
             他のエピソードを見る

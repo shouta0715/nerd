@@ -80,7 +80,7 @@ const CancelButton: FC<CancelButtonProps> = ({
     <div className="mt-5 sm:mt-6">
       <Button
         {...props}
-        className={clsx(props.className, "w-full")}
+        className={clsx("w-full", props.className)}
         onClick={onClose}
         theme={props.theme ?? "primary"}
         type="button"

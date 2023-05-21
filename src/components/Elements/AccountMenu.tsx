@@ -107,6 +107,7 @@ export const AccountMenu: FC<Props> = ({
         </div>
       </Transition>
       <Transition
+        as="div"
         className="fixed inset-0 z-50 flex place-items-center bg-black/20"
         enter="transition ease-out duration-100"
         enterFrom="transform opacity-0 scale-95"
