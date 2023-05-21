@@ -10,7 +10,7 @@ const Page: NextPageWithLayout = () => (
     <Suspense
       fallback={
         <div className="space-y-2 p-2">
-          <p className="mb-1 font-hiragino-sans font-semibold">シリーズ一覧</p>
+          <p className="font-hiragino-sans mb-1 font-semibold">シリーズ一覧</p>
           <p className="mx-auto h-2 w-1/2 animate-pulse bg-slate-200" />
           <Skeleton props={{ is_short: true }} theme="work" />
         </div>

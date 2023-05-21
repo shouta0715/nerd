@@ -17,7 +17,6 @@ export const PlayWorkHeader: FC<Props> = ({ title, id }) => {
         <Text
           className="line-clamp-3 text-base font-bold md:text-lg"
           component="h4"
-          ff="Hiragino Sans"
         >
           {title}
         </Text>

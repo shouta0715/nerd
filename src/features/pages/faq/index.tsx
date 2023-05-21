@@ -64,10 +64,8 @@ export const faqs: FaqProps[] = [
 
 export const Faq = () => (
   <div className="container mx-auto flex-1 bg-gray-50 py-4">
-    <section className="px-3 font-hiragino-sans md:px-6">
-      <h2 className="pb-4 text-center font-hiragino-sans text-xl font-bold">
-        よくある質問
-      </h2>
+    <section className=" px-3 md:px-6">
+      <h2 className=" pb-4 text-center text-xl font-bold">よくある質問</h2>
       <ul>
         {faqs.map((item) => (
           <AnswerItem {...item} key={item.key} />

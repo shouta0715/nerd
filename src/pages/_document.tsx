@@ -13,7 +13,7 @@ const Document = () => (
         property="og:description"
       />
     </Head>
-    <body className="font-futura">
+    <body className="font-inter">
       <Main />
       <NextScript />
     </body>

@@ -53,7 +53,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
             </Disclosure.Panel>
           </Transition>
           {!isFetchingNextPage && !isFetching && (
-            <div className="mt-2 flex w-full justify-between font-hiragino-sans">
+            <div className=" mt-2 flex w-full justify-between">
               <Disclosure.Button
                 className="flex w-max items-center justify-end space-x-1 p-0 text-xs font-semibold text-indigo-500 hover:bg-transparent md:text-sm"
                 onClick={clickHandler}

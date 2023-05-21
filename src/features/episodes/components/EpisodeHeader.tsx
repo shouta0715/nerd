@@ -24,22 +24,16 @@ export const EpisodeHeader: FC<Props> = ({
         <Text
           className="line-clamp-2 text-base font-bold md:text-lg"
           component="h4"
-          ff="Hiragino Sans"
         >
           {title}
         </Text>
         <Text className="flex" component="div">
-          <Text
-            className="mr-2 text-sm md:text-base"
-            component="p"
-            ff="Hiragino Sans"
-          >
+          <Text className="mr-2 text-sm md:text-base" component="p">
             第{episode_number}話
           </Text>
           <Text
             className="line-clamp-3 flex-1 text-sm md:text-base"
             component="p"
-            ff="Hiragino Sans"
           >
             {episode_title}
           </Text>

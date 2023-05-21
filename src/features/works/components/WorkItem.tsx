@@ -16,7 +16,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">
-        <h3 className="line-clamp-2 font-hiragino-sans text-base font-bold">
+        <h3 className=" line-clamp-2 text-base font-bold">
           {work.series_title}
         </h3>
       </div>
@@ -45,7 +45,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
               pathname: `/series/${work.series_id}`,
               query: { series_title: work.title },
             }}
-            size="sm"
+            size="md"
             theme="primary"
           >
             シリーズ一覧へ
@@ -67,7 +67,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
               },
             }}
             leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
-            size="sm"
+            size="md"
             theme="dark"
           >
             他のエピソードを見る

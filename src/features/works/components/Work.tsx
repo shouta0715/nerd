@@ -43,7 +43,6 @@ export const Work: FC = () => {
         <Text
           className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
           component="h1"
-          ff="Hiragino Sans"
         >
           {data?.works_by_pk?.series_title}
         </Text>
@@ -64,11 +63,7 @@ export const Work: FC = () => {
 
         {series && (
           <div className="mt-6">
-            <Text
-              className="mb-4 text-xl font-bold"
-              component="h1"
-              ff="Hiragino Sans"
-            >
+            <Text className="mb-4 text-xl font-bold" component="h1">
               シリーズ一覧
             </Text>
             <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

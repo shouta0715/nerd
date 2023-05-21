@@ -16,10 +16,8 @@ export const Usage = () => {
   return (
     <>
       <div className="container mx-auto flex-1 bg-gray-50  py-4">
-        <section className="px-3 font-hiragino-sans md:px-6">
-          <h2 className="pb-4 text-center font-hiragino-sans text-xl font-bold">
-            使い方
-          </h2>
+        <section className=" px-3 md:px-6">
+          <h2 className=" pb-4 text-center text-xl font-bold">使い方</h2>
           <ol className="text-sm md:text-base">
             <li className="relative flex pb-8">
               <div className="absolute left-5 z-0 h-full w-0.5 bg-slate-200" />
@@ -95,8 +93,8 @@ export const Usage = () => {
             </li>
           </ol>
         </section>
-        <section className="mt-4 px-3 font-hiragino-sans md:px-6">
-          <h2 className="py-4 text-center font-hiragino-sans text-xl font-bold">
+        <section className=" mt-4 px-3 md:px-6">
+          <h2 className=" py-4 text-center text-xl font-bold">
             ルール・注意事項
           </h2>
           <ol className="list-inside list-decimal space-y-4">

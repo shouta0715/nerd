@@ -38,7 +38,7 @@ export const AccountMenu: FC<Props> = ({
         show={isUserMenuOpen}
       >
         <div className="space-y-2 p-2">
-          <div className="flex space-x-2 font-hiragino-sans">
+          <div className=" flex space-x-2">
             <figure className="relative aspect-square">
               <Image
                 alt="avatar"
@@ -54,13 +54,12 @@ export const AccountMenu: FC<Props> = ({
           </div>
 
           <div className="flex items-center text-dimmed ">
-            <Text className="mr-2 text-xs" component="p" ff="Hiragino Sans">
+            <Text className="mr-2 text-xs" component="p">
               投稿名
             </Text>
             <Text
               className="flex-1 overflow-hidden text-ellipsis text-xs"
               component="p"
-              ff="Hiragino Sans"
             >
               {user?.user_name}
             </Text>
@@ -76,7 +75,7 @@ export const AccountMenu: FC<Props> = ({
             }}
           >
             <ArrowPathIcon className="ml-1 h-5 w-5 text-dimmed" />
-            <Text className="text-xs" component="span" ff="Hiragino Sans">
+            <Text className="text-xs" component="span">
               {user?.isDefaultPhoto
                 ? "デフォルトの画像に変更"
                 : "自分の画像に変更"}
@@ -90,7 +89,7 @@ export const AccountMenu: FC<Props> = ({
             }}
           >
             <ArrowRightOnRectangleIcon className="ml-1 h-5 w-5 text-dimmed" />
-            <Text className="text-xs" component="span" ff="Hiragino Sans">
+            <Text className="text-xs" component="span">
               ログアウト
             </Text>
           </button>
@@ -101,7 +100,7 @@ export const AccountMenu: FC<Props> = ({
             }
           >
             <TrashIcon className="ml-1 h-5 w-5 text-dimmed" />
-            <Text className="text-xs" component="span" ff="Hiragino Sans">
+            <Text className="text-xs" component="span">
               アカウントの削除
             </Text>
           </button>

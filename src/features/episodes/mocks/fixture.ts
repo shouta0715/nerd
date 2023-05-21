@@ -1,38 +1,6 @@
 import { TodayEpisode, WorkEpisode } from "src/features/episodes/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
-
-type Mode = "finished" | "will" | "now";
-
-const createTime = (
-  mode: Mode = "finished"
-): {
-  start_time: string;
-  end_time: string;
-} => {
-  const now = new Date();
-  const start_time = new Date();
-  const end_time = new Date();
-
-  if (mode === "finished") {
-    start_time.setDate(now.getDate() - 1);
-    end_time.setDate(now.getDate() - 1);
-  }
-
-  if (mode === "will") {
-    start_time.setDate(now.getDate() + 1);
-    end_time.setDate(now.getDate() + 1);
-  }
-  if (mode === "now") {
-    // 開始から5分後に設定 終了は30分後
-    start_time.setMinutes(now.getMinutes() - 5);
-    end_time.setMinutes(now.getMinutes() + 25);
-  }
-
-  return {
-    start_time: start_time.toISOString(),
-    end_time: end_time.toISOString(),
-  };
-};
+import { Mode, createTime } from "src/tests/storybook";
 
 export const episodeData: GetEpisodeQuery = {
   __typename: "query_root",

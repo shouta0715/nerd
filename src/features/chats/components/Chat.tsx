@@ -41,7 +41,6 @@ export const Chat: FC<Props> = ({ chat, animate }) => {
         <Text
           align="inherit"
           className="my-1 max-w-full break-words font-bold"
-          ff="Hiragino Sans"
           size="xs"
         >
           {chat.commenter_name}
@@ -53,7 +52,6 @@ export const Chat: FC<Props> = ({ chat, animate }) => {
             user?.id === chat.user?.id ? "inline-block text-left" : ""
           }`}
           component="p"
-          ff="Hiragino Sans"
           size="sm"
         >
           {chat.content}

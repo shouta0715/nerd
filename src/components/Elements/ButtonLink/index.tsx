@@ -7,17 +7,17 @@ import { Loader } from "src/components/Elements/Loader";
 const textSizes = {
   xs: "text-xs",
   sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
-  xl: "text-xl",
+  md: "text-sm",
+  lg: "text-sm",
+  xl: "text-sm",
 };
 
 const sizes = {
-  xs: "text-xs px-1.5 py-1.5",
-  sm: "text-sm px-2 py-2",
-  md: "text-base px-2.5 py-2",
-  lg: "text-lg px-2.5 py-2",
-  xl: "text-xl px-3 py-2.5",
+  xs: "px-2 py-1 text-xs",
+  sm: "px-2 py-1 text-sm",
+  md: "px-2.5 py-1.5 text-sm",
+  lg: "px-3 py-2 text-sm",
+  xl: "px-3.5 py-2.5 text-sm",
 };
 
 const rounded = {
@@ -66,7 +66,7 @@ export const ButtonLink: FC<LinkProps> = ({
   <NLink
     className={twMerge(
       clsx(
-        "flex items-center justify-center transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
+        "flex items-center justify-center font-semibold transition-transform duration-75 focus:outline-none active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70 disabled:active:translate-y-0",
         sizes[size],
         rounded[radius],
         loading && "cursor-wait opacity-60",
@@ -87,7 +87,7 @@ export const ButtonLink: FC<LinkProps> = ({
     {!loading && leftIcon}
     <span
       className={twMerge(
-        clsx("mx-2 font-bold", textSizes[size], textClassName)
+        clsx("mx-2 font-semibold", textSizes[size], textClassName)
       )}
     >
       {props.children}

@@ -30,8 +30,7 @@ const families = {
   sans: "font-sans",
   serif: "font-serif",
   mono: "font-mono",
-  "Hiragino Sans": "font-hiragino-sans",
-  futura: "font-futura",
+  inter: "font-inter",
 };
 
 const fontWeights = {
@@ -89,7 +88,7 @@ export const Text = forwardRef<HTMLDivElement, TextProps>(
     {
       component = "div",
       size = "md",
-      ff = "futura",
+      ff = "inter",
       fw = "normal",
       lh = "normal",
       align = "left",

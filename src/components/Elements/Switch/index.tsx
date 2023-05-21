@@ -11,7 +11,7 @@ type SwitchTheme =
   | "timer"
   | "transparent";
 
-type SwitchSize = "sm" | "md" | "lg" | "xl";
+type SwitchSize = "xs" | "sm" | "md" | "lg" | "xl";
 
 const themes = {
   primary: {
@@ -41,11 +41,14 @@ const themes = {
 };
 
 const sizes = {
-  sm: {
-    switch: "w-11 h-6",
-    mark: "w-4 h-4 ui-not-checked:translate-x-1 ui-checked:translate-x-6",
+  xs: {
+    switch: "w-9 h-5",
+    mark: "w-4 h-4 ui-not-checked:translate-x-0.5 ui-checked:translate-x-[1.125rem]",
   },
-
+  sm: {
+    switch: "w-10 h-6",
+    mark: "w-5 h-5 ui-not-checked:translate-x-0.5 ui-checked:translate-x-[1.125rem]",
+  },
   md: {
     switch: "w-14 h-8",
     mark: "w-6 h-6 ui-not-checked:translate-x-1 ui-checked:translate-x-7",
@@ -108,7 +111,7 @@ export const Switch: FC<SwitchProps> = ({
       checked={typeof checked === "boolean" ? checked : checkedState}
       className={twMerge(
         clsx(
-          "w- relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
+          "w- translate-x- relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
           themes[theme].switch,
           sizes[size].switch,
           className,

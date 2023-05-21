@@ -79,7 +79,6 @@ export const Comments = forwardRef<any, Props>(
               ? "grid w-full flex-1 place-items-center text-lg font-semibold"
               : "hidden"
           }`}
-          ff="Hiragino Sans"
         >
           一番最初のコメントを書いてみよう！
         </Text>

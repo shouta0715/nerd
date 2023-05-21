@@ -34,25 +34,16 @@ export const LiveHeader: FC<Props> = ({
 }) => (
   <header className="container mx-auto mb-1 flex flex-col bg-white px-4 md:px-6 md:pt-4">
     <div className="flex w-full flex-1 flex-col items-center gap-1">
-      <Text
-        className=" text-base font-bold md:text-lg"
-        component="h4"
-        ff="Hiragino Sans"
-      >
+      <Text className=" text-base font-bold md:text-lg" component="h4">
         {title}
       </Text>
       <Text className="flex" component="div">
-        <Text
-          className="mr-2 text-sm md:text-base"
-          component="p"
-          ff="Hiragino Sans"
-        >
+        <Text className="mr-2 text-sm md:text-base" component="p">
           第{episode_number}話
         </Text>
         <Text
           className="line-clamp-3 flex-1 text-sm md:text-base"
           component="p"
-          ff="Hiragino Sans"
         >
           {episode_title}
         </Text>

@@ -8,8 +8,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        inter: ['Inter var', 'sans-serif'],
+        sans: ['Inter var', 'sans-serif'],
         futura: ["Futura", "sans-serif"],
-        "hiragino-sans": ["Hiragino Sans", "sans-serif"],
       },
       colors: {
         dimmed: "rgb(134, 142, 150)",
