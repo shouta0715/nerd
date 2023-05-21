@@ -11,6 +11,17 @@ import { NotificationProvider } from "src/components/Elements/Notification/Notif
 import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
 import { Inter } from "@next/font/google";
+import dynamic from "next/dynamic";
+
+const DynamicFirebaseAuth = dynamic(
+  () =>
+    import("src/features/auth/components/FirebaseAuth").then(
+      (mod) => mod.FirebaseAuth
+    ),
+  {
+    ssr: false,
+  }
+);
 
 type Props = {
   children: React.ReactNode;
@@ -30,15 +41,14 @@ export const Provider = ({ children }: Props) => {
       </Head>
       <ErrorBoundary FallbackComponent={Error}>
         <NotificationProvider>
-          <FirebaseAuth>
-            <NextNProgress
-              color="#6366f1"
-              height={2}
-              options={{ showSpinner: false }}
-              startPosition={0.1}
-            />
-            {children}
-          </FirebaseAuth>
+          <DynamicFirebaseAuth />
+          <NextNProgress
+            color="#6366f1"
+            height={2}
+            options={{ showSpinner: false }}
+            startPosition={0.1}
+          />
+          {children}
         </NotificationProvider>
       </ErrorBoundary>
     </QueryClientProvider>
