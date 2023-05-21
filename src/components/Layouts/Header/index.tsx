@@ -10,10 +10,6 @@ const DynamicAvatar = dynamic(() =>
   import("src/components/Elements/Avatar").then((mod) => mod.Avatar)
 );
 
-const DynamicModal = dynamic(() =>
-  import("src/components/Elements/Modal").then((mod) => mod.Modal)
-);
-
 const DynamicAccountMenu = dynamic(() =>
   import("src/components/Elements/AccountMenu").then((mod) => mod.AccountMenu)
 );
@@ -90,19 +86,16 @@ export const Header = () => {
                   />
                 </div>
               ) : (
-                <>
-                  <Button
-                    className="px-1.5 py-1 md:px-2 md:py-1.5"
-                    loading={authLoading}
-                    onClick={() => changeIsOpenModal(true)}
-                    radius="md"
-                    size="sm"
-                    theme="primary"
-                  >
-                    ログイン
-                  </Button>
-                  <DynamicModal />
-                </>
+                <Button
+                  className="px-1.5 py-1 md:px-2 md:py-1.5"
+                  loading={authLoading}
+                  onClick={() => changeIsOpenModal(true)}
+                  radius="md"
+                  size="sm"
+                  theme="primary"
+                >
+                  ログイン
+                </Button>
               )}
             </div>
           </div>

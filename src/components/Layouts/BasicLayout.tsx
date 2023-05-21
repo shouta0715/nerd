@@ -1,8 +1,9 @@
 import dynamic from "next/dynamic";
 import React, { ReactElement } from "react";
-import { Modal } from "src/components/Elements/Modal";
+
 import { Aside } from "src/components/Layouts/Aside";
 import { Header } from "src/components/Layouts/Header";
+import { AuthModal } from "src/components/Modal/Auth";
 import { Provider } from "src/features/provider";
 
 const DynamicSearchButton = dynamic(
@@ -47,7 +48,7 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
         {page}
       </div>
     </div>
-    <Modal />
+    <AuthModal />
   </LayoutProvider>
 );
 
@@ -59,6 +60,6 @@ export const BasicListLayout = (page: ReactElement) => (
         {page}
       </main>
     </div>
-    <Modal />
+    <AuthModal />
   </LayoutProvider>
 );

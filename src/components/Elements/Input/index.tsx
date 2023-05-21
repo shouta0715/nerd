@@ -16,15 +16,10 @@ const rounded = {
   full: "rounded-full",
 };
 
-type IconProps =
-  | { leftIcon: React.ReactElement; rightIcon?: never }
-  | { rightIcon: React.ReactElement; leftIcon?: never }
-  | { rightIcon?: undefined; leftIcon?: undefined };
-
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   inputSize?: keyof typeof sizes;
   radius?: keyof typeof rounded;
-} & IconProps;
+};
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
@@ -38,20 +33,25 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => (
-    <input
-      ref={ref}
-      className={twMerge(
-        clsx(
-          "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm",
-          sizes[inputSize],
-          rounded[radius],
-          className
-        )
-      )}
-      placeholder={placeholder}
-      type="text"
-      value={value}
-      {...props}
-    />
+    <>
+      <label className="sr-only" htmlFor={props.id ?? props.name ?? "input"}>
+        {placeholder}
+      </label>
+      <input
+        ref={ref}
+        className={twMerge(
+          clsx(
+            "block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm",
+            sizes[inputSize],
+            rounded[radius],
+            className
+          )
+        )}
+        placeholder={placeholder}
+        type="text"
+        value={value}
+        {...props}
+      />
+    </>
   )
 );

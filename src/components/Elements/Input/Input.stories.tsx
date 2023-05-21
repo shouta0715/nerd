@@ -18,7 +18,6 @@ export const XSmall: Story = {
   args: {
     placeholder: "Input",
     radius: "md",
-
     inputSize: "xs",
   },
 };
