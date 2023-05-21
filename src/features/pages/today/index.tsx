@@ -14,7 +14,7 @@ type Props = TopPageList<GetTodayEpisodesQuery> & {
 };
 
 export const Today: FC<Props> = ({ registeredError, buildDate, data }) => (
-  <section className="bg-gray-50 px-3 py-6 md:px-6">
+  <section className="px-3 py-6 md:px-6">
     {registeredError ? (
       <TodayError />
     ) : (
@@ -26,7 +26,7 @@ export const Today: FC<Props> = ({ registeredError, buildDate, data }) => (
           className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
           component="p"
         >
-          <Link className="text-base  md:text-lg" href="/list/todayEpisodes">
+          <Link className="text-base  md:text-lg" href="/list/today">
             今日のエピソードをもっと見る
           </Link>
           <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />

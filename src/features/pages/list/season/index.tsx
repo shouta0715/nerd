@@ -20,7 +20,7 @@ export const Season = ({
   data,
   autoCompleteData,
 }: ListPage<GetSeasonWorksQuery>) => (
-  <section className="flex-1 animate-fadeUp bg-gray-50">
+  <section className="flex-1 animate-fadeUp">
     <ListHeader autoCompleteData={autoCompleteData} />
     <div className="container mx-auto">
       <div className="px-3 py-4 md:px-6">

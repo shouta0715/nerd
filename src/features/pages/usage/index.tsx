@@ -56,10 +56,12 @@ const Steps: TStep[] = [
 
 export const Usage = () => {
   return (
-    <div className="flex-1  py-4">
-      <section className=" px-3 md:px-6">
-        <h2 className=" pb-4 text-center text-xl font-bold">使い方</h2>
-        <ul className="-mb-8">
+    <div className="flex-1 bg-white py-4">
+      <section className="px-3 md:px-6">
+        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+          使い方
+        </h2>
+        <ul className="-mb-8 mt-10">
           {Steps.map((step, index) => (
             <Step
               key={`step-${step.id}`}
@@ -69,12 +71,12 @@ export const Usage = () => {
           ))}
         </ul>
       </section>
-      <section className=" mt-4 px-3 md:px-6">
-        <h2 className=" py-4 text-center text-xl font-bold">
+      <section className="mt-10 px-3 md:px-6">
+        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
           ルール・注意事項
         </h2>
-        <ol className="list-inside list-decimal space-y-4">
-          <li>不適切なコメントは禁止です。</li>
+        <ol className="mt-10 list-inside list-decimal space-y-4 px-2">
+          <li className="text-gray-500">不適切なコメントは禁止です。</li>
           <li>暴言や、誹謗中傷、個人情報、などの投稿は禁止です。</li>
           <li>関係のないアニメの感想を投稿は禁止です。</li>
           <li>悪意のあるネタバレは禁止です。</li>

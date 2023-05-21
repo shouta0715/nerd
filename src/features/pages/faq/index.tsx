@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react";
 import { AnswerItem } from "src/features/pages/faq/answers";
 import { DoNotFind } from "src/features/pages/faq/answers/DoNotFind";
@@ -65,7 +66,7 @@ export const Faq = () => (
   <div className="flex-1 bg-white py-4">
     <div className=" px-3  md:px-6">
       <div className="divide-y divide-gray-900/10">
-        <h2 className="text-2xl font-bold leading-10 tracking-tight text-gray-900">
+        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
           よくある質問
         </h2>
         <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
@@ -73,6 +74,16 @@ export const Faq = () => (
             <AnswerItem {...item} key={item.key} />
           ))}
         </dl>
+        <p className="mt-6 max-w-2xl py-6 text-base leading-7 text-gray-600">
+          以下のよくある質問をご覧ください。それでも解決しない場合は、
+          <a
+            className="font-semibold text-indigo-600 hover:text-indigo-500"
+            href="mailto:"
+          >
+            こちら
+          </a>
+          までお問い合わせください。
+        </p>
       </div>
     </div>
   </div>
