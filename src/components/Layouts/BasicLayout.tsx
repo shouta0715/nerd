@@ -37,6 +37,7 @@ export const BasicLayout = (page: ReactElement) => (
         </div>
       </div>
     </div>
+    <AuthModal />
   </LayoutProvider>
 );
 

@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { FC } from "react";
+import { TimerModal } from "src/components/Modal/Timer";
 import { useOpenState } from "src/features/episodes/store";
-import { CountDownModal } from "src/features/timer/components/CountDownModal";
 
 type Props = {
   children: React.ReactNode;
@@ -32,7 +32,7 @@ export const MenuWrapper: FC<Props> = ({ children }) => {
           {children}
         </div>
       </div>
-      <CountDownModal />
+      <TimerModal />
     </>
   );
 };
