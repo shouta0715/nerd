@@ -76,7 +76,7 @@ export const Usage = () => {
           ルール・注意事項
         </h2>
         <ol className="mt-10 list-inside list-decimal space-y-4 px-2">
-          <li className="text-gray-500">不適切なコメントは禁止です。</li>
+          <li>不適切なコメントは禁止です。</li>
           <li>暴言や、誹謗中傷、個人情報、などの投稿は禁止です。</li>
           <li>関係のないアニメの感想を投稿は禁止です。</li>
           <li>悪意のあるネタバレは禁止です。</li>

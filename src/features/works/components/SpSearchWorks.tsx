@@ -37,7 +37,7 @@ export const SpSearchWorks = () => {
   return (
     <>
       <DetailTitle title={`${q}の検索結果`} />
-      <section className="h-full flex-1 bg-gray-50">
+      <section className="h-full flex-1">
         <div className="container mx-auto h-full p-4">
           {data && data.search_works.length > 0 && (
             <p className="grid place-items-center font-bold">{q}の検索結果</p>
