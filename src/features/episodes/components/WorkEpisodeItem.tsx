@@ -18,7 +18,7 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`
       }
-      className="mb-1 px-2 font-hiragino-sans text-sm text-indigo-500 transition-all hover:text-indigo-600 hover:underline md:text-base"
+      className=" mb-1 px-2 text-sm text-indigo-500 transition-all hover:text-indigo-600 hover:underline md:text-base"
       color="indigo"
       href={{
         pathname: getIsFinished(episode.end_time)
@@ -31,11 +31,7 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
     >
       第{episode.number}話
     </Link>
-    <Text
-      className="line-clamp-3 flex-1 text-sm md:text-sm"
-      component="p"
-      ff="Hiragino Sans"
-    >
+    <Text className="line-clamp-3 flex-1 text-sm md:text-sm" component="p">
       {episode.title}
     </Text>
   </li>

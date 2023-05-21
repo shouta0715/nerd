@@ -52,22 +52,16 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             <Text
               className="line-clamp-1 text-base font-bold text-white md:text-lg"
               component="h4"
-              ff="Hiragino Sans"
             >
               {episode?.work.series_title}
             </Text>
             <Text className="flex text-white" component="div">
-              <Text
-                className="mr-2 text-sm md:text-base"
-                component="p"
-                ff="Hiragino Sans"
-              >
+              <Text className="mr-2 text-sm md:text-base" component="p">
                 第{episode?.number}話
               </Text>
               <Text
                 className="line-clamp-1 flex-1 text-sm md:text-base"
                 component="p"
-                ff="Hiragino Sans"
               >
                 {episode?.title}
               </Text>

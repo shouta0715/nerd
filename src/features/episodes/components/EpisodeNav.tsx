@@ -44,7 +44,6 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, data }) => {
                   : "border-b-indigo-500 text-indigo-500"
               }`}
               component="button"
-              ff="Hiragino Sans"
               onClick={() => setIsChat(true)}
             >
               チャット
@@ -58,7 +57,6 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, data }) => {
                   : "border-b-indigo-500 text-indigo-500"
               }`}
               component="button"
-              ff="Hiragino Sans"
               onClick={() => {
                 setIsChat(false);
                 stop();

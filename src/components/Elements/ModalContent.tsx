@@ -16,7 +16,7 @@ export const ModalContent: FC = () => {
     <div className="flex flex-col items-center  justify-center rounded-xl   bg-white p-6 shadow-sm md:max-w-md">
       <header className="mb-3 flex w-full items-center justify-center">
         <Text className="-mr-5 flex flex-1 items-center justify-center font-bold">
-          <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text font-hiragino-sans  text-xl text-transparent md:text-2xl">
+          <span className=" inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text  text-xl text-transparent md:text-2xl">
             Nerd
           </span>
         </Text>
@@ -35,7 +35,7 @@ export const ModalContent: FC = () => {
         </Link>
       </Text>
       <Button
-        className="my-6 font-hiragino-sans font-bold shadow"
+        className=" my-6 font-bold shadow"
         leftIcon={<GoogleIcon />}
         onClick={async () => {
           await signInGoogle();

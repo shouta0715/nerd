@@ -22,7 +22,6 @@ export const Season = ({
       align="center"
       className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
       component="p"
-      ff="Hiragino Sans"
     >
       <Link className="text-base md:text-lg" href="/list/seasonWorks">
         今期のアニメをもっと見る

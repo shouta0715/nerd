@@ -9,15 +9,8 @@ type TextProps = {
 
 export type NotificationType = "success" | "error" | "info";
 
-type ClassNames = {
-  title?: string;
-  message?: string;
-};
-
 export type NotificationState = {
   duration: number;
-  className: string;
-  classNames: ClassNames;
   type: NotificationType;
   isShown: boolean;
   isPersistent: boolean;
@@ -34,12 +27,7 @@ const defaultState: NotificationState = {
   title: "",
   message: "",
   duration: 5000,
-  className: "",
   isShown: false,
-  classNames: {
-    title: "",
-    message: "",
-  },
   type: "info",
   isPersistent: false,
 };

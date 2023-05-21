@@ -15,10 +15,7 @@ type Props = {
 export const FinishLive: FC<Props> = ({ episode }) => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center space-y-4 bg-gray-50 p-6">
-      <Text
-        className="mb-4 text-center text-lg font-bold md:text-xl"
-        ff="Hiragino Sans"
-      >
+      <Text className="mb-4 text-center text-lg font-bold md:text-xl">
         ライブ放送は終了しました
       </Text>
       <div className="flex w-full flex-wrap items-center justify-center gap-2  lg:hidden">

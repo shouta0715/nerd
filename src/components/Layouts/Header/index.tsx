@@ -54,7 +54,7 @@ export const Header = () => {
         <div className="flex w-full flex-col">
           <div className="flex w-full items-center justify-between">
             <Link
-              className="my-2 inline-block font-hiragino-sans text-2xl font-bold md:text-3xl"
+              className=" my-2 inline-block text-2xl font-bold md:text-3xl"
               href="/"
             >
               <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">

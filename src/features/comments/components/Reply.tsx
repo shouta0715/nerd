@@ -51,11 +51,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           }
           role="button"
         >
-          <Text
-            className="flex flex-col font-bold"
-            ff="Hiragino Sans"
-            size="xs"
-          >
+          <Text className="flex flex-col font-bold" size="xs">
             <span>{reply.commenter_name}</span>
             {reply.replied_to_commenter_name &&
               original_id !== reply.reply_to && (
@@ -64,11 +60,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
                 </span>
               )}
           </Text>
-          <Text
-            className="break-words py-1 text-sm"
-            component="p"
-            ff="Hiragino Sans"
-          >
+          <Text className="break-words py-1 text-sm" component="p">
             {reply.content}
           </Text>
         </div>
@@ -76,7 +68,6 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           className="flex items-center justify-between space-x-2"
           color="dimmed"
           component="div"
-          ff="Hiragino Sans"
           size="xs"
         >
           <div className="flex items-center justify-center">

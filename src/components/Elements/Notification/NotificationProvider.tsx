@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Notification } from "src/components/Elements/Notification/Notification";
+import { Notification } from "src/components/Elements/Notification";
 
 type Props = {
   children: React.ReactNode;

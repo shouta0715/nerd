@@ -10,7 +10,7 @@ export const Request = () => {
 
   return (
     <div className="container mx-auto flex-1 bg-gray-50 py-4">
-      <section className="px-3 font-hiragino-sans md:px-6">
+      <section className=" px-3 md:px-6">
         <h1 className=" mb-4 grid w-full place-items-center text-lg font-bold md:text-xl">
           作品の追加要望
         </h1>

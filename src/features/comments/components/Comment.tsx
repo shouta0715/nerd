@@ -53,13 +53,12 @@ export const Comment: FC<Props> = ({ comment }) => {
           }
           role="button"
         >
-          <Text className="font-bold" ff="Hiragino Sans" size="xs">
+          <Text className="font-bold" size="xs">
             {comment.commenter_name}
           </Text>
           <Text
             ref={(comment.reply_count ?? -1) > 0 ? content : null}
-            className=" scroll-mt-20 break-words py-1 font-hiragino-sans text-base lg:scroll-mt-10"
-            ff="Hiragino Sans"
+            className="  scroll-mt-20 break-words py-1 text-base lg:scroll-mt-10"
           >
             {comment.content}
           </Text>
@@ -68,7 +67,6 @@ export const Comment: FC<Props> = ({ comment }) => {
           className="flex items-center justify-between space-x-2"
           color="dimmed"
           component="div"
-          ff="Hiragino Sans"
           size="xs"
         >
           <div className="flex">

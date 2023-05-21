@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import { Button } from "src/components/Elements/Button";
-import { Notification } from "src/components/Elements/Notification/Notification";
+import { Notification } from "src/components/Elements/Notification";
 import {
   NotificationState,
   useNotificationState,

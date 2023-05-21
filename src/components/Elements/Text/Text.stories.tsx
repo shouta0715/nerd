@@ -6,6 +6,9 @@ type Story = StoryObj<typeof Text>;
 export default {
   title: "Elements/Text",
   component: Text,
+  args: {
+    ff: "inter",
+  },
 } as Meta<typeof Text>;
 
 export const Default: Story = {
@@ -95,12 +98,5 @@ export const Xxxxxxxxxlarge: Story = {
   args: {
     children: "Text",
     size: "9xl",
-  },
-};
-
-export const HiraginoSans: Story = {
-  args: {
-    children: "Text",
-    ff: "Hiragino Sans",
   },
 };

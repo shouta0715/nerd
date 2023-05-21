@@ -38,7 +38,6 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, data }) => {
                   : "border-indigo-500 text-indigo-500"
               }`}
               component="button"
-              ff="Hiragino Sans"
               onClick={() => setIsChat(true)}
             >
               チャット
@@ -53,7 +52,6 @@ export const PlayWorkNav: FC<Props> = ({ setIsChat, isChat, data }) => {
               }`}
               color="indigo"
               component="li"
-              ff="Hiragino Sans"
               onClick={() => {
                 setIsChat(false);
                 stop();

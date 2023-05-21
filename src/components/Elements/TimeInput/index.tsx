@@ -24,7 +24,7 @@ export const TimeInput: FC = () => {
   return (
     <div className="flex flex-col items-center space-y-1">
       <div className="flex items-center">
-        <Text className="text-sm" ff="Hiragino Sans">
+        <Text className="text-sm">
           {mode === "up" ? "開始から" : "終了まで"}
         </Text>
         <div className="relative">

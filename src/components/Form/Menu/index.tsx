@@ -13,12 +13,7 @@ export const MenuForm = () => {
       <label htmlFor="commenter-name-input">
         <div className="flex items-center">
           <PencilIcon className=" h-4 w-4" />
-          <Text
-            className="min-w-max"
-            component="span"
-            ff="Hiragino Sans"
-            size="xs"
-          >
+          <Text className="min-w-max" component="span" size="xs">
             投稿名の変更
           </Text>
           <Button
@@ -36,7 +31,6 @@ export const MenuForm = () => {
           <Text
             className="line-clamp-1 flex-1 text-dimmed"
             component="div"
-            ff="Hiragino Sans"
             size="xs"
           >
             現在: {user.user_name}
@@ -46,7 +40,7 @@ export const MenuForm = () => {
         )}
       </label>
       <Input
-        className="py-1 font-hiragino-sans text-[16px]"
+        className=" py-1 text-[16px]"
         id="commenter-name-input"
         inputSize="xs"
         maxLength={20}
