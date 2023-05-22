@@ -26,7 +26,7 @@ export const ListTitle: FC<Props> = ({ title, autoCompleteData }) => {
   return (
     <Combobox
       as="div"
-      className="flex flex-col py-8 md:flex-row md:items-center md:justify-between md:space-x-8"
+      className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between md:space-x-8"
       onChange={(value) => {
         setSearchInput(value);
         setComboboxValue(value);
@@ -38,7 +38,7 @@ export const ListTitle: FC<Props> = ({ title, autoCompleteData }) => {
       </Combobox.Label>
       <div className="relative mt-2 flex-1 md:mt-0">
         <Combobox.Input
-          className="w-full rounded-md border-0 bg-white px-12 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          className="w-full rounded-md border border-slate-200 bg-white px-12 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           onChange={(e) => {
             setComboboxValue(e.target.value);
             if (e.target.value === "") setSearchInput("");

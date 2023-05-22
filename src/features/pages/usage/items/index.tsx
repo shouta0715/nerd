@@ -26,7 +26,7 @@ export const Step = ({
             <span
               className={clsx(
                 iconBackground,
-                "flex h-8 w-8 items-center justify-center rounded-full ring-8 ring-white"
+                "flex h-8 w-8 items-center justify-center rounded-full"
               )}
             >
               <Icon aria-hidden="true" className="h-5 w-5 text-white" />
