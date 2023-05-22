@@ -15,4 +15,6 @@ export type AutoCompleteData = {
   episodeTitle?: string;
   value: string;
   number?: number;
+  start_time?: string;
+  end_time?: string;
 };

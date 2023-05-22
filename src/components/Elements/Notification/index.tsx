@@ -74,7 +74,7 @@ export const Notification = () => {
   return (
     <div
       aria-live="assertive"
-      className="pointer-events-none fixed inset-0 flex  px-4 py-6 sm:p-6"
+      className="pointer-events-none fixed inset-0 z-[200] flex  px-4 py-6 sm:p-6"
     >
       <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
         <Transition
