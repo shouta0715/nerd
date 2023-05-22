@@ -26,7 +26,7 @@ export type Notification = NotificationState & NotificationActions;
 const defaultState: NotificationState = {
   title: "",
   message: "",
-  duration: 5000,
+  duration: 3000,
   isShown: false,
   type: "info",
   isPersistent: false,

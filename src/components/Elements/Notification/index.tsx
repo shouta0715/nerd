@@ -97,7 +97,7 @@ export const Notification = () => {
                 </div>
                 <div className="ml-3 w-0 flex-1 pt-0.5">
                   <p
-                    className={`text-sm font-medium text-gray-900 ${TypeTextColors[type]}`}
+                    className={`text-sm font-bold text-gray-900 ${TypeTextColors[type]}`}
                   >
                     {title}
                   </p>
