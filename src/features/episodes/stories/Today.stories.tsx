@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import TodayEpisodeItem from "src/features/episodes/components/TodayEpisodeItem";
-import { todayEpisodeData } from "src/features/episodes/mocks/fixture";
+import { todayEpisodeData } from "src/tests/mocks";
 import { ListDecorator } from "src/tests/storybook";
 
 export default {

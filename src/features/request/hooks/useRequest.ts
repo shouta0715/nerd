@@ -33,6 +33,7 @@ export const useRequest = () => {
         type: "success",
         message: "リクエストを送信しました",
       });
+      reset();
     } catch (error) {
       onShow({
         title: "エラー",
@@ -40,8 +41,6 @@ export const useRequest = () => {
         message:
           "エラーが発生しました。時間をおいて再度リクエストをお願いします。",
       });
-    } finally {
-      reset();
     }
   });
 

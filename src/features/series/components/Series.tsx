@@ -18,9 +18,9 @@ export const Series: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-2 p-2">
+      <div className="space-y-4 px-3 py-4 md:px-6">
         <p className=" mb-1 font-semibold">シリーズ一覧</p>
-        <p className="mx-auto h-2 w-1/2 animate-pulse bg-slate-200" />
+        <p className="mx-auto h-2 w-1/2 animate-pulse rounded-md bg-slate-200" />
         <Skeleton theme="work" />
       </div>
     );

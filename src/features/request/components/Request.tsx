@@ -77,10 +77,10 @@ export const Request = () => {
             />
           </div>
           <Button
-            className="mx-auto w-full max-w-sm space-x-4 bg-indigo-500 text-white hover:bg-indigo-600"
+            className="mx-auto"
             disabled={isLoading || !user}
-            loaderClassName="w-6 h-6"
             loading={isLoading}
+            theme="primary"
             type="submit"
           >
             {!user ? "ロード中..." : isLoading ? "送信中..." : "送信する"}

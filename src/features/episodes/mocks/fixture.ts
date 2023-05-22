@@ -1,6 +1,5 @@
-import { TodayEpisode, WorkEpisode } from "src/features/episodes/types";
+import { WorkEpisode } from "src/features/episodes/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
-import { Mode, createTime } from "src/tests/storybook";
 
 export const episodeData: GetEpisodeQuery = {
   __typename: "query_root",
@@ -22,31 +21,6 @@ export const episodeData: GetEpisodeQuery = {
       has_episodes: true,
     },
   },
-};
-
-export const todayEpisodeData = (mode: Mode = "finished"): TodayEpisode => {
-  const { start_time, end_time } = createTime(mode);
-
-  return {
-    __typename: "episodes",
-    id: "1",
-
-    title: "緑谷出久：オリジン",
-    number: 1,
-    has_next_episode: true,
-    has_prev_episode: false,
-    start_time,
-    end_time,
-    next_episode_id: "2",
-    work: {
-      __typename: "works",
-      id: 1,
-      title: "僕のヒーローアカデミア",
-
-      series_title: "僕のヒーローアカデミア",
-      series_id: "U",
-    },
-  };
 };
 
 export const workEpisodeItemData: WorkEpisode = {
