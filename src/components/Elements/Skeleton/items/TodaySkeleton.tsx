@@ -3,7 +3,7 @@ import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkele
 
 export const TodaySkeleton = () => (
   <div
-    className=" flex-1 rounded-md bg-white p-4  shadow md:px-6"
+    className=" flex-1  rounded-2xl  p-4 shadow-lg ring-1 ring-gray-900/5   md:px-6"
     role="status"
   >
     <div className="mx-auto flex animate-pulse flex-col items-center justify-between">

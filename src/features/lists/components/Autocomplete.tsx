@@ -45,7 +45,7 @@ export const Autocomplete: FC<Props> = ({ autoCompleteData }) => {
               />
             </button>
             <Combobox.Input
-              className=" w-full appearance-none rounded-full border  border-gray-300 px-8 py-1.5 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className=" w-full appearance-none rounded-full border  border-gray-300 bg-transparent px-8 py-1.5 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
               onChange={(e) => {
                 setComboboxValue(e.target.value);
                 if (e.target.value === "") setSearchInput("");

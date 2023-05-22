@@ -11,7 +11,7 @@ export const Nerd = ({
   weeklyData,
   registeredError,
 }: TopPage) => (
-  <div className="space-y-1 bg-white">
+  <div className="space-y-6">
     <Today
       buildDate={buildDate}
       data={todayData}

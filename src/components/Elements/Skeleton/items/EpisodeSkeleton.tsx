@@ -5,7 +5,7 @@ import { EpisodeMenuSkeleton } from "src/components/Elements/Skeleton/items/Epis
 import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkeleton";
 
 export const EpisodeSkeleton = () => (
-  <div className="flex flex-1 flex-col bg-white">
+  <div className="flex flex-1 flex-col">
     <div className="container contents lg:mx-auto lg:flex" role="status">
       <div className="w-full flex-1 rounded-md ">
         <div className="mx-auto flex animate-pulse flex-col items-center justify-between p-4  md:px-6">

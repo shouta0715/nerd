@@ -6,7 +6,7 @@ import { Meta } from "src/libs/meta";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 const Page: NextPageWithLayout = () => (
-  <section className="flex min-h-screen flex-col bg-gray-50">
+  <section className="flex min-h-screen flex-col">
     <Suspense
       fallback={
         <div className="space-y-2 p-2">

@@ -22,11 +22,9 @@ export const Weekly = ({
 }: ListPage<GetWeeklyWorksQuery>) => (
   <section className="animate-fadeUp">
     <ListHeader autoCompleteData={autoCompleteData} />
-    <div className="container mx-auto">
-      <div className="px-3 py-4 md:px-6">
-        <ListTitle title="今週のアニメ" />
-        <WeeklyWorksList data={data} />
-      </div>
+    <div className="px-3 py-4 md:px-6">
+      <ListTitle title="今週のアニメ" />
+      <WeeklyWorksList data={data} />
     </div>
     <DynamicSearchButton />
   </section>

@@ -6,7 +6,7 @@ import { Work } from "src/features/works/components/Work";
 import { NextPageWithLayout } from "src/libs/next/types";
 
 const Page: NextPageWithLayout = () => (
-  <section className="flex-1 bg-gray-50">
+  <section className="flex-1">
     <Suspense
       fallback={
         <div className="flex flex-col px-3 py-4 md:px-6">

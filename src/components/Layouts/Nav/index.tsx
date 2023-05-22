@@ -52,14 +52,14 @@ const mockNavigation = [
 const navList = mockNavigation.map((item) => (
   <Link
     key={item.name}
-    className=" group relative flex  items-center justify-center rounded-md px-2 py-1.5 text-xs hover:bg-gray-100 md:py-2 md:text-sm"
+    className=" group relative flex  items-center justify-center rounded-md px-2 py-1.5 text-xs hover:text-indigo-500 md:py-2 md:text-sm"
     href={`${item.href}`}
   >
     <div className="absolute bottom-0 left-0 h-[1px] w-0" />
     <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
     <div className="flex h-full flex-1 items-center">
       <span className="inline-block flex-1">{item.name}</span>
-      <ChevronRightIcon className=" h-4 w-4 stroke-slate-300 group-hover:stroke-black md:h-6 md:w-6" />
+      <ChevronRightIcon className=" h-4 w-4 stroke-slate-300 group-hover:stroke-indigo-500 md:h-6 md:w-6" />
     </div>
   </Link>
 ));

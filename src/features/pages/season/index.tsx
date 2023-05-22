@@ -11,7 +11,7 @@ export const Season = ({
   data,
   buildDate,
 }: TopPageList<GetSeasonWorksQuery>) => (
-  <section className=" bg-indigo-50 px-3 py-10 shadow-[0_0_0_100vmax_rgba(238_242_255)] [clip-path:inset(0_-100vmax)] md:px-6">
+  <section className="px-3 py-10 md:px-6">
     <TopTitle buildDate={buildDate} title="今期のアニメ" />
     <ul className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {data.works?.map((work) => (
