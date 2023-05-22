@@ -4,10 +4,10 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import React, { FC } from "react";
-import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader";
+import { TextArea } from "src/components/Elements/TextArea";
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store/timerStore";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
@@ -102,7 +102,7 @@ export const ChatInput: FC<Props> = ({
           )}
         </button>
         <div className="relative mr-2  flex  flex-1 items-center">
-          <ReactTextareaAutosize
+          <TextArea
             aria-label="コメントを入力"
             className="placeholder: w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-pink-500 disabled:bg-white"
             disabled={time === 0 || authLoading || time === downTime}
