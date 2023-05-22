@@ -29,14 +29,16 @@ export default Page;
 
 export const getStaticProps: NextSSG<Props> = async () => {
   const data = await getTodayEpisodes();
-  const autoCompleteData: AutoCompleteData[] = data?.episodes
-    .map((episode) => ({
+  const autoCompleteData: AutoCompleteData[] = data?.episodes.map(
+    (episode) => ({
       title: episode.work.series_title,
       episodeTitle: episode.title,
       number: episode.number,
       value: episode.title,
-    }))
-    .reverse();
+      start_time: episode.start_time,
+      end_time: episode.end_time,
+    })
+  );
 
   const error = data.episodes.some((episode) => episode.start_time === null)
     ? new InternalServerError().throwMessage()

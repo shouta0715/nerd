@@ -12,7 +12,7 @@ type Props = {
 export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   <li
     key={`works-${work.id}`}
-    className="relative w-full flex-1 animate-fadeUp  rounded-xl border border-slate-200 bg-white"
+    className="border-slate-20 xl:row-end-10 relative  w-full flex-1 animate-fadeUp  rounded-2xl border shadow-lg ring-1  ring-gray-900/5"
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">

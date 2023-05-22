@@ -12,7 +12,7 @@ export const WorkSkeleton: FC<Props> = ({
   isButton = false,
 }) => (
   <div
-    className=" grid w-full grid-cols-2 space-y-1 rounded-md border border-solid border-slate-200 bg-white p-3 shadow md:grid-cols-3 md:p-4 lg:grid-cols-4"
+    className=" grid w-full  grid-cols-2 space-y-1 rounded-2xl  border border-solid border-slate-200 p-3  shadow-lg ring-1 ring-gray-900/5 md:grid-cols-3 md:p-4 lg:grid-cols-4"
     role="status"
   >
     {Array.from({ length: is_short ? 8 : 24 }).map((_, index) => (

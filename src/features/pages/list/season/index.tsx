@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import React from "react";
-import { ListHeader } from "src/features/lists/components/ListHeader";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { SeasonWorksList } from "src/features/lists/components/SeasonWorks";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
@@ -21,12 +20,9 @@ export const Season = ({
   autoCompleteData,
 }: ListPage<GetSeasonWorksQuery>) => (
   <section className="flex-1 animate-fadeUp">
-    <ListHeader autoCompleteData={autoCompleteData} />
-    <div className="container mx-auto">
-      <div className="px-3 py-4 md:px-6">
-        <ListTitle title="今期のアニメ" />
-        <SeasonWorksList data={data} />
-      </div>
+    <div className="px-3 py-4 md:px-6">
+      <ListTitle autoCompleteData={autoCompleteData} title="今期のアニメ" />
+      <SeasonWorksList data={data} />
     </div>
     <DynamicSearchButton />
   </section>

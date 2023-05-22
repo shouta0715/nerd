@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { ReactElement } from "react";
+import { Background } from "src/components/Elements/Background";
 
 import { Aside } from "src/components/Layouts/Aside";
 import { Header } from "src/components/Layouts/Header";
@@ -25,7 +26,8 @@ export const BasicLayout = (page: ReactElement) => (
     <div className="flex w-full">
       <div className="flex min-h-screen max-w-full flex-1 flex-col">
         <Header />
-        <div className="flex flex-1 flex-col md:flex-row">
+        <div className="relative isolate flex flex-1 flex-col md:flex-row">
+          <Background />
           <Aside />
           <div className="flex flex-1 flex-col">
             <main className="relative flex flex-1 flex-col">{page}</main>
@@ -55,6 +57,7 @@ export const BasicListLayout = (page: ReactElement) => (
   <LayoutProvider>
     <div className="flex min-h-screen flex-col">
       <Header />
+      <Background />
       <main className="flex flex-1 animate-fadeUp flex-col">{page}</main>
     </div>
     <AuthModal />

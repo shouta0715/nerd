@@ -23,7 +23,7 @@ export const WeeklyWorksList: FC<Props> = ({ data }) => {
 
   return (
     <>
-      <ul className="peer grid grid-cols-1 gap-2 md:grid-cols-2  md:gap-4 lg:grid-cols-3">
+      <ul className="peer grid grid-cols-1  gap-y-12 md:grid-cols-2 md:gap-16  lg:grid-cols-3">
         {filterWorks?.map((work) => (
           <DynamicWorkItem key={`work-${work.id}`} work={work} />
         ))}

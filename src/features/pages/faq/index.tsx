@@ -63,7 +63,7 @@ export const faqs: FaqProps[] = [
 ];
 
 export const Faq = () => (
-  <div className="flex-1 bg-white py-4">
+  <div className="flex-1 py-4">
     <div className=" px-3  md:px-6">
       <div className="divide-y divide-gray-900/10">
         <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
@@ -75,7 +75,7 @@ export const Faq = () => (
           ))}
         </dl>
         <p className="mt-6 max-w-2xl py-6 text-base leading-7 text-gray-600">
-          以下のよくある質問をご覧ください。それでも解決しない場合は、
+          上記の質問で解決しない場合は、
           <a
             className="font-semibold text-indigo-600 hover:text-indigo-500"
             href="mailto:"
