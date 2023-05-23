@@ -1,24 +1,14 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { Loader } from "src/components/Elements/Loader";
+import { Image } from "src/components/Elements/Image";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
-const DynamicAvatar = dynamic(() =>
-  import("src/components/Elements/Avatar").then((mod) => mod.Avatar)
-);
-
 const DynamicAccountMenu = dynamic(() =>
   import("src/components/Elements/AccountMenu").then((mod) => mod.AccountMenu)
-);
-
-const DynamicImage = dynamic(
-  () => import("next/image").then((mod) => mod.default),
-  {
-    loading: () => <Loader className="h-[38px] w-[38px] animate-fadeIn" />,
-  }
 );
 
 export const Header = () => {
@@ -45,64 +35,6 @@ export const Header = () => {
   }, []);
 
   return (
-    // <header className="w-full md:border-b md:border-slate-200">
-    //   <div className="container mx-auto px-4 md:px-6">
-    //     <div className="flex w-full flex-col">
-    //       <div className="flex w-full items-center justify-between">
-    //         <Link
-    //           className=" my-2 inline-block text-2xl font-bold md:text-3xl"
-    //           href="/"
-    //         >
-    //           <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
-    //             Nerd
-    //           </span>
-    //         </Link>
-    //         <div className="flex items-center justify-between">
-    //           {user && !user.anonymous ? (
-    //             <div ref={elementRef} className="relative">
-    //               {authLoading ? (
-    //                 <Loader className="animate-fadeIn" />
-    //               ) : (
-    //                 <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
-    //                   {user.isDefaultPhoto ? (
-    //                     <DynamicImage
-    //                       alt="avatar"
-    //                       className="rounded-full object-contain"
-    //                       height={38}
-    //                       src={user?.photo_url ?? ""}
-    //                       width={38}
-    //                     />
-    //                   ) : (
-    //                     <DynamicAvatar
-    //                       user_id={user.id}
-    //                       user_name={user.user_name}
-    //                     />
-    //                   )}
-    //                 </button>
-    //               )}
-    //               <DynamicAccountMenu
-    //                 isUserMenuOpen={isUserMenuOpen}
-    //                 setIsUserMenuOpen={setIsUserMenuOpen}
-    //               />
-    //             </div>
-    //           ) : (
-    //             <Button
-    //               className="px-1.5 py-1 md:px-2 md:py-1.5"
-    //               loading={authLoading}
-    //               onClick={() => changeIsOpenModal(true)}
-    //               radius="md"
-    //               size="sm"
-    //               theme="primary"
-    //             >
-    //               ログイン
-    //             </Button>
-    //           )}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </header>
-
     <header className="shrink-0 border-b border-gray-200 bg-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link className="inline-block text-2xl font-bold md:text-3xl" href="/">
@@ -113,26 +45,23 @@ export const Header = () => {
         <div className="flex items-center gap-x-8">
           {user && !user.anonymous ? (
             <div ref={elementRef} className="relative">
-              {authLoading ? (
-                <Loader className="animate-fadeIn" />
-              ) : (
-                <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
-                  {user.isDefaultPhoto ? (
-                    <DynamicImage
-                      alt="avatar"
-                      className="rounded-full object-contain"
-                      height={38}
-                      src={user?.photo_url ?? ""}
-                      width={38}
-                    />
-                  ) : (
-                    <DynamicAvatar
-                      user_id={user.id}
-                      user_name={user.user_name}
-                    />
-                  )}
-                </button>
-              )}
+              <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+                {user.isDefaultPhoto ? (
+                  <Image
+                    alt="avatar"
+                    isLoading={authLoading}
+                    radius="full"
+                    src={user?.photo_url ?? ""}
+                  />
+                ) : (
+                  <Avatar
+                    isLoading={authLoading}
+                    user_id={user.id}
+                    user_name={user.user_name}
+                  />
+                )}
+              </button>
+
               <DynamicAccountMenu
                 isUserMenuOpen={isUserMenuOpen}
                 setIsUserMenuOpen={setIsUserMenuOpen}

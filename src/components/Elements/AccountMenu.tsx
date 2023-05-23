@@ -4,8 +4,8 @@ import {
   ArrowRightOnRectangleIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import React, { FC, useState } from "react";
+import { Image } from "src/components/Elements/Image";
 import { Text } from "src/components/Elements/Text";
 import { DeleteModal } from "src/components/Modal/Delete";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";

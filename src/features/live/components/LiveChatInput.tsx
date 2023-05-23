@@ -2,11 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import React, { FC } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
+import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { useOpenState } from "src/features/episodes/store";
 import { useLiveChatInput } from "src/features/live/hooks/useLiveChatInput";
@@ -73,18 +73,17 @@ export const LiveChatInput: FC<Props> = ({
               setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
           }}
         >
-          {authLoading ? (
-            <Loader size="lg" />
-          ) : user?.isDefaultPhoto ? (
+          {user?.isDefaultPhoto ? (
             <Image
               alt="avatar"
-              className="rounded-full object-contain"
               height={38}
+              isLoading={authLoading}
               src={user?.photo_url ?? ""}
               width={38}
             />
           ) : (
             <Avatar
+              isLoading={authLoading}
               user_id={user?.id ?? ""}
               user_name={user?.user_name ?? ""}
             />
