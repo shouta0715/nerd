@@ -5,7 +5,7 @@ export const Background = () => {
     <>
       <div
         aria-hidden="true"
-        className="fixed  inset-x-0 top-1/2 -z-10 max-h-full -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl"
+        className="absolute inset-x-0  top-1/2 -z-10 max-h-full -translate-y-1/2 transform-gpu overflow-hidden opacity-30 blur-3xl md:fixed"
       >
         <div
           className="ml-[max(50%,38rem)] aspect-[1313/771] w-[82.0625rem] bg-gradient-to-tr from-[#9780ff] via-[#89fcdd] to-[#fcfc89]"
@@ -17,7 +17,7 @@ export const Background = () => {
       </div>
       <div
         aria-hidden="true"
-        className="fixed inset-x-0 top-0 -z-10 flex max-h-full transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 xl:justify-end"
+        className=" absolute inset-x-0 top-0 -z-10 flex max-h-full transform-gpu overflow-hidden pt-32 opacity-25 blur-3xl sm:pt-40 md:fixed xl:justify-end"
       >
         <div
           className="ml-[-22rem] aspect-[1313/771] w-[82.0625rem] flex-none origin-top-right rotate-[30deg] bg-gradient-to-tr from-[#ffff82] via-[#9dffcc] to-[#896ffb] xl:ml-0 xl:mr-[calc(50%-12rem)]"
