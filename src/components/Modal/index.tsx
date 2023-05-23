@@ -7,9 +7,15 @@ import { Button, ButtonProps } from "src/components/Elements/Button";
 type CancelButtonProps = {
   children: ReactNode;
   onClose: () => void;
+  className?: string;
 } & ButtonProps;
 
 type TitleProps = {
+  children: ReactNode;
+  className?: string;
+};
+
+type ContentProps = {
   children: ReactNode;
 };
 
@@ -80,7 +86,7 @@ const CancelButton: FC<CancelButtonProps> = ({
     <div className="mt-5 sm:mt-6">
       <Button
         {...props}
-        className={clsx("w-full", props.className)}
+        className={twMerge(clsx("w-full", props.className))}
         onClick={onClose}
         theme={props.theme ?? "primary"}
         type="button"
@@ -91,12 +97,14 @@ const CancelButton: FC<CancelButtonProps> = ({
   );
 };
 
-const Title: FC<TitleProps> = ({ children }) => {
+const Title: FC<TitleProps> = ({ children, className = "" }) => {
   return (
     <div className="text-center">
       <Dialog.Title
         as="h3"
-        className="text-base font-semibold leading-6 text-gray-900"
+        className={twMerge(
+          clsx(`text-base font-semibold leading-6 text-gray-900`, className)
+        )}
       >
         {children}
       </Dialog.Title>
@@ -104,7 +112,7 @@ const Title: FC<TitleProps> = ({ children }) => {
   );
 };
 
-const Content: FC<{ children: ReactNode }> = ({ children }) => {
+const Content: FC<ContentProps> = ({ children }) => {
   return (
     <div className="mt-2 ">
       <div className="text-sm text-gray-500">{children}</div>

@@ -21,11 +21,12 @@ export const DeleteModal: FC<Props> = ({ open, onClose }) => {
           />
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <Modal.Title>アカウントの消去</Modal.Title>
+          <Modal.Title className="text-left text-base font-semibold leading-6 text-gray-900">
+            アカウントの消去
+          </Modal.Title>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
               アカウントを消去しても、コメントは残りますが、自分の投稿として表示されなくなります。
-              <br />
               本当にアカウントを消去してよろしいですか？
             </p>
           </div>
