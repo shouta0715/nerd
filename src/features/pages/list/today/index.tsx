@@ -19,7 +19,7 @@ export const Today = ({
   data,
   autoCompleteData,
 }: ListPage<GetTodayEpisodesQuery>) => (
-  <section className="flex-1 animate-fadeUp py-4">
+  <section className="flex-1 animate-fadeUp">
     <ListTitle
       autoCompleteData={autoCompleteData}
       title="今日放送のエピソード"
