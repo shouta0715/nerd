@@ -19,11 +19,9 @@ export const Weekly = ({
   data,
   autoCompleteData,
 }: ListPage<GetWeeklyWorksQuery>) => (
-  <section className="animate-fadeUp">
-    <div className="px-3 py-4 md:px-6">
-      <ListTitle autoCompleteData={autoCompleteData} title="今週のアニメ" />
-      <WeeklyWorksList data={data} />
-    </div>
+  <section className="animate-fadeUp py-4">
+    <ListTitle autoCompleteData={autoCompleteData} title="今週のアニメ" />
+    <WeeklyWorksList data={data} />
     <DynamicSearchButton />
   </section>
 );

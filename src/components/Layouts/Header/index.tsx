@@ -37,7 +37,7 @@ export const Header = () => {
   return (
     <header className="shrink-0 border-b border-gray-200 bg-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link className="inline-block text-2xl font-bold md:text-3xl" href="/">
+        <Link className="inline-block text-3xl font-black sm:text-4xl" href="/">
           <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
             Nerd
           </span>

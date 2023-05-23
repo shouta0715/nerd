@@ -11,7 +11,7 @@ export const Weekly = ({
   data,
   buildDate,
 }: TopPageList<GetWeeklyWorksQuery>) => (
-  <section className="px-3 pt-10 md:px-6 md:pb-10">
+  <section className="pt-10 md:pb-10">
     <TopTitle buildDate={buildDate} title="今週のアニメ" />
     <ul className="grid grid-cols-1  gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
       {data?.weekly_works?.map((work) => (
