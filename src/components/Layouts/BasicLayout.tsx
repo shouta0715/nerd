@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import React, { ReactElement } from "react";
 import { Background } from "src/components/Elements/Background";
-
 import { Aside } from "src/components/Layouts/Aside";
+
 import { Header } from "src/components/Layouts/Header";
 import { AuthModal } from "src/components/Modal/Auth";
 import { Provider } from "src/features/provider";
@@ -23,20 +23,15 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
 
 export const BasicLayout = (page: ReactElement) => (
   <LayoutProvider>
-    <div className="flex w-full">
-      <div className="flex min-h-screen max-w-full flex-1 flex-col">
-        <Header />
-        <div className="relative isolate flex flex-1 flex-col md:flex-row">
-          <Background />
-          <Aside />
-          <div className="flex flex-1 flex-col">
-            <main className="relative flex flex-1 flex-col">{page}</main>
-            <DynamicSearchButton />
-            {/* <Footer /> */}
-          </div>
-        </div>
+    <div className="flex min-h-full flex-col">
+      <Header />
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-x-6 md:flex-row">
+        <Background />
+        <Aside />
+        <main className="w-full flex-1 bg-white/25">{page}</main>
       </div>
     </div>
+    <DynamicSearchButton />
     <AuthModal />
   </LayoutProvider>
 );
