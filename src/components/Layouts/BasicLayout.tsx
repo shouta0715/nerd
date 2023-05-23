@@ -53,7 +53,9 @@ export const BasicListLayout = (page: ReactElement) => (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Background />
-      <main className="flex flex-1 animate-fadeUp flex-col">{page}</main>
+      <main className="flex flex-1 animate-fadeUp flex-col bg-white/30">
+        {page}
+      </main>
     </div>
     <AuthModal />
   </LayoutProvider>
