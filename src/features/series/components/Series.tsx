@@ -43,7 +43,7 @@ export const Series: FC = () => {
           {series_title ?? data?.works[0]?.title}
         </Text>
 
-        <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
           {data?.works.map((series_work, index) => (
             <SeriesItem
               key={series_work.id}
