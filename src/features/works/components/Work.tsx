@@ -24,7 +24,7 @@ export const Work: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto flex flex-col">
+      <div className="flex h-full flex-col">
         <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
         <Skeleton theme="work" />
       </div>
