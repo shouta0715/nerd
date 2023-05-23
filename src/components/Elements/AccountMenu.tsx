@@ -8,6 +8,7 @@ import Image from "next/image";
 import React, { FC, useState } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
+import { DeleteModal } from "src/components/Modal/Delete";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
 import { useUserState } from "src/store/user/userState";
 
@@ -150,6 +151,10 @@ export const AccountMenu: FC<Props> = ({
           </div>
         </Transition.Child>
       </Transition>
+      <DeleteModal
+        onClose={() => setIsDeleteConfirmationOpen(false)}
+        open={isDeleteConfirmationOpen}
+      />
     </>
   );
 };
