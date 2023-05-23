@@ -20,13 +20,11 @@ export const Today = ({
   autoCompleteData,
 }: ListPage<GetTodayEpisodesQuery>) => (
   <section className="flex-1 animate-fadeUp">
-    <div className="px-3 py-4 md:px-6">
-      <ListTitle
-        autoCompleteData={autoCompleteData}
-        title="今日放送のエピソード"
-      />
-      <TodayEpisodeList data={data} />
-    </div>
+    <ListTitle
+      autoCompleteData={autoCompleteData}
+      title="今日放送のエピソード"
+    />
+    <TodayEpisodeList data={data} />
     <DynamicSearchButton />
   </section>
 );

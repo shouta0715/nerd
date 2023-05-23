@@ -57,7 +57,7 @@ const Steps: TStep[] = [
 export const Usage = () => {
   return (
     <div className="flex-1">
-      <section className="px-3 md:px-6">
+      <section>
         <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
           使い方
         </h2>
@@ -71,7 +71,7 @@ export const Usage = () => {
           ))}
         </ul>
       </section>
-      <section className="mt-10 px-3 md:px-6">
+      <section className="mt-10">
         <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
           ルール・注意事項
         </h2>

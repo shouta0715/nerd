@@ -24,7 +24,7 @@ export const Work: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto flex flex-col px-3 md:px-6">
+      <div className="container mx-auto flex flex-col">
         <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
         <Skeleton theme="work" />
       </div>
@@ -39,7 +39,7 @@ export const Work: FC = () => {
   return (
     <>
       <DetailTitle title={data?.works_by_pk?.series_title} />
-      <div className="flex h-full animate-fadeUp flex-col px-3 md:px-6">
+      <div className="flex h-full animate-fadeUp flex-col">
         <Text
           className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
           component="h2"

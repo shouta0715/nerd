@@ -20,10 +20,8 @@ export const Season = ({
   autoCompleteData,
 }: ListPage<GetSeasonWorksQuery>) => (
   <section className="flex-1 animate-fadeUp">
-    <div className="px-3 py-4 md:px-6">
-      <ListTitle autoCompleteData={autoCompleteData} title="今期のアニメ" />
-      <SeasonWorksList data={data} />
-    </div>
+    <ListTitle autoCompleteData={autoCompleteData} title="今期のアニメ" />
+    <SeasonWorksList data={data} />
     <DynamicSearchButton />
   </section>
 );

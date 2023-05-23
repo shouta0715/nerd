@@ -18,7 +18,7 @@ export const Series: FC = () => {
 
   if (isLoading) {
     return (
-      <div className="space-y-4 px-3 py-4 md:px-6">
+      <div className="space-y-4">
         <p className=" mb-1 font-semibold">シリーズ一覧</p>
         <p className="mx-auto h-2 w-1/2 animate-pulse rounded-md bg-slate-200" />
         <Skeleton theme="work" />
@@ -34,7 +34,7 @@ export const Series: FC = () => {
   return (
     <>
       <DetailTitle title={`シリーズ一覧 ${data?.works?.[0].series_title}`} />
-      <div className="flex h-full animate-fadeUp flex-col px-3 md:px-6">
+      <div className="flex h-full animate-fadeUp flex-col">
         <p className="mb-1 font-semibold">シリーズ一覧</p>
         <Text
           className="mb-4 grid place-content-center text-lg font-bold md:text-xl"
