@@ -1,7 +1,9 @@
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
+import { Button } from "src/components/Elements/Button";
 import { Modal } from "src/components/Modal";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
+import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
   open: boolean;
@@ -10,6 +12,7 @@ type Props = {
 
 export const DeleteModal: FC<Props> = ({ open, onClose }) => {
   const { deleteGoogleUser } = useGoogleSignIn();
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
     <Modal onClose={onClose} open={open}>
@@ -21,7 +24,7 @@ export const DeleteModal: FC<Props> = ({ open, onClose }) => {
           />
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <Modal.Title className="text-left text-base font-semibold leading-6 text-gray-900">
+          <Modal.Title className="text-center text-base font-semibold leading-6 text-gray-900 sm:text-left">
             アカウントの消去
           </Modal.Title>
           <div className="mt-2">
@@ -33,13 +36,14 @@ export const DeleteModal: FC<Props> = ({ open, onClose }) => {
         </div>
       </div>
       <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <button
+        <Button
           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+          loading={authLoading}
           onClick={deleteGoogleUser}
           type="button"
         >
           消去
-        </button>
+        </Button>
         <button
           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
           onClick={onClose}

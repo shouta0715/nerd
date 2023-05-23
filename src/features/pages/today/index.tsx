@@ -14,7 +14,7 @@ type Props = TopPageList<GetTodayEpisodesQuery> & {
 };
 
 export const Today: FC<Props> = ({ registeredError, buildDate, data }) => (
-  <section className="px-3 py-6 md:px-6">
+  <section className="px-3 md:px-6">
     {registeredError ? (
       <TodayError />
     ) : (

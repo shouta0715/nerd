@@ -63,7 +63,7 @@ export const faqs: FaqProps[] = [
 ];
 
 export const Faq = () => (
-  <div className="flex-1 py-4">
+  <div className="flex-1">
     <div className=" px-3  md:px-6">
       <div className="divide-y divide-gray-900/10">
         <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">

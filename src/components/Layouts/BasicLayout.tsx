@@ -23,12 +23,12 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
 
 export const BasicLayout = (page: ReactElement) => (
   <LayoutProvider>
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-x-6 md:flex-row">
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col items-start gap-x-8 bg-white/20 px-4 py-4 sm:px-6 md:flex-row md:py-10 lg:px-8">
         <Background />
         <Aside />
-        <main className="w-full flex-1 bg-white/30">{page}</main>
+        <main className="w-full flex-1 pt-10 md:pt-0">{page}</main>
       </div>
     </div>
     <DynamicSearchButton />
@@ -53,9 +53,7 @@ export const BasicListLayout = (page: ReactElement) => (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Background />
-      <main className="flex flex-1 animate-fadeUp flex-col bg-white/30">
-        {page}
-      </main>
+      <main className="flex flex-1 animate-fadeUp flex-col ">{page}</main>
     </div>
     <AuthModal />
   </LayoutProvider>

@@ -13,6 +13,7 @@ export const AuthModal = () => {
     state.setIsOpenModal,
   ]);
   const { signInGoogle } = useGoogleSignIn();
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
     <Modal onClose={() => setOpen(false)} open={open}>
@@ -32,11 +33,12 @@ export const AuthModal = () => {
           </Link>
         </Text>
         <Button
-          className="mx-auto my-6"
+          className="mx-auto my-6 shadow-md"
           leftIcon={<GoogleIcon />}
+          loading={authLoading}
           onClick={async () => {
-            await signInGoogle();
             setOpen(false);
+            await signInGoogle();
           }}
           radius="full"
         >

@@ -2,10 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import React, { FC, useEffect, useRef } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
+import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { TextArea } from "src/components/Elements/TextArea";
 import { useInputCommentState, useRefState } from "src/features/comments/store";
@@ -71,18 +71,17 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
               setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
           }}
         >
-          {authLoading ? (
-            <Loader size="md" />
-          ) : user?.isDefaultPhoto ? (
+          {user?.isDefaultPhoto ? (
             <Image
               alt="avatar"
-              className="rounded-full object-contain"
               height={38}
+              isLoading={authLoading}
               src={user?.photo_url ?? ""}
               width={38}
             />
           ) : (
             <Avatar
+              isLoading={authLoading}
               user_id={user?.id ?? ""}
               user_name={user?.user_name ?? ""}
             />
