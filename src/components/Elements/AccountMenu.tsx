@@ -6,7 +6,6 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import React, { FC, useState } from "react";
-import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { DeleteModal } from "src/components/Modal/Delete";
 import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
@@ -21,7 +20,7 @@ export const AccountMenu: FC<Props> = ({
   isUserMenuOpen,
   setIsUserMenuOpen,
 }) => {
-  const { signOutGoogle, deleteGoogleUser } = useGoogleSignIn();
+  const { signOutGoogle } = useGoogleSignIn();
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
@@ -106,50 +105,6 @@ export const AccountMenu: FC<Props> = ({
             </Text>
           </button>
         </div>
-      </Transition>
-      <Transition
-        as="div"
-        className="fixed inset-0 z-50 flex place-items-center bg-black/20"
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            setIsDeleteConfirmationOpen(false);
-          }
-        }}
-        show={isDeleteConfirmationOpen}
-      >
-        <Transition.Child
-          className="mx-auto  max-w-md rounded-md bg-white p-6"
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <p className="flex items-center justify-center font-semibold">
-            本当に削除しますか？
-          </p>
-          <div className="item-center mt-4 flex justify-between">
-            <Button
-              className="mr-4 rounded-md bg-red-500 px-2 py-1 text-white"
-              onClick={deleteGoogleUser}
-            >
-              削除
-            </Button>
-            <Button
-              className="rounded-md bg-indigo-500 px-2 py-1 text-white"
-              onClick={() => setIsDeleteConfirmationOpen(false)}
-            >
-              キャンセル
-            </Button>
-          </div>
-        </Transition.Child>
       </Transition>
       <DeleteModal
         onClose={() => setIsDeleteConfirmationOpen(false)}

@@ -21,7 +21,7 @@ export const DeleteModal: FC<Props> = ({ open, onClose }) => {
           />
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <Modal.Title className="text-left text-base font-semibold leading-6 text-gray-900">
+          <Modal.Title className="text-center text-base font-semibold leading-6 text-gray-900 sm:text-left">
             アカウントの消去
           </Modal.Title>
           <div className="mt-2">
