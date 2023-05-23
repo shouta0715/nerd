@@ -27,9 +27,9 @@ export const BasicLayout = (page: ReactElement) => (
       <div className="flex min-h-screen max-w-full flex-1 flex-col">
         <Header />
         <div className="relative isolate flex flex-1 flex-col md:flex-row">
-          <Background />
           <Aside />
-          <div className="flex flex-1 flex-col">
+          <Background />
+          <div className="flex flex-1 flex-col bg-white/25">
             <main className="relative flex flex-1 flex-col">{page}</main>
             <DynamicSearchButton />
             {/* <Footer /> */}
