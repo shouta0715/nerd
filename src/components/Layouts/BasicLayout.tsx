@@ -28,7 +28,7 @@ export const BasicLayout = (page: ReactElement) => (
       <div className="mx-auto flex w-full max-w-7xl flex-col items-start gap-x-6 md:flex-row">
         <Background />
         <Aside />
-        <main className="w-full flex-1 bg-white/25">{page}</main>
+        <main className="w-full flex-1 bg-white/30">{page}</main>
       </div>
     </div>
     <DynamicSearchButton />
