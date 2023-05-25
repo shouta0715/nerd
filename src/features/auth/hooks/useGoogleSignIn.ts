@@ -90,9 +90,7 @@ export const useGoogleSignIn = () => {
     } catch (error: any) {
       if (error.code === "auth/requires-recent-login") {
         if (auth.currentUser) {
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const credential = GoogleAuthProvider.credential();
           if (credential) {
             await reauthenticateWithCredential(auth.currentUser, credential);
             await deleteToken(auth.currentUser.uid);

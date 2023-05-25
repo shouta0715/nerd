@@ -10,7 +10,8 @@ import { Error } from "src/components/Elements/Error";
 import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
 import { FirebaseAuth } from "src/features/auth/components/FirebaseAuth";
 import queryClient from "src/libs/queryClient";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 type Props = {
   children: React.ReactNode;
@@ -40,6 +41,7 @@ export const Provider = ({ children }: Props) => {
             {children}
           </FirebaseAuth>
         </NotificationProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </ErrorBoundary>
     </QueryClientProvider>
   );
