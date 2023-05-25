@@ -6,8 +6,10 @@ import {
   signOut,
   reauthenticateWithCredential,
 } from "firebase/auth";
+import { useState } from "react";
 import { auth } from "../../../libs/firebase";
 import { useNotificationState } from "src/components/Elements/Notification/store";
+import { UnauthorizedError } from "src/libs/error";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
@@ -17,6 +19,7 @@ export const useGoogleSignIn = () => {
     state.setAuthLoading,
   ]);
   const onShow = useNotificationState((state) => state.onShow);
+  const [_, setIsError] = useState(null);
 
   const user = useUserState((state) => state.user);
   const signInGoogle = async () => {
@@ -25,13 +28,14 @@ export const useGoogleSignIn = () => {
 
     try {
       if (!auth.currentUser) {
-        throw new Error("Firebase: Error (auth/user-not-found).");
+        setIsError(() => {
+          throw new UnauthorizedError();
+        });
       }
       await signInWithPopup(auth, provider);
       onShow({
         title: "ログインしました",
         type: "success",
-        duration: 3000,
       });
     } catch (error: any) {
       setAuthLoading(false);
@@ -49,7 +53,6 @@ export const useGoogleSignIn = () => {
       onShow({
         title: "ログアウトしました",
         type: "success",
-        duration: 3000,
       });
     } catch (error) {
       setAuthLoading(false);
@@ -78,16 +81,16 @@ export const useGoogleSignIn = () => {
           type: "success",
         });
       } else {
-        throw new Error("Firebase: Error (auth/user-not-found).");
+        setIsError(() => {
+          throw new UnauthorizedError();
+        });
       }
 
       localStorage.removeItem("user_name");
     } catch (error: any) {
       if (error.code === "auth/requires-recent-login") {
         if (auth.currentUser) {
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const credential = GoogleAuthProvider.credential();
           if (credential) {
             await reauthenticateWithCredential(auth.currentUser, credential);
             await deleteToken(auth.currentUser.uid);
@@ -95,15 +98,18 @@ export const useGoogleSignIn = () => {
           }
         }
       } else if (error.code === "auth/user-not-found") {
-        if (auth.currentUser) {
-          await deleteToken(auth.currentUser.uid);
-          await deleteUser(auth.currentUser);
-        }
+        setIsError(() => {
+          throw new UnauthorizedError();
+        });
       }
 
       setAuthLoading(false);
 
-      throw new Error(error);
+      setIsError(() => {
+        throw new UnauthorizedError();
+      });
+    } finally {
+      setAuthLoading(false);
     }
   };
 
