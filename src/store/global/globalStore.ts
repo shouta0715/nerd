@@ -6,6 +6,8 @@ type GlobalState = {
   setIsOpenModal: (flag: boolean) => void;
   authLoading: boolean;
   setAuthLoading: (authLoading: boolean) => void;
+  isDeleteConfirmationOpen: boolean;
+  setIsDeleteConfirmationOpen: (flag: boolean) => void;
 };
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -13,6 +15,9 @@ export const useGlobalState = create<GlobalState>((set) => ({
   setIsOpenModal: (flag) => set(() => ({ isOpenLoginModal: flag })),
   authLoading: true,
   setAuthLoading: (authLoading) => set(() => ({ authLoading })),
+  isDeleteConfirmationOpen: false,
+  setIsDeleteConfirmationOpen: (flag) =>
+    set(() => ({ isDeleteConfirmationOpen: flag })),
 }));
 
 type CountDownModal = {
