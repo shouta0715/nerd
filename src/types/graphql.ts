@@ -103,8 +103,8 @@ export type Chats = {
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id: Scalars['uuid']['output'];
   /** An object relationship */
-  user: Users;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<Users>;
+  user_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   work?: Maybe<Works>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -568,8 +568,8 @@ export type Comments = {
   reply_count?: Maybe<Scalars['bigint']['output']>;
   reply_to?: Maybe<Scalars['uuid']['output']>;
   /** An object relationship */
-  user: Users;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<Users>;
+  user_id?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   work?: Maybe<Works>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -1598,8 +1598,8 @@ export type Likes = {
   comment_id: Scalars['uuid']['output'];
   id: Scalars['Int']['output'];
   /** An object relationship */
-  user: Users;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<Users>;
+  user_id?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregated selection of "likes" */
@@ -3017,8 +3017,8 @@ export type Request_Works = {
   id: Scalars['Int']['output'];
   official_url?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
-  user: Users;
-  user_id: Scalars['String']['output'];
+  user?: Maybe<Users>;
+  user_id?: Maybe<Scalars['String']['output']>;
   work_title: Scalars['String']['output'];
 };
 

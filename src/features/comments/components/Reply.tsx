@@ -35,7 +35,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
         ) : (
           <Avatar
             size="sm"
-            user_id={reply.user?.id}
+            user_id={reply.user?.id ?? ""}
             user_name={reply.commenter_name}
           />
         )}

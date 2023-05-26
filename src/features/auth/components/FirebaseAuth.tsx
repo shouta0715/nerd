@@ -76,6 +76,7 @@ export const FirebaseAuth = () => {
             id: user.uid,
             user_name: user.displayName ?? null,
             photo_url: user.photoURL ?? null,
+            isAnonymous: user.isAnonymous,
           });
 
           const { insert_users_one } = userData.data;

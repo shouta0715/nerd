@@ -36,13 +36,14 @@ export const createUser = async ({
   id,
   user_name,
   photo_url,
+  isAnonymous,
 }: CreateUserSchema): Promise<ReturnCreateUser> => {
   const res = await fetch("/api/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, user_name, photo_url }),
+    body: JSON.stringify({ id, user_name, photo_url, isAnonymous }),
   });
 
   if (!res.ok) {
