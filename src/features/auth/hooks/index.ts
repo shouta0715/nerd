@@ -55,3 +55,9 @@ export const createUser = async ({
 
   return user;
 };
+
+export const deleteToken = async (id: string) => {
+  fetch(`/api/user/${id}`, {
+    method: "DELETE",
+  });
+};

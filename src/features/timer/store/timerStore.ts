@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 
-import create from "zustand";
+import { create } from "zustand";
 import {
   secondToTime,
   timeToSecond,

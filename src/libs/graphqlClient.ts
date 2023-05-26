@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable class-methods-use-this */
 import type { TypedDocumentNode } from "@graphql-typed-document-node/core";
-import { GraphQLClient, Variables } from "graphql-request";
 import {
+  GraphQLClient,
   RequestDocument,
   RequestOptions,
-  VariablesAndRequestHeaders,
-} from "graphql-request/dist/types";
+  Variables,
+} from "graphql-request";
+import { VariablesAndRequestHeaders } from "graphql-request/dist/types";
 import { InternalServerError, UnauthorizedError } from "src/libs/error";
 import { RefreshTokenResult } from "src/types/dataType";
 

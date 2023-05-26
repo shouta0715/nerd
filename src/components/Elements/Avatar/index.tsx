@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import dynamic from "next/dynamic";
 import { FC } from "react";
 import { Loader } from "src/components/Elements/Loader";
@@ -25,7 +24,7 @@ export const Avatar: FC<Props> = ({
   ) : (
     <div className="h-[38px] w-[38px] overflow-hidden rounded-full">
       <DynamicAvatar
-        colors={["#f59e0b", "#14b8a6", "#0ea5e9", "#4f46e5"]}
+        colors={["#24C0EB", "#5CCEEE", "#0ea5e9", "#F1EBEB", "#EEE8E8"]}
         name={`${user_id}${user_name}`}
         size={size === "sm" ? 32 : size === "md" ? 38 : 48}
         variant="beam"

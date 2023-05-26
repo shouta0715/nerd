@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { AutoCompleteData } from "src/features/episodes/types";
 
 type AutCompleteState = {

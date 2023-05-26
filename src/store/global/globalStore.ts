@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import create from "zustand";
+import { create } from "zustand";
 
 type GlobalState = {
   isOpenLoginModal: boolean;

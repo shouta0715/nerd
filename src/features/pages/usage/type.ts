@@ -1,15 +1,16 @@
-import { ReactNode, SVGProps } from "react";
+import { ReactNode } from "react";
 
 export type Step = {
   id: number;
   content: string;
   element?: ReactNode;
   stepContent: string;
-  Icon: (
-    props: SVGProps<SVGSVGElement> & {
-      title?: string | undefined;
-      titleId?: string | undefined;
-    }
-  ) => JSX.Element;
+  Icon: React.ForwardRefExoticComponent<
+    React.PropsWithoutRef<React.SVGProps<SVGSVGElement>> & {
+      title?: string;
+      titleId?: string;
+    } & React.RefAttributes<SVGSVGElement>
+  >;
+
   iconBackground: string;
 };
