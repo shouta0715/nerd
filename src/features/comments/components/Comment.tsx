@@ -37,7 +37,7 @@ export const Comment: FC<Props> = ({ comment }) => {
           />
         ) : (
           <Avatar
-            user_id={comment.user?.id}
+            user_id={comment.user?.id ?? ""}
             user_name={comment.commenter_name}
           />
         )}

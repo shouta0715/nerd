@@ -30,7 +30,10 @@ export const Chat: FC<Props> = ({ chat, animate }) => {
             width={38}
           />
         ) : (
-          <Avatar user_id={chat.user?.id} user_name={chat.commenter_name} />
+          <Avatar
+            user_id={chat.user?.id ?? ""}
+            user_name={chat.commenter_name}
+          />
         )}
       </figure>
       <div

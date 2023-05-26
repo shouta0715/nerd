@@ -16,7 +16,7 @@ export type InsertLikeMutationVariables = Types.Exact<{
 }>;
 
 
-export type InsertLikeMutation = { __typename?: 'mutation_root', insert_likes_one?: { __typename?: 'likes', id: number, user_id: string, comment_id: any } | null };
+export type InsertLikeMutation = { __typename?: 'mutation_root', insert_likes_one?: { __typename?: 'likes', id: number, user_id?: string | null, comment_id: any } | null };
 
 export type DeleteLikeMutationVariables = Types.Exact<{
   user_id: Types.Scalars['String']['input'];
