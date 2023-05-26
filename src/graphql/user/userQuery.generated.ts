@@ -14,24 +14,24 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
 export type UserInfoFragment = { __typename?: 'users', id: string, photo_url?: string | null, user_name: string };
 
 export type GetUserQueryVariables = Types.Exact<{
-  id: Types.Scalars['String'];
+  id: Types.Scalars['String']['input'];
 }>;
 
 
 export type GetUserQuery = { __typename?: 'query_root', users_by_pk?: { __typename?: 'users', id: string, photo_url?: string | null, user_name: string } | null };
 
 export type CreateUserMutationVariables = Types.Exact<{
-  id: Types.Scalars['String'];
-  user_name?: Types.InputMaybe<Types.Scalars['String']>;
-  photo_url?: Types.InputMaybe<Types.Scalars['String']>;
-  ip?: Types.InputMaybe<Types.Scalars['String']>;
+  id: Types.Scalars['String']['input'];
+  user_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  photo_url?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  ip?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
 export type CreateUserMutation = { __typename?: 'mutation_root', insert_users_one?: { __typename?: 'users', id: string, photo_url?: string | null, user_name: string } | null };
 
 export type DeleteUserMutationVariables = Types.Exact<{
-  id: Types.Scalars['String'];
+  id: Types.Scalars['String']['input'];
 }>;
 
 

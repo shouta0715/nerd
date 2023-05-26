@@ -16,46 +16,46 @@ export type FragmentWorkFragment = { __typename?: 'works', title: string, series
 export type FragmentEpisodeFragment = { __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null };
 
 export type GetSeasonWorksQueryVariables = Types.Exact<{
-  season: Types.Scalars['String'];
-  year: Types.Scalars['Int'];
-  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  season: Types.Scalars['String']['input'];
+  year: Types.Scalars['Int']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
 export type GetSeasonWorksQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type SearchWorksQueryVariables = Types.Exact<{
-  search: Types.Scalars['String'];
-  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  search: Types.Scalars['String']['input'];
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 
 export type SearchWorksQuery = { __typename?: 'query_root', search_works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWorkSeriesQueryVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
-  series_id: Types.Scalars['String'];
+  id: Types.Scalars['Int']['input'];
+  series_id: Types.Scalars['String']['input'];
 }>;
 
 
 export type GetWorkSeriesQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> } | null, works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWorkQueryVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
+  id: Types.Scalars['Int']['input'];
 }>;
 
 
 export type GetWorkQuery = { __typename?: 'query_root', works_by_pk?: { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null } | null };
 
 export type GetSeriesQueryVariables = Types.Exact<{
-  series_id: Types.Scalars['String'];
+  series_id: Types.Scalars['String']['input'];
 }>;
 
 
 export type GetSeriesQuery = { __typename?: 'query_root', works: Array<{ __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null, episodes: Array<{ __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null }> }> };
 
 export type GetWeeklyWorksQueryVariables = Types.Exact<{
-  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  limit?: Types.InputMaybe<Types.Scalars['Int']['input']>;
 }>;
 
 

@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 import { SearchWorksQuery } from "src/graphql/work/workQuery.generated";
 
 type SearchWorksState = {

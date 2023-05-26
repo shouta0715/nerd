@@ -14,9 +14,9 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
 export type CommentFragmentFragment = { __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } };
 
 export type GetCommentsEpisodeQueryVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  limit: Types.Scalars['Int'];
+  episode_id: Types.Scalars['uuid']['input'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']['input']>;
+  limit: Types.Scalars['Int']['input'];
   order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
@@ -24,10 +24,10 @@ export type GetCommentsEpisodeQueryVariables = Types.Exact<{
 export type GetCommentsEpisodeQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetCommentsEpisodeByLikesQueryVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']>;
-  limit: Types.Scalars['Int'];
+  episode_id: Types.Scalars['uuid']['input'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']['input']>;
+  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  limit: Types.Scalars['Int']['input'];
   order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
@@ -35,9 +35,9 @@ export type GetCommentsEpisodeByLikesQueryVariables = Types.Exact<{
 export type GetCommentsEpisodeByLikesQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetCommentsWorkQueryVariables = Types.Exact<{
-  work_id: Types.Scalars['Int'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  limit: Types.Scalars['Int'];
+  work_id: Types.Scalars['Int']['input'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']['input']>;
+  limit: Types.Scalars['Int']['input'];
   order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
@@ -45,10 +45,10 @@ export type GetCommentsWorkQueryVariables = Types.Exact<{
 export type GetCommentsWorkQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetCommentsWorkByLikesQueryVariables = Types.Exact<{
-  work_id: Types.Scalars['Int'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']>;
-  limit: Types.Scalars['Int'];
+  work_id: Types.Scalars['Int']['input'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']['input']>;
+  likes_cursor?: Types.InputMaybe<Types.Scalars['Int']['input']>;
+  limit: Types.Scalars['Int']['input'];
   order_by?: Types.InputMaybe<Array<Types.Comments_Order_By> | Types.Comments_Order_By>;
 }>;
 
@@ -56,31 +56,31 @@ export type GetCommentsWorkByLikesQueryVariables = Types.Exact<{
 export type GetCommentsWorkByLikesQuery = { __typename?: 'query_root', comments: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type GetRepliesQueryVariables = Types.Exact<{
-  _reply_to: Types.Scalars['uuid'];
-  cursor: Types.Scalars['timestamptz'];
-  reply_limit: Types.Scalars['Int'];
+  _reply_to: Types.Scalars['uuid']['input'];
+  cursor: Types.Scalars['timestamptz']['input'];
+  reply_limit: Types.Scalars['Int']['input'];
 }>;
 
 
 export type GetRepliesQuery = { __typename?: 'query_root', replies: Array<{ __typename?: 'comments', content: string, work_id?: number | null, user_id: string, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_to?: any | null, replied_to_commenter_name?: string | null, is_like?: boolean | null, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string }, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } }> };
 
 export type MutateEpisodeCommentMutationVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  content: Types.Scalars['String'];
-  reply_to?: Types.InputMaybe<Types.Scalars['uuid']>;
-  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']>;
-  commenter_name: Types.Scalars['String'];
+  episode_id: Types.Scalars['uuid']['input'];
+  content: Types.Scalars['String']['input'];
+  reply_to?: Types.InputMaybe<Types.Scalars['uuid']['input']>;
+  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  commenter_name: Types.Scalars['String']['input'];
 }>;
 
 
 export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, episode_id?: any | null } | null };
 
 export type MutateWorkCommentMutationVariables = Types.Exact<{
-  work_id: Types.Scalars['Int'];
-  content: Types.Scalars['String'];
-  reply_to?: Types.InputMaybe<Types.Scalars['uuid']>;
-  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']>;
-  commenter_name: Types.Scalars['String'];
+  work_id: Types.Scalars['Int']['input'];
+  content: Types.Scalars['String']['input'];
+  reply_to?: Types.InputMaybe<Types.Scalars['uuid']['input']>;
+  replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  commenter_name: Types.Scalars['String']['input'];
 }>;
 
 

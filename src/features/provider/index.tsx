@@ -11,7 +11,7 @@ import { NotificationProvider } from "src/components/Elements/Notification/Notif
 import queryClient from "src/libs/queryClient";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import dynamic from "next/dynamic";
-import { Inter } from "next/font/google";
+import { Inter } from "@next/font/google";
 
 type Props = {
   children: React.ReactNode;

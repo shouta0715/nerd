@@ -12,20 +12,20 @@ function fetcher<TData, TVariables extends { [key: string]: any }>(client: Graph
   });
 }
 export type GetChatsEpisodeQueryVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  get_limit: Types.Scalars['Int'];
-  _lt: Types.Scalars['Int'];
-  _gte: Types.Scalars['Int'];
+  episode_id: Types.Scalars['uuid']['input'];
+  get_limit: Types.Scalars['Int']['input'];
+  _lt: Types.Scalars['Int']['input'];
+  _gte: Types.Scalars['Int']['input'];
 }>;
 
 
 export type GetChatsEpisodeQuery = { __typename?: 'query_root', chats_by_episode_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } }> };
 
 export type GetChatsWorkQueryVariables = Types.Exact<{
-  work_id: Types.Scalars['Int'];
-  get_limit: Types.Scalars['Int'];
-  _lt: Types.Scalars['Int'];
-  _gte: Types.Scalars['Int'];
+  work_id: Types.Scalars['Int']['input'];
+  get_limit: Types.Scalars['Int']['input'];
+  _lt: Types.Scalars['Int']['input'];
+  _gte: Types.Scalars['Int']['input'];
 }>;
 
 
@@ -39,9 +39,9 @@ export type InsertChatMutationVariables = Types.Exact<{
 export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id: string, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } } | null };
 
 export type GetZeroTimeChatsQueryVariables = Types.Exact<{
-  episode_id: Types.Scalars['uuid'];
-  limit: Types.Scalars['Int'];
-  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  episode_id: Types.Scalars['uuid']['input'];
+  limit: Types.Scalars['Int']['input'];
+  cursor?: Types.InputMaybe<Types.Scalars['timestamptz']['input']>;
 }>;
 
 
