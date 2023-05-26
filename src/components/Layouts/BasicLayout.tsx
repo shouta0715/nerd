@@ -2,19 +2,15 @@ import dynamic from "next/dynamic";
 import React, { ReactElement } from "react";
 import { Background } from "src/components/Elements/Background";
 import { Aside } from "src/components/Layouts/Aside";
-
 import { Header } from "src/components/Layouts/Header";
-import { AuthModal } from "src/components/Modal/Auth";
 import { Provider } from "src/features/provider";
 
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
+const DynamicSearchButton = dynamic(() =>
+  import("src/components/Elements/SearchButton").then((mod) => mod.SearchButton)
+);
+
+const DynamicAuthModal = dynamic(() =>
+  import("src/components/Modal/Auth").then((mod) => mod.AuthModal)
 );
 
 export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
@@ -36,7 +32,7 @@ export const BasicLayout = (page: ReactElement) => (
         </div>
       </div>
     </div>
-    <AuthModal />
+    <DynamicAuthModal />
   </LayoutProvider>
 );
 
@@ -48,7 +44,7 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
         {page}
       </div>
     </div>
-    <AuthModal />
+    <DynamicAuthModal />
   </LayoutProvider>
 );
 
@@ -61,6 +57,6 @@ export const BasicListLayout = (page: ReactElement) => (
         {page}
       </main>
     </div>
-    <AuthModal />
+    <DynamicAuthModal />
   </LayoutProvider>
 );

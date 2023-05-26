@@ -5,14 +5,8 @@ import { WeeklyWorksList } from "src/features/lists/components/WeeklyWorksList";
 import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
 import { ListPage } from "src/libs/next/types";
 
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
+const DynamicSearchButton = dynamic(() =>
+  import("src/components/Elements/SearchButton").then((mod) => mod.SearchButton)
 );
 
 export const Weekly = ({
