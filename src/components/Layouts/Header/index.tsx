@@ -1,6 +1,7 @@
+import { Popover } from "@headlessui/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Image } from "src/components/Elements/Image";
@@ -15,24 +16,6 @@ export const Header = () => {
   const user = useUserState((state) => state.user);
   const authLoading = useGlobalState((state) => state.authLoading);
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
-  const [isUserMenuOpen, setIsUserMenuOpen] = React.useState(false);
-  const elementRef = React.useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        elementRef.current &&
-        !elementRef.current.contains(event.target as Node)
-      ) {
-        setIsUserMenuOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <header className="shrink-0 border-b border-gray-200 bg-white">
@@ -44,8 +27,8 @@ export const Header = () => {
         </Link>
         <div className="flex items-center gap-x-8">
           {user && !user.anonymous ? (
-            <div ref={elementRef} className="relative">
-              <button onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
+            <Popover className="relative">
+              <Popover.Button>
                 {user.isDefaultPhoto ? (
                   <Image
                     alt="avatar"
@@ -60,13 +43,9 @@ export const Header = () => {
                     user_name={user.user_name}
                   />
                 )}
-              </button>
-
-              <DynamicAccountMenu
-                isUserMenuOpen={isUserMenuOpen}
-                setIsUserMenuOpen={setIsUserMenuOpen}
-              />
-            </div>
+              </Popover.Button>
+              <DynamicAccountMenu />
+            </Popover>
           ) : (
             <Button
               className="px-1.5 py-1 md:px-2 md:py-1.5"

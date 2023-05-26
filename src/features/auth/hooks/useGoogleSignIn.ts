@@ -4,7 +4,8 @@ import {
   deleteUser,
   signInWithPopup,
   signOut,
-  reauthenticateWithCredential,
+  OAuthProvider,
+  reauthenticateWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../../libs/firebase";
@@ -13,11 +14,20 @@ import { UnauthorizedError } from "src/libs/error";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
+export const deleteToken = async (id: string) => {
+  fetch(`/api/user/${id}`, {
+    method: "DELETE",
+  });
+};
+
 export const useGoogleSignIn = () => {
-  const [authLoading, setAuthLoading] = useGlobalState((state) => [
-    state.authLoading,
-    state.setAuthLoading,
-  ]);
+  const [authLoading, setAuthLoading, setIsDeleteConfirmationOpen] =
+    useGlobalState((state) => [
+      state.authLoading,
+      state.setAuthLoading,
+      state.setIsDeleteConfirmationOpen,
+    ]);
+
   const onShow = useNotificationState((state) => state.onShow);
   const [_, setIsError] = useState(null);
 
@@ -50,23 +60,15 @@ export const useGoogleSignIn = () => {
     try {
       setAuthLoading(true);
       await signOut(auth);
+
       onShow({
         title: "ログアウトしました",
         type: "success",
       });
+      setAuthLoading(false);
     } catch (error) {
       setAuthLoading(false);
     }
-  };
-
-  const deleteToken = async (id: string) => {
-    fetch("/api/user", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id }),
-    });
   };
 
   const deleteGoogleUser = async () => {
@@ -76,6 +78,7 @@ export const useGoogleSignIn = () => {
       if (auth.currentUser) {
         await deleteToken(auth.currentUser.uid);
         await deleteUser(auth.currentUser);
+        setIsDeleteConfirmationOpen(false);
         onShow({
           title: "アカウントを消去しました",
           type: "success",
@@ -90,12 +93,25 @@ export const useGoogleSignIn = () => {
     } catch (error: any) {
       if (error.code === "auth/requires-recent-login") {
         if (auth.currentUser) {
-          const credential = GoogleAuthProvider.credential();
-          if (credential) {
-            await reauthenticateWithCredential(auth.currentUser, credential);
-            await deleteToken(auth.currentUser.uid);
-            await deleteUser(auth.currentUser);
-          }
+          const provider = new OAuthProvider("google.com");
+
+          const { user: deletedUser } = await reauthenticateWithPopup(
+            auth.currentUser,
+            provider
+          );
+
+          await deleteToken(deletedUser.uid);
+          await deleteUser(deletedUser);
+          setIsDeleteConfirmationOpen(false);
+          setAuthLoading(false);
+          onShow({
+            title: "アカウントを消去しました",
+            type: "success",
+          });
+
+          localStorage.removeItem("user_name");
+
+          return;
         }
       } else if (error.code === "auth/user-not-found") {
         setIsError(() => {
@@ -108,8 +124,6 @@ export const useGoogleSignIn = () => {
       setIsError(() => {
         throw new UnauthorizedError();
       });
-    } finally {
-      setAuthLoading(false);
     }
   };
 
