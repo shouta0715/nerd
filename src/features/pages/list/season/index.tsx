@@ -5,14 +5,8 @@ import { SeasonWorksList } from "src/features/lists/components/SeasonWorks";
 import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { ListPage } from "src/libs/next/types";
 
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
+const DynamicSearchButton = dynamic(() =>
+  import("src/components/Elements/SearchButton").then((mod) => mod.SearchButton)
 );
 
 export const Season = ({

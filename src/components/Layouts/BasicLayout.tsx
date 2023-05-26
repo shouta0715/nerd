@@ -5,21 +5,12 @@ import { Aside } from "src/components/Layouts/Aside";
 import { Header } from "src/components/Layouts/Header";
 import { Provider } from "src/features/provider";
 
-const DynamicSearchButton = dynamic(
-  () =>
-    import("src/components/Elements/SearchButton").then(
-      (mod) => mod.SearchButton
-    ),
-  {
-    ssr: false,
-  }
+const DynamicSearchButton = dynamic(() =>
+  import("src/components/Elements/SearchButton").then((mod) => mod.SearchButton)
 );
 
-const DynamicAuthModal = dynamic(
-  () => import("src/components/Modal/Auth").then((mod) => mod.AuthModal),
-  {
-    ssr: false,
-  }
+const DynamicAuthModal = dynamic(() =>
+  import("src/components/Modal/Auth").then((mod) => mod.AuthModal)
 );
 
 export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
