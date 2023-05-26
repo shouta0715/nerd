@@ -25,6 +25,7 @@ export type CreateUserMutationVariables = Types.Exact<{
   user_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
   photo_url?: Types.InputMaybe<Types.Scalars['String']['input']>;
   ip?: Types.InputMaybe<Types.Scalars['String']['input']>;
+  isAnonymous?: Types.InputMaybe<Types.Scalars['Boolean']['input']>;
 }>;
 
 
@@ -67,9 +68,9 @@ export const useGetUserQuery = <
     );
 useGetUserQuery.fetcher = (client: GraphQLClient, variables: GetUserQueryVariables, headers?: RequestInit['headers']) => fetcher<GetUserQuery, GetUserQueryVariables>(client, GetUserDocument, variables, headers);
 export const CreateUserDocument = `
-    mutation CreateUser($id: String!, $user_name: String, $photo_url: String, $ip: String) {
+    mutation CreateUser($id: String!, $user_name: String, $photo_url: String, $ip: String, $isAnonymous: Boolean) {
   insert_users_one(
-    object: {id: $id, user_name: $user_name, photo_url: $photo_url, ip: $ip}
+    object: {id: $id, user_name: $user_name, photo_url: $photo_url, ip: $ip, anonymous: $isAnonymous}
     on_conflict: {constraint: users_pkey}
   ) {
     ...UserInfo
