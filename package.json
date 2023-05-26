@@ -13,7 +13,7 @@
     "format": "prettier --write .",
     "test-all": "yarn format && yarn check-lint && yarn check-types",
     "test": "jest",
-    "codegen": "graphql-codegen --config codegen.ts",
+    "codegen": "graphql-codegen --config codegen.js",
     "analyze": "ANALYZE=true next build",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",

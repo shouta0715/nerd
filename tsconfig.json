@@ -20,7 +20,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "codegen.ts",
+    "codegen.js",
     "jest.config.ts"
   ],
   "exclude": ["node_modules"]

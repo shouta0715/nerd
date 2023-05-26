@@ -1,7 +1,6 @@
-import { CodegenConfig } from "@graphql-codegen/cli";
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { secret, endpoint } from "./secrets.json";
+const { secret, endpoint } = require("./secrets.json");
 
 // export const overwrite = true;
 const schema = {
@@ -12,7 +11,7 @@ const schema = {
   },
 };
 const documents = "./src/graphql/**/*.ts";
-const codegenConfig: CodegenConfig = {
+const codegenConfig = {
   schema,
   documents,
   generates: {
@@ -34,4 +33,4 @@ const codegenConfig: CodegenConfig = {
   },
 };
 
-export default codegenConfig;
+module.exports = codegenConfig;
