@@ -70,9 +70,41 @@ export const useLiveChats = ({
       const newPageParam = { _gte: _lt, _lt: NumberTime + 1 };
       setPrevPageParam(newPageParam);
 
-      fetchNextPage({
+      const prevData = queryClient.getQueryData<InfiniteLiveChats>([
+        "LiveChats",
+        { episode_id },
+      ]);
+      const { data: refetchData } = await fetchNextPage({
         pageParam: newPageParam,
       });
+
+      if (
+        !prevData ||
+        !refetchData ||
+        !refetchData.pages.at(-1)?.chats_by_episode_id.length
+      )
+        return;
+
+      const maybeSelfMutatedId = prevData.pages
+        .at(-1)
+        ?.chats_by_episode_id.at(-1)?.id;
+
+      const filteredDuplicatedData = refetchData.pages
+        .at(-1)
+        ?.chats_by_episode_id.filter((chat) => chat.id !== maybeSelfMutatedId);
+
+      if (!filteredDuplicatedData) return;
+
+      queryClient.setQueryData<InfiniteLiveChats>(
+        ["LiveChats", { episode_id }],
+        {
+          pageParam: refetchData.pageParams as PageParam[],
+          pages: [
+            ...refetchData.pages.slice(0, -1),
+            { chats_by_episode_id: filteredDuplicatedData },
+          ],
+        }
+      );
 
       return;
     }
