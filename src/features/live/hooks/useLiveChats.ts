@@ -89,19 +89,26 @@ export const useLiveChats = ({
         .at(-1)
         ?.chats_by_episode_id.at(-1)?.id;
 
-      const filteredDuplicatedData = refetchData.pages
-        .at(-1)
-        ?.chats_by_episode_id.filter((chat) => chat.id !== maybeSelfMutatedId);
-
-      if (!filteredDuplicatedData) return;
+      const filteredDuplicatedData = prevData.pages.map((page) => {
+        return {
+          ...page,
+          chats_by_episode_id: page.chats_by_episode_id.filter(
+            (chat) => chat.id !== maybeSelfMutatedId
+          ),
+        };
+      });
 
       queryClient.setQueryData<InfiniteLiveChats>(
         ["LiveChats", { episode_id }],
         {
           pageParam: refetchData.pageParams as PageParam[],
           pages: [
-            ...refetchData.pages.slice(0, -1),
-            { chats_by_episode_id: filteredDuplicatedData },
+            ...filteredDuplicatedData,
+            {
+              chats_by_episode_id:
+                refetchData.pages[refetchData.pages.length - 1]
+                  .chats_by_episode_id,
+            },
           ],
         }
       );
