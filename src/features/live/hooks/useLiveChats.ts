@@ -85,17 +85,19 @@ export const useLiveChats = ({
       )
         return;
 
-      const maybeSelfMutatedId = prevData.pages
+      const maybeSelfMutatedIds = refetchData.pages
         .at(-1)
-        ?.chats_by_episode_id.at(-1)?.id;
+        ?.chats_by_episode_id.map((chat) => chat.id);
 
-      const filteredDuplicatedData = prevData.pages.map((page) => {
-        return {
-          ...page,
-          chats_by_episode_id: page.chats_by_episode_id.filter(
-            (chat) => chat.id !== maybeSelfMutatedId
-          ),
-        };
+      const filteredDuplicatedData = prevData.pages.map((page, index) => {
+        if (index !== prevData.pages.length - 1) return page;
+
+        // 最後のindexの時は、自分自身のデータを除外する
+        const chats_by_episode_id = page.chats_by_episode_id.filter(
+          (chat) => !maybeSelfMutatedIds?.includes(chat.id)
+        );
+
+        return { chats_by_episode_id };
       });
 
       queryClient.setQueryData<InfiniteLiveChats>(
