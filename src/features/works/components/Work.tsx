@@ -62,11 +62,11 @@ export const Work: FC = () => {
         )}
 
         {series && (
-          <div className="mt-6">
+          <div className="mt-20">
             <Text className="mb-4 text-xl font-bold" component="h1">
               シリーズ一覧
             </Text>
-            <ul className="grid grid-cols-1 gap-2  md:gap-4 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+            <ul className="grid grid-cols-1 gap-y-12  md:gap-12 lg:grid-cols-2  2xl:grid-cols-3">
               {isPlaceholderData
                 ? Array.from({ length: 8 }).map((_, index) => (
                     <Skeleton
