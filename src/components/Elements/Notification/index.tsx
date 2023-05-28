@@ -42,34 +42,14 @@ export const Notification = () => {
     title,
     message,
     type,
-    duration,
-    isPersistent,
     onHide,
   } = useNotificationState((state) => ({
     isShown: state.isShown,
     title: state.title,
     message: state.message,
     type: state.type,
-    duration: state.duration,
-    isPersistent: state.isPersistent,
     onHide: state.onHide,
   }));
-
-  const intervalId = React.useRef<NodeJS.Timeout | null>(null);
-
-  React.useEffect(() => {
-    if (show && !isPersistent) {
-      intervalId.current = setTimeout(() => {
-        onHide();
-      }, duration);
-    }
-
-    return () => {
-      if (intervalId.current) {
-        clearTimeout(intervalId.current);
-      }
-    };
-  }, [duration, isPersistent, onHide, show]);
 
   return (
     <div

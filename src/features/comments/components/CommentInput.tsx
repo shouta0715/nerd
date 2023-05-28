@@ -136,7 +136,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
               type="submit"
             >
               {isLoading || authLoading ? (
-                <Loader color="white" size="md" />
+                <Loader size="md" theme="white" />
               ) : (
                 <PaperAirplaneIcon className=" h-4 w-4 fill-white stroke-white" />
               )}
@@ -156,7 +156,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
           type="submit"
         >
           {isLoading || authLoading ? (
-            <Loader color="white" size="md" />
+            <Loader size="md" theme="white" />
           ) : (
             <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
           )}
