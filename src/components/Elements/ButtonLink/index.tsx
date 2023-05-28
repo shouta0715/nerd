@@ -79,8 +79,8 @@ export const ButtonLink: FC<LinkProps> = ({
     {loading && (
       <Loader
         className={clsx(loaderClassName)}
-        color="white"
         size={size}
+        theme="white"
         variant="oval"
       />
     )}

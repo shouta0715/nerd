@@ -14,6 +14,7 @@ export type NotificationState = {
   type: NotificationType;
   isShown: boolean;
   isPersistent: boolean;
+  timer: NodeJS.Timeout | null;
 } & TextProps;
 
 type NotificationActions = {
@@ -30,10 +31,38 @@ const defaultState: NotificationState = {
   isShown: false,
   type: "info",
   isPersistent: false,
+  timer: null,
 };
 
 export const useNotificationState = create<Notification>((set, get) => ({
   ...defaultState,
-  onShow: (state) => set(() => ({ ...defaultState, ...state, isShown: true })),
-  onHide: () => set(() => ({ ...get(), isShown: false })),
+  onShow: (state) =>
+    set(() => {
+      const { duration, isPersistent } = state;
+
+      const timer = setTimeout(() => {
+        if (!isPersistent) {
+          get().onHide();
+        }
+      }, duration ?? 3000);
+
+      return {
+        ...state,
+        isShown: true,
+        timer,
+      };
+    }),
+  onHide: () =>
+    set(() => {
+      const { timer } = get();
+
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      return {
+        ...get(),
+        isShown: false,
+      };
+    }),
 }));

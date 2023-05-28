@@ -29,7 +29,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
         <span className="block truncate">{buttonLabel(filter)}</span>
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           {isLoading ? (
-            <Loader className="m-auto" color="white" size="sm" variant="dots" />
+            <Loader className="m-auto" size="sm" theme="white" variant="dots" />
           ) : (
             <ChevronDownIcon
               aria-hidden="true"

@@ -11,7 +11,7 @@ export default {
 export const Default: Story = {
   args: {
     variant: "oval",
-    color: "indigo",
+    theme: "primary",
     size: "md",
   },
 };
@@ -19,7 +19,7 @@ export const Default: Story = {
 export const Oval: Story = {
   args: {
     variant: "oval",
-    color: "indigo",
+    theme: "primary",
     size: "md",
   },
 };
@@ -27,7 +27,7 @@ export const Oval: Story = {
 export const Dots: Story = {
   args: {
     variant: "dots",
-    color: "indigo",
+    theme: "primary",
     size: "md",
   },
 };

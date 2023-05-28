@@ -45,7 +45,7 @@ export const Chats: FC<Props> = ({
         show={time === 0 && !interval.active}
       >
         {isLoading || !user ? (
-          <Loader color="white" size="xl" />
+          <Loader size="md" theme="white" />
         ) : (
           <PlayIcon className="h-10 w-10 fill-white" />
         )}

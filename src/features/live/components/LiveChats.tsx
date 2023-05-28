@@ -62,7 +62,7 @@ export const LiveChats: FC<Props> = ({
       </button>
       <div className="fixed bottom-20 right-2 grid h-11 w-11 place-items-center rounded-full bg-indigo-500 shadow-md shadow-indigo-400 transition-transform active:translate-y-1 lg:right-14">
         {isRefetching ? (
-          <Loader color="white" size="sm" />
+          <Loader size="sm" theme="white" />
         ) : (
           <button
             className="grid h-full w-full place-items-center text-white "

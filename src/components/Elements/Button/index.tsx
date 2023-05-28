@@ -90,8 +90,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       {loading && (
         <Loader
           className={clsx(loaderClassName)}
-          color="white"
           size={size}
+          theme="white"
           variant="oval"
         />
       )}
