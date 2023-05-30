@@ -1,5 +1,6 @@
 import { useMutateChatWork } from "src/features/chats/api/useMutateChatWork";
 import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
+import { useGlobalState } from "src/store/global/globalStore";
 
 type Args = {
   work_id: number;
@@ -8,11 +9,12 @@ type Args = {
 export const useSubmitWork = ({ work_id }: Args) => {
   const { insertChat } = useMutateChatWork();
   const { content, user, getTime, setContent } = useSubmitChat();
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!content.trim()) return;
+      if (!content.trim() || authLoading) return;
       const object = {
         work_id,
         content,

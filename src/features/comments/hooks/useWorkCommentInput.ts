@@ -1,6 +1,7 @@
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
+import { useGlobalState } from "src/store/global/globalStore";
 
 export const useWorkCommentInput = (
   work_id: number,
@@ -15,12 +16,13 @@ export const useWorkCommentInput = (
     insertWorkComment,
   } = useCommentInput(filter);
   const onNotification = useNotificationState((state) => state.onShow);
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      if (!content.trim()) return;
+      if (!content.trim() || authLoading) return;
       insertWorkComment.mutateAsync({
         work_id,
         content,

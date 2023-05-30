@@ -132,7 +132,7 @@ export const LiveChatInput: FC<Props> = ({
         </button>
         <Button
           className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
-          disabled={!user || isTimerLoading || mode === "finish"}
+          disabled={authLoading || isTimerLoading || mode === "finish"}
           type="submit"
         >
           {isLoading || authLoading ? (

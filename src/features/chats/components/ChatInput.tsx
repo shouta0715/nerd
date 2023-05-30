@@ -127,7 +127,7 @@ export const ChatInput: FC<Props> = ({
               className="h-8 w-8 rounded-full border-none bg-teal-500 p-0 active:translate-y-0 disabled:opacity-100 lg:hidden"
               disabled={
                 time === 0 ||
-                !user ||
+                authLoading ||
                 content.length === 0 ||
                 content.length > 100
               }

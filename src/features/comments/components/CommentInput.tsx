@@ -132,6 +132,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
             </div>
             <Button
               className="h-8 w-8 border-none bg-teal-500 p-0 active:translate-y-0 lg:hidden"
+              disabled={isLoading || authLoading}
               radius="full"
               type="submit"
             >

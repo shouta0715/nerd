@@ -63,6 +63,10 @@ export const useGoogleSignIn = () => {
       setAuthLoading(false);
     } catch (error) {
       setAuthLoading(false);
+      onShow({
+        title: "ログアウトに失敗しました",
+        type: "error",
+      });
     }
   };
 
@@ -109,15 +113,16 @@ export const useGoogleSignIn = () => {
           return;
         }
       } else if (error.code === "auth/user-not-found") {
-        setIsError(() => {
-          throw new UnauthorizedError();
+        onShow({
+          title: "アカウントが見つかりませんでした",
+          type: "error",
         });
       }
 
       setAuthLoading(false);
-
-      setIsError(() => {
-        throw new UnauthorizedError();
+      onShow({
+        title: "アカウントの消去に失敗しました",
+        type: "error",
       });
     }
   };

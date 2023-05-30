@@ -3,6 +3,7 @@
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useMutateChatEpisode } from "src/features/chats/api/useMutateChatEpisode";
 import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
+import { useGlobalState } from "src/store/global/globalStore";
 
 type Args = {
   episode_id: string;
@@ -12,11 +13,12 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   const { insertChat } = useMutateChatEpisode();
   const { content, user, getTime, setContent } = useSubmitChat();
   const onNotification = useNotificationState((state) => state.onShow);
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!content.trim()) return;
+      if (!content.trim() || authLoading) return;
       const object = {
         episode_id,
         content,
