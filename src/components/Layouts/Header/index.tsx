@@ -2,6 +2,7 @@ import { Popover } from "@headlessui/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
+import Logo from "public/logo.svg";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Image } from "src/components/Elements/Image";
@@ -20,7 +21,11 @@ export const Header = () => {
   return (
     <header className="shrink-0 border-b border-gray-200 bg-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link className="inline-block text-3xl font-black sm:text-4xl" href="/">
+        <Link
+          className="flex items-center gap-x-1 text-3xl font-black sm:text-4xl"
+          href="/"
+        >
+          <Logo className="h-10 w-10" />
           <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
             Nerd
           </span>
