@@ -3,6 +3,7 @@ import { useNotificationState } from "src/components/Elements/Notification/store
 import { useMutateLiveChat } from "src/features/live/api/useMutateLiveChat";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
+import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {
@@ -16,11 +17,12 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   const user = useUserState((state) => state.user);
   const { insetChat } = useMutateLiveChat();
   const onNotification = useNotificationState((state) => state.onShow);
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!content.trim()) return;
+      if (!content.trim() || authLoading) return;
 
       const object = {
         episode_id,

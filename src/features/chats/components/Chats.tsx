@@ -6,7 +6,7 @@ import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/components/Chat";
 import { Chat as TypeChat } from "src/features/chats/types";
 import { useTimerState } from "src/features/timer/store/timerStore";
-import { useUserState } from "src/store/user/userState";
+import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
   chats: TypeChat[];
@@ -27,14 +27,14 @@ export const Chats: FC<Props> = ({
   isLoading,
 }) => {
   const interval = useTimerState((state) => state.interval);
-  const user = useUserState((state) => state.user);
+  const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
     <ul className="relative  flex w-full flex-1 flex-col space-y-3 px-2  py-4 md:px-4">
       <Transition
         as="button"
         className="absolute left-1/2 top-1/2 m-auto grid  -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border bg-black p-4 transition-all"
-        disabled={isLoading}
+        disabled={isLoading || authLoading}
         enter="duration-300"
         enterFrom="opacity-0"
         enterTo="opacity-100"
@@ -44,8 +44,8 @@ export const Chats: FC<Props> = ({
         onClick={interval.start}
         show={time === 0 && !interval.active}
       >
-        {isLoading || !user ? (
-          <Loader size="md" theme="white" />
+        {isLoading || authLoading ? (
+          <Loader size="xl" theme="white" />
         ) : (
           <PlayIcon className="h-10 w-10 fill-white" />
         )}
