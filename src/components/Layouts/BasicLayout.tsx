@@ -42,7 +42,7 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
   <LayoutProvider>
     <div className="flex min-h-screen animate-fadeUp flex-col ">
       <Header />
-      <div className="container relative contents flex-1 lg:mx-auto lg:flex ">
+      <div className="container relative contents flex-1 lg:mx-auto lg:flex lg:max-w-7xl ">
         {page}
       </div>
     </div>
