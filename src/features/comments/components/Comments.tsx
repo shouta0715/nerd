@@ -44,7 +44,7 @@ export const Comments = forwardRef<any, Props>(
     return (
       <>
         <ul
-          className={`relative mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4 ${
+          className={`relative mx-auto w-full flex-1 space-y-6 px-2 pt-4 md:max-w-xl md:px-4 ${
             data?.pages[0].comments.length === 0 ? "hidden" : "block"
           }`}
         >
@@ -80,7 +80,7 @@ export const Comments = forwardRef<any, Props>(
               : "hidden"
           }`}
         >
-          一番最初のコメントを書いてみよう！
+          コメントはまだありません
         </Text>
       </>
     );
