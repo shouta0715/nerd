@@ -1,11 +1,11 @@
-import { setCookie } from "nookies";
-import { BadRequestError, InternalServerError } from "../error";
-import { createOption } from "../options";
-import { Next, ReturnRefreshToken, refreshSchema } from "../types";
-import { validate } from "../validate";
+import {setCookie} from "nookies";
+import {BadRequestError, InternalServerError} from "../error";
+import {createOption} from "../options";
+import {Next, ReturnRefreshToken, refreshSchema} from "../types";
+import {validate} from "../validate";
 
 export const refresh: Next<ReturnRefreshToken> = async (req, res) => {
-  const { refreshToken } = req.cookies;
+  const {refreshToken} = req.cookies;
 
   if (!refreshToken) {
     res.status(400).json(new BadRequestError().throwMessage());
@@ -25,15 +25,17 @@ export const refresh: Next<ReturnRefreshToken> = async (req, res) => {
       return r.text();
     });
 
-    const { id_token: idToken } = JSON.parse(data);
+    const {id_token: idToken} = JSON.parse(data);
     const option = createOption();
-    setCookie({ res }, "refreshToken", refreshToken, option);
+    setCookie({res}, "refreshToken", refreshToken, option);
 
     try {
       validate(idToken, refreshSchema);
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json(new BadRequestError().throwMessage());
+    }
 
-    res.status(200).json({ message: "ok", data: idToken });
+    res.status(200).json({message: "ok", data: idToken});
   } catch (err: any) {
     res.status(500).json(new InternalServerError().throwMessage());
   }

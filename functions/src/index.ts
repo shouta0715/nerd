@@ -1,7 +1,7 @@
-import { refresh } from "./server/functions/referesh";
-import { httpsRequest } from "./server";
-import { userHandler } from "./server/functions/user";
-import { setCustomClaimsHandler } from "./server/functions/setCustomClaims";
+import {refresh} from "./server/functions/referesh";
+import {httpsRequest} from "./server";
+import {userHandler} from "./server/functions/user";
+import {setCustomClaimsHandler} from "./server/functions/setCustomClaims";
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
