@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import { auth } from "../../../libs/firebase";
 import { useNotificationState } from "src/components/Elements/Notification/store";
-import { deleteToken } from "src/features/auth/hooks";
+
 import { UnauthorizedError } from "src/libs/error";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -75,7 +75,6 @@ export const useGoogleSignIn = () => {
       setAuthLoading(true);
 
       if (auth.currentUser) {
-        await deleteToken(auth.currentUser.uid);
         await deleteUser(auth.currentUser);
         setIsDeleteConfirmationOpen(false);
         onShow({
@@ -99,7 +98,6 @@ export const useGoogleSignIn = () => {
             provider
           );
 
-          await deleteToken(deletedUser.uid);
           await deleteUser(deletedUser);
           setIsDeleteConfirmationOpen(false);
           setAuthLoading(false);

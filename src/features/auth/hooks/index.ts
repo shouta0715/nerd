@@ -10,9 +10,10 @@ import {
 } from "src/libs/server/types";
 
 const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
+const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
 
 export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
-  const res = await fetch("/api/auth/setCustomClaims", {
+  const res = await fetch(`${API_URL}/setCustomClaims`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +39,7 @@ export const createUser = async ({
   photo_url,
   isAnonymous,
 }: CreateUserSchema): Promise<ReturnCreateUser> => {
-  const res = await fetch("/api/user", {
+  const res = await fetch(`${API_URL}/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -55,10 +56,4 @@ export const createUser = async ({
   const user = (await res.json()) as ReturnCreateUser;
 
   return user;
-};
-
-export const deleteToken = async (id: string) => {
-  fetch(`/api/user/${id}`, {
-    method: "DELETE",
-  });
 };

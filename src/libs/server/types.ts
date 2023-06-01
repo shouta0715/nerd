@@ -1,8 +1,6 @@
-import { NextApiResponse } from "next";
 import { z } from "zod";
 import {
   CreateUserMutation,
-  DeleteUserMutation,
   GetUserQuery,
 } from "src/graphql/user/userQuery.generated";
 
@@ -23,22 +21,6 @@ export const createUserSchema = z.object({
 
 export type CreateUserSchema = z.infer<typeof createUserSchema>;
 
-export type ReturnCreateUser = {
-  data: CreateUserMutation;
-  message: string;
-};
-
-export const deleteUserSchema = z.object({
-  id: z.string(),
-});
-
-export type DeleteUserSchema = z.infer<typeof deleteUserSchema>;
-
-export type ReturnDeleteUser = {
-  data: DeleteUserMutation;
-  message: string;
-};
-
 export const createClaimsSchema = z.object({
   id: z.string(),
   isAnonymous: z.boolean(),
@@ -55,4 +37,18 @@ export type ReturnError = {
   message: string;
 };
 
-export type ApiResponse<T> = NextApiResponse<T | ReturnError>;
+export type ReturnCreateUser = {
+  data: CreateUserMutation;
+  message: string;
+};
+
+export const refreshSchema = z.string();
+
+export type RefreshSchema = z.infer<typeof refreshSchema>;
+
+export type ReturnRefreshToken =
+  | {
+      message: string;
+      data: RefreshSchema;
+    }
+  | ReturnError;
