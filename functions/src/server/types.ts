@@ -1,8 +1,7 @@
 import { z } from "zod";
-import {
-  CreateUserMutation,
-  GetUserQuery,
-} from "src/graphql/user/userQuery.generated";
+import { CreateUserMutation, GetUserQuery } from "../user/types";
+import { Response } from "firebase-functions/v1";
+import { Request } from "express";
 
 export const getUserSchema = z.object({
   id: z.string(),
@@ -37,10 +36,12 @@ export type ReturnError = {
   message: string;
 };
 
-export type ReturnCreateUser = {
-  data: CreateUserMutation;
-  message: string;
-};
+export type ReturnCreateUser =
+  | {
+      data: CreateUserMutation;
+      message: string;
+    }
+  | ReturnError;
 
 export const refreshSchema = z.string();
 
@@ -52,3 +53,7 @@ export type ReturnRefreshToken =
       data: RefreshSchema;
     }
   | ReturnError;
+
+type ApiResponse<T> = Response<T>;
+
+export type Next<T> = (req: Request, res: ApiResponse<T>) => void;

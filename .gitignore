@@ -27,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.*
 
 # vercel
 .vercel
@@ -47,3 +48,5 @@ __reports__
 __mocks__
 
 storybook-static
+
+.firebase

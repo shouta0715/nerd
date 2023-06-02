@@ -5,10 +5,10 @@ yarn.lock
 package-lock.json
 public
 generated
-functions
 *.config.*
 *.generated.ts
 graphql.ts
 __reports__
 coverage
 storybook-static
+.firebase

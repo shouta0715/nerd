@@ -1,13 +1,4 @@
-import * as cookie from "cookie";
 import { cert } from "firebase-admin/app";
-
-export const firebaseConfig = {
-  credential: cert({
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-  }),
-};
 
 export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
   "https://hasura.io/jwt/claims": {
@@ -17,10 +8,20 @@ export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
   },
 });
 
-export const createOption = (): cookie.CookieSerializeOptions => ({
+export const createOption = (): any => ({
   maxAge: 14 * 24 * 60 * 60, // 14 days
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
   sameSite: "strict",
   path: "/",
 });
+
+export const getFirebaseConfig = () => {
+  return {
+    credential: cert({
+      projectId: process.env.PROJECT_ID,
+      clientEmail: process.env.CLIENT_EMAIL,
+      privateKey: process.env.PRIVATE_KEY?.replace(/\\n/g, "\n"),
+    }),
+  };
+};

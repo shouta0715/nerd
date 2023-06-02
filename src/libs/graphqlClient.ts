@@ -21,10 +21,13 @@ class GraphQLRequest extends GraphQLClient {
   }
 
   private async refreshToken() {
-    const data: RefreshTokenResult = await fetch("/api/auth/refreshToken", {
-      method: "POST",
-      credentials: "include",
-    }).then((res) => res.json());
+    const data: RefreshTokenResult = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/refreshToken`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    ).then((res) => res.json());
 
     return data;
   }

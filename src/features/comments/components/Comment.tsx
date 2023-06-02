@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-import Image from "next/image";
+
 import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
+import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
 import { useReply } from "src/features/comments/hooks/useReply";
