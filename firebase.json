@@ -3,6 +3,7 @@
     {
       "source": "functions",
       "codebase": "default",
+      "runtime": "nodejs18",
       "ignore": [
         "node_modules",
         ".git",
@@ -20,6 +21,28 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "frameworksBackend": {
       "region": "us-central1"
-    }
+    },
+    "rewrites": [
+      {
+        "destination": "/episodes/[slug].html",
+        "regex": "^/episodes/([^/]+?)(?:/)?$"
+      },
+      {
+        "destination": "/episodes/live/[slug].html",
+        "regex": "^/episodes/live/([^/]+?)(?:/)?$"
+      },
+      {
+        "destination": "/series/[slug].html",
+        "regex": "^/series/([^/]+?)(?:/)?$"
+      },
+      {
+        "destination": "/works/play/[slug].html",
+        "regex": "^/works/play/([^/]+?)(?:/)?$"
+      },
+      {
+        "destination": "/works/[slug].html",
+        "regex": "^/works/([^/]+?)(?:/)?$"
+      }
+    ]
   }
 }

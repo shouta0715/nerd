@@ -1,12 +1,12 @@
 /* eslint-disable max-classes-per-file */
 export const errors = {
-  200: {message: "GraphQL Error"},
-  400: {message: "Bad Request"},
-  401: {message: "Unauthorized"},
-  403: {message: "Forbidden"},
-  404: {message: "Not Found"},
-  405: {message: "Method Not Allowed"},
-  500: {message: "Internal Server Error"},
+  200: { message: "GraphQL Error" },
+  400: { message: "Bad Request" },
+  401: { message: "Unauthorized" },
+  403: { message: "Forbidden" },
+  404: { message: "Not Found" },
+  405: { message: "Method Not Allowed" },
+  500: { message: "Internal Server Error" },
 } as const;
 
 export type ErrorType = keyof typeof errors;
@@ -29,7 +29,7 @@ export class HttpError extends Error {
   }
 
   throwMessage() {
-    return {message: this.message, status: this.status};
+    return { message: this.message, status: this.status };
   }
 }
 

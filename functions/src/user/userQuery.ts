@@ -1,4 +1,4 @@
-import {gql} from "graphql-request";
+import { gql } from "graphql-request";
 
 const userInfo = gql`
   fragment UserInfo on users {

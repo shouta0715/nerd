@@ -1,4 +1,4 @@
-import {GraphQLClient} from "graphql-request";
+import { GraphQLClient } from "graphql-request";
 
 export const getClient = () => {
   const url = process.env.ENDPOINT as string;

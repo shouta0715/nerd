@@ -1,4 +1,4 @@
-import {cert} from "firebase-admin/app";
+import { cert } from "firebase-admin/app";
 
 export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
   "https://hasura.io/jwt/claims": {

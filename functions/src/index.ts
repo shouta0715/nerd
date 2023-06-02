@@ -1,20 +1,28 @@
-import {refresh} from "./server/functions/referesh";
-import {httpsRequest} from "./server";
-import {userHandler} from "./server/functions/user";
-import {setCustomClaimsHandler} from "./server/functions/setCustomClaims";
+import { refresh } from "./server/functions/referesh";
+import { httpsRequest } from "./server";
+import { userHandler } from "./server/functions/user";
+import { setCustomClaimsHandler } from "./server/functions/setCustomClaims";
+import * as cors from "cors";
+import * as express from "express";
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+const router = express.Router();
+app.use("/api", router);
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+  })
+);
 
-export const setCustomClaims = httpsRequest({
-  next: setCustomClaimsHandler,
-});
+// すべてのリクエストをapi/以下にする
 
-export const user = httpsRequest({
-  next: userHandler,
+router.post("/setCustomClaims", setCustomClaimsHandler);
+router.post("/user", userHandler);
+router.post("/refreshToken", refresh);
+
+export const api = httpsRequest({
+  next: app,
   secrets: ["ADMIN_SECRET"],
-});
-
-export const refreshToken = httpsRequest({
-  next: refresh,
 });

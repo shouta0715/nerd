@@ -1,4 +1,4 @@
-import {ZodSchema, z} from "zod";
+import { ZodSchema, z } from "zod";
 
 export function validate<T extends ZodSchema>(
   target: unknown,

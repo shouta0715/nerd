@@ -12,3 +12,4 @@ graphql.ts
 __reports__
 coverage
 storybook-static
+.firebase
