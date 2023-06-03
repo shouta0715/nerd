@@ -1,8 +1,8 @@
-import { z } from "zod";
-import { CreateUserMutation, GetUserQuery } from "../../user/types";
-import { Response } from "firebase-functions/v1";
-import { Request } from "express";
-import { UserRecord } from "firebase-functions/v1/auth";
+import {z} from "zod";
+import {CreateUserMutation, GetUserQuery} from "../../user/types";
+import {Response} from "firebase-functions/v1";
+import {Request} from "express";
+import {UserRecord} from "firebase-functions/v1/auth";
 
 export const getUserSchema = z.object({
   id: z.string(),

@@ -1,7 +1,7 @@
-import { setCustomClaimsHandler } from "../../functions/customClaims";
-import { deleteTokenHandler } from "../../functions/deleteToken";
-import { refreshTokenHandler } from "../../functions/refreshToken";
-import { userHandler } from "../../functions/user";
+import {setCustomClaimsHandler} from "../../functions/customClaims";
+import {deleteTokenHandler} from "../../functions/deleteToken";
+import {refreshTokenHandler} from "../../functions/refreshToken";
+import {userHandler} from "../../functions/user";
 
 import * as express from "express";
 
@@ -12,4 +12,4 @@ router.post("/user", userHandler);
 router.post("/refreshToken", refreshTokenHandler);
 router.delete("/deleteToken", deleteTokenHandler);
 
-export { router };
+export {router};

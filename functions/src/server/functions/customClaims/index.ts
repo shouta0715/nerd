@@ -1,14 +1,14 @@
-import { getApp, getApps, initializeApp } from "firebase-admin/app";
-import { getAuth } from "firebase-admin/auth";
+import {getApp, getApps, initializeApp} from "firebase-admin/app";
+import {getAuth} from "firebase-admin/auth";
 
-import { ZodError } from "zod";
+import {ZodError} from "zod";
 import {
   createCustomClaims,
   createOption,
   getFirebaseConfig,
 } from "../../config/options";
-import { validate } from "../../types/validate";
-import { Next, ReturnCreateClaims, createClaimsSchema } from "../../types";
+import {validate} from "../../types/validate";
+import {Next, ReturnCreateClaims, createClaimsSchema} from "../../types";
 import {
   BadRequestError,
   InternalServerError,
@@ -20,7 +20,7 @@ export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
 
   try {
     validate(req.body, createClaimsSchema);
-    const { id, isAnonymous, refreshToken } = req.body;
+    const {id, isAnonymous, refreshToken} = req.body;
     const option = createOption();
     const customClaims = createCustomClaims(id, isAnonymous);
 
@@ -30,7 +30,7 @@ export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, option);
 
-    res.status(200).json({ message: "ok" });
+    res.status(200).json({message: "ok"});
   } catch (err: any) {
     if (err instanceof ZodError) {
       res.status(400).json(new BadRequestError().throwMessage());
@@ -44,9 +44,9 @@ export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
 
 export const setCustomClaimsHandler: Next<ReturnCreateClaims> = (req, res) => {
   switch (req.method) {
-    case "POST":
-      return postHandler(req, res);
-    default:
-      return res.status(405).json(new MethodNotAllowedError().throwMessage());
+  case "POST":
+    return postHandler(req, res);
+  default:
+    return res.status(405).json(new MethodNotAllowedError().throwMessage());
   }
 };

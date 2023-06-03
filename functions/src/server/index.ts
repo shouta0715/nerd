@@ -1,5 +1,5 @@
-import { AuthNext, Next } from "./types";
-import { region } from "firebase-functions/v1";
+import {AuthNext, Next} from "./types";
+import {region} from "firebase-functions/v1";
 
 type RequestConfig<T> = {
   next: Next<T>;
@@ -12,7 +12,7 @@ type AuthConfig = {
   trigger: "onCreate" | "onDelete";
 };
 
-export const httpsRequest = <T>({ next, secrets }: RequestConfig<T>) => {
+export const httpsRequest = <T>({next, secrets}: RequestConfig<T>) => {
   return region("us-central1")
     .runWith({
       secrets: secrets ?? [],
@@ -22,7 +22,7 @@ export const httpsRequest = <T>({ next, secrets }: RequestConfig<T>) => {
     });
 };
 
-export const authRequest = ({ next, secrets, trigger }: AuthConfig) => {
+export const authRequest = ({next, secrets, trigger}: AuthConfig) => {
   if (trigger === "onCreate") {
     return region("us-central1")
       .runWith({

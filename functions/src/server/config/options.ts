@@ -1,5 +1,5 @@
-import { CookieOptions } from "express";
-import { cert } from "firebase-admin/app";
+import {CookieOptions} from "express";
+import {cert} from "firebase-admin/app";
 
 export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
   "https://hasura.io/jwt/claims": {

@@ -1,6 +1,6 @@
-import { authRequest, httpsRequest } from "./server";
-import { app } from "./server/config/express";
-import { onDeleteHandler } from "./server/routers/auth";
+import {authRequest, httpsRequest} from "./server";
+import {app} from "./server/config/express";
+import {onDeleteHandler} from "./server/routers/auth";
 
 export const api = httpsRequest({
   next: app,
