@@ -1,21 +1,21 @@
-import { ZodError } from "zod";
-import { CreateUserMutation } from "../../user/types";
-import { CREATE_USER } from "../../user/userQuery";
-import { getClient } from "../client";
+import {ZodError} from "zod";
+import {Next, ReturnCreateUser, createUserSchema} from "../../types";
+import {validate} from "../../types/validate";
+import {getClient} from "../../config/client";
+import {CreateUserMutation} from "../../../user/types";
+import {CREATE_USER} from "../../../user/userQuery";
 import {
   BadRequestError,
   InternalServerError,
   MethodNotAllowedError,
-} from "../error";
-import { Next, ReturnCreateUser, createUserSchema } from "../types";
-import { validate } from "../validate";
+} from "../../error";
 
 const postHandler: Next<ReturnCreateUser> = async (req, res) => {
   try {
     validate(req.body, createUserSchema);
     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-    const { id, user_name, photo_url, isAnonymous } = req.body;
+    const {id, user_name, photo_url, isAnonymous} = req.body;
 
     const data = await getClient().request<CreateUserMutation>(CREATE_USER, {
       id,
@@ -42,9 +42,9 @@ const postHandler: Next<ReturnCreateUser> = async (req, res) => {
 
 export const userHandler: Next<ReturnCreateUser> = (req, res) => {
   switch (req.method) {
-    case "POST":
-      return postHandler(req, res);
-    default:
-      return res.status(405).json(new MethodNotAllowedError().throwMessage());
+  case "POST":
+    return postHandler(req, res);
+  default:
+    return res.status(405).json(new MethodNotAllowedError().throwMessage());
   }
 };
