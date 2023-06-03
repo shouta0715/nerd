@@ -11,10 +11,11 @@ export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
 
 export const createOption = (): CookieOptions => ({
   maxAge: 14 * 24 * 60 * 60, // 14 days
-  httpOnly: true,
+  httpOnly: process.env.NODE_ENV === "production",
   secure: process.env.NODE_ENV === "production",
   sameSite: "none",
   path: "/",
+  domain: process.env.ORIGIN,
 });
 
 export const getFirebaseConfig = () => {

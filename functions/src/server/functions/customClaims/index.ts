@@ -1,19 +1,19 @@
 import { getApp, getApps, initializeApp } from "firebase-admin/app";
-import { Next, ReturnCreateClaims, createClaimsSchema } from "../types";
+import { getAuth } from "firebase-admin/auth";
+
+import { ZodError } from "zod";
 import {
   createCustomClaims,
   createOption,
   getFirebaseConfig,
-} from "../options";
-import { validate } from "../validate";
-import { getAuth } from "firebase-admin/auth";
-import { setCookie } from "nookies";
+} from "../../config/options";
+import { validate } from "../../types/validate";
+import { Next, ReturnCreateClaims, createClaimsSchema } from "../../types";
 import {
   BadRequestError,
   InternalServerError,
   MethodNotAllowedError,
-} from "../error";
-import { ZodError } from "zod";
+} from "../../error";
 
 export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
   getApps().length === 0 ? initializeApp(getFirebaseConfig()) : getApp();
@@ -21,13 +21,14 @@ export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
   try {
     validate(req.body, createClaimsSchema);
     const { id, isAnonymous, refreshToken } = req.body;
-
     const option = createOption();
     const customClaims = createCustomClaims(id, isAnonymous);
 
     await getAuth().setCustomUserClaims(id, customClaims);
 
-    setCookie({ res }, "refreshToken", refreshToken, option);
+    console.log("refreshToken", option);
+
+    res.cookie("refreshToken", refreshToken, option);
 
     res.status(200).json({ message: "ok" });
   } catch (err: any) {

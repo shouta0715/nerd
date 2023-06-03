@@ -1,10 +1,14 @@
 import { setCookie } from "nookies";
-import { BadRequestError, InternalServerError } from "../error";
-import { createOption } from "../options";
-import { Next, ReturnRefreshToken, refreshSchema } from "../types";
-import { validate } from "../validate";
+import { Next, ReturnRefreshToken, refreshSchema } from "../../types";
+import {
+  BadRequestError,
+  InternalServerError,
+  MethodNotAllowedError,
+} from "../../error";
+import { createOption } from "../../config/options";
+import { validate } from "../../types/validate";
 
-export const refresh: Next<ReturnRefreshToken> = async (req, res) => {
+export const postHandler: Next<ReturnRefreshToken> = async (req, res) => {
   const { refreshToken } = req.cookies;
 
   if (!refreshToken) {
@@ -40,5 +44,14 @@ export const refresh: Next<ReturnRefreshToken> = async (req, res) => {
     res.status(200).json({ message: "ok", data: idToken });
   } catch (err: any) {
     res.status(500).json(new InternalServerError().throwMessage());
+  }
+};
+
+export const refreshTokenHandler: Next<ReturnRefreshToken> = (req, res) => {
+  switch (req.method) {
+    case "POST":
+      return postHandler(req, res);
+    default:
+      return res.status(405).json(new MethodNotAllowedError().throwMessage());
   }
 };
