@@ -25,9 +25,6 @@ export const postHandler: Next<ReturnCreateClaims> = async (req, res) => {
     const customClaims = createCustomClaims(id, isAnonymous);
 
     await getAuth().setCustomUserClaims(id, customClaims);
-
-    console.log("refreshToken", option);
-
     res.cookie("refreshToken", refreshToken, option);
 
     res.status(200).json({message: "ok"});
