@@ -25,6 +25,15 @@ export type GetEpisodeQueryVariables = Types.Exact<{
 
 export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } } | null };
 
+export type GetHighTrafficEpisodesIdsQueryVariables = Types.Exact<{
+  season: Types.Scalars['String']['input'];
+  year: Types.Scalars['Int']['input'];
+  where: Types.Episodes_Bool_Exp;
+}>;
+
+
+export type GetHighTrafficEpisodesIdsQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }>, works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }>, episodes: Array<{ __typename?: 'episodes', id: any }> };
+
 
 export const GetTodayEpisodesDocument = `
     query GetTodayEpisodes($where: episodes_bool_exp!) {
@@ -97,3 +106,38 @@ export const useGetEpisodeQuery = <
       options
     );
 useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
+export const GetHighTrafficEpisodesIdsDocument = `
+    query GetHighTrafficEpisodesIds($season: String!, $year: Int!, $where: episodes_bool_exp!) {
+  weekly_works(args: {limit_num: null}) {
+    episodes {
+      id
+    }
+  }
+  works(
+    where: {_and: {season_year: {_eq: $year}, season_name: {_eq: $season}, tid: {_is_null: false}}}
+    limit: null
+  ) {
+    episodes {
+      id
+    }
+  }
+  episodes(where: $where, order_by: {start_time: asc}) {
+    id
+  }
+}
+    `;
+export const useGetHighTrafficEpisodesIdsQuery = <
+      TData = GetHighTrafficEpisodesIdsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetHighTrafficEpisodesIdsQueryVariables,
+      options?: UseQueryOptions<GetHighTrafficEpisodesIdsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetHighTrafficEpisodesIdsQuery, TError, TData>(
+      ['GetHighTrafficEpisodesIds', variables],
+      fetcher<GetHighTrafficEpisodesIdsQuery, GetHighTrafficEpisodesIdsQueryVariables>(client, GetHighTrafficEpisodesIdsDocument, variables, headers),
+      options
+    );
+useGetHighTrafficEpisodesIdsQuery.fetcher = (client: GraphQLClient, variables: GetHighTrafficEpisodesIdsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetHighTrafficEpisodesIdsQuery, GetHighTrafficEpisodesIdsQueryVariables>(client, GetHighTrafficEpisodesIdsDocument, variables, headers);

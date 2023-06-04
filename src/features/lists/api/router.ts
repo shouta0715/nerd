@@ -1,4 +1,8 @@
-import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import {
+  useGetEpisodeQuery,
+  useGetHighTrafficEpisodesIdsQuery,
+  useGetTodayEpisodesQuery,
+} from "src/graphql/episode/episodeQuery.generated";
 import {
   useGetSeasonWorksQuery,
   useGetWeeklyWorksQuery,
@@ -39,6 +43,55 @@ export const getWeeklyWorks = async (limit: number | null) => {
 
   const fetcher = useGetWeeklyWorksQuery.fetcher(request, {
     limit,
+  });
+
+  const data = await fetcher();
+
+  return data;
+};
+
+export const getHighTrafficEpisodesIds = async () => {
+  const { request } = getClient();
+  const { season, year } = returningSeason();
+  const query = await getTodayData();
+
+  const fetcher = useGetHighTrafficEpisodesIdsQuery.fetcher(request, {
+    season,
+    year,
+    where: query,
+  });
+
+  const data = await fetcher();
+
+  const weeklyIds = data.weekly_works
+    .map((work) => {
+      return work.episodes.map((episode) => {
+        return episode.id;
+      });
+    })
+    .flat();
+
+  const seasonIds = data.works
+    .map((work) => {
+      return work.episodes.map((episode) => {
+        return episode.id;
+      });
+    })
+    .flat();
+
+  const todayEpisodeIds = data.episodes.map((episode) => episode.id);
+
+  const allIds = [...weeklyIds, ...seasonIds, ...todayEpisodeIds];
+
+  const ids = [...new Set(allIds)];
+
+  return ids;
+};
+
+export const getHighTrafficEpisodes = async (id: string) => {
+  const { request } = getClient();
+  const fetcher = useGetEpisodeQuery.fetcher(request, {
+    id,
   });
 
   const data = await fetcher();

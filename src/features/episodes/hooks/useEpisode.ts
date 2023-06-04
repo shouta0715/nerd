@@ -8,7 +8,7 @@ import { useTimerState } from "src/features/timer/store/timerStore";
 export const useEpisode = () => {
   const router = useRouter();
   const { slug, episode } = router.query;
-  const { data, isLoading } = useQueryEpisode(slug, episode);
+  const { data, isLoading } = useQueryEpisode(slug, episode, router.isFallback);
   const [isChat, setIsChat] = useState(true);
   const [filter, setFilter] = useState<CommentsFilter>("new");
 
@@ -22,5 +22,6 @@ export const useEpisode = () => {
     setIsChat,
     filter,
     setFilter,
+    isFallback: router.isFallback,
   };
 };
