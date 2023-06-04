@@ -1,6 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import React from "react";
 
 export const SsgError = (props?: { message?: string }) => (
   <div className="flex flex-1 flex-col items-center justify-center px-3 md:px-6">
