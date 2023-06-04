@@ -1,18 +1,17 @@
 import * as cors from "cors";
 import * as express from "express";
 import {router} from "../routers/api";
-import * as cookieParser from "cookie-parser";
+
+const corsOptions = {
+  origin: process.env.ORIGIN,
+};
 
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use(
-  cors({
-    origin: process.env.ORIGIN,
-  })
-);
-app.use(cookieParser());
+app.use(cors(corsOptions));
 app.use("/", router);
 
 export {app};

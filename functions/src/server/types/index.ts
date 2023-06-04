@@ -24,7 +24,6 @@ export type CreateUserSchema = z.infer<typeof createUserSchema>;
 export const createClaimsSchema = z.object({
   id: z.string(),
   isAnonymous: z.boolean(),
-  refreshToken: z.string(),
 });
 
 export type CreateClaimsSchema = z.infer<typeof createClaimsSchema>;
@@ -45,23 +44,6 @@ export type ReturnError = {
 export type ReturnCreateUser =
   | {
       data: CreateUserMutation;
-      message: string;
-    }
-  | ReturnError;
-
-export const refreshSchema = z.string();
-
-export type RefreshSchema = z.infer<typeof refreshSchema>;
-
-export type ReturnRefreshToken =
-  | {
-      message: string;
-      data: RefreshSchema;
-    }
-  | ReturnError;
-
-export type ReturnDeleteToken =
-  | {
       message: string;
     }
   | ReturnError;
