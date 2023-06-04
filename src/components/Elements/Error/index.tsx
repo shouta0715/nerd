@@ -41,4 +41,6 @@ const errorHandle = (error: Error) => {
   return <ErrorPage {...new BadRequestError()} />;
 };
 
-export const Error = ({ error }: FallbackProps) => errorHandle(error);
+export const Error = ({ error }: FallbackProps) => {
+  return errorHandle(error);
+};
