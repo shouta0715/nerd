@@ -42,3 +42,34 @@ export const GET_EPISODE = gql`
     }
   }
 `;
+
+export const GET_HIGH_TRAFFIC_EPISODES_IDS = gql`
+  query GetHighTrafficEpisodesIds(
+    $season: String!
+    $year: Int!
+    $where: episodes_bool_exp!
+  ) {
+    weekly_works(args: { limit_num: null }) {
+      episodes {
+        id
+      }
+    }
+    works(
+      where: {
+        _and: {
+          season_year: { _eq: $year }
+          season_name: { _eq: $season }
+          tid: { _is_null: false }
+        }
+      }
+      limit: null
+    ) {
+      episodes {
+        id
+      }
+    }
+    episodes(where: $where, order_by: { start_time: asc }) {
+      id
+    }
+  }
+`;
