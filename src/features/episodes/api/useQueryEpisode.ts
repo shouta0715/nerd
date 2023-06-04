@@ -4,8 +4,7 @@ import { client } from "src/libs/graphqlClient";
 
 export const useQueryEpisode = (
   id: string | string[] | undefined,
-  episode: string | string[] | undefined,
-  enable = true
+  episode: string | string[] | undefined
 ) => {
   return useGetEpisodeQuery(
     client,
@@ -13,7 +12,7 @@ export const useQueryEpisode = (
       id,
     },
     {
-      enabled: enable && !!id,
+      enabled: !!id,
       placeholderData: () => {
         if (!episode || typeof episode === "string") return undefined;
 
