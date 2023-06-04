@@ -25,7 +25,7 @@ class GraphQLRequest extends GraphQLClient {
     );
 
     const data = await fetch(
-      `https://securetoken.googleapis.com/v1/token?key=${process.env.API_KEY}`,
+      `https://securetoken.googleapis.com/v1/token?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
       {
         method: "POST",
         headers: {

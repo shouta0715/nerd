@@ -1,5 +1,7 @@
+
 import {AuthNext, Next} from "./types";
 import {region} from "firebase-functions/v1";
+import * as _cors from "cors";
 
 type RequestConfig<T> = {
   next: Next<T>;
@@ -13,12 +15,16 @@ type AuthConfig = {
 };
 
 export const httpsRequest = <T>({next, secrets}: RequestConfig<T>) => {
+  const cors = _cors({
+    origin: process.env.ORIGIN,
+  });
+
   return region("us-central1")
     .runWith({
       secrets: secrets ?? [],
     })
     .https.onRequest((req, res) => {
-      next(req, res);
+      cors(req, res, () => next(req, res));
     });
 };
 
