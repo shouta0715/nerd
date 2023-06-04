@@ -44,13 +44,9 @@ export const GET_EPISODE = gql`
 `;
 
 export const GET_HIGH_TRAFFIC_EPISODES_IDS = gql`
-  query GetHighTrafficEpisodesIds(
-    $season: String!
-    $year: Int!
-    $where: episodes_bool_exp!
-  ) {
+  query GetHighTrafficEpisodesIds($season: String!, $year: Int!) {
     weekly_works(args: { limit_num: null }) {
-      episodes {
+      episodes(limit: 2) {
         id
       }
     }
@@ -64,12 +60,9 @@ export const GET_HIGH_TRAFFIC_EPISODES_IDS = gql`
       }
       limit: null
     ) {
-      episodes {
+      episodes(limit: 2) {
         id
       }
-    }
-    episodes(where: $where, order_by: { start_time: asc }) {
-      id
     }
   }
 `;

@@ -28,11 +28,10 @@ export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __
 export type GetHighTrafficEpisodesIdsQueryVariables = Types.Exact<{
   season: Types.Scalars['String']['input'];
   year: Types.Scalars['Int']['input'];
-  where: Types.Episodes_Bool_Exp;
 }>;
 
 
-export type GetHighTrafficEpisodesIdsQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }>, works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }>, episodes: Array<{ __typename?: 'episodes', id: any }> };
+export type GetHighTrafficEpisodesIdsQuery = { __typename?: 'query_root', weekly_works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }>, works: Array<{ __typename?: 'works', episodes: Array<{ __typename?: 'episodes', id: any }> }> };
 
 
 export const GetTodayEpisodesDocument = `
@@ -107,9 +106,9 @@ export const useGetEpisodeQuery = <
     );
 useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
 export const GetHighTrafficEpisodesIdsDocument = `
-    query GetHighTrafficEpisodesIds($season: String!, $year: Int!, $where: episodes_bool_exp!) {
+    query GetHighTrafficEpisodesIds($season: String!, $year: Int!) {
   weekly_works(args: {limit_num: null}) {
-    episodes {
+    episodes(limit: 2) {
       id
     }
   }
@@ -117,12 +116,9 @@ export const GetHighTrafficEpisodesIdsDocument = `
     where: {_and: {season_year: {_eq: $year}, season_name: {_eq: $season}, tid: {_is_null: false}}}
     limit: null
   ) {
-    episodes {
+    episodes(limit: 2) {
       id
     }
-  }
-  episodes(where: $where, order_by: {start_time: asc}) {
-    id
   }
 }
     `;
