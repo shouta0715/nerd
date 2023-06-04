@@ -27,8 +27,6 @@ export const getStaticPaths = async () => {
 
   const paths = ids.map((id) => ({ params: { slug: id } }));
 
-  console.log(paths);
-
   return {
     paths,
     fallback: true,

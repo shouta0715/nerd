@@ -53,12 +53,10 @@ export const getWeeklyWorks = async (limit: number | null) => {
 export const getHighTrafficEpisodesIds = async () => {
   const { request } = getClient();
   const { season, year } = returningSeason();
-  const query = await getTodayData();
 
   const fetcher = useGetHighTrafficEpisodesIdsQuery.fetcher(request, {
     season,
     year,
-    where: query,
   });
 
   const data = await fetcher();
@@ -79,9 +77,7 @@ export const getHighTrafficEpisodesIds = async () => {
     })
     .flat();
 
-  const todayEpisodeIds = data.episodes.map((episode) => episode.id);
-
-  const allIds = [...weeklyIds, ...seasonIds, ...todayEpisodeIds];
+  const allIds = [...weeklyIds, ...seasonIds];
 
   const ids = [...new Set(allIds)];
 
