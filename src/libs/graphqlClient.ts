@@ -9,7 +9,7 @@ import {
 } from "graphql-request";
 import { VariablesAndRequestHeaders } from "graphql-request/dist/types";
 import { InternalServerError, UnauthorizedError } from "src/libs/error";
-import { RefreshTokenResult } from "src/types/dataType";
+import { auth } from "src/libs/firebase";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
@@ -21,15 +21,21 @@ class GraphQLRequest extends GraphQLClient {
   }
 
   private async refreshToken() {
-    const data: RefreshTokenResult = await fetch(
-      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/refreshToken`,
+    const refreshToken = auth.currentUser?.refreshToken;
+    const data = await fetch(
+      `https://securetoken.googleapis.com/v1/token?key=${process.env.API_KEY}`,
       {
         method: "POST",
-        credentials: "include",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
       }
-    ).then((res) => res.json());
+    ).then((r) => {
+      return r.text();
+    });
 
-    return data;
+    return JSON.parse(data);
   }
 
   override async request<T = any, V extends Variables = Variables>(
@@ -46,7 +52,7 @@ class GraphQLRequest extends GraphQLClient {
         if (this.retry < 1) {
           const data = await this.refreshToken();
           if (data.message === "ok") {
-            this.setHeader("Authorization", `Bearer ${data.idToken}`);
+            this.setHeader("Authorization", `Bearer ${data.id_token}`);
             this.retry += 1;
 
             return await super.request(

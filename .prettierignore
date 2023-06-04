@@ -12,3 +12,4 @@ __reports__
 coverage
 storybook-static
 .firebase
+functions

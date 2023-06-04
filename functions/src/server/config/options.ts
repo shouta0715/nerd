@@ -1,4 +1,3 @@
-import {CookieOptions} from "express";
 import {cert} from "firebase-admin/app";
 
 export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
@@ -7,15 +6,6 @@ export const createCustomClaims = (uid: string, isAnonymous: boolean) => ({
     "x-hasura-allowed-roles": ["user", "anonymous"],
     "x-hasura-user-id": uid,
   },
-});
-
-export const createOption = (): CookieOptions => ({
-  maxAge: 14 * 24 * 60 * 60, // 14 days
-  httpOnly: process.env.NODE_ENV === "production",
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "none",
-  path: "/",
-  domain: process.env.ORIGIN,
 });
 
 export const getFirebaseConfig = () => {

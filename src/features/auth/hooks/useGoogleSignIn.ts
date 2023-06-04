@@ -10,8 +10,6 @@ import {
 import { useState } from "react";
 import { auth } from "../../../libs/firebase";
 import { useNotificationState } from "src/components/Elements/Notification/store";
-
-import { deleteToken } from "src/features/auth/hooks";
 import { UnauthorizedError } from "src/libs/error";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -77,7 +75,6 @@ export const useGoogleSignIn = () => {
 
       if (auth.currentUser) {
         await deleteUser(auth.currentUser);
-        await deleteToken();
         setIsDeleteConfirmationOpen(false);
         onShow({
           title: "アカウントを消去しました",
@@ -101,7 +98,6 @@ export const useGoogleSignIn = () => {
           );
 
           await deleteUser(deletedUser);
-          await deleteToken();
           setIsDeleteConfirmationOpen(false);
           setAuthLoading(false);
           onShow({

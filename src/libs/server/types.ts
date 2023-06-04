@@ -24,7 +24,6 @@ export type CreateUserSchema = z.infer<typeof createUserSchema>;
 export const createClaimsSchema = z.object({
   id: z.string(),
   isAnonymous: z.boolean(),
-  refreshToken: z.string(),
 });
 
 export type CreateClaimsSchema = z.infer<typeof createClaimsSchema>;

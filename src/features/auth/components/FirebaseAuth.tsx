@@ -67,7 +67,6 @@ export const FirebaseAuth = () => {
           await handleSetCustomClaims({
             id: user.uid,
             isAnonymous: user.isAnonymous,
-            refreshToken: user.refreshToken,
           });
 
           const newestToken = await auth.currentUser?.getIdToken(true);
