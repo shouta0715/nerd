@@ -9,7 +9,6 @@ import {
 } from "graphql-request";
 import { VariablesAndRequestHeaders } from "graphql-request/dist/types";
 import { InternalServerError, UnauthorizedError } from "src/libs/error";
-import { auth } from "src/libs/firebase";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
@@ -21,7 +20,10 @@ class GraphQLRequest extends GraphQLClient {
   }
 
   private async refreshToken() {
-    const refreshToken = auth.currentUser?.refreshToken;
+    const refreshToken = await import("src/libs/firebase").then(
+      (r) => r.auth.currentUser?.refreshToken
+    );
+
     const data = await fetch(
       `https://securetoken.googleapis.com/v1/token?key=${process.env.API_KEY}`,
       {
