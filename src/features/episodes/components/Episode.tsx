@@ -11,32 +11,18 @@ import { EpisodeComments } from "src/features/comments/components/EpisodeComment
 import { EpisodeHeader } from "src/features/episodes/components/EpisodeHeader";
 import { EpisodeNav } from "src/features/episodes/components/EpisodeNav";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";
 
-type Props = {
-  data: GetEpisodeQuery;
-};
+export const Episode: FC = () => {
+  const { data, isLoading, isChat, setIsChat, filter, setFilter } =
+    useEpisode();
 
-export const Episode: FC<Props> = ({ data: SSGData }) => {
-  const {
-    data: queryData,
-    isLoading,
-    isChat,
-    setIsChat,
-    filter,
-    setFilter,
-    isFallback,
-  } = useEpisode();
-
-  if (isLoading && isFallback) {
+  if (isLoading) {
     return <Skeleton theme="episode" />;
   }
-
-  const data = SSGData ?? queryData;
 
   validateData({
     trigger: !data?.episodes_by_pk,
