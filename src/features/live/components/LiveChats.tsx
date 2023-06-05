@@ -11,15 +11,9 @@ type Props = {
   time: LiveTimer["time"];
   episode_id: string;
   mode: LiveTimer["mode"];
-  isTimerLoading: boolean;
 };
 
-export const LiveChats: FC<Props> = ({
-  time,
-  episode_id,
-  mode,
-  isTimerLoading,
-}) => {
+export const LiveChats: FC<Props> = ({ time, episode_id, mode }) => {
   const {
     data,
     isBottom,
@@ -32,7 +26,6 @@ export const LiveChats: FC<Props> = ({
     time,
     episode_id,
     mode,
-    isTimerLoading,
   });
   const user = useUserState((state) => state.user);
 

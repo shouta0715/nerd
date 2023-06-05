@@ -18,7 +18,6 @@ export type Time = {
 export type LiveTimer = {
   mode: "down" | "up" | "finish" | "notRegister";
   time: Time;
-  isTimeLoading: boolean;
   isFinished: boolean;
   isAlreadyFinished: boolean | null;
 };

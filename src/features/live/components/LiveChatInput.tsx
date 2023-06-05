@@ -18,15 +18,9 @@ type Props = {
   mode: LiveTimer["mode"];
   episode_id: string;
   time: Time;
-  isTimerLoading: boolean;
 };
 
-export const LiveChatInput: FC<Props> = ({
-  mode,
-  episode_id,
-  time,
-  isTimerLoading,
-}) => {
+export const LiveChatInput: FC<Props> = ({ mode, episode_id, time }) => {
   const { content, setContent, onSubmitHandler, isLoading } = useLiveChatInput({
     mode,
     episode_id,
@@ -92,7 +86,7 @@ export const LiveChatInput: FC<Props> = ({
         <div className="relative mr-2 flex flex-1 items-center">
           <ReactTextareaAutosize
             className="w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-red-500 disabled:bg-white disabled:placeholder:text-red-500"
-            disabled={!user || isTimerLoading || mode === "finish"}
+            disabled={!user || mode === "finish"}
             maxLength={100}
             maxRows={4}
             onChange={(e) =>
@@ -132,7 +126,7 @@ export const LiveChatInput: FC<Props> = ({
         </button>
         <Button
           className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
-          disabled={authLoading || isTimerLoading || mode === "finish"}
+          disabled={authLoading || mode === "finish"}
           type="submit"
         >
           {isLoading || authLoading ? (

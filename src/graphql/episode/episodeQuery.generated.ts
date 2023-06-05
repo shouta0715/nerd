@@ -25,6 +25,13 @@ export type GetEpisodeQueryVariables = Types.Exact<{
 
 export type GetEpisodeQuery = { __typename?: 'query_root', episodes_by_pk?: { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } } | null };
 
+export type GetTodayEpisodeIdsQueryVariables = Types.Exact<{
+  where: Types.Episodes_Bool_Exp;
+}>;
+
+
+export type GetTodayEpisodeIdsQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any }> };
+
 
 export const GetTodayEpisodesDocument = `
     query GetTodayEpisodes($where: episodes_bool_exp!) {
@@ -97,3 +104,25 @@ export const useGetEpisodeQuery = <
       options
     );
 useGetEpisodeQuery.fetcher = (client: GraphQLClient, variables: GetEpisodeQueryVariables, headers?: RequestInit['headers']) => fetcher<GetEpisodeQuery, GetEpisodeQueryVariables>(client, GetEpisodeDocument, variables, headers);
+export const GetTodayEpisodeIdsDocument = `
+    query GetTodayEpisodeIds($where: episodes_bool_exp!) {
+  episodes(where: $where, order_by: {start_time: asc}) {
+    id
+  }
+}
+    `;
+export const useGetTodayEpisodeIdsQuery = <
+      TData = GetTodayEpisodeIdsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetTodayEpisodeIdsQueryVariables,
+      options?: UseQueryOptions<GetTodayEpisodeIdsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetTodayEpisodeIdsQuery, TError, TData>(
+      ['GetTodayEpisodeIds', variables],
+      fetcher<GetTodayEpisodeIdsQuery, GetTodayEpisodeIdsQueryVariables>(client, GetTodayEpisodeIdsDocument, variables, headers),
+      options
+    );
+useGetTodayEpisodeIdsQuery.fetcher = (client: GraphQLClient, variables: GetTodayEpisodeIdsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetTodayEpisodeIdsQuery, GetTodayEpisodeIdsQueryVariables>(client, GetTodayEpisodeIdsDocument, variables, headers);

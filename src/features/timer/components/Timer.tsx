@@ -9,16 +9,9 @@ type Props = {
   minutes: string;
   seconds: string;
   id: string;
-  isTimeLoading: boolean;
 };
-export const Timer: FC<Props> = ({
-  hours,
-  minutes,
-  seconds,
-  id,
-  isTimeLoading,
-}) => {
-  if (isTimeLoading || !id) {
+export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
+  if (!id) {
     return <Skeleton theme="timer" />;
   }
 

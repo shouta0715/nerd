@@ -40,7 +40,7 @@ export const BasicLayout = (page: ReactElement) => (
 
 export const BasicLayoutOnlyHeader = (page: ReactElement) => (
   <LayoutProvider>
-    <div className="flex min-h-screen animate-fadeUp flex-col ">
+    <div className="flex min-h-screen flex-col ">
       <Header />
       <div className="container relative contents flex-1 lg:mx-auto lg:flex lg:max-w-7xl ">
         {page}
@@ -55,7 +55,7 @@ export const BasicListLayout = (page: ReactElement) => (
     <div className="flex min-h-screen flex-col">
       <Header />
       <Background />
-      <main className="flex flex-1 animate-fadeUp flex-col px-4 py-4 sm:px-6 md:flex-row md:py-10 lg:px-8">
+      <main className="flex flex-1 flex-col px-4 py-4 sm:px-6 md:flex-row md:py-10 lg:px-8">
         {page} <DynamicSearchButton />
       </main>
       <Footer />

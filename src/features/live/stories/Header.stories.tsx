@@ -13,7 +13,7 @@ const defaultArgs: Story["args"] = {
   episode_title: "エピソードタイトル",
   episode_number: 1,
   title: "タイトル",
-  isTimeLoading: false,
+
   time: {
     hours: "00",
     minutes: "00",
@@ -32,9 +32,7 @@ export const Default: Story = {
 };
 
 export const Loading: Story = {
-  args: createArgs({
-    isTimeLoading: true,
-  }),
+  args: createArgs({}),
 };
 
 export const Up: Story = {
@@ -46,7 +44,6 @@ export const Up: Story = {
 export const UpLoading: Story = {
   args: createArgs({
     mode: "up",
-    isTimeLoading: true,
   }),
 };
 

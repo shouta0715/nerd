@@ -77,31 +77,8 @@ export const useLiveTimer = ({
   );
   const [time, setTime] = useState<Time>(getInitialTime(start_time));
   const intervalId = useRef<NodeJS.Timeout | null>(null);
-  const [isTimeLoading, setIsTimeLoading] = useState<boolean>(() => {
-    if (start_time === null && end_time === null) return false;
 
-    if (!start_time || !end_time) return true;
-
-    return false;
-  });
-  const isAlreadyFinished = useRef<null | boolean>(null);
-
-  useEffect(() => {
-    if (start_time === null && end_time === null && isTimeLoading) {
-      setTime(getInitialTime(start_time));
-      setMode(getIsStatus({ start_time, end_time }));
-      setIsTimeLoading(false);
-    }
-    if (!start_time || !end_time) return;
-
-    setTime(getInitialTime(start_time));
-    setIsTimeLoading(false);
-    setMode(getIsStatus({ start_time, end_time }));
-
-    if (isAlreadyFinished.current === null) {
-      isAlreadyFinished.current = getIsAlreadyFinished(end_time);
-    }
-  }, [end_time, isTimeLoading, start_time]);
+  const isAlreadyFinished = useRef<boolean>(getIsAlreadyFinished(end_time));
 
   useEffect(() => {
     if (!start_time || !end_time) return;
@@ -146,7 +123,6 @@ export const useLiveTimer = ({
       minutes: time.minutes,
       seconds: time.seconds,
     },
-    isTimeLoading,
     isFinished: mode === "finish",
     isAlreadyFinished: isAlreadyFinished.current,
   };
