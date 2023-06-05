@@ -1,18 +1,47 @@
-import React, { Suspense } from "react";
-import { Skeleton } from "src/components/Elements/Skeleton";
+import { GetStaticPaths } from "next";
+import React from "react";
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { Live } from "src/features/live/components/Live";
+import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import {
+  getEpisode,
+  getTodayEpisodeIdsPaths,
+} from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";
+import { genTitle } from "src/libs/meta/OnlyTitle";
 
-import { NextPageWithLayout } from "src/libs/next/types";
+import { NextSSG, NextSSGPage } from "src/libs/next/types";
 
-const Page: NextPageWithLayout = () => (
-  <Suspense fallback={<Skeleton theme="episode" />}>
-    <Live />
-  </Suspense>
-);
+const Page: NextSSGPage<GetEpisodeQuery> = ({ data }) => <Live data={data} />;
 
 Page.getLayout = BasicLayoutOnlyHeader;
-Page.getTitle = Meta(() => "Nerd");
+Page.getTitle = Meta(({ data }) =>
+  genTitle({
+    title: data.episodes_by_pk?.work.series_title,
+    number: data?.episodes_by_pk?.number,
+    subtitle: data?.episodes_by_pk?.title,
+  })
+);
 
 export default Page;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = await getTodayEpisodeIdsPaths();
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: NextSSG<GetEpisodeQuery> = async ({ params }) => {
+  const id = params?.slug as string;
+  const data = await getEpisode(id);
+
+  return {
+    props: {
+      data,
+      error: null,
+    },
+  };
+};

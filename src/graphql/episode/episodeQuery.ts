@@ -42,3 +42,11 @@ export const GET_EPISODE = gql`
     }
   }
 `;
+
+export const GET_TODAY_EPISODE_IDS = gql`
+  query GetTodayEpisodeIds($where: episodes_bool_exp!) {
+    episodes(where: $where, order_by: { start_time: asc }) {
+      id
+    }
+  }
+`;

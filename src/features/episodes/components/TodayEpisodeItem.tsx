@@ -7,10 +7,7 @@ import { ModeBadge } from "src/components/Elements/ModeBadge";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { TodayEpisode } from "src/features/episodes/types";
-import {
-  genEpisodePlaceholder,
-  genTodayEpisodePlaceholder,
-} from "src/features/episodes/utils";
+import { genEpisodePlaceholder } from "src/features/episodes/utils";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 
 const DynamicTimer = dynamic(
@@ -80,7 +77,6 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             <DynamicTimer
               hours={time.hours.toString().padStart(2, "0")}
               id={episode.id}
-              isTimeLoading={false}
               minutes={time.minutes.toString().padStart(2, "0")}
               seconds={time.seconds.toString().padStart(2, "0")}
             />
@@ -93,9 +89,6 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               } ml-auto mt-2 rounded-md px-2 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
-                query: {
-                  episode: genTodayEpisodePlaceholder(episode),
-                },
               }}
               size="sm"
             >

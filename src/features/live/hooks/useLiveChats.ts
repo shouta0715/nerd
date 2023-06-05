@@ -10,7 +10,6 @@ type Props = {
   time: LiveTimer["time"];
   episode_id: string;
   mode: LiveTimer["mode"];
-  isTimerLoading: boolean;
 };
 
 type PageParam = {
@@ -23,12 +22,7 @@ type InfiniteLiveChats = {
   pages: GetChatsEpisodeQuery[];
 };
 
-export const useLiveChats = ({
-  time,
-  episode_id,
-  mode,
-  isTimerLoading,
-}: Props) => {
+export const useLiveChats = ({ time, episode_id, mode }: Props) => {
   const { isBottom, bottomRef, entry } = useChats();
 
   const queryClient = useQueryClient();
@@ -44,7 +38,7 @@ export const useLiveChats = ({
     time,
     episode_id,
     mode,
-    enabled: !isTimerLoading,
+    enabled: mode !== "finish",
   });
 
   const [prevPageParam, setPrevPageParam] =

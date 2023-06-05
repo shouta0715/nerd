@@ -6,27 +6,30 @@ type Props = {
   number?: number;
   subtitle?: string;
 };
+const sliceTitle = (value: string) => {
+  if (value.length > 20) {
+    return `${value.slice(0, 20)}...`;
+  }
+
+  return value;
+};
+
+export const genTitle = ({ title = "Nerd", number, subtitle }: Props) => {
+  if (number && subtitle) {
+    return `${sliceTitle(title)} 第${number}話「${sliceTitle(subtitle)}」`;
+  }
+
+  return title;
+};
 
 export const DetailTitle = ({ title = "Nerd", number, subtitle }: Props) => {
-  const sliceTitle = (value: string) => {
-    if (value.length > 20) {
-      return `${value.slice(0, 20)}...`;
-    }
-
-    return value;
-  };
-
-  const genTitle = () => {
-    if (number && subtitle) {
-      return `${sliceTitle(title)} 第${number}話「${sliceTitle(subtitle)}」`;
-    }
-
-    return title;
-  };
-
   return (
     <Head>
-      <title>{`${genTitle()} - Nerd`}</title>
+      <title>{`${genTitle({
+        title,
+        number,
+        subtitle,
+      })} - Nerd`}</title>
     </Head>
   );
 };

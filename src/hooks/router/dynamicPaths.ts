@@ -1,6 +1,11 @@
 /* eslint-disable no-promise-executor-return */
 
+import {
+  useGetEpisodeQuery,
+  useGetTodayEpisodeIdsQuery,
+} from "src/graphql/episode/episodeQuery.generated";
 import { Episodes_Bool_Exp } from "src/types/graphql";
+import { getClient } from "src/utils/getClient";
 import { parseXml } from "src/utils/parseXml";
 
 export const getTodayData = async () => {
@@ -28,4 +33,33 @@ export const getTodayData = async () => {
   };
 
   return query;
+};
+
+export const getTodayEpisodeIdsPaths = async () => {
+  const query = await getTodayData();
+  const { request } = getClient();
+  const fetcher = useGetTodayEpisodeIdsQuery.fetcher(request, {
+    where: query,
+  });
+
+  const data = await fetcher();
+
+  const paths = data.episodes.map((item) => ({
+    params: {
+      slug: item.id,
+    },
+  }));
+
+  return paths;
+};
+
+export const getEpisode = async (id: string) => {
+  const { request } = getClient();
+  const fetcher = useGetEpisodeQuery.fetcher(request, {
+    id,
+  });
+
+  const data = await fetcher();
+
+  return data;
 };

@@ -28,10 +28,6 @@
         "regex": "^/episodes/([^/]+?)(?:/)?$"
       },
       {
-        "destination": "/episodes/live/[slug].html",
-        "regex": "^/episodes/live/([^/]+?)(?:/)?$"
-      },
-      {
         "destination": "/series/[slug].html",
         "regex": "^/series/([^/]+?)(?:/)?$"
       },
