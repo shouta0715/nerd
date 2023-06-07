@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { CountUpTimer } from "src/features/timer/components/CountUpTImer";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 
 type Props = {
   title?: string;

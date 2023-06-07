@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { CommentsFilter } from "src/features/comments/types";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { useQueryWork } from "src/features/works/api/useQueryWork";
 
 export const usePlayWork = () => {

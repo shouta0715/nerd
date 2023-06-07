@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
 import { useId } from "src/hooks/useId";
 

@@ -13,6 +13,9 @@ const customJestConfig = {
   testPathIgnorePatterns: ["<rootDir>/e2e/"],
   testEnvironment: "jest-environment-jsdom",
   setupFilesAfterEnv: ["./jest.setup.ts"],
+  moduleNameMapper: {
+    "^.+\\.(svg)$": "<rootDir>/__mocks__/svg.tsx", 
+  },
   reporters: [
     "default",
     [
