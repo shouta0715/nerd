@@ -9,7 +9,7 @@ import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { TextArea } from "src/components/Elements/TextArea";
 import { useOpenState } from "src/features/episodes/store";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";

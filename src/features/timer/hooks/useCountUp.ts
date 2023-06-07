@@ -1,4 +1,4 @@
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 
 export const useCountUp = () => {
   const time = useTimerState((state) => state.time);

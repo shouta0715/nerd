@@ -1,4 +1,4 @@
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { useInterSection } from "src/hooks/useInterSection";
 
 export const useChats = () => {
