@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useCountDownModal } from "src/store/global/globalStore";
 
@@ -15,13 +15,14 @@ export const useTimeInput = () => {
     downInitialTime,
   } = useTimerState((state) => ({
     time: state.time,
-    padTime: state.getPadStartTime(),
+    padTime: state.padTime(),
     interval: state.interval,
     changeTenTime: state.changeTenTime,
     setTime: state.setTime,
     mode: state.mode,
     downInitialTime: state.downInitialTime,
   }));
+
   const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
   const setChangeTime = () => {

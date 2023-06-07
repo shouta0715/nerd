@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { useUserState } from "src/store/user/userState";
 
 export const useSubmitChat = () => {

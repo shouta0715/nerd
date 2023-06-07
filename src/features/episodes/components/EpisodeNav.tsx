@@ -9,7 +9,7 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
 import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { useUserState } from "src/store/user/userState";
 

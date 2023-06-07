@@ -5,7 +5,7 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Menu } from "src/components/Elements/Menu";
 import { Text } from "src/components/Elements/Text";
 import { usePrefetchCommentWork } from "src/features/comments/api/usePrefetchCommentWork";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 import { useUserState } from "src/store/user/userState";
 

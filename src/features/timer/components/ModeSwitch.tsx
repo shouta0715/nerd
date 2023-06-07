@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Switch } from "src/components/Elements/Switch";
 
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useCountDownModal } from "src/store/global/globalStore";
 

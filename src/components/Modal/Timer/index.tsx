@@ -3,7 +3,7 @@ import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { Modal } from "src/components/Modal";
 import { useDownModal } from "src/features/timer/hooks/useDownModal";
-import { useTimerState } from "src/features/timer/store/timerStore";
+import { useTimerState } from "src/features/timer/store";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useCountDownModal } from "src/store/global/globalStore";
 
