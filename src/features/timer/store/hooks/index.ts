@@ -1,6 +1,9 @@
 /* eslint-disable no-shadow */
+import {
+  InitialTimerCount,
+  MaxTime,
+} from "src/features/timer/store/initialState";
 import { Get, Set, TimerCount } from "src/features/timer/store/types";
-import { InitialTimerCount, MaxTime } from "src/features/timer/store/values";
 import {
   secondToTime,
   timeToSecond,

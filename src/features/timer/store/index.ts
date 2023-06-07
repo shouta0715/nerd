@@ -14,13 +14,16 @@ import {
 } from "src/features/timer/store/hooks";
 
 import {
+  InitialTimerCount,
+  interval,
+} from "src/features/timer/store/initialState";
+import {
   Get,
   Set,
   TimerState,
   TimerStateActions,
   TimerStateValues,
 } from "src/features/timer/store/types";
-import { InitialTimerCount, interval } from "src/features/timer/store/values";
 
 export const timerValue = (set: Set, get: Get): TimerStateValues => ({
   mode: "up",

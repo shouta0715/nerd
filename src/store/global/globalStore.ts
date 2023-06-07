@@ -20,7 +20,7 @@ export const useGlobalState = create<GlobalState>((set) => ({
     set(() => ({ isDeleteConfirmationOpen: flag })),
 }));
 
-type CountDownModal = {
+export type CountDownModal = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 };
