@@ -45,7 +45,7 @@ secrets.json
 
 __reports__
 
-__mocks__
+*.log
 
 storybook-static
 
