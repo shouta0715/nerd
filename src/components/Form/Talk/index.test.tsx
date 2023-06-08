@@ -107,7 +107,9 @@ describe("TalkForm", () => {
 
     const buttons = getAllByRole("button");
     const spButton = buttons[1];
+    const pcButton = buttons[buttons.length - 1];
 
     expect(spButton).toBeDisabled();
+    expect(pcButton).toBeDisabled();
   });
 });
