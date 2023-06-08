@@ -28,7 +28,7 @@ export const EpisodeNav: FC<Props> = ({ setIsChat, isChat, data }) => {
   const stop = useTimerState((state) => state.interval.stop);
 
   return (
-    <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200 bg-white px-2 lg:static lg:h-auto lg:border-none">
+    <nav className="sticky top-0 z-10 flex h-10 items-center justify-between border-b border-solid border-b-slate-200   px-6 lg:static lg:h-auto lg:border-none">
       <div className="container mx-auto flex items-center justify-between lg:flex-col lg:items-stretch ">
         <div className="flex flex-1 items-center justify-between border-0 border-solid  border-slate-200 lg:after:h-7 lg:after:w-7 lg:after:content-['']">
           <button className="h-7 w-7 border-none" onClick={() => router.back()}>
