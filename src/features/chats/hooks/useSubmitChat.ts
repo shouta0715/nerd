@@ -4,13 +4,13 @@ import { useUserState } from "src/store/user/userState";
 
 export const useSubmitChat = () => {
   const getTime = useTimerState((state) => state.getTime);
-  const [content, setContent] = useState<string>("");
+  const [value, setValue] = useState<string>("");
   const user = useUserState((state) => state.user);
 
   return {
     getTime,
-    content,
     user,
-    setContent,
+    value,
+    setValue,
   };
 };

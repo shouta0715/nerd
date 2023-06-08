@@ -7,16 +7,16 @@ type Props = {
 };
 
 export const WorkChatInput: FC<Props> = ({ work_id }) => {
-  const { onSubmitHandler, isLoading, setContent, content } = useSubmitWork({
+  const { onSubmitHandler, isLoading, setValue, value } = useSubmitWork({
     work_id,
   });
 
   return (
     <ChatInput
-      content={content}
       isLoading={isLoading}
       onSubmitHandler={onSubmitHandler}
-      setContent={setContent}
+      setContent={setValue}
+      value={value}
     />
   );
 };

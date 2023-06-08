@@ -7,15 +7,16 @@ type Props = {
 };
 
 export const EpisodeChatInput: FC<Props> = ({ episode_id }) => {
-  const { onSubmitHandler, isLoading, setContent, content } =
-    useSubmitChatEpisode({ episode_id });
+  const { onSubmitHandler, isLoading, value, setValue } = useSubmitChatEpisode({
+    episode_id,
+  });
 
   return (
     <ChatInput
-      content={content}
       isLoading={isLoading}
       onSubmitHandler={onSubmitHandler}
-      setContent={setContent}
+      setContent={setValue}
+      value={value}
     />
   );
 };

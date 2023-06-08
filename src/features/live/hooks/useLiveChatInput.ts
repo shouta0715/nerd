@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
-  const [content, setContent] = useState<string>("");
+  const [value, setValue] = useState<string>("");
   const user = useUserState((state) => state.user);
   const { insetChat } = useMutateLiveChat();
   const onNotification = useNotificationState((state) => state.onShow);
@@ -22,18 +22,18 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!content.trim() || authLoading) return;
+      if (!value.trim() || authLoading) return;
 
       const object = {
         episode_id,
-        content,
+        content: value,
         comment_time: mode === "down" ? 0 : timeToSecond(time),
         commenter_name: user?.user_name || "匿名",
       };
       insetChat.mutateAsync({
         object,
       });
-      setContent("");
+      setValue("");
     } catch (error) {
       onNotification({
         title: "コメントの投稿に失敗しました",
@@ -44,8 +44,8 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   };
 
   return {
-    content,
-    setContent,
+    value,
+    setValue,
     onSubmitHandler,
     isLoading: insetChat.isLoading,
   };
