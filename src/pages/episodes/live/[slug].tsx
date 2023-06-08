@@ -3,10 +3,7 @@ import React from "react";
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { Live } from "src/features/live/components/Live";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
-import {
-  getEpisode,
-  getTodayEpisodeIdsPaths,
-} from "src/hooks/router/dynamicPaths";
+import { getEpisode, getLiveIdsPaths } from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
@@ -26,7 +23,7 @@ Page.getTitle = Meta(({ data }) =>
 export default Page;
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getTodayEpisodeIdsPaths();
+  const paths = await getLiveIdsPaths();
 
   return {
     paths,
