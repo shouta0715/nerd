@@ -23,11 +23,9 @@ export const Menu: FC<Props> = ({ children, live = false }) => {
 
   return (
     <MenuWrapper>
-      <section className="px-6 py-5">
+      <section className="border-b py-3 lg:py-6">
         <div className="mb-2 flex items-center justify-between">
-          <Text className="text-dimmed" size="sm">
-            メニュー
-          </Text>
+          <Text size="sm">メニュー</Text>
           <button
             className="h-5 w-5 transition-transform active:translate-y-0.5 lg:hidden"
             onClick={() => setIsMenuOpen(false)}
@@ -37,13 +35,17 @@ export const Menu: FC<Props> = ({ children, live = false }) => {
           </button>
         </div>
         <MenuForm />
-        {!live && (
-          <>
-            <TimeInput />
-            <ModeSwitch />
-          </>
-        )}
       </section>
+      {!live && (
+        <section className="lg:py-6">
+          <Text size="sm">タイマー</Text>
+          <Text className="text-xs text-dimmed lg:mb-4 lg:mt-2">
+            モードを変更すると経過時間から表示か残り時間から表示か変更できます。
+          </Text>
+          <TimeInput />
+          <ModeSwitch />
+        </section>
+      )}
       {children}
     </MenuWrapper>
   );

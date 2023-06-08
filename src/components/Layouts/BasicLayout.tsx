@@ -42,7 +42,8 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
   <LayoutProvider>
     <div className="flex min-h-screen flex-col ">
       <Header />
-      <div className="container relative contents flex-1 lg:mx-auto lg:flex lg:max-w-7xl ">
+      <Background />
+      <div className="container relative contents flex-1 bg-white/50  lg:mx-auto lg:flex lg:max-w-7xl ">
         {page}
       </div>
     </div>
