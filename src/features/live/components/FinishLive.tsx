@@ -23,7 +23,7 @@ export const FinishLive: FC<Props> = ({ episode }) => {
           className="w-max "
           href={`/episodes/${episode?.id}`}
           leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
-          size="sm"
+          size="md"
           theme="danger"
         >
           もう一度見る
@@ -44,7 +44,7 @@ export const FinishLive: FC<Props> = ({ episode }) => {
               },
             }}
             leftIcon={<Square3Stack3DIcon className="h-4 w-4" />}
-            size="sm"
+            size="md"
             theme="dark"
           >
             他のエピソードへ
