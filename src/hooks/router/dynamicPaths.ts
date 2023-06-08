@@ -35,11 +35,20 @@ export const getTodayData = async () => {
   return query;
 };
 
-export const getTodayEpisodeIdsPaths = async () => {
+export const getLiveIdsPaths = async () => {
   const query = await getTodayData();
   const { request } = getClient();
   const fetcher = useGetTodayEpisodeIdsQuery.fetcher(request, {
-    where: query,
+    where: {
+      _or: [
+        query,
+        {
+          start_time: {
+            _is_null: true,
+          },
+        },
+      ],
+    },
   });
 
   const data = await fetcher();
