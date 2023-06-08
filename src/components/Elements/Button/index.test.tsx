@@ -34,4 +34,17 @@ describe("Elements/Buttonのテスト", () => {
     await user.click(button);
     expect(onClick).not.toHaveBeenCalled();
   });
+
+  test("disabledがtrueなら押せない", async () => {
+    const onClick = jest.fn();
+    render(
+      <Button disabled onClick={onClick}>
+        {children}
+      </Button>
+    );
+    const button = screen.getByRole("button");
+    expect(button).toBeDisabled();
+    await user.click(button);
+    expect(onClick).not.toHaveBeenCalled();
+  });
 });

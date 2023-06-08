@@ -17,7 +17,7 @@ type Props = {
   disabled?: boolean;
   value: string;
   placeholder: string;
-  ref?: React.RefObject<HTMLTextAreaElement>;
+  ref?: React.RefObject<HTMLTextAreaElement> | null;
   onBlur?: () => void;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   validLength?: number;
@@ -63,6 +63,7 @@ export const TalkForm: FC<Props> = ({
           if (!user?.anonymous && user)
             setUser({ ...user, isDefaultPhoto: !user.isDefaultPhoto });
         }}
+        type="button"
       >
         {user?.isDefaultPhoto ? (
           <Image

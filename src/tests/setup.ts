@@ -9,3 +9,12 @@ export const setupMsw = (...handlers: RequestHandler[]) => {
 
   return server;
 };
+
+export const setupAutoSizeTextarea = () => {
+  beforeAll(() => {
+    Object.defineProperty(document, "fonts", {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      value: { addEventListener() {}, removeEventListener() {} },
+    });
+  });
+};
