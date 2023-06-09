@@ -96,6 +96,20 @@ describe("TalkForm", () => {
     expect(onSubmitHandler).toHaveBeenCalledTimes(0);
   });
 
+  test("loading中はEnterを押しても、onSubmitHandlerが呼ばれない。", async () => {
+    const { getByRole, onSubmitHandler } = setup({
+      isLoading: true,
+    });
+
+    const textarea = getByRole("textbox");
+
+    await act(async () => {
+      await user.type(textarea, "test");
+      await userEvent.type(textarea, "{enter}");
+    });
+    expect(onSubmitHandler).toHaveBeenCalledTimes(0);
+  });
+
   test("loadingまたは何も入力されていないときはButtonが押せない", async () => {
     const { getAllByRole } = setup(
       {
