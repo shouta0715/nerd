@@ -697,6 +697,8 @@ export type Comments_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Comments_Avg_Fields = {
   __typename?: 'comments_avg_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -772,6 +774,8 @@ export type Comments_Max_Fields = {
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   replied_to_commenter_name?: Maybe<Scalars['String']['output']>;
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   reply_to?: Maybe<Scalars['uuid']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -799,6 +803,8 @@ export type Comments_Min_Fields = {
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   replied_to_commenter_name?: Maybe<Scalars['String']['output']>;
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   reply_to?: Maybe<Scalars['uuid']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -920,6 +926,8 @@ export type Comments_Set_Input = {
 /** aggregate stddev on columns */
 export type Comments_Stddev_Fields = {
   __typename?: 'comments_stddev_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -931,6 +939,8 @@ export type Comments_Stddev_Order_By = {
 /** aggregate stddev_pop on columns */
 export type Comments_Stddev_Pop_Fields = {
   __typename?: 'comments_stddev_pop_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -942,6 +952,8 @@ export type Comments_Stddev_Pop_Order_By = {
 /** aggregate stddev_samp on columns */
 export type Comments_Stddev_Samp_Fields = {
   __typename?: 'comments_stddev_samp_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -975,6 +987,8 @@ export type Comments_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Comments_Sum_Fields = {
   __typename?: 'comments_sum_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1019,6 +1033,8 @@ export type Comments_Updates = {
 /** aggregate var_pop on columns */
 export type Comments_Var_Pop_Fields = {
   __typename?: 'comments_var_pop_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1030,6 +1046,8 @@ export type Comments_Var_Pop_Order_By = {
 /** aggregate var_samp on columns */
 export type Comments_Var_Samp_Fields = {
   __typename?: 'comments_var_samp_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1041,6 +1059,8 @@ export type Comments_Var_Samp_Order_By = {
 /** aggregate variance on columns */
 export type Comments_Variance_Fields = {
   __typename?: 'comments_variance_fields';
+  /** A computed field, executes function "reply_count" */
+  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 

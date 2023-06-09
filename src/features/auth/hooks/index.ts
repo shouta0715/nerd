@@ -1,7 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import request from "graphql-request";
-import { GET_USER } from "src/graphql/user/userQuery";
-import { GetUserQuery } from "src/graphql/user/userQuery.generated";
 import { HttpError, ErrorType } from "src/libs/error";
 import {
   CreateClaimsSchema,
@@ -9,7 +6,6 @@ import {
   ReturnCreateUser,
 } from "src/libs/server/types";
 
-const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
 const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
 
 export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
@@ -28,12 +24,6 @@ export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
   }
 
   return res;
-};
-
-export const getUserHandler = async (id: string): Promise<GetUserQuery> => {
-  const data = await request<GetUserQuery>(url, GET_USER, { id });
-
-  return data;
 };
 
 export const createUserHandler = async ({
@@ -61,16 +51,11 @@ export const createUserHandler = async ({
   return user;
 };
 export const useUser = () => {
-  const getUser = useMutation({
-    mutationFn: getUserHandler,
-  });
-
   const createUser = useMutation({
     mutationFn: createUserHandler,
   });
 
   return {
-    getMutateAsync: getUser.mutateAsync,
     createMutateAsync: createUser.mutateAsync,
   };
 };

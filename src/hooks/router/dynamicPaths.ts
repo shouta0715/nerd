@@ -2,7 +2,7 @@
 
 import {
   useGetEpisodeQuery,
-  useGetTodayEpisodeIdsQuery,
+  useGetLiveIdsQuery,
 } from "src/graphql/episode/episodeQuery.generated";
 import { Episodes_Bool_Exp } from "src/types/graphql";
 import { getClient } from "src/utils/getClient";
@@ -38,7 +38,7 @@ export const getTodayData = async () => {
 export const getLiveIdsPaths = async () => {
   const query = await getTodayData();
   const { request } = getClient();
-  const fetcher = useGetTodayEpisodeIdsQuery.fetcher(request, {
+  const fetcher = useGetLiveIdsQuery.fetcher(request, {
     where: {
       _or: [
         query,
