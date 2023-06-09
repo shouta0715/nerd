@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import request from "graphql-request";
 import { GET_USER } from "src/graphql/user/userQuery";
 import { GetUserQuery } from "src/graphql/user/userQuery.generated";
@@ -6,7 +7,6 @@ import {
   CreateClaimsSchema,
   CreateUserSchema,
   ReturnCreateUser,
-  ReturnGetUser,
 } from "src/libs/server/types";
 
 const url = process.env.NEXT_PUBLIC_ENDPOINT as string;
@@ -30,10 +30,13 @@ export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
   return res;
 };
 
-export const getUser = async (id: string): Promise<ReturnGetUser> =>
-  request<GetUserQuery>(url, GET_USER, { id });
+export const getUserHandler = async (id: string): Promise<GetUserQuery> => {
+  const data = await request<GetUserQuery>(url, GET_USER, { id });
 
-export const createUser = async ({
+  return data;
+};
+
+export const createUserHandler = async ({
   id,
   user_name,
   photo_url,
@@ -56,4 +59,18 @@ export const createUser = async ({
   const user = (await res.json()) as ReturnCreateUser;
 
   return user;
+};
+export const useUser = () => {
+  const getUser = useMutation({
+    mutationFn: getUserHandler,
+  });
+
+  const createUser = useMutation({
+    mutationFn: createUserHandler,
+  });
+
+  return {
+    getMutateAsync: getUser.mutateAsync,
+    createMutateAsync: createUser.mutateAsync,
+  };
 };

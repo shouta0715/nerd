@@ -23,7 +23,7 @@ export const Menu: FC<Props> = ({ children, live = false }) => {
 
   return (
     <MenuWrapper>
-      <section className="border-b py-3 lg:py-6">
+      <section className="py-3 lg:py-6">
         <div className="mb-2 flex items-center justify-between">
           <Text size="sm">メニュー</Text>
           <button
@@ -37,7 +37,7 @@ export const Menu: FC<Props> = ({ children, live = false }) => {
         <MenuForm />
       </section>
       {!live && (
-        <section className="lg:py-6">
+        <section className="border-t py-2 lg:py-6">
           <Text size="sm">タイマー</Text>
           <Text className="text-xs text-dimmed lg:mb-4 lg:mt-2">
             モードを変更すると経過時間から表示か残り時間から表示か変更できます。

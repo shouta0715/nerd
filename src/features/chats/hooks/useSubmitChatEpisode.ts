@@ -11,24 +11,24 @@ type Args = {
 
 export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   const { insertChat } = useMutateChatEpisode();
-  const { content, user, getTime, setContent } = useSubmitChat();
+  const { setValue, user, getTime, value } = useSubmitChat();
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!content.trim() || authLoading) return;
+      if (!value.trim() || authLoading) return;
       const object = {
         episode_id,
-        content,
+        content: value,
         comment_time: getTime(),
         commenter_name: user?.user_name || "匿名",
       };
       insertChat.mutateAsync({
         object,
       });
-      setContent("");
+      setValue("");
     } catch (error) {
       onNotification({
         title: "コメントの投稿に失敗しました",
@@ -41,7 +41,7 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   return {
     onSubmitHandler,
     isLoading: insertChat.isLoading,
-    setContent,
-    content,
+    value,
+    setValue,
   };
 };

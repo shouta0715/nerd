@@ -3,11 +3,25 @@ import { QueryClient } from "@tanstack/react-query";
 
 const queryClient = new QueryClient({
   defaultOptions: {
+    mutations: {
+      retry: (failureCount, error: any) => {
+        if (error?.message === "Network request failed")
+          return failureCount < 5;
+
+        return false;
+      },
+    },
     queries: {
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       refetchOnReconnect: false,
-      retry: false,
+
+      retry: (failureCount, error: any) => {
+        if (error?.message === "Network request failed")
+          return failureCount < 5;
+
+        return false;
+      },
       suspense: true,
       useErrorBoundary: true,
     },
