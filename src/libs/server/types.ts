@@ -1,9 +1,4 @@
 import { z } from "zod";
-import { GetUserQuery } from "src/graphql/user/userQuery.generated";
-
-export const getUserSchema = z.object({
-  id: z.string(),
-});
 
 export type CreateUserMutation = {
   __typename?: "mutation_root";
@@ -14,10 +9,6 @@ export type CreateUserMutation = {
     user_name: string;
   } | null;
 };
-
-export type GetUserSchema = z.infer<typeof getUserSchema>;
-
-export type ReturnGetUser = GetUserQuery;
 
 export const createUserSchema = z.object({
   id: z.string(),

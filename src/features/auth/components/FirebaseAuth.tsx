@@ -20,7 +20,7 @@ export const FirebaseAuth = () => {
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
   const [_, setAuthError] = useState<null>(null);
-  const { getMutateAsync, createMutateAsync } = useUser();
+  const { createMutateAsync } = useUser();
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -31,19 +31,11 @@ export const FirebaseAuth = () => {
 
         if (isHasClaims) {
           try {
-            const userData = await getMutateAsync(user.uid);
-
-            const { users_by_pk } = userData;
-
-            if (!users_by_pk) throw new ForbiddenError();
-
-            const { photo_url, id, user_name } = users_by_pk;
-
             setUser({
-              id,
+              id: user.uid,
               anonymous: user.isAnonymous,
-              photo_url: photo_url ?? null,
-              user_name: prevName ?? user_name,
+              photo_url: user.photoURL ?? null,
+              user_name: prevName ?? user.displayName ?? "匿名",
               provider_user_name: user.displayName ?? null,
               isDefaultPhoto: false,
             });
@@ -110,7 +102,7 @@ export const FirebaseAuth = () => {
     return () => {
       unSubUser();
     };
-  }, [createMutateAsync, getMutateAsync, queryClient, setAuthLoading, setUser]);
+  }, [createMutateAsync, queryClient, setAuthLoading, setUser]);
 
   return null;
 };

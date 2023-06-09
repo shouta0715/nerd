@@ -1,8 +1,7 @@
-import { graphql, rest } from "msw";
+import { rest } from "msw";
 import {
   createUserData,
   customClaimsData,
-  getUserData,
 } from "src/features/auth/mocks/fixture";
 
 export const handleSetCustomClaims = (status?: number) => {
@@ -12,16 +11,6 @@ export const handleSetCustomClaims = (status?: number) => {
     }
 
     return res(ctx.status(200), ctx.json(customClaimsData));
-  });
-};
-
-export const handleGetUser = (status?: number) => {
-  return graphql.query("GetUser", (_, res, ctx) => {
-    if (status) {
-      return res(ctx.status(status));
-    }
-
-    return res(ctx.data(getUserData));
   });
 };
 
@@ -35,8 +24,4 @@ export const handleCreateUser = (status?: number) => {
   });
 };
 
-export const handler = [
-  handleSetCustomClaims(),
-  handleGetUser(),
-  handleCreateUser(),
-];
+export const handler = [handleSetCustomClaims(), handleCreateUser()];
