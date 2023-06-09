@@ -5,11 +5,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { useEffect, useState } from "react";
-import {
-  getUser,
-  createUser,
-  handleSetCustomClaims,
-} from "src/features/auth/hooks";
+import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
@@ -24,6 +20,7 @@ export const FirebaseAuth = () => {
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
   const [_, setAuthError] = useState<null>(null);
+  const { getMutateAsync, createMutateAsync } = useUser();
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -34,7 +31,7 @@ export const FirebaseAuth = () => {
 
         if (isHasClaims) {
           try {
-            const userData = await getUser(user.uid);
+            const userData = await getMutateAsync(user.uid);
 
             const { users_by_pk } = userData;
 
@@ -71,7 +68,7 @@ export const FirebaseAuth = () => {
 
           const newestToken = await auth.currentUser?.getIdToken(true);
 
-          const userData = await createUser({
+          const userData = await createMutateAsync({
             id: user.uid,
             user_name: user.displayName ?? null,
             photo_url: user.photoURL ?? null,
@@ -113,7 +110,7 @@ export const FirebaseAuth = () => {
     return () => {
       unSubUser();
     };
-  }, [queryClient, setAuthLoading, setUser]);
+  }, [createMutateAsync, getMutateAsync, queryClient, setAuthLoading, setUser]);
 
   return null;
 };

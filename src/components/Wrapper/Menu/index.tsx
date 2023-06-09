@@ -25,7 +25,7 @@ export const MenuWrapper: FC<Props> = ({ children }) => {
         }}
       >
         <div
-          className={`mx-auto h-max max-h-[90vh] w-full max-w-sm animate-modal overflow-y-auto rounded-xl bg-white p-4  shadow lg:static lg:mx-0 lg:h-auto lg:max-h-fit lg:w-full lg:max-w-none lg:translate-x-0  lg:translate-y-0 lg:animate-none lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:transition-none ${
+          className={` mx-auto h-max max-h-[90vh] w-11/12 animate-modal overflow-y-auto rounded-xl bg-white p-4  shadow lg:static lg:mx-0 lg:h-auto lg:max-h-fit lg:w-full lg:max-w-none lg:translate-x-0  lg:translate-y-0 lg:animate-none lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none lg:transition-none ${
             isMenuOpen ? "block" : "  hidden lg:block"
           }`}
         >
