@@ -6,10 +6,14 @@ import { Text } from "src/components/Elements/Text";
 import { useMenuForm } from "src/components/Form/Menu/useMenuForm";
 
 export const MenuForm = () => {
-  const { handleChangeName, register, isChange, user } = useMenuForm();
+  const { handleSubmit, onInValid, onValid, register, isChange, user } =
+    useMenuForm();
 
   return (
-    <form className="mb-3 space-y-2" onSubmit={handleChangeName}>
+    <form
+      className="mb-3 space-y-2"
+      onSubmit={handleSubmit(onValid, onInValid)}
+    >
       <label htmlFor="commenter-name-input">
         <div className="mb-2 flex items-center">
           <PencilIcon className="h-4 w-4" />
@@ -35,6 +39,7 @@ export const MenuForm = () => {
           inputSize="xs"
           maxLength={20}
           {...register("username")}
+          placeholder="投稿名を入力してください"
         />
         <Button
           className="ml-auto min-w-max transition-transform active:translate-y-0.5"

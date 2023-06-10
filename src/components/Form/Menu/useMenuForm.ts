@@ -39,14 +39,14 @@ export const useMenuForm = () => {
     reset();
   };
 
-  const handleChangeName = handleSubmit(onValid, onInValid);
-
   const isChange = watch("username") !== user?.user_name && watch("username");
 
   return {
     register,
     errors,
-    handleChangeName,
+    handleSubmit,
+    onInValid,
+    onValid,
     isChange,
     setValue,
     user,
