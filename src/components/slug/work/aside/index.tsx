@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { Menu } from "src/components/Elements/Menu";
 import { Header } from "src/components/slug/common/header";
 import { Nav } from "src/components/slug/common/nav";
 
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
+import { Menu } from "src/features/episodes/components/Menu";
 import { WorkMenu } from "src/features/works/components/WorkMenu";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 

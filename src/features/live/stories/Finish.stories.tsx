@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { episodeData } from "src/features/episodes/mocks/fixture";
-import { FinishLive } from "src/features/live/components/FinishLive";
+import { FinishLive } from "src/features/live/components/Finish";
 
 export default {
   title: "Features/Live/Finish",

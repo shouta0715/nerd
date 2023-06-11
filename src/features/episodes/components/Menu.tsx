@@ -2,6 +2,7 @@ import React from "react";
 import { Text } from "src/components/Elements/Text";
 import { TimeInput } from "src/components/Elements/TimeInput";
 import { MenuForm } from "src/components/Form/Menu";
+import { MenuModal } from "src/components/Modal/Menu";
 import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 
 export const Menu = ({ live = false }) => {
@@ -23,6 +24,7 @@ export const Menu = ({ live = false }) => {
           <ModeSwitch />
         </section>
       )}
+      <MenuModal live={live} />
     </>
   );
 };
