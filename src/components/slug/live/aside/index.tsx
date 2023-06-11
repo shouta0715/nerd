@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { FC, Suspense } from "react";
-import { Header } from "src/components/slug/live/header";
-import { Nav } from "src/components/slug/live/nav";
+import { Header } from "src/components/Slug/live/header";
+import { Nav } from "src/components/Slug/live/nav";
 
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
