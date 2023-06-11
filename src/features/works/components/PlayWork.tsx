@@ -2,7 +2,7 @@ import React, { FC, Suspense } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { MenuModal } from "src/components/Modal/Menu";
-import { Header } from "src/components/slug/common/header";
+import { Header } from "src/components/slug/common/Header";
 import { Nav } from "src/components/slug/common/nav";
 
 import { Aside } from "src/components/slug/work/aside";
