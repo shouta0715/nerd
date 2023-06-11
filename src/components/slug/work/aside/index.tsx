@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Header } from "src/components/slug/common/Header";
+import { Header } from "src/components/slug/common/header";
 import { Nav } from "src/components/slug/common/nav";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";

@@ -1,5 +1,5 @@
 import React, { FC, Suspense } from "react";
-import { Header } from "src/components/slug/common/Header";
+import { Header } from "src/components/slug/common/header";
 import { Nav } from "src/components/slug/common/nav";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
