@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Header } from "src/components/Slug/live/header";
+import { Header } from "src/components/slug/live/header";
 
 export default {
   title: "Features/Live/Header",

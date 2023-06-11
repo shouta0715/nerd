@@ -1,8 +1,8 @@
 import React, { FC, Suspense } from "react";
 import { Loader } from "src/components/Elements/Loader";
-import { Aside } from "src/components/Slug/live/aside";
-import { Header } from "src/components/Slug/live/header";
-import { Nav } from "src/components/Slug/live/nav";
+import { Aside } from "src/components/slug/live/aside";
+import { Header } from "src/components/slug/live/header";
+import { Nav } from "src/components/slug/live/nav";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/Finish";
