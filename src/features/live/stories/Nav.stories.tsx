@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Nav } from "src/components/slug/live/nav";
+import { Nav } from "src/components/Slug/live/nav";
 import { episodeData } from "src/features/episodes/mocks/fixture";
 import { handlers } from "src/features/episodes/mocks/msw";
 import { ProvidersDecorator } from "src/tests/storybook";

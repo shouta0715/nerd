@@ -3,9 +3,9 @@ import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { MenuModal } from "src/components/Modal/Menu";
 import { TimerModal } from "src/components/Modal/Timer";
-import { Header } from "src/components/slug/common/Header";
-import { Nav } from "src/components/slug/common/nav";
-import { Aside } from "src/components/slug/episode/aside";
+import { Header } from "src/components/Slug/common/Header";
+import { Nav } from "src/components/Slug/common/nav";
+import { Aside } from "src/components/Slug/episode/aside";
 
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
