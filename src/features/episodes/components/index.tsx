@@ -4,7 +4,6 @@ import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/episode/aside";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { MenuModal } from "src/components/Modal/Menu";
 import { TimerModal } from "src/components/Modal/Timer";
 
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
@@ -55,7 +54,7 @@ export const Episode: FC = () => {
             sub_title={data?.episodes_by_pk?.title}
             title={data?.episodes_by_pk?.work.series_title}
           />
-          <MenuModal />
+
           {isChat ? (
             <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
           ) : (

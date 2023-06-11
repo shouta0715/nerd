@@ -4,7 +4,6 @@ import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/work/aside";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { MenuModal } from "src/components/Modal/Menu";
 
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
@@ -44,7 +43,7 @@ export const PlayWork: FC = () => {
             id={data?.works_by_pk?.id}
             title={data?.works_by_pk?.series_title}
           />
-          <MenuModal />
+
           {isChat ? (
             <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
           ) : (
