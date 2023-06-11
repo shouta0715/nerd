@@ -53,7 +53,7 @@ export const TalkForm: FC<Props> = ({
 
   return (
     <form
-      className="flex items-center justify-center gap-4 opacity-100 lg:flex-col lg:items-stretch lg:justify-between"
+      className="flex items-center justify-center gap-4  lg:flex-col lg:items-stretch lg:justify-between"
       onSubmit={onSubmitHandler}
     >
       <button
@@ -84,11 +84,11 @@ export const TalkForm: FC<Props> = ({
         {user && <span className="hidden lg:block">{user.user_name}</span>}
       </button>
 
-      <div className="relative flex flex-1  items-center gap-4">
+      <div className="relative flex flex-1 items-center">
         <TextArea
           ref={ref}
           aria-label="コメントを入力"
-          className="placeholder: w-full flex-1 resize-none appearance-none rounded-md border  border-gray-300 px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-pink-500 disabled:bg-white"
+          className="placeholder: w-full flex-1 resize-none appearance-none rounded-md border border-gray-300  px-4 py-2 pr-10 placeholder:pt-1 placeholder:text-xs focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 disabled:border-pink-500 disabled:bg-white lg:mr-4"
           disabled={authLoading || disabled}
           maxLength={validLength}
           maxRows={4}

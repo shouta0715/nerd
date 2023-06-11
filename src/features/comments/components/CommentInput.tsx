@@ -48,7 +48,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 z-[1] w-full border-t border-solid border-slate-200  bg-white p-2 lg:sticky lg:border-0">
+    <div className="fixed bottom-0 left-0 z-[1] w-full border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:border-0 lg:bg-transparent lg:p-0">
       <TalkForm
         ref={inputRef}
         isLoading={isLoading}

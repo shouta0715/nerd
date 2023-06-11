@@ -29,9 +29,8 @@ export const Nav: FC<Props> = ({
   return (
     <nav
       className={clsx(
-        `flex`,
-        response === "lg" &&
-          "hidden flex-1 items-center justify-around lg:flex",
+        `flex items-center`,
+        response === "lg" && "hidden flex-1  justify-around lg:flex",
 
         response === "sp" &&
           "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
@@ -43,18 +42,22 @@ export const Nav: FC<Props> = ({
       )}
     >
       <Text
-        className={`inline-block cursor-pointer rounded-none text-base  font-bold text-indigo-500 transition-colors duration-300 ${
-          mode === "up" ? " text-orange-500" : " text-indigo-500"
-        }`}
+        className={clsx(
+          "inline-block cursor-pointer rounded-none text-base  font-bold text-indigo-500 transition-colors duration-300 ",
+          mode === "up" ? " text-orange-500" : " text-indigo-500",
+          !isChat && "opacity-50"
+        )}
         component="button"
         onClick={() => setIsChat(true)}
       >
         チャット
       </Text>
       <Text
-        className={`inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 transition-colors duration-300 md:text-base ${
-          !isChat ? "border-0 border-solid " : "border-none"
-        } ${mode === "up" ? " text-orange-500" : " text-indigo-500"}`}
+        className={clsx(
+          "inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 transition-colors duration-300 md:text-base ",
+          isChat && "opacity-50",
+          mode === "up" ? " text-orange-500" : " text-indigo-500"
+        )}
         component="button"
         onClick={() => {
           setIsChat(false);
