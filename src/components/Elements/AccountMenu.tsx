@@ -32,7 +32,7 @@ export const AccountMenu = () => {
         leaveFrom="opacity-100 translate-y-0"
         leaveTo="opacity-0 translate-y-1"
       >
-        <Popover.Panel className="absolute right-0 z-20 h-max w-64 rounded-xl border-2 border-slate-200 bg-white shadow-lg ring-1 ring-gray-900/5">
+        <Popover.Panel className="absolute right-0 z-30 h-max w-64 rounded-xl border-2 border-slate-200 bg-white shadow-lg ring-1 ring-gray-900/5">
           <div className="space-y-2 p-2">
             <div className=" flex space-x-2">
               <figure className="relative aspect-square">
