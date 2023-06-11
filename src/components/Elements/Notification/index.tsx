@@ -67,7 +67,10 @@ export const Notification = () => {
           leaveTo="opacity-0"
           show={show}
         >
-          <div className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+          <div
+            className="pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+            role="alert"
+          >
             <div className="p-4">
               <div className="flex items-start">
                 <div className="flex-shrink-0">

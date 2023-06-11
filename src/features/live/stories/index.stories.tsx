@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Live } from "src/features/live/components/Live";
+import { Live } from "src/features/live/components";
 import { handlers } from "src/features/live/mocks/msw";
 import { BasicLayoutOnlyHeaderDecorator } from "src/tests/storybook";
 

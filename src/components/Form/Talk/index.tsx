@@ -53,10 +53,11 @@ export const TalkForm: FC<Props> = ({
 
   return (
     <form
-      className="flex items-center justify-center space-x-2 opacity-100 lg:justify-between lg:space-x-6"
+      className="flex items-center justify-center gap-4 opacity-100 lg:flex-col lg:items-stretch lg:justify-between"
       onSubmit={onSubmitHandler}
     >
       <button
+        className="flex items-center gap-4"
         onClick={() => {
           if (user?.anonymous) setIsOpenModal(true);
 
@@ -80,8 +81,10 @@ export const TalkForm: FC<Props> = ({
             user_name={user?.user_name ?? ""}
           />
         )}
+        {user && <span className="hidden lg:block">{user.user_name}</span>}
       </button>
-      <div className="relative mr-2  flex  flex-1 items-center">
+
+      <div className="relative flex flex-1  items-center gap-4">
         <TextArea
           ref={ref}
           aria-label="コメントを入力"
@@ -95,6 +98,17 @@ export const TalkForm: FC<Props> = ({
           placeholder={placeholder}
           value={value}
         />
+        <Button
+          className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
+          disabled={loading}
+          type="submit"
+        >
+          {apiLoading ? (
+            <Loader size="md" theme="white" />
+          ) : (
+            <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+          )}
+        </Button>
         <div className="absolute right-2 flex flex-col ">
           <div
             className={clsx(
@@ -126,17 +140,6 @@ export const TalkForm: FC<Props> = ({
       >
         <AdjustmentsHorizontalIcon />
       </button>
-      <Button
-        className="hidden h-9 w-9 place-items-center rounded-full bg-teal-500 p-0 lg:grid"
-        disabled={loading}
-        type="submit"
-      >
-        {apiLoading ? (
-          <Loader size="md" theme="white" />
-        ) : (
-          <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
-        )}
-      </Button>
     </form>
   );
 };

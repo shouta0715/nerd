@@ -1,7 +1,7 @@
 import { GetStaticPaths } from "next";
 import React from "react";
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
-import { Live } from "src/features/live/components/Live";
+import { Live } from "src/features/live/components";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { getEpisode, getLiveIdsPaths } from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";

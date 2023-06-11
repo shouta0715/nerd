@@ -1,17 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { LiveHeader } from "src/features/live/components/LiveHeader";
+import { Header } from "src/components/Slug/live/header";
 
 export default {
   title: "Features/Live/Header",
-  component: LiveHeader,
-} as Meta<typeof LiveHeader>;
+  component: Header,
+} as Meta<typeof Header>;
 
-type Story = StoryObj<typeof LiveHeader>;
+type Story = StoryObj<typeof Header>;
 
 const defaultArgs: Story["args"] = {
   id: "1",
-  episode_title: "エピソードタイトル",
-  episode_number: 1,
+  sub_title: "エピソードタイトル",
+  number: 1,
   title: "タイトル",
 
   time: {

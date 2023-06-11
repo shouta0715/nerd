@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Episode } from "src/features/episodes/components/Episode";
+import { Episode } from "src/features/episodes/components";
 import { handlers } from "src/features/episodes/mocks/msw";
 import { BasicLayoutOnlyHeaderDecorator } from "src/tests/storybook";
 

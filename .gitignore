@@ -45,6 +45,8 @@ secrets.json
 
 __reports__
 
+__snapshots__
+
 *.log
 
 storybook-static

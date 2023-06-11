@@ -1,21 +1,23 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { PlayWorkNav } from "src/features/works/components/PlayWorkNav";
+import { Nav } from "src/components/Slug/common/nav";
 import { ProvidersDecorator } from "src/tests/storybook";
 
 export default {
   title: "Features/Works/Play/Nav",
-  component: PlayWorkNav,
+  component: Nav,
   decorators: [ProvidersDecorator],
-} as Meta<typeof PlayWorkNav>;
+} as Meta<typeof Nav>;
 
-type Story = StoryObj<typeof PlayWorkNav>;
+type Story = StoryObj<typeof Nav>;
 
 const createDecorators =
-  (props: Partial<React.ComponentProps<typeof PlayWorkNav>>) => () => {
+  (props: Partial<React.ComponentProps<typeof Nav>>) => () => {
     const [isChat, setIsChat] = useState(props.isChat ?? false);
 
-    return <PlayWorkNav {...props} isChat={isChat} setIsChat={setIsChat} />;
+    return (
+      <Nav response="lg" {...props} isChat={isChat} setIsChat={setIsChat} />
+    );
   };
 
 export const Default: Story = {

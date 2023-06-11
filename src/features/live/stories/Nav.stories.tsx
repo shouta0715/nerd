@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { Nav } from "src/components/Slug/live/nav";
 import { episodeData } from "src/features/episodes/mocks/fixture";
 import { handlers } from "src/features/episodes/mocks/msw";
-import { LiveNav } from "src/features/live/components/LiveNav";
 import { ProvidersDecorator } from "src/tests/storybook";
 
 export default {
   title: "features/live/Nav",
-  component: LiveNav,
+  component: Nav,
   decorators: [ProvidersDecorator],
   args: {
     data: episodeData,
@@ -26,9 +26,9 @@ export default {
       },
     },
   },
-} as Meta<typeof LiveNav>;
+} as Meta<typeof Nav>;
 
-type Story = StoryObj<typeof LiveNav>;
+type Story = StoryObj<typeof Nav>;
 
 export const Default: Story = {};
 

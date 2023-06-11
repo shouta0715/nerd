@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
-import { Episode } from "src/features/episodes/components/Episode";
+import { Episode } from "src/features/episodes/components";
 import { Meta } from "src/libs/meta";
 
 import { NextPageWithLayout } from "src/libs/next/types";

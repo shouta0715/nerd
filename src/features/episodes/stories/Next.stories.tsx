@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
+import { NextMenu } from "src/features/episodes/components/NextMenu";
+
 import { episodeData } from "src/features/episodes/mocks/fixture";
 import { handlers } from "src/features/episodes/mocks/msw";
 import {
@@ -9,7 +10,7 @@ import {
 
 export default {
   title: "features/Episode/Next",
-  component: NextEpisodeMenu,
+  component: NextMenu,
   decorators: [ProvidersDecorator],
   parameters: {
     msw: {
@@ -18,28 +19,25 @@ export default {
       },
     },
   },
-} as Meta<typeof NextEpisodeMenu>;
+} as Meta<typeof NextMenu>;
 
-type Story = StoryObj<typeof NextEpisodeMenu>;
+type Story = StoryObj<typeof NextMenu>;
 
 export const Default: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
   },
 };
 
 export const Open: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
   },
 };
 
 export const Sp: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
   },
   parameters: {
     ...createViewPortParameters("sp"),
@@ -49,7 +47,6 @@ export const Sp: Story = {
 export const Sm: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
   },
   parameters: {
     ...createViewPortParameters("sm"),
@@ -59,7 +56,6 @@ export const Sm: Story = {
 export const Lg: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
   },
   parameters: {
     ...createViewPortParameters("lg"),
@@ -69,7 +65,7 @@ export const Lg: Story = {
 export const DownSp: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
+
     mode: "down",
   },
   parameters: {
@@ -80,7 +76,7 @@ export const DownSp: Story = {
 export const DownSm: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
+
     mode: "down",
   },
   parameters: {
@@ -91,7 +87,6 @@ export const DownSm: Story = {
 export const DownLg: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
 
     mode: "down",
   },
@@ -103,7 +98,7 @@ export const DownLg: Story = {
 export const FinishedSp: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
+
     mode: "finish",
   },
   parameters: {
@@ -114,7 +109,7 @@ export const FinishedSp: Story = {
 export const FinishedSm: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
+
     mode: "finish",
   },
   parameters: {
@@ -125,7 +120,7 @@ export const FinishedSm: Story = {
 export const FinishedLg: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    isOpen: true,
+
     mode: "finish",
   },
   parameters: {
