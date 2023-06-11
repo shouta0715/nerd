@@ -40,9 +40,10 @@ export const BasicLayout = (page: ReactElement) => (
 
 export const BasicLayoutOnlyHeader = (page: ReactElement) => (
   <LayoutProvider>
-    <div className="flex min-h-screen flex-col ">
+    <div className="flex min-h-screen max-w-full flex-1 flex-col">
       <Header />
-      <div className="container relative contents flex-1 bg-white  lg:mx-auto lg:flex lg:max-w-7xl ">
+      <div className="mx-auto flex h-full w-full max-w-7xl flex-1  flex-col items-start gap-x-8  px-0   lg:flex-row lg:px-8">
+        <Background />
         {page}
       </div>
     </div>

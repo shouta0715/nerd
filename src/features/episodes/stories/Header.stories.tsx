@@ -1,17 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { EpisodeHeader } from "src/features/episodes/components/EpisodeHeader";
+import { Header } from "src/components/slug/common/Header";
 
 export default {
   title: "features/Episode/Header",
-  component: EpisodeHeader,
-} as Meta<typeof EpisodeHeader>;
+  component: Header,
+} as Meta<typeof Header>;
 
-type Story = StoryObj<typeof EpisodeHeader>;
+type Story = StoryObj<typeof Header>;
 
 export const Default: Story = {
   args: {
-    episode_number: 1,
-    episode_title: "緑谷出久：オリジン",
+    number: 1,
+    sub_title: "緑谷出久：オリジン",
     id: "1",
     title: "僕のヒーローアカデミア",
   },
@@ -19,8 +19,8 @@ export const Default: Story = {
 
 export const LongTitle: Story = {
   args: {
-    episode_number: 1,
-    episode_title: "緑谷出久：オリジン",
+    number: 1,
+    sub_title: "緑谷出久：オリジン",
     id: "1",
     title:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam accusantium ipsum quis, officiis sit quo debitis animi blanditiis. Et nostrum adipisci possimus quos. Laboriosam quo magnam incidunt, voluptatum excepturi dolores.",
@@ -29,8 +29,8 @@ export const LongTitle: Story = {
 
 export const LongEpisodeTitle: Story = {
   args: {
-    episode_number: 1,
-    episode_title:
+    number: 1,
+    sub_title:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam accusantium ipsum quis, officiis sit quo debitis animi blanditiis. Et nostrum adipisci possimus quos. Laboriosam quo magnam incidunt, voluptatum excepturi dolores.",
     id: "1",
     title: "僕のヒーローアカデミア",
@@ -39,8 +39,8 @@ export const LongEpisodeTitle: Story = {
 
 export const LongTitleAndEpisodeTitle: Story = {
   args: {
-    episode_number: 1,
-    episode_title:
+    number: 1,
+    sub_title:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam accusantium ipsum quis, officiis sit quo debitis animi blanditiis. Et nostrum adipisci possimus quos. Laboriosam quo magnam incidunt, voluptatum excepturi dolores.",
     id: "1",
     title:
@@ -50,8 +50,8 @@ export const LongTitleAndEpisodeTitle: Story = {
 
 export const BiggestNumber: Story = {
   args: {
-    episode_number: 1942,
-    episode_title: "緑谷出久：オリジン",
+    number: 1942,
+    sub_title: "緑谷出久：オリジン",
     id: "1",
     title: "僕のヒーローアカデミア",
   },

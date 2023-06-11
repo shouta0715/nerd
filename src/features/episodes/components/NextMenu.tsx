@@ -5,13 +5,12 @@
 import {
   ChevronDoubleRightIcon,
   Square3Stack3DIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
-import { NextEpisodeMenuWrapper } from "src/components/Wrapper/Next";
+import { NextEpisodeModal } from "src/components/Modal/NextEpisode";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store";
 import { LiveTimer } from "src/features/timer/types";
@@ -21,16 +20,9 @@ import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 type Props = {
   episode?: GetEpisodeQuery["episodes_by_pk"];
   mode?: LiveTimer["mode"];
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const NextEpisodeMenu: FC<Props> = ({
-  episode,
-  mode,
-  isOpen,
-  setIsOpen,
-}) => {
+export const NextMenu: FC<Props> = ({ episode, mode }) => {
   const { data, isLoading } = useQueryEpisode(
     episode?.next_episode_id,
     undefined
@@ -39,28 +31,17 @@ export const NextEpisodeMenu: FC<Props> = ({
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
 
-  if (isOpen && isLoading && episode?.next_episode_id) {
-    return (
-      <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Skeleton theme="nextMenu" />
-      </NextEpisodeMenuWrapper>
-    );
+  if (isLoading && episode?.next_episode_id) {
+    return <Skeleton theme="nextMenu" />;
   }
 
   return (
-    <NextEpisodeMenuWrapper isOpen={isOpen} setIsOpen={setIsOpen}>
-      <section className="border-solid border-slate-200 px-6 py-5">
+    <>
+      <section className="hidden border-solid border-slate-200 lg:block">
         <div className="mb-4 flex items-center justify-between">
           <Text className="text-dimmed" size="sm">
             エピソード
           </Text>
-          <button
-            className="h-5 w-5 transition-transform active:translate-y-0.5 lg:hidden"
-            onClick={() => setIsOpen(false)}
-            type="button"
-          >
-            <XMarkIcon />
-          </button>
         </div>
         <Text component="div">
           <Text className="line-clamp-2 text-sm" component="p">
@@ -130,6 +111,7 @@ export const NextEpisodeMenu: FC<Props> = ({
           )}
         </div>
       </section>
-    </NextEpisodeMenuWrapper>
+      <NextEpisodeModal data={data} episode={episode} mode={mode} />
+    </>
   );
 };

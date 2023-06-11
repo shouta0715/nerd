@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { EpisodeNav } from "src/features/episodes/components/EpisodeNav";
+import { Nav } from "src/components/slug/episode/navs";
+
 import { episodeData } from "src/features/episodes/mocks/fixture";
 import { handlers } from "src/features/episodes/mocks/msw";
 import { ProvidersDecorator } from "src/tests/storybook";
 
 export default {
   title: "features/Episode/Nav",
-  component: EpisodeNav,
+  component: Nav,
   decorators: [ProvidersDecorator],
   parameters: {
     msw: {
@@ -17,15 +18,17 @@ export default {
       },
     },
   },
-} as Meta<typeof EpisodeNav>;
+} as Meta<typeof Nav>;
 
-type Story = StoryObj<typeof EpisodeNav>;
+type Story = StoryObj<typeof Nav>;
 
 const createDecorators =
-  (props: Partial<React.ComponentProps<typeof EpisodeNav>>) => () => {
+  (props: Partial<React.ComponentProps<typeof Nav>>) => () => {
     const [isChat, setIsChat] = useState(props.isChat ?? false);
 
-    return <EpisodeNav {...props} isChat={isChat} setIsChat={setIsChat} />;
+    return (
+      <Nav response="lg" {...props} isChat={isChat} setIsChat={setIsChat} />
+    );
   };
 
 export const Default: Story = {

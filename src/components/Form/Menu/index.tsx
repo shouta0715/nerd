@@ -34,7 +34,7 @@ export const MenuForm = () => {
       </label>
       <div className="flex">
         <Input
-          className=" mr-4 py-1 text-[16px]"
+          className=" mr-4 py-1 text-[16px] placeholder:text-xs"
           id="commenter-name-input"
           inputSize="xs"
           maxLength={20}

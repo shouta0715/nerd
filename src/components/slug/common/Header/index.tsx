@@ -5,39 +5,45 @@ import { useTimerState } from "src/features/timer/store";
 
 type Props = {
   title?: string;
-  episode_title?: string;
-  episode_number?: number;
+  sub_title?: string;
+  number?: number;
   id?: string;
 };
 
-export const EpisodeHeader: FC<Props> = ({
+export const Header: FC<Props> = ({
   title,
-  episode_number,
-  episode_title,
+  sub_title,
+  number,
+
   id,
 }) => {
   const mode = useTimerState((state) => state.mode);
 
   return (
-    <header className="container mx-auto mb-1 flex flex-col bg-white/20 px-4 pt-4 md:px-6">
-      <div className="flex w-full flex-1 flex-col items-center gap-1">
+    <header className="flex flex-col">
+      <div
+        className={`flex w-full flex-1 flex-col items-center gap-1 lg:rounded-t-2xl lg:p-4 lg:text-white
+      ${mode === "up" ? "lg:bg-orange-500" : "lg:bg-indigo-600"}`}
+      >
         <Text
           className="line-clamp-2 text-base font-bold md:text-lg"
           component="h4"
         >
           {title}
         </Text>
-        <Text className="flex" component="div">
-          <Text className="mr-2 text-sm md:text-base" component="p">
-            第{episode_number}話
+        {sub_title && (
+          <Text className="flex" component="div">
+            <Text className="mr-2 text-sm md:text-base" component="p">
+              第{number}話
+            </Text>
+            <Text
+              className="line-clamp-3 flex-1 text-sm md:text-base"
+              component="p"
+            >
+              {sub_title}
+            </Text>
           </Text>
-          <Text
-            className="line-clamp-3 flex-1 text-sm md:text-base"
-            component="p"
-          >
-            {episode_title}
-          </Text>
-        </Text>
+        )}
       </div>
       <div className="mx-auto mt-1.5 flex max-w-max flex-col md:mt-3">
         <Text

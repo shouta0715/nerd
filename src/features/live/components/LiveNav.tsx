@@ -8,7 +8,8 @@ import { Menu } from "src/components/Elements/Menu";
 import { Skeleton } from "src/components/Elements/Skeleton";
 
 import { Text } from "src/components/Elements/Text";
-import { NextEpisodeMenu } from "src/features/episodes/components/NextEpisodeMenu";
+import { NextMenu } from "src/features/episodes/components/NextMenu";
+
 import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -73,12 +74,7 @@ export const LiveNav: FC<Props> = ({ isChat, setIsChat, data, mode }) => {
         <Suspense
           fallback={<Skeleton props={{ isHidden: true }} theme="nextMenu" />}
         >
-          <NextEpisodeMenu
-            episode={data?.episodes_by_pk}
-            isOpen={isEpisodeMenuOpen}
-            mode={mode}
-            setIsOpen={setIsEpisodeMenuOpen}
-          />
+          <NextMenu episode={data?.episodes_by_pk} mode={mode} />
         </Suspense>
       </div>
     </nav>
