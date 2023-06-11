@@ -3,9 +3,10 @@ import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { MenuModal } from "src/components/Modal/Menu";
 import { TimerModal } from "src/components/Modal/Timer";
-import { Header } from "src/components/slug/common/Header";
+import { Header } from "src/components/slug/common/header";
+import { Nav } from "src/components/slug/common/nav";
 import { Aside } from "src/components/slug/episode/aside";
-import { Nav } from "src/components/slug/episode/navs";
+
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 
 import { EpisodeChats } from "src/features/chats/components/EpisodeChats";

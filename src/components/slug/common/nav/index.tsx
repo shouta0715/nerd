@@ -2,36 +2,44 @@ import { ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
-import { usePrefetchCommentEpisode } from "src/features/comments/api/usePrefetchCommentEpisode";
+
 import { useOpenState } from "src/features/episodes/store";
 import { useTimerState } from "src/features/timer/store";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
-import { useUserState } from "src/store/user/userState";
 
 type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
-  data?: GetEpisodeQuery;
   response: "lg" | "sp";
+  showNext?: boolean;
 };
 
-export const Nav: FC<Props> = ({ setIsChat, isChat, data, response }) => {
-  const prefetchComments = usePrefetchCommentEpisode();
-  const user = useUserState((state) => state.user);
+export const Nav: FC<Props> = ({
+  setIsChat,
+  isChat,
+  response,
+  showNext = true,
+}) => {
   const mode = useTimerState((state) => state.mode);
   const stop = useTimerState((state) => state.interval.stop);
-  const [isNextEpisodeOpen, setIsNextEpisodeOpen] = useOpenState((state) => [
-    state.isNextEpisodeOpen,
-    state.setIsNextEpisodeOpen,
+  const [isNextOpen, setIsNextOpen] = useOpenState((state) => [
+    state.isNextOpen,
+    state.setIsNextOpen,
   ]);
 
   return (
     <nav
       className={clsx(
         `flex`,
-        response === "lg"
-          ? "hidden flex-1 items-center justify-around lg:flex"
-          : "sticky top-0 z-20 justify-between border-b bg-white/80 px-2 before:h-7 before:w-7 before:content-[''] lg:hidden"
+        response === "lg" &&
+          "hidden flex-1 items-center justify-around lg:flex",
+
+        response === "sp" &&
+          "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
+        response === "sp" && !showNext && "justify-around",
+
+        response === "sp" &&
+          showNext &&
+          " justify-between px-2 before:h-7 before:w-7 before:content-['']"
       )}
     >
       <Text
@@ -52,15 +60,13 @@ export const Nav: FC<Props> = ({ setIsChat, isChat, data, response }) => {
           setIsChat(false);
           stop();
         }}
-        onMouseEnter={() => user && prefetchComments(data?.episodes_by_pk?.id)}
-        onTouchStart={() => user && prefetchComments(data?.episodes_by_pk?.id)}
       >
         コメント
       </Text>
-      {response === "sp" && (
+      {response === "sp" && showNext && (
         <button
           className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
-          onClick={() => setIsNextEpisodeOpen(!isNextEpisodeOpen)}
+          onClick={() => setIsNextOpen(!isNextOpen)}
         >
           <ListBulletIcon />
         </button>

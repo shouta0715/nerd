@@ -7,16 +7,10 @@ type Props = {
   title?: string;
   sub_title?: string;
   number?: number;
-  id?: string;
+  id?: string | number;
 };
 
-export const Header: FC<Props> = ({
-  title,
-  sub_title,
-  number,
-
-  id,
-}) => {
+export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
   const mode = useTimerState((state) => state.mode);
 
   return (

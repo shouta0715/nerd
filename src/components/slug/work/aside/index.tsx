@@ -1,18 +1,18 @@
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import { Menu } from "src/components/Elements/Menu";
 import { Header } from "src/components/slug/common/header";
 import { Nav } from "src/components/slug/common/nav";
 
-import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
+import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
+import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
-import { NextMenu } from "src/features/episodes/components/NextMenu";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { WorkMenu } from "src/features/works/components/WorkMenu";
+import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 
 type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
-  data?: GetEpisodeQuery;
+  data?: GetWorkQuery;
   filter: CommentsFilter;
 };
 
@@ -23,30 +23,25 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
 
       <div className=" rounded-2xl bg-white/60 pb-4  shadow-lg ring-1 ring-gray-900/5">
         <Header
-          id={data?.episodes_by_pk?.id}
-          number={data?.episodes_by_pk?.number}
-          sub_title={data?.episodes_by_pk?.title}
-          title={data?.episodes_by_pk?.work.series_title}
+          id={data?.works_by_pk?.id}
+          title={data?.works_by_pk?.series_title}
         />
         <Nav isChat={isChat} response="lg" setIsChat={setIsChat} />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />
       </div>
-
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Suspense>
-          <NextMenu episode={data?.episodes_by_pk} />
-        </Suspense>
+        <WorkMenu data={data} />
       </div>
 
       <div className=" sticky bottom-0 h-max w-full rounded-2xl bg-white p-4 shadow-lg ring-1  ring-gray-900/5 ">
         {isChat ? (
-          <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
+          <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (
-          <EpisodeCommentInput
-            episode_id={data?.episodes_by_pk?.id}
+          <WorkCommentInput
             filter={filter}
+            work_id={data?.works_by_pk?.id ?? 0}
           />
         )}
       </div>

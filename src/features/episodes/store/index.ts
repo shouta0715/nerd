@@ -14,13 +14,13 @@ export const useAutoCompleteState = create<AutCompleteState>((set) => ({
 type OpenState = {
   isMenuOpen: boolean;
   setIsMenuOpen: (flag: boolean) => void;
-  isNextEpisodeOpen: boolean;
-  setIsNextEpisodeOpen: (flag: boolean) => void;
+  isNextOpen: boolean;
+  setIsNextOpen: (flag: boolean) => void;
 };
 
 export const useOpenState = create<OpenState>((set) => ({
   isMenuOpen: false,
   setIsMenuOpen: (flag) => set(() => ({ isMenuOpen: flag })),
-  isNextEpisodeOpen: false,
-  setIsNextEpisodeOpen: (flag) => set(() => ({ isNextEpisodeOpen: flag })),
+  isNextOpen: false,
+  setIsNextOpen: (flag) => set(() => ({ isNextOpen: flag })),
 }));

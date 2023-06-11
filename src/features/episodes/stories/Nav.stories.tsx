@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Nav } from "src/components/slug/episode/navs";
+import { Nav } from "src/components/slug/common/nav";
 
-import { episodeData } from "src/features/episodes/mocks/fixture";
 import { handlers } from "src/features/episodes/mocks/msw";
 import { ProvidersDecorator } from "src/tests/storybook";
 
@@ -41,7 +40,4 @@ export const Default: Story = {
 
 export const Chat: Story = {
   decorators: [createDecorators({ isChat: true })],
-};
-export const WithData: Story = {
-  decorators: [createDecorators({ data: episodeData })],
 };

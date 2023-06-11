@@ -19,20 +19,20 @@ type Props = {
 };
 
 export const NextEpisodeModal: FC<Props> = ({ mode, episode, data }) => {
-  const [isNextEpisodeOpen, setIsNextEpisodeOpen] = useOpenState((state) => [
-    state.isNextEpisodeOpen,
-    state.setIsNextEpisodeOpen,
+  const [isNextOpen, setIsNextOpen] = useOpenState((state) => [
+    state.isNextOpen,
+    state.setIsNextOpen,
   ]);
 
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
 
   return (
-    <Transition.Root as={Fragment} show={isNextEpisodeOpen}>
+    <Transition.Root as={Fragment} show={isNextOpen}>
       <Dialog
         as="div"
         className="relative z-50 lg:hidden"
-        onClose={() => setIsNextEpisodeOpen(false)}
+        onClose={() => setIsNextOpen(false)}
       >
         <Transition.Child
           as={Fragment}

@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { PlayWorkHeader } from "src/features/works/components/PlayWorkHeader";
+import { Header } from "src/components/slug/common/header";
 
 export default {
   title: "Features/Works/Play/Header",
-  component: PlayWorkHeader,
-} as Meta<typeof PlayWorkHeader>;
+  component: Header,
+} as Meta<typeof Header>;
 
-type Story = StoryObj<typeof PlayWorkHeader>;
+type Story = StoryObj<typeof Header>;
 
 export const Default: Story = {
   args: {
