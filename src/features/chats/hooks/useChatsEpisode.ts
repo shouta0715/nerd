@@ -4,11 +4,10 @@ import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsEpisode = (episode_id: string) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQueryChatsEpisode({
-      episode_id,
-      enabled: !!episode_id,
-    });
+  const { data, isLoading } = useInfiniteQueryChatsEpisode({
+    episode_id,
+    enabled: !!episode_id,
+  });
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -28,16 +27,20 @@ export const useChatsEpisode = (episode_id: string) => {
     entry?.target.scrollIntoView({ behavior: "smooth" });
   }, [entry?.target, isBottom, chats.length]);
 
-  useEffect(() => {
-    if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
-      fetchNextPage({
-        pageParam: {
-          _gte: time,
-          _lt: time + 300,
-        },
-      });
-    }
-  }, [fetchNextPage, isFetchingNextPage, time]);
+  // useEffect(() => {
+  //   if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
+  //     (async () => {
+  //       const data = await fetchNextPage({
+  //         pageParam: {
+  //           _gte: time,
+  //           _lt: time + 300,
+  //         },
+  //       });
+
+  //       console.log(data.dataUpdatedAt);
+  //     })();
+  //   }
+  // }, [fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };
