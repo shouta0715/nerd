@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Header } from "src/components/Slug/common/Header";
+import { Header } from "src/components/dynamic/common/header";
 
 export default {
   title: "Features/Works/Play/Header",

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { Header } from "src/components/Slug/common/Header";
-import { Nav } from "src/components/Slug/common/nav";
+import { Header } from "src/components/dynamic/common/header";
+import { Nav } from "src/components/dynamic/common/nav";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { CommentsFilter } from "src/features/comments/types";

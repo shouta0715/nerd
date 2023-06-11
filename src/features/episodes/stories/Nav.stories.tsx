@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Nav } from "src/components/Slug/common/nav";
+import { Nav } from "src/components/dynamic/common/nav";
 
 import { handlers } from "src/features/episodes/mocks/msw";
 import { ProvidersDecorator } from "src/tests/storybook";

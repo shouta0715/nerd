@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { useState } from "react";
-import { Nav } from "src/components/Slug/common/nav";
+import { Nav } from "src/components/dynamic/common/nav";
 import { ProvidersDecorator } from "src/tests/storybook";
 
 export default {
