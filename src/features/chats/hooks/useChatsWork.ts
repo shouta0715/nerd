@@ -4,11 +4,10 @@ import { useChats } from "src/features/chats/hooks/useChats";
 
 export const useChatsWork = (work_id: number) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQueryChatsWork({
-      work_id,
-      enabled: !!work_id,
-    });
+  const { data, isLoading } = useInfiniteQueryChatsWork({
+    work_id,
+    enabled: !!work_id,
+  });
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -28,16 +27,16 @@ export const useChatsWork = (work_id: number) => {
     entry?.target.scrollIntoView({ behavior: "smooth" });
   }, [entry?.target, isBottom, chats.length]);
 
-  useEffect(() => {
-    if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
-      fetchNextPage({
-        pageParam: {
-          _gte: time,
-          _lt: time + 300,
-        },
-      });
-    }
-  }, [fetchNextPage, isFetchingNextPage, time]);
+  // useEffect(() => {
+  //   if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
+  //     fetchNextPage({
+  //       pageParam: {
+  //         _gte: time,
+  //         _lt: time + 300,
+  //       },
+  //     });
+  //   }
+  // }, [fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };
