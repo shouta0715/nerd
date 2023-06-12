@@ -1,5 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
+import {
+  OAuthProvider,
+  deleteUser,
+  reauthenticateWithPopup,
+} from "firebase/auth";
+import { NotificationState } from "src/components/Elements/Notification/store";
 import { HttpError, ErrorType } from "src/libs/error";
+import { auth } from "src/libs/firebase";
 import {
   CreateClaimsSchema,
   CreateUserSchema,
@@ -58,4 +65,74 @@ export const useUser = () => {
   return {
     createMutateAsync: createUser.mutateAsync,
   };
+};
+
+type HandleReset = {
+  setIsDeleteConfirmationOpen: (value: boolean) => void;
+  setAuthLoading: (value: boolean) => void;
+  onShow: (state: Partial<NotificationState>) => void;
+};
+
+export const handleNoUser = ({
+  setIsDeleteConfirmationOpen,
+  setAuthLoading,
+  onShow,
+}: HandleReset) => {
+  setIsDeleteConfirmationOpen(false);
+  setAuthLoading(false);
+  onShow({
+    title: "エラーが発生しました",
+    message: "ログアウト後、再度ログインしてください",
+    type: "error",
+  });
+};
+
+export const handleRequireReLogin = async ({
+  setIsDeleteConfirmationOpen,
+  setAuthLoading,
+  onShow,
+}: {
+  setIsDeleteConfirmationOpen: (value: boolean) => void;
+  setAuthLoading: (value: boolean) => void;
+  onShow: (state: Partial<NotificationState>) => void;
+}) => {
+  if (!auth.currentUser) {
+    handleNoUser({
+      setIsDeleteConfirmationOpen,
+      setAuthLoading,
+      onShow,
+    });
+
+    return;
+  }
+  const provider = new OAuthProvider("google.com");
+
+  const { user: deletedUser } = await reauthenticateWithPopup(
+    auth.currentUser,
+    provider
+  );
+
+  await deleteUser(deletedUser);
+  setIsDeleteConfirmationOpen(false);
+  setAuthLoading(false);
+  onShow({
+    title: "アカウントを消去しました",
+    type: "success",
+  });
+
+  localStorage.removeItem("user_name");
+};
+
+export const handleError = ({
+  setIsDeleteConfirmationOpen,
+  setAuthLoading,
+  onShow,
+}: HandleReset) => {
+  setIsDeleteConfirmationOpen(false);
+  setAuthLoading(false);
+  onShow({
+    title: "エラーが発生しました",
+    message: "ログアウト後、再度ログインしてください",
+    type: "error",
+  });
 };

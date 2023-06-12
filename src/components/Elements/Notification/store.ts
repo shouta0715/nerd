@@ -38,7 +38,7 @@ export const useNotificationState = create<Notification>((set, get) => ({
   ...defaultState,
   onShow: (state) =>
     set(() => {
-      const { duration, isPersistent } = state;
+      const { duration, isPersistent, message } = state;
 
       const timer = setTimeout(() => {
         if (!isPersistent) {
@@ -50,6 +50,7 @@ export const useNotificationState = create<Notification>((set, get) => ({
         ...state,
         isShown: true,
         timer,
+        message: message ?? "",
       };
     }),
   onHide: () =>

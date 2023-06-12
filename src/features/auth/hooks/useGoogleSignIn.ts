@@ -4,12 +4,15 @@ import {
   deleteUser,
   signInWithPopup,
   signOut,
-  OAuthProvider,
-  reauthenticateWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../../libs/firebase";
 import { useNotificationState } from "src/components/Elements/Notification/store";
+import {
+  handleError,
+  handleNoUser,
+  handleRequireReLogin,
+} from "src/features/auth/hooks";
 import { UnauthorizedError } from "src/libs/error";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -88,32 +91,29 @@ export const useGoogleSignIn = () => {
 
       localStorage.removeItem("user_name");
     } catch (error: any) {
-      if (error.code === "auth/requires-recent-login") {
-        if (auth.currentUser) {
-          const provider = new OAuthProvider("google.com");
-
-          const { user: deletedUser } = await reauthenticateWithPopup(
-            auth.currentUser,
-            provider
-          );
-
-          await deleteUser(deletedUser);
-          setIsDeleteConfirmationOpen(false);
-          setAuthLoading(false);
-          onShow({
-            title: "アカウントを消去しました",
-            type: "success",
+      switch (error.code) {
+        case "auth/requires-recent-login":
+          handleRequireReLogin({
+            setIsDeleteConfirmationOpen,
+            setAuthLoading,
+            onShow,
           });
+          break;
 
-          localStorage.removeItem("user_name");
+        case "auth/user-not-found":
+          handleNoUser({
+            setIsDeleteConfirmationOpen,
+            setAuthLoading,
+            onShow,
+          });
+          break;
 
-          return;
-        }
-      } else if (error.code === "auth/user-not-found") {
-        onShow({
-          title: "アカウントが見つかりませんでした",
-          type: "error",
-        });
+        default:
+          handleError({
+            setIsDeleteConfirmationOpen,
+            setAuthLoading,
+            onShow,
+          });
       }
 
       setAuthLoading(false);
