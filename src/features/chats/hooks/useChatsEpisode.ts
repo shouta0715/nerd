@@ -1,13 +1,17 @@
 import { useEffect, useMemo } from "react";
+import { isPageParams } from "../types/index";
+/* eslint-disable no-underscore-dangle */
 import { useInfiniteQueryChatsEpisode } from "src/features/chats/api/useInfiniteQueryChatsEpisode";
 import { useChats } from "src/features/chats/hooks/useChats";
+import { isBetweenTime, multipleOf300 } from "src/features/chats/utils";
 
 export const useChatsEpisode = (episode_id: string) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, isLoading } = useInfiniteQueryChatsEpisode({
-    episode_id,
-    enabled: !!episode_id,
-  });
+  const { data, fetchNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteQueryChatsEpisode({
+      episode_id,
+      enabled: !!episode_id,
+    });
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -27,20 +31,44 @@ export const useChatsEpisode = (episode_id: string) => {
     entry?.target.scrollIntoView({ behavior: "smooth" });
   }, [entry?.target, isBottom, chats.length]);
 
-  // useEffect(() => {
-  //   if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
-  //     (async () => {
-  //       const data = await fetchNextPage({
-  //         pageParam: {
-  //           _gte: time,
-  //           _lt: time + 300,
-  //         },
-  //       });
+  useEffect(() => {
+    if (
+      isFetchingNextPage ||
+      time < 300 ||
+      !data?.pageParams ||
+      data.pageParams.length > 36
+    )
+      return;
 
-  //       console.log(data.dataUpdatedAt);
-  //     })();
-  //   }
-  // }, [fetchNextPage, isFetchingNextPage, time]);
+    const lastPageParam = data?.pageParams.at(-1);
+
+    if (lastPageParam === undefined) {
+      (async () => {
+        fetchNextPage({
+          pageParam: {
+            _gte: 300,
+            _lt: multipleOf300(time),
+          },
+        });
+      })();
+
+      return;
+    }
+
+    if (!isPageParams(lastPageParam) || isBetweenTime(time, lastPageParam))
+      return;
+
+    const lastChatTime = lastPageParam._lt;
+
+    (async () => {
+      fetchNextPage({
+        pageParam: {
+          _gte: lastChatTime,
+          _lt: multipleOf300(time),
+        },
+      });
+    })();
+  }, [data?.pageParams, fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };

@@ -4,6 +4,7 @@ import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/work/aside";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { TimerModal } from "src/components/Modal/Timer";
 
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkChats } from "src/features/chats/components/WorkChats";
@@ -79,6 +80,7 @@ export const PlayWork: FC = () => {
           )}
         </main>
       </div>
+      <TimerModal />
     </>
   );
 };

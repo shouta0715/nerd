@@ -1,13 +1,16 @@
 import { useEffect, useMemo } from "react";
 import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQueryChatsWork";
 import { useChats } from "src/features/chats/hooks/useChats";
+import { isPageParams } from "src/features/chats/types";
+import { isBetweenTime, multipleOf300 } from "src/features/chats/utils";
 
 export const useChatsWork = (work_id: number) => {
   const { entry, isBottom, time, bottomRef } = useChats();
-  const { data, isLoading } = useInfiniteQueryChatsWork({
-    work_id,
-    enabled: !!work_id,
-  });
+  const { data, isLoading, fetchNextPage, isFetchingNextPage } =
+    useInfiniteQueryChatsWork({
+      work_id,
+      enabled: !!work_id,
+    });
 
   const chats = useMemo(() => {
     if (!data?.pages) return [];
@@ -27,16 +30,45 @@ export const useChatsWork = (work_id: number) => {
     entry?.target.scrollIntoView({ behavior: "smooth" });
   }, [entry?.target, isBottom, chats.length]);
 
-  // useEffect(() => {
-  //   if (time % 300 === 0 && time !== 0 && !isFetchingNextPage) {
-  //     fetchNextPage({
-  //       pageParam: {
-  //         _gte: time,
-  //         _lt: time + 300,
-  //       },
-  //     });
-  //   }
-  // }, [fetchNextPage, isFetchingNextPage, time]);
+  useEffect(() => {
+    if (
+      isFetchingNextPage ||
+      time < 300 ||
+      !data?.pageParams ||
+      data.pageParams.length > 36
+    )
+      return;
+
+    const lastPageParam = data?.pageParams.at(-1);
+
+    if (lastPageParam === undefined) {
+      (async () => {
+        fetchNextPage({
+          pageParam: {
+            _gte: 300,
+            _lt: multipleOf300(time),
+          },
+        });
+      })();
+
+      return;
+    }
+
+    if (!isPageParams(lastPageParam) || isBetweenTime(time, lastPageParam))
+      return;
+
+    // eslint-disable-next-line no-underscore-dangle
+    const lastChatTime = lastPageParam._lt;
+
+    (async () => {
+      fetchNextPage({
+        pageParam: {
+          _gte: lastChatTime,
+          _lt: multipleOf300(time),
+        },
+      });
+    })();
+  }, [data?.pageParams, fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, bottomRef, isBottom, entry, time, isLoading };
 };

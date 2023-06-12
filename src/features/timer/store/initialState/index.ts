@@ -11,7 +11,7 @@ export const InitialTimerCount = {
 export const MaxTime = {
   seconds: 0,
   minutes: 0,
-  hours: 10,
+  hours: 4,
 };
 
 const start = (get: Get, set: Set) => {

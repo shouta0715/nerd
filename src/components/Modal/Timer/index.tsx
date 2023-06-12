@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { PinInput } from "src/components/Elements/PinInput/PinInput";
 import { Text } from "src/components/Elements/Text";
 import { Modal } from "src/components/Modal";
@@ -24,6 +24,8 @@ export const TimerModal = () => {
 
     setIsOpen(false);
   };
+
+  useEffect(() => () => setIsOpen(false), [setIsOpen]);
 
   const { inputTime, padTime, handleChange, onSubmitHandler } = useDownModal();
 

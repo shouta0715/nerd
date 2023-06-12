@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useTimerState } from "src/features/timer/store";
+import { MaxTime } from "src/features/timer/store/initialState";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useCountDownModal } from "src/store/global/globalStore";
 
@@ -23,6 +25,8 @@ export const useTimeInput = () => {
     downInitialTime: state.downInitialTime,
   }));
 
+  const showNotification = useNotificationState((state) => state.onShow);
+
   const setIsOpen = useCountDownModal((state) => state.setIsOpen);
 
   const setChangeTime = () => {
@@ -36,6 +40,20 @@ export const useTimeInput = () => {
       minutes: +minutes,
       seconds: +seconds,
     });
+
+    const timeToSeconds = timeToSecond({
+      hours: +hours,
+      minutes: +minutes,
+      seconds: +seconds,
+    });
+
+    if (timeToSeconds > timeToSecond(MaxTime))
+      showNotification({
+        title: "時間を変更しました",
+        message: "最大時間の4時間を超えたため4時間に設定されます。",
+        type: "error",
+      });
+    else showNotification({ title: "時間を変更しました", type: "success" });
   };
 
   const changeHandler = (newTime: string) => setInputTime(newTime);
