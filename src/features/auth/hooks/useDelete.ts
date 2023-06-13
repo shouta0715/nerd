@@ -18,7 +18,6 @@ export const useDelete = () => {
   const onShow = useNotificationState((state) => state.onShow);
 
   const resentLogin = useCallback(async () => {
-    console.log("resentLogin");
     const provider = new GoogleAuthProvider();
 
     try {
@@ -54,7 +53,6 @@ export const useDelete = () => {
   }, [onShow, setIsDeleteConfirmationOpen]);
 
   const deleteGoogleUser = useCallback(async () => {
-    console.log("deleteGoogleUser");
     setAuthLoading(true);
     try {
       if (!auth.currentUser) throw new UnauthorizedError();

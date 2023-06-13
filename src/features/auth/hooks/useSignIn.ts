@@ -16,7 +16,6 @@ export const useSignIn = () => {
   const user = useUserState((state) => state.user);
 
   const signInGoogle = useCallback(async () => {
-    console.log("signInGoogle");
     setAuthLoading(true);
     const provider = new GoogleAuthProvider();
 

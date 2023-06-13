@@ -10,7 +10,6 @@ export const useSignOut = () => {
   const onShow = useNotificationState((state) => state.onShow);
 
   const signOutGoogle = useCallback(async () => {
-    console.log("signOutGoogle");
     setAuthLoading(true);
 
     try {
