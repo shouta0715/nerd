@@ -30,7 +30,7 @@ export const Header: FC<Props> = ({
   id,
   mode,
 }) => (
-  <header className="flex flex-col">
+  <header className="flex flex-col px-4 lg:px-0">
     <div
       className={`flex w-full flex-1 flex-col items-center gap-1 lg:rounded-t-2xl lg:p-4 lg:text-white
   ${mode === "up" ? "lg:bg-orange-500" : "lg:bg-indigo-600"}`}
