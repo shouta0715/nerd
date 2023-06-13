@@ -36,8 +36,8 @@ export const useDelete = () => {
     } catch (error) {
       if (error instanceof FirebaseError) {
         onShow({
-          title: "アカウントの消去に失敗しました",
-          message: "時間をおいて再度お試しください",
+          title: "アカウントの消去に失敗しました resent login",
+          message: `時間をおいて再度お試しください${error.code}${error.message}`,
           type: "error",
         });
 
@@ -73,8 +73,8 @@ export const useDelete = () => {
 
           default:
             onShow({
-              title: "アカウントの消去に失敗しました",
-              message: "時間をおいて再度お試しください",
+              title: "アカウントの消去に失敗しました delete user",
+              message: `時間をおいて再度お試しください${error.code}${error.message}`,
               type: "error",
             });
             break;
