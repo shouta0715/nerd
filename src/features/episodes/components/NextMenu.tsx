@@ -32,7 +32,17 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
   const timerMode = useTimerState((state) => state.mode);
 
   if (isLoading && episode?.next_episode_id) {
-    return <Skeleton theme="nextMenu" />;
+    return (
+      <>
+        <Skeleton theme="nextMenu" />;
+        <NextEpisodeModal
+          data={data}
+          episode={episode}
+          isLoading={isLoading}
+          mode={mode}
+        />
+      </>
+    );
   }
 
   return (
