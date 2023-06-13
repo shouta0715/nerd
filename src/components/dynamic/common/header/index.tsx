@@ -14,13 +14,13 @@ export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
   const mode = useTimerState((state) => state.mode);
 
   return (
-    <header className="flex flex-col">
+    <header className="flex flex-col px-4 lg:px-0">
       <div
         className={`flex w-full flex-1 flex-col items-center gap-1 lg:rounded-t-2xl lg:p-4 lg:text-white
       ${mode === "up" ? "lg:bg-orange-500" : "lg:bg-indigo-600"}`}
       >
         <Text
-          className="line-clamp-2 px-4 text-base font-bold  md:text-lg lg:px-0"
+          className="line-clamp-2 text-base font-bold  md:text-lg "
           component="h4"
         >
           {title}
