@@ -83,23 +83,14 @@ export const useGoogleSignIn = () => {
           title: "アカウントを消去しました",
           type: "success",
         });
+        localStorage.removeItem("user_name");
       } else {
-        setIsError(() => {
-          throw new UnauthorizedError();
-        });
-      }
-
-      localStorage.removeItem("user_name");
-    } catch (error: any) {
-      if (!error.code) {
-        setAuthLoading(false);
         onShow({
-          title: "アカウントを消去できませんでした。",
-          message: "時間をおいて再度お試しください。",
+          title: "アカウントの消去に失敗しました",
           type: "error",
         });
       }
-
+    } catch (error: any) {
       switch (error.code) {
         case "auth/requires-recent-login":
           handleRequireReLogin({
@@ -124,6 +115,8 @@ export const useGoogleSignIn = () => {
             onShow,
           });
       }
+
+      setAuthLoading(false);
     }
   };
 
