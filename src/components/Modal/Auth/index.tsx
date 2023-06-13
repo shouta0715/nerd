@@ -4,7 +4,7 @@ import GoogleIcon from "public/icons/GoogleIcon.svg";
 import { Button } from "src/components/Elements/Button";
 import { Text } from "src/components/Elements/Text";
 import { Modal } from "src/components/Modal";
-import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
+import { useGoogle } from "src/features/auth/hooks/useGoogle";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const AuthModal = () => {
@@ -12,7 +12,7 @@ export const AuthModal = () => {
     state.isOpenLoginModal,
     state.setIsOpenModal,
   ]);
-  const { signInGoogle } = useGoogleSignIn();
+  const { signInGoogle } = useGoogle();
   const authLoading = useGlobalState((state) => state.authLoading);
 
   return (

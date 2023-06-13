@@ -8,12 +8,13 @@ import React from "react";
 import { Image } from "src/components/Elements/Image";
 import { Text } from "src/components/Elements/Text";
 import { DeleteModal } from "src/components/Modal/Delete";
-import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
+import { useGoogle } from "src/features/auth/hooks/useGoogle";
+
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 export const AccountMenu = () => {
-  const { signOutGoogle } = useGoogleSignIn();
+  const { signOutGoogle } = useGoogle();
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useGlobalState((state) => [

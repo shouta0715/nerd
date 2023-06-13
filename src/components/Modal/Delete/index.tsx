@@ -2,7 +2,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Modal } from "src/components/Modal";
-import { useGoogleSignIn } from "src/features/auth/hooks/useGoogleSignIn";
+import { useGoogle } from "src/features/auth/hooks/useGoogle";
 import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const DeleteModal: FC<Props> = ({ open, onClose }) => {
-  const { deleteGoogleUser } = useGoogleSignIn();
+  const { deleteGoogleUser } = useGoogle();
   const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
