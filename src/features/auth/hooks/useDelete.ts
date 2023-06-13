@@ -6,6 +6,7 @@ import {
 } from "firebase/auth";
 import { useCallback } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useRecentLoginState } from "src/features/auth/store";
 import { UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { useGlobalState } from "src/store/global/globalStore";
@@ -15,14 +16,25 @@ export const useDelete = () => {
     (state) => [state.setAuthLoading, state.setIsDeleteConfirmationOpen]
   );
 
+  const setIsRequired = useRecentLoginState((state) => state.setIsRequired);
+
   const onShow = useNotificationState((state) => state.onShow);
 
-  const resentLogin = useCallback(async () => {
+  const handleRecentLogin = useCallback(() => {
+    setIsRequired(true);
+    onShow({
+      title: "再ログインが必要です",
+      message: "再ログインしてからもう一度お試しください",
+      type: "error",
+    });
+  }, [onShow, setIsRequired]);
+
+  const reAuthDeleteGoogleUser = useCallback(async () => {
     const provider = new GoogleAuthProvider();
 
     try {
       if (!auth.currentUser) throw new UnauthorizedError();
-      setIsDeleteConfirmationOpen(false);
+
       const { user: deletedUser } = await reauthenticateWithPopup(
         auth.currentUser,
         provider
@@ -30,6 +42,8 @@ export const useDelete = () => {
 
       await deleteUser(deletedUser);
 
+      setIsDeleteConfirmationOpen(false);
+      setIsRequired(false);
       onShow({
         title: "アカウントを消去しました",
         type: "success",
@@ -51,7 +65,7 @@ export const useDelete = () => {
         type: "error",
       });
     }
-  }, [onShow, setIsDeleteConfirmationOpen]);
+  }, [onShow, setIsDeleteConfirmationOpen, setIsRequired]);
 
   const deleteGoogleUser = useCallback(async () => {
     setAuthLoading(true);
@@ -69,7 +83,7 @@ export const useDelete = () => {
       if (error instanceof FirebaseError) {
         switch (error.code) {
           case "auth/requires-recent-login":
-            resentLogin();
+            handleRecentLogin();
             break;
 
           case "auth/user-not-found":
@@ -100,7 +114,7 @@ export const useDelete = () => {
     } finally {
       setAuthLoading(false);
     }
-  }, [onShow, resentLogin, setAuthLoading, setIsDeleteConfirmationOpen]);
+  }, [handleRecentLogin, onShow, setAuthLoading, setIsDeleteConfirmationOpen]);
 
-  return { deleteGoogleUser };
+  return { deleteGoogleUser, reAuthDeleteGoogleUser };
 };

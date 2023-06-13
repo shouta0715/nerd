@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Modal } from "src/components/Modal";
 import { useGoogle } from "src/features/auth/hooks/useGoogle";
+import { useRecentLoginState } from "src/features/auth/store";
 import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export const DeleteModal: FC<Props> = ({ open, onClose }) => {
-  const { deleteGoogleUser } = useGoogle();
+  const { deleteGoogleUser, reAuthDeleteGoogleUser } = useGoogle();
+  const isReAuth = useRecentLoginState((state) => state.isRequired);
   const authLoading = useGlobalState((state) => state.authLoading);
 
   return (
@@ -39,10 +41,10 @@ export const DeleteModal: FC<Props> = ({ open, onClose }) => {
         <Button
           className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
           loading={authLoading}
-          onClick={deleteGoogleUser}
+          onClick={isReAuth ? reAuthDeleteGoogleUser : deleteGoogleUser}
           type="button"
         >
-          消去
+          {isReAuth ? "再認証して消去" : "消去する"}
         </Button>
         <button
           className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"

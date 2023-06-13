@@ -15,6 +15,7 @@ import { useUserState } from "src/store/user/userState";
 
 export const AccountMenu = () => {
   const { signOutGoogle } = useGoogle();
+
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useGlobalState((state) => [

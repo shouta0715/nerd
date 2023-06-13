@@ -5,11 +5,12 @@ import { useSignOut } from "src/features/auth/hooks/useSignOut";
 export const useGoogle = () => {
   const { signInGoogle } = useSignIn();
   const { signOutGoogle } = useSignOut();
-  const { deleteGoogleUser } = useDelete();
+  const { deleteGoogleUser, reAuthDeleteGoogleUser } = useDelete();
 
   return {
     signInGoogle,
     signOutGoogle,
     deleteGoogleUser,
+    reAuthDeleteGoogleUser,
   };
 };
