@@ -91,6 +91,15 @@ export const useGoogleSignIn = () => {
 
       localStorage.removeItem("user_name");
     } catch (error: any) {
+      if (!error.code) {
+        setAuthLoading(false);
+        onShow({
+          title: "アカウントを消去できませんでした。",
+          message: "時間をおいて再度お試しください。",
+          type: "error",
+        });
+      }
+
       switch (error.code) {
         case "auth/requires-recent-login":
           handleRequireReLogin({
@@ -115,12 +124,6 @@ export const useGoogleSignIn = () => {
             onShow,
           });
       }
-
-      setAuthLoading(false);
-      onShow({
-        title: "アカウントの消去に失敗しました",
-        type: "error",
-      });
     }
   };
 
