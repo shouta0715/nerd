@@ -1,6 +1,7 @@
 import React, { FC, Suspense } from "react";
 import { Header } from "src/components/dynamic/common/header";
 import { Nav } from "src/components/dynamic/common/nav";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
@@ -34,7 +35,7 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
       </div>
 
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Suspense>
+        <Suspense fallback={<Skeleton theme="nextMenu" />}>
           <NextMenu episode={data?.episodes_by_pk} />
         </Suspense>
       </div>
