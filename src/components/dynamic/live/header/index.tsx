@@ -36,7 +36,7 @@ export const Header: FC<Props> = ({
   ${mode === "up" ? "lg:bg-orange-500" : "lg:bg-indigo-600"}`}
     >
       <Text
-        className="line-clamp-2 text-base font-bold md:text-lg"
+        className="line-clamp-2 px-4 text-base font-bold md:text-lg lg:px-0"
         component="h4"
       >
         {title}
