@@ -22,13 +22,14 @@ export const useDelete = () => {
 
     try {
       if (!auth.currentUser) throw new UnauthorizedError();
+      setIsDeleteConfirmationOpen(false);
       const { user: deletedUser } = await reauthenticateWithPopup(
         auth.currentUser,
         provider
       );
 
       await deleteUser(deletedUser);
-      setIsDeleteConfirmationOpen(false);
+
       onShow({
         title: "アカウントを消去しました",
         type: "success",
@@ -69,6 +70,14 @@ export const useDelete = () => {
         switch (error.code) {
           case "auth/requires-recent-login":
             resentLogin();
+            break;
+
+          case "auth/user-not-found":
+            onShow({
+              title: "アカウントが見つかりませんでした",
+              message: "アカウントが既に消去されている可能性があります",
+              type: "error",
+            });
             break;
 
           default:
