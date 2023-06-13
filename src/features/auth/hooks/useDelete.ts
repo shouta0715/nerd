@@ -31,6 +31,7 @@ export const useDelete = () => {
 
   const reAuthDeleteGoogleUser = useCallback(async () => {
     const provider = new GoogleAuthProvider();
+    setAuthLoading(true);
 
     try {
       if (!auth.currentUser) throw new UnauthorizedError();
@@ -52,7 +53,7 @@ export const useDelete = () => {
       if (error instanceof FirebaseError) {
         onShow({
           title: "アカウントの消去に失敗しました resent login",
-          message: `時間をおいて再度お試しください${error.code}${error.message}`,
+          message: "時間をおいて再度お試しください",
           type: "error",
         });
 
@@ -64,8 +65,10 @@ export const useDelete = () => {
         message: "時間をおいて再度お試しください",
         type: "error",
       });
+    } finally {
+      setAuthLoading(false);
     }
-  }, [onShow, setIsDeleteConfirmationOpen, setIsRequired]);
+  }, [onShow, setAuthLoading, setIsDeleteConfirmationOpen, setIsRequired]);
 
   const deleteGoogleUser = useCallback(async () => {
     setAuthLoading(true);
@@ -97,7 +100,7 @@ export const useDelete = () => {
           default:
             onShow({
               title: "アカウントの消去に失敗しました delete user",
-              message: `時間をおいて再度お試しください${error.code}${error.message}`,
+              message: "時間をおいて再度お試しください",
               type: "error",
             });
             break;
