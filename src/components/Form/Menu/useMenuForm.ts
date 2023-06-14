@@ -11,8 +11,7 @@ export const useMenuForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    setValue,
+
     reset,
     watch,
   } = useForm<Username>({
@@ -43,12 +42,10 @@ export const useMenuForm = () => {
 
   return {
     register,
-    errors,
     handleSubmit,
     onInValid,
     onValid,
     isChange,
-    setValue,
     user,
   };
 };
