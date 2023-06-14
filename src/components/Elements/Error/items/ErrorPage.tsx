@@ -122,10 +122,15 @@ export const ErrorPage = ({ status }: Error) => (
           >
             ホームに戻る
           </button>
-          <button className="flex items-center justify-center gap-1 text-sm font-semibold leading-6 text-gray-900">
+          <a
+            className="flex items-center justify-center gap-1 text-sm font-semibold leading-6 text-gray-900"
+            href="https://forms.gle/GMzgLTw6FA8S6jjS9"
+            rel="noreferrer"
+            target="_blank"
+          >
             お問い合わせ
             <ArrowSmallRightIcon aria-hidden="true" className="h-5 w-5 " />
-          </button>
+          </a>
         </div>
       </div>
     </main>
