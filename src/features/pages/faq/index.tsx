@@ -77,7 +77,9 @@ export const Faq = () => (
         上記の質問で解決しない場合は、
         <a
           className="font-semibold text-indigo-600 hover:text-indigo-500"
-          href="mailto:"
+          href="https://forms.gle/GMzgLTw6FA8S6jjS9"
+          rel="noreferrer"
+          target="_blank"
         >
           こちら
         </a>
