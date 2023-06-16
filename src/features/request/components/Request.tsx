@@ -21,8 +21,7 @@ export const Request = () => {
           >
             作品のタイトル
             <span className="mt-0.5 block text-xs text-indigo-500">
-              ※略称は使わないでください。例: ヒロアカ5期 →
-              僕のヒーローアカデミア5期
+              ※略称は使わないでください。
             </span>
           </label>
           <Input
@@ -30,7 +29,7 @@ export const Request = () => {
             className="placeholder:text-xs"
             id="work_title"
             name="work_title"
-            placeholder="例: 僕のヒーローアカデミア5期"
+            placeholder="タイトルを入力..."
             type="text"
           />
           {errors.work_title && (
@@ -51,7 +50,7 @@ export const Request = () => {
             className="placeholder:text-xs"
             id="work_url"
             name="work_url"
-            placeholder="例: https://heroaca.com/"
+            placeholder="URLを入力..."
             type="text"
           />
           {errors.work_url && (
@@ -78,7 +77,6 @@ export const Request = () => {
         <Button
           className="mx-auto"
           disabled={isLoading || !user}
-          loading={isLoading}
           theme="primary"
           type="submit"
         >
