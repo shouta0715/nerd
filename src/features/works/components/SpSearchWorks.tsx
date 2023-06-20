@@ -2,6 +2,7 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
@@ -9,7 +10,9 @@ import { DetailTitle } from "src/libs/meta/OnlyTitle";
 export const SpSearchWorks = () => {
   const router = useRouter();
   const { q } = router.query;
-  const { data } = useQuerySearchWorks(q === undefined ? "" : q.toString());
+  const { data, isLoading } = useQuerySearchWorks(
+    q === undefined ? "" : q.toString()
+  );
 
   useEffect(() => {
     const onResize = () => {
@@ -33,6 +36,17 @@ export const SpSearchWorks = () => {
       window.removeEventListener("resize", onResize);
     };
   }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col">
+        <div className="mx-auto  mb-4 grid  w-full max-w-md  place-items-center font-bold">
+          {q ? `${q}で検索中...` : "検索中..."}
+        </div>
+        <Skeleton theme="work" />
+      </div>
+    );
+  }
 
   return (
     <>

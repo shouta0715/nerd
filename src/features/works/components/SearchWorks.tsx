@@ -1,15 +1,24 @@
 /* eslint-disable no-nested-ternary */
 import { CubeTransparentIcon } from "@heroicons/react/24/outline";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
 import { Loader } from "src/components/Elements/Loader";
-import { useSearchWorksState } from "src/features/works/store";
+import {
+  useSearchWorksInput,
+  useSearchWorksState,
+} from "src/features/works/store";
+import { SearchWorksQuery } from "src/graphql/work/workQuery.generated";
 
 export const SearchWorks = () => {
-  const [data, isLoading] = useSearchWorksState((state) => [
-    state.data,
-    state.isLoading,
-  ]);
+  const isLoading = useSearchWorksState((state) => state.isLoading);
+  const search = useSearchWorksInput((state) => state.search);
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData<
+    SearchWorksQuery["search_works"] | null
+  >(["SearchWorks", { search }], {
+    exact: true,
+  });
 
   if (isLoading) {
     return (
