@@ -1,21 +1,9 @@
-import React, { Suspense } from "react";
-import { Skeleton } from "src/components/Elements/Skeleton";
+import React from "react";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import { SpSearchWorks } from "src/features/works/components/SpSearchWorks";
 import { NextPageWithLayout } from "src/libs/next/types";
 
-const Page: NextPageWithLayout = () => (
-  <Suspense
-    fallback={
-      <div className="flex flex-col">
-        <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
-        <Skeleton theme="work" />
-      </div>
-    }
-  >
-    <SpSearchWorks />
-  </Suspense>
-);
+const Page: NextPageWithLayout = () => <SpSearchWorks />;
 
 Page.getLayout = BasicLayout;
 

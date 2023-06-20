@@ -9,5 +9,6 @@ export const useQuerySearchWorks = (q: string) => {
     },
     enabled: !!q,
     staleTime: 1000 * 60 * 5,
+    suspense: false,
   });
 };
