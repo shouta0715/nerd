@@ -2,14 +2,9 @@ import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { Input } from "src/components/Elements/Input";
 import { useSearchWorks } from "src/features/works/hooks/useSearchWorks";
-import { useSearchWorksState } from "src/features/works/store";
 
 export const SearchWorksForm = () => {
   const { submitHandler, setSearch, search } = useSearchWorks();
-  const [data, setData] = useSearchWorksState((state) => [
-    state.data,
-    state.setData,
-  ]);
 
   return (
     <form className="hidden w-full space-x-4 md:flex" onSubmit={submitHandler}>
@@ -24,10 +19,7 @@ export const SearchWorksForm = () => {
         />
         <button
           className="absolute right-2 top-1/2 block -translate-y-1/2 rounded-full bg-indigo-50 p-1 peer-placeholder-shown:hidden"
-          onClick={() => {
-            setSearch("");
-            if (!data?.length) setData(null);
-          }}
+          onClick={() => setSearch("")}
           type="button"
         >
           <XMarkIcon className=" h-3 w-3  cursor-pointer fill-white stroke-indigo-500 stroke-2" />
