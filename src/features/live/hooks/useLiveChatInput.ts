@@ -5,6 +5,7 @@ import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
+import { getIp } from "src/utils/getIp";
 
 type Props = {
   time: Time;
@@ -24,11 +25,13 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
     try {
       if (!value.trim() || authLoading) return;
 
+      const ip = await getIp();
       const object = {
         episode_id,
         content: value,
         comment_time: mode === "down" ? 0 : timeToSecond(time),
         commenter_name: user?.user_name || "匿名",
+        ip: ip || null,
       };
       insetChat.mutateAsync({
         object,
