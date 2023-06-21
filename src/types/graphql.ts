@@ -102,6 +102,7 @@ export type Chats = {
   episode?: Maybe<Episodes>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id: Scalars['uuid']['output'];
+  ip?: Maybe<Scalars['String']['output']>;
   /** An object relationship */
   user?: Maybe<Users>;
   user_id?: Maybe<Scalars['String']['output']>;
@@ -215,6 +216,7 @@ export type Chats_Bool_Exp = {
   episode?: InputMaybe<Episodes_Bool_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  ip?: InputMaybe<String_Comparison_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
   work?: InputMaybe<Works_Bool_Exp>;
@@ -257,6 +259,7 @@ export type Chats_Insert_Input = {
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['String']['input']>;
   work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
@@ -272,6 +275,7 @@ export type Chats_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  ip?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
@@ -284,6 +288,7 @@ export type Chats_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
@@ -297,6 +302,7 @@ export type Chats_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  ip?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
@@ -309,6 +315,7 @@ export type Chats_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
@@ -339,6 +346,7 @@ export type Chats_Order_By = {
   episode?: InputMaybe<Episodes_Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
   work?: InputMaybe<Works_Order_By>;
@@ -367,6 +375,8 @@ export enum Chats_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Ip = 'ip',
+  /** column name */
   UserId = 'user_id',
   /** column name */
   WorkId = 'work_id'
@@ -393,6 +403,7 @@ export type Chats_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -453,6 +464,7 @@ export type Chats_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -486,6 +498,8 @@ export enum Chats_Update_Column {
   EpisodeId = 'episode_id',
   /** column name */
   Id = 'id',
+  /** column name */
+  Ip = 'ip',
   /** column name */
   UserId = 'user_id',
   /** column name */
@@ -557,6 +571,7 @@ export type Comments = {
   episode?: Maybe<Episodes>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id: Scalars['uuid']['output'];
+  ip?: Maybe<Scalars['String']['output']>;
   /** A computed field, executes function "comment_is_like" */
   is_like?: Maybe<Scalars['Boolean']['output']>;
   /** An array relationship */
@@ -697,8 +712,6 @@ export type Comments_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Comments_Avg_Fields = {
   __typename?: 'comments_avg_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -722,6 +735,7 @@ export type Comments_Bool_Exp = {
   episode?: InputMaybe<Episodes_Bool_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  ip?: InputMaybe<String_Comparison_Exp>;
   is_like?: InputMaybe<Boolean_Comparison_Exp>;
   likes?: InputMaybe<Likes_Bool_Exp>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
@@ -756,6 +770,7 @@ export type Comments_Insert_Input = {
   episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
   replied_to_commenter_name?: InputMaybe<Scalars['String']['input']>;
   reply_to?: InputMaybe<Scalars['uuid']['input']>;
@@ -773,9 +788,8 @@ export type Comments_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  ip?: Maybe<Scalars['String']['output']>;
   replied_to_commenter_name?: Maybe<Scalars['String']['output']>;
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   reply_to?: Maybe<Scalars['uuid']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -788,6 +802,7 @@ export type Comments_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   replied_to_commenter_name?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -802,9 +817,8 @@ export type Comments_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
+  ip?: Maybe<Scalars['String']['output']>;
   replied_to_commenter_name?: Maybe<Scalars['String']['output']>;
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   reply_to?: Maybe<Scalars['uuid']['output']>;
   user_id?: Maybe<Scalars['String']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -817,6 +831,7 @@ export type Comments_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   replied_to_commenter_name?: InputMaybe<Order_By>;
   reply_to?: InputMaybe<Order_By>;
   user_id?: InputMaybe<Order_By>;
@@ -857,6 +872,7 @@ export type Comments_Order_By = {
   episode?: InputMaybe<Episodes_Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  ip?: InputMaybe<Order_By>;
   is_like?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   replied_to_commenter_name?: InputMaybe<Order_By>;
@@ -888,6 +904,8 @@ export enum Comments_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Ip = 'ip',
+  /** column name */
   RepliedToCommenterName = 'replied_to_commenter_name',
   /** column name */
   ReplyTo = 'reply_to',
@@ -917,6 +935,7 @@ export type Comments_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   replied_to_commenter_name?: InputMaybe<Scalars['String']['input']>;
   reply_to?: InputMaybe<Scalars['uuid']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
@@ -926,8 +945,6 @@ export type Comments_Set_Input = {
 /** aggregate stddev on columns */
 export type Comments_Stddev_Fields = {
   __typename?: 'comments_stddev_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -939,8 +956,6 @@ export type Comments_Stddev_Order_By = {
 /** aggregate stddev_pop on columns */
 export type Comments_Stddev_Pop_Fields = {
   __typename?: 'comments_stddev_pop_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -952,8 +967,6 @@ export type Comments_Stddev_Pop_Order_By = {
 /** aggregate stddev_samp on columns */
 export type Comments_Stddev_Samp_Fields = {
   __typename?: 'comments_stddev_samp_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -978,6 +991,7 @@ export type Comments_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
+  ip?: InputMaybe<Scalars['String']['input']>;
   replied_to_commenter_name?: InputMaybe<Scalars['String']['input']>;
   reply_to?: InputMaybe<Scalars['uuid']['input']>;
   user_id?: InputMaybe<Scalars['String']['input']>;
@@ -987,8 +1001,6 @@ export type Comments_Stream_Cursor_Value_Input = {
 /** aggregate sum on columns */
 export type Comments_Sum_Fields = {
   __typename?: 'comments_sum_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -1012,6 +1024,8 @@ export enum Comments_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Ip = 'ip',
+  /** column name */
   RepliedToCommenterName = 'replied_to_commenter_name',
   /** column name */
   ReplyTo = 'reply_to',
@@ -1033,8 +1047,6 @@ export type Comments_Updates = {
 /** aggregate var_pop on columns */
 export type Comments_Var_Pop_Fields = {
   __typename?: 'comments_var_pop_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1046,8 +1058,6 @@ export type Comments_Var_Pop_Order_By = {
 /** aggregate var_samp on columns */
 export type Comments_Var_Samp_Fields = {
   __typename?: 'comments_var_samp_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -1059,8 +1069,6 @@ export type Comments_Var_Samp_Order_By = {
 /** aggregate variance on columns */
 export type Comments_Variance_Fields = {
   __typename?: 'comments_variance_fields';
-  /** A computed field, executes function "reply_count" */
-  reply_count?: Maybe<Scalars['bigint']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3845,7 +3853,6 @@ export type Users = {
   comments_aggregate: Comments_Aggregate;
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['String']['output'];
-  ip?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   likes: Array<Likes>;
   /** An aggregate relationship */
@@ -3973,7 +3980,6 @@ export type Users_Bool_Exp = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<String_Comparison_Exp>;
-  ip?: InputMaybe<String_Comparison_Exp>;
   likes?: InputMaybe<Likes_Bool_Exp>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
   photo_url?: InputMaybe<String_Comparison_Exp>;
@@ -3996,7 +4002,6 @@ export type Users_Insert_Input = {
   comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  ip?: InputMaybe<Scalars['String']['input']>;
   likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
   photo_url?: InputMaybe<Scalars['String']['input']>;
   request_works?: InputMaybe<Request_Works_Arr_Rel_Insert_Input>;
@@ -4009,7 +4014,6 @@ export type Users_Max_Fields = {
   __typename?: 'users_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  ip?: Maybe<Scalars['String']['output']>;
   photo_url?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   user_name?: Maybe<Scalars['String']['output']>;
@@ -4020,7 +4024,6 @@ export type Users_Min_Fields = {
   __typename?: 'users_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  ip?: Maybe<Scalars['String']['output']>;
   photo_url?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
   user_name?: Maybe<Scalars['String']['output']>;
@@ -4056,7 +4059,6 @@ export type Users_Order_By = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  ip?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
   photo_url?: InputMaybe<Order_By>;
   request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Order_By>;
@@ -4078,8 +4080,6 @@ export enum Users_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Ip = 'ip',
-  /** column name */
   PhotoUrl = 'photo_url',
   /** column name */
   UpdatedAt = 'updated_at',
@@ -4092,7 +4092,6 @@ export type Users_Set_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  ip?: InputMaybe<Scalars['String']['input']>;
   photo_url?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -4111,7 +4110,6 @@ export type Users_Stream_Cursor_Value_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  ip?: InputMaybe<Scalars['String']['input']>;
   photo_url?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
@@ -4125,8 +4123,6 @@ export enum Users_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
-  /** column name */
-  Ip = 'ip',
   /** column name */
   PhotoUrl = 'photo_url',
   /** column name */

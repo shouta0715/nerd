@@ -13,15 +13,12 @@ import {
 const postHandler: Next<ReturnCreateUser> = async (req, res) => {
   try {
     validate(req.body, createUserSchema);
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
-
     const {id, user_name, photo_url, isAnonymous} = req.body;
 
     const data = await getClient().request<CreateUserMutation>(CREATE_USER, {
       id,
       user_name: user_name || "匿名",
       photo_url,
-      ip,
       isAnonymous,
     });
 

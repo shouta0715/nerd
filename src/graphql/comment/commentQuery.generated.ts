@@ -70,6 +70,7 @@ export type MutateEpisodeCommentMutationVariables = Types.Exact<{
   reply_to?: Types.InputMaybe<Types.Scalars['uuid']['input']>;
   replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
   commenter_name: Types.Scalars['String']['input'];
+  ip?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -81,6 +82,7 @@ export type MutateWorkCommentMutationVariables = Types.Exact<{
   reply_to?: Types.InputMaybe<Types.Scalars['uuid']['input']>;
   replied_to_commenter_name?: Types.InputMaybe<Types.Scalars['String']['input']>;
   commenter_name: Types.Scalars['String']['input'];
+  ip?: Types.InputMaybe<Types.Scalars['String']['input']>;
 }>;
 
 
@@ -257,9 +259,9 @@ export const useGetRepliesQuery = <
     );
 useGetRepliesQuery.fetcher = (client: GraphQLClient, variables: GetRepliesQueryVariables, headers?: RequestInit['headers']) => fetcher<GetRepliesQuery, GetRepliesQueryVariables>(client, GetRepliesDocument, variables, headers);
 export const MutateEpisodeCommentDocument = `
-    mutation MutateEpisodeComment($episode_id: uuid!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!) {
+    mutation MutateEpisodeComment($episode_id: uuid!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!, $ip: String) {
   insert_comments_one(
-    object: {episode_id: $episode_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name}
+    object: {episode_id: $episode_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name, ip: $ip}
   ) {
     id
     content
@@ -284,9 +286,9 @@ export const useMutateEpisodeCommentMutation = <
     );
 useMutateEpisodeCommentMutation.fetcher = (client: GraphQLClient, variables: MutateEpisodeCommentMutationVariables, headers?: RequestInit['headers']) => fetcher<MutateEpisodeCommentMutation, MutateEpisodeCommentMutationVariables>(client, MutateEpisodeCommentDocument, variables, headers);
 export const MutateWorkCommentDocument = `
-    mutation MutateWorkComment($work_id: Int!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!) {
+    mutation MutateWorkComment($work_id: Int!, $content: String!, $reply_to: uuid, $replied_to_commenter_name: String, $commenter_name: String!, $ip: String) {
   insert_comments_one(
-    object: {work_id: $work_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name}
+    object: {work_id: $work_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name, ip: $ip}
   ) {
     id
     content

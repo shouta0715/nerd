@@ -22,7 +22,6 @@ export const CREATE_USER = gql`
     $id: String!
     $user_name: String
     $photo_url: String
-    $ip: String
     $isAnonymous: Boolean
   ) {
     insert_users_one(
@@ -30,7 +29,6 @@ export const CREATE_USER = gql`
         id: $id
         user_name: $user_name
         photo_url: $photo_url
-        ip: $ip
         anonymous: $isAnonymous
       }
       on_conflict: { constraint: users_pkey }

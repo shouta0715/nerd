@@ -160,6 +160,7 @@ export const MUTATE_EPISODE_COMMENT = gql`
     $reply_to: uuid
     $replied_to_commenter_name: String
     $commenter_name: String!
+    $ip: String
   ) {
     insert_comments_one(
       object: {
@@ -168,6 +169,7 @@ export const MUTATE_EPISODE_COMMENT = gql`
         reply_to: $reply_to
         replied_to_commenter_name: $replied_to_commenter_name
         commenter_name: $commenter_name
+        ip: $ip
       }
     ) {
       id
@@ -186,6 +188,7 @@ export const MUTATE_WORK_COMMENT = gql`
     $reply_to: uuid
     $replied_to_commenter_name: String
     $commenter_name: String!
+    $ip: String
   ) {
     insert_comments_one(
       object: {
@@ -194,6 +197,7 @@ export const MUTATE_WORK_COMMENT = gql`
         reply_to: $reply_to
         replied_to_commenter_name: $replied_to_commenter_name
         commenter_name: $commenter_name
+        ip: $ip
       }
     ) {
       id

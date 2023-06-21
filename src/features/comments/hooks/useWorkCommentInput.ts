@@ -2,6 +2,7 @@ import { useNotificationState } from "src/components/Elements/Notification/store
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
 import { useGlobalState } from "src/store/global/globalStore";
+import { getIp } from "src/utils/getIp";
 
 export const useWorkCommentInput = (
   work_id: number,
@@ -23,12 +24,15 @@ export const useWorkCommentInput = (
 
     try {
       if (!content.trim() || authLoading) return;
+      const ip = await getIp();
+
       insertWorkComment.mutateAsync({
         work_id,
         content,
         reply_to,
         replied_to_commenter_name,
         commenter_name: user?.user_name || "匿名",
+        ip: ip || null
       });
     } catch (error) {
       onNotification({
