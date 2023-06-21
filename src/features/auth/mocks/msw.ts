@@ -4,8 +4,10 @@ import {
   customClaimsData,
 } from "src/features/auth/mocks/fixture";
 
+const API_URL = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
+
 export const handleSetCustomClaims = (status?: number) => {
-  return rest.post("/api/auth/setCustomClaims", (req, res, ctx) => {
+  return rest.post(`${API_URL}/setCustomClaims`, (req, res, ctx) => {
     if (status) {
       return res(ctx.status(status));
     }
@@ -15,7 +17,7 @@ export const handleSetCustomClaims = (status?: number) => {
 };
 
 export const handleCreateUser = (status?: number) => {
-  return rest.post("/api/user", (_, res, ctx) => {
+  return rest.post(`${API_URL}/user`, (_, res, ctx) => {
     if (status) {
       return res(ctx.status(status));
     }
