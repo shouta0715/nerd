@@ -32,7 +32,7 @@ export const useWorkCommentInput = (
         reply_to,
         replied_to_commenter_name,
         commenter_name: user?.user_name || "匿名",
-        ip: ip || null
+        ip: ip || null,
       });
     } catch (error) {
       onNotification({
