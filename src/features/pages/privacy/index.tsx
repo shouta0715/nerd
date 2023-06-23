@@ -68,7 +68,7 @@ export const Privacy = () => {
   return (
     <div className="flex-1">
       <h2 className="mb-3 text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
-        利用規約
+        プライバシーポリシー
       </h2>
       <p className="mb-4 text-base leading-6 text-gray-600">
         本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
