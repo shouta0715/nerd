@@ -19,7 +19,9 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   ]);
 
   useEffect(() => {
-    setInputRef(inputRef);
+    const isVisited = inputRef.current?.clientHeight !== 0;
+
+    if (inputRef.current && isVisited) setInputRef(inputRef);
   }, [setInputRef]);
 
   const onBlurHandler = () => {
