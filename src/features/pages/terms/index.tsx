@@ -3,11 +3,19 @@
 import React from "react";
 import { Account } from "src/features/pages/terms/contents/Account";
 import { Apply } from "src/features/pages/terms/contents/Apply";
+import { Change } from "src/features/pages/terms/contents/Change";
+import { ChangesTerms } from "src/features/pages/terms/contents/ChangesTerms";
 import { Copyright } from "src/features/pages/terms/contents/Copyright";
+import { Disclaimer } from "src/features/pages/terms/contents/Disclaimer";
+import { Governing } from "src/features/pages/terms/contents/Governing";
+import { Notification } from "src/features/pages/terms/contents/Notification";
+import { Obligations } from "src/features/pages/terms/contents/Obligations";
 import { Outage } from "src/features/pages/terms/contents/Outage";
+import { PersonalInformation } from "src/features/pages/terms/contents/PersonalInformation";
 import { Prohibited } from "src/features/pages/terms/contents/Prohibited";
 import { Registration } from "src/features/pages/terms/contents/Registration";
 import { UsageLimit } from "src/features/pages/terms/contents/UsageLimit";
+import { Withdrawal } from "src/features/pages/terms/contents/Withdrawal";
 import { Term } from "src/features/pages/terms/types";
 
 const TermDescriptions: Term[] = [
@@ -45,6 +53,46 @@ const TermDescriptions: Term[] = [
     title: "利用制限および登録抹消",
     contents: <UsageLimit />,
     key: "limit",
+  },
+  {
+    title: "退会",
+    contents: <Withdrawal />,
+    key: "withdrawal",
+  },
+  {
+    title: "保証の否認および免責事項",
+    contents: <Disclaimer />,
+    key: "disclaimer",
+  },
+  {
+    title: "サービス内容の変更等",
+    contents: <Change />,
+    key: "change",
+  },
+  {
+    title: "利用規約の変更",
+    contents: <ChangesTerms />,
+    key: "changes",
+  },
+  {
+    title: "個人情報の取扱い",
+    contents: <PersonalInformation />,
+    key: "personal",
+  },
+  {
+    title: "通知または連絡",
+    contents: <Notification />,
+    key: "notification",
+  },
+  {
+    title: "権利義務の譲渡の禁止",
+    contents: <Obligations />,
+    key: "disclaimer",
+  },
+  {
+    title: "準拠法・裁判管轄",
+    contents: <Governing />,
+    key: "governing",
   },
 ];
 
