@@ -25,12 +25,6 @@ export const AuthModal = () => {
       <Modal.Content>
         <Text className="font-medium text-dimmed" component="p" size="sm">
           ログインをすると投稿にいいねをつけたり、自分の投稿を保存できます。
-          <Link
-            className="inline-block text-sm text-indigo-500 underline"
-            href="/"
-          >
-            詳しくはこちら
-          </Link>
         </Text>
         <Button
           className="mx-auto my-6 shadow-md"
@@ -48,6 +42,7 @@ export const AuthModal = () => {
           <Link
             className="inline-block text-sm text-indigo-500 underline"
             href="/terms"
+            onClick={() => setOpen(false)}
           >
             利用規約
           </Link>
@@ -55,6 +50,7 @@ export const AuthModal = () => {
           <Link
             className="inline-block text-sm text-indigo-500 underline"
             href="/privacy"
+            onClick={() => setOpen(false)}
           >
             プライバシーポリシー
           </Link>
