@@ -5,6 +5,7 @@ import { Account } from "src/features/pages/terms/contents/Account";
 import { Apply } from "src/features/pages/terms/contents/Apply";
 import { Change } from "src/features/pages/terms/contents/Change";
 import { ChangesTerms } from "src/features/pages/terms/contents/ChangesTerms";
+import { Contact } from "src/features/pages/terms/contents/Contact";
 import { Copyright } from "src/features/pages/terms/contents/Copyright";
 import { Disclaimer } from "src/features/pages/terms/contents/Disclaimer";
 import { Governing } from "src/features/pages/terms/contents/Governing";
@@ -94,6 +95,11 @@ const TermDescriptions: Term[] = [
     contents: <Governing />,
     key: "governing",
   },
+  {
+    title: "お問い合わせ窓口",
+    contents: <Contact />,
+    key: "contact",
+  },
 ];
 
 export const Terms = () => {
@@ -119,6 +125,10 @@ export const Terms = () => {
             </ol>
           </li>
         ))}
+
+        <li className="ml-auto text-base leading-6 text-gray-600">
+          以上 2023年6月23日制定
+        </li>
       </ol>
     </div>
   );
