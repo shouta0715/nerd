@@ -47,14 +47,14 @@ export const AuthModal = () => {
         <Text className="font-medium text-dimmed" size="sm">
           <Link
             className="inline-block text-sm text-indigo-500 underline"
-            href="/"
+            href="/terms"
           >
             利用規約
           </Link>
           、
           <Link
             className="inline-block text-sm text-indigo-500 underline"
-            href="/"
+            href="/privacy"
           >
             プライバシーポリシー
           </Link>
