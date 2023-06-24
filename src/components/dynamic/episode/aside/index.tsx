@@ -39,7 +39,7 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
         <Suspense
           fallback={
             <>
-              <Skeleton theme="nextMenu" />;
+              <Skeleton theme="nextMenu" />
               <NextEpisodeModal episode={data?.episodes_by_pk} isLoading />
             </>
           }
