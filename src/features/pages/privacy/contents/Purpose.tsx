@@ -30,7 +30,7 @@ const items: PrivacyItem[] = [
 export const Purpose = () => {
   return (
     <>
-      <p>当社が個人情報を収集・利用する目的は，以下のとおりです。</p>
+      <p>本サービスが個人情報を収集・利用する目的は，以下のとおりです。</p>
       <PrivacyItems items={items} />
     </>
   );
