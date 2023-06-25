@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useTimerState } from "src/features/timer/store";
-import { timeToPadTime } from "src/features/timer/utils/timeProcessing";
+import { MaxTime } from "src/features/timer/store/initialState";
+import {
+  timeToPadTime,
+  timeToSecond,
+} from "src/features/timer/utils/timeProcessing";
 import { useCountDownModal } from "src/store/global/globalStore";
 
 export const useDownModal = () => {
@@ -15,6 +20,7 @@ export const useDownModal = () => {
   const setIsOpen = useCountDownModal((state) => state.setIsOpen);
   const padTime = timeToPadTime(downInitialTime);
   const [inputTime, setInputTime] = useState<string | null>(null);
+  const onNotification = useNotificationState((state) => state.onShow);
 
   const handleChange = (newTime: string) => setInputTime(newTime);
 
@@ -39,7 +45,7 @@ export const useDownModal = () => {
 
   const changeTime = () => {
     const digits = inputTime?.match(/.{1,2}/g);
-    if (!digits) return;
+    if (!digits) return false;
     const [hours, minutes, seconds] = digits;
 
     setDownInitialTime({
@@ -52,12 +58,58 @@ export const useDownModal = () => {
       minutes: +minutes,
       seconds: +seconds,
     });
+
+    const time = timeToSecond({
+      hours: +hours,
+      minutes: +minutes,
+      seconds: +seconds,
+    });
+
+    return time > timeToSecond(MaxTime);
   };
 
   const onSubmitHandler = () => {
     if (getIsChangeTime()) {
-      changeTime();
+      const isOverMaxTime = changeTime();
       setInputTime(null);
+
+      const seconds = timeToSecond(downInitialTime);
+
+      switch (seconds) {
+        case 0:
+          if (isOverMaxTime) {
+            onNotification({
+              title: "時間を設定しました。",
+              message: "最大時間の4時間を超えたため4時間に設定されました。",
+              type: "info",
+            });
+
+            break;
+          }
+
+          onNotification({
+            title: "時間を設定しました。",
+            type: "success",
+          });
+
+          break;
+
+        default:
+          if (isOverMaxTime) {
+            onNotification({
+              title: "時間を変更しました。",
+              message: "最大時間の4時間を超えたため4時間に設定されました。",
+              type: "info",
+            });
+
+            break;
+          }
+
+          onNotification({
+            title: "時間を変更しました。",
+            type: "success",
+          });
+      }
     }
 
     setIsOpen(false);

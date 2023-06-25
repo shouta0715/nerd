@@ -50,8 +50,8 @@ export const useTimeInput = () => {
     if (timeToSeconds > timeToSecond(MaxTime))
       showNotification({
         title: "時間を変更しました",
-        message: "最大時間の4時間を超えたため4時間に設定されます。",
-        type: "error",
+        message: "最大時間の4時間を超えたため4時間に設定されました。",
+        type: "info",
       });
     else showNotification({ title: "時間を変更しました", type: "success" });
   };

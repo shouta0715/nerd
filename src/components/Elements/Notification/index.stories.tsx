@@ -6,7 +6,14 @@ import {
   useNotificationState,
 } from "src/components/Elements/Notification/store";
 
-const ShowNotification = (props: Partial<NotificationState>) => {
+const DefaultState: NotificationState = {
+  title: "Default",
+  type: "success",
+  message: "",
+  isPersistent: false,
+};
+
+const ShowNotification = (props: NotificationState) => {
   const { onShow } = useNotificationState();
 
   return (
@@ -23,7 +30,7 @@ const createDecorators = (props: Partial<NotificationState>) => () =>
   (
     <>
       <Notification />
-      <ShowNotification {...props} />
+      <ShowNotification {...DefaultState} {...props} />
     </>
   );
 
