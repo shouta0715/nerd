@@ -79,6 +79,14 @@ export const intervalTime = (set: Set, get: Get) => {
 
 export const setDownInitialTime = (set: Set) => {
   return (time: TimerCount) => {
+    if (timeToSecond(time) > timeToSecond(MaxTime)) {
+      set({
+        downInitialTime: MaxTime,
+      });
+
+      return;
+    }
+
     set({ downInitialTime: time });
   };
 };

@@ -1,6 +1,6 @@
 import { Switch as TSwitch } from "@headlessui/react";
 import clsx from "clsx";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { twMerge } from "tailwind-merge";
 
 type SwitchTheme =
@@ -43,25 +43,25 @@ const themes = {
 const sizes = {
   xs: {
     switch: "w-9 h-5",
-    mark: "w-4 h-4 ui-not-checked:translate-x-0.5 ui-checked:translate-x-[1.125rem]",
+    mark: "w-4 h-4 translate-x-0.5 ui-checked:translate-x-[1.125rem]",
   },
   sm: {
     switch: "w-10 h-6",
-    mark: "w-5 h-5 ui-not-checked:translate-x-0.5 ui-checked:translate-x-[1.125rem]",
+    mark: "w-5 h-5 translate-x-0.5 ui-checked:translate-x-[1.125rem]",
   },
   md: {
     switch: "w-14 h-8",
-    mark: "w-6 h-6 ui-not-checked:translate-x-1 ui-checked:translate-x-7",
+    mark: "w-6 h-6 translate-x-1 ui-checked:translate-x-7",
   },
 
   lg: {
     switch: "w-[4.5rem] h-10",
-    mark: "w-8 h-8 ui-not-checked:translate-x-1 ui-checked:translate-x-9",
+    mark: "w-8 h-8 translate-x-1 ui-checked:translate-x-9",
   },
 
   xl: {
     switch: "w-24 h-12",
-    mark: "w-10 h-10 ui-not-checked:translate-x-1 ui-checked:translate-x-[3.25rem]",
+    mark: "w-10 h-10 translate-x-1 ui-checked:translate-x-[3.25rem]",
   },
 };
 
@@ -100,38 +100,33 @@ export const Switch: FC<SwitchProps> = ({
   checked,
   classNames = defaultClassNames,
 }) => {
-  const [checkedState, setCheckedState] = useState(defaultChecked);
-
   return (
     <TSwitch
-      aria-checked={checkedState}
-      aria-label={checkedState ? enabledSrOnlyChar : disabledSrOnlyChar}
+      aria-checked={checked}
+      aria-label={checked ? enabledSrOnlyChar : disabledSrOnlyChar}
       aria-roledescription="switch"
       as="button"
-      checked={typeof checked === "boolean" ? checked : checkedState}
+      checked={checked}
       className={twMerge(
         clsx(
-          "w- translate-x- relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
+          "relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ",
           themes[theme].switch,
           sizes[size].switch,
           className,
           classNames.switch
         )
       )}
+      defaultChecked={defaultChecked}
       disabled={disabled}
-      onChange={(flag) => {
-        if (typeof checked !== "boolean") setCheckedState(flag);
-
-        onChange?.(flag);
-      }}
+      onChange={(flag) => onChange?.(flag)}
     >
       <span className="sr-only">
-        {checkedState ? enabledSrOnlyChar : disabledSrOnlyChar}
+        {checked ? enabledSrOnlyChar : disabledSrOnlyChar}
       </span>
       <span
         className={twMerge(
           clsx(
-            "inline-block h-4 w-4 transform rounded-full transition",
+            "inline-block h-4 w-4 transform rounded-full  transition",
             themes[theme].mark,
             sizes[size].mark,
             classNames.mark

@@ -10,15 +10,15 @@ type TextProps = {
 export type NotificationType = "success" | "error" | "info";
 
 export type NotificationState = {
-  duration: number;
+  duration?: number;
   type: NotificationType;
-  isShown: boolean;
-  isPersistent: boolean;
-  timer: NodeJS.Timeout | null;
+  isShown?: boolean;
+  isPersistent?: boolean;
+  timer?: NodeJS.Timeout | null;
 } & TextProps;
 
 type NotificationActions = {
-  onShow: (state: Partial<NotificationState>) => void;
+  onShow: (state: NotificationState) => void;
   onHide: () => void;
 };
 
