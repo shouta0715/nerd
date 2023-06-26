@@ -20,7 +20,7 @@ export const Like: FC<Props> = ({ is_like, like_count, comment_id }) => {
       <HeartIcon
         className={`h-5 w-5 transition-transform group-active:scale-90 ${
           isLike
-            ? "fill-pink-500 text-pink-500 group-hover:fill-white"
+            ? "fill-pink-500 text-pink-500"
             : "text-gray-500 group-hover:text-pink-500"
         }`}
       />

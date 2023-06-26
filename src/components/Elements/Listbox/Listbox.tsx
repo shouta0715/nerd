@@ -25,7 +25,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
 }: Props<T, P>) => (
   <Listbox disabled={isLoading} onChange={setFilter} value={filter}>
     <div className="">
-      <Listbox.Button className="relative cursor-default  rounded-lg bg-indigo-500  py-2 pl-3 pr-12 text-left text-sm font-semibold text-white shadow-md">
+      <Listbox.Button className="relative cursor-default  rounded-lg bg-indigo-600  py-2 pl-3 pr-12 text-left text-sm font-semibold text-white shadow-md">
         <span className="block truncate">{buttonLabel(filter)}</span>
         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           {isLoading ? (
