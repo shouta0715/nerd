@@ -39,7 +39,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
       <div className="mx-auto flex h-full flex-col items-center">
         <div
           className={`mb-2 flex w-full flex-col rounded-t-xl p-4 ${
-            mode === "down" ? "bg-indigo-500" : ""
+            mode === "down" ? "bg-indigo-600" : ""
           } ${mode === "up" ? "bg-orange-500" : ""} ${
             mode === "finish" ? "bg-pink-500" : ""
           }`}
