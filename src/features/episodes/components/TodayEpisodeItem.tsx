@@ -40,8 +40,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         <div
           className={`mb-2 flex w-full flex-col rounded-t-xl p-4 ${
             mode === "down" ? "bg-indigo-600" : ""
-          } ${mode === "up" ? "bg-orange-500" : ""} ${
-            mode === "finish" ? "bg-pink-500" : ""
+          } ${mode === "up" ? "bg-orange-600" : ""} ${
+            mode === "finish" ? "bg-pink-600" : ""
           }`}
         >
           <ModeBadge mode={mode} start_time={episode.start_time} />
@@ -69,7 +69,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <div className="flex flex-1 flex-col">
             <Text
               className={`mx-auto mb-1.5 text-sm font-bold  md:text-base ${
-                mode === "down" ? "text-indigo-500" : "text-orange-500"
+                mode === "down" ? "text-indigo-600" : "text-orange-600"
               }`}
             >
               {mode === "down" ? "開始まで" : "開始から"}
@@ -84,8 +84,8 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               as={`/episodes/live/${episode.id}`}
               className={`${
                 mode === "down"
-                  ? "bg-indigo-500 text-white"
-                  : "bg-orange-500 text-white"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-orange-600 text-white"
               } ml-auto mt-2 rounded-md px-2 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
