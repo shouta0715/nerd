@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQueryChatsWork";
 import { useChats } from "src/features/chats/hooks/useChats";
 import { isPageParams } from "src/features/chats/types";
-import { isBetweenTime, multipleOf300 } from "src/features/chats/utils";
+import { isAvoidFetchNext, multipleOf300 } from "src/features/chats/utils";
 
 export const useChatsWork = (work_id: number) => {
   const { entry, isBottom, time, bottomRef } = useChats();
@@ -54,7 +54,7 @@ export const useChatsWork = (work_id: number) => {
       return;
     }
 
-    if (!isPageParams(lastPageParam) || isBetweenTime(time, lastPageParam))
+    if (!isPageParams(lastPageParam) || isAvoidFetchNext(time, lastPageParam))
       return;
 
     // eslint-disable-next-line no-underscore-dangle

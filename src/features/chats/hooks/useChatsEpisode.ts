@@ -3,7 +3,7 @@ import { isPageParams } from "../types/index";
 /* eslint-disable no-underscore-dangle */
 import { useInfiniteQueryChatsEpisode } from "src/features/chats/api/useInfiniteQueryChatsEpisode";
 import { useChats } from "src/features/chats/hooks/useChats";
-import { isBetweenTime, multipleOf300 } from "src/features/chats/utils";
+import { isAvoidFetchNext, multipleOf300 } from "src/features/chats/utils";
 
 export const useChatsEpisode = (episode_id: string) => {
   const { entry, isBottom, time, bottomRef } = useChats();
@@ -55,7 +55,7 @@ export const useChatsEpisode = (episode_id: string) => {
       return;
     }
 
-    if (!isPageParams(lastPageParam) || isBetweenTime(time, lastPageParam))
+    if (!isPageParams(lastPageParam) || isAvoidFetchNext(time, lastPageParam))
       return;
 
     const lastChatTime = lastPageParam._lt;
