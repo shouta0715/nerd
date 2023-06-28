@@ -53,13 +53,19 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
 
 export const BasicListLayout = (page: ReactElement) => (
   <LayoutProvider>
-    <div className="flex min-h-screen flex-col">
-      <Header />
-      <Background />
-      <main className="flex flex-1 flex-col px-4 py-4 sm:px-6 md:flex-row md:py-10 lg:px-8">
-        {page} <DynamicSearchButton />
-      </main>
-      <Footer />
+    <div className="flex w-full">
+      <div className="flex min-h-screen max-w-full flex-1 flex-col">
+        <Header />
+        <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
+          <Background />
+          <Aside />
+          <main className="flex w-full flex-1 flex-col pt-10 md:pt-0">
+            {page}
+            <DynamicSearchButton />
+          </main>
+        </div>
+        <Footer />
+      </div>
     </div>
     <DynamicAuthModal />
   </LayoutProvider>
