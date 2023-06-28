@@ -64,7 +64,9 @@ export const Work: FC = () => {
         {series && (
           <div className="mt-20">
             <Text className="mb-4 text-xl font-bold" component="h1">
-              シリーズ一覧
+              {isPlaceholderData || isLoading
+                ? "シリーズ一覧"
+                : data && data.works.length > 0 && "シリーズ一覧"}
             </Text>
             <ul className="grid grid-cols-1 gap-y-12  md:gap-12 lg:grid-cols-2  2xl:grid-cols-3">
               {isPlaceholderData
