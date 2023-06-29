@@ -5,6 +5,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
@@ -20,6 +21,7 @@ export const FirebaseAuth = () => {
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
   const [_, setAuthError] = useState<null>(null);
+  const onNotification = useNotificationState((state) => state.onShow);
   const { createMutateAsync } = useUser();
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
@@ -95,6 +97,20 @@ export const FirebaseAuth = () => {
       } else {
         (async () => {
           await signInAnonymously(auth).then((result) => result.user);
+          const shouldShowNotification = localStorage.getItem(
+            "shouldShowNotification"
+          );
+
+          if (shouldShowNotification !== "false") {
+            onNotification({
+              title: "匿名ユーザーでログインしました",
+              type: "success",
+              link: true,
+              isPersistent: true,
+            });
+
+            localStorage.setItem("shouldShowNotification", "false");
+          }
         })();
       }
     });
@@ -102,7 +118,7 @@ export const FirebaseAuth = () => {
     return () => {
       unSubUser();
     };
-  }, [createMutateAsync, queryClient, setAuthLoading, setUser]);
+  }, [createMutateAsync, onNotification, queryClient, setAuthLoading, setUser]);
 
   return null;
 };

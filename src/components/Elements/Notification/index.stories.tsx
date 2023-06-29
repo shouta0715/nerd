@@ -11,6 +11,7 @@ const DefaultState: NotificationState = {
   type: "success",
   message: "",
   isPersistent: false,
+  link: false,
 };
 
 const ShowNotification = (props: NotificationState) => {
@@ -97,6 +98,15 @@ export const CommentError: Story = {
       title: "コメントの投稿に失敗しました",
       type: "error",
       message: "再度お試しください",
+    }),
+  ],
+};
+
+export const Link: Story = {
+  decorators: [
+    createDecorators({
+      title: "Link",
+      link: true,
     }),
   ],
 };
