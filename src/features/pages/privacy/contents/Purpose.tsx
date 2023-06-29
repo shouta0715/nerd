@@ -23,7 +23,7 @@ const items: PrivacyItem[] = [
   },
   {
     content: "上記の利用目的に付随する目的",
-    key: "purpose_4",
+    key: "purpose_5",
   },
 ];
 
