@@ -23,7 +23,7 @@ export const TextArea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         ref={ref}
         className={twMerge(
           clsx(
-            `block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`,
+            `block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 disabled:opacity-100 sm:text-sm sm:leading-6`,
             rounded[radius],
             className
           )
