@@ -15,6 +15,7 @@ export type NotificationState = {
   isShown?: boolean;
   isPersistent?: boolean;
   timer?: NodeJS.Timeout | null;
+  link?: boolean;
 } & TextProps;
 
 type NotificationActions = {
@@ -32,6 +33,7 @@ const defaultState: NotificationState = {
   type: "info",
   isPersistent: false,
   timer: null,
+  link: false,
 };
 
 export const useNotificationState = create<Notification>((set, get) => ({

@@ -6,6 +6,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import Link from "next/link";
 import React, { Fragment } from "react";
 import {
   NotificationType,
@@ -43,12 +44,14 @@ export const Notification = () => {
     message,
     type,
     onHide,
+    link,
   } = useNotificationState((state) => ({
     isShown: state.isShown,
     title: state.title,
     message: state.message,
     type: state.type,
     onHide: state.onHide,
+    link: state.link,
   }));
 
   return (
@@ -82,8 +85,28 @@ export const Notification = () => {
                   <p className={`text-sm font-bold ${TypeTextColors[type]}`}>
                     {title}
                   </p>
-                  {message && (
-                    <p className="mt-1 text-sm text-gray-500">{message}</p>
+                  {(message || link) && (
+                    <div className="mt-1 text-sm text-gray-500">
+                      {message && <p>{message}</p>}
+                      {link && (
+                        <p>
+                          <Link
+                            className="text-indigo-600 underline"
+                            href="/privacy"
+                          >
+                            プライバシーポリシー
+                          </Link>
+                          及び
+                          <Link
+                            className="text-indigo-600 underline"
+                            href="/terms"
+                          >
+                            利用規約
+                          </Link>
+                          をご確認ください。
+                        </p>
+                      )}
+                    </div>
                   )}
                 </div>
                 <div className="ml-4 flex flex-shrink-0">

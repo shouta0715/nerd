@@ -88,7 +88,7 @@ const TermDescriptions: Term[] = [
   {
     title: "権利義務の譲渡の禁止",
     contents: <Obligations />,
-    key: "disclaimer",
+    key: "obligations",
   },
   {
     title: "準拠法・裁判管轄",

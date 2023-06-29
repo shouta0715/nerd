@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { NextEpisodeModal } from "src/components/Modal/NextEpisode";
@@ -30,6 +31,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
 
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
+  const onNotification = useNotificationState((state) => state.onShow);
 
   if (isLoading && episode?.next_episode_id) {
     return (
@@ -83,7 +85,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
           {episode?.next_episode_id && (
             <ButtonLink
               className={` flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
-                timerMode === "up" ? "bg-orange-500" : "bg-indigo-500"
+                timerMode === "up" ? "bg-orange-600" : "bg-indigo-600"
               }`}
               href={
                 getIsFinished(data?.episodes_by_pk?.end_time)
@@ -91,7 +93,13 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
                   : `/episodes/live/${data?.episodes_by_pk?.id}`
               }
               leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
-              onClick={interval.reset}
+              onClick={() => {
+                interval.reset();
+                onNotification({
+                  type: "success",
+                  title: "次のエピソードへ移動しました。",
+                });
+              }}
               size="xs"
             >
               次のエピソードへ
