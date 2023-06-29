@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { FC, Fragment } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { useNotificationState } from "src/components/Elements/Notification/store";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { useOpenState } from "src/features/episodes/store";
@@ -33,7 +34,7 @@ export const NextEpisodeModal: FC<Props> = ({
 
   const interval = useTimerState((state) => state.interval);
   const timerMode = useTimerState((state) => state.mode);
-
+  const onNotification = useNotificationState((state) => state.onShow);
   const isSkelton = isLoading && episode?.next_episode_id;
 
   return (
@@ -110,8 +111,8 @@ export const NextEpisodeModal: FC<Props> = ({
                         <ButtonLink
                           className={` flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
                             timerMode === "up"
-                              ? "bg-orange-500"
-                              : "bg-indigo-500"
+                              ? "bg-orange-600"
+                              : "bg-indigo-600"
                           }`}
                           href={
                             getIsFinished(data?.episodes_by_pk?.end_time)
@@ -121,7 +122,13 @@ export const NextEpisodeModal: FC<Props> = ({
                           leftIcon={
                             <ChevronDoubleRightIcon className="h-4 w-4" />
                           }
-                          onClick={interval.reset}
+                          onClick={() => {
+                            interval.reset();
+                            onNotification({
+                              type: "success",
+                              title: "次のエピソードへ移動しました。",
+                            });
+                          }}
                           size="xs"
                         >
                           次のエピソードへ
