@@ -53,6 +53,8 @@ export const useNotificationState = create<Notification>((set, get) => ({
         isShown: true,
         timer,
         message: message ?? "",
+        link: state.link ?? false,
+        isPersistent: isPersistent ?? false,
       };
     }),
   onHide: () =>
