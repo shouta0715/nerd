@@ -1,10 +1,11 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { useChats } from "src/features/chats/hooks/useChats";
+
 import { useInfiniteLiveChats } from "src/features/live/api/useInfiniteLiveChats";
 import { LiveTimer } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { GetChatsEpisodeQuery } from "src/graphql/chat/chatQuery.generated";
+import { useAutoScroll } from "src/hooks/useAutoScroll";
 
 type Props = {
   time: LiveTimer["time"];
@@ -23,10 +24,8 @@ type InfiniteLiveChats = {
 };
 
 export const useLiveChats = ({ time, episode_id, mode }: Props) => {
-  const { isBottom, bottomRef, entry } = useChats();
-
   const queryClient = useQueryClient();
-
+  const { isSelfScroll } = useAutoScroll();
   const {
     data,
     fetchNextPage,
@@ -155,11 +154,9 @@ export const useLiveChats = ({ time, episode_id, mode }: Props) => {
 
   return {
     data: chats,
-    isBottom,
     handleRefetch,
     isRefetching,
     isLoading,
-    bottomRef,
-    entry,
+    isBottom: !isSelfScroll,
   };
 };

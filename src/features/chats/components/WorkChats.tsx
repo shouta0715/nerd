@@ -7,16 +7,13 @@ type Props = {
 };
 
 export const WorkChats: FC<Props> = memo(({ work_id }) => {
-  const { data, bottomRef, isBottom, entry, time, isLoading } =
-    useChatsWork(work_id);
+  const { data, time, isLoading, isSelfScroll } = useChatsWork(work_id);
 
   return (
     <Chats
-      bottomRef={bottomRef}
       chats={data}
-      entry={entry}
-      isBottom={isBottom}
       isLoading={isLoading}
+      isSelfScroll={isSelfScroll}
       time={time}
     />
   );
