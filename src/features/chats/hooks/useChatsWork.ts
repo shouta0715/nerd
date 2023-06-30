@@ -7,7 +7,7 @@ import { useTimerState } from "src/features/timer/store";
 import { useAutoScroll } from "src/hooks/useAutoScroll";
 
 export const useChatsWork = (work_id: number) => {
-  const { isBottom, isSelfScroll } = useAutoScroll();
+  const { isBottom, isSelfScroll, prevScrollTop } = useAutoScroll();
   const time = useTimerState((state) => state.getTime());
   const { data, isLoading, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryChatsWork({
@@ -28,13 +28,19 @@ export const useChatsWork = (work_id: number) => {
   }, [data?.pages, time]);
 
   useEffect(() => {
+    if (chats.length === 0 && prevScrollTop.current !== 0) {
+      prevScrollTop.current = 0;
+
+      return;
+    }
+
     if (!isBottom.current) return;
 
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: "smooth",
     });
-  }, [isBottom, chats.length]);
+  }, [isBottom, chats.length, prevScrollTop]);
 
   useEffect(() => {
     if (

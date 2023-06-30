@@ -6,6 +6,7 @@ import {
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
+import { genEpisodePlaceholder } from "src/features/episodes/utils";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
@@ -20,8 +21,17 @@ export const FinishLive: FC<Props> = ({ episode }) => {
       </Text>
       <div className="flex w-full flex-wrap items-center justify-center gap-2  lg:hidden">
         <ButtonLink
-          className="w-max "
-          href={`/episodes/${episode?.id}`}
+          as={`/episodes/${episode?.id}`}
+          className="w-max"
+          href={{
+            pathname: `/episodes/${episode?.id}`,
+            query: {
+              episode: genEpisodePlaceholder(
+                episode,
+                episode?.work.series_title
+              ),
+            },
+          }}
           leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
           size="md"
           theme="danger"
