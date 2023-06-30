@@ -8,7 +8,7 @@ export const Footer: FC = () => (
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
             className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
-            href="/privacy"
+            href="/terms"
           >
             利用規約
           </Link>
