@@ -3,14 +3,20 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export const useAutoScroll = () => {
   const isBottom = useRef(true);
   const [isSelfScroll, setIsSelfScroll] = useState(false);
-  const prevScrollTop = useRef(0);
+  const prevScrollTop = useRef<null | number>(null);
 
   const handleScroll = useCallback(() => {
     const { scrollHeight } = document.documentElement;
     const { scrollTop } = document.documentElement;
     const { clientHeight } = document.documentElement;
 
-    if (scrollTop < prevScrollTop.current) {
+    const distanceFromBottom = scrollHeight - clientHeight - scrollTop;
+
+    if (
+      prevScrollTop.current !== null &&
+      distanceFromBottom > 100 &&
+      prevScrollTop.current > scrollTop
+    ) {
       isBottom.current = false;
 
       if (!isSelfScroll) setIsSelfScroll(true);
@@ -20,9 +26,7 @@ export const useAutoScroll = () => {
       if (isSelfScroll) setIsSelfScroll(false);
     }
 
-    if (scrollTop >= 0 && scrollTop <= scrollHeight - clientHeight) {
-      prevScrollTop.current = scrollTop;
-    }
+    prevScrollTop.current = scrollTop;
   }, [isSelfScroll]);
 
   useEffect(() => {

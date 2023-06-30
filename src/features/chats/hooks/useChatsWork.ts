@@ -28,8 +28,8 @@ export const useChatsWork = (work_id: number) => {
   }, [data?.pages, time]);
 
   useEffect(() => {
-    if (chats.length === 0 && prevScrollTop.current !== 0) {
-      prevScrollTop.current = 0;
+    if (chats.length === 0 && prevScrollTop.current !== null) {
+      prevScrollTop.current = null;
 
       return;
     }
