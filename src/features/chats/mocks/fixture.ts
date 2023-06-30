@@ -16,7 +16,6 @@ export const episodeChatData: GetChatsEpisodeQuery = {
       user: {
         id: "1",
         anonymous: false,
-        user_name: "test",
       },
     },
   ],
@@ -35,7 +34,6 @@ export const workChatData: GetChatsWorkQuery = {
       user: {
         id: "1",
         anonymous: false,
-        user_name: "test",
       },
     },
   ],

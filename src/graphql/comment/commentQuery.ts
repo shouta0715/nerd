@@ -11,7 +11,6 @@ const _ = gql`
     commenter_name
     user {
       anonymous
-      user_name
       id
     }
     reply_count
@@ -140,7 +139,6 @@ export const GET_REPLIES = gql`
       replied_to_commenter_name
       user {
         anonymous
-        user_name
         id
       }
       is_like

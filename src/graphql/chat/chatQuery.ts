@@ -26,7 +26,6 @@ export const GET_CHATS_EPISODE = gql`
       commenter_name
       user {
         anonymous
-        user_name
         id
       }
     }
@@ -59,7 +58,6 @@ export const GET_CHATS_WORK = gql`
       commenter_name
       user {
         anonymous
-        user_name
         id
       }
     }
@@ -79,8 +77,6 @@ export const INSERT_CHAT = gql`
       commenter_name
       user {
         anonymous
-        user_name
-        photo_url
         id
       }
     }
@@ -112,7 +108,6 @@ export const GET_ZERO_TIME_CHATS = gql`
       commenter_name
       user {
         anonymous
-        user_name
         id
       }
     }

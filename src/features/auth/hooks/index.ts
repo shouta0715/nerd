@@ -29,8 +29,6 @@ export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
 
 export const createUserHandler = async ({
   id,
-  user_name,
-  photo_url,
   isAnonymous,
 }: CreateUserSchema): Promise<ReturnCreateUser> => {
   const res = await fetch(`${API_URL}/user`, {
@@ -38,7 +36,7 @@ export const createUserHandler = async ({
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, user_name, photo_url, isAnonymous }),
+    body: JSON.stringify({ id, isAnonymous }),
   });
 
   if (!res.ok) {
