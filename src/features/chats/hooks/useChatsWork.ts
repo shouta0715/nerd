@@ -1,11 +1,14 @@
 import { useEffect, useMemo } from "react";
 import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQueryChatsWork";
-import { useChats } from "src/features/chats/hooks/useChats";
+
 import { isPageParams } from "src/features/chats/types";
 import { isAvoidFetchNext, multipleOf300 } from "src/features/chats/utils";
+import { useTimerState } from "src/features/timer/store";
+import { useAutoScroll } from "src/hooks/useAutoScroll";
 
 export const useChatsWork = (work_id: number) => {
-  const { entry, isBottom, time, bottomRef } = useChats();
+  const { isBottom, isSelfScroll } = useAutoScroll();
+  const time = useTimerState((state) => state.getTime());
   const { data, isLoading, fetchNextPage, isFetchingNextPage } =
     useInfiniteQueryChatsWork({
       work_id,
@@ -25,10 +28,10 @@ export const useChatsWork = (work_id: number) => {
   }, [data?.pages, time]);
 
   useEffect(() => {
-    if (!isBottom) return;
+    if (!isBottom.current) return;
 
-    entry?.target.scrollIntoView({ behavior: "smooth" });
-  }, [entry?.target, isBottom, chats.length]);
+    window.scrollTo(0, document.documentElement.scrollHeight);
+  }, [isBottom, chats.length]);
 
   useEffect(() => {
     if (
@@ -70,5 +73,5 @@ export const useChatsWork = (work_id: number) => {
     })();
   }, [data?.pageParams, fetchNextPage, isFetchingNextPage, time]);
 
-  return { data: chats, bottomRef, isBottom, entry, time, isLoading };
+  return { data: chats, isSelfScroll, time, isLoading };
 };

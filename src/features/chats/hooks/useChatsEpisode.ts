@@ -2,11 +2,14 @@ import { useEffect, useMemo } from "react";
 import { isPageParams } from "../types/index";
 /* eslint-disable no-underscore-dangle */
 import { useInfiniteQueryChatsEpisode } from "src/features/chats/api/useInfiniteQueryChatsEpisode";
-import { useChats } from "src/features/chats/hooks/useChats";
+
 import { isAvoidFetchNext, multipleOf300 } from "src/features/chats/utils";
+import { useTimerState } from "src/features/timer/store";
+import { useAutoScroll } from "src/hooks/useAutoScroll";
 
 export const useChatsEpisode = (episode_id: string) => {
-  const { entry, isBottom, time, bottomRef } = useChats();
+  const { isBottom, isSelfScroll } = useAutoScroll();
+  const time = useTimerState((state) => state.getTime());
   const { data, fetchNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQueryChatsEpisode({
       episode_id,
@@ -26,10 +29,10 @@ export const useChatsEpisode = (episode_id: string) => {
   }, [data?.pages, time]);
 
   useEffect(() => {
-    if (!isBottom) return;
+    if (!isBottom.current) return;
 
-    entry?.target.scrollIntoView({ behavior: "smooth" });
-  }, [entry?.target, isBottom, chats.length]);
+    window.scrollTo(0, document.documentElement.scrollHeight);
+  }, [isBottom, chats.length]);
 
   useEffect(() => {
     if (
@@ -70,5 +73,10 @@ export const useChatsEpisode = (episode_id: string) => {
     })();
   }, [data?.pageParams, fetchNextPage, isFetchingNextPage, time]);
 
-  return { data: chats, bottomRef, isBottom, entry, time, isLoading };
+  return {
+    data: chats,
+    time,
+    isLoading,
+    isSelfScroll,
+  };
 };

@@ -1,4 +1,5 @@
 import { ArrowDownIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 import React, { FC } from "react";
 import RotateArrowIcon from "public/icons/RotateArrowRightIcon.svg";
 import { Loader } from "src/components/Elements/Loader";
@@ -14,19 +15,12 @@ type Props = {
 };
 
 export const LiveChats: FC<Props> = ({ time, episode_id, mode }) => {
-  const {
-    data,
-    isBottom,
-    entry,
-    isRefetching,
-    handleRefetch,
-    isLoading,
-    bottomRef,
-  } = useLiveChats({
-    time,
-    episode_id,
-    mode,
-  });
+  const { data, isRefetching, handleRefetch, isLoading, isBottom } =
+    useLiveChats({
+      time,
+      episode_id,
+      mode,
+    });
   const user = useUserState((state) => state.user);
 
   if (!user || isLoading) {
@@ -42,14 +36,16 @@ export const LiveChats: FC<Props> = ({ time, episode_id, mode }) => {
         <Chat key={chats.id} animate={mode === "up"} chat={chats} />
       ))}
       <button
-        className={`fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2 cursor-pointer items-center justify-center   rounded-full border-none  bg-indigo-500 shadow-md shadow-black/[0.3] transition-all active:translate-y-1 lg:bottom-10  lg:left-3/4 lg:-translate-x-3/4 ${
-          isBottom || isBottom === undefined
-            ? "translate-y-10 opacity-0 lg:hidden"
-            : "opacity-1 translate-y-0"
-        }`}
-        onClick={() => {
-          entry?.target.scrollIntoView({ behavior: "smooth" });
-        }}
+        className={clsx(
+          "fixed bottom-[4.5rem] left-1/2 z-0 flex h-7 w-7 -translate-x-1/2 cursor-pointer items-center justify-center   rounded-full border-none  bg-indigo-500 shadow-md shadow-black/[0.3] transition-all active:translate-y-1 lg:bottom-10  lg:left-3/4 lg:-translate-x-3/4",
+          isBottom ? "hidden" : "block"
+        )}
+        onClick={() =>
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          })
+        }
       >
         <ArrowDownIcon className="h-4 w-4 fill-white stroke-white stroke-2 text-white" />
       </button>
@@ -65,7 +61,6 @@ export const LiveChats: FC<Props> = ({ time, episode_id, mode }) => {
           </button>
         )}
       </div>
-      <div ref={bottomRef} className="absolute bottom-0 opacity-0" />
     </ul>
   );
 };
