@@ -31,7 +31,10 @@ export const useChatsEpisode = (episode_id: string) => {
   useEffect(() => {
     if (!isBottom.current) return;
 
-    window.scrollTo(0, document.documentElement.scrollHeight);
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
   }, [isBottom, chats.length]);
 
   useEffect(() => {
