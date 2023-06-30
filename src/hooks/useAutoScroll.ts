@@ -29,5 +29,5 @@ export const useAutoScroll = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  return { isBottom, isSelfScroll };
+  return { isBottom, isSelfScroll, prevScrollTop };
 };

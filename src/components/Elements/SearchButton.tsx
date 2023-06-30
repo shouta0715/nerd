@@ -11,7 +11,7 @@ export const SearchButton = () => {
     <>
       <div className="sticky bottom-8 left-[86%] z-40 h-12 w-12 bg-transparent md:hidden">
         <button
-          className="grid h-12 w-12 place-items-center rounded-full border-none bg-indigo-500 shadow-md shadow-indigo-400 outline-none md:hidden"
+          className="grid h-12 w-12 place-items-center rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 outline-none md:hidden"
           onClick={() => setIsSearchOpen(!isSearchOpen)}
         >
           <MagnifyingGlassIcon className="h-6 w-6 stroke-white stroke-2" />
