@@ -29,8 +29,8 @@ export const useChatsEpisode = (episode_id: string) => {
   }, [data?.pages, time]);
 
   useEffect(() => {
-    if (chats.length === 0 && prevScrollTop.current !== 0) {
-      prevScrollTop.current = 0;
+    if (chats.length === 0 && prevScrollTop.current !== null) {
+      prevScrollTop.current = null;
 
       return;
     }
