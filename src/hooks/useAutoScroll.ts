@@ -20,7 +20,9 @@ export const useAutoScroll = () => {
       if (isSelfScroll) setIsSelfScroll(false);
     }
 
-    prevScrollTop.current = scrollTop;
+    if (scrollTop >= 0 && scrollTop <= scrollHeight - clientHeight) {
+      prevScrollTop.current = scrollTop;
+    }
   }, [isSelfScroll]);
 
   useEffect(() => {
