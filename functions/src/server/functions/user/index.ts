@@ -13,12 +13,10 @@ import {
 const postHandler: Next<ReturnCreateUser> = async (req, res) => {
   try {
     validate(req.body, createUserSchema);
-    const {id, user_name, photo_url, isAnonymous} = req.body;
+    const {id, isAnonymous} = req.body;
 
     const data = await getClient().request<CreateUserMutation>(CREATE_USER, {
       id,
-      user_name: user_name || "匿名",
-      photo_url,
       isAnonymous,
     });
 

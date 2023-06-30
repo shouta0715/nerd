@@ -3,8 +3,6 @@ export type CreateUserMutation = {
   insert_users_one?: {
     __typename?: "users";
     id: string;
-    photo_url?: string | null;
-    user_name: string;
   } | null;
 };
 
@@ -13,7 +11,5 @@ export type GetUserQuery = {
   users_by_pk?: {
     __typename?: "users";
     id: string;
-    photo_url?: string | null;
-    user_name: string;
   } | null;
 };

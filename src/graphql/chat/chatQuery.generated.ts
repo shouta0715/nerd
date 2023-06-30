@@ -19,7 +19,7 @@ export type GetChatsEpisodeQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetChatsEpisodeQuery = { __typename?: 'query_root', chats_by_episode_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } | null }> };
+export type GetChatsEpisodeQuery = { __typename?: 'query_root', chats_by_episode_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
 
 export type GetChatsWorkQueryVariables = Types.Exact<{
   work_id: Types.Scalars['Int']['input'];
@@ -29,14 +29,14 @@ export type GetChatsWorkQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetChatsWorkQuery = { __typename?: 'query_root', chats_by_work_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } | null }> };
+export type GetChatsWorkQuery = { __typename?: 'query_root', chats_by_work_id: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
 
 export type InsertChatMutationVariables = Types.Exact<{
   object: Types.Chats_Insert_Input;
 }>;
 
 
-export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, user_name: string, photo_url?: string | null, id: string } | null } | null };
+export type InsertChatMutation = { __typename?: 'mutation_root', insert_chats_one?: { __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null } | null };
 
 export type GetZeroTimeChatsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid']['input'];
@@ -45,7 +45,7 @@ export type GetZeroTimeChatsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GetZeroTimeChatsQuery = { __typename?: 'query_root', chats: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, user_name: string, id: string } | null }> };
+export type GetZeroTimeChatsQuery = { __typename?: 'query_root', chats: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
 
 
 export const GetChatsEpisodeDocument = `
@@ -64,7 +64,6 @@ export const GetChatsEpisodeDocument = `
     commenter_name
     user {
       anonymous
-      user_name
       id
     }
   }
@@ -101,7 +100,6 @@ export const GetChatsWorkDocument = `
     commenter_name
     user {
       anonymous
-      user_name
       id
     }
   }
@@ -135,8 +133,6 @@ export const InsertChatDocument = `
     commenter_name
     user {
       anonymous
-      user_name
-      photo_url
       id
     }
   }
@@ -173,7 +169,6 @@ export const GetZeroTimeChatsDocument = `
     commenter_name
     user {
       anonymous
-      user_name
       id
     }
   }

@@ -64,8 +64,6 @@ export const FirebaseAuth = () => {
 
           const userData = await createMutateAsync({
             id: user.uid,
-            user_name: user.displayName ?? null,
-            photo_url: user.photoURL ?? null,
             isAnonymous: user.isAnonymous,
           });
 
@@ -73,13 +71,13 @@ export const FirebaseAuth = () => {
 
           if (!insert_users_one) throw new UnauthorizedError();
 
-          const { photo_url, id, user_name } = insert_users_one;
+          const { id } = insert_users_one;
 
           setUser({
             id,
             anonymous: user.isAnonymous,
-            photo_url: photo_url ?? null,
-            user_name: prevName ?? user_name,
+            photo_url: user.photoURL ?? null,
+            user_name: prevName ?? user.displayName ?? "匿名",
             provider_user_name: user.displayName ?? null,
             isDefaultPhoto: false,
           });

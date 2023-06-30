@@ -14,8 +14,6 @@ export type ReturnGetUser = GetUserQuery;
 
 export const createUserSchema = z.object({
   id: z.string(),
-  user_name: z.nullable(z.string()),
-  photo_url: z.nullable(z.string()),
   isAnonymous: z.boolean(),
 });
 

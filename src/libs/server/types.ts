@@ -5,15 +5,11 @@ export type CreateUserMutation = {
   insert_users_one?: {
     __typename?: "users";
     id: string;
-    photo_url?: string | null;
-    user_name: string;
   } | null;
 };
 
 export const createUserSchema = z.object({
   id: z.string(),
-  user_name: z.nullable(z.string()),
-  photo_url: z.nullable(z.string()),
   isAnonymous: z.boolean(),
 });
 
