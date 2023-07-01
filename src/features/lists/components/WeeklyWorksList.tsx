@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
+import { SeriesError } from "src/components/Elements/Error/items/SeriesError";
 import { Skeleton } from "src/components/Elements/Skeleton";
 
 import { useWeeklyWorks } from "src/features/lists/hooks/useWeeklyWorks";
@@ -21,16 +22,15 @@ const DynamicWorkItem = dynamic(
 export const WeeklyWorksList: FC<Props> = ({ data }) => {
   const { filterWorks } = useWeeklyWorks({ data });
 
-  return (
-    <>
-      <ul className="peer grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
-        {filterWorks?.map((work) => (
-          <DynamicWorkItem key={`work-${work.id}`} work={work} />
-        ))}
-      </ul>
-      <p className="peer-empty:decoration-slice-1 hidden text-center text-xl font-bold peer-empty:mt-8 peer-empty:block peer-empty:text-gray-500">
-        今週のアニメはありません。
-      </p>
-    </>
+  return filterWorks.length > 0 ? (
+    <ul className="peer grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+      {filterWorks?.map((work) => (
+        <DynamicWorkItem key={`work-${work.id}`} work={work} />
+      ))}
+    </ul>
+  ) : (
+    <div className="py-10">
+      <SeriesError />
+    </div>
   );
 };
