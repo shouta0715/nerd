@@ -32,7 +32,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
             ))}
           </ul>
         ) : (
-          <p className="mb-2 flex h-full items-center justify-center text-sm text-dimmed">
+          <p className="mb-2 flex h-full items-center justify-center py-16 text-sm text-dimmed">
             テレビ放送のアニメは放送日時になるとエピソードが追加されます。
           </p>
         )}

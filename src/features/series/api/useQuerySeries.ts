@@ -4,9 +4,10 @@ import { client } from "src/libs/graphqlClient";
 
 type Args = {
   slug: string | string[] | null;
+  series_title: string | string[] | null;
 };
 
-export const useQuerySeries = ({ slug }: Args) => {
+export const useQuerySeries = ({ slug, series_title }: Args) => {
   return useGetSeriesQuery(
     client,
     {
@@ -19,6 +20,18 @@ export const useQuerySeries = ({ slug }: Args) => {
           throw new NotFoundError();
         }
       },
+      placeholderData: () => ({
+        works: [
+          {
+            series_title: typeof series_title === "string" ? series_title : "",
+            series_id: typeof slug === "string" ? slug : "",
+            title: "",
+            id: 0,
+            has_episodes: undefined,
+            episodes: [],
+          },
+        ],
+      }),
     }
   );
 };
