@@ -65,7 +65,7 @@ export const Episode: FC = () => {
           )}
         </div>
         <Nav isChat={isChat} response="sp" setIsChat={setIsChat} />
-        <main className="flex flex-1 pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <Suspense
               fallback={<Loader className="m-auto" size="xl" variant="dots" />}
