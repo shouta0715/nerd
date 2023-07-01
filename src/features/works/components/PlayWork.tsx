@@ -60,7 +60,7 @@ export const PlayWork: FC = () => {
           setIsChat={setIsChat}
           showNext={!!data?.works_by_pk?.series_id}
         />
-        <main className="flex-ocl flex flex-1 pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <Suspense
               fallback={<Loader className="m-auto" size="xl" variant="dots" />}
