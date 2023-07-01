@@ -11,7 +11,10 @@ import { validateData } from "src/utils/validateData";
 export const Series: FC = () => {
   const router = useRouter();
   const { slug, series_title } = router.query;
-  const { data, isLoading } = useQuerySeries({ slug: slug ?? null });
+  const { data, isLoading, isPlaceholderData } = useQuerySeries({
+    slug: slug ?? null,
+    series_title: series_title ?? null,
+  });
   const firstHasEpisodeIndex = data?.works?.findIndex(
     (episode) => !episode.has_episodes
   );
@@ -20,7 +23,9 @@ export const Series: FC = () => {
     return (
       <div className="space-y-4">
         <p className=" mb-1 font-semibold">シリーズ一覧</p>
+
         <p className="mx-auto h-2 w-1/2 animate-pulse rounded-md bg-slate-200" />
+
         <Skeleton theme="work" />
       </div>
     );
@@ -33,7 +38,9 @@ export const Series: FC = () => {
 
   return (
     <>
-      <DetailTitle title={`シリーズ一覧 ${data?.works?.[0].series_title}`} />
+      <DetailTitle
+        title={`シリーズ一覧 ${series_title ?? data?.works[0]?.title}`}
+      />
       <div className="flex h-full animate-fadeUp flex-col">
         <p className="mb-1 font-semibold">シリーズ一覧</p>
         <Text
@@ -43,15 +50,19 @@ export const Series: FC = () => {
           {series_title ?? data?.works[0]?.title}
         </Text>
 
-        <ul className="grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
-          {data?.works.map((series_work, index) => (
-            <SeriesItem
-              key={series_work.id}
-              isFirstHasEpisodeIndex={firstHasEpisodeIndex === index}
-              series_work={series_work}
-            />
-          ))}
-        </ul>
+        {isPlaceholderData ? (
+          <Skeleton theme="work" />
+        ) : (
+          <ul className="grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+            {data?.works.map((series_work, index) => (
+              <SeriesItem
+                key={series_work.id}
+                isFirstHasEpisodeIndex={firstHasEpisodeIndex === index}
+                series_work={series_work}
+              />
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
