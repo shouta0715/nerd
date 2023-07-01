@@ -46,7 +46,7 @@ export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
           <Chat key={comment.id} animate chat={comment} />
         ))}
       </ul>
-      <div className="sticky bottom-20 flex w-full justify-end px-2 lg:bottom-4 lg:px-3">
+      <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
         <button
           className={clsx(
             "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
