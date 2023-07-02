@@ -28,6 +28,5 @@ type Story = StoryObj<typeof NextEpisodeModal>;
 export const Default: Story = {
   args: {
     episode: episodeData.episodes_by_pk,
-    data: episodeData,
   },
 };
