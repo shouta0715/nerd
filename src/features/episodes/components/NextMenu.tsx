@@ -56,7 +56,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
           </Text>
         </div>
         <Text component="div">
-          <Text className="line-clamp-2 text-sm" component="p">
+          <Text className="text-sm" component="p">
             {episode?.work.series_title}
           </Text>
           {episode?.title && (
@@ -64,7 +64,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
               <Text className="mr-1 text-dimmed" size="sm">
                 {episode.number}.
               </Text>
-              <Text className="line-clamp-2 text-dimmed" size="sm">
+              <Text className="text-dimmed" size="sm">
                 {episode.title}
               </Text>
             </div>
