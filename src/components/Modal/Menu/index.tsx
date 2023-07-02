@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Text } from "src/components/Elements/Text";
 import { TimeInput } from "src/components/Elements/TimeInput";
 import { MenuForm } from "src/components/Form/Menu";
@@ -11,6 +11,8 @@ export const MenuModal = ({ live = false }) => {
     state.isMenuOpen,
     state.setIsMenuOpen,
   ]);
+
+  useEffect(() => () => setIsMenuOpen(false), [setIsMenuOpen]);
 
   return (
     <Transition.Root as={Fragment} show={isMenuOpen}>

@@ -28,12 +28,9 @@ export const Episode: Story = {
   decorators: [BasicLayoutOnlyHeaderDecorator],
 };
 
-export const NextMenu: Story = {
+export const NextButton: Story = {
   args: {
-    theme: "nextMenu",
-    props: {
-      isHidden: false,
-    },
+    theme: "nextButton",
   },
 };
 

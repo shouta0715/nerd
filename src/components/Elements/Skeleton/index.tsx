@@ -1,6 +1,6 @@
 import { EpisodeMenuSkeleton } from "src/components/Elements/Skeleton/items/EpisodeMenuSkeleton";
 import { EpisodeSkeleton } from "src/components/Elements/Skeleton/items/EpisodeSkeleton";
-import { NextEpisodeMenuSkeleton } from "src/components/Elements/Skeleton/items/NextEpisodeMenuSkeleton";
+import { NextButtonSkelton } from "src/components/Elements/Skeleton/items/NextButtonSkelton";
 import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkeleton";
 import { TodaySkeleton } from "src/components/Elements/Skeleton/items/TodaySkeleton";
 import { WorkEpisodeSkeleton } from "src/components/Elements/Skeleton/items/WorkEpisodeSkeleton";
@@ -9,14 +9,15 @@ import { WorkSkeleton } from "src/components/Elements/Skeleton/items/WorkSkeleto
 type Themes =
   | "episodeMenu"
   | "episode"
-  | "nextMenu"
   | "timer"
   | "workEpisode"
   | "work"
-  | "today";
+  | "today"
+  | "nextButton";
 
 type ThemeProps = {
   episodeMenu: never;
+  nextButton: never;
   episode: never;
   nextMenu: {
     isHidden?: boolean;
@@ -33,25 +34,23 @@ type ThemeProps = {
 const ThemeComponents = {
   episodeMenu: EpisodeMenuSkeleton,
   episode: EpisodeSkeleton,
-  nextMenu: ({ isHidden = false }) => (
-    <NextEpisodeMenuSkeleton isHidden={isHidden} />
-  ),
   timer: TimerSkeleton,
   workEpisode: WorkEpisodeSkeleton,
   work: ({ is_short = false, isButton = false }) => (
     <WorkSkeleton is_short={is_short} isButton={isButton} />
   ),
   today: TodaySkeleton,
+  nextButton: NextButtonSkelton,
 };
 
 const Accessibility = {
   episodeMenu: "エピソードメニューをロード中...",
   episode: "エピソードをロード中...",
-  nextMenu: "次のエピソードをロード中...",
   timer: "タイマーをロード中...",
   workEpisode: "エピソードをロード中...",
   work: "作品をロード中...",
   today: "今日のエピソードをロード中...",
+  nextButton: "次のエピソードをロード中...",
 };
 
 const selectTheme = (theme: Themes) => {

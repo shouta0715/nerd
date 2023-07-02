@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import { Header } from "src/components/dynamic/live/header";
 import { Nav } from "src/components/dynamic/live/nav";
 
@@ -52,9 +52,7 @@ export const Aside: FC<Props> = ({
       </div>
 
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Suspense>
-          <NextMenu episode={data?.episodes_by_pk} />
-        </Suspense>
+        <NextMenu episode={data?.episodes_by_pk} />
       </div>
 
       <div

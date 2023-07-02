@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
 import { useOpenState } from "src/features/episodes/store";
@@ -14,6 +14,8 @@ export const WorkMenuModal: FC<Props> = ({ data }) => {
     state.isNextOpen,
     state.setIsNextOpen,
   ]);
+
+  useEffect(() => () => setIsNextOpen(false), [setIsNextOpen]);
 
   return (
     <Transition.Root as={Fragment} show={isNextOpen}>
