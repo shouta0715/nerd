@@ -44,7 +44,7 @@ export const Comments = forwardRef<any, Props>(
     return (
       <>
         <ul
-          className={`relative mx-auto w-full flex-1 space-y-6 px-2 pt-4 md:max-w-xl md:px-4 ${
+          className={`mx-auto w-full flex-1 space-y-6 px-2 pt-4 md:max-w-xl md:px-4 ${
             data?.pages[0].comments.length === 0 ? "hidden" : "block"
           }`}
         >
@@ -76,7 +76,7 @@ export const Comments = forwardRef<any, Props>(
         <Text
           className={`${
             data?.pages[0].comments.length === 0
-              ? "grid w-full flex-1 place-items-center text-lg font-semibold"
+              ? " flex w-full flex-1 items-center justify-center text-lg font-semibold"
               : "hidden"
           }`}
         >
