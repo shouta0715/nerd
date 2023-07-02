@@ -47,7 +47,7 @@ export const Header: FC<Props> = ({
             第{number}話
           </Text>
           <Text
-            className="line-clamp-3 flex-1 text-sm md:text-base"
+            className="line-clamp-2 flex-1 text-sm md:text-base"
             component="p"
           >
             {sub_title}

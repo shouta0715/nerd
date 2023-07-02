@@ -18,7 +18,7 @@ export const WorkMenu: FC<Props> = ({ data }) => {
           </Text>
         </div>
         <Text component="div">
-          <Text className="line-clamp-2 text-sm" component="p">
+          <Text className="text-sm" component="p">
             {data?.works_by_pk?.series_title}
           </Text>
         </Text>
