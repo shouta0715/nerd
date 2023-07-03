@@ -4,14 +4,15 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
+import { getWsClient } from "src/libs/wsClient";
 
-import { useGlobalState } from "src/store/global/globalStore";
+import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
@@ -20,9 +21,27 @@ export const FirebaseAuth = () => {
   const setUser = useUserState((state) => state.setUser);
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
+  const setWsClient = useWsClientState((state) => state.setWsClient);
+
   const [_, setAuthError] = useState<null>(null);
   const onNotification = useNotificationState((state) => state.onShow);
   const { createMutateAsync } = useUser();
+
+  const onConnected = useCallback(() => {
+    onNotification({
+      title: "リアルタイムでコメントが更新されます。",
+      type: "success",
+    });
+  }, [onNotification]);
+
+  const onError = useCallback(() => {
+    onNotification({
+      title: "接続中にエラーが発生しました。",
+      message: "手動で最新のコメントを読み込んでください。",
+      type: "error",
+    });
+  }, [onNotification]);
+
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -44,6 +63,13 @@ export const FirebaseAuth = () => {
 
             client.setHeader("authorization", `Bearer ${idTokenResult.token}`);
 
+            setWsClient(
+              getWsClient({
+                token: idTokenResult.token,
+                onConnected,
+                onError,
+              })
+            );
             setAuthLoading(false);
 
             return;
@@ -83,6 +109,13 @@ export const FirebaseAuth = () => {
           });
 
           client.setHeader("authorization", `Bearer ${newestToken}`);
+          setWsClient(
+            getWsClient({
+              token: idTokenResult.token,
+              onConnected,
+              onError,
+            })
+          );
 
           queryClient.invalidateQueries(["comments"]);
           queryClient.invalidateQueries(["replies"]);
@@ -116,7 +149,16 @@ export const FirebaseAuth = () => {
     return () => {
       unSubUser();
     };
-  }, [createMutateAsync, onNotification, queryClient, setAuthLoading, setUser]);
+  }, [
+    createMutateAsync,
+    onConnected,
+    onError,
+    onNotification,
+    queryClient,
+    setAuthLoading,
+    setUser,
+    setWsClient,
+  ]);
 
   return null;
 };

@@ -9,7 +9,9 @@ import { genTitle } from "src/libs/meta/OnlyTitle";
 
 import { NextSSG, NextSSGPage } from "src/libs/next/types";
 
-const Page: NextSSGPage<GetEpisodeQuery> = ({ data }) => <Live data={data} />;
+const Page: NextSSGPage<GetEpisodeQuery> = ({ data }) => (
+  <Live key={data.episodes_by_pk?.id} data={data} />
+);
 
 Page.getLayout = BasicLayoutOnlyHeader;
 Page.getTitle = Meta(({ data }) =>

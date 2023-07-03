@@ -91,3 +91,9 @@ export const WorkWithShortAndButton: Story = {
     },
   },
 };
+
+export const Search: Story = {
+  args: {
+    theme: "search",
+  },
+};

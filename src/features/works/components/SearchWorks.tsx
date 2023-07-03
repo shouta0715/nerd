@@ -2,7 +2,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import React from "react";
-import { Loader } from "src/components/Elements/Loader";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import {
   useSearchWorksInput,
   useSearchWorksState,
@@ -13,30 +13,32 @@ export const SearchWorks = () => {
   const isLoading = useSearchWorksState((state) => state.isLoading);
   const search = useSearchWorksInput((state) => state.search);
   const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<
-    SearchWorksQuery["search_works"] | null
-  >(["SearchWorks", { search }], {
-    exact: true,
-  });
+  const data = queryClient.getQueryData<SearchWorksQuery | null>(
+    ["SearchWorks", { search }],
+    {
+      exact: true,
+    }
+  );
 
   if (isLoading) {
     return (
-      <div className="w-full">
-        <Loader className="mx-auto" />
-      </div>
+      <>
+        <p className="my-6 text-center font-bold">{`${search}で検索中...`}</p>
+        <Skeleton theme="search" />;
+      </>
     );
   }
 
   return (
     <div>
-      {data && data?.length > 0 && (
+      {data && data?.search_works.length > 0 && (
         <p className="text-center font-bold">検索結果</p>
       )}
-      {data && data.length === 0 && (
-        <p className="text-center text-gray-500">見つかりませんでした</p>
+      {data && data.search_works.length === 0 && (
+        <p className="text-center text-gray-800">見つかりませんでした</p>
       )}
       <ul className="space-y-2 pt-6 empty:py-0">
-        {data?.map((work) => (
+        {data?.search_works.map((work) => (
           <li key={work.id} className="group relative py-2">
             <div className="absolute bottom-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
             <Link
