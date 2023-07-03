@@ -1,5 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { SearchWorks } from "src/features/works/api/useMutateSearchWorks";
+import { useSearchWorksQuery } from "src/graphql/work/workQuery.generated";
+import { client } from "src/libs/graphqlClient";
+
+export const SearchWorks = async (search: string) => {
+  const fetcher = useSearchWorksQuery.fetcher(client, {
+    search,
+    limit: 100,
+  });
+
+  const data = await fetcher();
+
+  return data;
+};
 
 export const useQuerySearchWorks = (q: string) => {
   return useQuery({
