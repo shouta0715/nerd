@@ -97,3 +97,21 @@ export const Search: Story = {
     theme: "search",
   },
 };
+
+export const Header: Story = {
+  args: {
+    theme: "header",
+  },
+};
+
+export const Nav: Story = {
+  args: {
+    theme: "nav",
+  },
+};
+
+export const Form: Story = {
+  args: {
+    theme: "form",
+  },
+};
