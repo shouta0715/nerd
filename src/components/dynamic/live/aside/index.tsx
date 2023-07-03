@@ -1,13 +1,12 @@
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { Header } from "src/components/dynamic/live/header";
-import { Nav } from "src/components/dynamic/live/nav";
+import { Skeleton } from "src/components/Elements/Skeleton";
 
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
 import { Menu } from "src/features/episodes/components/Menu";
 import { NextMenu } from "src/features/episodes/components/NextMenu";
-import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -20,6 +19,32 @@ type Props = {
   time: Time;
 };
 
+const DynamicHeader = dynamic(
+  () => import("src/components/dynamic/live/header").then((mod) => mod.Header),
+  {
+    ssr: false,
+    loading: () => <Skeleton theme="header" />,
+  }
+);
+
+const DynamicNav = dynamic(
+  () => import("src/components/dynamic/live/nav").then((mod) => mod.Nav),
+  {
+    ssr: false,
+    loading: () => <Skeleton theme="nav" />,
+  }
+);
+
+const DynamicChatInput = dynamic(
+  () =>
+    import("src/features/live/components/LiveChatInput").then(
+      (mod) => mod.LiveChatInput
+    ),
+  {
+    ssr: false,
+    loading: () => <Skeleton theme="form" />,
+  }
+);
 export const Aside: FC<Props> = ({
   isChat,
   setIsChat,
@@ -33,7 +58,7 @@ export const Aside: FC<Props> = ({
       {/* PC Design */}
 
       <div className=" rounded-2xl bg-white/60 pb-4  shadow-lg ring-1 ring-gray-900/5">
-        <Header
+        <DynamicHeader
           id={data?.episodes_by_pk?.id}
           mode={mode}
           number={data?.episodes_by_pk?.number}
@@ -45,7 +70,12 @@ export const Aside: FC<Props> = ({
           }}
           title={data?.episodes_by_pk?.work.series_title}
         />
-        <Nav isChat={isChat} mode={mode} response="lg" setIsChat={setIsChat} />
+        <DynamicNav
+          isChat={isChat}
+          mode={mode}
+          response="lg"
+          setIsChat={setIsChat}
+        />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu live />
@@ -62,7 +92,7 @@ export const Aside: FC<Props> = ({
         )}
       >
         {isChat ? (
-          <LiveChatInput
+          <DynamicChatInput
             episode_id={data?.episodes_by_pk?.id}
             mode={mode}
             time={time}
