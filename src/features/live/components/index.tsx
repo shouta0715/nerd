@@ -102,6 +102,7 @@ export const Live: FC<Props> = ({ data }) => {
           response="sp"
           setIsChat={setIsChat}
         />
+
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <Suspense

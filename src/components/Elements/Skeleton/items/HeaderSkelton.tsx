@@ -3,7 +3,7 @@ import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkele
 
 export const HeaderSkelton = () => {
   return (
-    <div className="flex animate-pulse flex-col items-center justify-between p-4  md:px-6">
+    <div className="flex animate-pulse flex-col items-center justify-between px-6  lg:py-4">
       <div className="mb-1 h-6 w-52 rounded-md bg-slate-200 md:mb-2" />
       <div className="mb-2 flex h-4 w-full  ">
         <div className="mr-4 h-4 w-1/12 rounded-md bg-slate-200" />

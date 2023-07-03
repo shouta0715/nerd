@@ -3,7 +3,7 @@ import React from "react";
 export const FormSkelton = () => {
   return (
     <>
-      <div className="bottom-0 left-0 z-[1] hidden w-full border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:block lg:border-0 lg:bg-transparent lg:p-0">
+      <div className="z-[1] hidden w-full border-slate-200 bg-white lg:relative lg:block">
         <div className="flex flex-1 flex-col justify-center gap-4">
           <div className="flex items-center gap-4">
             <div className="h-8 w-8 rounded-full bg-slate-200" />
