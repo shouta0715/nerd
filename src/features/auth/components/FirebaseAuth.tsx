@@ -4,7 +4,7 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
@@ -26,6 +26,22 @@ export const FirebaseAuth = () => {
   const [_, setAuthError] = useState<null>(null);
   const onNotification = useNotificationState((state) => state.onShow);
   const { createMutateAsync } = useUser();
+
+  const onConnected = useCallback(() => {
+    onNotification({
+      title: "リアルタイムでコメントが更新されます。",
+      type: "success",
+    });
+  }, [onNotification]);
+
+  const onError = useCallback(() => {
+    onNotification({
+      title: "接続中にエラーが発生しました。",
+      message: "手動で最新のコメントを読み込んでください。",
+      type: "error",
+    });
+  }, [onNotification]);
+
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
       if (user) {
@@ -47,7 +63,13 @@ export const FirebaseAuth = () => {
 
             client.setHeader("authorization", `Bearer ${idTokenResult.token}`);
 
-            setWsClient(getWsClient(idTokenResult.token));
+            setWsClient(
+              getWsClient({
+                token: idTokenResult.token,
+                onConnected,
+                onError,
+              })
+            );
             setAuthLoading(false);
 
             return;
@@ -87,7 +109,13 @@ export const FirebaseAuth = () => {
           });
 
           client.setHeader("authorization", `Bearer ${newestToken}`);
-          setWsClient(getWsClient(idTokenResult.token));
+          setWsClient(
+            getWsClient({
+              token: idTokenResult.token,
+              onConnected,
+              onError,
+            })
+          );
 
           queryClient.invalidateQueries(["comments"]);
           queryClient.invalidateQueries(["replies"]);
@@ -123,6 +151,8 @@ export const FirebaseAuth = () => {
     };
   }, [
     createMutateAsync,
+    onConnected,
+    onError,
     onNotification,
     queryClient,
     setAuthLoading,

@@ -61,6 +61,16 @@ export const useMutateLiveChat = () => {
 
       if (!prevData || !context) return;
 
+      if (context.comment_time !== 0) {
+        const newChats = [...prevData.chats, data.insert_chats_one];
+
+        queryClient.setQueryData<GetChatsQuery>(genQueryKey(episode_id), {
+          chats: newChats,
+        });
+
+        return;
+      }
+
       const { fake_id } = context;
 
       const newChats: GetChatsQuery["chats"] = prevData.chats.map((chat) => {

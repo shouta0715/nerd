@@ -69,8 +69,8 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
         error: () => {
           if (isWsError) return;
           onNotification({
-            title: "接続中にエラーが発生しました。",
-            message: "通信環境の良いところで再度お試しください。",
+            title: "リアルタイム接続に失敗しました",
+            message: "右下のボタンを押すと、最新のコメントを読み込めます",
             type: "error",
           });
           setIsWsError(true);
@@ -92,6 +92,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
   const wsErrorRefetch = async () => {
     if (!isWsError || mode !== "up") return;
+
     const key = getKey(episode_id);
     const number = timeToSecond(time);
     const newPageNation: PageNation = {
@@ -135,5 +136,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     isWsError,
     wsErrorRefetch,
     isLoadingWsRefetch,
+    isSubscription: !isWsError && mode === "up",
   };
 };
