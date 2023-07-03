@@ -93,7 +93,6 @@ export type Bigint_Comparison_Exp = {
 /** columns and relationships of "chats" */
 export type Chats = {
   __typename?: 'chats';
-  anonymous: Scalars['Boolean']['output'];
   comment_time: Scalars['Int']['output'];
   commenter_name: Scalars['String']['output'];
   content: Scalars['String']['output'];
@@ -119,23 +118,7 @@ export type Chats_Aggregate = {
 };
 
 export type Chats_Aggregate_Bool_Exp = {
-  bool_and?: InputMaybe<Chats_Aggregate_Bool_Exp_Bool_And>;
-  bool_or?: InputMaybe<Chats_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Chats_Aggregate_Bool_Exp_Count>;
-};
-
-export type Chats_Aggregate_Bool_Exp_Bool_And = {
-  arguments: Chats_Select_Column_Chats_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Chats_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
-};
-
-export type Chats_Aggregate_Bool_Exp_Bool_Or = {
-  arguments: Chats_Select_Column_Chats_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Chats_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
 };
 
 export type Chats_Aggregate_Bool_Exp_Count = {
@@ -208,7 +191,6 @@ export type Chats_Bool_Exp = {
   _and?: InputMaybe<Array<Chats_Bool_Exp>>;
   _not?: InputMaybe<Chats_Bool_Exp>;
   _or?: InputMaybe<Array<Chats_Bool_Exp>>;
-  anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   comment_time?: InputMaybe<Int_Comparison_Exp>;
   commenter_name?: InputMaybe<String_Comparison_Exp>;
   content?: InputMaybe<String_Comparison_Exp>;
@@ -251,7 +233,6 @@ export type Chats_Inc_Input = {
 
 /** input type for inserting data into table "chats" */
 export type Chats_Insert_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   comment_time?: InputMaybe<Scalars['Int']['input']>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
@@ -338,7 +319,6 @@ export type Chats_On_Conflict = {
 
 /** Ordering options when selecting data from "chats". */
 export type Chats_Order_By = {
-  anonymous?: InputMaybe<Order_By>;
   comment_time?: InputMaybe<Order_By>;
   commenter_name?: InputMaybe<Order_By>;
   content?: InputMaybe<Order_By>;
@@ -361,8 +341,6 @@ export type Chats_Pk_Columns_Input = {
 /** select columns of table "chats" */
 export enum Chats_Select_Column {
   /** column name */
-  Anonymous = 'anonymous',
-  /** column name */
   CommentTime = 'comment_time',
   /** column name */
   CommenterName = 'commenter_name',
@@ -382,21 +360,8 @@ export enum Chats_Select_Column {
   WorkId = 'work_id'
 }
 
-/** select "chats_aggregate_bool_exp_bool_and_arguments_columns" columns of table "chats" */
-export enum Chats_Select_Column_Chats_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
-  /** column name */
-  Anonymous = 'anonymous'
-}
-
-/** select "chats_aggregate_bool_exp_bool_or_arguments_columns" columns of table "chats" */
-export enum Chats_Select_Column_Chats_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
-  /** column name */
-  Anonymous = 'anonymous'
-}
-
 /** input type for updating data in table "chats" */
 export type Chats_Set_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   comment_time?: InputMaybe<Scalars['Int']['input']>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
@@ -457,7 +422,6 @@ export type Chats_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Chats_Stream_Cursor_Value_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   comment_time?: InputMaybe<Scalars['Int']['input']>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
@@ -484,8 +448,6 @@ export type Chats_Sum_Order_By = {
 
 /** update columns of table "chats" */
 export enum Chats_Update_Column {
-  /** column name */
-  Anonymous = 'anonymous',
   /** column name */
   CommentTime = 'comment_time',
   /** column name */
@@ -557,7 +519,6 @@ export type Chats_Variance_Order_By = {
 /** columns and relationships of "comments" */
 export type Comments = {
   __typename?: 'comments';
-  anonymous: Scalars['Boolean']['output'];
   /** An object relationship */
   comment?: Maybe<Comments>;
   commenter_name: Scalars['String']['output'];
@@ -638,23 +599,7 @@ export type Comments_Aggregate = {
 };
 
 export type Comments_Aggregate_Bool_Exp = {
-  bool_and?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_And>;
-  bool_or?: InputMaybe<Comments_Aggregate_Bool_Exp_Bool_Or>;
   count?: InputMaybe<Comments_Aggregate_Bool_Exp_Count>;
-};
-
-export type Comments_Aggregate_Bool_Exp_Bool_And = {
-  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Comments_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
-};
-
-export type Comments_Aggregate_Bool_Exp_Bool_Or = {
-  arguments: Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Comments_Bool_Exp>;
-  predicate: Boolean_Comparison_Exp;
 };
 
 export type Comments_Aggregate_Bool_Exp_Count = {
@@ -725,7 +670,6 @@ export type Comments_Bool_Exp = {
   _and?: InputMaybe<Array<Comments_Bool_Exp>>;
   _not?: InputMaybe<Comments_Bool_Exp>;
   _or?: InputMaybe<Array<Comments_Bool_Exp>>;
-  anonymous?: InputMaybe<Boolean_Comparison_Exp>;
   comment?: InputMaybe<Comments_Bool_Exp>;
   commenter_name?: InputMaybe<String_Comparison_Exp>;
   comments?: InputMaybe<Comments_Bool_Exp>;
@@ -761,7 +705,6 @@ export type Comments_Inc_Input = {
 
 /** input type for inserting data into table "comments" */
 export type Comments_Insert_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   comment?: InputMaybe<Comments_Obj_Rel_Insert_Input>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
@@ -863,7 +806,6 @@ export type Comments_On_Conflict = {
 
 /** Ordering options when selecting data from "comments". */
 export type Comments_Order_By = {
-  anonymous?: InputMaybe<Order_By>;
   comment?: InputMaybe<Comments_Order_By>;
   commenter_name?: InputMaybe<Order_By>;
   comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
@@ -892,8 +834,6 @@ export type Comments_Pk_Columns_Input = {
 /** select columns of table "comments" */
 export enum Comments_Select_Column {
   /** column name */
-  Anonymous = 'anonymous',
-  /** column name */
   CommenterName = 'commenter_name',
   /** column name */
   Content = 'content',
@@ -915,21 +855,8 @@ export enum Comments_Select_Column {
   WorkId = 'work_id'
 }
 
-/** select "comments_aggregate_bool_exp_bool_and_arguments_columns" columns of table "comments" */
-export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_And_Arguments_Columns {
-  /** column name */
-  Anonymous = 'anonymous'
-}
-
-/** select "comments_aggregate_bool_exp_bool_or_arguments_columns" columns of table "comments" */
-export enum Comments_Select_Column_Comments_Aggregate_Bool_Exp_Bool_Or_Arguments_Columns {
-  /** column name */
-  Anonymous = 'anonymous'
-}
-
 /** input type for updating data in table "comments" */
 export type Comments_Set_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -985,7 +912,6 @@ export type Comments_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Comments_Stream_Cursor_Value_Input = {
-  anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   commenter_name?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
@@ -1011,8 +937,6 @@ export type Comments_Sum_Order_By = {
 
 /** update columns of table "comments" */
 export enum Comments_Update_Column {
-  /** column name */
-  Anonymous = 'anonymous',
   /** column name */
   CommenterName = 'commenter_name',
   /** column name */
@@ -3857,13 +3781,11 @@ export type Users = {
   likes: Array<Likes>;
   /** An aggregate relationship */
   likes_aggregate: Likes_Aggregate;
-  photo_url?: Maybe<Scalars['String']['output']>;
   /** An array relationship */
   request_works: Array<Request_Works>;
   /** An aggregate relationship */
   request_works_aggregate: Request_Works_Aggregate;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
-  user_name: Scalars['String']['output'];
 };
 
 
@@ -3982,11 +3904,9 @@ export type Users_Bool_Exp = {
   id?: InputMaybe<String_Comparison_Exp>;
   likes?: InputMaybe<Likes_Bool_Exp>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Bool_Exp>;
-  photo_url?: InputMaybe<String_Comparison_Exp>;
   request_works?: InputMaybe<Request_Works_Bool_Exp>;
   request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Bool_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  user_name?: InputMaybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -4003,10 +3923,8 @@ export type Users_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   likes?: InputMaybe<Likes_Arr_Rel_Insert_Input>;
-  photo_url?: InputMaybe<Scalars['String']['input']>;
   request_works?: InputMaybe<Request_Works_Arr_Rel_Insert_Input>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
@@ -4014,9 +3932,7 @@ export type Users_Max_Fields = {
   __typename?: 'users_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  photo_url?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
-  user_name?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
@@ -4024,9 +3940,7 @@ export type Users_Min_Fields = {
   __typename?: 'users_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['String']['output']>;
-  photo_url?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['timestamptz']['output']>;
-  user_name?: Maybe<Scalars['String']['output']>;
 };
 
 /** response of any mutation on the table "users" */
@@ -4060,10 +3974,8 @@ export type Users_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Likes_Aggregate_Order_By>;
-  photo_url?: InputMaybe<Order_By>;
   request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Order_By>;
   updated_at?: InputMaybe<Order_By>;
-  user_name?: InputMaybe<Order_By>;
 };
 
 /** primary key columns input for table: users */
@@ -4080,11 +3992,7 @@ export enum Users_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  PhotoUrl = 'photo_url',
-  /** column name */
-  UpdatedAt = 'updated_at',
-  /** column name */
-  UserName = 'user_name'
+  UpdatedAt = 'updated_at'
 }
 
 /** input type for updating data in table "users" */
@@ -4092,9 +4000,7 @@ export type Users_Set_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  photo_url?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Streaming cursor of the table "users" */
@@ -4110,9 +4016,7 @@ export type Users_Stream_Cursor_Value_Input = {
   anonymous?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
-  photo_url?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  user_name?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** update columns of table "users" */
@@ -4124,11 +4028,7 @@ export enum Users_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  PhotoUrl = 'photo_url',
-  /** column name */
-  UpdatedAt = 'updated_at',
-  /** column name */
-  UserName = 'user_name'
+  UpdatedAt = 'updated_at'
 }
 
 export type Users_Updates = {

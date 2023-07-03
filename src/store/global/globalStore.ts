@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { Client } from "graphql-ws";
 import { create } from "zustand";
 
 type GlobalState = {
@@ -28,4 +29,14 @@ export type CountDownModal = {
 export const useCountDownModal = create<CountDownModal>((set) => ({
   isOpen: false,
   setIsOpen: (isOpen) => set({ isOpen }),
+}));
+
+export type WsClientState = {
+  wsClient: Client | null;
+  setWsClient: (wsClient: Client | null) => void;
+};
+
+export const useWsClientState = create<WsClientState>((set) => ({
+  wsClient: null,
+  setWsClient: (wsClient) => set({ wsClient }),
 }));

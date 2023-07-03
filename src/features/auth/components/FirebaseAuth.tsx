@@ -10,8 +10,9 @@ import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
 import { client } from "src/libs/graphqlClient";
+import { getWsClient } from "src/libs/wsClient";
 
-import { useGlobalState } from "src/store/global/globalStore";
+import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 
 const TOKEN_KEY = process.env.NEXT_PUBLIC_TOKEN_KEY as string;
@@ -20,6 +21,8 @@ export const FirebaseAuth = () => {
   const setUser = useUserState((state) => state.setUser);
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
+  const setWsClient = useWsClientState((state) => state.setWsClient);
+
   const [_, setAuthError] = useState<null>(null);
   const onNotification = useNotificationState((state) => state.onShow);
   const { createMutateAsync } = useUser();
@@ -44,6 +47,7 @@ export const FirebaseAuth = () => {
 
             client.setHeader("authorization", `Bearer ${idTokenResult.token}`);
 
+            setWsClient(getWsClient(idTokenResult.token));
             setAuthLoading(false);
 
             return;
@@ -83,6 +87,7 @@ export const FirebaseAuth = () => {
           });
 
           client.setHeader("authorization", `Bearer ${newestToken}`);
+          setWsClient(getWsClient(idTokenResult.token));
 
           queryClient.invalidateQueries(["comments"]);
           queryClient.invalidateQueries(["replies"]);
@@ -116,7 +121,14 @@ export const FirebaseAuth = () => {
     return () => {
       unSubUser();
     };
-  }, [createMutateAsync, onNotification, queryClient, setAuthLoading, setUser]);
+  }, [
+    createMutateAsync,
+    onNotification,
+    queryClient,
+    setAuthLoading,
+    setUser,
+    setWsClient,
+  ]);
 
   return null;
 };

@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  GetChatsEpisodeQuery,
+  GetChatsQuery,
   useInsertChatMutation,
 } from "src/graphql/chat/chatQuery.generated";
 import { UnauthorizedError } from "src/libs/error";
@@ -8,17 +8,8 @@ import { client } from "src/libs/graphqlClient";
 import { useUserState } from "src/store/user/userState";
 import { genRandomId } from "src/utils/genRandomId";
 
-type InfiniteLiveChats = {
-  pageParams: [];
-  pages: GetChatsEpisodeQuery[];
-};
-
-type Pages = InfiniteLiveChats["pages"];
-
-type EpisodeData = Pages[0]["chats_by_episode_id"];
-
 const genQueryKey = (episode_id: string) => {
-  return ["LiveChats", { episode_id }];
+  return ["GetChats", { episode_id }];
 };
 
 export const useMutateLiveChat = () => {
@@ -35,100 +26,56 @@ export const useMutateLiveChat = () => {
       if (!user) throw new UnauthorizedError();
 
       const created_at = new Date().toString();
-      const prevData = queryClient.getQueryData<InfiniteLiveChats>([
-        "LiveChats",
-        { episode_id },
-      ]);
+      const prevData = queryClient.getQueryData<GetChatsQuery>(
+        genQueryKey(episode_id)
+      );
 
-      if (comment_time !== 0) return { prevData, fake_id, comment_time };
-
-      if (prevData) {
-        const prevChats = prevData.pages[0].chats_by_episode_id;
-        queryClient.setQueryData(["LiveChats", { episode_id }], {
-          pages: [
-            {
-              chats_by_episode_id: [
-                {
-                  id: fake_id,
-                  episode_id,
-                  comment_time,
-                  content,
-                  commenter_name,
-                  created_at,
-                  user_id: user.id,
-                  user,
-                },
-                ...prevChats,
-              ],
-            },
-          ],
-        });
-
+      if (comment_time !== 0 || !prevData)
         return { prevData, fake_id, comment_time };
-      }
+
+      const newChat: GetChatsQuery["chats"][0] = {
+        id: fake_id,
+        episode_id,
+        comment_time,
+        content: content || "",
+        commenter_name: commenter_name || "",
+        created_at,
+        user_id: user.id,
+        user,
+      };
+
+      queryClient.setQueryData<GetChatsQuery>(genQueryKey(episode_id), {
+        chats: [...prevData.chats, newChat],
+      });
 
       return { prevData, fake_id, comment_time };
     },
+
     onSuccess: (data, _, context) => {
-      const episode_id = data.insert_chats_one?.episode_id;
-      const prevData = queryClient.getQueryData<InfiniteLiveChats>([
-        "LiveChats",
-        { episode_id },
-      ]);
+      if (!data.insert_chats_one) return;
 
-      if (!prevData) return;
-      const { pageParams, pages } = prevData;
+      const { episode_id } = data.insert_chats_one;
+      const prevData = queryClient.getQueryData<GetChatsQuery>(
+        genQueryKey(episode_id)
+      );
 
-      if (context?.comment_time === 0) {
-        if (!context || !data.insert_chats_one) return;
-        const [{ fake_id }, { id }, zeroData] = [
-          context,
-          data.insert_chats_one,
-          prevData.pages[0].chats_by_episode_id,
-        ];
+      if (!prevData || !context) return;
 
-        const newEpisodes = zeroData.map((chat) => {
-          if (chat.id === fake_id) {
-            return {
-              ...chat,
-              id,
-            };
-          }
+      const { fake_id } = context;
 
-          return chat;
-        });
+      const newChats: GetChatsQuery["chats"] = prevData.chats.map((chat) => {
+        if (chat.id === fake_id) {
+          return {
+            ...chat,
+            id: data.insert_chats_one?.id,
+          };
+        }
 
-        const newPage: Pages = [
-          {
-            chats_by_episode_id: newEpisodes,
-          },
-        ];
+        return chat;
+      });
 
-        queryClient.setQueriesData<InfiniteLiveChats>(genQueryKey(episode_id), {
-          pageParams: prevData.pageParams,
-          pages: newPage,
-        });
-
-        return;
-      }
-
-      const lastEpisode = pages.at(-1)?.chats_by_episode_id;
-      if (!lastEpisode) return;
-
-      const newChat = data.insert_chats_one;
-      if (!newChat) return;
-
-      const newEpisode: EpisodeData = [...lastEpisode, newChat];
-
-      const newPage: Pages = [
-        ...pages.slice(0, -1),
-        {
-          chats_by_episode_id: newEpisode,
-        },
-      ];
-      queryClient.setQueriesData<InfiniteLiveChats>(genQueryKey(episode_id), {
-        pageParams,
-        pages: newPage,
+      queryClient.setQueryData<GetChatsQuery>(genQueryKey(episode_id), {
+        chats: newChats,
       });
     },
   });

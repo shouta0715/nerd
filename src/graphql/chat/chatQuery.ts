@@ -113,3 +113,48 @@ export const GET_ZERO_TIME_CHATS = gql`
     }
   }
 `;
+
+export const SUBSCRIPTION_CHATS = gql`
+  subscription SubscriptionChats($episode_id: uuid!) {
+    chats(
+      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }
+      order_by: { comment_time: asc }
+    ) {
+      content
+      work_id
+      user_id
+      comment_time
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        id
+      }
+    }
+  }
+`;
+
+export const GET_CHATS = gql`
+  query GetChats($episode_id: uuid!) {
+    chats(
+      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }
+      order_by: { comment_time: asc }
+      limit: 100
+    ) {
+      content
+      work_id
+      user_id
+      comment_time
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        id
+      }
+    }
+  }
+`;
