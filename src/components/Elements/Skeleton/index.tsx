@@ -1,8 +1,5 @@
 import { EpisodeMenuSkeleton } from "src/components/Elements/Skeleton/items/EpisodeMenuSkeleton";
 import { EpisodeSkeleton } from "src/components/Elements/Skeleton/items/EpisodeSkeleton";
-import { FormSkelton } from "src/components/Elements/Skeleton/items/FormSkelton";
-import { HeaderSkelton } from "src/components/Elements/Skeleton/items/HeaderSkelton";
-import { NavSkelton } from "src/components/Elements/Skeleton/items/NavSkelton";
 import { NextButtonSkelton } from "src/components/Elements/Skeleton/items/NextButtonSkelton";
 import { SearchSkelton } from "src/components/Elements/Skeleton/items/SearchSkelton";
 import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkeleton";
@@ -18,10 +15,7 @@ type Themes =
   | "work"
   | "today"
   | "nextButton"
-  | "search"
-  | "header"
-  | "nav"
-  | "form";
+  | "search";
 
 type ThemeProps = {
   episodeMenu: never;
@@ -39,9 +33,6 @@ type ThemeProps = {
   };
   today: never;
   search: never;
-  header: never;
-  nav: never;
-  form: never;
 };
 const ThemeComponents = {
   episodeMenu: EpisodeMenuSkeleton,
@@ -54,9 +45,6 @@ const ThemeComponents = {
   today: TodaySkeleton,
   nextButton: NextButtonSkelton,
   search: SearchSkelton,
-  header: HeaderSkelton,
-  nav: NavSkelton,
-  form: FormSkelton,
 };
 
 const Accessibility = {
@@ -68,9 +56,6 @@ const Accessibility = {
   today: "今日のエピソードをロード中...",
   nextButton: "次のエピソードをロード中...",
   search: "検索中...",
-  header: "ヘッダーをロード中...",
-  nav: "ナビゲーションをロード中...",
-  form: "フォームをロード中...",
 };
 
 const selectTheme = (theme: Themes) => {

@@ -1,12 +1,13 @@
-import dynamic from "next/dynamic";
 import React, { FC, Suspense } from "react";
 
 import { Aside } from "src/components/dynamic/live/aside";
+import { Header } from "src/components/dynamic/live/header";
+import { Nav } from "src/components/dynamic/live/nav";
 import { Loader } from "src/components/Elements/Loader";
-import { Skeleton } from "src/components/Elements/Skeleton";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/Finish";
+import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveComment } from "src/features/live/components/LiveComment";
 import { useLive } from "src/features/live/hooks/useLive";
@@ -15,33 +16,6 @@ import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 type Props = {
   data: GetEpisodeQuery;
 };
-
-const DynamicHeader = dynamic(
-  () => import("src/components/dynamic/live/header").then((mod) => mod.Header),
-  {
-    ssr: false,
-    loading: () => <Skeleton theme="header" />,
-  }
-);
-
-const DynamicNav = dynamic(
-  () => import("src/components/dynamic/live/nav").then((mod) => mod.Nav),
-  {
-    ssr: false,
-    loading: () => <Skeleton theme="nav" />,
-  }
-);
-
-const DynamicChatInput = dynamic(
-  () =>
-    import("src/features/live/components/LiveChatInput").then(
-      (mod) => mod.LiveChatInput
-    ),
-  {
-    ssr: false,
-    loading: () => <Skeleton theme="form" />,
-  }
-);
 
 export const Live: FC<Props> = ({ data }) => {
   const {
@@ -68,7 +42,7 @@ export const Live: FC<Props> = ({ data }) => {
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
         <div className="block w-full bg-white/80 py-4 lg:hidden">
           {/* Mobile Design */}
-          <DynamicHeader
+          <Header
             id={data?.episodes_by_pk?.id}
             mode={mode}
             number={data?.episodes_by_pk?.number}
@@ -82,7 +56,7 @@ export const Live: FC<Props> = ({ data }) => {
           />
 
           {isChat ? (
-            <DynamicChatInput
+            <LiveChatInput
               episode_id={data?.episodes_by_pk?.id}
               mode={mode}
               time={time}
@@ -96,12 +70,7 @@ export const Live: FC<Props> = ({ data }) => {
             )
           )}
         </div>
-        <DynamicNav
-          isChat={isChat}
-          mode={mode}
-          response="sp"
-          setIsChat={setIsChat}
-        />
+        <Nav isChat={isChat} mode={mode} response="sp" setIsChat={setIsChat} />
 
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (

@@ -1,7 +1,8 @@
 import { GetStaticPaths } from "next";
+import dynamic from "next/dynamic";
 import React from "react";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
-import { Live } from "src/features/live/components";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { getEpisode, getLiveIdsPaths } from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";
@@ -9,8 +10,16 @@ import { genTitle } from "src/libs/meta/OnlyTitle";
 
 import { NextSSG, NextSSGPage } from "src/libs/next/types";
 
+const DynamicLive = dynamic(
+  () => import("src/features/live/components").then((mod) => mod.Live),
+  {
+    ssr: false,
+    loading: () => <Skeleton theme="episode" />,
+  }
+);
+
 const Page: NextSSGPage<GetEpisodeQuery> = ({ data }) => (
-  <Live key={data.episodes_by_pk?.id} data={data} />
+  <DynamicLive key={data.episodes_by_pk?.id} data={data} />
 );
 
 Page.getLayout = BasicLayoutOnlyHeader;
