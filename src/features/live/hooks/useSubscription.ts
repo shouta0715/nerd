@@ -8,6 +8,7 @@ import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { SUBSCRIPTION_CHATS } from "src/graphql/chat/chatQuery";
 import {
   GetChatsQuery,
+  SubscriptionChatsSubscription,
   useGetChatsEpisodeQuery,
 } from "src/graphql/chat/chatQuery.generated";
 import { client as gqlClient } from "src/libs/graphqlClient";
@@ -41,11 +42,14 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     if (mode !== "up" || isWsError) return () => wsClient.dispose();
 
-    wsClient.subscribe<GetChatsQuery>(
+    const initial_created_at = new Date().toISOString();
+
+    wsClient.subscribe<SubscriptionChatsSubscription>(
       {
         query: SUBSCRIPTION_CHATS,
         variables: {
           episode_id,
+          initial_created_at,
         },
       },
       {
@@ -55,12 +59,12 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
           if (!prevData) return;
 
-          if (!data || prevData.chats.length === data?.chats.length) return;
-
-          const newChats = data.chats.filter(
+          const newChats = data?.chats_stream.filter(
             (chat) =>
               !prevData.chats.some((prevChat) => prevChat.id === chat.id)
           );
+
+          if (!newChats) return;
 
           queryClient.setQueryData<GetChatsQuery>(key, {
             chats: [...prevData.chats, ...newChats],

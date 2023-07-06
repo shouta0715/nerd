@@ -43,7 +43,7 @@ export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
         </Transition>
 
         {chats?.map((comment) => (
-          <Chat key={comment.id} animate chat={comment} />
+          <Chat key={comment.id} chat={comment} />
         ))}
       </ul>
       <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">

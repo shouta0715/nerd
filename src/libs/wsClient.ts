@@ -11,7 +11,7 @@ type Props = {
 export const getWsClient = ({ token, onConnected, onError }: Props) => {
   const wsClient = createClient({
     url,
-    retryAttempts: 5,
+    retryAttempts: 6,
     keepAlive: 270000,
     connectionParams: () => {
       return {

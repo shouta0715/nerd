@@ -49,10 +49,11 @@ export type GetZeroTimeChatsQuery = { __typename?: 'query_root', chats: Array<{ 
 
 export type SubscriptionChatsSubscriptionVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid']['input'];
+  initial_created_at: Types.Scalars['timestamptz']['input'];
 }>;
 
 
-export type SubscriptionChatsSubscription = { __typename?: 'subscription_root', chats: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
+export type SubscriptionChatsSubscription = { __typename?: 'subscription_root', chats_stream: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
 
 export type GetChatsQueryVariables = Types.Exact<{
   episode_id: Types.Scalars['uuid']['input'];
@@ -204,10 +205,11 @@ export const useGetZeroTimeChatsQuery = <
     );
 useGetZeroTimeChatsQuery.fetcher = (client: GraphQLClient, variables: GetZeroTimeChatsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetZeroTimeChatsQuery, GetZeroTimeChatsQueryVariables>(client, GetZeroTimeChatsDocument, variables, headers);
 export const SubscriptionChatsDocument = `
-    subscription SubscriptionChats($episode_id: uuid!) {
-  chats(
+    subscription SubscriptionChats($episode_id: uuid!, $initial_created_at: timestamptz!) {
+  chats_stream(
+    cursor: {initial_value: {created_at: $initial_created_at}, ordering: ASC}
+    batch_size: 100
     where: {episode_id: {_eq: $episode_id}, comment_time: {_gte: 0}}
-    order_by: {comment_time: asc}
   ) {
     content
     work_id

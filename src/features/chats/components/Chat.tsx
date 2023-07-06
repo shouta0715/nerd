@@ -8,15 +8,14 @@ import { useUserState } from "src/store/user/userState";
 
 type Props = {
   chat: ChatType;
-  animate: boolean;
 };
 
-export const Chat: FC<Props> = ({ chat, animate }) => {
+export const Chat: FC<Props> = ({ chat }) => {
   const user = useUserState((state) => state.user);
 
   return (
     <li
-      className={`flex w-full ${animate ? "animate-comment" : ""} ${
+      className={`flex w-full animate-comment ${
         user?.id === chat.user?.id ? "flex-row-reverse" : ""
       }`}
     >

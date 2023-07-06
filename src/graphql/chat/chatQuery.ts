@@ -115,10 +115,17 @@ export const GET_ZERO_TIME_CHATS = gql`
 `;
 
 export const SUBSCRIPTION_CHATS = gql`
-  subscription SubscriptionChats($episode_id: uuid!) {
-    chats(
+  subscription SubscriptionChats(
+    $episode_id: uuid!
+    $initial_created_at: timestamptz!
+  ) {
+    chats_stream(
+      cursor: {
+        initial_value: { created_at: $initial_created_at }
+        ordering: ASC
+      }
+      batch_size: 100
       where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }
-      order_by: { comment_time: asc }
     ) {
       content
       work_id

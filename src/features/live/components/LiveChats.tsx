@@ -45,7 +45,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
             "右下のボタンを押すと、最新のコメントを読み込めます"}
         </p>
         {data?.map((chats) => (
-          <Chat key={chats.id} animate={mode === "up"} chat={chats} />
+          <Chat key={chats.id} chat={chats} />
         ))}
       </ul>
       <div className="sticky bottom-20 flex w-full justify-between px-2 lg:px-3">
@@ -66,7 +66,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
         <div
           className={clsx(
             "grid h-10 w-10 place-items-center  rounded-full bg-red-600 shadow-md shadow-red-400 transition-transform active:translate-y-1 lg:right-14",
-            isSubscription ? "hidden" : "block"
+            isSubscription || mode === "finish" ? "hidden" : "block"
           )}
         >
           {isRefetching || isLoadingWsRefetch ? (
