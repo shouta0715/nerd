@@ -12,16 +12,29 @@ export const genTodayEpisodePlaceholder = (episode: TodayEpisode) => [
   episode.end_time,
 ];
 
-export const genEpisodePlaceholder = (
-  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"],
-  title?: string
-) => [
+type Props = {
+  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"];
+  title?: string;
+  work_id?: number;
+  series_id?: string | null;
+};
+
+export const genEpisodePlaceholder = ({
+  episode,
   title,
-  episode?.title,
-  episode?.number.toString(),
-  episode?.id,
-  episode?.has_next_episode,
-  episode?.next_episode_id,
-  episode?.start_time,
-  episode?.end_time,
-];
+  work_id,
+  series_id,
+}: Props) => {
+  return [
+    title,
+    episode?.title,
+    episode?.number.toString(),
+    episode?.id,
+    episode?.has_next_episode,
+    episode?.next_episode_id,
+    episode?.start_time,
+    episode?.end_time,
+    work_id,
+    series_id,
+  ];
+};

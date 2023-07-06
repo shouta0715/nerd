@@ -103,10 +103,12 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               href={{
                 pathname: `/episodes/${episode.id}`,
                 query: {
-                  episode: genEpisodePlaceholder(
+                  episode: genEpisodePlaceholder({
                     episode,
-                    episode.work.series_title
-                  ),
+                    title: episode.work.series_title,
+                    work_id: episode.work.id,
+                    series_id: episode.work.series_id,
+                  }),
                 },
               }}
               leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}

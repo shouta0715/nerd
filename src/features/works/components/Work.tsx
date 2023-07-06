@@ -55,6 +55,8 @@ export const Work: FC = () => {
               <WorkEpisodeItem
                 key={episode.id}
                 episode={episode}
+                series_id={data?.works_by_pk?.series_id}
+                work_id={data?.works_by_pk?.id}
                 work_title={data?.works_by_pk?.series_title}
               />
             ))}

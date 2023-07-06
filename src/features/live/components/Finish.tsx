@@ -26,10 +26,12 @@ export const FinishLive: FC<Props> = ({ episode }) => {
           href={{
             pathname: `/episodes/${episode?.id}`,
             query: {
-              episode: genEpisodePlaceholder(
+              episode: genEpisodePlaceholder({
                 episode,
-                episode?.work.series_title
-              ),
+                title: episode?.work.series_title,
+                series_id: episode?.work.series_id,
+                work_id: episode?.work.id,
+              }),
             },
           }}
           leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}

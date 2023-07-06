@@ -12,8 +12,6 @@ export const useLive = (data: GetEpisodeQuery) => {
     end_time: data?.episodes_by_pk?.end_time,
   });
 
-  console.log("time", time);
-
   return {
     isChat,
     setIsChat,

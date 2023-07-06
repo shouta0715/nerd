@@ -17,9 +17,7 @@ export const useQueryWork = ({ slug, work }: Args) => {
     {
       enabled: !!slug,
       onSuccess: (data) => {
-        if (!data.works_by_pk) {
-          throw new NotFoundError();
-        }
+        if (!data.works_by_pk) throw new NotFoundError();
       },
       placeholderData: () => {
         if (!slug || !work || typeof work === "string") return undefined;

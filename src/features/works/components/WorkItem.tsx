@@ -27,6 +27,8 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
               <WorkEpisodeItem
                 key={`work-${episode.id}`}
                 episode={episode}
+                series_id={work.series_id}
+                work_id={work.id}
                 work_title={work.series_title}
               />
             ))}
