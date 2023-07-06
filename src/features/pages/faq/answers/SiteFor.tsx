@@ -2,13 +2,16 @@ import React from "react";
 
 export const SiteFor = () => (
   <>
-    <p> アニメの感想を話し合うサイトです！</p>
-    <div className="mt-2">
+    <p className="mb-4"> アニメの感想を話し合うサイトです！</p>
+    <div className="mt-2 flex flex-col gap-4">
       <p>
-        Netflixなどの配信サービスのタイムコードやテレビの放送時間に合わせて他のユーザーが投稿したチャットが表示されるので、
+        再生時間に合わせてコメントを表示することができるので、
         <span className="text-pink-500">
           リアルタイムでなくてもリアルタイムで感想を共有しているような感覚で楽しめます。
         </span>
+      </p>
+      <p>
+        また、放送中のアニメはリアルタイムでコメントが反映されるためリアルタイムで感想を共有できます。
       </p>
       <p className="mt-1.5">
         その他にもアニメ全体のコメントを投稿することができます。

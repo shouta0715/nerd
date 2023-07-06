@@ -14,3 +14,8 @@ export type Step = {
 
   iconBackground: string;
 };
+
+export type EStep = {
+  id: number;
+  description: string;
+};

@@ -7,11 +7,35 @@ import {
 } from "@heroicons/react/24/solid";
 import React from "react";
 import { Step } from "src/features/pages/usage/items";
+import { EasyItem } from "src/features/pages/usage/items/EasyItem";
 import { First } from "src/features/pages/usage/items/First";
 import { Fourth } from "src/features/pages/usage/items/Fourth";
-import type { Step as TStep } from "src/features/pages/usage/type";
+import type { EStep, Step as TStep } from "src/features/pages/usage/type";
 
-const Steps: TStep[] = [
+const EasySteps: EStep[] = [
+  {
+    id: 1,
+    description: "見るアニメを選ぶ！",
+  },
+  {
+    id: 2,
+    description: "チャットかコメントを選択！",
+  },
+  {
+    id: 3,
+    description: "チャットなら動画と一緒に再生して、コメントを投稿！",
+  },
+  {
+    id: 4,
+    description: "コメントなら感想を投稿！",
+  },
+  {
+    id: 5,
+    description: "投稿名を変更して、いろいろなアニメの感想を投稿！",
+  },
+];
+
+const DetailSteps: TStep[] = [
   {
     id: 1,
     content: "見るアニメを検索し、エピソードまたはアニメを選択します。",
@@ -23,7 +47,7 @@ const Steps: TStep[] = [
   {
     id: 2,
     content:
-      "チャットを選択し、動画配信サービスの再生ボタンと同時に再生ボタンをクリックします。該当の時間に他のユーザのコメントが表示されます。",
+      "チャットを選択し、動画配信サービスの再生ボタンと同時に再生ボタンをクリックします。該当の時間に他のユーザのコメントが表示されます。放送中のアニメはリアルタイムにコメントが反映されます。",
     stepContent: "Step 2. 再生",
     Icon: PlayIcon,
     iconBackground: "bg-green-500",
@@ -56,17 +80,32 @@ const Steps: TStep[] = [
 
 export const Usage = () => {
   return (
-    <div className="flex-1">
+    <div className="grid flex-1 gap-14">
+      <section>
+        <h2 className=" text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+          簡単な使い方
+        </h2>
+        <ul className="mt-6" id="detail">
+          {EasySteps.map((step, index) => (
+            <EasyItem
+              key={`step-easy-${step.id}`}
+              index={index}
+              {...step}
+              firstStep={index !== EasySteps.length - 1}
+            />
+          ))}
+        </ul>
+      </section>
       <section>
         <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
-          使い方
+          詳しい使い方
         </h2>
-        <ul className="-mb-8 mt-10">
-          {Steps.map((step, index) => (
+        <ul className="-mb-8 mt-6" id="detail">
+          {DetailSteps.map((step, index) => (
             <Step
               key={`step-${step.id}`}
               {...step}
-              firstStep={index !== Steps.length - 1}
+              firstStep={index !== DetailSteps.length - 1}
             />
           ))}
         </ul>
