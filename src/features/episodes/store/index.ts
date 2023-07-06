@@ -16,6 +16,8 @@ type OpenState = {
   setIsMenuOpen: (flag: boolean) => void;
   isNextOpen: boolean;
   setIsNextOpen: (flag: boolean) => void;
+  isTimerOpen: boolean;
+  setIsTimerOpen: (flag: boolean) => void;
 };
 
 export const useOpenState = create<OpenState>((set) => ({
@@ -23,4 +25,6 @@ export const useOpenState = create<OpenState>((set) => ({
   setIsMenuOpen: (flag) => set(() => ({ isMenuOpen: flag })),
   isNextOpen: false,
   setIsNextOpen: (flag) => set(() => ({ isNextOpen: flag })),
+  isTimerOpen: false,
+  setIsTimerOpen: (flag) => set(() => ({ isTimerOpen: flag })),
 }));

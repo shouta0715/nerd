@@ -1,4 +1,4 @@
-import { ListBulletIcon } from "@heroicons/react/24/outline";
+import { ClockIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
@@ -21,10 +21,13 @@ export const Nav: FC<Props> = ({
 }) => {
   const mode = useTimerState((state) => state.mode);
   const stop = useTimerState((state) => state.interval.stop);
-  const [isNextOpen, setIsNextOpen] = useOpenState((state) => [
-    state.isNextOpen,
-    state.setIsNextOpen,
-  ]);
+  const { isNextOpen, setIsNextOpen, isTimerOpen, setIsTimerOpen } =
+    useOpenState((state) => ({
+      isNextOpen: state.isNextOpen,
+      setIsNextOpen: state.setIsNextOpen,
+      isTimerOpen: state.isTimerOpen,
+      setIsTimerOpen: state.setIsTimerOpen,
+    }));
 
   return (
     <nav
@@ -36,11 +39,17 @@ export const Nav: FC<Props> = ({
           "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
         response === "sp" && !showNext && "justify-around",
 
-        response === "sp" &&
-          showNext &&
-          " justify-between px-2 before:h-7 before:w-7 before:content-['']"
+        response === "sp" && showNext && " justify-between px-2"
       )}
     >
+      {response === "sp" && (
+        <button
+          className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
+          onClick={() => setIsTimerOpen(!isTimerOpen)}
+        >
+          <ClockIcon />
+        </button>
+      )}
       <Text
         className={clsx(
           "inline-block cursor-pointer rounded-none text-base  font-bold text-indigo-500 transition-colors duration-300 ",

@@ -1,23 +1,24 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Text } from "src/components/Elements/Text";
-import { MenuForm } from "src/components/Form/Menu";
+import { TimeInput } from "src/components/Elements/TimeInput";
 import { useOpenState } from "src/features/episodes/store";
+import { ModeSwitch } from "src/features/timer/components/ModeSwitch";
 
-export const MenuModal = () => {
-  const [isMenuOpen, setIsMenuOpen] = useOpenState((state) => [
-    state.isMenuOpen,
-    state.setIsMenuOpen,
+export const SetTimerModal = () => {
+  const [isTimerOpen, setIsTimerOpen] = useOpenState((state) => [
+    state.isTimerOpen,
+    state.setIsTimerOpen,
   ]);
 
-  useEffect(() => () => setIsMenuOpen(false), [setIsMenuOpen]);
+  useEffect(() => () => setIsTimerOpen(false), [setIsTimerOpen]);
 
   return (
-    <Transition.Root as={Fragment} show={isMenuOpen}>
+    <Transition.Root as={Fragment} show={isTimerOpen}>
       <Dialog
         as="div"
         className="relative z-50 lg:hidden"
-        onClose={() => setIsMenuOpen(false)}
+        onClose={() => setIsTimerOpen(false)}
       >
         <Transition.Child
           as={Fragment}
@@ -44,12 +45,12 @@ export const MenuModal = () => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:w-full sm:max-w-md sm:p-6">
-                <section>
-                  <div className="mb-2 flex items-center justify-between">
-                    <Text size="sm">メニュー</Text>
-                  </div>
-                  <MenuForm />
-                </section>
+                <Text size="sm">タイマー</Text>
+                <Text className="mb-4 max-w-xs text-xs text-dimmed lg:mb-4 lg:mt-2">
+                  モードを変更すると経過時間から表示か残り時間から表示か変更できます。
+                </Text>
+                <TimeInput />
+                <ModeSwitch />
               </Dialog.Panel>
             </Transition.Child>
           </div>
