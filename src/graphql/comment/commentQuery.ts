@@ -170,11 +170,7 @@ export const MUTATE_EPISODE_COMMENT = gql`
         ip: $ip
       }
     ) {
-      id
-      content
-      reply_to
-      replied_to_commenter_name
-      episode_id
+      ...CommentFragment
     }
   }
 `;
@@ -198,11 +194,7 @@ export const MUTATE_WORK_COMMENT = gql`
         ip: $ip
       }
     ) {
-      id
-      content
-      reply_to
-      replied_to_commenter_name
-      work_id
+      ...CommentFragment
     }
   }
 `;
