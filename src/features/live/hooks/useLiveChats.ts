@@ -27,7 +27,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
   });
 
   const handleRefetch = async () => {
-    if (mode !== "down") return;
+    if (mode !== "down" && mode !== "notRegister") return;
 
     const prevData = queryClient.getQueryData<GetChatsQuery>([
       "GetChats",
