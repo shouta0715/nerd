@@ -1,9 +1,23 @@
 import { Time } from "src/features/timer/types";
 
-export const getInitialTime = (start_time: string): Time => {
-  if (start_time === null) return { hours: 0, minutes: 0, seconds: 0 };
+type Props = {
+  start_time: string | null;
+  end_time: string | null;
+};
+
+export const getInitialTime = ({ start_time, end_time }: Props): Time => {
+  if (start_time === null || end_time === null)
+    return { hours: 0, minutes: 0, seconds: 0 };
+
   const now = new Date();
   const start = new Date(start_time);
+  const end = new Date(end_time);
+
+  if (now.getTime() > end.getTime()) {
+    // 終了済みなら0を返す
+
+    return { hours: 0, minutes: 0, seconds: 0 };
+  }
 
   const diff = start.getTime() - now.getTime();
 

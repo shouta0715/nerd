@@ -11,9 +11,7 @@ type Props = {
   id: string;
 };
 export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
-  if (!id) {
-    return <Skeleton theme="timer" />;
-  }
+  if (!id) return <Skeleton theme="timer" />;
 
   return (
     <div className="flex space-x-4 md:space-x-6">
