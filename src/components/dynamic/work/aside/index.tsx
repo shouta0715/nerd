@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
+import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
+import { Timer } from "src/components/dynamic/common/timer";
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
-import { Menu } from "src/features/episodes/components/Menu";
+
 import { WorkMenu } from "src/features/works/components/WorkMenu";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 
@@ -29,6 +31,9 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />
+      </div>
+      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
+        <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <WorkMenu data={data} />

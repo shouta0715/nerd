@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import React, { FC } from "react";
+import { Menu } from "src/components/dynamic/common/menu";
 import { Header } from "src/components/dynamic/live/header";
 import { Nav } from "src/components/dynamic/live/nav";
 
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
-import { Menu } from "src/features/episodes/components/Menu";
+
 import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveTimer, Time } from "src/features/timer/types";
@@ -48,7 +49,7 @@ export const Aside: FC<Props> = ({
         <Nav isChat={isChat} mode={mode} response="lg" setIsChat={setIsChat} />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Menu live />
+        <Menu />
       </div>
 
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">

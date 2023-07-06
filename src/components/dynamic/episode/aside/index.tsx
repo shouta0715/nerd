@@ -1,10 +1,12 @@
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
+import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
+import { Timer } from "src/components/dynamic/common/timer";
 import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { CommentsFilter } from "src/features/comments/types";
-import { Menu } from "src/features/episodes/components/Menu";
+
 import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
@@ -32,7 +34,9 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />
       </div>
-
+      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
+        <Timer />
+      </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <NextMenu episode={data?.episodes_by_pk} />
       </div>
