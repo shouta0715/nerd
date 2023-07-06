@@ -15,9 +15,7 @@ import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 const clearTimerInterval = (
   intervalId: React.MutableRefObject<NodeJS.Timeout | null>
 ) => {
-  if (intervalId.current) {
-    clearInterval(intervalId.current);
-  }
+  if (intervalId.current) clearInterval(intervalId.current);
 };
 
 const countDown = ({ prevTime, setMode, intervalId }: CountDownProps): Time => {
@@ -56,11 +54,15 @@ const countUp = ({
     setMode("finish");
 
     clearTimerInterval(intervalId);
+    // 0を返す
 
-    return prevTime;
+    return {
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    };
   }
 
-  // 一秒ずつ増やしていく
   return {
     seconds: seconds === 59 ? 0 : seconds + 1,
     minutes: seconds === 59 ? minutes + 1 : minutes,
@@ -75,7 +77,13 @@ export const useLiveTimer = ({
   const [mode, setMode] = useState<LiveTimer["mode"]>(
     getIsStatus({ start_time, end_time })
   );
-  const [time, setTime] = useState<Time>(getInitialTime(start_time));
+  const [time, setTime] = useState<Time>(
+    getInitialTime({
+      start_time,
+      end_time,
+    })
+  );
+
   const intervalId = useRef<NodeJS.Timeout | null>(null);
 
   const isAlreadyFinished = useRef<boolean>(getIsAlreadyFinished(end_time));
@@ -87,9 +95,7 @@ export const useLiveTimer = ({
         setTime((prevTime) => countDown({ prevTime, setMode, intervalId }));
       }, 1000);
 
-      return () => {
-        clearTimerInterval(intervalId);
-      };
+      return () => clearTimerInterval(intervalId);
     }
 
     if (mode === "up")
@@ -104,9 +110,32 @@ export const useLiveTimer = ({
         );
       }, 1000);
 
-    return () => {
-      clearTimerInterval(intervalId);
+    return () => clearTimerInterval(intervalId);
+  }, [end_time, mode, start_time]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (
+        document.hidden ||
+        isAlreadyFinished.current ||
+        mode === "notRegister" ||
+        mode === "finish"
+      )
+        return;
+
+      const newMode = getIsStatus({ start_time, end_time });
+      const newTime = getInitialTime({ start_time, end_time });
+
+      if (mode !== newMode) setMode(newMode);
+
+      setTime(newTime);
     };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    // クリーンアップ関数
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [end_time, mode, start_time]);
 
   if (
