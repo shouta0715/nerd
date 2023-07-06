@@ -8,9 +8,16 @@ import { getIsFinished } from "src/features/timer/utils/getIsFinished";
 type Props = {
   episode: WorkEpisode;
   work_title?: string;
+  work_id?: number;
+  series_id?: string | null;
 };
 
-export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
+export const WorkEpisodeItem: FC<Props> = ({
+  episode,
+  work_title,
+  work_id,
+  series_id,
+}) => (
   <li className="flex h-full flex-col items-center p-2">
     <Link
       as={
@@ -25,7 +32,12 @@ export const WorkEpisodeItem: FC<Props> = ({ episode, work_title }) => (
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`,
         query: {
-          episode: genEpisodePlaceholder(episode, work_title),
+          episode: genEpisodePlaceholder({
+            episode,
+            title: work_title,
+            work_id,
+            series_id,
+          }),
         },
       }}
     >

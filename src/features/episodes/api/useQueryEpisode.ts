@@ -25,6 +25,8 @@ export const useQueryEpisode = (
           next_episode_id,
           start_time,
           end_time,
+          work_id,
+          series_id,
         ] = episode;
 
         return {
@@ -39,8 +41,8 @@ export const useQueryEpisode = (
             work: {
               series_title,
               title,
-              id: 0,
-              series_id: series_title,
+              id: work_id === "" ? 0 : +work_id,
+              series_id: series_id === "" ? null : series_id,
               has_episodes: true,
             },
           },
