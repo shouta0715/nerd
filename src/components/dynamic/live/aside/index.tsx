@@ -33,7 +33,7 @@ export const Aside: FC<Props> = ({
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
 
-      <div className=" rounded-2xl bg-white/60 pb-4  shadow-lg ring-1 ring-gray-900/5">
+      <div className="rounded-2xl bg-white/60 pb-4  shadow-lg ring-1 ring-gray-900/5">
         <Header
           id={data?.episodes_by_pk?.id}
           mode={mode}
