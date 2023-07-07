@@ -42,6 +42,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
           {isSubscription && "リアルタイムで更新されます"}
           {mode === "finish" && "終了しました"}
           {(mode === "down" || mode === "notRegister" || isWsError) &&
+            mode !== "finish" &&
             "右下のボタンを押すと、最新のコメントを読み込めます"}
         </p>
         {data?.map((chats) => (

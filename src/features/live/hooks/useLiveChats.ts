@@ -1,4 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 import { useQueryLiveChat } from "src/features/live/api/useQueryLiveChat";
 import { useSubscription } from "src/features/live/hooks/useSubscription";
@@ -20,11 +21,20 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
       time,
     });
   const queryClient = useQueryClient();
-  const { isSelfScroll } = useAutoScroll();
+  const { isSelfScroll, isBottom, prevScrollTop } = useAutoScroll();
   const { data, isLoading, refetch, isRefetching } = useQueryLiveChat({
     episode_id,
     enabled: mode !== "finish",
   });
+
+  useEffect(() => {
+    if (!isBottom.current) return;
+
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [data?.chats.length, isBottom, prevScrollTop]);
 
   const handleRefetch = async () => {
     if (mode !== "down" && mode !== "notRegister") return;
@@ -44,6 +54,8 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
     const newChats = refetchData.chats.filter(
       (chat) => !prevData.chats.some((prevChat) => prevChat.id === chat.id)
     );
+
+    // TODO 順番がおかしくなる。 refetchDataの秒数を見て、prevDataの最後よりも大きい場合は、最後に追加するようにする。小さい場合は一番近い秒数の次に追加するようにする。
 
     queryClient.setQueryData<GetChatsQuery>(["GetChats", { episode_id }], {
       chats: [...prevData.chats, ...newChats],
