@@ -7,7 +7,6 @@ import {
 } from "src/graphql/comment/commentQuery.generated";
 import { client } from "src/libs/graphqlClient";
 import { useUserState } from "src/store/user/userState";
-import { genRandomId } from "src/utils/genRandomId";
 
 type InfiniteCommentEpisode = {
   pageParam: [];
@@ -21,69 +20,14 @@ export const useMutateComment = (filter: CommentsFilter) => {
   const queryClient = useQueryClient();
   const insertEpisodeComment = useMutateEpisodeCommentMutation(client, {
     onMutate: async (variables) => {
-      const {
+      const { episode_id, reply_to } = variables;
+
+      if (reply_to) return { reply: true, episode_id };
+
+      return {
+        reply: false,
         episode_id,
-        replied_to_commenter_name,
-        reply_to,
-        content,
-        commenter_name,
-      } = variables;
-
-      const fakeId = genRandomId();
-      if (reply_to) {
-        return { fakeId, reply: true, episode_id };
-      }
-
-      const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
-        "comments",
-        { episode_id, filter },
-      ]);
-
-      if (prevData) {
-        // pagesの[0]の一番上に追加する
-        queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { episode_id, filter }],
-          {
-            pageParam: prevData.pageParam,
-            pages: prevData.pages.map((page, index) => {
-              if (index === 0) {
-                return {
-                  comments: [
-                    {
-                      id: fakeId,
-                      content,
-                      commenter_name,
-                      created_at: new Date().toString(),
-                      episode_id,
-                      replied_to_commenter_name,
-                      reply_to,
-                      reply_count: 0,
-                      user_id: user?.id ?? "",
-                      user: {
-                        id: user?.id ?? "",
-                        user_name: user?.user_name ?? "匿名",
-                        anonymous: user?.anonymous ?? false,
-                      },
-                      likes_aggregate: {
-                        aggregate: {
-                          count: 0,
-                        },
-                      },
-                    },
-                    ...page.comments,
-                  ],
-                };
-              }
-
-              return page;
-            }),
-          }
-        );
-
-        return { fakeId };
-      }
-
-      return { fakeId };
+      };
     },
     onSuccess: (data, variables, context) => {
       if (context?.reply) {
@@ -93,106 +37,46 @@ export const useMutateComment = (filter: CommentsFilter) => {
         queryClient.invalidateQueries({
           queryKey: ["comments", { episode_id: context.episode_id }],
         });
+
+        return;
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
         { episode_id: variables.episode_id, filter },
       ]);
 
-      if (prevData) {
-        // idを更新する
-        queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { episode_id: variables.episode_id, filter }],
-          {
-            pageParam: prevData.pageParam,
-            pages: prevData.pages.map((page, index) => {
-              if (index === 0) {
-                return {
-                  comments: page.comments.map((comment) => {
-                    if (comment.id === context?.fakeId) {
-                      return {
-                        ...comment,
-                        id: data.insert_comments_one?.id,
-                      };
-                    }
+      const { insert_comments_one } = data;
 
-                    return comment;
-                  }),
-                };
-              }
+      if (!prevData || !insert_comments_one || !user) return;
 
-              return page;
-            }),
-          }
-        );
-      }
+      queryClient.setQueryData<InfiniteCommentEpisode>(
+        ["comments", { episode_id: variables.episode_id, filter }],
+        {
+          pageParam: prevData.pageParam,
+          pages: prevData.pages.map((page, index) => {
+            if (!data.insert_comments_one) return page;
+            if (index === 0) {
+              return {
+                comments: [insert_comments_one, ...page.comments],
+              };
+            }
+
+            return page;
+          }),
+        }
+      );
     },
   });
   const insertWorkComment = useMutateWorkCommentMutation(client, {
     onMutate: async (variables) => {
-      const {
+      const { work_id, reply_to } = variables;
+
+      if (reply_to) return { reply: true, work_id };
+
+      return {
+        reply: false,
         work_id,
-        replied_to_commenter_name,
-        reply_to,
-        content,
-        commenter_name,
-      } = variables;
-
-      const fakeId = genRandomId();
-      if (reply_to) {
-        return { fakeId, reply: true, work_id };
-      }
-
-      const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
-        "comments",
-        { work_id, filter },
-      ]);
-
-      if (prevData) {
-        // pagesの[0]の一番上に追加する
-        queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { work_id, filter }],
-          {
-            pageParam: prevData.pageParam,
-            pages: prevData.pages.map((page, index) => {
-              if (index === 0) {
-                return {
-                  comments: [
-                    {
-                      id: fakeId,
-                      content,
-                      commenter_name,
-                      created_at: new Date().toString(),
-                      work_id,
-                      replied_to_commenter_name,
-                      reply_to,
-                      reply_count: 0,
-                      user_id: user?.id ?? "",
-                      user: {
-                        id: user?.id ?? "",
-                        user_name: user?.user_name ?? "匿名",
-                        anonymous: user?.anonymous ?? false,
-                      },
-                      likes_aggregate: {
-                        aggregate: {
-                          count: 0,
-                        },
-                      },
-                    },
-                    ...page.comments,
-                  ],
-                };
-              }
-
-              return page;
-            }),
-          }
-        );
-
-        return { fakeId };
-      }
-
-      return { fakeId };
+      };
     },
     onSuccess: (data, variables, context) => {
       if (context?.reply) {
@@ -202,39 +86,33 @@ export const useMutateComment = (filter: CommentsFilter) => {
         queryClient.invalidateQueries({
           queryKey: ["comments", { work_id: context.work_id }],
         });
+
+        return;
       }
       const prevData = queryClient.getQueryData<InfiniteCommentEpisode>([
         "comments",
         { work_id: variables.work_id, filter },
       ]);
 
-      if (prevData) {
-        // idを更新する
-        queryClient.setQueryData<InfiniteCommentEpisode>(
-          ["comments", { work_id: variables.work_id, filter }],
-          {
-            pageParam: prevData.pageParam,
-            pages: prevData.pages.map((page, index) => {
-              if (index === 0) {
-                return {
-                  comments: page.comments.map((comment) => {
-                    if (comment.id === context?.fakeId) {
-                      return {
-                        ...comment,
-                        id: data.insert_comments_one?.id,
-                      };
-                    }
+      if (!prevData || !user) return;
 
-                    return comment;
-                  }),
-                };
-              }
+      // idを更新する
+      queryClient.setQueryData<InfiniteCommentEpisode>(
+        ["comments", { work_id: variables.work_id, filter }],
+        {
+          pageParam: prevData.pageParam,
+          pages: prevData.pages.map((page, index) => {
+            if (!data.insert_comments_one) return page;
+            if (index === 0) {
+              return {
+                comments: [data.insert_comments_one, ...page.comments],
+              };
+            }
 
-              return page;
-            }),
-          }
-        );
-      }
+            return page;
+          }),
+        }
+      );
     },
   });
 

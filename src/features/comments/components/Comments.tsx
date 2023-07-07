@@ -76,7 +76,7 @@ export const Comments = forwardRef<any, Props>(
         <Text
           className={`${
             data?.pages[0].comments.length === 0
-              ? " flex w-full flex-1 items-center justify-center text-lg font-semibold"
+              ? "flex w-full flex-1 items-center justify-center text-gray-500"
               : "hidden"
           }`}
         >

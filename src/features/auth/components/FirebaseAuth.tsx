@@ -34,13 +34,17 @@ export const FirebaseAuth = () => {
     });
   }, [onNotification]);
 
-  const onError = useCallback(() => {
-    onNotification({
-      title: "接続中にエラーが発生しました。",
-      message: "手動で最新のコメントを読み込んでください。",
-      type: "error",
-    });
-  }, [onNotification]);
+  const onError = useCallback(
+    (error: unknown) => {
+      console.error(error);
+      onNotification({
+        title: "接続中にエラーが発生しました。",
+        message: "手動で最新のコメントを読み込んでください。",
+        type: "error",
+      });
+    },
+    [onNotification]
+  );
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {

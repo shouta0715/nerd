@@ -74,7 +74,7 @@ export type MutateEpisodeCommentMutationVariables = Types.Exact<{
 }>;
 
 
-export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, episode_id?: any | null } | null };
+export type MutateEpisodeCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, work_id?: number | null, user_id?: string | null, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user?: { __typename?: 'users', anonymous: boolean, id: string } | null, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } } | null };
 
 export type MutateWorkCommentMutationVariables = Types.Exact<{
   work_id: Types.Scalars['Int']['input'];
@@ -86,7 +86,7 @@ export type MutateWorkCommentMutationVariables = Types.Exact<{
 }>;
 
 
-export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', id: any, content: string, reply_to?: any | null, replied_to_commenter_name?: string | null, work_id?: number | null } | null };
+export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, work_id?: number | null, user_id?: string | null, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user?: { __typename?: 'users', anonymous: boolean, id: string } | null, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } } | null };
 
 export const CommentFragmentFragmentDoc = `
     fragment CommentFragment on comments {
@@ -261,14 +261,10 @@ export const MutateEpisodeCommentDocument = `
   insert_comments_one(
     object: {episode_id: $episode_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name, ip: $ip}
   ) {
-    id
-    content
-    reply_to
-    replied_to_commenter_name
-    episode_id
+    ...CommentFragment
   }
 }
-    `;
+    ${CommentFragmentFragmentDoc}`;
 export const useMutateEpisodeCommentMutation = <
       TError = unknown,
       TContext = unknown
@@ -288,14 +284,10 @@ export const MutateWorkCommentDocument = `
   insert_comments_one(
     object: {work_id: $work_id, content: $content, reply_to: $reply_to, replied_to_commenter_name: $replied_to_commenter_name, commenter_name: $commenter_name, ip: $ip}
   ) {
-    id
-    content
-    reply_to
-    replied_to_commenter_name
-    work_id
+    ...CommentFragment
   }
 }
-    `;
+    ${CommentFragmentFragmentDoc}`;
 export const useMutateWorkCommentMutation = <
       TError = unknown,
       TContext = unknown
