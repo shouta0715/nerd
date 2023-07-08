@@ -23,6 +23,12 @@ export const useMutateLiveChat = () => {
 
       if (!prevData) return;
 
+      const isDuplicated = prevData.chats.some(
+        (chat) => chat.id === data.insert_chats_one?.id
+      );
+
+      if (isDuplicated) return;
+
       const newChats = [...prevData.chats, data.insert_chats_one];
 
       queryClient.setQueryData<GetChatsQuery>(genQueryKey(episode_id), {
