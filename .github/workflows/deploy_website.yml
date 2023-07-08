@@ -37,7 +37,7 @@ jobs:
           echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.local
           echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.local
           echo "NEXT_PUBLIC_TOKEN_KEY=${{ secrets.NEXT_PUBLIC_TOKEN_KEY }}" >> .env.local
-          echo "NEXT_PUBLIC_ADMIN_SECRET=${{ secrets.ADMIN_SECRET }}" >> .env.local
+          echo "ADMIN_SECRET=${{ secrets.ADMIN_SECRET }}" >> .env.local
           echo "NEXT_PUBLIC_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}" >> .env.local
           echo "NEXT_PUBLIC_WS_ENDPOINT=${{ secrets.NEXT_PUBLIC_WS_ENDPOINT }}" >> .env.local
       - name: Recreate all posts
