@@ -7,7 +7,7 @@ export const getClient = () => {
     process.env.NEXT_PUBLIC_ENDPOINT as string,
     {
       headers: {
-        "x-hasura-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET as string,
+        "x-hasura-admin-secret": process.env.ADMIN_SECRET as string,
       },
     }
   );

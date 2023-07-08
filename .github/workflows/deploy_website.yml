@@ -37,16 +37,17 @@ jobs:
           echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.local
           echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.local
           echo "NEXT_PUBLIC_TOKEN_KEY=${{ secrets.NEXT_PUBLIC_TOKEN_KEY }}" >> .env.local
-          echo "NEXT_PUBLIC_ADMIN_SECRET=${{ secrets.NEXT_PUBLIC_ADMIN_SECRET }}" >> .env.local
+          echo "NEXT_PUBLIC_ADMIN_SECRET=${{ secrets.ADMIN_SECRET }}" >> .env.local
           echo "NEXT_PUBLIC_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}" >> .env.local
           echo "NEXT_PUBLIC_WS_ENDPOINT=${{ secrets.NEXT_PUBLIC_WS_ENDPOINT }}" >> .env.local
       - name: Recreate all posts
         shell: bash
-        run: yarn && yarn build &&  npm install -g firebase-tools && firebase experiments:enable webframeworks
-      - name: firebase Action
-        uses: FirebaseExtended/action-hosting-deploy@v0
+        run: yarn && yarn build
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@1
         with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NERD_381210 }}"
-          channelId: live
-          projectId: nerd-381210
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          projectName: nerd
+          directory: /.vercel/output/static
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
