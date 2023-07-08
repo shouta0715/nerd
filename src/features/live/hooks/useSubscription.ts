@@ -120,8 +120,12 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
         (chat) => !prevData.chats.some((prevChat) => prevChat.id === chat.id)
       );
 
+      const sortChats = [...prevData.chats, ...newChats].sort(
+        (a, b) => a.comment_time - b.comment_time
+      );
+
       queryClient.setQueryData<GetChatsQuery>(key, {
-        chats: [...prevData.chats, ...newChats],
+        chats: sortChats,
       });
 
       setPrevPageNation(newPageNation);

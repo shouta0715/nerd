@@ -19,12 +19,14 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   const { insetChat } = useMutateLiveChat();
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
+  const [ipLoading, setIpLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       if (!value.trim() || authLoading) return;
 
+      setIpLoading(true);
       const ip = await getIp();
       const object = {
         episode_id,
@@ -44,12 +46,14 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
         message: "再度お試しください",
       });
     }
+
+    setIpLoading(false);
   };
 
   return {
     value,
     setValue,
     onSubmitHandler,
-    isLoading: insetChat.isLoading,
+    isLoading: insetChat.isLoading || ipLoading,
   };
 };

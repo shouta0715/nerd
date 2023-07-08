@@ -40,3 +40,13 @@ export const useWsClientState = create<WsClientState>((set) => ({
   wsClient: null,
   setWsClient: (wsClient) => set({ wsClient }),
 }));
+
+type IpState = {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+};
+
+export const useIpState = create<IpState>((set) => ({
+  isLoading: false,
+  setIsLoading: (isLoading) => set({ isLoading }),
+}));
