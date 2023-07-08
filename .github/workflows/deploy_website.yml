@@ -23,31 +23,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18.x"
-      # 投稿内容を更新するために npm run build:posts を走らせる
-      - name: Create env file
-        run: |
-          touch .env.local
-          echo "NEXT_PUBLIC_ENDPOINT=${{ secrets.NEXT_PUBLIC_ENDPOINT }}" >> .env.local
-          echo "NEXT_PUBLIC_SHOBOI_ENDOPOINT=${{ secrets.NEXT_PUBLIC_SHOBOI_ENDOPOINT }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_API_KEY=${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_PROJECT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_MESSAGIN_SENDER_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MESSAGIN_SENDER_ID }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_APP_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}" >> .env.local
-          echo "NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID }}" >> .env.local
-          echo "NEXT_PUBLIC_TOKEN_KEY=${{ secrets.NEXT_PUBLIC_TOKEN_KEY }}" >> .env.local
-          echo "ADMIN_SECRET=${{ secrets.ADMIN_SECRET }}" >> .env.local
-          echo "NEXT_PUBLIC_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}" >> .env.local
-          echo "NEXT_PUBLIC_WS_ENDPOINT=${{ secrets.NEXT_PUBLIC_WS_ENDPOINT }}" >> .env.local
-      - name: Recreate all posts
-        shell: bash
-        run: yarn && yarn build
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@1
         with:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           projectName: nerd
-          directory: /.vercel/output/static
+          directory: /
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useState } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { useMutateChatEpisode } from "src/features/chats/api/useMutateChatEpisode";
 import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
@@ -15,11 +16,14 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   const { setValue, user, getTime, value } = useSubmitChat();
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
+  const [ipLoading, setIpLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       if (!value.trim() || authLoading) return;
+      setIpLoading(true);
+
       const ip = await getIp();
 
       const object = {
@@ -40,11 +44,12 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
         message: "再度お試しください",
       });
     }
+    setIpLoading(false);
   };
 
   return {
     onSubmitHandler,
-    isLoading: insertChat.isLoading,
+    isLoading: insertChat.isLoading || ipLoading,
     value,
     setValue,
   };
