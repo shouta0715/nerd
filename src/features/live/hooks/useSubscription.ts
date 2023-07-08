@@ -64,7 +64,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
               !prevData.chats.some((prevChat) => prevChat.id === chat.id)
           );
 
-          if (!newChats) return;
+          if (!newChats || newChats.length === 0) return;
 
           queryClient.setQueryData<GetChatsQuery>(key, {
             chats: [...prevData.chats, ...newChats],

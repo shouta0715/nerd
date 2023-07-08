@@ -13,3 +13,4 @@ coverage
 storybook-static
 .firebase
 functions
+.vercel

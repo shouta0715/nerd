@@ -23,5 +23,5 @@
     "codegen.js",
     "jest.config.ts"
   ],
-  "exclude": ["node_modules", "functions"]
+  "exclude": ["node_modules"]
 }
