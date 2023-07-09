@@ -88,13 +88,17 @@ export const FirebaseAuth = () => {
           await handleSetCustomClaims({
             id: user.uid,
             isAnonymous: user.isAnonymous,
+            token: idTokenResult.token,
           });
 
           const newestToken = await auth.currentUser?.getIdToken(true);
 
+          if (!newestToken) throw new UnauthorizedError();
+
           const userData = await createMutateAsync({
             id: user.uid,
             isAnonymous: user.isAnonymous,
+            token: newestToken,
           });
 
           const { insert_users_one } = userData.data;

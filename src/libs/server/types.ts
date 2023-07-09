@@ -11,6 +11,7 @@ export type CreateUserMutation = {
 export const createUserSchema = z.object({
   id: z.string(),
   isAnonymous: z.boolean(),
+  token: z.string(),
 });
 
 export type CreateUserSchema = z.infer<typeof createUserSchema>;
@@ -18,6 +19,7 @@ export type CreateUserSchema = z.infer<typeof createUserSchema>;
 export const createClaimsSchema = z.object({
   id: z.string(),
   isAnonymous: z.boolean(),
+  token: z.string(),
 });
 
 export type CreateClaimsSchema = z.infer<typeof createClaimsSchema>;

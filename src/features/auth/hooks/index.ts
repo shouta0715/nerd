@@ -14,8 +14,12 @@ export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${body.token}`,
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify({
+      id: body.id,
+      isAnonymous: body.isAnonymous,
+    }),
   });
 
   if (!res.ok) {
@@ -30,11 +34,13 @@ export const handleSetCustomClaims = async (body: CreateClaimsSchema) => {
 export const createUserHandler = async ({
   id,
   isAnonymous,
+  token,
 }: CreateUserSchema): Promise<ReturnCreateUser> => {
   const res = await fetch(`${API_URL}/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ id, isAnonymous }),
   });
