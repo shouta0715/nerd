@@ -47,7 +47,7 @@ jobs:
         run: yarn install
 
       - name: Build
-        run: yarn build
+        run: npx @cloudflare/next-on-pages
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@1
@@ -55,6 +55,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           projectName: nerd
-          directory: .next
+          directory: .vercel/output/static
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: main
