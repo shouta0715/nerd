@@ -17,8 +17,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # nextjs auto deploy
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
+      - name: Install dependencies
+        run: yarn install
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@1
@@ -26,5 +35,6 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           projectName: nerd
-          directory: /
+          directory: /.vercel/output/static
+          branch: main
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
