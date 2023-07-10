@@ -29,12 +29,26 @@ const countDown = ({ prevTime, setMode, intervalId }: CountDownProps): Time => {
     return prevTime;
   }
 
-  // 一秒ずつ減らしていく
+  if (seconds === 0 && minutes !== 0) {
+    return {
+      seconds: 59,
+      minutes: minutes - 1,
+      hours,
+    };
+  }
+
+  if (seconds === 0 && minutes === 0) {
+    return {
+      seconds: 59,
+      minutes: 59,
+      hours: hours - 1,
+    };
+  }
+
   return {
-    seconds: seconds === 0 ? 59 : seconds - 1,
-    minutes: seconds === 0 ? (minutes - 1 > 0 ? minutes - 1 : 59) : minutes,
-    hours:
-      seconds === 0 && minutes === 0 ? (hours - 1 > 0 ? hours - 1 : 0) : hours,
+    seconds: seconds - 1,
+    minutes,
+    hours,
   };
 };
 
