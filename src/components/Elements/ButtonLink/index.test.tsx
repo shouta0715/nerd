@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
@@ -14,7 +14,9 @@ describe("ButtonLinkのtest", () => {
       wrapper: MemoryRouterProvider,
     });
     const router = screen.getByRole("link");
-    await user.click(router);
+    await act(async () => {
+      await user.click(router);
+    });
     expect(mockRouter.asPath).toBe(href);
   });
 });

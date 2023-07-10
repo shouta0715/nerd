@@ -19,7 +19,9 @@ const setup = (
 ) => {
   const { result } = renderHook(() => useGlobalState);
 
-  result.current.setState({ authLoading });
+  act(() => {
+    result.current.setState({ authLoading });
+  });
 
   const onSubmitHandler = props.onSubmitHandler || jest.fn();
   const onChangeHandler = props.onChange || jest.fn();
@@ -46,11 +48,6 @@ const setup = (
 };
 
 describe("TalkForm", () => {
-  test("should render", () => {
-    const { container } = setup({});
-    expect(container).toBeInTheDocument();
-  });
-
   test("isLoadingとauthLoadingがfalseなら、onChangeHandlerが呼ばれる。", async () => {
     const { getByRole, onChangeHandler } = setup({});
     const textarea = getByRole("textbox");
