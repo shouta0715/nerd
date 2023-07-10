@@ -14,12 +14,18 @@ type Props = {
 };
 
 export const useLiveChats = ({ episode_id, mode, time }: Props) => {
-  const { isWsError, wsErrorRefetch, isLoadingWsRefetch, isSubscription } =
-    useSubscription({
-      episode_id,
-      mode,
-      time,
-    });
+  const {
+    isWsError,
+    wsErrorRefetch,
+    isLoadingWsRefetch,
+    isSubscription,
+    handleReconnect,
+    canTryReconnect,
+  } = useSubscription({
+    episode_id,
+    mode,
+    time,
+  });
   const queryClient = useQueryClient();
   const { isSelfScroll, isBottom, prevScrollTop } = useAutoScroll();
   const { data, isLoading, refetch, isRefetching } = useQueryLiveChat({
@@ -72,5 +78,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
     isWsError,
     isLoadingWsRefetch,
     isSubscription,
+    handleReconnect,
+    canTryReconnect,
   };
 };

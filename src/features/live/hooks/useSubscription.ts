@@ -11,7 +11,9 @@ import {
   SubscriptionChatsSubscription,
   useGetChatsEpisodeQuery,
 } from "src/graphql/chat/chatQuery.generated";
+
 import { client as gqlClient } from "src/libs/graphqlClient";
+import { getWsClient } from "src/libs/wsClient";
 
 import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
 
@@ -35,7 +37,11 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
   const [isLoadingWsRefetch, setIsLoadingWsRefetch] = useState(false);
-  const wsClient = useWsClientState((state) => state.wsClient);
+  const [wsClient, setWsClient] = useWsClientState((state) => [
+    state.wsClient,
+    state.setWsClient,
+  ]);
+  const [isReconnected, setIsReconnected] = useState(false);
 
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
@@ -140,10 +146,46 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     }
   };
 
+  const handleReconnect = async () => {
+    if (!episode_id || authLoading || isReconnected || !isWsError) return;
+
+    const { auth } = await import("src/libs/firebase");
+
+    const token = await auth.currentUser?.getIdToken();
+
+    if (!token) return;
+
+    const newClient = getWsClient({
+      token,
+      onConnected: () => {
+        onNotification({
+          title: "リアルタイム接続に成功しました",
+          message: "自動で最新のコメントを読み込みます",
+          type: "success",
+        });
+        setIsWsError(false);
+      },
+
+      onError: () => {
+        onNotification({
+          title: "リアルタイム接続に失敗しました",
+          message: "右下のボタンを押すと、最新のコメントを読み込めます",
+          type: "error",
+        });
+        setIsWsError(true);
+      },
+    });
+
+    setWsClient(newClient);
+    setIsReconnected(true);
+  };
+
   return {
     isWsError,
     wsErrorRefetch,
     isLoadingWsRefetch,
     isSubscription: !isWsError && mode === "up",
+    handleReconnect,
+    canTryReconnect: !isReconnected && isWsError,
   };
 };
