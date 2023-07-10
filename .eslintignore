@@ -13,3 +13,5 @@ __reports__
 coverage
 storybook-static
 .firebase
+*.test.*
+*.spec.*

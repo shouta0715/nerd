@@ -1,6 +1,6 @@
 export type LiveTimerProps = {
-  start_time: string;
-  end_time: string;
+  start_time: string | null;
+  end_time: string | null;
 };
 
 export type PadTime = {

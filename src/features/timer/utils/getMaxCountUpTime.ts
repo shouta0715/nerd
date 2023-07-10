@@ -4,6 +4,8 @@ export const getMaxCountUpTime = ({
   end_time,
   start_time,
 }: LiveTimerProps): Time => {
+  if (!end_time || !start_time) return { hours: 0, minutes: 0, seconds: 0 };
+
   const start = new Date(start_time);
   const end = new Date(end_time);
 
