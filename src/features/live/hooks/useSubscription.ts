@@ -32,7 +32,7 @@ const getKey = (episode_id: string) => ["GetChats", { episode_id }];
 
 export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const onNotification = useNotificationState((state) => state.onShow);
-  const [isWsError, setIsWsError] = useState(false);
+  const [isWsError, setIsWsError] = useState(true);
   const authLoading = useGlobalState((state) => state.authLoading);
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
@@ -163,7 +163,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           message: "自動で最新のコメントを読み込みます",
           type: "success",
         });
-        setIsWsError(false);
       },
 
       onError: () => {
@@ -177,6 +176,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     });
 
     setWsClient(newClient);
+    setIsWsError(false);
     setIsReconnected(true);
   };
 
@@ -186,6 +186,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     isLoadingWsRefetch,
     isSubscription: !isWsError && mode === "up",
     handleReconnect,
-    canTryReconnect: !isReconnected && isWsError,
+    canTryReconnect: !isReconnected && isWsError && mode === "up",
   };
 };
