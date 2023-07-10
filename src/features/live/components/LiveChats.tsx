@@ -1,6 +1,7 @@
 import { ArrowPathIcon, ArrowSmallDownIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import React, { FC } from "react";
+import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/components/Chat";
 import { useLiveChats } from "src/features/live/hooks/useLiveChats";
@@ -24,6 +25,8 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
     isLoadingWsRefetch,
     isWsError,
     isSubscription,
+    canTryReconnect,
+    handleReconnect,
   } = useLiveChats({
     episode_id,
     mode,
@@ -64,10 +67,23 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
         >
           <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
         </button>
+        {canTryReconnect && (
+          <Button
+            className="border-none shadow-md shadow-red-400"
+            onClick={handleReconnect}
+            size="sm"
+            theme="danger"
+          >
+            再接続
+          </Button>
+        )}
         <div
           className={clsx(
-            "grid h-10 w-10 place-items-center  rounded-full bg-red-600 shadow-md shadow-red-400 transition-transform active:translate-y-1 lg:right-14",
-            isSubscription || mode === "finish" ? "hidden" : "block"
+            "grid h-10 w-10 place-items-center  rounded-full  shadow-md  transition-transform active:translate-y-1 lg:right-14",
+            isSubscription || mode === "finish" ? "hidden" : "block",
+            canTryReconnect
+              ? "bg-indigo-600 shadow-indigo-400"
+              : "bg-red-600 shadow-red-400"
           )}
         >
           {isRefetching || isLoadingWsRefetch ? (
