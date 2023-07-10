@@ -32,7 +32,7 @@ const getKey = (episode_id: string) => ["GetChats", { episode_id }];
 
 export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const onNotification = useNotificationState((state) => state.onShow);
-  const [isWsError, setIsWsError] = useState(true);
+  const [isWsError, setIsWsError] = useState(false);
   const authLoading = useGlobalState((state) => state.authLoading);
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
