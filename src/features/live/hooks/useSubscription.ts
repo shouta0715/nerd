@@ -171,7 +171,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           message: "右下のボタンを押すと、最新のコメントを読み込めます",
           type: "error",
         });
-        setIsWsError(true);
       },
     });
 
