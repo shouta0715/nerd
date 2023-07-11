@@ -12,7 +12,7 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
   const wsClient = createClient({
     url,
     retryAttempts: 6,
-    keepAlive: 240000 + Math.random() * 45000,
+    keepAlive: 180000 + Math.random() * 45000,
     connectionParams: () => {
       return {
         headers: {
@@ -20,15 +20,9 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
         },
       };
     },
-
     on: {
       connected: onConnected,
       error: onError,
-      message: (message) => console.log("message", message),
-      connecting: () => console.log("connecting"),
-      ping: (ping, pay) => console.log("ping", ping, pay),
-      pong: (pong, pay) => console.log("pong", pong, pay),
-      closed: (event) => console.log("closed", event),
     },
   });
 
