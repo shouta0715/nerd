@@ -23,6 +23,11 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
     on: {
       connected: onConnected,
       error: onError,
+      message: (message) => console.log("message", message),
+      connecting: () => console.log("connecting"),
+      ping: () => console.log("ping"),
+      pong: (pong, pay) => console.log("pong", pong, pay),
+      closed: (event) => console.log("closed", event),
     },
   });
 
