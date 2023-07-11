@@ -33,12 +33,16 @@ export const useCountDownModal = create<CountDownModal>((set) => ({
 
 export type WsClientState = {
   wsClient: Client | null;
+  isWsError: boolean;
   setWsClient: (wsClient: Client | null) => void;
+  setIsWsError: (isWsError: boolean) => void;
 };
 
 export const useWsClientState = create<WsClientState>((set) => ({
   wsClient: null,
+  isWsError: false,
   setWsClient: (wsClient) => set({ wsClient }),
+  setIsWsError: (isWsError) => set({ isWsError }),
 }));
 
 type IpState = {

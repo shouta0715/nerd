@@ -21,30 +21,31 @@ export const FirebaseAuth = () => {
   const setUser = useUserState((state) => state.setUser);
   const queryClient = useQueryClient();
   const setAuthLoading = useGlobalState((state) => state.setAuthLoading);
-  const setWsClient = useWsClientState((state) => state.setWsClient);
+  const [setWsClient, setIsWsError] = useWsClientState((state) => [
+    state.setWsClient,
+    state.setIsWsError,
+  ]);
 
   const [_, setAuthError] = useState<null>(null);
   const onNotification = useNotificationState((state) => state.onShow);
   const { createMutateAsync } = useUser();
 
   const onConnected = useCallback(() => {
+    setIsWsError(false);
     onNotification({
       title: "リアルタイムでコメントが更新されます。",
       type: "success",
     });
-  }, [onNotification]);
+  }, [onNotification, setIsWsError]);
 
-  const onError = useCallback(
-    (error: unknown) => {
-      console.error(error);
-      onNotification({
-        title: "接続中にエラーが発生しました。",
-        message: "手動で最新のコメントを読み込んでください。",
-        type: "error",
-      });
-    },
-    [onNotification]
-  );
+  const onError = useCallback(() => {
+    setIsWsError(true);
+    onNotification({
+      title: "接続中にエラーが発生しました。",
+      message: "手動で最新のコメントを読み込んでください。",
+      type: "error",
+    });
+  }, [onNotification, setIsWsError]);
 
   useEffect(() => {
     const unSubUser = auth.onAuthStateChanged(async (user) => {
