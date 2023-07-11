@@ -22,7 +22,7 @@ export const TodayEpisodeList: FC<Props> = ({ data }) => {
   const { deferredFilterEpisodes } = useTodayEpisodes({ data });
 
   return deferredFilterEpisodes.length > 0 ? (
-    <ul className="peer grid grid-cols-1 flex-row flex-wrap gap-12  md:grid-cols-[repeat(auto-fill,_minmax(400px,1fr))] ">
+    <ul className="peer grid grid-cols-1 flex-row flex-wrap gap-12  md:grid-cols-[repeat(auto-fill,_minmax(390px,1fr))] ">
       {deferredFilterEpisodes?.map((episode) => (
         <DynamicTodayEpisodeItem key={episode.id} episode={episode} />
       ))}

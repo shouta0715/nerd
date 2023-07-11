@@ -41,7 +41,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     state.wsClient,
     state.setWsClient,
   ]);
-  const [isReconnected, setIsReconnected] = useState(false);
+  const [reConnectionCount, setReConnectionCount] = useState(0);
 
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
@@ -147,7 +147,8 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   };
 
   const handleReconnect = async () => {
-    if (!episode_id || authLoading || isReconnected || !isWsError) return;
+    if (!episode_id || authLoading || reConnectionCount > 7 || !isWsError)
+      return;
 
     const { auth } = await import("src/libs/firebase");
 
@@ -164,20 +165,18 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           type: "success",
         });
       },
-
       onError: () => {
         onNotification({
           title: "リアルタイム接続に失敗しました",
           message: "右下のボタンを押すと、最新のコメントを読み込めます",
           type: "error",
         });
-        setIsWsError(true);
       },
     });
 
     setWsClient(newClient);
     setIsWsError(false);
-    setIsReconnected(true);
+    setReConnectionCount((prev) => prev + 1);
   };
 
   return {
@@ -186,6 +185,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     isLoadingWsRefetch,
     isSubscription: !isWsError && mode === "up",
     handleReconnect,
-    canTryReconnect: !isReconnected && isWsError && mode === "up",
+    canTryReconnect: !(reConnectionCount > 7) && isWsError && mode === "up",
   };
 };
