@@ -32,15 +32,12 @@ const getKey = (episode_id: string) => ["GetChats", { episode_id }];
 
 export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const onNotification = useNotificationState((state) => state.onShow);
-  const [isWsError, setIsWsError] = useState(false);
+
   const authLoading = useGlobalState((state) => state.authLoading);
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
   const [isLoadingWsRefetch, setIsLoadingWsRefetch] = useState(false);
-  const [wsClient, setWsClient] = useWsClientState((state) => [
-    state.wsClient,
-    state.setWsClient,
-  ]);
+  const { wsClient, setWsClient, isWsError, setIsWsError } = useWsClientState();
   const [reConnectionCount, setReConnectionCount] = useState(0);
 
   useEffect(() => {
@@ -83,7 +80,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
             message: "右下のボタンを押すと、最新のコメントを読み込めます",
             type: "error",
           });
-          setIsWsError(true);
         },
         complete: () => console.log("complete"),
       }
@@ -91,13 +87,13 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     return () => wsClient.dispose();
   }, [
-    authLoading,
-    episode_id,
-    isWsError,
-    mode,
-    onNotification,
-    queryClient,
     wsClient,
+    episode_id,
+    authLoading,
+    mode,
+    isWsError,
+    queryClient,
+    onNotification,
   ]);
 
   const wsErrorRefetch = async () => {

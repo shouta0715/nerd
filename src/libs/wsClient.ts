@@ -12,7 +12,6 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
   const wsClient = createClient({
     url,
     retryAttempts: 6,
-
     keepAlive: 30 * 1000,
     connectionParams: () => {
       return {
