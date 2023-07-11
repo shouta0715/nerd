@@ -114,6 +114,10 @@ export const Terms = () => {
         の提供条件及び本サービスの運営者 (以下「運営者」と言います。)
         と登録ユーザの皆様との間の権利義務関係が定められています。本サービスの利用に際しては、本規約の全文をお読みいただいたうえで、本規約に同意いただく必要があります。
       </p>
+      <p className="mb-4 text-base leading-6 text-red-600">
+        本サービスは現在、予告なくアカウントの消去を行う場合があります。
+        また、本サービスは予告なくサービスの提供を停止する場合があります。
+      </p>
       <ol className="flex flex-col gap-6  rounded-2xl border border-solid border-slate-200 bg-white/70 p-6 shadow-lg ring-1 ring-gray-900/5">
         {TermDescriptions.map((item, index) => (
           <li key={item.key}>

@@ -104,6 +104,10 @@ export const Notification = () => {
                             利用規約
                           </Link>
                           をご確認ください。
+                          <br />
+                          <span className="text-red-600">
+                            現在、ベータ版のため予告なくアカウントの消去を行う場合があります。
+                          </span>
                         </p>
                       )}
                     </div>
