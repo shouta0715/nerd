@@ -47,6 +47,8 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     const initial_created_at = new Date().toISOString();
 
+    wsClient.on("pong", (pong, pay) => console.log("pong", pong, pay));
+
     wsClient.subscribe<SubscriptionChatsSubscription>(
       {
         query: SUBSCRIPTION_CHATS,
@@ -85,7 +87,10 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       }
     );
 
-    return () => wsClient.dispose();
+    return () => {
+      if (isWsError) setIsWsError(false);
+      wsClient.dispose();
+    };
   }, [
     wsClient,
     episode_id,
@@ -94,6 +99,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     isWsError,
     queryClient,
     onNotification,
+    setIsWsError,
   ]);
 
   const wsErrorRefetch = async () => {
