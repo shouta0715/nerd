@@ -16,9 +16,9 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
     shouldRetry: (error) => {
       if (!(error instanceof CloseEvent)) return false;
 
-      if (error.code === 1000) return false;
-
       if (error.code === 1006) return true;
+
+      if (error.code === 1000) return false;
 
       return false;
     },
@@ -32,6 +32,7 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
     on: {
       connected: onConnected,
       error: onError,
+      closed: () => console.log("websocket closed"),
     },
   });
 
