@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
@@ -46,12 +46,14 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       state.setIsWsError,
     ]);
   const [reConnectionCount, setReConnectionCount] = useState(0);
+  const errorInterval = useRef<NodeJS.Timeout | null>(null);
 
   const handleAutoReconnect = useCallback(async () => {
     const token = await getToken();
 
     if (!token) return;
 
+    console.log("reconnect websocket");
     const newClient = getWsClient({
       token,
       onConnected: () => {
@@ -61,14 +63,18 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           message: "自動で最新のコメントを読み込みます",
           type: "success",
         });
+        if (errorInterval.current) clearInterval(errorInterval.current);
       },
       onError: () => {
-        setIsSocketError(true);
-        onNotification({
-          title: "リアルタイム接続に失敗しました",
-          message: "右下のボタンを押すと、最新のコメントを読み込めます",
-          type: "error",
-        });
+        if (errorInterval.current) clearInterval(errorInterval.current);
+        errorInterval.current = setInterval(() => {
+          onNotification({
+            title: "リアルタイム接続に失敗しました",
+            message: "右下のボタンを押すと、最新のコメントを読み込めます",
+            type: "error",
+          });
+          setIsSocketError(true);
+        }, 10000);
       },
     });
 
@@ -121,19 +127,29 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           });
         },
         error: () => {
-          if (isWsError) return;
-          onNotification({
-            title: "リアルタイム接続に失敗しました",
-            message: "右下のボタンを押すと、最新のコメントを読み込めます",
-            type: "error",
-          });
-          setIsWsError(true);
+          if (errorInterval.current) clearInterval(errorInterval.current);
+          errorInterval.current = setInterval(() => {
+            if (isWsError) return;
+            onNotification({
+              title: "リアルタイム接続に失敗しました",
+              message: "右下のボタンを押すと、最新のコメントを読み込めます",
+              type: "error",
+            });
+            setIsWsError(true);
+          }, 10000);
         },
         complete: () => console.log("complete"),
       }
     );
 
-    return () => wsClient.dispose();
+    return () => {
+      wsClient.dispose();
+
+      if (errorInterval.current) {
+        clearInterval(errorInterval.current);
+        errorInterval.current = null;
+      }
+    };
   }, [
     authLoading,
     episode_id,
