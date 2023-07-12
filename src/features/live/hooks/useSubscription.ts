@@ -86,7 +86,15 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
 
-    if (mode !== "up") return () => wsClient.dispose();
+    if (mode !== "up")
+      return () => {
+        wsClient.dispose();
+
+        if (errorInterval.current) {
+          clearInterval(errorInterval.current);
+          errorInterval.current = null;
+        }
+      };
 
     if (isWsError || reConnectionCount > 7) return () => {};
 
