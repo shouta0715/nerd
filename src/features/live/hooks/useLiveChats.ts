@@ -21,6 +21,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
     isSubscription,
     handleReconnect,
     canTryReconnect,
+    isSocketError,
   } = useSubscription({
     episode_id,
     mode,
@@ -80,5 +81,6 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
     isSubscription,
     handleReconnect,
     canTryReconnect,
+    isSocketError,
   };
 };

@@ -32,7 +32,6 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
     on: {
       connected: onConnected,
       error: onError,
-      closed: () => console.log("websocket closed"),
     },
   });
 
