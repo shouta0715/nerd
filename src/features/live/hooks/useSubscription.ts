@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Elements/Notification/store";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
@@ -16,6 +16,7 @@ import { client as gqlClient } from "src/libs/graphqlClient";
 import { getWsClient } from "src/libs/wsClient";
 
 import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
+import { getToken } from "src/utils/getToken";
 
 type Props = {
   episode_id: string;
@@ -37,19 +38,60 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
   const [isLoadingWsRefetch, setIsLoadingWsRefetch] = useState(false);
-  const [wsClient, setWsClient, isSocketError] = useWsClientState((state) => [
-    state.wsClient,
-    state.setWsClient,
-    state.isWsError,
-  ]);
+  const [wsClient, setWsClient, isSocketError, setIsSocketError] =
+    useWsClientState((state) => [
+      state.wsClient,
+      state.setWsClient,
+      state.isWsError,
+      state.setIsWsError,
+    ]);
   const [reConnectionCount, setReConnectionCount] = useState(0);
+
+  const handleAutoReconnect = useCallback(async () => {
+    const token = await getToken();
+
+    if (!token) return;
+
+    const newClient = getWsClient({
+      token,
+      onConnected: () => {
+        setIsSocketError(false);
+        onNotification({
+          title: "リアルタイム接続に成功しました",
+          message: "自動で最新のコメントを読み込みます",
+          type: "success",
+        });
+      },
+      onError: () => {
+        setIsSocketError(true);
+        onNotification({
+          title: "リアルタイム接続に失敗しました",
+          message: "右下のボタンを押すと、最新のコメントを読み込めます",
+          type: "error",
+        });
+      },
+    });
+
+    setWsClient(newClient);
+    setIsWsError(false);
+    setReConnectionCount((prev) => prev + 1);
+  }, [onNotification, setIsSocketError, setWsClient]);
 
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
 
-    if (mode !== "up" || isWsError) return () => wsClient.dispose();
+    if (mode !== "up" || isWsError || reConnectionCount > 7)
+      return () => wsClient.dispose();
 
     const initial_created_at = new Date().toISOString();
+
+    // wsClient.on("closed", (event: unknown) => {
+    //   if (!(event instanceof CloseEvent)) return;
+
+    //   if (event.code === 1000) return;
+
+    //   if (event.code === 1006) handleAutoReconnect();
+    // });
 
     wsClient.subscribe<SubscriptionChatsSubscription>(
       {
@@ -94,15 +136,17 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   }, [
     authLoading,
     episode_id,
+    handleAutoReconnect,
     isWsError,
     mode,
     onNotification,
     queryClient,
+    reConnectionCount,
     wsClient,
   ]);
 
   const wsErrorRefetch = async () => {
-    if (!isWsError || mode !== "up") return;
+    if ((!isWsError && !isSocketError) || mode !== "up") return;
 
     const key = getKey(episode_id);
     const number = timeToSecond(time);
@@ -136,7 +180,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       });
 
       setPrevPageNation(newPageNation);
-    } catch (error) {
+    } catch (_) {
       onNotification({
         title: "データ取得に失敗しました。",
         message: "通信環境の良いところで再度お試しください。",
@@ -148,43 +192,22 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   };
 
   const handleReconnect = async () => {
-    if (!episode_id || authLoading || reConnectionCount > 7 || !isWsError)
+    if (
+      !episode_id ||
+      authLoading ||
+      reConnectionCount > 7 ||
+      (!isWsError && !isSocketError)
+    )
       return;
 
-    const { auth } = await import("src/libs/firebase");
-
-    const token = await auth.currentUser?.getIdToken();
-
-    if (!token) return;
-
-    const newClient = getWsClient({
-      token,
-      onConnected: () => {
-        onNotification({
-          title: "リアルタイム接続に成功しました",
-          message: "自動で最新のコメントを読み込みます",
-          type: "success",
-        });
-      },
-      onError: () => {
-        onNotification({
-          title: "リアルタイム接続に失敗しました",
-          message: "右下のボタンを押すと、最新のコメントを読み込めます",
-          type: "error",
-        });
-      },
-    });
-
-    setWsClient(newClient);
-    setIsWsError(false);
-    setReConnectionCount((prev) => prev + 1);
+    handleAutoReconnect();
   };
 
   return {
     isWsError,
     wsErrorRefetch,
     isLoadingWsRefetch,
-    isSubscription: !isWsError && mode === "up",
+    isSubscription: mode === "up" && !isWsError && !isSocketError,
     handleReconnect,
     canTryReconnect:
       !(reConnectionCount > 7) && mode === "up" && (isWsError || isSocketError),
