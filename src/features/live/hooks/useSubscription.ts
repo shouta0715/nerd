@@ -87,7 +87,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     const initial_created_at = new Date().toISOString();
 
     wsClient.on("closed", (event: unknown) => {
-      if (!(event instanceof CloseEvent)) return;
+      if (!(event instanceof CloseEvent) || mode !== "up") return;
 
       if (event.code === 1000) return;
 
