@@ -95,7 +95,11 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     wsClient.on("closed", (event: unknown) => {
       if (!(event instanceof CloseEvent) || mode !== "up") return;
 
-      if (event.code === 1000) return;
+      if (event.code === 1000) {
+        if (errorInterval.current) clearInterval(errorInterval.current);
+
+        return;
+      }
 
       if (event.code === 1006) handleAutoReconnect();
     });
