@@ -52,6 +52,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     if (!token) return;
 
+    console.log("reconnect");
     const newClient = getWsClient({
       token,
       onConnected: () => {
@@ -85,13 +86,13 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     const initial_created_at = new Date().toISOString();
 
-    // wsClient.on("closed", (event: unknown) => {
-    //   if (!(event instanceof CloseEvent)) return;
+    wsClient.on("closed", (event: unknown) => {
+      if (!(event instanceof CloseEvent)) return;
 
-    //   if (event.code === 1000) return;
+      if (event.code === 1000) return;
 
-    //   if (event.code === 1006) handleAutoReconnect();
-    // });
+      if (event.code === 1006) handleAutoReconnect();
+    });
 
     wsClient.subscribe<SubscriptionChatsSubscription>(
       {
