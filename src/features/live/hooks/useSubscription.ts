@@ -86,7 +86,15 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
 
-    if (mode !== "up") return () => wsClient.dispose();
+    if (mode !== "up")
+      return () => {
+        wsClient.dispose();
+
+        if (errorInterval.current) {
+          clearInterval(errorInterval.current);
+          errorInterval.current = null;
+        }
+      };
 
     if (isWsError || reConnectionCount > 7) return () => {};
 
@@ -95,7 +103,11 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     wsClient.on("closed", (event: unknown) => {
       if (!(event instanceof CloseEvent) || mode !== "up") return;
 
-      if (event.code === 1000) return;
+      if (event.code === 1000) {
+        if (errorInterval.current) clearInterval(errorInterval.current);
+
+        return;
+      }
 
       if (event.code === 1006) handleAutoReconnect();
     });
