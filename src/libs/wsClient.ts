@@ -12,7 +12,16 @@ export const getWsClient = ({ token, onConnected, onError }: Props) => {
   const wsClient = createClient({
     url,
     retryAttempts: 6,
-    keepAlive: 180000 + Math.random() * 45000,
+    keepAlive: 210000 + Math.random() * 45000,
+    shouldRetry: (error) => {
+      if (!(error instanceof CloseEvent)) return false;
+
+      if (error.code === 1000) return false;
+
+      if (error.code === 1006) return true;
+
+      return false;
+    },
     connectionParams: () => {
       return {
         headers: {
