@@ -52,13 +52,12 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     if (!token) return;
 
-    console.log("reconnect");
     const newClient = getWsClient({
       token,
       onConnected: () => {
         setIsSocketError(false);
         onNotification({
-          title: "リアルタイム接続に成功しました",
+          title: "リアルタイで更新中です。",
           message: "自動で最新のコメントを読み込みます",
           type: "success",
         });
@@ -81,8 +80,9 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
 
-    if (mode !== "up" || isWsError || reConnectionCount > 7)
-      return () => wsClient.dispose();
+    if (mode !== "up") return () => wsClient.dispose();
+
+    if (isWsError || reConnectionCount > 7) return () => {};
 
     const initial_created_at = new Date().toISOString();
 
@@ -206,6 +206,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
   return {
     isWsError,
+    isSocketError,
     wsErrorRefetch,
     isLoadingWsRefetch,
     isSubscription: mode === "up" && !isWsError && !isSocketError,

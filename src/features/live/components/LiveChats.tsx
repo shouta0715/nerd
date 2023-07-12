@@ -27,6 +27,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
     isSubscription,
     canTryReconnect,
     handleReconnect,
+    isSocketError,
   } = useLiveChats({
     episode_id,
     mode,
@@ -44,7 +45,10 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
         <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
           {isSubscription && "リアルタイムで更新されます"}
           {mode === "finish" && "終了しました"}
-          {(mode === "down" || mode === "notRegister" || isWsError) &&
+          {(mode === "down" ||
+            mode === "notRegister" ||
+            isWsError ||
+            isSocketError) &&
             mode !== "finish" &&
             "右下のボタンを押すと、最新のコメントを読み込めます"}
         </p>
@@ -91,7 +95,9 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
           ) : (
             <button
               className="grid h-full w-full place-items-center text-white "
-              onClick={isWsError ? wsErrorRefetch : handleRefetch}
+              onClick={
+                isWsError || isSocketError ? wsErrorRefetch : handleRefetch
+              }
             >
               <ArrowPathIcon className="h-6 w-6 stroke-white" />
             </button>
