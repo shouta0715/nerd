@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import { AdSenseScript } from "src/libs/scripts/AdSense";
 
 const Document = () => (
   <Html lang="ja-JP">
@@ -39,6 +40,7 @@ const Document = () => (
     <body className="font-inter">
       <Main />
       <NextScript />
+      <AdSenseScript />
     </body>
   </Html>
 );
