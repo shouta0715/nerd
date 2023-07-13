@@ -44,7 +44,7 @@ export const PinInput: FC<Props> = ({
           onChange={(e) => onChangeHandler(e, index)}
           onFocus={onFocusHandler}
           onKeyDown={(e) => onKeyDownHandler(e, index)}
-          type="tel"
+          pattern="[0-9]*"
           value={Number(digit)}
         />
       ))}
