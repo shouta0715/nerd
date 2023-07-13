@@ -13,6 +13,7 @@ import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
+import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 
 import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
@@ -27,7 +28,12 @@ export const Episode: FC = () => {
   }
 
   validateData({
-    trigger: !data?.episodes_by_pk,
+    trigger:
+      !data?.episodes_by_pk ||
+      getIsStatus({
+        end_time: data?.episodes_by_pk?.end_time,
+        start_time: data?.episodes_by_pk?.start_time,
+      }) !== "finish",
     error: new GraphQLError(),
   });
 

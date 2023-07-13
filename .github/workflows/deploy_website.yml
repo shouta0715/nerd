@@ -42,6 +42,7 @@ jobs:
           echo "ADMIN_SECRET=${{ secrets.ADMIN_SECRET }}" >> .env.local
           echo "NEXT_PUBLIC_API_ENDPOINT=${{ secrets.NEXT_PUBLIC_API_ENDPOINT }}" >> .env.local
           echo "NEXT_PUBLIC_WS_ENDPOINT=${{ secrets.NEXT_PUBLIC_WS_ENDPOINT }}" >> .env.local
+          echo "NEXT_PUBLIC_MAINTENANCE_MODE=${{ secrets.NEXT_PUBLIC_MAINTENANCE_MODE }}" >> .env.local
 
       - name: Install dependencies
         run: yarn install
