@@ -14,6 +14,15 @@ const regex = /^[0-9]*$/;
 
 const testRegex = (value: string) => regex.test(value);
 
+const toHalfSizeNumber = (value: string) => {
+  const halfVal = value.replace(/[\uff10-\uff19]/g, (tmpStr) => {
+    // 文字コードをシフト
+    return String.fromCharCode(tmpStr.charCodeAt(0) - 65248);
+  });
+
+  return halfVal;
+};
+
 const getMaxValue = (index: number) => {
   switch (index) {
     case 0:
@@ -104,7 +113,7 @@ export const usePinInput = ({
     index: number
   ): void => {
     event.preventDefault();
-    const { value } = event.target;
+    const value = toHalfSizeNumber(event.target.value);
 
     if (!testRegex(value)) return;
 
