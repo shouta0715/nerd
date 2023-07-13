@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { AdSenseScript } from "src/libs/scripts/AdSense";
 
 const Document = () => (
   <Html lang="ja-JP">
@@ -36,11 +35,15 @@ const Document = () => (
       <link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon" />
       <meta content="#da532c" name="msapplication-TileColor" />
       <meta content="#ffffff" name="theme-color" />
+      <script
+        async
+        crossOrigin="anonymous"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8148476979627677"
+      />
     </Head>
     <body className="font-inter">
       <Main />
       <NextScript />
-      <AdSenseScript />
     </body>
   </Html>
 );

@@ -1,4 +1,5 @@
 import React from "react";
+import { AdSense } from "src/features/pages/privacy/contents/AdSense";
 import { Change } from "src/features/pages/privacy/contents/Change";
 import { ChangePolicy } from "src/features/pages/privacy/contents/ChangePolicy";
 import { Collection } from "src/features/pages/privacy/contents/Collection";
@@ -56,6 +57,11 @@ const PrivacyDescriptions: TPrivacy[] = [
     title: "プライバシーポリシーの変更",
     key: "change_privacy_policy",
     content: <ChangePolicy />,
+  },
+  {
+    title: "Google AdSense 広告の配信",
+    key: "adsense",
+    content: <AdSense />,
   },
   {
     title: "お問い合わせ窓口",
