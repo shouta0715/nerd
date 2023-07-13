@@ -58,7 +58,7 @@ export const Aside: FC<Props> = ({
 
       <div
         className={clsx(
-          " sticky bottom-0  h-max w-full rounded-t-2xl bg-white p-4 shadow-lg ring-1  ring-gray-900/5 ",
+          " sticky bottom-0  h-max w-full rounded-t-2xl bg-white/80 p-4 shadow-lg ring-1  ring-gray-900/5 ",
           mode !== "finish" && !isChat && "hidden"
         )}
       >
