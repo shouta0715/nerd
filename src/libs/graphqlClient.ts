@@ -12,6 +12,16 @@ import { InternalServerError, UnauthorizedError } from "src/libs/error";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;
 
+type RefreshToken = {
+  access_token: string;
+  expires_in: string;
+  token_type: string;
+  refresh_token: string;
+  id_token: string;
+  user_id: string;
+  project_id: string;
+};
+
 class GraphQLRequest extends GraphQLClient {
   private retry = 0;
 
@@ -24,6 +34,8 @@ class GraphQLRequest extends GraphQLClient {
       (r) => r.auth.currentUser?.refreshToken
     );
 
+    if (!refreshToken) throw new UnauthorizedError();
+
     const data = await fetch(
       `https://securetoken.googleapis.com/v1/token?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`,
       {
@@ -33,11 +45,9 @@ class GraphQLRequest extends GraphQLClient {
         },
         body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
       }
-    ).then((r) => {
-      return r.text();
-    });
+    );
 
-    return JSON.parse(data);
+    return data.json() as Promise<RefreshToken>;
   }
 
   override async request<T = any, V extends Variables = Variables>(
@@ -45,19 +55,17 @@ class GraphQLRequest extends GraphQLClient {
     ...variablesAndRequestHeaders: VariablesAndRequestHeaders<V>
   ): Promise<T> {
     try {
-      return await super.request(
-        document as string,
-        ...variablesAndRequestHeaders
-      );
+      return super.request(document as string, ...variablesAndRequestHeaders);
     } catch (error: any) {
       if (JSON.stringify(error).includes("Could not verify JWT: JWTExpired")) {
         if (this.retry < 1) {
           const data = await this.refreshToken();
-          if (data.message === "ok") {
+
+          if (data.id_token) {
             this.setHeader("Authorization", `Bearer ${data.id_token}`);
             this.retry += 1;
 
-            return await super.request(
+            return super.request(
               document as string,
               ...variablesAndRequestHeaders
             );
@@ -66,10 +74,7 @@ class GraphQLRequest extends GraphQLClient {
           throw new UnauthorizedError();
         }
 
-        return await super.request(
-          document as string,
-          ...variablesAndRequestHeaders
-        );
+        return super.request(document as string, ...variablesAndRequestHeaders);
       }
 
       if (error.message === "Network request failed") {
