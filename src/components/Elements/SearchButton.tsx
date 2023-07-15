@@ -14,7 +14,10 @@ export const SearchButton = () => {
           className="grid h-12 w-12 place-items-center rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 outline-none md:hidden"
           onClick={() => setIsSearchOpen(!isSearchOpen)}
         >
-          <MagnifyingGlassIcon className="h-6 w-6 stroke-white stroke-2" />
+          <MagnifyingGlassIcon
+            aria-label="search"
+            className="h-6 w-6 stroke-white stroke-2"
+          />
         </button>
       </div>
       <SearchModal

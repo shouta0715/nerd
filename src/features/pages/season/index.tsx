@@ -27,7 +27,7 @@ export const Season = ({
     <Text
       align="center"
       className={clsx(
-        "mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline",
+        "mt-6 flex w-full items-center justify-center  font-semibold text-indigo-600 hover:underline",
         data.works?.length === 0 &&
           "pointer-events-none cursor-not-allowed opacity-50"
       )}
@@ -36,7 +36,7 @@ export const Season = ({
       <Link className="text-base md:text-lg " href="/list/season">
         今期のアニメをもっと見る
       </Link>
-      <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
+      <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-600" />
     </Text>
   </section>
 );
