@@ -9,6 +9,10 @@ export const getMaxCountUpTime = ({
   const start = new Date(start_time);
   const end = new Date(end_time);
 
+  if (end.getTime() < start.getTime()) {
+    return { hours: 0, minutes: 0, seconds: 0 };
+  }
+
   const diff = end.getTime() - start.getTime();
 
   const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

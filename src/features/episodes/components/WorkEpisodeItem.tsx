@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisode } from "src/features/episodes/types";
 import { genEpisodePlaceholder } from "src/features/episodes/utils";
-import { getIsFinished } from "src/features/timer/utils/getIsFinished";
+import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 
 type Props = {
   episode: WorkEpisode;
@@ -21,14 +21,14 @@ export const WorkEpisodeItem: FC<Props> = ({
   <li className="flex h-full flex-col items-center p-2">
     <Link
       as={
-        getIsFinished(episode.end_time)
+        getIsAlreadyFinished(episode.end_time)
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`
       }
       className=" mb-1 px-2 text-sm text-indigo-500 transition-all hover:text-indigo-600 hover:underline md:text-base"
       color="indigo"
       href={{
-        pathname: getIsFinished(episode.end_time)
+        pathname: getIsAlreadyFinished(episode.end_time)
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`,
         query: {

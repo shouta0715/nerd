@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 import { LiveTimerProps } from "src/features/timer/types";
+import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 
 type DifTime = {
   difHours: number;
@@ -12,6 +13,10 @@ type Timer = {
   start_dif: DifTime;
   end_dif?: DifTime;
 };
+
+afterEach(() => {
+  jest.useRealTimers();
+});
 
 const createDifTime = ({ start_dif, end_dif }: Timer) => {
   const isNotStart =
@@ -130,7 +135,7 @@ describe("useLiveTimer", () => {
     expect(m).toBe("finish");
   });
 
-  test("difを1分30のとき,modeがdownで30秒経過すると1秒になる", () => {
+  test("difを1分30のとき,modeがdownで30秒経過すると59になる", () => {
     const difTime: Timer = {
       start_dif: { difHours: 0, difMinutes: -1, difSeconds: 30 },
     };
@@ -148,8 +153,8 @@ describe("useLiveTimer", () => {
 
     expect(t).toEqual({
       hours: 0,
-      minutes: 1,
-      seconds: 0,
+      minutes: 0,
+      seconds: 59,
     });
   });
 
@@ -177,5 +182,53 @@ describe("useLiveTimer", () => {
     const { mode } = setup({ start_time: null, end_time: null });
 
     expect(mode).toBe("notRegister");
+  });
+
+  test("mode=upのとき一秒ずつ増える", () => {
+    const difTime: Timer = {
+      start_dif: { difHours: 0, difMinutes: 0, difSeconds: 0 },
+      end_dif: { difHours: 1, difMinutes: 30, difSeconds: 0 },
+    };
+    const { start_time, end_time } = createDifTime(difTime);
+
+    const { mode } = setup({ start_time, end_time });
+
+    expect(mode).toBe("up");
+
+    jest.useFakeTimers();
+
+    jest.advanceTimersByTime(1000 * 60 * 60 + 1000 * 120);
+
+    const { time: t } = setup({ start_time, end_time });
+
+    expect(t).toEqual({
+      hours: 1,
+      minutes: 2,
+      seconds: 0,
+    });
+  });
+
+  test("mode=downのとき一秒ずつ減る", () => {
+    const difTime: Timer = {
+      start_dif: { difHours: 0, difMinutes: -1, difSeconds: 0 },
+      end_dif: { difHours: 0, difMinutes: 0, difSeconds: 0 },
+    };
+    const { start_time, end_time } = createDifTime(difTime);
+
+    const { mode } = setup({ start_time, end_time });
+
+    expect(mode).toBe("down");
+
+    jest.useFakeTimers();
+
+    jest.advanceTimersByTime(1000);
+
+    const { time: t } = setup({ start_time, end_time });
+
+    expect(t).toEqual({
+      hours: 0,
+      minutes: 0,
+      seconds: 58,
+    });
   });
 });

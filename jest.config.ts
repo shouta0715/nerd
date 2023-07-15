@@ -10,7 +10,7 @@ const customJestConfig = {
   coverageDirectory: "coverage",
   moduleDirectories: ["node_modules", "<rootDir>/"],
   testMatch: ["**/?(*.)+(spec|test).[jt]s?(x)"],
-  testPathIgnorePatterns: ["<rootDir>/e2e/"],
+  testPathIgnorePatterns: ["<rootDir>/e2e/","<rootDir>/.next/", "<rootDir>/node_modules/", "<rootDir>/src/graphql/","<rootDir>/src/libs/"],
   testEnvironment: "jest-environment-jsdom",
   setupFilesAfterEnv: ["./jest.setup.ts"],
   moduleNameMapper: {

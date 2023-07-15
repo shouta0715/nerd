@@ -5,7 +5,8 @@ import { useNotificationState } from "src/components/Elements/Notification/store
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store";
-import { getIsFinished } from "src/features/timer/utils/getIsFinished";
+import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
+
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = { episode?: GetEpisodeQuery["episodes_by_pk"] };
@@ -27,7 +28,7 @@ export const NextButton: FC<Props> = ({ episode }) => {
         timerMode === "up" ? "bg-orange-600" : "bg-indigo-600"
       }`}
       href={
-        getIsFinished(data?.episodes_by_pk?.end_time)
+        getIsAlreadyFinished(data?.episodes_by_pk?.end_time)
           ? `/episodes/${data?.episodes_by_pk?.id}`
           : `/episodes/live/${data?.episodes_by_pk?.id}`
       }

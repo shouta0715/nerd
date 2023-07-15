@@ -16,7 +16,7 @@ export const useTimeInput = () => {
     setTime,
     downInitialTime,
   } = useTimerState((state) => ({
-    time: state.time,
+    time: state.getTime(),
     padTime: state.padTime(),
     interval: state.interval,
     changeTenTime: state.changeTenTime,
@@ -63,7 +63,11 @@ export const useTimeInput = () => {
   const onSubmitChangeTime = () => {
     if (mode === "down" && timeToSecond(downInitialTime) === 0) setIsOpen(true);
 
-    if (timeToSecond(time) === 0 && mode === "down") return;
+    if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
+      interval.reset();
+
+      return;
+    }
 
     if (isChangeTime) {
       setChangeTime();

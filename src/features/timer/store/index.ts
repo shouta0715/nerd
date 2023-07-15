@@ -36,7 +36,7 @@ export const timerActions = (set: Set, get: Get): TimerStateActions => ({
   intervalTime: intervalTime(set, get),
   setDownInitialTime: setDownInitialTime(set),
   setTime: setTime(set, get),
-  resetTime: resetTime(set),
+  resetTime: resetTime(set, get),
   getTime: getTime(get),
   changeTenTime: changeTenTime(set, get),
   changeMode: changeMode(set, get),
