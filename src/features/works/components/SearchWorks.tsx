@@ -24,7 +24,7 @@ export const SearchWorks = () => {
     return (
       <>
         <p className="my-6 text-center font-bold">{`${search}で検索中...`}</p>
-        <Skeleton theme="search" />;
+        <Skeleton theme="search" />
       </>
     );
   }
