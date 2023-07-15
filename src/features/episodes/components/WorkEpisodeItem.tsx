@@ -25,7 +25,7 @@ export const WorkEpisodeItem: FC<Props> = ({
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`
       }
-      className=" mb-1 px-2 text-sm text-indigo-500 transition-all hover:text-indigo-600 hover:underline md:text-base"
+      className=" mb-1 px-2 text-sm text-indigo-600 transition-all hover:text-indigo-500 hover:underline md:text-base"
       color="indigo"
       href={{
         pathname: getIsAlreadyFinished(episode.end_time)

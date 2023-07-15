@@ -20,13 +20,13 @@ export const Weekly = ({
     </ul>
     <Text
       align="center"
-      className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-500 hover:underline"
+      className="mt-6 flex w-full items-center justify-center  font-semibold text-indigo-600 hover:underline"
       component="p"
     >
       <Link className="text-base md:text-lg" href="/list/weekly">
         今週のアニメをもっと見る
       </Link>
-      <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-500" />
+      <ChevronRightIcon className="ml-1 h-5 w-5 stroke-indigo-600" />
     </Text>
   </section>
 );
