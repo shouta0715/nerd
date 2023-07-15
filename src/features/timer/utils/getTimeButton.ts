@@ -1,3 +1,4 @@
+import { MaxTime } from "src/features/timer/store/initialState";
 import { LiveTimer } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 
@@ -9,13 +10,13 @@ type Result = {
     | "bg-blue-600"
     | "bg-teal-600"
     | "bg-gray-600";
-  text: "開始" | "再生" | "一時停止" | "変更" | "終了" | "設定";
+  text: "開始" | "再生" | "一時停止" | "変更" | "もう一度見る" | "設定";
 };
 
 type Props = {
   mode: "up" | "down";
   isChangeTime: boolean;
-  time: LiveTimer["time"];
+  time: number;
   downInitialTime: LiveTimer["time"];
   active: boolean;
 };
@@ -48,45 +49,22 @@ export const getTimeButton = ({
     };
   }
 
-  if (mode === "up") {
-    const { hours, seconds, minutes } = time;
-
-    if (hours === 0 && seconds === 0 && minutes === 0) {
-      return {
-        color: "bg-blue-600",
-        text: "開始",
-      };
-    }
-
+  if (time === 0) {
     return {
-      color: "bg-indigo-600",
-      text: "再生",
+      color: "bg-blue-600",
+      text: "開始",
     };
   }
 
-  if (mode === "down") {
-    if (timeToSecond(downInitialTime) === timeToSecond(time)) {
-      return {
-        color: "bg-blue-600",
-        text: "開始",
-      };
-    }
-
-    if (timeToSecond(time) === 0) {
-      return {
-        color: "bg-gray-600",
-        text: "終了",
-      };
-    }
-
+  if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
     return {
-      color: "bg-indigo-600",
-      text: "再生",
+      color: "bg-gray-600",
+      text: "もう一度見る",
     };
   }
 
   return {
-    color: "bg-gray-600",
-    text: "終了",
+    color: "bg-indigo-600",
+    text: "再生",
   };
 };

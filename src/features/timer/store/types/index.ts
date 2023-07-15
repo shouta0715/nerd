@@ -24,6 +24,7 @@ export type TimerStateActions = {
   changeTenTime: (formula: "add" | "minus") => void;
   changeMode: () => void;
   padTime: () => string;
+  oneMore: () => void;
 };
 
 export type TimerStateValues = {

@@ -11,69 +11,21 @@ import {
 
 export const intervalTime = (set: Set, get: Get) => {
   return () => {
-    const { time, interval, downInitialTime, mode } = get();
-    const { hours, minutes, seconds } = time;
+    const { getTime, interval, downInitialTime, mode } = get();
+    const time = getTime();
 
-    if (hours === 10 && minutes === 0 && seconds === 0) {
+    if (time >= timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
       interval.stop();
 
       return;
     }
 
-    set(() => {
-      const {
-        hours: downHours,
-        minutes: downMinutes,
-        seconds: downSeconds,
-      } = downInitialTime;
+    const newTime =
+      mode === "up" ? time + 1 : timeToSecond(downInitialTime) - time - 1;
 
-      const isFinished =
-        downHours === 0 && downMinutes === 0 && downSeconds === 0;
+    const { hours, minutes, seconds } = secondToTime(newTime);
 
-      if (isFinished && mode === "down") {
-        get().interval.stop();
-
-        return {
-          time: InitialTimerCount,
-        };
-      }
-
-      if (mode === "down") {
-        if (hours === 0 && minutes === 0 && seconds === 0) {
-          interval.stop();
-
-          return {
-            time: InitialTimerCount,
-          };
-        }
-
-        const newSeconds = seconds === 0 ? 59 : seconds - 1;
-        const newMinutes =
-          seconds === 0 ? (minutes === 0 ? 59 : minutes - 1) : minutes;
-        const newHours =
-          seconds === 0 && minutes === 0
-            ? hours === 0
-              ? 23
-              : hours - 1
-            : hours;
-
-        return {
-          time: {
-            seconds: newSeconds,
-            minutes: newMinutes,
-            hours: newHours,
-          },
-        };
-      }
-
-      return {
-        time: {
-          seconds: seconds === 59 ? 0 : seconds + 1,
-          minutes: seconds === 59 ? minutes + 1 : minutes,
-          hours: minutes === 59 ? hours + 1 : hours,
-        },
-      };
-    });
+    set({ time: { hours, minutes, seconds } });
   };
 };
 
@@ -126,14 +78,21 @@ export const resetTime = (set: Set) => {
     set({ time: InitialTimerCount, downInitialTime: InitialTimerCount });
 };
 
+export const oneMore = (set: Set, get: Get) => {
+  return () =>
+    set({ time: InitialTimerCount, downInitialTime: get().downInitialTime });
+};
+
 export const getTime = (get: Get) => {
   return () => {
     const { mode, time, downInitialTime } = get();
     if (mode === "down") {
-      const maxTime = downInitialTime;
       const { hours, minutes, seconds } = time;
 
-      return timeToSecond(maxTime) - timeToSecond({ hours, minutes, seconds });
+      return (
+        timeToSecond(downInitialTime) -
+        timeToSecond({ hours, minutes, seconds })
+      );
     }
 
     return timeToSecond(time);
@@ -153,13 +112,13 @@ export const changeTenTime = (set: Set, get: Get) => {
         ? timeToSecond(time) + 10
         : timeToSecond(time) - 10;
 
-    const { hours, minutes, seconds } = secondToTime(newTime);
-
     if (newTime < 0) {
       set({ time: InitialTimerCount });
 
       return;
     }
+
+    const { hours, minutes, seconds } = secondToTime(newTime);
 
     if (mode === "down" && newTime > timeToSecond(get().downInitialTime)) {
       set({ time: get().downInitialTime });
@@ -167,7 +126,7 @@ export const changeTenTime = (set: Set, get: Get) => {
       return;
     }
 
-    if (hours >= 10) {
+    if (hours >= 4) {
       set({ time: MaxTime });
 
       return;

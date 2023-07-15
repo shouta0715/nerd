@@ -15,14 +15,16 @@ export const useTimeInput = () => {
     changeTenTime,
     setTime,
     downInitialTime,
+    oneMore,
   } = useTimerState((state) => ({
-    time: state.time,
+    time: state.getTime(),
     padTime: state.padTime(),
     interval: state.interval,
     changeTenTime: state.changeTenTime,
     setTime: state.setTime,
     mode: state.mode,
     downInitialTime: state.downInitialTime,
+    oneMore: state.oneMore,
   }));
 
   const showNotification = useNotificationState((state) => state.onShow);
@@ -63,7 +65,11 @@ export const useTimeInput = () => {
   const onSubmitChangeTime = () => {
     if (mode === "down" && timeToSecond(downInitialTime) === 0) setIsOpen(true);
 
-    if (timeToSecond(time) === 0 && mode === "down") return;
+    if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
+      oneMore();
+
+      return;
+    }
 
     if (isChangeTime) {
       setChangeTime();

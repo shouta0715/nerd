@@ -68,7 +68,6 @@ const countUp = ({
     setMode("finish");
 
     clearTimerInterval(intervalId);
-    // 0を返す
 
     return {
       hours: 0,
@@ -77,10 +76,26 @@ const countUp = ({
     };
   }
 
+  if (seconds === 59 && minutes !== 59) {
+    return {
+      seconds: 0,
+      minutes: minutes + 1,
+      hours,
+    };
+  }
+
+  if (seconds === 59 && minutes === 59) {
+    return {
+      seconds: 0,
+      minutes: 0,
+      hours: hours + 1,
+    };
+  }
+
   return {
-    seconds: seconds === 59 ? 0 : seconds + 1,
-    minutes: seconds === 59 ? minutes + 1 : minutes,
-    hours: seconds === 59 && minutes === 59 ? hours + 1 : hours,
+    seconds: seconds + 1,
+    minutes,
+    hours,
   };
 };
 
