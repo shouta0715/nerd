@@ -73,7 +73,12 @@ export const setTime = (set: Set, get: Get) => (time: TimerCount) => {
   set({ time });
 };
 
-export const resetTime = (set: Set, get: Get) => {
+export const resetTime = (set: Set) => {
+  return () =>
+    set({ time: InitialTimerCount, downInitialTime: InitialTimerCount });
+};
+
+export const oneMore = (set: Set, get: Get) => {
   return () =>
     set({ time: InitialTimerCount, downInitialTime: get().downInitialTime });
 };

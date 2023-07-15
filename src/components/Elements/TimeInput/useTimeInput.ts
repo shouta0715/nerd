@@ -15,6 +15,7 @@ export const useTimeInput = () => {
     changeTenTime,
     setTime,
     downInitialTime,
+    oneMore,
   } = useTimerState((state) => ({
     time: state.getTime(),
     padTime: state.padTime(),
@@ -23,6 +24,7 @@ export const useTimeInput = () => {
     setTime: state.setTime,
     mode: state.mode,
     downInitialTime: state.downInitialTime,
+    oneMore: state.oneMore,
   }));
 
   const showNotification = useNotificationState((state) => state.onShow);
@@ -64,7 +66,7 @@ export const useTimeInput = () => {
     if (mode === "down" && timeToSecond(downInitialTime) === 0) setIsOpen(true);
 
     if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
-      interval.reset();
+      oneMore();
 
       return;
     }
