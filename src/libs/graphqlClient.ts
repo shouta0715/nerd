@@ -64,8 +64,8 @@ class GraphQLRequest extends GraphQLClient {
         if (this.retry < 1) {
           const data = await this.refreshToken();
 
-          if (data.id_token) {
-            this.setHeader("Authorization", `Bearer ${data.id_token}`);
+          if (data.access_token) {
+            this.setHeader("authorization", `Bearer ${data.access_token}`);
             this.retry += 1;
 
             return await super.request(
