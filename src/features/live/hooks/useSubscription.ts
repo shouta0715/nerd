@@ -46,7 +46,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       state.setIsWsError,
     ]);
   const [reConnectionCount, setReConnectionCount] = useState(0);
-  const errorInterval = useRef<NodeJS.Timeout | null>(null);
+  const errorTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const handleAutoReconnect = useCallback(async () => {
     const token = await getToken();
@@ -57,17 +57,17 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     const newClient = getWsClient({
       token,
       onConnected: () => {
+        if (errorTimeout.current) clearTimeout(errorTimeout.current);
         setIsSocketError(false);
         onNotification({
           title: "リアルタイで更新中です。",
           message: "自動で最新のコメントを読み込みます",
           type: "success",
         });
-        if (errorInterval.current) clearInterval(errorInterval.current);
       },
       onError: () => {
-        if (errorInterval.current) clearInterval(errorInterval.current);
-        errorInterval.current = setInterval(() => {
+        if (errorTimeout.current) clearTimeout(errorTimeout.current);
+        errorTimeout.current = setTimeout(() => {
           onNotification({
             title: "リアルタイム接続に失敗しました",
             message: "右下のボタンを押すと、最新のコメントを読み込めます",
@@ -90,9 +90,9 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       return () => {
         wsClient.dispose();
 
-        if (errorInterval.current) {
-          clearInterval(errorInterval.current);
-          errorInterval.current = null;
+        if (errorTimeout.current) {
+          clearTimeout(errorTimeout.current);
+          errorTimeout.current = null;
         }
       };
 
@@ -104,7 +104,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       if (!(event instanceof CloseEvent) || mode !== "up") return;
 
       if (event.code === 1000) {
-        if (errorInterval.current) clearInterval(errorInterval.current);
+        if (errorTimeout.current) clearTimeout(errorTimeout.current);
 
         return;
       }
@@ -139,8 +139,8 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           });
         },
         error: () => {
-          if (errorInterval.current) clearInterval(errorInterval.current);
-          errorInterval.current = setInterval(() => {
+          if (errorTimeout.current) clearTimeout(errorTimeout.current);
+          errorTimeout.current = setTimeout(() => {
             if (isWsError) return;
             onNotification({
               title: "リアルタイム接続に失敗しました",
@@ -157,9 +157,9 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     return () => {
       wsClient.dispose();
 
-      if (errorInterval.current) {
-        clearInterval(errorInterval.current);
-        errorInterval.current = null;
+      if (errorTimeout.current) {
+        clearTimeout(errorTimeout.current);
+        errorTimeout.current = null;
       }
     };
   }, [
