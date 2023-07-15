@@ -55,7 +55,10 @@ class GraphQLRequest extends GraphQLClient {
     ...variablesAndRequestHeaders: VariablesAndRequestHeaders<V>
   ): Promise<T> {
     try {
-      return super.request(document as string, ...variablesAndRequestHeaders);
+      return await super.request(
+        document as string,
+        ...variablesAndRequestHeaders
+      );
     } catch (error: any) {
       if (JSON.stringify(error).includes("Could not verify JWT: JWTExpired")) {
         if (this.retry < 1) {
@@ -65,7 +68,7 @@ class GraphQLRequest extends GraphQLClient {
             this.setHeader("Authorization", `Bearer ${data.id_token}`);
             this.retry += 1;
 
-            return super.request(
+            return await super.request(
               document as string,
               ...variablesAndRequestHeaders
             );
@@ -74,7 +77,10 @@ class GraphQLRequest extends GraphQLClient {
           throw new UnauthorizedError();
         }
 
-        return super.request(document as string, ...variablesAndRequestHeaders);
+        return await super.request(
+          document as string,
+          ...variablesAndRequestHeaders
+        );
       }
 
       if (error.message === "Network request failed") {
