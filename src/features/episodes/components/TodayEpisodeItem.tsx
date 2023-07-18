@@ -53,7 +53,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                 ? `/episodes/${episode.id}`
                 : `/episodes/live/${episode.id}`
             }
-            className="flex w-full flex-1 flex-col items-center gap-1"
+            className="group flex w-full flex-1 flex-col items-center gap-1"
             href={{
               pathname: getIsAlreadyFinished(episode.end_time)
                 ? `/episodes/${episode.id}`
@@ -71,17 +71,20 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             }}
           >
             <Text
-              className="line-clamp-1 text-base font-bold text-white md:text-lg"
+              className="line-clamp-1 text-base font-bold text-white group-hover:underline md:text-lg"
               component="p"
             >
               {episode?.work.series_title}
             </Text>
             <Text className="flex text-white" component="div">
-              <Text className="mr-2 text-sm md:text-base" component="p">
+              <Text
+                className="mr-2 text-sm group-hover:underline md:text-base"
+                component="p"
+              >
                 第{episode?.number}話
               </Text>
               <Text
-                className="line-clamp-1 flex-1 text-sm md:text-base"
+                className="line-clamp-1 flex-1 text-sm group-hover:underline md:text-base"
                 component="p"
               >
                 {episode?.title}
