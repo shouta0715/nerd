@@ -1,6 +1,7 @@
 import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { FC, memo } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { ModeBadge } from "src/components/Elements/ModeBadge";
@@ -9,6 +10,7 @@ import { Text } from "src/components/Elements/Text";
 import { TodayEpisode } from "src/features/episodes/types";
 import { genEpisodePlaceholder } from "src/features/episodes/utils";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
+import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
@@ -45,25 +47,50 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           }`}
         >
           <ModeBadge mode={mode} start_time={episode.start_time} />
-          <div className="flex w-full flex-1 flex-col items-center gap-1">
+          <Link
+            as={
+              getIsAlreadyFinished(episode.end_time)
+                ? `/episodes/${episode.id}`
+                : `/episodes/live/${episode.id}`
+            }
+            className="group flex w-full flex-1 flex-col items-center gap-1"
+            href={{
+              pathname: getIsAlreadyFinished(episode.end_time)
+                ? `/episodes/${episode.id}`
+                : `/episodes/live/${episode.id}`,
+              query: getIsAlreadyFinished(episode.end_time)
+                ? {
+                    episode: genEpisodePlaceholder({
+                      episode,
+                      title: episode.work.series_title,
+                      work_id: episode.work.id,
+                      series_id: episode.work.series_id,
+                    }),
+                  }
+                : undefined,
+            }}
+          >
             <Text
-              className="line-clamp-1 text-base font-bold text-white md:text-lg"
-              component="h4"
+              className="line-clamp-1 text-base font-bold text-white group-hover:underline md:text-lg"
+              component="p"
             >
               {episode?.work.series_title}
             </Text>
             <Text className="flex text-white" component="div">
-              <Text className="mr-2 text-sm md:text-base" component="p">
+              <Text
+                className="mr-2 text-sm group-hover:underline md:text-base"
+                component="p"
+              >
                 第{episode?.number}話
               </Text>
               <Text
-                className="line-clamp-1 flex-1 text-sm md:text-base"
+                className="line-clamp-1 flex-1 text-sm group-hover:underline md:text-base"
                 component="p"
               >
                 {episode?.title}
               </Text>
             </Text>
-          </div>
+          </Link>
         </div>
         {mode !== "finish" ? (
           <div className="flex flex-1 flex-col">
