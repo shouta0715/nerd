@@ -30,7 +30,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
         commenter_name: user?.user_name || "匿名",
         ip: ip || null,
       };
-      insertChat.mutateAsync({
+      await insertChat.mutateAsync({
         object,
       });
       setValue("");
