@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { CommentsFilter } from "src/features/comments/types";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store";
-// いいね順 or 新着順
 
 export const useEpisode = () => {
   const router = useRouter();

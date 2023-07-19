@@ -1,4 +1,4 @@
-import type { RequestHandler } from "msw";
+import { setupWorker, type RequestHandler } from "msw";
 import { setupServer } from "msw/node";
 
 export const setupMsw = (...handlers: RequestHandler[]) => {
@@ -8,6 +8,18 @@ export const setupMsw = (...handlers: RequestHandler[]) => {
   afterAll(() => server.close());
 
   return server;
+};
+
+export const startMsw = (...handlers: RequestHandler[]) => {
+  const isServer = typeof window === "undefined";
+
+  if (isServer) {
+    const server = setupServer(...handlers);
+    server.listen();
+  } else {
+    const client = setupWorker(...handlers);
+    client.start();
+  }
 };
 
 export const setupAutoSizeTextarea = () => {

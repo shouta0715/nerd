@@ -26,7 +26,7 @@ export const handleEpisodeCommentByLikes = (status?: number) => {
   });
 };
 
-const handleWorkComment = (status?: number) => {
+export const handleWorkComment = (status?: number) => {
   return graphql.query("GetCommentsWork", (_, res, ctx) => {
     if (status) {
       return res(ctx.status(status));
@@ -36,7 +36,7 @@ const handleWorkComment = (status?: number) => {
   });
 };
 
-const handleWorkCommentByLikes = (status?: number) => {
+export const handleWorkCommentByLikes = (status?: number) => {
   return graphql.query("GetCommentsWorkByLikes", (_, res, ctx) => {
     if (status) {
       return res(ctx.status(status));

@@ -1,7 +1,9 @@
 import React, { FC, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/episode/aside";
+import { ErrorMessage } from "src/components/Elements/Error/items/ErrorMessage";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { TimerModal } from "src/components/Modal/Timer";
@@ -12,6 +14,7 @@ import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
 
 import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
 import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
+
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 
@@ -73,21 +76,35 @@ export const Episode: FC = () => {
         <Nav isChat={isChat} response="sp" setIsChat={setIsChat} />
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
-            <Suspense
-              fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+            <ErrorBoundary
+              key={`${data?.episodes_by_pk?.id}-chats`}
+              FallbackComponent={ErrorMessage}
             >
-              <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
-            </Suspense>
+              <Suspense
+                fallback={
+                  <Loader className="m-auto" size="xl" variant="dots" />
+                }
+              >
+                <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
+              </Suspense>
+            </ErrorBoundary>
           ) : (
-            <Suspense
-              fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+            <ErrorBoundary
+              key={`${data?.episodes_by_pk?.id}-comments`}
+              FallbackComponent={ErrorMessage}
             >
-              <EpisodeComments
-                episode_id={data?.episodes_by_pk?.id}
-                filter={filter}
-                setFilter={setFilter}
-              />
-            </Suspense>
+              <Suspense
+                fallback={
+                  <Loader className="m-auto" size="xl" variant="dots" />
+                }
+              >
+                <EpisodeComments
+                  episode_id={data?.episodes_by_pk?.id}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
+              </Suspense>
+            </ErrorBoundary>
           )}
         </main>
       </div>

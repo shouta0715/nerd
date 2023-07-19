@@ -30,10 +30,14 @@ export const handleLive = ({
   );
 };
 
-const handleLiveChats = () => {
+export const handleLiveChats = (status?: number) => {
   return graphql.query<GetChatsEpisodeQuery, GetChatsEpisodeQueryVariables>(
-    "GetChatsEpisode",
+    "GetChats",
     (_, res, ctx) => {
+      if (status) {
+        return res(ctx.status(status));
+      }
+
       return res(ctx.data(episodeChatData));
     }
   );
