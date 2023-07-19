@@ -1,7 +1,9 @@
 import React, { FC, Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/work/aside";
+import { ErrorMessage } from "src/components/Elements/Error/items/ErrorMessage";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { TimerModal } from "src/components/Modal/Timer";
@@ -62,21 +64,35 @@ export const PlayWork: FC = () => {
         />
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
-            <Suspense
-              fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+            <ErrorBoundary
+              key={`${data?.works_by_pk?.id}-chats`}
+              FallbackComponent={ErrorMessage}
             >
-              <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
-            </Suspense>
+              <Suspense
+                fallback={
+                  <Loader className="m-auto" size="xl" variant="dots" />
+                }
+              >
+                <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
+              </Suspense>
+            </ErrorBoundary>
           ) : (
-            <Suspense
-              fallback={<Loader className="m-auto" size="xl" variant="dots" />}
+            <ErrorBoundary
+              key={`${data?.works_by_pk?.id}-comments`}
+              FallbackComponent={ErrorMessage}
             >
-              <WorkComments
-                filter={filter}
-                setFilter={setFilter}
-                work_id={data?.works_by_pk?.id ?? 0}
-              />
-            </Suspense>
+              <Suspense
+                fallback={
+                  <Loader className="m-auto" size="xl" variant="dots" />
+                }
+              >
+                <WorkComments
+                  filter={filter}
+                  setFilter={setFilter}
+                  work_id={data?.works_by_pk?.id ?? 0}
+                />
+              </Suspense>
+            </ErrorBoundary>
           )}
         </main>
       </div>
