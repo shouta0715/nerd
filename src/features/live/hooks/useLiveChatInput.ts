@@ -35,7 +35,7 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
         commenter_name: user?.user_name || "匿名",
         ip: ip || null,
       };
-      insetChat.mutateAsync({
+      await insetChat.mutateAsync({
         object,
       });
       setValue("");
