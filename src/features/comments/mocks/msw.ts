@@ -2,9 +2,11 @@ import { graphql } from "msw";
 import {
   episodeCommentData,
   episodeCommentDataOrderByLike,
+  replyData,
   workCommentData,
   workCommentDataOrderByLike,
 } from "src/features/comments/mocks/fixture";
+import { GetRepliesQuery } from "src/graphql/comment/commentQuery.generated";
 
 export const handleEpisodeComment = (status?: number) => {
   return graphql.query("GetCommentsEpisode", (_, res, ctx) => {
@@ -43,6 +45,16 @@ export const handleWorkCommentByLikes = (status?: number) => {
     }
 
     return res(ctx.data(workCommentDataOrderByLike));
+  });
+};
+
+export const handleReplyEpisodeComment = (status?: number) => {
+  return graphql.query<GetRepliesQuery>("GetReplies", (_, res, ctx) => {
+    if (status) {
+      return res(ctx.status(status));
+    }
+
+    return res(ctx.data(replyData));
   });
 };
 

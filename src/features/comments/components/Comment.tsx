@@ -6,6 +6,7 @@ import React, { FC, Suspense, useRef } from "react";
 import { Replies } from "./Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
+import { AutoErrorBoundary } from "src/components/Elements/Error/items/ReplyMessage";
 import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
@@ -94,19 +95,21 @@ export const Comment: FC<Props> = ({ comment }) => {
             like_count={comment.likes_aggregate.aggregate?.count || 0}
           />
         </Text>
-        <Suspense
-          fallback={
-            <div className="mt-1 flex w-full">
-              <Loader className="mx-auto" variant="dots" />
-            </div>
-          }
-        >
-          <Replies
-            content={content}
-            reply_count={comment.reply_count || 0}
-            reply_id={comment.id}
-          />
-        </Suspense>
+        <AutoErrorBoundary key={`${comment.id}-reply`}>
+          <Suspense
+            fallback={
+              <div className="mt-1 flex w-full">
+                <Loader className="mx-auto" variant="dots" />
+              </div>
+            }
+          >
+            <Replies
+              content={content}
+              reply_count={comment.reply_count || 0}
+              reply_id={comment.id}
+            />
+          </Suspense>
+        </AutoErrorBoundary>
       </div>
     </li>
   );
