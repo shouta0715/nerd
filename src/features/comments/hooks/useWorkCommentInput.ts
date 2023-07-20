@@ -26,7 +26,7 @@ export const useWorkCommentInput = (
       if (!content.trim() || authLoading) return;
       const ip = await getIp();
 
-      insertWorkComment.mutateAsync({
+      await insertWorkComment.mutateAsync({
         work_id,
         content,
         reply_to,

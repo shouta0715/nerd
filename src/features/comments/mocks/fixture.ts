@@ -1,6 +1,7 @@
 import {
   GetCommentsEpisodeQuery,
   GetCommentsWorkQuery,
+  GetRepliesQuery,
 } from "src/graphql/comment/commentQuery.generated";
 
 const genMockData = (
@@ -16,7 +17,7 @@ const genMockData = (
       user_id: "1",
       episode_id: work ? undefined : "1",
       work_id: work ? 1 : undefined,
-      reply_count: 0,
+      reply_count: 11,
       commenter_name: "test",
       likes_aggregate: {
         aggregate: {
@@ -42,6 +43,30 @@ const genMockData = (
   return data;
 };
 
+const getReplyMockData = (): GetRepliesQuery["replies"] => {
+  return [
+    {
+      id: "1",
+      content: "test",
+      created_at: "2021-08-01T00:00:00.000Z",
+      user_id: "1",
+      episode_id: "1",
+      work_id: null,
+      reply_to: "1",
+      commenter_name: "test",
+      likes_aggregate: {
+        aggregate: {
+          count: 0,
+        },
+      },
+      user: {
+        id: "1",
+        anonymous: false,
+      },
+    },
+  ];
+};
+
 export const episodeCommentData: GetCommentsEpisodeQuery = {
   comments: genMockData(),
 };
@@ -56,4 +81,8 @@ export const workCommentData: GetCommentsWorkQuery = {
 
 export const workCommentDataOrderByLike: GetCommentsWorkQuery = {
   comments: genMockData(true),
+};
+
+export const replyData: GetRepliesQuery = {
+  replies: getReplyMockData(),
 };

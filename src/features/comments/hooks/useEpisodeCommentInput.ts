@@ -26,7 +26,7 @@ export const useEpisodeCommentInput = (
 
       const ip = await getIp();
 
-      insertEpisodeComment.mutateAsync({
+      await insertEpisodeComment.mutateAsync({
         episode_id,
         content,
         reply_to,
