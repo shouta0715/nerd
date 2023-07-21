@@ -1,6 +1,8 @@
-import { ClockIcon, ListBulletIcon } from "@heroicons/react/24/outline";
+import { ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
+import TimerIcon from "public/icons/TimerIcon.svg";
 import { Text } from "src/components/Elements/Text";
 
 import { useOpenState } from "src/features/episodes/store";
@@ -28,6 +30,7 @@ export const Nav: FC<Props> = ({
       isTimerOpen: state.isTimerOpen,
       setIsTimerOpen: state.setIsTimerOpen,
     }));
+  const router = useRouter();
 
   return (
     <nav
@@ -44,10 +47,10 @@ export const Nav: FC<Props> = ({
     >
       {response === "sp" && (
         <button
-          className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
+          className="m-1 h-6 w-6 transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsTimerOpen(!isTimerOpen)}
         >
-          <ClockIcon />
+          <TimerIcon />
         </button>
       )}
       <Text
@@ -57,7 +60,15 @@ export const Nav: FC<Props> = ({
           !isChat && "opacity-50"
         )}
         component="button"
-        onClick={() => setIsChat(true)}
+        onClick={() => {
+          setIsChat(true);
+          router.replace({
+            query: {
+              ...router.query,
+              mode: "chat",
+            },
+          });
+        }}
       >
         チャット
       </Text>
@@ -71,6 +82,12 @@ export const Nav: FC<Props> = ({
         onClick={() => {
           setIsChat(false);
           stop();
+          router.replace({
+            query: {
+              mode: "comment",
+              slug: router.query.slug,
+            },
+          });
         }}
       >
         コメント

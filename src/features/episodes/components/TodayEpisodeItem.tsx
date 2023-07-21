@@ -50,7 +50,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
           <Link
             as={
               getIsAlreadyFinished(episode.end_time)
-                ? `/episodes/${episode.id}`
+                ? `/episodes/${episode.id}?mode=chat`
                 : `/episodes/live/${episode.id}`
             }
             className="group flex w-full flex-1 flex-col items-center gap-1"
@@ -66,6 +66,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                       work_id: episode.work.id,
                       series_id: episode.work.series_id,
                     }),
+                    mode: "chat",
                   }
                 : undefined,
             }}
@@ -125,7 +126,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         ) : (
           <div className=" mt-3 flex w-full flex-1 flex-col items-center justify-end space-y-3">
             <ButtonLink
-              as={`/episodes/${episode.id}`}
+              as={`/episodes/${episode.id}?mode=chat`}
               className="py-2"
               href={{
                 pathname: `/episodes/${episode.id}`,
@@ -136,6 +137,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                     work_id: episode.work.id,
                     series_id: episode.work.series_id,
                   }),
+                  mode: "chat",
                 },
               }}
               leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}

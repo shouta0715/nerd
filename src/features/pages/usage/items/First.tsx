@@ -1,6 +1,6 @@
 import React from "react";
+import { useSearch } from "src/components/Elements/SearchButton/useSearch";
 import { SearchModal } from "src/components/Modal/Search";
-import { useSearch } from "src/hooks/useSearch";
 
 export const First = () => {
   const { isSearchOpen, setIsSearchOpen, search, setSearch, submitHandler } =

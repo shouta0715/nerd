@@ -60,7 +60,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
         if (errorTimeout.current) clearTimeout(errorTimeout.current);
         setIsSocketError(false);
         onNotification({
-          title: "リアルタイで更新中です。",
+          title: "リアルタイムで更新中です。",
           message: "自動で最新のコメントを読み込みます",
           type: "success",
         });

@@ -1,74 +1,120 @@
-/* eslint-disable no-nested-ternary */
-import { useQueryClient } from "@tanstack/react-query";
-import Link from "next/link";
-import React from "react";
-import { Skeleton } from "src/components/Elements/Skeleton";
 import {
-  useSearchWorksInput,
-  useSearchWorksState,
-} from "src/features/works/store";
-import { SearchWorksQuery } from "src/graphql/work/workQuery.generated";
+  ChevronDoubleDownIcon,
+  ChevronDoubleRightIcon,
+} from "@heroicons/react/24/outline";
+import { useRouter } from "next/router";
+import React, { useMemo } from "react";
+import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { Skeleton } from "src/components/Elements/Skeleton";
+import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
+import { WorkItem } from "src/features/works/components/WorkItem";
+import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const SearchWorks = () => {
-  const isLoading = useSearchWorksState((state) => state.isLoading);
-  const search = useSearchWorksInput((state) => state.search);
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<SearchWorksQuery | null>(
-    ["SearchWorks", { search }],
-    {
-      exact: true,
-    }
+  const router = useRouter();
+  const { q } = router.query;
+  const { data, isLoading } = useQuerySearchWorks(
+    q === undefined ? "" : q.toString()
   );
+  const noEpisodesRef = React.useRef<HTMLParagraphElement>(null);
+
+  const hasEpisodesData = useMemo(() => {
+    if (isLoading) return null;
+
+    return data?.search_works.filter((work) => work.has_episodes);
+  }, [data?.search_works, isLoading]);
+
+  const noEpisodesData = useMemo(() => {
+    if (isLoading) return null;
+
+    return data?.search_works.filter((work) => !work.has_episodes);
+  }, [data?.search_works, isLoading]);
 
   if (isLoading) {
     return (
-      <>
-        <p className="my-6 text-center font-bold">{`${search}で検索中...`}</p>
-        <Skeleton theme="search" />
-      </>
+      <div className="flex flex-col">
+        <div className="mx-auto  mb-4 grid  w-full max-w-md  place-items-center font-bold">
+          {q ? `${q}で検索中...` : "検索中..."}
+        </div>
+        <Skeleton theme="work" />
+      </div>
     );
   }
 
   return (
-    <div>
-      {data && data?.search_works.length > 0 && (
-        <p className="text-center font-bold">検索結果</p>
-      )}
-      {data && data.search_works.length === 0 && (
-        <p className="text-center text-gray-800">見つかりませんでした</p>
-      )}
-      <ul className="space-y-2 pt-6 empty:py-0">
-        {data?.search_works.map((work) => (
-          <li key={work.id} className="group relative py-2">
-            <div className="absolute bottom-0 h-[1px] w-full bg-slate-200 group-hover:animate-border" />
-            <Link
-              as={
-                work.series_id
-                  ? work.has_episodes
-                    ? `/works/${work.id}?series=${work.series_id}`
-                    : `/works/play/${work.id}?series=${work.series_id}`
-                  : work.has_episodes
-                  ? `/works/${work.id}`
-                  : `/works/play/${work.id}`
-              }
-              className="block pr-8"
-              href={{
-                pathname: `${
-                  work.has_episodes
-                    ? `/works/${work.id}`
-                    : `/works/play/${work.id}`
-                }`,
-                query: {
-                  series: work.series_id ?? undefined,
-                  work: [work.title, work.series_title],
-                },
-              }}
-            >
-              {work.series_title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <DetailTitle title={`${q}の検索結果`} />
+      <section className="h-full flex-1">
+        <div className="container mx-auto flex h-full flex-col gap-y-14">
+          {data && data.search_works.length === 0 && (
+            <p className="text-center text-dimmed">
+              &apos;{q}&apos;に一致する作品は見つかりませんでした。
+            </p>
+          )}
+          {hasEpisodesData && hasEpisodesData.length > 0 && (
+            <div>
+              <p className="grid place-items-center text-xl font-bold">
+                {q}の検索結果（エピソードあり）
+                {noEpisodesData && noEpisodesData?.length > 0 && (
+                  <button
+                    className="mt-1 flex items-center  justify-self-end text-sm text-indigo-600 underline"
+                    onClick={() => {
+                      noEpisodesRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
+                    エピソードなしはこちら
+                    <ChevronDoubleDownIcon className="h-4 w-4" />
+                  </button>
+                )}
+              </p>
+              <ul className="mt-10 grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+                {hasEpisodesData?.map((work) => (
+                  <WorkItem key={work.id} work={work} />
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {noEpisodesData && noEpisodesData?.length > 0 && (
+            <div>
+              <p
+                ref={noEpisodesRef}
+                className="grid scroll-m-8 place-items-center text-xl font-bold"
+              >
+                {q}の検索結果（エピソードなし）
+              </p>
+              <ul className="mt-10 grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+                {noEpisodesData?.map((work) => (
+                  <li
+                    key={work.id}
+                    className="group relative flex animate-fadeUp flex-col items-center space-x-2 rounded-2xl  border border-solid  border-slate-200 bg-white bg-white/70 p-3  shadow-lg ring-1 ring-gray-900/5 md:p-4"
+                  >
+                    <span className="mb-2.5 inline-block flex-1 font-bold">
+                      {work.series_title}
+                    </span>
+                    <ButtonLink
+                      as={`/works/play/${work.id}`}
+                      className="h-max border-white bg-indigo-500 font-bold text-white hover:bg-indigo-600"
+                      href={{
+                        pathname: `${`/works/play/${work.id}`}`,
+                        query: {
+                          work: [work.title, work.series_title],
+                        },
+                      }}
+                      leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
+                      size="sm"
+                    >
+                      視聴する
+                    </ButtonLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 };

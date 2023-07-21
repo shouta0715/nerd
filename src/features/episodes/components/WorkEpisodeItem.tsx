@@ -22,7 +22,7 @@ export const WorkEpisodeItem: FC<Props> = ({
     <Link
       as={
         getIsAlreadyFinished(episode.end_time)
-          ? `/episodes/${episode.id}`
+          ? `/episodes/${episode.id}?mode=chat`
           : `/episodes/live/${episode.id}`
       }
       className=" mb-1 px-2 text-sm text-indigo-600 transition-all hover:text-indigo-500 hover:underline md:text-base"
@@ -38,6 +38,7 @@ export const WorkEpisodeItem: FC<Props> = ({
             work_id,
             series_id,
           }),
+          mode: "chat",
         },
       }}
     >

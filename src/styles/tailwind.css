@@ -11,14 +11,6 @@
     @apply border-indigo-500 bg-indigo-500 font-bold text-white hover:bg-indigo-600;
   }
 
-  .btn-light {
-    @apply border-indigo-50 bg-indigo-50 font-bold text-indigo-500;
-  }
-
-  .light-bg {
-    @apply bg-indigo-50 text-indigo-500;
-  }
-
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;

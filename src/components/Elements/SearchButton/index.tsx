@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { useSearch } from "src/components/Elements/SearchButton/useSearch";
 import { SearchModal } from "src/components/Modal/Search";
-import { useSearch } from "src/hooks/useSearch";
 
 export const SearchButton = () => {
   const { isSearchOpen, setIsSearchOpen, search, setSearch, submitHandler } =
