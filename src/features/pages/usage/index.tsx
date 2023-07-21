@@ -7,33 +7,11 @@ import {
 } from "@heroicons/react/24/solid";
 import React from "react";
 import { Step } from "src/features/pages/usage/items";
-import { EasyItem } from "src/features/pages/usage/items/EasyItem";
 import { First } from "src/features/pages/usage/items/First";
 import { Fourth } from "src/features/pages/usage/items/Fourth";
-import type { EStep, Step as TStep } from "src/features/pages/usage/type";
-
-const EasySteps: EStep[] = [
-  {
-    id: 1,
-    description: "見るアニメを選ぶ！",
-  },
-  {
-    id: 2,
-    description: "チャットかコメントを選択！",
-  },
-  {
-    id: 3,
-    description: "チャットなら動画と一緒に再生して、コメントを投稿！",
-  },
-  {
-    id: 4,
-    description: "コメントなら感想を投稿！",
-  },
-  {
-    id: 5,
-    description: "投稿名を変更して、いろいろなアニメの感想を投稿！",
-  },
-];
+import { Tables } from "src/features/pages/usage/items/Tables";
+import { chatTables, liveTables } from "src/features/pages/usage/tableItems";
+import type { Step as TStep } from "src/features/pages/usage/type";
 
 const DetailSteps: TStep[] = [
   {
@@ -78,27 +56,60 @@ const DetailSteps: TStep[] = [
   },
 ];
 
+const faqs = [
+  {
+    question: "どんなサービスですか？",
+    answer: "アニメの感想を投稿できるサービスです。",
+  },
+  {
+    question: "どんな機能がありますか？",
+    answer:
+      "アニメの感想を投稿できるチャットとコメントの2つの機能と、テレビ放送中のアニメの感想をリアルタイムで投稿できる機能があります。",
+  },
+  {
+    question: "放送中のアニメはなにができますか？",
+    answer:
+      "Youtubeのライブ配信のように、リアルタイムでコメントを投稿できます。",
+  },
+];
+
 export const Usage = () => {
   return (
     <div className="grid flex-1 gap-14">
       <section>
-        <h2 className=" text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
-          簡単な使い方
+        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
+          はじめに
         </h2>
-        <ul className="mt-6" id="detail">
-          {EasySteps.map((step, index) => (
-            <EasyItem
-              key={`step-easy-${step.id}`}
-              index={index}
-              {...step}
-              firstStep={index !== EasySteps.length - 1}
-            />
-          ))}
-        </ul>
+        <div>
+          <dl className="my-6 space-y-10">
+            {faqs.map((faq) => (
+              <div key={faq.question}>
+                <dt className="text-base font-semibold leading-7 text-gray-900">
+                  Q. {faq.question}
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-gray-600">
+                  A. {faq.answer}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div className="flex flex-col gap-y-8">
+          <Tables
+            tableContents={chatTables.contents}
+            tableHeaders={chatTables.header}
+            title={chatTables.title}
+          />
+          <Tables
+            tableContents={liveTables.contents}
+            tableHeaders={liveTables.header}
+            title={liveTables.title}
+          />
+        </div>
       </section>
       <section>
-        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
-          詳しい使い方
+        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
+          使い方
         </h2>
         <ul className="-mb-8 mt-6" id="detail">
           {DetailSteps.map((step, index) => (
@@ -111,7 +122,7 @@ export const Usage = () => {
         </ul>
       </section>
       <section className="mt-10">
-        <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
           ルール・注意事項
         </h2>
         <ol className="mt-10 list-inside list-decimal space-y-4 px-2">

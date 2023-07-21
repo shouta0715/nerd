@@ -1,7 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React from "react";
 import { AnswerItem } from "src/features/pages/faq/answers";
+import { ChatDifference } from "src/features/pages/faq/answers/ChatDifference";
 import { DoNotFind } from "src/features/pages/faq/answers/DoNotFind";
+import { LiveDifference } from "src/features/pages/faq/answers/LiveDifference";
 import { LoginMeaning } from "src/features/pages/faq/answers/LoginMeaning";
 import { LoginName } from "src/features/pages/faq/answers/LoginName";
 import { NotChat } from "src/features/pages/faq/answers/NotChat";
@@ -13,9 +15,9 @@ import { Usage } from "src/features/pages/faq/answers/Usage";
 import { WillRequest } from "src/features/pages/faq/answers/WillRequest";
 import type { FaqProps } from "src/features/pages/faq/types";
 
-export const faqs: FaqProps[] = [
+const usageFaqs: FaqProps[] = [
   {
-    question: "このサイトは何をするためのサイトですか？",
+    question: "どんなサイトですか？",
     answer: <SiteFor />,
 
     defaultOpen: true,
@@ -25,16 +27,30 @@ export const faqs: FaqProps[] = [
     answer: <Usage />,
   },
   {
+    question: "チャットとコメントの違いは何ですか？",
+    answer: (
+      <div>
+        <p className="mb-2">
+          主な違いは、タイマーの時間に合わせてコメントが表示されるかどうかです。
+        </p>
+        <ChatDifference />
+      </div>
+    ),
+  },
+  {
+    question: "当日放送と放送終了後の違いは何ですか？",
+    answer: (
+      <div>
+        <p className="mb-2">
+          主な違いは、コメントの投稿ができるかとリアルタイムでコメントが表示されるかです。
+        </p>
+        <LiveDifference />
+      </div>
+    ),
+  },
+  {
     question: "投稿名はどこで変更できますか？",
     answer: <PostedName />,
-  },
-  {
-    question: "どこで見たいアニメを検索できますか？",
-    answer: <Search />,
-  },
-  {
-    question: "再生してもチャットが表示されません",
-    answer: <NotChat />,
   },
   {
     question: "ログインすると何ができるようになりますか？",
@@ -45,6 +61,18 @@ export const faqs: FaqProps[] = [
     question: "ログインしていても投稿名を変更できますか？",
     answer: <LoginName />,
   },
+];
+
+export const workFaqs: FaqProps[] = [
+  {
+    question: "どこで見たいアニメを検索できますか？",
+    answer: <Search />,
+  },
+  {
+    question: "再生してもチャットが表示されません",
+    answer: <NotChat />,
+  },
+
   {
     question: "検索しても見つからない",
     answer: <DoNotFind />,
@@ -61,28 +89,44 @@ export const faqs: FaqProps[] = [
 
 export const Faq = () => (
   <div className="flex-1">
-    <div className="divide-y divide-gray-900/10">
-      <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
-        よくある質問
-      </h2>
-      <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
-        {faqs.map((item, index) => (
+    <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+      よくある質問一覧
+    </h2>
+    <section className="mt-14">
+      <h3 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900">
+        使い方のよくある質問
+      </h3>
+      <dl className="mt-2 space-y-6 divide-y divide-gray-900/10">
+        {usageFaqs.map((item, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <AnswerItem {...item} key={`faq-${index}`} />
+          <AnswerItem {...item} key={`usage-faq-${index}`} />
         ))}
       </dl>
-      <p className="mt-6 max-w-2xl py-6 text-base leading-7 text-gray-600">
-        上記の質問で解決しない場合は、
-        <a
-          className="font-semibold text-indigo-600 hover:text-indigo-500"
-          href="https://forms.gle/GMzgLTw6FA8S6jjS9"
-          rel="noreferrer"
-          target="_blank"
-        >
-          こちら
-        </a>
-        までお問い合わせください。
-      </p>
-    </div>
+    </section>
+
+    <section className="mt-14">
+      <h3 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900">
+        作品に関するよくある質問
+      </h3>
+      <dl className="mt-2 space-y-6 divide-y divide-gray-900/10">
+        {workFaqs.map((item, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <AnswerItem {...item} key={`detail-faq-${index}`} />
+        ))}
+      </dl>
+    </section>
+
+    <p className="mt-6 max-w-2xl py-6 text-base leading-7 text-gray-600">
+      上記の質問で解決しない場合は、
+      <a
+        className="font-semibold text-indigo-600 hover:text-indigo-500"
+        href="https://forms.gle/GMzgLTw6FA8S6jjS9"
+        rel="noreferrer"
+        target="_blank"
+      >
+        こちら
+      </a>
+      までお問い合わせください。
+    </p>
   </div>
 );

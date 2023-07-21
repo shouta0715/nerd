@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { faqs } from "src/features/pages/faq";
+import { workFaqs } from "src/features/pages/faq";
+
 import { AnswerItem } from "src/features/pages/faq/answers";
 
 export default {
@@ -9,7 +10,7 @@ export default {
 
 type Story = StoryObj<typeof AnswerItem>;
 
-const getFaq = (index: number) => faqs[index];
+const getFaq = (index: number) => workFaqs[index];
 
 const mock = {
   question: "このサイトは何をするためのサイトですか？",

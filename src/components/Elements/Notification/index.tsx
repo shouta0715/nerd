@@ -86,25 +86,37 @@ export const Notification = () => {
                     {title}
                   </p>
                   {(message || link) && (
-                    <div className="mt-1 text-sm text-gray-500">
+                    <div className="mt-1 text-sm leading-4 text-gray-500">
                       {message && <p>{message}</p>}
                       {link && (
-                        <p>
-                          <Link
-                            className="text-indigo-600 underline"
-                            href="/privacy"
-                          >
-                            プライバシーポリシー
-                          </Link>
-                          及び
-                          <Link
-                            className="text-indigo-600 underline"
-                            href="/terms"
-                          >
-                            利用規約
-                          </Link>
-                          をご確認ください。
-                        </p>
+                        <>
+                          <p>
+                            <Link
+                              className="text-indigo-600 underline"
+                              href="/privacy"
+                            >
+                              プライバシーポリシー
+                            </Link>
+                            及び
+                            <Link
+                              className="text-indigo-600 underline"
+                              href="/terms"
+                            >
+                              利用規約
+                            </Link>
+                            をご確認ください。
+                          </p>
+                          <p>
+                            初めての方は
+                            <Link
+                              className="text-indigo-600 underline"
+                              href="/usage"
+                            >
+                              使い方
+                            </Link>
+                            をご覧ください。
+                          </p>
+                        </>
                       )}
                     </div>
                   )}
