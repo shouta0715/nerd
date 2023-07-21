@@ -31,14 +31,14 @@ export const TimerModal = () => {
 
   return (
     <Modal onClose={onClose} open={isOpen}>
-      <Modal.Title>放送時間を入力してください。</Modal.Title>
+      <Modal.Title>アニメの総再生時間の入力</Modal.Title>
       <Modal.Content>
         <p className="mb-4">
-          <span className="mt-2 inline-block text-xs font-normal md:text-sm">
-            設定した時間を0秒としてコメントが表示されます。
+          <span className="mb-1 mt-2 inline-block text-xs font-normal md:text-sm">
+            動画配信サービスの総再生時間に合わせて、アニメの放送時間を入力してください。
           </span>
-          <span className="mt-0.5 inline-block text-xs text-red-500 underline decoration-dotted md:text-sm">
-            ※正しい時間が入力されていない場合異なる時間のコメントが表示されます。
+          <span className="mb-1 mt-2 inline-block text-xs font-normal text-indigo-600 md:text-sm">
+            例)アニメの長さが24分30秒の場合、00:24:30と入力してください。
           </span>
         </p>
         <div className="flex flex-col items-center space-y-1">

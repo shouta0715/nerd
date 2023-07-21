@@ -1,7 +1,8 @@
-import { ClockIcon, ListBulletIcon } from "@heroicons/react/24/outline";
+import { ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { useRouter } from "next/router";
 import React, { FC } from "react";
+import TimerIcon from "public/icons/TimerIcon.svg";
 import { Text } from "src/components/Elements/Text";
 
 import { useOpenState } from "src/features/episodes/store";
@@ -46,10 +47,10 @@ export const Nav: FC<Props> = ({
     >
       {response === "sp" && (
         <button
-          className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
+          className="m-1 h-6 w-6 transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsTimerOpen(!isTimerOpen)}
         >
-          <ClockIcon />
+          <TimerIcon />
         </button>
       )}
       <Text

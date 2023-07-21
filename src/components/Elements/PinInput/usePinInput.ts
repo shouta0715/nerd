@@ -113,13 +113,14 @@ export const usePinInput = ({
     index: number
   ): void => {
     event.preventDefault();
+
     const value = toHalfSizeNumber(event.target.value);
 
     if (!testRegex(value)) return;
 
     const nextChar = getNextChar(value, index);
 
-    if (!nextChar) return;
+    if (nextChar === undefined) return;
 
     const newTime = getNewTime({ time: input ?? time, nextChar, index });
 

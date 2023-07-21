@@ -1,3 +1,4 @@
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Switch } from "src/components/Elements/Switch";
@@ -30,8 +31,16 @@ export const ModeSwitch: FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="mb-1.5 flex items-center space-x-4">
+    <div className="mt-2 flex flex-col items-center">
+      <div className="relative mb-1.5 flex items-center space-x-4">
+        <div className="relative">
+          <QuestionMarkCircleIcon className="peer ml-2 h-6 w-6" />
+          <div className="question -left-11 w-32">
+            スイッチを押すとカウントアップ・ダウンを切り替えることができます。
+            <br />
+            動画配信サービスの表示に合わせて切り替えてください。
+          </div>
+        </div>
         <Switch
           checked={isUp}
           defaultChecked={isUp}
@@ -53,8 +62,11 @@ export const ModeSwitch: FC = () => {
           設定
         </Button>
       </div>
+
       <p className="text-sm">
-        {isUp ? "経過時間に合わせて表示中" : "残り時間に合わせて表示中"}
+        {isUp
+          ? "カウントアップでコメントを表示中"
+          : "カウントダウンでコメントを表示中"}
       </p>
     </div>
   );

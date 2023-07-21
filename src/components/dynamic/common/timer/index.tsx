@@ -8,9 +8,6 @@ export const Timer = () => {
   return (
     <>
       <Text size="sm">タイマー</Text>
-      <Text className="text-xs text-dimmed lg:mb-4 lg:mt-2">
-        モードを変更すると経過時間から表示か残り時間から表示か変更できます。
-      </Text>
       <TimeInput />
       <ModeSwitch />
       <SetTimerModal />
