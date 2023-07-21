@@ -1,5 +1,6 @@
 import { ClockIcon, ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 
@@ -28,6 +29,7 @@ export const Nav: FC<Props> = ({
       isTimerOpen: state.isTimerOpen,
       setIsTimerOpen: state.setIsTimerOpen,
     }));
+  const router = useRouter();
 
   return (
     <nav
@@ -57,7 +59,15 @@ export const Nav: FC<Props> = ({
           !isChat && "opacity-50"
         )}
         component="button"
-        onClick={() => setIsChat(true)}
+        onClick={() => {
+          setIsChat(true);
+          router.replace({
+            query: {
+              ...router.query,
+              mode: "chat",
+            },
+          });
+        }}
       >
         チャット
       </Text>
@@ -71,6 +81,12 @@ export const Nav: FC<Props> = ({
         onClick={() => {
           setIsChat(false);
           stop();
+          router.replace({
+            query: {
+              mode: "comment",
+              slug: router.query.slug,
+            },
+          });
         }}
       >
         コメント

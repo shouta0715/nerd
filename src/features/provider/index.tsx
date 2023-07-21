@@ -39,7 +39,7 @@ export const Provider = ({ children }: Props) => {
           <DynamicFirebaseAuth />
           <NextNProgress
             color="#6366f1"
-            height={2}
+            height={3}
             options={{ showSpinner: false }}
             startPosition={0.1}
           />
