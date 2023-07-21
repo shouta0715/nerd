@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Button } from "src/components/Elements/Button";
+import { useSearch } from "src/components/Elements/SearchButton/useSearch";
 import { SearchModal } from "src/components/Modal/Search";
-import { useSearch } from "src/hooks/useSearch";
 
 const createDecorator = () => () => {
   const { isSearchOpen, setIsSearchOpen, search, setSearch, submitHandler } =

@@ -1,10 +1,10 @@
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { Input } from "src/components/Elements/Input";
-import { useSearchWorks } from "src/features/works/hooks/useSearchWorks";
+import { useSearch } from "src/components/Elements/SearchButton/useSearch";
 
 export const SearchWorksForm = () => {
-  const { submitHandler, setSearch, search } = useSearchWorks();
+  const { submitHandler, search, setSearch } = useSearch();
 
   return (
     <form className="hidden w-full space-x-4 md:flex" onSubmit={submitHandler}>
