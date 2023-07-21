@@ -22,7 +22,7 @@ export const Series: FC = () => {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <p className=" mb-1 font-semibold">シリーズ一覧</p>
+        <p className="mb-1 font-semibold">シリーズ一覧</p>
 
         <p className="mx-auto h-2 w-1/2 animate-pulse rounded-md bg-slate-200" />
 

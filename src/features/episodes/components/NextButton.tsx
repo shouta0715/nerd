@@ -24,12 +24,12 @@ export const NextButton: FC<Props> = ({ episode }) => {
 
   return (
     <ButtonLink
-      className={` flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
+      className={`flex h-full w-36 items-center space-x-2 py-2 font-bold text-white sm:mx-0 sm:w-max ${
         timerMode === "up" ? "bg-orange-600" : "bg-indigo-600"
       }`}
       href={
         getIsAlreadyFinished(data?.episodes_by_pk?.end_time)
-          ? `/episodes/${data?.episodes_by_pk?.id}`
+          ? `/episodes/${data?.episodes_by_pk?.id}?mode=chat`
           : `/episodes/live/${data?.episodes_by_pk?.id}`
       }
       leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}

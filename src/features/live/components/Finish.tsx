@@ -21,7 +21,7 @@ export const FinishLive: FC<Props> = ({ episode }) => {
       </Text>
       <div className="flex w-full flex-wrap items-center justify-center gap-2">
         <ButtonLink
-          as={`/episodes/${episode?.id}`}
+          as={`/episodes/${episode?.id}?mode=chat`}
           className="w-max"
           href={{
             pathname: `/episodes/${episode?.id}`,
@@ -32,6 +32,7 @@ export const FinishLive: FC<Props> = ({ episode }) => {
                 series_id: episode?.work.series_id,
                 work_id: episode?.work.id,
               }),
+              mode: "chat",
             },
           }}
           leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
