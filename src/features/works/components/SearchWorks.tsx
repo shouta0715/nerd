@@ -53,7 +53,7 @@ export const SearchWorks = () => {
           )}
           {hasEpisodesData && hasEpisodesData.length > 0 && (
             <div>
-              <p className="flex items-center justify-center text-lg font-bold md:text-xl">
+              <p className="flex flex-col items-center justify-center text-lg font-bold md:flex-row md:text-xl">
                 {q}の検索結果
                 <span className="text-sm">（エピソードあり）</span>
               </p>
@@ -82,7 +82,7 @@ export const SearchWorks = () => {
             <div>
               <p
                 ref={noEpisodesRef}
-                className=" flex scroll-m-8 items-center justify-center text-lg font-bold md:text-xl"
+                className=" flex scroll-m-8 flex-col items-center justify-center text-lg font-bold md:flex-row md:text-xl"
               >
                 {q}の検索結果<span className="text-sm">（エピソードなし）</span>
               </p>
