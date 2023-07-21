@@ -77,7 +77,7 @@ export const Usage = () => {
   return (
     <div className="grid flex-1 gap-14">
       <section>
-        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
+        <h2 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
           はじめに
         </h2>
         <div>
@@ -108,7 +108,7 @@ export const Usage = () => {
         </div>
       </section>
       <section>
-        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
+        <h2 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
           使い方
         </h2>
         <ul className="-mb-8 mt-6" id="detail">
@@ -122,7 +122,7 @@ export const Usage = () => {
         </ul>
       </section>
       <section className="mt-10">
-        <h2 className="text-center text-xl font-bold leading-10 tracking-tight text-gray-900">
+        <h2 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
           ルール・注意事項
         </h2>
         <ol className="mt-10 list-inside list-decimal space-y-4 px-2">

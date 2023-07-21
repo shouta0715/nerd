@@ -53,22 +53,23 @@ export const SearchWorks = () => {
           )}
           {hasEpisodesData && hasEpisodesData.length > 0 && (
             <div>
-              <p className="grid place-items-center text-xl font-bold">
-                {q}の検索結果（エピソードあり）
-                {noEpisodesData && noEpisodesData?.length > 0 && (
-                  <button
-                    className="mt-1 flex items-center  justify-self-end text-sm text-indigo-600 underline"
-                    onClick={() => {
-                      noEpisodesRef.current?.scrollIntoView({
-                        behavior: "smooth",
-                      });
-                    }}
-                  >
-                    エピソードなしはこちら
-                    <ChevronDoubleDownIcon className="h-4 w-4" />
-                  </button>
-                )}
+              <p className="flex items-center justify-center text-lg font-bold md:text-xl">
+                {q}の検索結果
+                <span className="text-sm">（エピソードあり）</span>
               </p>
+              {noEpisodesData && noEpisodesData?.length > 0 && (
+                <button
+                  className="ml-auto mt-1 flex items-center text-sm text-indigo-600 underline"
+                  onClick={() => {
+                    noEpisodesRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  エピソードなしはこちら
+                  <ChevronDoubleDownIcon className="h-4 w-4" />
+                </button>
+              )}
               <ul className="mt-10 grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
                 {hasEpisodesData?.map((work) => (
                   <WorkItem key={work.id} work={work} />
@@ -81,9 +82,9 @@ export const SearchWorks = () => {
             <div>
               <p
                 ref={noEpisodesRef}
-                className="grid scroll-m-8 place-items-center text-xl font-bold"
+                className=" flex scroll-m-8 items-center justify-center text-lg font-bold md:text-xl"
               >
-                {q}の検索結果（エピソードなし）
+                {q}の検索結果<span className="text-sm">（エピソードなし）</span>
               </p>
               <ul className="mt-10 grid grid-cols-1 gap-y-12 md:gap-16 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
                 {noEpisodesData?.map((work) => (

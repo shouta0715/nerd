@@ -12,7 +12,7 @@ export const useSearch = () => {
       router.push({
         pathname: "/search",
         query: {
-          q: search,
+          q: search.trim(),
         },
       });
 

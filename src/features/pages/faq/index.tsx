@@ -89,11 +89,11 @@ export const workFaqs: FaqProps[] = [
 
 export const Faq = () => (
   <div className="flex-1">
-    <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+    <h2 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
       よくある質問一覧
     </h2>
     <section className="mt-14">
-      <h3 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900">
+      <h3 className="text-center  text-base leading-10 tracking-tight text-gray-900 md:text-lg">
         使い方のよくある質問
       </h3>
       <dl className="mt-2 space-y-6 divide-y divide-gray-900/10">
@@ -105,7 +105,7 @@ export const Faq = () => (
     </section>
 
     <section className="mt-14">
-      <h3 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900">
+      <h3 className="text-center leading-10 tracking-tight text-gray-900 md:text-lg">
         作品に関するよくある質問
       </h3>
       <dl className="mt-2 space-y-6 divide-y divide-gray-900/10">

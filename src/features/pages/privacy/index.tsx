@@ -73,7 +73,7 @@ const PrivacyDescriptions: TPrivacy[] = [
 export const Privacy = () => {
   return (
     <div className="flex-1">
-      <h2 className="mb-3 text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+      <h2 className="mb-3 text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
         プライバシーポリシー
       </h2>
       <p className="mb-4 text-base leading-6 text-gray-600">

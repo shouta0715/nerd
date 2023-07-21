@@ -10,7 +10,7 @@ export const Request = () => {
 
   return (
     <section className="flex-1">
-      <h2 className="text-center text-2xl font-bold leading-10 tracking-tight text-gray-900">
+      <h2 className="text-center text-lg font-bold leading-10 tracking-tight text-gray-900 md:text-xl">
         作品のリクエスト
       </h2>
       <form className="mt-10 space-y-4" onSubmit={onSubmitHandler}>
