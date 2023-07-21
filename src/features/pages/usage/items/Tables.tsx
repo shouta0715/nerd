@@ -21,7 +21,7 @@ export const Tables: FC<Props> = ({ tableContents, tableHeaders, title }) => {
         {title}
       </h3>
       <div className="flow-root">
-        <div className="inline-block min-w-full px-6 py-2 align-middle">
+        <div className="inline-block min-w-full py-2 align-middle">
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
             <table className="w-full table-fixed divide-y divide-gray-300">
               <thead className="bg-gray-50">
