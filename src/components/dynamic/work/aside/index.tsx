@@ -12,12 +12,12 @@ import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
 
 type Props = {
   isChat: boolean;
-  setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
+
   data?: GetWorkQuery;
   filter: CommentsFilter;
 };
 
-export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
+export const Aside: FC<Props> = ({ isChat, data, filter }) => {
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -27,7 +27,7 @@ export const Aside: FC<Props> = ({ isChat, setIsChat, data, filter }) => {
           id={data?.works_by_pk?.id}
           title={data?.works_by_pk?.series_title}
         />
-        <Nav isChat={isChat} response="lg" setIsChat={setIsChat} />
+        <Nav isChat={isChat} response="lg" />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />

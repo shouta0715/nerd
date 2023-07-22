@@ -128,7 +128,7 @@ export const Usage = () => {
         <ol className="mt-10 list-inside list-decimal space-y-4 px-2">
           <li>不適切なコメントは禁止です。</li>
           <li>暴言や、誹謗中傷、個人情報、などの投稿は禁止です。</li>
-          <li>関係のないアニメの感想を投稿は禁止です。</li>
+          <li>関係のないアニメの感想を投稿するのは禁止です。</li>
           <li>悪意のあるネタバレは禁止です。</li>
         </ol>
       </section>

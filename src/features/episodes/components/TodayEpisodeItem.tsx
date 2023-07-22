@@ -51,7 +51,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
             as={
               getIsAlreadyFinished(episode.end_time)
                 ? `/episodes/${episode.id}?mode=chat`
-                : `/episodes/live/${episode.id}`
+                : `/episodes/live/${episode.id}?mode=chat`
             }
             className="group flex w-full flex-1 flex-col items-center gap-1"
             href={{
@@ -68,7 +68,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
                     }),
                     mode: "chat",
                   }
-                : undefined,
+                : {
+                    mode: "chat",
+                  },
             }}
           >
             <Text
@@ -109,7 +111,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               seconds={time.seconds.toString().padStart(2, "0")}
             />
             <ButtonLink
-              as={`/episodes/live/${episode.id}`}
+              as={`/episodes/live/${episode.id}?mode=chat`}
               className={`${
                 mode === "down"
                   ? "bg-indigo-600 text-white"
@@ -117,6 +119,9 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               } ml-auto mt-2 rounded-md px-2 py-2 text-sm font-bold`}
               href={{
                 pathname: `/episodes/live/${episode.id}`,
+                query: {
+                  mode: "chat",
+                },
               }}
               size="sm"
             >

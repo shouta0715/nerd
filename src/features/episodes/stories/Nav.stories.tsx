@@ -23,11 +23,9 @@ type Story = StoryObj<typeof Nav>;
 
 const createDecorators =
   (props: Partial<React.ComponentProps<typeof Nav>>) => () => {
-    const [isChat, setIsChat] = useState(props.isChat ?? false);
+    const [isChat, _] = useState(props.isChat ?? false);
 
-    return (
-      <Nav response="lg" {...props} isChat={isChat} setIsChat={setIsChat} />
-    );
+    return <Nav response="lg" {...props} isChat={isChat} />;
   };
 
 export const Default: Story = {

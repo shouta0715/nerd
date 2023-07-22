@@ -48,48 +48,46 @@ export const Comments = forwardRef<any, Props>(
 
     return (
       <>
-        <ul
-          className={`mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4 ${
-            data?.pages[0].comments.length === 0 ? "hidden" : "block"
-          }`}
-        >
-          <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
-            右下のボタンを押すと、最新のコメントを読み込めます
-          </p>
-          <div className="flex items-center justify-end space-x-4 px-2">
-            <ListBox<CommentsFilter, OptionProps>
-              buttonLabel={(value) =>
-                value === "new" ? "新しい順" : "いいね順"
-              }
-              filter={filter}
-              isLoading={isLoading}
-              options={options}
-              setFilter={setFilter}
-            />
+        {data?.pages[0].comments.length !== 0 ? (
+          <ul className="mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4">
+            <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+              右下のボタンを押すと、最新のコメントを読み込めます
+            </p>
+            <div className="flex items-center justify-end space-x-4 px-2">
+              <ListBox<CommentsFilter, OptionProps>
+                buttonLabel={(value) =>
+                  value === "new" ? "新しい順" : "いいね順"
+                }
+                filter={filter}
+                isLoading={isLoading}
+                options={options}
+                setFilter={setFilter}
+              />
+            </div>
+            {data?.pages.map((page) =>
+              page.comments.map((comment) => (
+                <Comment key={comment.id} comment={comment} />
+              ))
+            )}
+            <div
+              ref={ref}
+              className={`flex h-20 items-center justify-center text-center  ${
+                hasNextPage ? "block" : "hidden"
+              }`}
+            >
+              <Loader variant="oval" />
+            </div>
+          </ul>
+        ) : (
+          <div className="flex flex-1 flex-col items-center justify-center px-2 py-4 md:max-w-xl md:px-4">
+            <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+              右下のボタンを押すと、最新のコメントを読み込めます
+            </p>
+            <Text className="flex w-full flex-1 items-center justify-center text-gray-500">
+              コメントはまだありません
+            </Text>
           </div>
-          {data?.pages.map((page) =>
-            page.comments.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
-            ))
-          )}
-          <div
-            ref={ref}
-            className={`flex h-20 items-center justify-center text-center  ${
-              hasNextPage ? "block" : "hidden"
-            }`}
-          >
-            <Loader variant="oval" />
-          </div>
-        </ul>
-        <Text
-          className={`${
-            data?.pages[0].comments.length === 0
-              ? "flex w-full flex-1 items-center justify-center text-gray-500"
-              : "hidden"
-          }`}
-        >
-          コメントはまだありません
-        </Text>
+        )}
         <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
           <div className="grid h-10 w-10 place-items-center  rounded-full  bg-indigo-600  shadow-md shadow-indigo-400 transition-transform active:translate-y-1 lg:right-14">
             {isLoading ? (

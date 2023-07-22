@@ -22,7 +22,7 @@ type Props = {
 export const Live: FC<Props> = ({ data }) => {
   const {
     isChat,
-    setIsChat,
+
     time,
     mode,
     isAlreadyFinished,
@@ -37,7 +37,6 @@ export const Live: FC<Props> = ({ data }) => {
         filter={filter}
         isChat={isChat}
         mode={mode}
-        setIsChat={setIsChat}
         time={time}
       />
 
@@ -72,7 +71,7 @@ export const Live: FC<Props> = ({ data }) => {
             )
           )}
         </div>
-        <Nav isChat={isChat} mode={mode} response="sp" setIsChat={setIsChat} />
+        <Nav isChat={isChat} mode={mode} response="sp" />
 
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
@@ -113,7 +112,7 @@ export const Live: FC<Props> = ({ data }) => {
                     setFilter={setFilter}
                   />
                 ) : (
-                  <LiveComment setIsChat={setIsChat} />
+                  <LiveComment />
                 )}
               </Suspense>
             </ErrorBoundary>
