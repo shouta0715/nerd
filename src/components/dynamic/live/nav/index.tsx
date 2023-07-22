@@ -10,7 +10,6 @@ type Props = {
   isChat: boolean;
   setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
   response: "lg" | "sp";
-  showNext?: boolean;
   mode: LiveTimer["mode"];
 };
 
@@ -18,7 +17,7 @@ export const Nav: FC<Props> = ({
   setIsChat,
   isChat,
   response,
-  showNext = true,
+
   mode,
 }) => {
   const [isNextOpen, setIsNextOpen] = useOpenState((state) => [
@@ -32,12 +31,9 @@ export const Nav: FC<Props> = ({
         `flex items-center`,
         response === "lg" && "hidden flex-1 justify-around lg:flex",
 
-        response === "sp" &&
-          "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
-
-        response === "sp" &&
-          showNext &&
-          "justify-between px-2 before:h-7 before:w-7 before:content-['']"
+        response === "sp"
+          ? "sticky top-0 z-20 justify-between border-b bg-white/80 px-2 before:h-7 before:w-7 before:content-[''] lg:hidden"
+          : ""
       )}
     >
       <Text
@@ -62,7 +58,7 @@ export const Nav: FC<Props> = ({
       >
         コメント
       </Text>
-      {response === "sp" && showNext && (
+      {response === "sp" && (
         <button
           className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsNextOpen(!isNextOpen)}
