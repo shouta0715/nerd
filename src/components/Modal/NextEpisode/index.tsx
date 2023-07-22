@@ -5,12 +5,14 @@ import {
 } from "@heroicons/react/24/outline";
 import React, { FC, Fragment, Suspense, useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { ShareButton } from "src/components/Elements/Share";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { NextButton } from "src/features/episodes/components/NextButton";
 import { useOpenState } from "src/features/episodes/store";
 import { LiveTimer } from "src/features/timer/types";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {
   episode?: GetEpisodeQuery["episodes_by_pk"];
@@ -62,6 +64,18 @@ export const NextEpisodeModal: FC<Props> = ({ mode, episode }) => {
                     <Text className="text-dimmed" size="sm">
                       エピソード
                     </Text>
+                    <ShareButton
+                      title={`${genTitle({
+                        title: episode?.work.series_title,
+                        number: episode?.number,
+                        subtitle: episode?.title,
+                      })}の感想を一緒にシェアしよう！`}
+                      url={
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : ""
+                      }
+                    />
                   </div>
                   <Text component="div">
                     <Text className="text-sm" component="p">

@@ -30,7 +30,11 @@ export const SeriesItem: FC<Props> = ({
         href={{
           pathname: `${`/works/play/${series_work.id}`}`,
           query: {
-            work: [series_work.title, series_work.series_title],
+            work: [
+              series_work.title,
+              series_work.series_title,
+              series_work.series_id ?? "",
+            ],
           },
         }}
         leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}

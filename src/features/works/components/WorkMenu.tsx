@@ -1,8 +1,10 @@
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { ShareButton } from "src/components/Elements/Share";
 import { Text } from "src/components/Elements/Text";
 import { WorkMenuModal } from "src/components/Modal/WorkMenu";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {
   data?: GetWorkQuery;
@@ -16,6 +18,12 @@ export const WorkMenu: FC<Props> = ({ data }) => {
           <Text className="text-dimmed" size="sm">
             エピソード
           </Text>
+          <ShareButton
+            title={`${genTitle({
+              title: data?.works_by_pk?.series_title,
+            })}の感想を一緒にシェアしよう！`}
+            url={typeof window !== "undefined" ? window.location.href : ""}
+          />
         </div>
         <Text component="div">
           <Text className="text-sm" component="p">
