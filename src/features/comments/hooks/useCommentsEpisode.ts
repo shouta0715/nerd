@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useInfiniteCommentsEpisode } from "src/features/comments/api/useInfiniteCommentsEpisode";
 import { CommentsFilter } from "src/features/comments/types";
@@ -7,8 +8,15 @@ export const useCommentsEpisode = (
   episode_id: string,
   filter: CommentsFilter
 ) => {
-  const { data, isFetchingNextPage, fetchNextPage, hasNextPage, isFetching } =
-    useInfiniteCommentsEpisode(episode_id, filter);
+  const {
+    data,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isLoading,
+  } = useInfiniteCommentsEpisode(episode_id, filter);
+  const queryClient = useQueryClient();
 
   const { ref, entry } = useInterSection({
     root: null,
@@ -22,11 +30,27 @@ export const useCommentsEpisode = (
     }
   }, [entry?.isIntersecting, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+  const refetchHandler = () => {
+    if (!episode_id || isFetchingNextPage || isFetching) return;
+
+    queryClient.invalidateQueries([
+      "comments",
+      {
+        episode_id,
+        filter,
+      },
+    ]);
+    queryClient.invalidateQueries({
+      queryKey: ["replies"],
+    });
+  };
+
   return {
     data,
     isFetchingNextPage,
     ref,
     hasNextPage,
-    isLoading: isFetching,
+    isLoading: isFetching || isFetchingNextPage || isLoading,
+    refetchHandler,
   };
 };

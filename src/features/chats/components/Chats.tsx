@@ -22,6 +22,11 @@ export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
   return (
     <>
       <ul className="relative flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
+        <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+          {interval.active
+            ? "タイマーの時間に合わせて過去のその時間に投稿されたコメントが表示されます。"
+            : "配信サービスのアニメと同時にタイマーをスタートさせてください。"}
+        </p>
         <Transition
           as="button"
           className="absolute left-1/2 top-1/2 m-auto grid  -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border bg-black p-4 transition-all"

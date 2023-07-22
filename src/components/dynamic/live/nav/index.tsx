@@ -34,11 +34,10 @@ export const Nav: FC<Props> = ({
 
         response === "sp" &&
           "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
-        response === "sp" && !showNext && "justify-around",
 
         response === "sp" &&
           showNext &&
-          " justify-between px-2 before:h-7 before:w-7 before:content-['']"
+          "justify-between px-2 before:h-7 before:w-7 before:content-['']"
       )}
     >
       <Text

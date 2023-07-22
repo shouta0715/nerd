@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { InfiniteData } from "@tanstack/react-query";
 import React, { Fragment, forwardRef } from "react";
 import {
@@ -31,10 +32,14 @@ type Props = {
   setFilter: React.Dispatch<React.SetStateAction<CommentsFilter>>;
   hasNextPage?: boolean;
   isLoading: boolean;
+  refetchHandler: () => void;
 };
 
 export const Comments = forwardRef<any, Props>(
-  ({ data, hasNextPage, filter, setFilter, isLoading }, ref) => {
+  (
+    { data, hasNextPage, filter, setFilter, isLoading, refetchHandler },
+    ref
+  ) => {
     const user = useUserState((state) => state.user);
 
     if (!user) {
@@ -44,10 +49,13 @@ export const Comments = forwardRef<any, Props>(
     return (
       <>
         <ul
-          className={`mx-auto w-full flex-1 space-y-6 px-2 pt-4 md:max-w-xl md:px-4 ${
+          className={`mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4 ${
             data?.pages[0].comments.length === 0 ? "hidden" : "block"
           }`}
         >
+          <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+            右下のボタンを押すと、最新のコメントを読み込めます
+          </p>
           <div className="flex items-center justify-end space-x-4 px-2">
             <ListBox<CommentsFilter, OptionProps>
               buttonLabel={(value) =>
@@ -82,6 +90,20 @@ export const Comments = forwardRef<any, Props>(
         >
           コメントはまだありません
         </Text>
+        <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
+          <div className="grid h-10 w-10 place-items-center  rounded-full  bg-indigo-600  shadow-md shadow-indigo-400 transition-transform active:translate-y-1 lg:right-14">
+            {isLoading ? (
+              <Loader size="xl" theme="white" />
+            ) : (
+              <button
+                className="grid h-full w-full place-items-center text-white "
+                onClick={refetchHandler}
+              >
+                <ArrowPathIcon className="h-6 w-6 stroke-white" />
+              </button>
+            )}
+          </div>
+        </div>
       </>
     );
   }

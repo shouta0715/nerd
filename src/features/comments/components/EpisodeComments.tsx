@@ -14,10 +14,8 @@ export const EpisodeComments: FC<Props> = ({
   filter,
   setFilter,
 }) => {
-  const { data, ref, hasNextPage, isLoading } = useCommentsEpisode(
-    episode_id,
-    filter
-  );
+  const { data, ref, hasNextPage, isLoading, refetchHandler } =
+    useCommentsEpisode(episode_id, filter);
 
   return (
     <Comments
@@ -26,6 +24,7 @@ export const EpisodeComments: FC<Props> = ({
       filter={filter}
       hasNextPage={hasNextPage}
       isLoading={isLoading}
+      refetchHandler={refetchHandler}
       setFilter={setFilter}
     />
   );

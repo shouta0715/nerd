@@ -11,6 +11,7 @@ export const useReplies = ({ reply_count, reply_id }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isFetching } =
     useInfiniteQueryReplies(reply_id, isOpen);
+
   const [replyCount, setReplyCount] = useState(0);
   const [showCount, setShowCount] = useState(1);
 
@@ -35,14 +36,6 @@ export const useReplies = ({ reply_count, reply_id }: Props) => {
       setIsOpen(false);
       setReplyCount(0);
       setShowCount(1);
-
-      // // TODO ユーザーの設定によりの設定により変更する
-      // if (content.current) {
-      //   content.current.scrollIntoView({
-      //     behavior: "smooth",
-      //     block: "start",
-      //   });
-      // }
 
       return;
     }
@@ -69,15 +62,7 @@ export const useReplies = ({ reply_count, reply_id }: Props) => {
   const closeClickHandler = useCallback(() => {
     setIsOpen(false);
     setReplyCount(0);
-    setShowCount(1);
-
-    // // TODO ユーザーの設定によりの設定により変更する
-    // if (content.current) {
-    //   content.current.scrollIntoView({
-    //     behavior: "smooth",
-    //     block: "start",
-    //   });
-    // }
+    setShowCount(1); // // TODO ユーザーの設定によりの設定により変
   }, []);
 
   return {
@@ -87,10 +72,9 @@ export const useReplies = ({ reply_count, reply_id }: Props) => {
     data,
     hasNextPage,
     fetchNextPage,
-    isFetchingNextPage,
     replyCount,
     showCount,
     closeClickHandler,
-    isFetching,
+    isLoading: isFetching || isFetchingNextPage,
   };
 };
