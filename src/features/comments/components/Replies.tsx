@@ -19,9 +19,8 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
     isOpen,
     data,
     showCount,
-    isFetchingNextPage,
-    isFetching,
     closeClickHandler,
+    isLoading,
   } = useReplies({
     reply_id,
     reply_count,
@@ -45,15 +44,15 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                     />
                   ))
                 )}
-              {isFetchingNextPage && isFetching && (
+              {isLoading && (
                 <div className="flex w-full">
                   <Loader className="mx-auto" size="lg" variant="dots" />
                 </div>
               )}
             </Disclosure.Panel>
           </Transition>
-          {!isFetchingNextPage && !isFetching && (
-            <div className=" mt-2 flex w-full justify-between">
+          {!isLoading && (
+            <div className="my-2 flex w-full justify-between">
               <Disclosure.Button
                 className="flex w-max items-center justify-end space-x-1 p-0 text-xs font-semibold text-indigo-500 hover:bg-transparent md:text-sm"
                 onClick={clickHandler}
@@ -63,9 +62,7 @@ export const Replies: FC<Props> = ({ reply_count, reply_id, content }) => {
                   <ChevronUpIcon
                     className={`h-4 w-4 transform transition-transform ${
                       controlLabel() === "返信を閉じる" ? "" : "rotate-180 "
-                    }
-
-                  `}
+                    }`}
                   />
                 </span>
               </Disclosure.Button>

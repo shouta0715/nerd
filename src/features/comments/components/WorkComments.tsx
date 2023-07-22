@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const WorkComments: FC<Props> = ({ work_id, filter, setFilter }) => {
-  const { data, ref, hasNextPage, isLoading } = useCommentsWork(
+  const { data, ref, hasNextPage, isLoading, refetchHandler } = useCommentsWork(
     work_id,
     filter
   );
@@ -22,6 +22,7 @@ export const WorkComments: FC<Props> = ({ work_id, filter, setFilter }) => {
       filter={filter}
       hasNextPage={hasNextPage}
       isLoading={isLoading}
+      refetchHandler={refetchHandler}
       setFilter={setFilter}
     />
   );

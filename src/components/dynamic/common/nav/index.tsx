@@ -36,13 +36,13 @@ export const Nav: FC<Props> = ({
     <nav
       className={clsx(
         `flex items-center`,
-        response === "lg" && "hidden flex-1  justify-around lg:flex",
-
-        response === "sp" &&
-          "sticky top-0 z-20 border-b bg-white/80 px-2 lg:hidden",
-        response === "sp" && !showNext && "justify-around",
-
-        response === "sp" && showNext && " justify-between px-2"
+        response === "lg" ? "hidden flex-1  justify-around lg:flex" : "",
+        response === "sp"
+          ? "sticky top-0 z-20 justify-between border-b bg-white/80 px-2 lg:hidden"
+          : "",
+        response === "sp" && !showNext
+          ? "after:h-7 after:w-7 after:content-['']"
+          : ""
       )}
     >
       {response === "sp" && (

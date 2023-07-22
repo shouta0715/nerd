@@ -28,7 +28,7 @@ export const Comment: FC<Props> = ({ comment }) => {
 
   return (
     <li className="flex w-full">
-      <figure className="m-0 mr-2">
+      <figure className="mr-2">
         {user?.isDefaultPhoto && user?.id === comment?.user?.id ? (
           <Image
             alt="avatar"
