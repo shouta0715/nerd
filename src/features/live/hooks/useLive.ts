@@ -1,10 +1,13 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { CommentsFilter } from "src/features/comments/types";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 export const useLive = (data: GetEpisodeQuery) => {
-  const [isChat, setIsChat] = useState(true);
+  const router = useRouter();
+  const { mode: chatMode } = router.query;
+
   const [filter, setFilter] = useState<CommentsFilter>("new");
 
   const { mode, time, isAlreadyFinished } = useLiveTimer({
@@ -13,8 +16,7 @@ export const useLive = (data: GetEpisodeQuery) => {
   });
 
   return {
-    isChat,
-    setIsChat,
+    isChat: chatMode === "chat",
     mode,
     time,
     isAlreadyFinished,

@@ -14,21 +14,13 @@ import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 
 type Props = {
   isChat: boolean;
-  setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
   data?: GetEpisodeQuery;
   filter: CommentsFilter;
   mode: LiveTimer["mode"];
   time: Time;
 };
 
-export const Aside: FC<Props> = ({
-  isChat,
-  setIsChat,
-  data,
-  filter,
-  mode,
-  time,
-}) => {
+export const Aside: FC<Props> = ({ isChat, data, filter, mode, time }) => {
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -46,7 +38,7 @@ export const Aside: FC<Props> = ({
           }}
           title={data?.episodes_by_pk?.work.series_title}
         />
-        <Nav isChat={isChat} mode={mode} response="lg" setIsChat={setIsChat} />
+        <Nav isChat={isChat} mode={mode} response="lg" />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />

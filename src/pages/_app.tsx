@@ -1,5 +1,6 @@
 import { Maintenance } from "src/features/pages/maintenance";
 import "../styles/tailwind.css";
+import { Meta } from "src/libs/meta";
 import { AppPropsWithLayout } from "src/libs/next/types";
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
@@ -8,7 +9,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   }
 
   const getLayout = Component.getLayout ?? ((page) => page);
-  const getTitle = Component.getTitle ?? ((page) => page);
+  const getTitle = Component.getTitle ?? Meta();
 
   return getLayout(getTitle(<Component {...pageProps} />, pageProps));
 };

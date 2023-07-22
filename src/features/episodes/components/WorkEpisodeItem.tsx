@@ -23,7 +23,7 @@ export const WorkEpisodeItem: FC<Props> = ({
       as={
         getIsAlreadyFinished(episode.end_time)
           ? `/episodes/${episode.id}?mode=chat`
-          : `/episodes/live/${episode.id}`
+          : `/episodes/live/${episode.id}?mode=chat`
       }
       className=" mb-1 px-2 text-sm text-indigo-600 transition-all hover:text-indigo-500 hover:underline md:text-base"
       color="indigo"
@@ -31,15 +31,19 @@ export const WorkEpisodeItem: FC<Props> = ({
         pathname: getIsAlreadyFinished(episode.end_time)
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`,
-        query: {
-          episode: genEpisodePlaceholder({
-            episode,
-            title: work_title,
-            work_id,
-            series_id,
-          }),
-          mode: "chat",
-        },
+        query: getIsAlreadyFinished(episode.end_time)
+          ? {
+              episode: genEpisodePlaceholder({
+                episode,
+                title: work_title,
+                work_id,
+                series_id,
+              }),
+              mode: "chat",
+            }
+          : {
+              mode: "chat",
+            },
       }}
     >
       第{episode.number}話

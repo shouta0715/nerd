@@ -9,14 +9,6 @@ export const useEpisode = () => {
   const { slug, episode, mode } = router.query;
   const { data, isLoading } = useQueryEpisode(slug, episode);
 
-  const [isChat, setIsChat] = useState(() => {
-    if (typeof mode === "string") {
-      return mode === "chat";
-    }
-
-    return true;
-  });
-
   const [filter, setFilter] = useState<CommentsFilter>("new");
 
   const interval = useTimerState((state) => state.interval);
@@ -25,8 +17,7 @@ export const useEpisode = () => {
   return {
     data,
     isLoading,
-    isChat,
-    setIsChat,
+    isChat: mode === "chat",
     filter,
     setFilter,
   };

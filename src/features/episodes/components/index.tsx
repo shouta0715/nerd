@@ -23,8 +23,7 @@ import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";
 
 export const Episode: FC = () => {
-  const { data, isLoading, isChat, setIsChat, filter, setFilter } =
-    useEpisode();
+  const { data, isLoading, isChat, filter, setFilter } = useEpisode();
 
   if (isLoading) {
     return <Skeleton theme="episode" />;
@@ -47,12 +46,7 @@ export const Episode: FC = () => {
         subtitle={data?.episodes_by_pk?.title}
         title={data?.episodes_by_pk?.work.series_title}
       />
-      <Aside
-        data={data}
-        filter={filter}
-        isChat={isChat}
-        setIsChat={setIsChat}
-      />
+      <Aside data={data} filter={filter} isChat={isChat} />
 
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
         <div className="block w-full bg-white/80 py-4 lg:hidden">
@@ -73,7 +67,7 @@ export const Episode: FC = () => {
             />
           )}
         </div>
-        <Nav isChat={isChat} response="sp" setIsChat={setIsChat} />
+        <Nav isChat={isChat} response="sp" />
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <ErrorBoundary

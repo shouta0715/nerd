@@ -1,5 +1,6 @@
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 
@@ -8,22 +9,17 @@ import { LiveTimer } from "src/features/timer/types";
 
 type Props = {
   isChat: boolean;
-  setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
+
   response: "lg" | "sp";
   mode: LiveTimer["mode"];
 };
 
-export const Nav: FC<Props> = ({
-  setIsChat,
-  isChat,
-  response,
-
-  mode,
-}) => {
+export const Nav: FC<Props> = ({ isChat, response, mode }) => {
   const [isNextOpen, setIsNextOpen] = useOpenState((state) => [
     state.isNextOpen,
     state.setIsNextOpen,
   ]);
+  const router = useRouter();
 
   return (
     <nav
@@ -43,7 +39,14 @@ export const Nav: FC<Props> = ({
           !isChat && "opacity-50"
         )}
         component="button"
-        onClick={() => setIsChat(true)}
+        onClick={() => {
+          router.replace({
+            query: {
+              ...router.query,
+              mode: "chat",
+            },
+          });
+        }}
       >
         チャット
       </Text>
@@ -54,7 +57,14 @@ export const Nav: FC<Props> = ({
           mode === "up" ? " text-orange-500" : " text-indigo-500"
         )}
         component="button"
-        onClick={() => setIsChat(false)}
+        onClick={() => {
+          router.replace({
+            query: {
+              ...router.query,
+              mode: "comment",
+            },
+          });
+        }}
       >
         コメント
       </Text>

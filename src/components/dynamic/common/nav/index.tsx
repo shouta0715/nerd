@@ -10,17 +10,12 @@ import { useTimerState } from "src/features/timer/store";
 
 type Props = {
   isChat: boolean;
-  setIsChat: React.Dispatch<React.SetStateAction<boolean>>;
+
   response: "lg" | "sp";
   showNext?: boolean;
 };
 
-export const Nav: FC<Props> = ({
-  setIsChat,
-  isChat,
-  response,
-  showNext = true,
-}) => {
+export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
   const mode = useTimerState((state) => state.mode);
   const stop = useTimerState((state) => state.interval.stop);
   const { isNextOpen, setIsNextOpen, isTimerOpen, setIsTimerOpen } =
@@ -61,7 +56,6 @@ export const Nav: FC<Props> = ({
         )}
         component="button"
         onClick={() => {
-          setIsChat(true);
           router.replace({
             query: {
               ...router.query,
@@ -80,7 +74,6 @@ export const Nav: FC<Props> = ({
         )}
         component="button"
         onClick={() => {
-          setIsChat(false);
           stop();
           router.replace({
             query: {

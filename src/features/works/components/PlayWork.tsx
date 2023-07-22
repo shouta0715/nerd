@@ -18,8 +18,7 @@ import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/validateData";
 
 export const PlayWork: FC = () => {
-  const { isChat, isLoading, setIsChat, data, filter, setFilter } =
-    usePlayWork();
+  const { isChat, isLoading, data, filter, setFilter } = usePlayWork();
 
   if (isLoading) {
     return <Skeleton theme="episode" />;
@@ -33,12 +32,7 @@ export const PlayWork: FC = () => {
   return (
     <>
       <DetailTitle title={data?.works_by_pk?.series_title} />
-      <Aside
-        data={data}
-        filter={filter}
-        isChat={isChat}
-        setIsChat={setIsChat}
-      />
+      <Aside data={data} filter={filter} isChat={isChat} />
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
         <div className="block w-full bg-white/80 py-4 lg:hidden">
           {/* Mobile Design */}
@@ -59,7 +53,6 @@ export const PlayWork: FC = () => {
         <Nav
           isChat={isChat}
           response="sp"
-          setIsChat={setIsChat}
           showNext={!!data?.works_by_pk?.series_id}
         />
         <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
