@@ -39,7 +39,7 @@ export const Aside: FC<Props> = ({ isChat, data, filter }) => {
         <WorkMenu data={data} />
       </div>
 
-      <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white p-4 shadow-lg ring-1  ring-gray-900/5 ">
+      <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 ">
         {isChat ? (
           <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (
