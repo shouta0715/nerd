@@ -101,7 +101,11 @@ export const SearchWorks = () => {
                       href={{
                         pathname: `${`/works/play/${work.id}`}`,
                         query: {
-                          work: [work.title, work.series_title],
+                          work: [
+                            work.title,
+                            work.series_title,
+                            work.series_id ?? "",
+                          ],
                         },
                       }}
                       leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}

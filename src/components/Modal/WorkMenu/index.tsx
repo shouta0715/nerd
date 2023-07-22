@@ -1,9 +1,11 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { FC, Fragment, useEffect } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
+import { ShareButton } from "src/components/Elements/Share";
 import { Text } from "src/components/Elements/Text";
 import { useOpenState } from "src/features/episodes/store";
 import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {
   data?: GetWorkQuery;
@@ -54,6 +56,16 @@ export const WorkMenuModal: FC<Props> = ({ data }) => {
                     <Text className="text-dimmed" size="sm">
                       エピソード
                     </Text>
+                    <ShareButton
+                      title={`${genTitle({
+                        title: data?.works_by_pk?.series_title,
+                      })}の感想を一緒にシェアしよう！`}
+                      url={
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : ""
+                      }
+                    />
                   </div>
                   <Text component="div">
                     <Text className="line-clamp-2 text-sm" component="p">
@@ -62,10 +74,10 @@ export const WorkMenuModal: FC<Props> = ({ data }) => {
                   </Text>
                   <div className="mt-4 flex flex-wrap items-center justify-center">
                     {data?.works_by_pk?.series_id && (
-                      <nav className="group relative my-2 flex cursor-pointer items-center justify-center pb-2">
+                      <nav className="group relative flex cursor-pointer items-center justify-center pb-2">
                         <ButtonLink
                           as={`/series/${data?.works_by_pk?.series_id}`}
-                          className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:py-2 md:text-sm"
+                          className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:text-sm"
                           href={{
                             pathname: `/series/${data?.works_by_pk?.series_id}`,
                             query: { series_title: data?.works_by_pk?.title },

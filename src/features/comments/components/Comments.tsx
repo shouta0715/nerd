@@ -49,7 +49,7 @@ export const Comments = forwardRef<any, Props>(
     return (
       <>
         {data?.pages[0].comments.length !== 0 ? (
-          <ul className="mx-auto w-full flex-1 space-y-6 px-2 py-4 md:max-w-xl md:px-4">
+          <ul className="flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
             <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
               右下のボタンを押すと、最新のコメントを読み込めます
             </p>
@@ -79,7 +79,7 @@ export const Comments = forwardRef<any, Props>(
             </div>
           </ul>
         ) : (
-          <div className="flex flex-1 flex-col items-center justify-center px-2 py-4 md:max-w-xl md:px-4">
+          <div className="flex flex-1 flex-col items-center justify-center px-2 py-4 md:px-4">
             <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
               右下のボタンを押すと、最新のコメントを読み込めます
             </p>

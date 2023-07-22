@@ -8,6 +8,9 @@ export const Timer = () => {
   return (
     <>
       <Text size="sm">タイマー</Text>
+      <Text className="mb-2 text-dimmed" size="xs">
+        表示されているタイマーの時間などを変更できます。
+      </Text>
       <TimeInput />
       <ModeSwitch />
       <SetTimerModal />

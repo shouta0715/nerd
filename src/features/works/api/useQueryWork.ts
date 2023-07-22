@@ -22,13 +22,14 @@ export const useQueryWork = ({ slug, work }: Args) => {
       placeholderData: () => {
         if (!slug || !work || typeof work === "string") return undefined;
 
-        const [title, series_title] = work;
+        const [title, series_title, series_id] = work;
 
         return {
           works_by_pk: {
             id: Number(slug),
             title,
             series_title,
+            series_id: series_id === "" ? null : series_id,
           },
         };
       },
