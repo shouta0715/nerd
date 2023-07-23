@@ -40,10 +40,7 @@ const Document = () => (
       <meta content="#ffffff" name="theme-color" />
       <meta content="summary_large_image" name="twitter:card" />
       <meta content="Nerd" name="twitter:title" />
-      <meta
-        content="https://nerd-plus.com/mstile-150x150.png"
-        name="twitter:image"
-      />
+      <meta content="https://nerd-plus.com/og.png" name="twitter:image" />
       <script
         async
         crossOrigin="anonymous"
