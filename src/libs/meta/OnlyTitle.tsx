@@ -30,6 +30,14 @@ export const DetailTitle = ({ title = "Nerd", number, subtitle }: Props) => {
         number,
         subtitle,
       })} - Nerd`}</title>
+      <meta
+        content={`${genTitle({
+          title,
+          number,
+          subtitle,
+        })}の感想を一緒にシェアしよう！`}
+        name="twitter:description"
+      />
     </Head>
   );
 };
