@@ -10,6 +10,9 @@ const Document = () => (
       />
       <meta content="Nerd" property="og:site_name" />
       <meta content="Nerd" property="og:title" />
+      <meta content="website" property="og:type" />
+      <meta content="https://nerd-plus.com/" property="og:url" />
+      <meta content="https://nerd-plus.com/og.png" property="og:image" />
       <meta
         content="匿名でアニメの感想を投稿してみんなと感想を共有しよう！"
         property="og:description"
@@ -35,6 +38,12 @@ const Document = () => (
       <link color="#5bbad5" href="/safari-pinned-tab.svg" rel="mask-icon" />
       <meta content="#da532c" name="msapplication-TileColor" />
       <meta content="#ffffff" name="theme-color" />
+      <meta content="summary_large_image" name="twitter:card" />
+      <meta content="Nerd" name="twitter:title" />
+      <meta
+        content="https://nerd-plus.com/mstile-150x150.png"
+        name="twitter:image"
+      />
       <script
         async
         crossOrigin="anonymous"
