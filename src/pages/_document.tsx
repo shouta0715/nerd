@@ -18,6 +18,10 @@ const Document = () => (
       <meta content="https://nerd-plus.com/og.png" name="twitter:image" />
       <meta
         content="匿名でアニメの感想を投稿してみんなと感想を共有しよう！"
+        name="twitter:description"
+      />
+      <meta
+        content="匿名でアニメの感想を投稿してみんなと感想を共有しよう！"
         property="og:description"
       />
       <link
