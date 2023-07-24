@@ -6,14 +6,17 @@ import TwitterIcon from "public/icons/TwitterIcon.svg";
 type Props = {
   title: string;
   url: string;
+  text: string;
 };
 
-export const ShareButton: FC<Props> = ({ title, url }) => {
+export const ShareButton: FC<Props> = ({ title, url, text }) => {
   const baseUrl = "https://twitter.com/intent/tweet";
+  const titleHashTag = title.replace(/\s+/g, "");
+  const hashtags = ["Nerd", titleHashTag];
 
   const params = new URLSearchParams({
-    hashtags: `Nerd`,
-    text: title,
+    hashtags: hashtags.join(","),
+    text,
     url,
   });
 
@@ -23,7 +26,7 @@ export const ShareButton: FC<Props> = ({ title, url }) => {
     <a
       className={twMerge(
         clsx(
-          "flex min-w-max items-center justify-center gap-2 rounded-full border px-2 py-1 hover:bg-gray-100"
+          "flex min-w-max items-center justify-center gap-2 rounded-full border px-2 py-1 font-semibold hover:bg-gray-100"
         )
       )}
       href={shareUrl}

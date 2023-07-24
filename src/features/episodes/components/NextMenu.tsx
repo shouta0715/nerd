@@ -31,11 +31,12 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
             エピソード
           </Text>
           <ShareButton
-            title={`${genTitle({
+            text={`${genTitle({
               title: episode?.work.series_title,
               number: episode?.number,
               subtitle: episode?.title,
             })}の感想を一緒にシェアしよう！`}
+            title={episode?.work.title ?? ""}
             url={typeof window !== "undefined" ? window.location.href : ""}
           />
         </div>
