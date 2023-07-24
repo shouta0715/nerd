@@ -57,9 +57,10 @@ export const WorkMenuModal: FC<Props> = ({ data }) => {
                       エピソード
                     </Text>
                     <ShareButton
-                      title={`${genTitle({
+                      text={`${genTitle({
                         title: data?.works_by_pk?.series_title,
                       })}の感想を一緒にシェアしよう！`}
+                      title={data?.works_by_pk?.title ?? ""}
                       url={
                         typeof window !== "undefined"
                           ? window.location.href
