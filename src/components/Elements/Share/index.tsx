@@ -11,10 +11,10 @@ type Props = {
 
 export const ShareButton: FC<Props> = ({ title, url, text }) => {
   const baseUrl = "https://twitter.com/intent/tweet";
-  // twitterのハッシュタグのルールに従って、タイトルから空白と記号を削除
-  const titleHashTag = title.replace(/[\s\W]+/g, "");
 
-  const hashtags = ["Nerd", titleHashTag];
+  const titleHashTag = title.replace(/[\s\\.,;?!]/g, "");
+
+  const hashtags = titleHashTag ? ["Nerd", titleHashTag] : ["Nerd"];
 
   const params = new URLSearchParams({
     hashtags: hashtags.join(","),
@@ -36,7 +36,7 @@ export const ShareButton: FC<Props> = ({ title, url, text }) => {
       target="_blank"
     >
       <TwitterIcon />
-      <span className="text-xs">シェア</span>
+      <span className="text-sm">シェア</span>
     </a>
   );
 };
