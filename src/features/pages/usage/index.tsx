@@ -58,8 +58,8 @@ const DetailSteps: TStep[] = [
 
 const faqs = [
   {
-    question: "どんなサービスですか？",
-    answer: "アニメの感想を投稿できるサービスです。",
+    question: "どんなサイトですか？",
+    answer: "アニメの感想を投稿できるサイトです。",
   },
   {
     question: "どんな機能がありますか？",
