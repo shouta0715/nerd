@@ -7,11 +7,11 @@ export const LiveComment = () => {
 
   return (
     <div className="flex w-full flex-1 animate-fadeUp flex-col items-center justify-center p-6">
-      <p className="text-lg font-bold md:text-xl">
+      <p className="text-dimmed">
         終了までお待ち下さい。終了後にコメントを投稿できます。
       </p>
       <Button
-        className="mt-4 bg-indigo-500 p-2 font-bold text-white"
+        className="mt-4"
         onClick={() =>
           router.replace({
             query: {
@@ -20,7 +20,8 @@ export const LiveComment = () => {
             },
           })
         }
-        size="sm"
+        size="md"
+        theme="primary"
       >
         チャットに戻る
       </Button>
