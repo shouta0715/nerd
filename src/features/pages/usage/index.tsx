@@ -24,8 +24,7 @@ const DetailSteps: TStep[] = [
   },
   {
     id: 2,
-    content:
-      "チャットを選択し、動画配信サービスの再生ボタンと同時に再生ボタンをクリックします。該当の時間に他のユーザのコメントが表示されます。放送中のアニメはリアルタイムにコメントが反映されます。",
+    content: "チャットを選択し、動画配信サービスと同時に再生します。",
     stepContent: "Step 2. 再生",
     Icon: PlayIcon,
     iconBackground: "bg-green-500",
@@ -39,8 +38,7 @@ const DetailSteps: TStep[] = [
   },
   {
     id: 4,
-    content:
-      "動画が終了したら、コメントタブを選択し、アニメ全体の感想を投稿します。",
+    content: "コメントタブを選択し、アニメ全体の感想を投稿します。",
     element: <Fourth />,
     stepContent: "Step 4. 投稿",
     iconBackground: "bg-pink-500",
