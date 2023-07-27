@@ -20,15 +20,8 @@ type Props = {
 };
 
 export const Live: FC<Props> = ({ data }) => {
-  const {
-    isChat,
-
-    time,
-    mode,
-    isAlreadyFinished,
-    filter,
-    setFilter,
-  } = useLive(data);
+  const { isChat, time, mode, isAlreadyFinished, filter, setFilter } =
+    useLive(data);
 
   return (
     <>

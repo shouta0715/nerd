@@ -33,7 +33,7 @@ export const Step = ({
             </span>
           </div>
           <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
-            <div className="text-sm text-gray-500">
+            <div className="text-gray-500">
               <p>{content}</p>
               {element}
             </div>
