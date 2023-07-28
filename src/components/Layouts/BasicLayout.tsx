@@ -70,3 +70,7 @@ export const BasicListLayout = (page: ReactElement) => (
     <DynamicAuthModal />
   </LayoutProvider>
 );
+
+export const OnlyProviderLayout = (page: ReactElement) => (
+  <LayoutProvider>{page}</LayoutProvider>
+);

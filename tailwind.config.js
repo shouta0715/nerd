@@ -22,6 +22,7 @@ module.exports = {
         fadeIn: "fadeIn 0.25s ease-out forwards",
         border: "border 0.25s ease-out forwards",
         like: "like 1s ease-out forwards",
+        gradient: "gradient 3s ease infinite",
       },
       keyframes: {
         comment: {
@@ -47,6 +48,17 @@ module.exports = {
         like: {
           "0%": { transform: "scale(1)" },
           "100%": { transform: "scale(1.5)" },
+        },
+        gradient: {
+          "0%": {
+            backgroundPosition: "0% 50%",
+          },
+          "100%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          }
         },
       },
       height: {

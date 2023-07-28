@@ -1,8 +1,10 @@
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { GetStaticPaths } from "next";
 import dynamic from "next/dynamic";
 import React from "react";
-import { Skeleton } from "src/components/Elements/Skeleton";
+
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
+import { Skeleton } from "src/features/live/components/Skeleton";
 import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
 import { getEpisode, getLiveIdsPaths } from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";
@@ -14,7 +16,7 @@ const DynamicLive = dynamic(
   () => import("src/features/live/components").then((mod) => mod.Live),
   {
     ssr: false,
-    loading: () => <Skeleton theme="episode" />,
+    loading: () => <Skeleton />,
   }
 );
 
@@ -44,12 +46,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: NextSSG<GetEpisodeQuery> = async ({ params }) => {
   const id = params?.slug as string;
-  const data = await getEpisode(id);
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["GetEpisodeLive", { id }],
+    queryFn: () => getEpisode(id),
+  });
+
+  const data = queryClient.getQueryData<GetEpisodeQuery>([
+    "GetEpisodeLive",
+    { id },
+  ]);
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const dehydratedState = dehydrate(queryClient);
 
   return {
     props: {
       data,
       error: null,
+      dehydratedState,
     },
   };
 };
