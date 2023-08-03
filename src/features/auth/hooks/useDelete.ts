@@ -5,7 +5,7 @@ import {
   reauthenticateWithPopup,
 } from "firebase/auth";
 import { useCallback } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useRecentLoginState } from "src/features/auth/store";
 import { UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";

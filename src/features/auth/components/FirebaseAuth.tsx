@@ -5,7 +5,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { signInAnonymously } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
 import { auth } from "src/libs/firebase";
@@ -126,8 +126,13 @@ export const FirebaseAuth = () => {
             })
           );
 
-          queryClient.invalidateQueries(["comments"]);
-          queryClient.invalidateQueries(["replies"]);
+          queryClient.invalidateQueries({
+            queryKey: ["comments"],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["replies"],
+          });
+
           setAuthLoading(false);
         } catch (error: any) {
           setAuthError(() => {

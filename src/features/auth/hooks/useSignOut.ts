@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import { useCallback } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { auth } from "src/libs/firebase";
 import { useGlobalState } from "src/store/global/globalStore";
 
