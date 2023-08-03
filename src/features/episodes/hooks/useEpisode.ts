@@ -7,7 +7,7 @@ import { useTimerState } from "src/features/timer/store";
 export const useEpisode = () => {
   const router = useRouter();
   const { slug, episode, mode } = router.query;
-  const { data, isLoading } = useQueryEpisode(slug, episode);
+  const { data, isPending } = useQueryEpisode(slug, episode);
 
   const [filter, setFilter] = useState<CommentsFilter>("new");
 
@@ -16,7 +16,7 @@ export const useEpisode = () => {
 
   return {
     data,
-    isLoading,
+    isPending,
     isChat: mode === "chat",
     filter,
     setFilter,

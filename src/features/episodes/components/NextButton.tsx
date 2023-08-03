@@ -1,18 +1,17 @@
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { useNotificationState } from "src/components/Elements/Notification/store";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { useNotificationState } from "src/components/Notification/store";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store";
 import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
-
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = { episode?: GetEpisodeQuery["episodes_by_pk"] };
 
 export const NextButton: FC<Props> = ({ episode }) => {
-  const { data, isLoading } = useQueryEpisode(
+  const { data, isPending } = useQueryEpisode(
     episode?.next_episode_id,
     undefined
   );
@@ -20,7 +19,7 @@ export const NextButton: FC<Props> = ({ episode }) => {
   const timerMode = useTimerState((state) => state.mode);
   const onNotification = useNotificationState((state) => state.onShow);
 
-  if (isLoading) return <Skeleton theme="nextButton" />;
+  if (isPending) return <Skeleton theme="nextButton" />;
 
   return (
     <ButtonLink
@@ -30,7 +29,7 @@ export const NextButton: FC<Props> = ({ episode }) => {
       href={
         getIsAlreadyFinished(data?.episodes_by_pk?.end_time)
           ? `/episodes/${data?.episodes_by_pk?.id}?mode=chat`
-          : `/episodes/live/${data?.episodes_by_pk?.id}`
+          : `/episodes/live/${data?.episodes_by_pk?.id}?mode=chat`
       }
       leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
       onClick={() => {

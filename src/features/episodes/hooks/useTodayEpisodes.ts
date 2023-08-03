@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-expressions */
 import { useRouter } from "next/router";
 import { useDeferredValue, useEffect, useMemo } from "react";
+
 import { TodayEpisode } from "src/features/episodes/types";
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetTodayEpisodesQuery } from "src/gql/graphql";
 
 import { useSearchInputState } from "src/store/input/searchInput";
 
@@ -39,22 +40,20 @@ export const useTodayEpisodes = ({ data }: Props) => {
   const searchInput = useSearchInputState((state) => state.searchInput);
   const setSearchInput = useSearchInputState((state) => state.setSearchInput);
 
-  const filterEpisodes = useMemo(
-    () =>
-      data?.episodes
-        ?.sort(sortFn)
-        .slice(0, limit)
-        .filter(
-          (episode) =>
-            episode.title
-              .toLowerCase()
-              .includes(searchInput.toLowerCase().trim()) ||
-            episode.work.series_title
-              .toLowerCase()
-              .includes(searchInput.toLowerCase().trim())
-        ),
-    [data?.episodes, limit, searchInput]
-  );
+  const filterEpisodes = useMemo(() => {
+    return data?.episodes
+      ?.sort(sortFn)
+      .slice(0, limit)
+      .filter(
+        (episode) =>
+          episode.title
+            .toLowerCase()
+            .includes(searchInput.toLowerCase().trim()) ||
+          episode.work.series_title
+            .toLowerCase()
+            .includes(searchInput.toLowerCase().trim())
+      );
+  }, [data?.episodes, limit, searchInput]);
 
   const deferredFilterEpisodes = useDeferredValue(filterEpisodes);
 
