@@ -1,4 +1,4 @@
-import { SsgError } from "src/components/Elements/Error/items/SsgError";
+import { SsgError } from "src/components/Error/items/SsgError";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
 import {
   getSeasonWorks,
@@ -10,7 +10,7 @@ import { Nerd } from "src/features/pages/nerd";
 import { InternalServerError } from "src/libs/error";
 import { Meta } from "src/libs/meta";
 import { NextSSG, NextSSGPage, TopPage } from "src/libs/next/types";
-import { genBuildData } from "src/utils/genBuildData";
+import { genBuildData } from "src/utils/server/genBuildData";
 
 const Page: NextSSGPage<TopPage> = ({ data, error }) =>
   error ? <SsgError /> : <Nerd {...data} />;

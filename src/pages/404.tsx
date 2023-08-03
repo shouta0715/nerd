@@ -1,5 +1,5 @@
 import React from "react";
-import { ErrorPage } from "src/components/Elements/Error/items/ErrorPage";
+import { ErrorPage } from "src/components/Error/items/ErrorPage";
 import { OnlyProviderLayout } from "src/components/Layouts/BasicLayout";
 import { NotFoundError } from "src/libs/error";
 import { Meta } from "src/libs/meta";

@@ -1,11 +1,10 @@
 import React from "react";
-import { SsgError } from "src/components/Elements/Error/items/SsgError";
+import { SsgError } from "src/components/Error/items/SsgError";
 import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getTodayEpisodes } from "src/features/lists/api/router";
 import { Today } from "src/features/pages/list/today";
-
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetTodayEpisodesQuery } from "src/gql/graphql";
 import { InternalServerError } from "src/libs/error";
 import { Meta } from "src/libs/meta";
 import { NextSSG, NextSSGPage } from "src/libs/next/types";

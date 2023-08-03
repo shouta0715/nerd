@@ -1,11 +1,11 @@
 import React from "react";
-import { SsgError } from "src/components/Elements/Error/items/SsgError";
+import { SsgError } from "src/components/Error/items/SsgError";
 import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getSeasonWorks } from "src/features/lists/api/router";
 import { Season } from "src/features/pages/list/season";
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
 import { Meta } from "src/libs/meta";
 import { NextSSG, NextSSGPage } from "src/libs/next/types";
 

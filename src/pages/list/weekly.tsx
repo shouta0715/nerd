@@ -1,10 +1,10 @@
 import React from "react";
-import { SsgError } from "src/components/Elements/Error/items/SsgError";
+import { SsgError } from "src/components/Error/items/SsgError";
 import { BasicListLayout } from "src/components/Layouts/BasicLayout";
 import { AutoCompleteData } from "src/features/episodes/types";
 import { getWeeklyWorks } from "src/features/lists/api/router";
 import { Weekly } from "src/features/pages/list/weekly";
-import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetWeeklyWorksQuery } from "src/gql/graphql";
 import { Meta } from "src/libs/meta";
 import { NextSSG, NextSSGPage } from "src/libs/next/types";
 
