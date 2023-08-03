@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useTimerState } from "src/features/timer/store";
 import { MaxTime } from "src/features/timer/store/initialState";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";

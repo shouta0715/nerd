@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { ErrorPage } from "src/components/Elements/Error/items/ErrorPage";
+import { ErrorPage } from "src/components/Error/items/ErrorPage";
 import { Error } from "src/libs/error";
 
 const setup = (props: Partial<Error>) => {

@@ -1,10 +1,10 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import { Button } from "src/components/Elements/Button";
-import { Notification } from "src/components/Elements/Notification";
+import { Notification } from "src/components/Notification";
 import {
   NotificationState,
   useNotificationState,
-} from "src/components/Elements/Notification/store";
+} from "src/components/Notification/store";
 
 const DefaultState: NotificationState = {
   title: "Default",

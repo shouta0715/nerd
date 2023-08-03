@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Error as ErrorComponent } from "src/components/Elements/Error";
+import { Error as ErrorComponent } from "src/components/Error";
 import {
   BadRequestError,
   ForbiddenError,

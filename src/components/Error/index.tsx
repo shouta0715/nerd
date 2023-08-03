@@ -1,6 +1,6 @@
 import { FallbackProps } from "react-error-boundary";
 
-import { ErrorPage } from "src/components/Elements/Error/items/ErrorPage";
+import { ErrorPage } from "src/components/Error/items/ErrorPage";
 import {
   BadRequestError,
   ForbiddenError,

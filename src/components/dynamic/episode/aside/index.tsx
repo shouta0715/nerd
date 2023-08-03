@@ -8,7 +8,7 @@ import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCom
 import { CommentsFilter } from "src/features/comments/types";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
@@ -31,16 +31,16 @@ export const Aside: FC<Props> = ({ isChat, data, filter }) => {
         />
         <Nav isChat={isChat} response="lg" />
       </div>
-      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Menu />
-      </div>
+
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <NextMenu episode={data?.episodes_by_pk} />
       </div>
-
+      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
+        <Menu />
+      </div>
       <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 ">
         {isChat ? (
           <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />

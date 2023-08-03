@@ -2,7 +2,7 @@ import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import React from "react";
 import { FallbackProps } from "react-error-boundary";
 import { Button } from "src/components/Elements/Button";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 
 export const ErrorMessage = ({ resetErrorBoundary }: FallbackProps) => {
   const { reset } = useQueryErrorResetBoundary();

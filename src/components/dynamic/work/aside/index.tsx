@@ -8,11 +8,10 @@ import { WorkCommentInput } from "src/features/comments/components/WorkCommentIn
 import { CommentsFilter } from "src/features/comments/types";
 
 import { WorkMenu } from "src/features/works/components/WorkMenu";
-import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { GetWorkQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
-
   data?: GetWorkQuery;
   filter: CommentsFilter;
 };

@@ -11,7 +11,7 @@ import React, { Fragment } from "react";
 import {
   NotificationType,
   useNotificationState,
-} from "src/components/Elements/Notification/store";
+} from "src/components/Notification/store";
 
 const TypeIcons = {
   success: CheckCircleIcon,

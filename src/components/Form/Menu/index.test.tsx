@@ -1,7 +1,7 @@
 import { act, render, renderHook } from "@testing-library/react";
 import useEvent from "@testing-library/user-event";
 
-import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
+import { NotificationProvider } from "src/components/Notification/NotificationProvider";
 import { MenuForm } from "src/components/Form/Menu";
 import { useUserState } from "src/store/user/userState";
 import { userData } from "src/tests/mocks/fixture";
