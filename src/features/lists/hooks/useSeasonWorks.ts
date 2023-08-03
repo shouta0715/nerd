@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
-
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 import { useSearchInputState } from "src/store/input/searchInput";
 
 type Props = {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetWeeklyWorksQuery } from "src/gql/graphql";
 import { useSearchInputState } from "src/store/input/searchInput";
 
 type Props = {

@@ -1,47 +1,48 @@
-import { useGetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import {
-  useGetSeasonWorksQuery,
-  useGetWeeklyWorksQuery,
-} from "src/graphql/work/workQuery.generated";
+  seasonEpisodesDocument,
+  todayEpisodesDocument,
+  weeklyWorksDocument,
+} from "src/documents/routers";
+import {
+  GetTodayEpisodesQuery,
+  GetTodayEpisodesQueryVariables,
+} from "src/gql/graphql";
 import { getTodayData } from "src/hooks/router/dynamicPaths";
-import { getClient } from "src/utils/getClient";
-import { returningSeason } from "src/utils/returningSeason";
+import { getClient } from "src/utils/server/getClient";
+import { returningSeason } from "src/utils/server/returningSeason";
 
 export const getTodayEpisodes = async () => {
   const query = await getTodayData();
-  const { request } = getClient();
-  const fetcher = useGetTodayEpisodesQuery.fetcher(request, {
+  const { client } = getClient();
+  const data = await client.request<
+    GetTodayEpisodesQuery,
+    GetTodayEpisodesQueryVariables
+  >(todayEpisodesDocument, {
     where: query,
   });
-
-  const data = await fetcher();
 
   return data;
 };
 
 export const getSeasonWorks = async (limit: number | null) => {
-  const { request } = getClient();
+  const { client } = getClient();
   const { season, year } = returningSeason();
 
-  const fetcher = useGetSeasonWorksQuery.fetcher(request, {
+  const data = await client.request(seasonEpisodesDocument, {
     season,
     year,
     limit,
   });
 
-  const data = await fetcher();
-
   return data;
 };
 
 export const getWeeklyWorks = async (limit: number | null) => {
-  const { request } = getClient();
+  const { client } = getClient();
 
-  const fetcher = useGetWeeklyWorksQuery.fetcher(request, {
+  const data = await client.request(weeklyWorksDocument, {
     limit,
   });
-
-  const data = await fetcher();
 
   return data;
 };

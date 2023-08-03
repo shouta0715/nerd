@@ -1,9 +1,8 @@
 import React, { FC } from "react";
-import { SeriesError } from "src/components/Elements/Error/items/SeriesError";
+import { SeriesError } from "src/components/Error/items/SeriesError";
 import { useSeasonWorks } from "src/features/lists/hooks/useSeasonWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
-
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 
 type Props = { data: GetSeasonWorksQuery };
 
