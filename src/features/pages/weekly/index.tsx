@@ -4,7 +4,8 @@ import React from "react";
 import { Text } from "src/components/Elements/Text";
 import { TopTitle } from "src/components/Elements/TopTitle";
 import { WorkItem } from "src/features/works/components/WorkItem";
-import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetWeeklyWorksQuery } from "src/gql/graphql";
+
 import { TopPageList } from "src/libs/next/types";
 
 export const Weekly = ({

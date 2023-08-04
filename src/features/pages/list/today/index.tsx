@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { TodayEpisodeList } from "src/features/lists/components/TodayEpisodeList";
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetTodayEpisodesQuery } from "src/gql/graphql";
 import { ListPage } from "src/libs/next/types";
 
 export const Today = ({

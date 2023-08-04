@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Today } from "src/features/pages/today";
 import { todayData } from "src/tests/mocks/fixture";
 import { BasicLayoutDecorator } from "src/tests/storybook";
-import { genBuildData } from "src/utils/genBuildData";
+import { genBuildData } from "src/utils/server/genBuildData";
 
 export default {
   title: "Pages/Today",

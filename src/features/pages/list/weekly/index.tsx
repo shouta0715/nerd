@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { WeeklyWorksList } from "src/features/lists/components/WeeklyWorksList";
-import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetWeeklyWorksQuery } from "src/gql/graphql";
 import { ListPage } from "src/libs/next/types";
 
 export const Weekly = ({
