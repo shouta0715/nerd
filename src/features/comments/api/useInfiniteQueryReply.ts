@@ -1,35 +1,29 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useGetRepliesQuery } from "src/graphql/comment/commentQuery.generated";
+import { replyDocument } from "src/documents/reply";
+
 import { client } from "src/libs/graphqlClient";
 
-type PageParam =
-  | {
-      cursor: string;
-    }
-  | undefined;
+type PageParam = {
+  cursor: string | null;
+} | null;
 
 type GetReplyArgs = {
   reply_to: string;
-  pageParam: {
-    cursor: string;
-  };
+  pageParam: PageParam;
 };
 
 const InitialPageParam = {
-  // TODO アプリ公開日にする
   cursor: null,
 };
 
 export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
-  const { cursor } = pageParam;
+  const { cursor } = pageParam || InitialPageParam;
 
-  const fetcher = useGetRepliesQuery.fetcher(client, {
+  const data = await client.request(replyDocument, {
     _reply_to: reply_to,
     cursor,
     reply_limit: 10,
   });
-
-  const data = await fetcher();
 
   return data;
 };
@@ -37,13 +31,13 @@ export const getReplies = async ({ reply_to, pageParam }: GetReplyArgs) => {
 export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) => {
   return useInfiniteQuery({
     queryKey: ["replies", { reply_to }],
-    queryFn: ({ pageParam = InitialPageParam }) => {
+    queryFn: ({ pageParam }) => {
       return getReplies({
         reply_to,
         pageParam,
       });
     },
-    getNextPageParam: (lastPage): PageParam => {
+    getNextPageParam: (lastPage) => {
       const lastReply = lastPage.replies.at(-1);
 
       if (!lastReply || lastPage.replies.length < 10) return undefined;
@@ -52,6 +46,7 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) => {
         cursor: lastReply.created_at,
       };
     },
+    defaultPageParam: InitialPageParam,
     suspense: true,
     enabled: isOpen && !!reply_to,
     staleTime: 1000 * 60 * 5,

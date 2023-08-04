@@ -16,25 +16,31 @@ export const useRefState = create<RefState>((set, get) => ({
 }));
 
 type InputState = {
-  content: string;
   reply_to: string | null;
   replied_to_commenter_name: string | null;
 };
 
 type InputCommentState = {
   inputComment: InputState;
+  content: string;
   setInputComment: (input: InputState) => void;
   resetInputComment: () => void;
+  setContent: (content: string) => void;
 };
 
 const InitialState: InputState = {
-  content: "",
   reply_to: null,
   replied_to_commenter_name: null,
 };
 
 export const useInputCommentState = create<InputCommentState>((set) => ({
   inputComment: InitialState,
+  content: "",
+  setContent: (content) => set({ content }),
   setInputComment: (input) => set({ inputComment: input }),
-  resetInputComment: () => set({ inputComment: InitialState }),
+  resetInputComment: () =>
+    set({
+      inputComment: InitialState,
+      content: "",
+    }),
 }));

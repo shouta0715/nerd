@@ -1,13 +1,11 @@
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useState } from "react";
+import { useNotificationState } from "src/components/Notification/store";
 import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
-import { CommentsFilter } from "src/features/comments/types";
-import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/getIp";
 
-export const useEpisodeCommentInput = (
-  episode_id: string,
-  filter: CommentsFilter
-) => {
+import { useGlobalState } from "src/store/global/globalStore";
+import { getIp } from "src/utils/client/getIp";
+
+export const useEpisodeCommentInput = (episode_id: string) => {
   const {
     content,
     reply_to,
@@ -15,15 +13,17 @@ export const useEpisodeCommentInput = (
     user,
     reset,
     insertEpisodeComment,
-  } = useCommentInput(filter);
+  } = useCommentInput(episode_id);
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
+  const [ipLoading, setIpLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       if (!content.trim() || authLoading) return;
 
+      setIpLoading(true);
       const ip = await getIp();
 
       await insertEpisodeComment.mutateAsync({
@@ -34,19 +34,20 @@ export const useEpisodeCommentInput = (
         commenter_name: user?.user_name || "匿名",
         ip: ip || null,
       });
+      reset();
     } catch (error) {
       onNotification({
         title: "コメントの投稿に失敗しました",
         type: "error",
         message: "再度お試しください",
       });
-    } finally {
-      reset();
     }
+
+    setIpLoading(false);
   };
 
   return {
     onSubmitHandler,
-    isLoading: insertEpisodeComment.isLoading,
+    isLoading: insertEpisodeComment.isPending || ipLoading,
   };
 };

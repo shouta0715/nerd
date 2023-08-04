@@ -11,12 +11,14 @@ type Props = {
 
 export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   const inputRef = useRef<HTMLTextAreaElement>(null);
-
   const setInputRef = useRefState((state) => state.setInputRef);
-  const [inputState, setInputComment] = useInputCommentState((state) => [
-    state.inputComment,
-    state.setInputComment,
-  ]);
+  const [inputState, setInputComment, content, setContent] =
+    useInputCommentState((state) => [
+      state.inputComment,
+      state.setInputComment,
+      state.content,
+      state.setContent,
+    ]);
 
   useEffect(() => {
     const isVisited = inputRef.current?.clientHeight !== 0;
@@ -25,21 +27,15 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
   }, [setInputRef]);
 
   const onBlurHandler = () => {
-    if (!inputState.content) {
-      setInputComment({
-        ...inputState,
-        replied_to_commenter_name: null,
-        reply_to: null,
-      });
-    }
+    if (content) return;
+    setInputComment({
+      replied_to_commenter_name: null,
+      reply_to: null,
+    });
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.currentTarget.value.length <= 300)
-      setInputComment({
-        ...inputState,
-        content: e.currentTarget.value,
-      });
+    if (e.currentTarget.value.length <= 300) setContent(e.currentTarget.value);
   };
 
   const genPlaceholder = () => {
@@ -59,7 +55,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         onSubmitHandler={onSubmitHandler}
         placeholder={genPlaceholder()}
         validLength={300}
-        value={inputState.content}
+        value={content}
       />
       <p className="mt-4 hidden place-items-center text-sm text-dimmed lg:grid">
         ルールを守って良識のあるコメントをしましょう

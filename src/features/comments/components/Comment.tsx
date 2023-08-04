@@ -2,17 +2,17 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 
-import React, { FC, Suspense, useRef } from "react";
-import { Replies } from "./Replies";
+import React, { FC, Suspense, useRef, memo } from "react";
+import { Replies } from "../../replies/components/Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
-import { AutoErrorBoundary } from "src/components/Elements/Error/items/ReplyMessage";
 import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
-import { useReply } from "src/features/comments/hooks/useReply";
+import { AutoErrorBoundary } from "src/components/Error/items/ReplyMessage";
 import { Comment as TypeComment } from "src/features/comments/types";
 import { Like } from "src/features/likes/components/Like";
+import { useReply } from "src/features/replies/hooks/useReply";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 
@@ -20,7 +20,7 @@ type Props = {
   comment: TypeComment;
 };
 
-export const Comment: FC<Props> = ({ comment }) => {
+export const Comment: FC<Props> = memo(({ comment }) => {
   const content = useRef<HTMLParagraphElement>(null);
   const { handleClick } = useReply();
 
@@ -60,7 +60,7 @@ export const Comment: FC<Props> = ({ comment }) => {
           </Text>
           <Text
             ref={(comment.reply_count ?? -1) > 0 ? content : null}
-            className="  scroll-mt-20 break-words py-1 text-base lg:scroll-mt-10"
+            className="break-words py-1 text-base"
           >
             {comment.content}
           </Text>
@@ -113,4 +113,4 @@ export const Comment: FC<Props> = ({ comment }) => {
       </div>
     </li>
   );
-};
+});

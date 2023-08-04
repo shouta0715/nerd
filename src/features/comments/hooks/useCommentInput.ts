@@ -1,16 +1,17 @@
-import { useMutateComment } from "src/features/comments/api/useMutate";
+import { useMutateComment } from "src/features/comments/api/useMutateComment";
+
 import { useInputCommentState } from "src/features/comments/store";
-import { CommentsFilter } from "src/features/comments/types";
 import { useUserState } from "src/store/user/userState";
 
-export const useCommentInput = (filter: CommentsFilter) => {
-  const [{ content, reply_to, replied_to_commenter_name }, reset] =
+export const useCommentInput = (id: string | number) => {
+  const [{ reply_to, replied_to_commenter_name }, reset, content] =
     useInputCommentState((state) => [
       state.inputComment,
       state.resetInputComment,
+      state.content,
     ]);
   const user = useUserState((state) => state.user);
-  const { insertEpisodeComment, insertWorkComment } = useMutateComment(filter);
+  const { insertEpisodeComment, insertWorkComment } = useMutateComment(id);
 
   return {
     content,

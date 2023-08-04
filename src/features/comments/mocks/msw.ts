@@ -2,11 +2,19 @@ import { graphql } from "msw";
 import {
   episodeCommentData,
   episodeCommentDataOrderByLike,
+  episodeMutateData,
   replyData,
   workCommentData,
   workCommentDataOrderByLike,
+  workMutateData,
 } from "src/features/comments/mocks/fixture";
-import { GetRepliesQuery } from "src/graphql/comment/commentQuery.generated";
+import {
+  GetRepliesQuery,
+  MutateEpisodeCommentMutation,
+  MutateEpisodeCommentMutationVariables,
+  MutateWorkCommentMutation,
+  MutateWorkCommentMutationVariables,
+} from "src/gql/graphql";
 
 export const handleEpisodeComment = (status?: number) => {
   return graphql.query("GetCommentsEpisode", (_, res, ctx) => {
@@ -14,7 +22,7 @@ export const handleEpisodeComment = (status?: number) => {
       return res(ctx.status(status));
     }
 
-    return res(ctx.data(episodeCommentData));
+    return res(ctx.delay(5000), ctx.data(episodeCommentData));
   });
 };
 
@@ -58,9 +66,58 @@ export const handleReplyEpisodeComment = (status?: number) => {
   });
 };
 
+export const handleLatestEpisodeComment = (status?: number) => {
+  return graphql.query("GetLatestEpisodeComment", (_, res, ctx) => {
+    if (status) {
+      return res(ctx.status(status));
+    }
+
+    return res(ctx.data(episodeCommentData));
+  });
+};
+
+export const handleLatestWorkComment = (status?: number) => {
+  return graphql.query("GetLatestWorkComment", (_, res, ctx) => {
+    if (status) {
+      return res(ctx.status(status));
+    }
+
+    return res(ctx.delay(5000), ctx.data(workCommentData));
+  });
+};
+
+export const mutateEpisodeComment = (status?: number) => {
+  return graphql.mutation<
+    MutateEpisodeCommentMutation,
+    MutateEpisodeCommentMutationVariables
+  >("MutateEpisodeComment", (req, res, ctx) => {
+    if (status) {
+      return res(ctx.delay(3000), ctx.status(status));
+    }
+
+    return res(ctx.delay(5000), ctx.data(episodeMutateData(req.variables)));
+  });
+};
+
+export const mutateWorkComment = (status?: number) => {
+  return graphql.mutation<
+    MutateWorkCommentMutation,
+    MutateWorkCommentMutationVariables
+  >("MutateWorkComment", (req, res, ctx) => {
+    if (status) {
+      return res(ctx.delay(3000), ctx.status(status));
+    }
+
+    return res(ctx.delay(5000), ctx.data(workMutateData(req.variables)));
+  });
+};
+
 export const handlers = [
   handleEpisodeComment(),
   handleEpisodeCommentByLikes(),
   handleWorkComment(),
   handleWorkCommentByLikes(),
+  handleReplyEpisodeComment(),
+  handleLatestEpisodeComment(),
+  handleLatestWorkComment(),
 ];

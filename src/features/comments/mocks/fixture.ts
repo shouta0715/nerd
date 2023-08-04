@@ -2,32 +2,37 @@ import {
   GetCommentsEpisodeQuery,
   GetCommentsWorkQuery,
   GetRepliesQuery,
-} from "src/graphql/comment/commentQuery.generated";
+  MutateEpisodeCommentMutation,
+  MutateEpisodeCommentMutationVariables,
+  MutateWorkCommentMutation,
+  MutateWorkCommentMutationVariables,
+} from "src/gql/graphql";
+import { genRandomId } from "src/utils/client/genRandomId";
 
-const genMockData = (
+export const genMockData = (
   orderbyLike = false,
   work = false,
   length = 10
 ): GetCommentsEpisodeQuery["comments"] => {
-  const data = Array.from({ length }).map((_, index) => {
+  const data = Array.from({ length }).map((_) => {
     return {
-      created_at: "2021-08-01T00:00:00.000Z",
-      id: index.toString(),
-      content: "test",
+      created_at: new Date().toISOString(),
+      id: genRandomId(),
+      content: genRandomId(),
       user_id: "1",
       episode_id: work ? undefined : "1",
       work_id: work ? 1 : undefined,
-      reply_count: 11,
-      commenter_name: "test",
+      reply_count: Math.floor(Math.random() * 100),
+      commenter_name: genRandomId(),
       likes_aggregate: {
         aggregate: {
           count: Math.floor(Math.random() * 100),
         },
       },
       user: {
-        id: "1",
+        id: genRandomId(),
         anonymous: false,
-        user_name: "test",
+        user_name: genRandomId(),
       },
     };
   });
@@ -46,9 +51,9 @@ const genMockData = (
 const getReplyMockData = (): GetRepliesQuery["replies"] => {
   return [
     {
-      id: "1",
-      content: "test",
-      created_at: "2021-08-01T00:00:00.000Z",
+      id: genRandomId(),
+      content: Math.random().toString(),
+      created_at: new Date().toISOString(),
       user_id: "1",
       episode_id: "1",
       work_id: null,
@@ -68,7 +73,7 @@ const getReplyMockData = (): GetRepliesQuery["replies"] => {
 };
 
 export const episodeCommentData: GetCommentsEpisodeQuery = {
-  comments: genMockData(),
+  comments: genMockData(false, false, Math.floor(200)),
 };
 
 export const episodeCommentDataOrderByLike: GetCommentsEpisodeQuery = {
@@ -76,7 +81,7 @@ export const episodeCommentDataOrderByLike: GetCommentsEpisodeQuery = {
 };
 
 export const workCommentData: GetCommentsWorkQuery = {
-  comments: genMockData(),
+  comments: genMockData(false, false, Math.floor(200)),
 };
 
 export const workCommentDataOrderByLike: GetCommentsWorkQuery = {
@@ -85,4 +90,40 @@ export const workCommentDataOrderByLike: GetCommentsWorkQuery = {
 
 export const replyData: GetRepliesQuery = {
   replies: getReplyMockData(),
+};
+
+export const episodeMutateData = (
+  variables: MutateEpisodeCommentMutationVariables
+): MutateEpisodeCommentMutation => {
+  return {
+    insert_comments_one: {
+      __typename: "comments",
+      id: genRandomId(),
+      created_at: new Date().toISOString(),
+      likes_aggregate: {
+        aggregate: {
+          count: 0,
+        },
+      },
+      ...variables,
+    },
+  };
+};
+
+export const workMutateData = (
+  variables: MutateWorkCommentMutationVariables
+): MutateWorkCommentMutation => {
+  return {
+    insert_comments_one: {
+      __typename: "comments",
+      id: genRandomId(),
+      created_at: new Date().toISOString(),
+      likes_aggregate: {
+        aggregate: {
+          count: 0,
+        },
+      },
+      ...variables,
+    },
+  };
 };
