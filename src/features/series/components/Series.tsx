@@ -6,12 +6,12 @@ import { useQuerySeries } from "src/features/series/api/useQuerySeries";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
-import { validateData } from "src/utils/validateData";
+import { validateData } from "src/utils/client/validateData";
 
 export const Series: FC = () => {
   const router = useRouter();
   const { slug, series_title } = router.query;
-  const { data, isLoading, isPlaceholderData } = useQuerySeries({
+  const { data, isPending, isPlaceholderData } = useQuerySeries({
     slug: slug ?? null,
     series_title: series_title ?? null,
   });
@@ -19,13 +19,11 @@ export const Series: FC = () => {
     (episode) => !episode.has_episodes
   );
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="space-y-4">
         <p className="mb-1 font-semibold">シリーズ一覧</p>
-
         <p className="mx-auto h-2 w-1/2 animate-pulse rounded-md bg-slate-200" />
-
         <Skeleton theme="work" />
       </div>
     );

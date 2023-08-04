@@ -2,7 +2,7 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { WorkItem } from "src/features/works/components/WorkItem";
-import { GetSeriesQuery } from "src/graphql/work/workQuery.generated";
+import { GetSeriesQuery } from "src/gql/graphql";
 
 type Props = {
   series_work: GetSeriesQuery["works"][0];

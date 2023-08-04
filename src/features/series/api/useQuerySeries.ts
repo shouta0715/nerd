@@ -1,6 +1,7 @@
-import { useGetSeriesQuery } from "src/graphql/work/workQuery.generated";
-import { NotFoundError } from "src/libs/error";
-import { client } from "src/libs/graphqlClient";
+import { seriesDocument } from "src/documents/series";
+import { getSeriesPlaceHolder } from "src/features/series/utils";
+import { GetSeriesQuery, GetSeriesQueryVariables } from "src/gql/graphql";
+import { useGraphQL } from "src/hooks/useGraphQL";
 
 type Args = {
   slug: string | string[] | null;
@@ -8,30 +9,14 @@ type Args = {
 };
 
 export const useQuerySeries = ({ slug, series_title }: Args) => {
-  return useGetSeriesQuery(
-    client,
-    {
+  return useGraphQL<GetSeriesQuery, GetSeriesQueryVariables>({
+    document: seriesDocument,
+    variables: {
       series_id: typeof slug === "string" ? slug : "",
     },
-    {
+    options: {
       enabled: !!slug && typeof slug === "string",
-      onSuccess: (data) => {
-        if (!data.works || !data.works.length) {
-          throw new NotFoundError();
-        }
-      },
-      placeholderData: () => ({
-        works: [
-          {
-            series_title: typeof series_title === "string" ? series_title : "",
-            series_id: typeof slug === "string" ? slug : "",
-            title: "",
-            id: 0,
-            has_episodes: undefined,
-            episodes: [],
-          },
-        ],
-      }),
-    }
-  );
+      placeholderData: () => getSeriesPlaceHolder(series_title, slug),
+    },
+  });
 };
