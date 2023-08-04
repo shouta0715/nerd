@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { CommentsFilter } from "src/features/comments/types";
+import { useEffect } from "react";
 import { useQueryEpisode } from "src/features/episodes/api/useQueryEpisode";
 import { useTimerState } from "src/features/timer/store";
 
@@ -9,8 +8,6 @@ export const useEpisode = () => {
   const { slug, episode, mode } = router.query;
   const { data, isPending } = useQueryEpisode(slug, episode);
 
-  const [filter, setFilter] = useState<CommentsFilter>("new");
-
   const interval = useTimerState((state) => state.interval);
   useEffect(() => interval.reset, [interval.reset]);
 
@@ -18,7 +15,5 @@ export const useEpisode = () => {
     data,
     isPending,
     isChat: mode === "chat",
-    filter,
-    setFilter,
   };
 };
