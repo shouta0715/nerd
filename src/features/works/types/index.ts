@@ -1,3 +1,3 @@
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 
 export type Work = GetSeasonWorksQuery["works"][0];

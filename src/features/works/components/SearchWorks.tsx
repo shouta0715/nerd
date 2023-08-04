@@ -13,24 +13,24 @@ import { DetailTitle } from "src/libs/meta/OnlyTitle";
 export const SearchWorks = () => {
   const router = useRouter();
   const { q } = router.query;
-  const { data, isLoading } = useQuerySearchWorks(
+  const { data, isPending } = useQuerySearchWorks(
     q === undefined ? "" : q.toString()
   );
   const noEpisodesRef = React.useRef<HTMLParagraphElement>(null);
 
   const hasEpisodesData = useMemo(() => {
-    if (isLoading) return null;
+    if (isPending) return null;
 
     return data?.search_works.filter((work) => work.has_episodes);
-  }, [data?.search_works, isLoading]);
+  }, [data?.search_works, isPending]);
 
   const noEpisodesData = useMemo(() => {
-    if (isLoading) return null;
+    if (isPending) return null;
 
     return data?.search_works.filter((work) => !work.has_episodes);
-  }, [data?.search_works, isLoading]);
+  }, [data?.search_works, isPending]);
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex flex-col">
         <div className="mx-auto  mb-4 grid  w-full max-w-md  place-items-center font-bold">

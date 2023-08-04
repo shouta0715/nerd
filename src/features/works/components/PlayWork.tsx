@@ -3,9 +3,9 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/work/aside";
-import { ErrorMessage } from "src/components/Elements/Error/items/ErrorMessage";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { TimerModal } from "src/components/Modal/Timer";
 
 import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
@@ -15,12 +15,12 @@ import { WorkComments } from "src/features/comments/components/WorkComments";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
-import { validateData } from "src/utils/validateData";
+import { validateData } from "src/utils/client/validateData";
 
 export const PlayWork: FC = () => {
-  const { isChat, isLoading, data, filter, setFilter } = usePlayWork();
+  const { isChat, isPending, data } = usePlayWork();
 
-  if (isLoading) {
+  if (isPending) {
     return <Skeleton theme="episode" />;
   }
 
@@ -32,7 +32,7 @@ export const PlayWork: FC = () => {
   return (
     <>
       <DetailTitle title={data?.works_by_pk?.series_title} />
-      <Aside data={data} filter={filter} isChat={isChat} />
+      <Aside data={data} isChat={isChat} />
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
         <div className="block w-full bg-white/80 py-4 lg:hidden">
           {/* Mobile Design */}
@@ -44,10 +44,7 @@ export const PlayWork: FC = () => {
           {isChat ? (
             <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
           ) : (
-            <WorkCommentInput
-              filter={filter}
-              work_id={data?.works_by_pk?.id ?? 0}
-            />
+            <WorkCommentInput work_id={data?.works_by_pk?.id ?? 0} />
           )}
         </div>
         <Nav
@@ -79,11 +76,7 @@ export const PlayWork: FC = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <WorkComments
-                  filter={filter}
-                  setFilter={setFilter}
-                  work_id={data?.works_by_pk?.id ?? 0}
-                />
+                <WorkComments work_id={data?.works_by_pk?.id ?? 0} />
               </Suspense>
             </ErrorBoundary>
           )}

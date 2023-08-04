@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useGetWorkQuery } from "src/graphql/work/workQuery.generated";
-import { NotFoundError } from "src/libs/error";
-import { client } from "src/libs/graphqlClient";
+
+import { workDocument } from "src/documents/works";
+import { getWorkPlaceholder } from "src/features/works/utils";
+import { GetWorkQuery, GetWorkQueryVariables } from "src/gql/graphql";
+import { useGraphQL } from "src/hooks/useGraphQL";
 
 type Args = {
   slug: string | string[] | undefined;
@@ -9,30 +11,19 @@ type Args = {
 };
 
 export const useQueryWork = ({ slug, work }: Args) => {
-  return useGetWorkQuery(
-    client,
-    {
+  return useGraphQL<GetWorkQuery, GetWorkQueryVariables>({
+    document: workDocument,
+    variables: {
       id: Number(slug),
     },
-    {
+    options: {
       enabled: !!slug,
-      onSuccess: (data) => {
-        if (!data.works_by_pk) throw new NotFoundError();
-      },
+      staleTime: 1000 * 60 * 30,
       placeholderData: () => {
         if (!slug || !work || typeof work === "string") return undefined;
 
-        const [title, series_title, series_id] = work;
-
-        return {
-          works_by_pk: {
-            id: Number(slug),
-            title,
-            series_title,
-            series_id: series_id === "" ? null : series_id,
-          },
-        };
+        return getWorkPlaceholder(work, slug);
       },
-    }
-  );
+    },
+  });
 };

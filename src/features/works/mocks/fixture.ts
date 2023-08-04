@@ -3,7 +3,8 @@ import {
   GetWorkQuery,
   GetWorkSeriesQuery,
   SearchWorksQuery,
-} from "src/graphql/work/workQuery.generated";
+} from "src/gql/graphql";
+
 import {
   createEpisodes,
   createWork,

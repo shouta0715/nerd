@@ -1,57 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
+import { workSiresDocument } from "src/documents/works";
+import { getSeriesWorkPlaceholder } from "src/features/works/utils";
 import {
   GetWorkSeriesQuery,
-  useGetWorkSeriesQuery,
-} from "src/graphql/work/workQuery.generated";
-
-import { client } from "src/libs/graphqlClient";
-
-type GetSeries = {
-  id: string | string[] | undefined;
-  series_id: string | string[] | undefined;
-};
+  GetWorkSeriesQueryVariables,
+} from "src/gql/graphql";
+import { useGraphQL } from "src/hooks/useGraphQL";
 
 type Args = {
   slug: string | string[] | undefined;
   series_id: string | string[] | undefined;
   work: string | string[] | undefined;
 };
-const getSeriesWork = async ({ id, series_id }: GetSeries) => {
-  if (!id) throw new Error("id is required");
-
-  const fetcher = useGetWorkSeriesQuery.fetcher(client, {
-    id: +id,
-    series_id: series_id?.toString() ?? "",
-  });
-
-  const data = await fetcher();
-
-  return data;
-};
 
 export const useQuerySeriesWork = ({ slug, series_id, work }: Args) => {
-  return useQuery<GetWorkSeriesQuery, Error>({
-    queryKey: ["GetSeriesWork", { slug, series_id: series_id ?? null }],
-    queryFn: () => {
-      return getSeriesWork({ id: slug, series_id });
+  return useGraphQL<GetWorkSeriesQuery, GetWorkSeriesQueryVariables>({
+    document: workSiresDocument,
+    variables: {
+      id: Number(slug),
+      series_id: series_id?.toString() ?? "",
     },
-    enabled: !!slug,
-    placeholderData: () => {
-      if (!work || typeof work === "string" || !slug) return undefined;
-      const [title, series_title] = work;
+    options: {
+      enabled: !!slug,
+      placeholderData: () => {
+        if (!work || typeof work === "string" || !slug) return undefined;
 
-      return {
-        works_by_pk: {
-          id: +slug,
-          title,
-          series_title,
-          series_id: series_id?.toString() ?? "",
-          has_episodes: false,
-          episodes: [],
-        },
-        works: [],
-      };
+        return getSeriesWorkPlaceholder(work, slug, series_id);
+      },
+      staleTime: 1000 * 60 * 5,
     },
-    staleTime: 1000 * 60 * 5,
   });
 };

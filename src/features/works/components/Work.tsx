@@ -8,12 +8,12 @@ import { SeriesItem } from "src/features/series/components/SeriesItem";
 import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
-import { validateData } from "src/utils/validateData";
+import { validateData } from "src/utils/client/validateData";
 
 export const Work: FC = () => {
   const router = useRouter();
   const { slug, series, work } = router.query;
-  const { data, isPlaceholderData, isLoading } = useQuerySeriesWork({
+  const { data, isPlaceholderData, isPending } = useQuerySeriesWork({
     slug,
     series_id: series,
     work,
@@ -22,7 +22,7 @@ export const Work: FC = () => {
     (episode) => !episode.has_episodes
   );
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="flex h-full flex-col">
         <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
@@ -66,7 +66,7 @@ export const Work: FC = () => {
         {series && (
           <div className="mt-20">
             <Text className="mb-4 text-xl font-bold" component="h1">
-              {isPlaceholderData || isLoading
+              {isPlaceholderData || isPending
                 ? "シリーズ一覧"
                 : data && data.works.length > 0 && "シリーズ一覧"}
             </Text>
