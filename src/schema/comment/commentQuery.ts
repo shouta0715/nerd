@@ -69,6 +69,48 @@ export const GET_COMMENTS_EPISODE_BY_LIKES = gql`
   }
 `;
 
+export const GET_LATEST_EPISODE_COMMENT = gql`
+  query GetLatestEpisodeComment(
+    $episode_id: uuid!
+    $cursor: timestamptz
+    $limit: Int!
+    $order_by: [comments_order_by!]
+  ) {
+    comments(
+      where: {
+        episode_id: { _eq: $episode_id }
+        created_at: { _gt: $cursor }
+        reply_to: { _is_null: true }
+      }
+      order_by: $order_by
+      limit: $limit
+    ) {
+      ...CommentFragment
+    }
+  }
+`;
+
+export const GET_LATEST_WORK_COMMENT = gql`
+  query GetLatestWorkComment(
+    $work_id: Int!
+    $cursor: timestamptz
+    $limit: Int!
+    $order_by: [comments_order_by!]
+  ) {
+    comments(
+      where: {
+        work_id: { _eq: $work_id }
+        created_at: { _gt: $cursor }
+        reply_to: { _is_null: true }
+      }
+      order_by: $order_by
+      limit: $limit
+    ) {
+      ...CommentFragment
+    }
+  }
+`;
+
 export const GET_COMMENTS_WORK = gql`
   query GetCommentsWork(
     $work_id: Int!
