@@ -6,12 +6,12 @@ import Head from "next/head";
 import NextNProgress from "nextjs-progressbar";
 import React, { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { Error } from "src/components/Elements/Error";
-import { NotificationProvider } from "src/components/Elements/Notification/NotificationProvider";
-import queryClient from "src/libs/queryClient";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Error } from "src/components/Error";
+import { NotificationProvider } from "src/components/Notification/NotificationProvider";
 import dynamic from "next/dynamic";
 import { Inter } from "@next/font/google";
+import queryClient from "src/libs/client";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 type Props = {
   children: React.ReactNode;
@@ -45,7 +45,7 @@ export const Provider = ({ children }: Props) => {
           />
           {children}
         </NotificationProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <ReactQueryDevtools position="left" />
       </ErrorBoundary>
     </QueryClientProvider>
   );
