@@ -1,4 +1,4 @@
-import { InsertRequestMutation } from "src/graphql/request/requestQuery.generated";
+import { InsertRequestMutation } from "src/gql/graphql";
 
 export const requestData: InsertRequestMutation = {
   insert_request_works_one: {

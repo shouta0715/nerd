@@ -5,7 +5,7 @@ import { useRequest } from "src/features/request/hooks/useRequest";
 import { useUserState } from "src/store/user/userState";
 
 export const Request = () => {
-  const { onSubmitHandler, register, errors, isLoading } = useRequest();
+  const { onSubmitHandler, register, errors, isPending } = useRequest();
   const user = useUserState((state) => state.user);
 
   return (
@@ -76,11 +76,11 @@ export const Request = () => {
         </div>
         <Button
           className="mx-auto"
-          disabled={isLoading || !user}
+          disabled={isPending || !user}
           theme="primary"
           type="submit"
         >
-          {!user ? "ロード中..." : isLoading ? "送信中..." : "送信する"}
+          {!user ? "ロード中..." : isPending ? "送信中..." : "送信する"}
         </Button>
       </form>
     </section>

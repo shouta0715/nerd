@@ -3,7 +3,7 @@ import { requestData } from "src/features/request/mocks/fixture";
 import {
   InsertRequestMutation,
   InsertRequestMutationVariables,
-} from "src/graphql/request/requestQuery.generated";
+} from "src/gql/graphql";
 
 export const handleRequest = (status?: number) => {
   return graphql.mutation<

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useMutateRequest } from "src/features/request/api/useMutateRequest";
 import { Request, RequestSchema } from "src/features/request/types";
 
@@ -36,10 +36,9 @@ export const useRequest = () => {
       reset();
     } catch (error) {
       onShow({
-        title: "エラー",
+        title: "エラーが発生しました。",
         type: "error",
-        message:
-          "エラーが発生しました。時間をおいて再度リクエストをお願いします。",
+        message: "時間をおいて再度リクエストをお願いします。",
       });
     }
   });
