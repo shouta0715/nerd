@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC, Suspense, useRef, memo } from "react";
 import { Replies } from "../../replies/components/Replies";
 import { Avatar } from "src/components/Elements/Avatar";
@@ -44,7 +45,7 @@ export const Comment: FC<Props> = memo(({ comment }) => {
           />
         )}
       </figure>
-      <div className="max-w-[calc(100%-46px)] flex-1">
+      <div className="flex-1">
         <div
           className="w-full"
           onClick={() =>
@@ -55,12 +56,17 @@ export const Comment: FC<Props> = memo(({ comment }) => {
           }
           role="button"
         >
-          <Text className="font-bold" size="xs">
-            {comment.commenter_name}
+          <Text className="my-1 text-gray-500" size="xs">
+            <span className="inline-flex items-center gap-x-1.5 rounded-full text-gray-500">
+              {comment.commenter_name}
+              {comment.user_id === user?.id && (
+                <CheckCircleIcon className="h-4 w-4 text-green-500" />
+              )}
+            </span>
           </Text>
           <Text
             ref={(comment.reply_count ?? -1) > 0 ? content : null}
-            className="break-words py-1 text-base"
+            className="break-words text-base"
           >
             {comment.content}
           </Text>

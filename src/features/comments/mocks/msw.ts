@@ -22,7 +22,7 @@ export const handleEpisodeComment = (status?: number) => {
       return res(ctx.status(status));
     }
 
-    return res(ctx.delay(5000), ctx.data(episodeCommentData));
+    return res(ctx.data(episodeCommentData));
   });
 };
 
@@ -82,7 +82,7 @@ export const handleLatestWorkComment = (status?: number) => {
       return res(ctx.status(status));
     }
 
-    return res(ctx.delay(5000), ctx.data(workCommentData));
+    return res(ctx.data(workCommentData));
   });
 };
 
@@ -120,4 +120,6 @@ export const handlers = [
   handleReplyEpisodeComment(),
   handleLatestEpisodeComment(),
   handleLatestWorkComment(),
+  mutateEpisodeComment(),
+  mutateWorkComment(),
 ];

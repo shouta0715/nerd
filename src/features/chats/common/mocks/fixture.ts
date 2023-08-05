@@ -30,14 +30,14 @@ export const mutateEpisodeData = (
   return {
     insert_chats_one: {
       id: "1",
-      user_id: "1",
-      episode_id: "1",
-      created_at: "2021-08-01T00:00:00.000Z",
+      user_id: variables.object.user_id || "1",
+      episode_id: variables.object.episode_id || "1",
+      created_at: variables.object.created_at || "2021-08-01T00:00:00.000Z",
       content: variables.object.content || "",
       comment_time: variables.object.comment_time || 0,
-      commenter_name: "test",
+      commenter_name: variables.object.commenter_name || "",
       user: {
-        id: "1",
+        id: variables.object.user_id || "1",
         anonymous: false,
       },
     },

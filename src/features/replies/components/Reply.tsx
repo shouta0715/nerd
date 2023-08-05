@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
@@ -24,7 +25,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
 
   return (
     <li className="flex w-full">
-      <figure className="m-0 mr-2">
+      <figure className="mr-2">
         {user?.isDefaultPhoto && user?.id === reply.user?.id ? (
           <Image
             alt="avatar"
@@ -41,7 +42,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           />
         )}
       </figure>
-      <div className="max-w-[calc(100%-46px)] flex-1">
+      <div className="flex-1">
         <div
           className="w-full"
           onClick={() =>
@@ -52,8 +53,13 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
           }
           role="button"
         >
-          <Text className="flex flex-col font-bold" size="xs">
-            <span>{reply.commenter_name}</span>
+          <Text className="my-1 flex flex-col" size="xs">
+            <span className="inline-flex items-center gap-x-1.5 rounded-full text-gray-500">
+              {reply.commenter_name}
+              {reply.user_id === user?.id && (
+                <CheckCircleIcon className="h-3 w-3 text-green-500" />
+              )}
+            </span>
             {reply.replied_to_commenter_name &&
               original_id !== reply.reply_to && (
                 <span className="text-blue-500">
@@ -61,7 +67,7 @@ export const Reply: FC<Props> = ({ reply, original_id }) => {
                 </span>
               )}
           </Text>
-          <Text className="break-words py-1 text-sm" component="p">
+          <Text className="break-words text-sm" component="p">
             {reply.content}
           </Text>
         </div>

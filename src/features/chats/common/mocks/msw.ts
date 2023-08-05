@@ -14,7 +14,7 @@ import {
 export const handleEpisodeChat = (status?: number) => {
   return graphql.query<GetChatsEpisodeQuery>(
     "GetChatsEpisode",
-    (_, res, ctx) => {
+    (req, res, ctx) => {
       if (status) {
         return res(ctx.status(status));
       }

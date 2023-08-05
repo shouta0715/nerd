@@ -28,9 +28,9 @@ export const Optimistic: FC<Props> = ({ comment }) => {
           <Avatar user_id={user?.id ?? ""} user_name={comment.commenter_name} />
         )}
       </figure>
-      <div className="max-w-[calc(100%-46px)] flex-1">
+      <div className="flex-1">
         <div className="w-full">
-          <Text className="font-bold" size="xs">
+          <Text className="my-1 text-gray-500" size="xs">
             {comment.commenter_name}
           </Text>
           <Text className=" break-words py-1 text-base">{comment.content}</Text>

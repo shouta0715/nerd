@@ -1,3 +1,4 @@
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Image } from "src/components/Elements/Image";
@@ -14,12 +15,8 @@ export const Chat: FC<Props> = memo(({ chat }) => {
   const user = useUserState((state) => state.user);
 
   return (
-    <li
-      className={`flex w-full animate-comment ${
-        user?.id === chat.user?.id ? "flex-row-reverse" : ""
-      }`}
-    >
-      <figure className={`m-0 ${user?.id === chat.user?.id ? "ml-2" : "mr-2"}`}>
+    <li className="flex w-full animate-comment">
+      <figure className="mr-2">
         {user?.isDefaultPhoto && user?.id === chat.user?.id ? (
           <Image
             alt="avatar"
@@ -35,29 +32,19 @@ export const Chat: FC<Props> = memo(({ chat }) => {
           />
         )}
       </figure>
-      <div
-        className={`max-w-[calc(100%-92px)] flex-1 ${
-          user?.id === chat.user?.id ? "text-right" : ""
-        }`}
-      >
-        <Text
-          align="inherit"
-          className="my-1 max-w-full break-words font-bold"
-          size="xs"
-        >
-          {chat.commenter_name}
-        </Text>
+      <div className="flex-1">
+        <div className="my-1 max-w-full break-words text-xs md:text-sm">
+          <span className="inline-flex items-center gap-x-1.5 rounded-full text-gray-500">
+            {chat.commenter_name}
+            {chat.user_id === user?.id && (
+              <CheckCircleIcon className="h-4 w-4 text-green-500" />
+            )}
+          </span>
+        </div>
 
-        <Text
-          align="inherit"
-          className={`max-w-full break-words ${
-            user?.id === chat.user?.id ? "inline-block text-left" : ""
-          }`}
-          component="p"
-          size="sm"
-        >
+        <p className="max-w-full break-words text-base text-gray-900">
           {chat.content}
-        </Text>
+        </p>
         <Text align="inherit" className="text-dimmed" size="xs">
           <span>{timeCommented(chat.comment_time)}</span>
         </Text>
