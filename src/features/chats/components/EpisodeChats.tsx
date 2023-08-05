@@ -7,12 +7,12 @@ type Props = {
 };
 
 export const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
-  const { data, time, isLoading, isSelfScroll } = useChatsEpisode(episode_id);
+  const { data, time, isPending, isSelfScroll } = useChatsEpisode(episode_id);
 
   return (
     <Chats
       chats={data}
-      isLoading={isLoading}
+      isPending={isPending}
       isSelfScroll={isSelfScroll}
       time={time}
     />

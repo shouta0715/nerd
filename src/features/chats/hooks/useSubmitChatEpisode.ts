@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useMutateChatEpisode } from "src/features/chats/api/useMutateChatEpisode";
 import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/getIp";
+import { getIp } from "src/utils/client/getIp";
 
 type Args = {
   episode_id: string;
@@ -49,7 +49,7 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
 
   return {
     onSubmitHandler,
-    isLoading: insertChat.isLoading || ipLoading,
+    isLoading: insertChat.isPending || ipLoading,
     value,
     setValue,
   };

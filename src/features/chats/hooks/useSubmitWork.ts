@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useMutateChatWork } from "src/features/chats/api/useMutateChatWork";
 import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/getIp";
+import { getIp } from "src/utils/client/getIp";
 
 type Args = {
   work_id: number;
@@ -46,7 +46,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
 
   return {
     onSubmitHandler,
-    isLoading: insertChat.isLoading || ipLoading,
+    isLoading: insertChat.isPending || ipLoading,
     setValue,
     value,
   };

@@ -11,11 +11,11 @@ import { useGlobalState } from "src/store/global/globalStore";
 type Props = {
   chats: TypeChat[];
   time: number;
-  isLoading: boolean;
+  isPending: boolean;
   isSelfScroll: boolean;
 };
 
-export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
+export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
 
@@ -30,7 +30,7 @@ export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
         <Transition
           as="button"
           className="absolute left-1/2 top-1/2 m-auto grid  -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border bg-black p-4 transition-all"
-          disabled={isLoading || authLoading}
+          disabled={isPending || authLoading}
           enter="duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -40,7 +40,7 @@ export const Chats: FC<Props> = ({ chats, time, isLoading, isSelfScroll }) => {
           onClick={interval.start}
           show={time === 0 && !interval.active}
         >
-          {isLoading || authLoading ? (
+          {isPending || authLoading ? (
             <Loader size="xl" theme="white" />
           ) : (
             <PlayIcon className="h-10 w-10 fill-white" />

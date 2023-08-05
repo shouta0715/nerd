@@ -7,7 +7,7 @@ import {
   GetChatsEpisodeQuery,
   GetChatsWorkQuery,
   InsertChatMutation,
-} from "src/graphql/chat/chatQuery.generated";
+} from "src/gql/graphql";
 
 export const handleEpisodeChat = (status?: number) => {
   return graphql.query("GetChatsEpisode", (_, res, ctx) => {

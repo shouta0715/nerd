@@ -1,7 +1,4 @@
-import {
-  GetChatsEpisodeQuery,
-  GetChatsWorkQuery,
-} from "src/graphql/chat/chatQuery.generated";
+import { GetChatsEpisodeQuery, GetChatsWorkQuery } from "src/gql/graphql";
 
 export const episodeChatData: GetChatsEpisodeQuery = {
   chats_by_episode_id: [

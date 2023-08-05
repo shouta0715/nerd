@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import { GetChatsWorkQuery } from "src/graphql/chat/chatQuery.generated";
+
+import { GetChatsWorkQuery } from "src/gql/graphql";
 
 export type Chat = GetChatsWorkQuery["chats_by_work_id"][0];
 

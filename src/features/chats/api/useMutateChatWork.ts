@@ -1,114 +1,74 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useInputCommentState } from "src/features/comments/store";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { insertChatDocument } from "src/documents/chats";
+
+import { PageParams } from "src/features/chats/types";
 import {
   GetChatsWorkQuery,
-  useInsertChatMutation,
-} from "src/graphql/chat/chatQuery.generated";
+  InsertChatMutation,
+  InsertChatMutationVariables,
+} from "src/gql/graphql";
+import { Error } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
-import { useUserState } from "src/store/user/userState";
-import { genRandomId } from "src/utils/genRandomId";
 
 type PrevData = {
   pages: GetChatsWorkQuery[];
-  pageParams: {
-    _gte: number;
-    _lt: number;
-  }[];
+  pageParams: PageParams[];
 };
 
 export const useMutateChatWork = () => {
   const queryClient = useQueryClient();
-  const resetInputComment = useInputCommentState((state) => {
-    return state.resetInputComment;
-  });
-  const user = useUserState((state) => {
-    return state.user;
-  });
+  const insertChat = useMutation<
+    InsertChatMutation,
+    Error,
+    InsertChatMutationVariables
+  >({
+    mutationFn: (object) => client.request(insertChatDocument, object),
+    onSuccess: (data) => {
+      if (!data.insert_chats_one) return;
 
-  const insertChat = useInsertChatMutation(client, {
-    onMutate: async (newComment) => {
-      const fake_id = genRandomId();
-      const { work_id, comment_time, content, commenter_name } =
-        newComment.object;
+      const { work_id, comment_time } = data.insert_chats_one;
 
-      if (
-        !content?.trim() ||
-        comment_time === undefined ||
-        comment_time === null ||
-        !commenter_name?.trim() ||
-        !user
-      ) {
-        throw new Error("Invalid comment");
-      }
-
-      const created_at = new Date().toString();
-      const mutateCommentPageIndex = Math.floor(comment_time / 300);
+      if (!work_id) return;
 
       const prevData = queryClient.getQueryData<PrevData>([
         "chats",
         { work_id },
       ]);
 
-      if (prevData) {
-        queryClient.setQueryData(["chats", { work_id }], {
-          pages: prevData.pages.map((page, index) => {
-            if (index === mutateCommentPageIndex) {
-              const mutateNextTimeIndex = page.chats_by_work_id.findIndex(
-                (comment) => {
-                  return comment.comment_time >= comment_time;
-                }
-              );
+      if (!prevData) return;
 
-              const newPages: GetChatsWorkQuery = {
-                chats_by_work_id: [...page.chats_by_work_id],
-              };
+      const mutateCommentPageIndex = Math.floor(comment_time / 300);
 
-              if (mutateNextTimeIndex === -1 || comment_time === 0) {
-                newPages.chats_by_work_id.push({
-                  comment_time,
-                  content,
-                  created_at,
-                  commenter_name,
-                  user,
-                  user_id: user.id,
-                  id: fake_id,
-                });
-              } else {
-                newPages.chats_by_work_id.splice(mutateNextTimeIndex, 0, {
-                  comment_time,
-                  content,
-                  created_at,
-                  commenter_name,
-                  user,
-                  user_id: user.id,
-                  id: fake_id,
-                });
-              }
+      const newPages = prevData.pages.map((page, index) => {
+        if (index !== mutateCommentPageIndex || !data.insert_chats_one)
+          return page;
+        const nextTimeIndex = page.chats_by_work_id.findIndex(
+          (comment) => comment.comment_time >= comment_time
+        );
 
-              return newPages;
-            }
+        const prevEpisodes: GetChatsWorkQuery = {
+          chats_by_work_id: [...page.chats_by_work_id],
+        };
 
-            return page;
-          }),
+        if (nextTimeIndex === -1) {
+          prevEpisodes.chats_by_work_id.push({
+            ...data.insert_chats_one,
+          });
+
+          return prevEpisodes;
+        }
+
+        prevEpisodes.chats_by_work_id.splice(nextTimeIndex, 0, {
+          ...data.insert_chats_one,
         });
-      }
-      resetInputComment();
 
-      return {
-        pages: prevData?.pages,
-        pageParams: prevData?.pageParams,
-        fake_id,
-        user,
-      };
-    },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onError: (_: any, newComment, context) => {
-      const { work_id } = newComment.object;
+        return prevEpisodes;
+      });
 
-      const prevData = context?.pages;
-      if (prevData) {
-        queryClient.setQueryData(["chats", { work_id }], prevData);
-      }
+      queryClient.setQueryData(["chats", { work_id }], {
+        pages: newPages,
+        pageParams: prevData.pageParams,
+      });
     },
   });
 
