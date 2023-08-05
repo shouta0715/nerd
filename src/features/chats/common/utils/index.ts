@@ -1,4 +1,4 @@
-import { PageParams } from "src/features/chats/types";
+import { PageParams } from "src/features/chats/common/types";
 import { MaxTime } from "src/features/timer/store/initialState";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 

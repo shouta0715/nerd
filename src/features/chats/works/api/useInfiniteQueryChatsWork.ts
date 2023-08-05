@@ -1,8 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { workChatsDocument } from "src/documents/chats";
-
-import { PageParams } from "src/features/chats/types";
-import { multipleOf300 } from "src/features/chats/utils";
+import { PageParams } from "src/features/chats/common/types";
+import { multipleOf300 } from "src/features/chats/common/utils";
 import { useTimerState } from "src/features/timer/store";
 import { GetChatsWorkQuery, GetChatsWorkQueryVariables } from "src/gql/graphql";
 

@@ -1,8 +1,7 @@
 import { useEffect, useMemo } from "react";
-import { useInfiniteQueryChatsWork } from "src/features/chats/api/useInfiniteQueryChatsWork";
-
-import { isPageParams } from "src/features/chats/types";
-import { isAvoidFetchNext } from "src/features/chats/utils";
+import { isPageParams } from "src/features/chats/common/types";
+import { isAvoidFetchNext } from "src/features/chats/common/utils";
+import { useInfiniteQueryChatsWork } from "src/features/chats/works/api/useInfiniteQueryChatsWork";
 import { useTimerState } from "src/features/timer/store";
 import { useAutoScroll } from "src/hooks/useAutoScroll";
 

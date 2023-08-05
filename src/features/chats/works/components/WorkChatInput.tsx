@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { ChatInput } from "src/features/chats/components/ChatInput";
-import { useSubmitWork } from "src/features/chats/hooks/useSubmitWork";
+import { ChatInput } from "src/features/chats/common/components/ChatInput";
+import { useSubmitWork } from "src/features/chats/works/hooks/useSubmitWork";
 
 type Props = {
   work_id: number;

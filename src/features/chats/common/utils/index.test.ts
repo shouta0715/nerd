@@ -1,4 +1,7 @@
-import { isAvoidFetchNext, multipleOf300 } from "src/features/chats/utils";
+import {
+  isAvoidFetchNext,
+  multipleOf300,
+} from "src/features/chats/common/utils";
 
 describe("chat/utils", () => {
   describe("multipleOf300", () => {

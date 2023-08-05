@@ -1,12 +1,12 @@
-import React, { FC, memo } from "react";
-import { Chats } from "src/features/chats/components/Chats";
-import { useChatsEpisode } from "src/features/chats/hooks/useChatsEpisode";
+import React, { FC } from "react";
+import { Chats } from "src/features/chats/common/components/Chats";
+import { useChatsEpisode } from "src/features/chats/episodes/hooks/useChatsEpisode";
 
 type Props = {
   episode_id: string;
 };
 
-export const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
+export const EpisodeChats: FC<Props> = ({ episode_id }) => {
   const { data, time, isPending, isSelfScroll } = useChatsEpisode(episode_id);
 
   return (
@@ -17,4 +17,4 @@ export const EpisodeChats: FC<Props> = memo(({ episode_id }) => {
       time={time}
     />
   );
-});
+};

@@ -7,9 +7,8 @@ import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { TimerModal } from "src/components/Modal/Timer";
-
-import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
-import { WorkChats } from "src/features/chats/components/WorkChats";
+import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
+import { WorkChats } from "src/features/chats/works/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
 import { WorkComments } from "src/features/comments/components/WorkComments";
 import { usePlayWork } from "src/features/works/hooks/usePlayWork";

@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Image } from "src/components/Elements/Image";
 import { Text } from "src/components/Elements/Text";
-import { Chat as ChatType } from "src/features/chats/types";
+import { Chat as ChatType } from "src/features/chats/common/types";
 import { timeCommented } from "src/features/timer/utils/timeProcessing";
 import { useUserState } from "src/store/user/userState";
 
@@ -10,7 +10,7 @@ type Props = {
   chat: ChatType;
 };
 
-export const Chat: FC<Props> = ({ chat }) => {
+export const Chat: FC<Props> = memo(({ chat }) => {
   const user = useUserState((state) => state.user);
 
   return (
@@ -64,4 +64,4 @@ export const Chat: FC<Props> = ({ chat }) => {
       </div>
     </li>
   );
-};
+});

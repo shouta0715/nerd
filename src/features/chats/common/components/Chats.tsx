@@ -3,8 +3,8 @@ import { ArrowSmallDownIcon, PlayIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader";
-import { Chat } from "src/features/chats/components/Chat";
-import { Chat as TypeChat } from "src/features/chats/types";
+import { Chat } from "src/features/chats/common/components/Chat";
+import { Chat as TypeChat } from "src/features/chats/common/types";
 import { useTimerState } from "src/features/timer/store";
 import { useGlobalState } from "src/store/global/globalStore";
 

@@ -1,22 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { insertChatDocument } from "src/documents/chats";
-
-import { PageParams } from "src/features/chats/types";
+import { PageParams } from "src/features/chats/common/types";
 import {
-  GetChatsEpisodeQuery,
+  GetChatsWorkQuery,
   InsertChatMutation,
   InsertChatMutationVariables,
 } from "src/gql/graphql";
 import { Error } from "src/libs/error";
-
 import { client } from "src/libs/graphqlClient";
 
 type PrevData = {
-  pages: GetChatsEpisodeQuery[];
+  pages: GetChatsWorkQuery[];
   pageParams: PageParams[];
 };
 
-export const useMutateChatEpisode = () => {
+export const useMutateChatWork = () => {
   const queryClient = useQueryClient();
   const insertChat = useMutation<
     InsertChatMutation,
@@ -27,11 +25,13 @@ export const useMutateChatEpisode = () => {
     onSuccess: (data) => {
       if (!data.insert_chats_one) return;
 
-      const { episode_id, comment_time } = data.insert_chats_one;
+      const { work_id, comment_time } = data.insert_chats_one;
+
+      if (!work_id) return;
 
       const prevData = queryClient.getQueryData<PrevData>([
         "chats",
-        { episode_id },
+        { work_id },
       ]);
 
       if (!prevData) return;
@@ -41,30 +41,30 @@ export const useMutateChatEpisode = () => {
       const newPages = prevData.pages.map((page, index) => {
         if (index !== mutateCommentPageIndex || !data.insert_chats_one)
           return page;
-        const nextTimeIndex = page.chats_by_episode_id.findIndex(
+        const nextTimeIndex = page.chats_by_work_id.findIndex(
           (comment) => comment.comment_time >= comment_time
         );
 
-        const prevEpisodes: GetChatsEpisodeQuery = {
-          chats_by_episode_id: [...page.chats_by_episode_id],
+        const prevEpisodes: GetChatsWorkQuery = {
+          chats_by_work_id: [...page.chats_by_work_id],
         };
 
         if (nextTimeIndex === -1) {
-          prevEpisodes.chats_by_episode_id.push({
+          prevEpisodes.chats_by_work_id.push({
             ...data.insert_chats_one,
           });
 
           return prevEpisodes;
         }
 
-        prevEpisodes.chats_by_episode_id.splice(nextTimeIndex, 0, {
+        prevEpisodes.chats_by_work_id.splice(nextTimeIndex, 0, {
           ...data.insert_chats_one,
         });
 
         return prevEpisodes;
       });
 
-      queryClient.setQueryData(["chats", { episode_id }], {
+      queryClient.setQueryData(["chats", { work_id }], {
         pages: newPages,
         pageParams: prevData.pageParams,
       });

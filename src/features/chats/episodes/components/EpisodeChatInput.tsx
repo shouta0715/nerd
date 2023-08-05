@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { ChatInput } from "src/features/chats/components/ChatInput";
-import { useSubmitChatEpisode } from "src/features/chats/hooks/useSubmitChatEpisode";
+import { ChatInput } from "src/features/chats/common/components/ChatInput";
+import { useSubmitChatEpisode } from "src/features/chats/episodes/hooks/useSubmitChatEpisode";
 
 type Props = {
   episode_id: string;

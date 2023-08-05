@@ -1,9 +1,7 @@
 import { useEffect, useMemo } from "react";
-import { isPageParams } from "../types/index";
-/* eslint-disable no-underscore-dangle */
-import { useInfiniteQueryChatsEpisode } from "src/features/chats/api/useInfiniteQueryChatsEpisode";
-
-import { isAvoidFetchNext } from "src/features/chats/utils";
+import { isPageParams } from "src/features/chats/common/types";
+import { isAvoidFetchNext } from "src/features/chats/common/utils";
+import { useInfiniteQueryChatsEpisode } from "src/features/chats/episodes/api/useInfiniteQueryChatsEpisode";
 import { useTimerState } from "src/features/timer/store";
 import { useAutoScroll } from "src/hooks/useAutoScroll";
 

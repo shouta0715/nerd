@@ -1,5 +1,5 @@
 import { graphql } from "msw";
-import { handleEpisodeChat } from "src/features/chats/mocks/msw";
+import { handleEpisodeChat } from "src/features/chats/common/mocks/msw";
 import { handlers as commentHandlers } from "src/features/comments/mocks/msw";
 import { episodeData } from "src/features/episodes/mocks/fixture";
 

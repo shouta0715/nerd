@@ -1,22 +1,27 @@
 import { graphql } from "msw";
 import {
   episodeChatData,
+  mutateEpisodeData,
   workChatData,
-} from "src/features/chats/mocks/fixture";
+} from "src/features/chats/common/mocks/fixture";
 import {
   GetChatsEpisodeQuery,
   GetChatsWorkQuery,
   InsertChatMutation,
+  InsertChatMutationVariables,
 } from "src/gql/graphql";
 
 export const handleEpisodeChat = (status?: number) => {
-  return graphql.query("GetChatsEpisode", (_, res, ctx) => {
-    if (status) {
-      return res(ctx.status(status));
-    }
+  return graphql.query<GetChatsEpisodeQuery>(
+    "GetChatsEpisode",
+    (_, res, ctx) => {
+      if (status) {
+        return res(ctx.status(status));
+      }
 
-    return res(ctx.data(episodeChatData));
-  });
+      return res(ctx.data(episodeChatData()));
+    }
+  );
 };
 
 export const handlerWorkChat = (status?: number) => {
@@ -30,14 +35,14 @@ export const handlerWorkChat = (status?: number) => {
 };
 
 export const handleMutateEpisodeChat = (status?: number) => {
-  return graphql.mutation<GetChatsEpisodeQuery, InsertChatMutation>(
+  return graphql.mutation<InsertChatMutation, InsertChatMutationVariables>(
     "InsertChat",
-    (_, res, ctx) => {
+    (req, res, ctx) => {
       if (status) {
         return res(ctx.status(status));
       }
 
-      return res(ctx.data(episodeChatData));
+      return res(ctx.data(mutateEpisodeData(req.variables)));
     }
   );
 };
@@ -54,3 +59,10 @@ export const handleMutateWorkChat = (status?: number) => {
     }
   );
 };
+
+export const handlers = [
+  handleEpisodeChat(),
+  handlerWorkChat(),
+  handleMutateEpisodeChat(),
+  handleMutateWorkChat(),
+];

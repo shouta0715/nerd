@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
-import { useMutateChatWork } from "src/features/chats/api/useMutateChatWork";
-import { useSubmitChat } from "src/features/chats/hooks/useSubmitChat";
+import { useSubmitChat } from "src/features/chats/common/hooks/useSubmitChat";
+import { useMutateChatEpisode } from "src/features/chats/episodes/api/useMutateChatEpisode";
 import { useGlobalState } from "src/store/global/globalStore";
 import { getIp } from "src/utils/client/getIp";
 
 type Args = {
-  work_id: number;
+  episode_id: string;
 };
 
-export const useSubmitWork = ({ work_id }: Args) => {
-  const { insertChat } = useMutateChatWork();
+export const useSubmitChatEpisode = ({ episode_id }: Args) => {
+  const { insertChat } = useMutateChatEpisode();
   const { setValue, user, getTime, value } = useSubmitChat();
-  const authLoading = useGlobalState((state) => state.authLoading);
   const onNotification = useNotificationState((state) => state.onShow);
+  const authLoading = useGlobalState((state) => state.authLoading);
   const [ipLoading, setIpLoading] = useState(false);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,10 +23,11 @@ export const useSubmitWork = ({ work_id }: Args) => {
     try {
       if (!value.trim() || authLoading) return;
       setIpLoading(true);
+
       const ip = await getIp();
 
       const object = {
-        work_id,
+        episode_id,
         content: value,
         comment_time: getTime(),
         commenter_name: user?.user_name || "匿名",
@@ -47,7 +50,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
   return {
     onSubmitHandler,
     isLoading: insertChat.isPending || ipLoading,
-    setValue,
     value,
+    setValue,
   };
 };

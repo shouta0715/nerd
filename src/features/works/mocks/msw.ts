@@ -1,5 +1,5 @@
 import { graphql } from "msw";
-import { handlerWorkChat } from "src/features/chats/mocks/msw";
+import { handlerWorkChat } from "src/features/chats/common/mocks/msw";
 import { handlers as commentHandlers } from "src/features/comments/mocks/msw";
 import {
   searchWorksData,
