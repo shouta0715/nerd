@@ -1,4 +1,7 @@
-import { TodayEpisode, WorkEpisode } from "src/features/episodes/types";
+import {
+  GenEpisodePlaceholder,
+  TodayEpisode,
+} from "src/features/episodes/types";
 import { GetEpisodeQuery } from "src/gql/graphql";
 
 export const genTodayEpisodePlaceholder = (episode: TodayEpisode) => [
@@ -12,19 +15,12 @@ export const genTodayEpisodePlaceholder = (episode: TodayEpisode) => [
   episode.end_time,
 ];
 
-type Props = {
-  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"];
-  title?: string;
-  work_id?: number;
-  series_id?: string | null;
-};
-
 export const genEpisodePlaceholder = ({
   episode,
   title,
   work_id,
   series_id,
-}: Props) => {
+}: GenEpisodePlaceholder) => {
   return [
     title,
     episode?.title,

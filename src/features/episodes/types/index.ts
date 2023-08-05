@@ -18,3 +18,10 @@ export type AutoCompleteData = {
   start_time?: string;
   end_time?: string;
 };
+
+export type GenEpisodePlaceholder = {
+  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"];
+  title?: string;
+  work_id?: number;
+  series_id?: string | null;
+};

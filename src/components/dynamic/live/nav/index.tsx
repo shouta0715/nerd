@@ -42,7 +42,7 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
         onClick={() => {
           router.replace({
             query: {
-              ...router.query,
+              slug: router.query.slug,
               mode: "chat",
             },
           });
@@ -60,8 +60,9 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
         onClick={() => {
           router.replace({
             query: {
-              ...router.query,
+              slug: router.query.slug,
               mode: "comment",
+              order: router.query.order ?? "new",
             },
           });
         }}

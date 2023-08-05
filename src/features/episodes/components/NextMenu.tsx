@@ -60,7 +60,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
           {mode && mode === "finish" && (
             <ButtonLink
               className="mx-auto w-36 space-x-2 py-2  font-bold text-white sm:mx-0 sm:w-max"
-              href={`/episodes/${episode?.id}`}
+              href={`/episodes/${episode?.id}?mode=chat`}
               leftIcon={<ChevronDoubleRightIcon className="h-4 w-4" />}
               size="xs"
               theme="danger"

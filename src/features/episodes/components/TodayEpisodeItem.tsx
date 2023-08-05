@@ -9,8 +9,11 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { TodayEpisode } from "src/features/episodes/types";
 import { genEpisodePlaceholder } from "src/features/episodes/utils";
+import {
+  getEpisodeQuery,
+  getTodayEpisodeLink,
+} from "src/features/episodes/utils/link";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
-import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
@@ -48,29 +51,25 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         >
           <ModeBadge mode={mode} start_time={episode.start_time} />
           <Link
-            as={
-              getIsAlreadyFinished(episode.end_time)
-                ? `/episodes/${episode.id}?mode=chat`
-                : `/episodes/live/${episode.id}?mode=chat`
-            }
+            as={getTodayEpisodeLink({
+              as: true,
+              id: episode.id,
+              end_time: episode.end_time,
+            })}
             className="group flex w-full flex-1 flex-col items-center gap-1"
             href={{
-              pathname: getIsAlreadyFinished(episode.end_time)
-                ? `/episodes/${episode.id}`
-                : `/episodes/live/${episode.id}`,
-              query: getIsAlreadyFinished(episode.end_time)
-                ? {
-                    episode: genEpisodePlaceholder({
-                      episode,
-                      title: episode.work.series_title,
-                      work_id: episode.work.id,
-                      series_id: episode.work.series_id,
-                    }),
-                    mode: "chat",
-                  }
-                : {
-                    mode: "chat",
-                  },
+              pathname: getTodayEpisodeLink({
+                as: false,
+                id: episode.id,
+                end_time: episode.end_time,
+              }),
+              query: getEpisodeQuery({
+                episode,
+                title: episode.work.series_title,
+                work_id: episode.work.id,
+                series_id: episode.work.series_id,
+                today: true,
+              }),
             }}
           >
             <Text

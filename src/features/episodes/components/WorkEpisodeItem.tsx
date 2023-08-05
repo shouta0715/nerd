@@ -2,7 +2,10 @@ import Link from "next/link";
 import React, { FC } from "react";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisode } from "src/features/episodes/types";
-import { genEpisodePlaceholder } from "src/features/episodes/utils";
+import {
+  getEpisodeLink,
+  getEpisodeQuery,
+} from "src/features/episodes/utils/link";
 import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 
 type Props = {
@@ -20,30 +23,24 @@ export const WorkEpisodeItem: FC<Props> = ({
 }) => (
   <li className="flex h-full flex-col items-center p-2">
     <Link
-      as={
-        getIsAlreadyFinished(episode.end_time)
-          ? `/episodes/${episode.id}?mode=chat`
-          : `/episodes/live/${episode.id}?mode=chat`
-      }
+      as={getEpisodeLink({
+        as: true,
+        id: episode.id,
+        end_time: episode.end_time,
+      })}
       className=" mb-1 px-2 text-sm text-indigo-600 transition-all hover:text-indigo-500 hover:underline md:text-base"
       color="indigo"
       href={{
         pathname: getIsAlreadyFinished(episode.end_time)
           ? `/episodes/${episode.id}`
           : `/episodes/live/${episode.id}`,
-        query: getIsAlreadyFinished(episode.end_time)
-          ? {
-              episode: genEpisodePlaceholder({
-                episode,
-                title: work_title,
-                work_id,
-                series_id,
-              }),
-              mode: "chat",
-            }
-          : {
-              mode: "chat",
-            },
+        query: getEpisodeQuery({
+          episode,
+          title: work_title,
+          work_id,
+          series_id,
+          today: false,
+        }),
       }}
     >
       第{episode.number}話

@@ -6,6 +6,7 @@ import { useTimerState } from "src/features/timer/store";
 export const useEpisode = () => {
   const router = useRouter();
   const { slug, episode, mode } = router.query;
+
   const { data, isPending } = useQueryEpisode(slug, episode);
 
   const interval = useTimerState((state) => state.interval);
