@@ -11,7 +11,7 @@ import { Text } from "src/components/Elements/Text";
 import { NextButton } from "src/features/episodes/components/NextButton";
 import { useOpenState } from "src/features/episodes/store";
 import { LiveTimer } from "src/features/timer/types";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {

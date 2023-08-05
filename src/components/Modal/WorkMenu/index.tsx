@@ -4,7 +4,7 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { ShareButton } from "src/components/Elements/Share";
 import { Text } from "src/components/Elements/Text";
 import { useOpenState } from "src/features/episodes/store";
-import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { GetWorkQuery } from "src/gql/graphql";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {
