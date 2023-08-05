@@ -9,6 +9,7 @@ functions
 *.config.*
 *.generated.ts
 graphql.ts
+gql
 __reports__
 coverage
 storybook-static
