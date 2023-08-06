@@ -2,7 +2,6 @@ import { useQueryClient, useIsFetching } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 import { useInView } from "react-intersection-observer";
-import { useInfiniteCommentsWork } from "src/features/comments/api/useInfiniteCommentsWork";
 
 import {
   InfiniteCommentEpisode,
@@ -10,6 +9,7 @@ import {
 } from "src/features/comments/common/types";
 import { getInitialPageParam } from "src/features/comments/common/utils";
 import { getLatestWorkComments } from "src/features/comments/common/utils/getLatestComments";
+import { useInfiniteCommentsWork } from "src/features/comments/works/api/useInfiniteCommentsWork";
 import { GetLatestEpisodeCommentQuery } from "src/gql/graphql";
 
 export const useCommentsWork = (work_id: number) => {

@@ -2,10 +2,10 @@ import { useQueryClient, useIsFetching } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 import { useMemo, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
-import { useInfiniteCommentsEpisode } from "src/features/comments/api/useInfiniteCommentsEpisode";
 import { InfiniteCommentEpisode } from "src/features/comments/common/types";
 import { getInitialPageParam } from "src/features/comments/common/utils";
 import { getLatestEpisodeComments } from "src/features/comments/common/utils/getLatestComments";
+import { useInfiniteCommentsEpisode } from "src/features/comments/episodes/api/useInfiniteCommentsEpisode";
 import { GetLatestEpisodeCommentQuery } from "src/gql/graphql";
 
 export const useCommentsEpisode = (episode_id: string) => {

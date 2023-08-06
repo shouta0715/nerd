@@ -1,4 +1,4 @@
-import { useMutateComment } from "src/features/comments/api/useMutateComment";
+import { useMutateComment } from "src/features/comments/common/api/useMutateComment";
 
 import { useInputCommentState } from "src/features/comments/common/store";
 import { useUserState } from "src/store/user/userState";
