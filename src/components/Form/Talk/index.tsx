@@ -72,6 +72,7 @@ export const TalkForm = forwardRef<
             }}
             type="button"
           >
+            <span className="sr-only">アバターを変更する</span>
             {user?.isDefaultPhoto ? (
               <Image
                 alt="avatar"
@@ -125,9 +126,15 @@ export const TalkForm = forwardRef<
             type="submit"
           >
             {apiLoading ? (
-              <Loader size="md" theme="white" />
+              <>
+                <Loader size="md" theme="white" />
+                <span className="sr-only">送信中</span>
+              </>
             ) : (
-              <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+              <>
+                <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+                <span className="sr-only">送信する</span>
+              </>
             )}
           </Button>
           <div
@@ -148,9 +155,15 @@ export const TalkForm = forwardRef<
             type="submit"
           >
             {apiLoading ? (
-              <Loader size="md" theme="white" />
+              <>
+                <Loader size="md" theme="white" />
+                <span className="sr-only">送信中</span>
+              </>
             ) : (
-              <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+              <>
+                <PaperAirplaneIcon className="h-full w-full fill-white stroke-white" />
+                <span className="sr-only">送信する</span>
+              </>
             )}
           </Button>
         ) : (

@@ -17,7 +17,7 @@ export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
     <header className="flex flex-col px-4 lg:px-0">
       <div
         className={`flex w-full flex-1 flex-col items-center gap-1 lg:rounded-t-2xl lg:px-4 lg:py-6 lg:text-white
-      ${mode === "up" ? "lg:bg-orange-500" : "lg:bg-indigo-600"}`}
+      ${mode === "up" ? "lg:bg-orange-600" : "lg:bg-indigo-600"}`}
       >
         <Text
           className="line-clamp-2 text-base font-bold  md:text-lg"
@@ -41,8 +41,8 @@ export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
       </div>
       <div className="mx-auto mt-1.5 flex max-w-max flex-col md:mt-3">
         <Text
-          className={`mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-500 transition-colors duration-300 md:text-base ${
-            mode === "up" ? "text-orange-500" : "text-indigo-500"
+          className={`mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-600 transition-colors duration-300 md:text-base ${
+            mode === "up" ? "text-orange-600" : "text-indigo-600"
           }`}
         >
           {mode === "up" ? "開始から" : "終了まで"}

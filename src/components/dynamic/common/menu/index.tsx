@@ -9,6 +9,11 @@ export const Menu = () => {
       <section>
         <div className="mb-2 flex items-center justify-between">
           <Text size="sm">メニュー</Text>
+          <p>
+            <Text className="text-sm text-pink-600" component="span">
+              投稿時に表示される名前を変更できます。
+            </Text>
+          </p>
         </div>
         <MenuForm />
       </section>

@@ -13,6 +13,7 @@ export const useQueryLiveChat = ({
     document: chatsDocument,
     options: {
       enabled,
+      gcTime: 0,
     },
     variables: {
       episode_id,
