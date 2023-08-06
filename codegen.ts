@@ -1,12 +1,10 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
-import { secret, endpoint } from "./secrets.json";
-
 // export const overwrite = true;
 const schema = {
-  [endpoint]: {
+  [process.env.NEXT_PUBLIC_ENDPOINT as string]: {
     headers: {
-      "x-hasura-admin-secret": secret,
+      "x-hasura-admin-secret": process.env.ADMIN_SECRET as string,
     },
   },
 };
