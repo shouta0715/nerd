@@ -8,8 +8,8 @@ import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { GetChatsQuery, SubscriptionChatsSubscription } from "src/gql/graphql";
 
-import { client } from "src/libs/graphqlClient";
-import { getWsClient } from "src/libs/wsClient";
+import { client } from "src/libs/client/graphql";
+import { getWsClient } from "src/libs/client/ws";
 import { SUBSCRIPTION_CHATS } from "src/schema/chat/chatQuery";
 
 import { useGlobalState, useWsClientState } from "src/store/global/globalStore";

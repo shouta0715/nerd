@@ -15,9 +15,8 @@ import {
   MutateWorkCommentMutation,
   MutateWorkCommentMutationVariables,
 } from "src/gql/graphql";
+import { client } from "src/libs/client/graphql";
 import { Error } from "src/libs/error";
-
-import { client } from "src/libs/graphqlClient";
 import { useUserState } from "src/store/user/userState";
 
 type QueryKey = ["comments", Record<string, unknown>];

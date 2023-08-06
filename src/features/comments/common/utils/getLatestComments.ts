@@ -3,7 +3,7 @@ import {
   workLatestCommentsDocument,
 } from "src/documents/comments";
 import { Order_By } from "src/gql/graphql";
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 
 type GetLatestEpisodeCommentsArgs = {
   episode_id: string;

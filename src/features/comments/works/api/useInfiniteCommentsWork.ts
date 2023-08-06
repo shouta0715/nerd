@@ -6,7 +6,7 @@ import {
 import { CommentsFilter } from "src/features/comments/common/types";
 import { getInitialPageParam } from "src/features/comments/common/utils";
 import { Order_By } from "src/gql/graphql";
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 import { useUserState } from "src/store/user/userState";
 
 type GetFinishCommentsArgs = {

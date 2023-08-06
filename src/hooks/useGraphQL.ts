@@ -4,7 +4,7 @@ import {
   UseQueryResult,
   useQuery,
 } from "@tanstack/react-query";
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 
 export function useGraphQL<TResult, TVariables>({
   document,

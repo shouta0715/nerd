@@ -31,7 +31,7 @@ class GraphQLRequest extends GraphQLClient {
   }
 
   private async refreshToken() {
-    const refreshToken = await import("src/libs/firebase").then(
+    const refreshToken = await import("src/libs/client/firebase").then(
       (r) => r.auth.currentUser?.refreshToken
     );
 

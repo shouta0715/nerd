@@ -7,11 +7,10 @@ import { signInAnonymously } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { handleSetCustomClaims, useUser } from "src/features/auth/hooks";
+import { auth } from "src/libs/client/firebase";
+import { client } from "src/libs/client/graphql";
+import { getWsClient } from "src/libs/client/ws";
 import { ForbiddenError, UnauthorizedError } from "src/libs/error";
-import { auth } from "src/libs/firebase";
-import { client } from "src/libs/graphqlClient";
-import { getWsClient } from "src/libs/wsClient";
-
 import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
 

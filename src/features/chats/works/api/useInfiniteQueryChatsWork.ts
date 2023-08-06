@@ -5,7 +5,7 @@ import { multipleOf300 } from "src/features/chats/common/utils";
 import { useTimerState } from "src/features/timer/store";
 import { GetChatsWorkQuery, GetChatsWorkQueryVariables } from "src/gql/graphql";
 
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 
 type Args = {
   work_id: number;

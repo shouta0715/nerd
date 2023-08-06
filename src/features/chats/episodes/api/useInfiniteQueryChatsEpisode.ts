@@ -8,7 +8,7 @@ import {
   GetChatsEpisodeQueryVariables,
 } from "src/gql/graphql";
 
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 
 type Args = {
   episode_id: string;

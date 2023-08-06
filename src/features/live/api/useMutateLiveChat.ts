@@ -5,8 +5,8 @@ import {
   InsertChatMutation,
   InsertChatMutationVariables,
 } from "src/gql/graphql";
+import { client } from "src/libs/client/graphql";
 import { Error } from "src/libs/error";
-import { client } from "src/libs/graphqlClient";
 import { getQueryKey } from "src/utils/client/getQueryKey";
 
 export const useMutateLiveChat = () => {

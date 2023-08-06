@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { replyDocument } from "src/documents/reply";
 
-import { client } from "src/libs/graphqlClient";
+import { client } from "src/libs/client/graphql";
 
 type PageParam = {
   cursor: string | null;

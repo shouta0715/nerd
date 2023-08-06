@@ -4,8 +4,8 @@ import {
   InsertRequestMutation,
   InsertRequestMutationVariables,
 } from "src/gql/graphql";
+import { client } from "src/libs/client/graphql";
 import { Error } from "src/libs/error";
-import { client } from "src/libs/graphqlClient";
 
 export const useMutateRequest = () => {
   return useMutation<

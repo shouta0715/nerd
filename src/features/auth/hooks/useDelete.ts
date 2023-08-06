@@ -7,8 +7,8 @@ import {
 import { useCallback } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { useRecentLoginState } from "src/features/auth/store";
+import { auth } from "src/libs/client/firebase";
 import { UnauthorizedError } from "src/libs/error";
-import { auth } from "src/libs/firebase";
 import { useGlobalState } from "src/store/global/globalStore";
 
 export const useDelete = () => {
