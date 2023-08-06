@@ -14,6 +14,7 @@ import {
   getTodayEpisodeLink,
 } from "src/features/episodes/utils/link";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
+import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
@@ -151,18 +152,22 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               アーカイブで参加する
             </ButtonLink>
             <ButtonLink
-              as={
-                episode.work.series_id
-                  ? `/works/${episode.work.id}?series=${episode.work.series_id}`
-                  : `/works/${episode.work.id}`
-              }
+              as={getWorksLink({
+                id: episode?.work.id,
+                series_id: episode?.work.series_id,
+                as: true,
+              })}
               className="py-2"
               href={{
-                pathname: `${`/works/${episode.work.id}`}`,
-                query: {
-                  series: episode.work.series_id ?? undefined,
-                  work: [episode.work.title, episode.work.series_title],
-                },
+                pathname: getWorksLink({
+                  id: episode?.work.id,
+                  as: false,
+                }),
+                query: getWorksQuery({
+                  series_id: episode?.work.series_id,
+                  title: episode?.work.title,
+                  series_title: episode?.work.series_title,
+                }),
               }}
               leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
               size="xs"

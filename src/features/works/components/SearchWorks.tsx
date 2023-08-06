@@ -8,6 +8,10 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Skeleton } from "src/components/Elements/Skeleton";
 import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
 import { WorkItem } from "src/features/works/components/WorkItem";
+import {
+  getSlugWorkLink,
+  getSlugWorkQuery,
+} from "src/features/works/utils/link";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const SearchWorks = () => {
@@ -96,17 +100,21 @@ export const SearchWorks = () => {
                       {work.series_title}
                     </span>
                     <ButtonLink
-                      as={`/works/play/${work.id}`}
+                      as={getSlugWorkLink({
+                        id: work.id,
+                        as: true,
+                      })}
                       className="h-max border-white bg-indigo-500 font-bold text-white hover:bg-indigo-600"
                       href={{
-                        pathname: `${`/works/play/${work.id}`}`,
-                        query: {
-                          work: [
-                            work.title,
-                            work.series_title,
-                            work.series_id ?? "",
-                          ],
-                        },
+                        pathname: getSlugWorkLink({
+                          id: work.id,
+                          as: false,
+                        }),
+                        query: getSlugWorkQuery({
+                          title: work.title,
+                          series_id: work.series_id,
+                          series_title: work.series_title,
+                        }),
                       }}
                       leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
                       size="sm"

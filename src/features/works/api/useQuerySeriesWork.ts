@@ -1,5 +1,5 @@
 import { workSiresDocument } from "src/documents/works";
-import { getSeriesWorkPlaceholder } from "src/features/works/utils";
+import { genSeriesWorkPlaceholder } from "src/features/works/utils";
 import {
   GetWorkSeriesQuery,
   GetWorkSeriesQueryVariables,
@@ -24,7 +24,7 @@ export const useQuerySeriesWork = ({ slug, series_id, work }: Args) => {
       placeholderData: () => {
         if (!work || typeof work === "string" || !slug) return undefined;
 
-        return getSeriesWorkPlaceholder(work, slug, series_id);
+        return genSeriesWorkPlaceholder({ data: work, slug, series_id });
       },
       staleTime: 1000 * 60 * 5,
     },

@@ -1,9 +1,13 @@
+import {
+  GenSeriesWorkPlaceholder,
+  GenWorkPlaceholder,
+} from "src/features/works/types";
 import { GetWorkQuery, GetWorkSeriesQuery } from "src/gql/graphql";
 
-export const getWorkPlaceholder = (
-  data: string[],
-  slug: string | string[]
-): GetWorkQuery => {
+export const genWorkPlaceholder = ({
+  data,
+  slug,
+}: GenWorkPlaceholder): GetWorkQuery => {
   const [title, series_title, series_id] = data;
 
   return {
@@ -16,11 +20,11 @@ export const getWorkPlaceholder = (
   };
 };
 
-export const getSeriesWorkPlaceholder = (
-  data: string[],
-  slug: string | string[],
-  series_id?: string | string[]
-): GetWorkSeriesQuery => {
+export const genSeriesWorkPlaceholder = ({
+  data,
+  slug,
+  series_id,
+}: GenSeriesWorkPlaceholder): GetWorkSeriesQuery => {
   const [title, series_title] = data;
 
   return {

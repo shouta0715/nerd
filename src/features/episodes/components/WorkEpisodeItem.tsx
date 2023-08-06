@@ -6,7 +6,6 @@ import {
   getEpisodeLink,
   getEpisodeQuery,
 } from "src/features/episodes/utils/link";
-import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
 
 type Props = {
   episode: WorkEpisode;
@@ -31,9 +30,11 @@ export const WorkEpisodeItem: FC<Props> = ({
       className=" mb-1 px-2 text-sm text-indigo-600 transition-all hover:text-indigo-500 hover:underline md:text-base"
       color="indigo"
       href={{
-        pathname: getIsAlreadyFinished(episode.end_time)
-          ? `/episodes/${episode.id}`
-          : `/episodes/live/${episode.id}`,
+        pathname: getEpisodeLink({
+          as: false,
+          id: episode.id,
+          end_time: episode.end_time,
+        }),
         query: getEpisodeQuery({
           episode,
           title: work_title,

@@ -11,6 +11,7 @@ import { Text } from "src/components/Elements/Text";
 import { NextButton } from "src/features/episodes/components/NextButton";
 import { useOpenState } from "src/features/episodes/store";
 import { LiveTimer } from "src/features/timer/types";
+import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
 import { GetEpisodeQuery } from "src/gql/graphql";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
@@ -114,21 +115,22 @@ export const NextEpisodeModal: FC<Props> = ({ mode, episode }) => {
                     )}
                     {episode?.work.has_episodes && (
                       <ButtonLink
-                        as={
-                          episode?.work.series_id
-                            ? `/works/${episode?.work.id}?series=${episode?.work.series_id}`
-                            : `/works/${episode?.work.id}`
-                        }
+                        as={getWorksLink({
+                          id: episode?.work.id,
+                          series_id: episode?.work.series_id,
+                          as: true,
+                        })}
                         className="mx-auto flex w-36 items-center space-x-2 py-2 text-white sm:mx-0 sm:w-max"
                         href={{
-                          pathname: `${`/works/${episode?.work.id}`}`,
-                          query: {
-                            series: episode?.work.series_id ?? undefined,
-                            work: [
-                              episode?.work.title,
-                              episode?.work.series_title,
-                            ],
-                          },
+                          pathname: getWorksLink({
+                            id: episode?.work.id,
+                            as: false,
+                          }),
+                          query: getWorksQuery({
+                            series_id: episode?.work.series_id,
+                            title: episode?.work.title,
+                            series_title: episode?.work.series_title,
+                          }),
                         }}
                         leftIcon={<Square3Stack3DIcon className="h-4 w-4" />}
                         size="xs"

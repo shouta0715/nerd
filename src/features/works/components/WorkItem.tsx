@@ -2,7 +2,9 @@ import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
+import { getSeriesLink, getSeriesQuery } from "src/features/series/utils/link";
 import { Work } from "src/features/works/types";
+import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
 
 type Props = {
   work: Work;
@@ -41,11 +43,17 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
 
         {work.series_id && !isSeriesPage && (
           <ButtonLink
-            as={`/series/${work.series_id}`}
+            as={getSeriesLink({
+              series_id: work.series_id,
+            })}
             className="mx-auto mb-2 flex max-w-max flex-col items-center justify-center py-2"
             href={{
-              pathname: `/series/${work.series_id}`,
-              query: { series_title: work.title },
+              pathname: getSeriesLink({
+                series_id: work.series_id,
+              }),
+              query: getSeriesQuery({
+                title: work.title,
+              }),
             }}
             size="xs"
             theme="primary"
@@ -55,18 +63,22 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
         )}
         {work.has_episodes && work.episodes.length > 7 && (
           <ButtonLink
-            as={
-              work.series_id
-                ? `/works/${work.id}?series=${work.series_id}`
-                : `/works/${work.id}`
-            }
+            as={getWorksLink({
+              id: work.id,
+              series_id: work.series_id,
+              as: true,
+            })}
             className="mx-auto flex w-full max-w-max items-center justify-center py-2"
             href={{
-              pathname: `${`/works/${work.id}`}`,
-              query: {
-                series: work.series_id ?? undefined,
-                work: [work.title, work.series_title],
-              },
+              pathname: getWorksLink({
+                id: work.id,
+                as: false,
+              }),
+              query: getWorksQuery({
+                series_id: work.series_id,
+                title: work.title,
+                series_title: work.series_title,
+              }),
             }}
             leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
             size="xs"

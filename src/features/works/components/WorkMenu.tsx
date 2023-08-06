@@ -3,6 +3,7 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { ShareButton } from "src/components/Elements/Share";
 import { Text } from "src/components/Elements/Text";
 import { WorkMenuModal } from "src/components/Modal/WorkMenu";
+import { getSeriesLink, getSeriesQuery } from "src/features/series/utils/link";
 import { GetWorkQuery } from "src/gql/graphql";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
@@ -38,8 +39,12 @@ export const WorkMenu: FC<Props> = ({ data }) => {
                 as={`/series/${data?.works_by_pk?.series_id}`}
                 className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-4  py-2 text-center text-sm font-bold text-white"
                 href={{
-                  pathname: `/series/${data?.works_by_pk?.series_id}`,
-                  query: { series_title: data?.works_by_pk?.title },
+                  pathname: getSeriesLink({
+                    series_id: data?.works_by_pk?.series_id,
+                  }),
+                  query: getSeriesQuery({
+                    title: data?.works_by_pk?.title,
+                  }),
                 }}
                 size="xs"
               >

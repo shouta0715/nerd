@@ -1,6 +1,6 @@
 import { GetSeriesQuery } from "src/gql/graphql";
 
-export const getSeriesPlaceHolder = (
+export const genSeriesPlaceHolder = (
   series_title: string | string[] | null,
   slug: string | string[] | null
 ): GetSeriesQuery => {

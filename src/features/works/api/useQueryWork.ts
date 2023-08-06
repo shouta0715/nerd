@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { workDocument } from "src/documents/works";
-import { getWorkPlaceholder } from "src/features/works/utils";
+import { genWorkPlaceholder } from "src/features/works/utils";
 import { GetWorkQuery, GetWorkQueryVariables } from "src/gql/graphql";
 import { useGraphQL } from "src/hooks/useGraphQL";
 
@@ -22,7 +22,7 @@ export const useQueryWork = ({ slug, work }: Args) => {
       placeholderData: () => {
         if (!slug || !work || typeof work === "string") return undefined;
 
-        return getWorkPlaceholder(work, slug);
+        return genWorkPlaceholder({ data: work, slug });
       },
     },
   });

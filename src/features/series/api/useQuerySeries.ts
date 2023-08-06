@@ -1,5 +1,5 @@
 import { seriesDocument } from "src/documents/series";
-import { getSeriesPlaceHolder } from "src/features/series/utils";
+import { genSeriesPlaceHolder } from "src/features/series/utils";
 import { GetSeriesQuery, GetSeriesQueryVariables } from "src/gql/graphql";
 import { useGraphQL } from "src/hooks/useGraphQL";
 
@@ -16,7 +16,8 @@ export const useQuerySeries = ({ slug, series_title }: Args) => {
     },
     options: {
       enabled: !!slug && typeof slug === "string",
-      placeholderData: () => getSeriesPlaceHolder(series_title, slug),
+      placeholderData: () => genSeriesPlaceHolder(series_title, slug),
+      staleTime: 1000 * 60 * 5,
     },
   });
 };
