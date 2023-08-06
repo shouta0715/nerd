@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
@@ -8,13 +9,18 @@ import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput
 import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
 import { useTimerState } from "src/features/timer/store";
 
-import { WorkMenu } from "src/features/works/play/components/WorkMenu";
 import { GetWorkQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
   data?: GetWorkQuery;
 };
+
+const DynamicWorkMenu = dynamic(() =>
+  import("src/features/works/play/components/WorkMenu").then(
+    (mod) => mod.WorkMenu
+  )
+);
 
 export const Aside: FC<Props> = ({ isChat, data }) => {
   const mode = useTimerState((state) => state.mode);
@@ -37,9 +43,8 @@ export const Aside: FC<Props> = ({ isChat, data }) => {
         <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <WorkMenu data={data} />
+        <DynamicWorkMenu data={data} />
       </div>
-
       <div
         className={clsx(
           mode === "up" ? "border-orange-600" : "border-indigo-600",

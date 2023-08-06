@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
@@ -7,7 +8,6 @@ import { Timer } from "src/components/dynamic/common/timer";
 import { EpisodeChatInput } from "src/features/chats/episodes/components/EpisodeChatInput";
 import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
-import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { useTimerState } from "src/features/timer/store";
 import { GetEpisodeQuery } from "src/gql/graphql";
 
@@ -15,6 +15,12 @@ type Props = {
   isChat: boolean;
   data?: GetEpisodeQuery;
 };
+
+const DynamicNextMenu = dynamic(() =>
+  import("src/features/episodes/components/NextMenu").then(
+    (mod) => mod.NextMenu
+  )
+);
 
 export const Aside: FC<Props> = ({ isChat, data }) => {
   const mode = useTimerState((state) => state.mode);
@@ -37,7 +43,7 @@ export const Aside: FC<Props> = ({ isChat, data }) => {
         <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <NextMenu episode={data?.episodes_by_pk} />
+        <DynamicNextMenu episode={data?.episodes_by_pk} />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />

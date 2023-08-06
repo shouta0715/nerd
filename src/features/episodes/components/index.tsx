@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
@@ -8,14 +9,32 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { TimerModal } from "src/components/Modal/Timer";
 import { EpisodeChatInput } from "src/features/chats/episodes/components/EpisodeChatInput";
-import { EpisodeChats } from "src/features/chats/episodes/components/EpisodeChats";
 import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
-import { EpisodeComments } from "src/features/comments/episodes/components/EpisodeComments";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { getIsStatus } from "src/features/timer/utils/getIsStatus";
 import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/client/validateData";
+
+const DynamicChats = dynamic(
+  () =>
+    import("src/features/chats/episodes/components/EpisodeChats").then(
+      (mod) => mod.EpisodeChats
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
+
+const DynamicComments = dynamic(
+  () =>
+    import("src/features/comments/episodes/components/EpisodeComments").then(
+      (mod) => mod.EpisodeComments
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
 
 export const Episode = () => {
   const { data, isPending, isChat } = useEpisode();
@@ -70,7 +89,7 @@ export const Episode = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <EpisodeChats episode_id={data?.episodes_by_pk?.id} />
+                <DynamicChats episode_id={data?.episodes_by_pk?.id} />
               </Suspense>
             </ErrorBoundary>
           ) : (
@@ -83,7 +102,7 @@ export const Episode = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                <DynamicComments episode_id={data?.episodes_by_pk?.id} />
               </Suspense>
             </ErrorBoundary>
           )}

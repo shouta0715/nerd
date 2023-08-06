@@ -1,4 +1,3 @@
-import { Popover } from "@headlessui/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
@@ -10,6 +9,14 @@ import { useUserState } from "src/store/user/userState";
 
 const DynamicAccountMenu = dynamic(() =>
   import("src/components/Elements/AccountMenu").then((mod) => mod.AccountMenu)
+);
+
+const DynamicPopover = dynamic(() =>
+  import("@headlessui/react").then((mod) => mod.Popover)
+);
+
+const DynamicPopoverButton = dynamic(() =>
+  import("@headlessui/react").then((mod) => mod.Popover.Button)
 );
 
 export const Header = () => {
@@ -26,9 +33,18 @@ export const Header = () => {
           </span>
         </Link>
         <div className="flex items-center gap-x-8">
+          <p>
+            <Link
+              className="text-sm font-medium text-indigo-600 underline hover:text-indigo-500"
+              href="/usage"
+            >
+              使い方
+            </Link>
+          </p>
+
           {user && !user.anonymous ? (
-            <Popover className="relative">
-              <Popover.Button>
+            <DynamicPopover className="relative">
+              <DynamicPopoverButton>
                 {user.isDefaultPhoto ? (
                   <Image
                     alt="avatar"
@@ -43,9 +59,9 @@ export const Header = () => {
                     user_name={user.user_name}
                   />
                 )}
-              </Popover.Button>
+              </DynamicPopoverButton>
               <DynamicAccountMenu />
-            </Popover>
+            </DynamicPopover>
           ) : (
             <Button
               className="px-1.5 py-1 md:px-2 md:py-1.5"

@@ -7,7 +7,6 @@ import NextNProgress from "nextjs-progressbar";
 import React, { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Error } from "src/components/Error";
-import { NotificationProvider } from "src/components/Notification/NotificationProvider";
 import dynamic from "next/dynamic";
 import { Inter } from "next/font/google";
 import queryClient from "src/libs/client/query";
@@ -23,6 +22,12 @@ const DynamicFirebaseAuth = dynamic(() =>
   )
 );
 
+const DynamicNextNProgress = dynamic(() => import("nextjs-progressbar"));
+
+const DynamicNotification = dynamic(() =>
+  import("src/components/Notification").then((mod) => mod.Notification)
+);
+
 export const Provider = ({ children }: Props) => {
   const [client] = useState(() => queryClient);
 
@@ -35,16 +40,15 @@ export const Provider = ({ children }: Props) => {
         />
       </Head>
       <ErrorBoundary FallbackComponent={Error}>
-        <NotificationProvider>
-          <DynamicFirebaseAuth />
-          <NextNProgress
-            color="#6366f1"
-            height={3}
-            options={{ showSpinner: false }}
-            startPosition={0.1}
-          />
-          {children}
-        </NotificationProvider>
+        <DynamicNotification />
+        <DynamicFirebaseAuth />
+        <DynamicNextNProgress
+          color="#6366f1"
+          height={3}
+          options={{ showSpinner: false }}
+          startPosition={0.1}
+        />
+        {children}
         <ReactQueryDevtools position="left" />
       </ErrorBoundary>
     </QueryClientProvider>

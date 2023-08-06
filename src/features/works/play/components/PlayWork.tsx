@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React, { FC, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
@@ -8,13 +9,31 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { TimerModal } from "src/components/Modal/Timer";
 import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
-import { WorkChats } from "src/features/chats/works/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
-import { WorkComments } from "src/features/comments/works/components/WorkComments";
 import { usePlayWork } from "src/features/works/play/hooks/usePlayWork";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/client/validateData";
+
+const DynamicChats = dynamic(
+  () =>
+    import("src/features/chats/works/components/WorkChats").then(
+      (mod) => mod.WorkChats
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
+
+const DynamicComments = dynamic(
+  () =>
+    import("src/features/comments/works/components/WorkComments").then(
+      (mod) => mod.WorkComments
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
 
 export const PlayWork: FC = () => {
   const { isChat, isPending, data } = usePlayWork();
@@ -62,7 +81,7 @@ export const PlayWork: FC = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <WorkChats work_id={data?.works_by_pk?.id ?? 0} />
+                <DynamicChats work_id={data?.works_by_pk?.id ?? 0} />
               </Suspense>
             </ErrorBoundary>
           ) : (
@@ -75,7 +94,7 @@ export const PlayWork: FC = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <WorkComments work_id={data?.works_by_pk?.id ?? 0} />
+                <DynamicComments work_id={data?.works_by_pk?.id ?? 0} />
               </Suspense>
             </ErrorBoundary>
           )}
