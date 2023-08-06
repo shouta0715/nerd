@@ -15,7 +15,7 @@ export const LiveComment = () => {
         onClick={() =>
           router.replace({
             query: {
-              ...router.query,
+              slug: router.query.slug,
               mode: "chat",
             },
           })

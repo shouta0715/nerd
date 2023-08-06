@@ -2,12 +2,13 @@
 import { GetStaticProps, NextPage } from "next";
 import { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
+
 import { AutoCompleteData } from "src/features/episodes/types";
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import {
   GetSeasonWorksQuery,
+  GetTodayEpisodesQuery,
   GetWeeklyWorksQuery,
-} from "src/graphql/work/workQuery.generated";
+} from "src/gql/graphql";
 import { Error } from "src/libs/error";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {

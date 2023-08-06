@@ -1,4 +1,4 @@
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 import { Mode, createTime } from "src/tests/storybook";
 
 export const liveData = (mode: Mode): GetEpisodeQuery => {

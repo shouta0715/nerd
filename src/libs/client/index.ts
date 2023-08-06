@@ -1,4 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const queryClient = new QueryClient({
@@ -23,7 +24,7 @@ const queryClient = new QueryClient({
         return false;
       },
       suspense: true,
-      useErrorBoundary: true,
+      throwOnError: true,
     },
   },
 });

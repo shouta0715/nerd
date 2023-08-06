@@ -8,6 +8,7 @@ import {
   Variables,
 } from "graphql-request";
 import { VariablesAndRequestHeaders } from "graphql-request/dist/types";
+
 import { InternalServerError, UnauthorizedError } from "src/libs/error";
 
 const endpoint = process.env.NEXT_PUBLIC_ENDPOINT as string;

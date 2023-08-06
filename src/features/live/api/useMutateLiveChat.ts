@@ -1,24 +1,34 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { chatsDocument, insertChatDocument } from "src/documents/chats";
 import {
   GetChatsQuery,
-  useInsertChatMutation,
-} from "src/graphql/chat/chatQuery.generated";
+  InsertChatMutation,
+  InsertChatMutationVariables,
+} from "src/gql/graphql";
+import { Error } from "src/libs/error";
 import { client } from "src/libs/graphqlClient";
-
-const genQueryKey = (episode_id: string) => {
-  return ["GetChats", { episode_id }];
-};
+import { getQueryKey } from "src/utils/client/getQueryKey";
 
 export const useMutateLiveChat = () => {
   const queryClient = useQueryClient();
 
-  const insetChat = useInsertChatMutation(client, {
+  const insetChat = useMutation<
+    InsertChatMutation,
+    Error,
+    InsertChatMutationVariables
+  >({
+    mutationFn: (object) => client.request(insertChatDocument, object),
     onSuccess: (data) => {
       if (!data.insert_chats_one) return;
 
       const { episode_id } = data.insert_chats_one;
       const prevData = queryClient.getQueryData<GetChatsQuery>(
-        genQueryKey(episode_id)
+        getQueryKey({
+          document: chatsDocument,
+          variables: {
+            episode_id,
+          },
+        })
       );
 
       if (!prevData) return;
@@ -31,9 +41,17 @@ export const useMutateLiveChat = () => {
 
       const newChats = [...prevData.chats, data.insert_chats_one];
 
-      queryClient.setQueryData<GetChatsQuery>(genQueryKey(episode_id), {
-        chats: newChats,
-      });
+      queryClient.setQueryData<GetChatsQuery>(
+        getQueryKey({
+          document: chatsDocument,
+          variables: {
+            episode_id,
+          },
+        }),
+        {
+          chats: newChats,
+        }
+      );
     },
   });
 

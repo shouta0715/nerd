@@ -1,14 +1,12 @@
 import { graphql } from "msw";
-import { episodeChatData } from "src/features/chats/mocks/fixture";
+import { episodeChatData } from "src/features/chats/common/mocks/fixture";
 import { liveData } from "src/features/live/mocks/fixture";
 import {
   GetChatsEpisodeQuery,
   GetChatsEpisodeQueryVariables,
-} from "src/graphql/chat/chatQuery.generated";
-import {
   GetEpisodeQuery,
   GetEpisodeQueryVariables,
-} from "src/graphql/episode/episodeQuery.generated";
+} from "src/gql/graphql";
 import { Mode } from "src/tests/storybook";
 
 export const handleLive = ({
@@ -38,7 +36,7 @@ export const handleLiveChats = (status?: number) => {
         return res(ctx.status(status));
       }
 
-      return res(ctx.data(episodeChatData));
+      return res(ctx.data(episodeChatData()));
     }
   );
 };
