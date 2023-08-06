@@ -57,6 +57,7 @@ export const TimeInput: FC = () => {
       </div>
       <div className="grid w-full grid-cols-3 items-center justify-between">
         <Button
+          aria-label="10秒減らす"
           className="relative mx-auto h-12 w-12 border-none"
           onClick={() => changeTenTime("minus")}
         >
@@ -89,6 +90,7 @@ export const TimeInput: FC = () => {
           }
         </Button>
         <Button
+          aria-label="10秒増やす"
           className="relative mx-auto h-12 w-12 border-none"
           onClick={() => changeTenTime("add")}
         >

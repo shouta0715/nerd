@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
@@ -5,6 +6,7 @@ import { Nav } from "src/components/dynamic/common/nav";
 import { Timer } from "src/components/dynamic/common/timer";
 import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
+import { useTimerState } from "src/features/timer/store";
 
 import { WorkMenu } from "src/features/works/play/components/WorkMenu";
 import { GetWorkQuery } from "src/gql/graphql";
@@ -15,6 +17,8 @@ type Props = {
 };
 
 export const Aside: FC<Props> = ({ isChat, data }) => {
+  const mode = useTimerState((state) => state.mode);
+
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -36,7 +40,16 @@ export const Aside: FC<Props> = ({ isChat, data }) => {
         <WorkMenu data={data} />
       </div>
 
-      <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 ">
+      <div
+        className={clsx(
+          mode === "up" ? "border-orange-600" : "border-indigo-600",
+          "sticky bottom-0 h-max w-full rounded-2xl  border-4  bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 "
+        )}
+      >
+        <p className="mb-2 text-sm">
+          {isChat ? "チャット" : "コメント"}
+          投稿欄
+        </p>
         {isChat ? (
           <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (

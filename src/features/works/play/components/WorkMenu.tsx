@@ -16,9 +16,7 @@ export const WorkMenu: FC<Props> = ({ data }) => {
     <>
       <section className=" border-solid border-slate-200">
         <div className="mb-4 flex items-center justify-between">
-          <Text className="text-dimmed" size="sm">
-            エピソード
-          </Text>
+          <Text size="sm">エピソード</Text>
           <ShareButton
             text={`${genTitle({
               title: data?.works_by_pk?.series_title,

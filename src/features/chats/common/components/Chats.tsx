@@ -1,6 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { ArrowSmallDownIcon, PlayIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
+import { useRouter } from "next/router";
 import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/common/components/Chat";
@@ -18,20 +19,36 @@ type Props = {
 export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
+  const router = useRouter();
 
   return (
     <>
       <ul className="relative flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
-        <p className="flex max-w-full flex-col items-center justify-center break-words text-xs text-dimmed md:text-sm">
+        <div className="flex max-w-full flex-col items-center justify-center gap-y-1 break-words text-xs text-dimmed md:text-sm">
+          <div>
+            コメントへ移動するには
+            <button
+              className="text-indigo-600 hover:underline"
+              onClick={() =>
+                router.replace({
+                  query: {
+                    mode: "comment",
+                    slug: router.query.slug,
+                    order: "new",
+                  },
+                })
+              }
+            >
+              こちら
+            </button>
+            かコメントタブをクリックしてください。
+          </div>
           <span>
             {interval.active
               ? "タイマーの時間に合わせて過去のその時間に投稿されたコメントが表示されます。"
               : "配信サービスのアニメと同時にタイマーをスタートさせてください。"}
           </span>
-          <span>
-            コメントタブを押すとアニメ全体のコメントページに移動します。
-          </span>
-        </p>
+        </div>
         <Transition
           as="button"
           className="absolute left-1/2 top-1/2 m-auto grid  -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border bg-black p-4 transition-all"
@@ -46,9 +63,17 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           show={time === 0 && !interval.active}
         >
           {isPending || authLoading ? (
-            <Loader size="xl" theme="white" />
+            <>
+              <Loader size="xl" theme="white" />
+              <span className="sr-only">
+                {isPending ? "読み込み中" : "認証中"}
+              </span>
+            </>
           ) : (
-            <PlayIcon className="h-10 w-10 fill-white" />
+            <>
+              <PlayIcon className="h-10 w-10 fill-white" />
+              <span className="sr-only">タイマーを開始する</span>
+            </>
           )}
         </Transition>
 
@@ -72,6 +97,7 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           }
         >
           <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
+          <span className="sr-only">最新のコメントまでスクロールする</span>
         </button>
       </div>
     </>

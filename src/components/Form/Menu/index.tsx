@@ -15,7 +15,7 @@ export const MenuForm = () => {
       onSubmit={handleSubmit(onValid, onInValid)}
     >
       <label htmlFor="commenter-name-input">
-        <div className="mb-2 flex items-center">
+        <div className="mb-2 flex items-center gap-x-1">
           <PencilIcon className="h-4 w-4" />
           <Text className="min-w-max text-sm lg:text-sm" component="span">
             投稿名の変更

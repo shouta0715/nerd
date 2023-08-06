@@ -6,7 +6,11 @@ import { useNotificationState } from "src/components/Notification/store";
 import { episodeChatsDocument } from "src/documents/chats";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
-import { GetChatsQuery, SubscriptionChatsSubscription } from "src/gql/graphql";
+import {
+  GetChatsQuery,
+  SubscriptionChatsSubscription,
+  SubscriptionChatsSubscriptionVariables,
+} from "src/gql/graphql";
 
 import { client } from "src/libs/client/graphql";
 import { getWsClient } from "src/libs/client/ws";
@@ -50,7 +54,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     if (!token) return;
 
-    console.log("reconnect websocket");
     const newClient = getWsClient({
       token,
       onConnected: () => {
@@ -95,8 +98,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     if (isWsError || reConnectionCount > 7) return () => {};
 
-    const initial_created_at = new Date().toISOString();
-
     wsClient.on("closed", (event: unknown) => {
       if (!(event instanceof CloseEvent) || mode !== "up") return;
 
@@ -109,7 +110,11 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       if (event.code === 1006) handleAutoReconnect();
     });
 
-    wsClient.subscribe<SubscriptionChatsSubscription>(
+    const initial_created_at = new Date().toISOString();
+    wsClient.subscribe<
+      SubscriptionChatsSubscription,
+      SubscriptionChatsSubscriptionVariables
+    >(
       {
         query: SUBSCRIPTION_CHATS,
         variables: {

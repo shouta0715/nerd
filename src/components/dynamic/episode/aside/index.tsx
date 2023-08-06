@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React, { FC } from "react";
 import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
@@ -7,6 +8,7 @@ import { EpisodeChatInput } from "src/features/chats/episodes/components/Episode
 import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
+import { useTimerState } from "src/features/timer/store";
 import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
@@ -15,6 +17,8 @@ type Props = {
 };
 
 export const Aside: FC<Props> = ({ isChat, data }) => {
+  const mode = useTimerState((state) => state.mode);
+
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -38,7 +42,16 @@ export const Aside: FC<Props> = ({ isChat, data }) => {
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Menu />
       </div>
-      <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 ">
+      <div
+        className={clsx(
+          mode === "up" ? "border-orange-600" : "border-indigo-600",
+          "sticky bottom-0 h-max w-full rounded-2xl  border-4  bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 "
+        )}
+      >
+        <p className="mb-2 text-sm">
+          {isChat ? "チャット" : "コメント"}
+          投稿欄
+        </p>
         {isChat ? (
           <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
         ) : (

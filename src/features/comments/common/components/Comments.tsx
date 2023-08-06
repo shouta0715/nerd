@@ -49,10 +49,26 @@ export const Comments = forwardRef<any, Props>(
     return (
       <>
         <ul className="flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
-          <p className="flex max-w-full flex-col items-center justify-center break-words text-sm text-dimmed">
+          <div className="flex max-w-full flex-col items-center justify-center gap-y-1 break-words text-xs text-dimmed md:text-sm">
+            <div>
+              チャットへ移動するには
+              <button
+                className="text-indigo-600 hover:underline"
+                onClick={() =>
+                  router.replace({
+                    query: {
+                      mode: "chat",
+                      slug: router.query.slug,
+                    },
+                  })
+                }
+              >
+                こちら
+              </button>
+              かチャットタブをクリックしてください。
+            </div>
             <span>右下のボタンを押すと、最新のコメントを読み込めます</span>
-            <span>チャットタブを選択すると、チャットページに移動します。</span>
-          </p>
+          </div>
           <div className="flex items-center justify-end space-x-4 px-2">
             <ListBox<CommentsFilter, OptionProps>
               buttonLabel={(value) =>

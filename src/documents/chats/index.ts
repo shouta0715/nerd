@@ -61,3 +61,32 @@ export const insertChatDocument = graphql(`
     }
   }
 `);
+
+export const subscriptionChatsDocument = graphql(`
+  subscription SubscriptionChats(
+    $episode_id: uuid!
+    $initial_created_at: timestamptz!
+  ) {
+    chats_stream(
+      cursor: {
+        initial_value: { created_at: $initial_created_at }
+        ordering: ASC
+      }
+      batch_size: 100
+      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }
+    ) {
+      content
+      work_id
+      user_id
+      comment_time
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        id
+      }
+    }
+  }
+`);

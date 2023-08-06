@@ -32,9 +32,7 @@ export const NextMenu: FC<Props> = ({ episode, mode }) => {
     <>
       <section className="hidden border-solid border-slate-200 lg:block">
         <div className="mb-4 flex items-center justify-between">
-          <Text className="text-dimmed" size="sm">
-            エピソード
-          </Text>
+          <Text size="sm">エピソード</Text>
           <ShareButton
             text={`${genTitle({
               title: episode?.work.series_title,

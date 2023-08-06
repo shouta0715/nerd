@@ -66,7 +66,6 @@ export const INSERT_CHAT = gql`
     }
   }
 `;
-
 export const SUBSCRIPTION_CHATS = gql`
   subscription SubscriptionChats(
     $episode_id: uuid!
@@ -80,7 +79,18 @@ export const SUBSCRIPTION_CHATS = gql`
       batch_size: 100
       where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }
     ) {
-      ...ChatFragment
+      content
+      work_id
+      user_id
+      comment_time
+      id
+      episode_id
+      created_at
+      commenter_name
+      user {
+        anonymous
+        id
+      }
     }
   }
 `;

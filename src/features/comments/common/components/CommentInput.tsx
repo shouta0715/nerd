@@ -60,7 +60,7 @@ export const CommentInput: FC<Props> = ({ onSubmitHandler, isLoading }) => {
         validLength={300}
         value={content}
       />
-      <p className="mt-4 hidden place-items-center text-sm text-dimmed lg:grid">
+      <p className="mt-4 hidden place-items-center text-sm text-dimmed lg:grid ">
         ルールを守って良識のあるコメントをしましょう
       </p>
     </div>
