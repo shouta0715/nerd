@@ -4,7 +4,7 @@ import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Timer } from "src/components/dynamic/common/timer";
 import { EpisodeChatInput } from "src/features/chats/episodes/components/EpisodeChatInput";
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { GetEpisodeQuery } from "src/gql/graphql";

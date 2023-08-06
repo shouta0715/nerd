@@ -4,14 +4,14 @@
 
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import React, { FC, Suspense, useRef, memo } from "react";
-import { Replies } from "../../replies/components/Replies";
+import { Replies } from "../../../replies/components/Replies";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Image } from "src/components/Elements/Image";
 import { Loader } from "src/components/Elements/Loader";
 import { Text } from "src/components/Elements/Text";
 import { AutoErrorBoundary } from "src/components/Error/items/ReplyMessage";
-import { Comment as TypeComment } from "src/features/comments/types";
+import { Comment as TypeComment } from "src/features/comments/common/types";
 import { Like } from "src/features/likes/components/Like";
 import { useReply } from "src/features/replies/hooks/useReply";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";

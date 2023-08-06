@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Image } from "src/components/Elements/Image";
 import { Text } from "src/components/Elements/Text";
-import { OptimisticMutateVariables } from "src/features/comments/types";
+import { OptimisticMutateVariables } from "src/features/comments/common/types";
 import { useUserState } from "src/store/user/userState";
 
 type Props = {

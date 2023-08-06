@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { CommentInput } from "src/features/comments/components/CommentInput";
-import { useEpisodeCommentInput } from "src/features/comments/hooks/useEpisodeCommentInput";
+import { CommentInput } from "src/features/comments/common/components/CommentInput";
+import { useEpisodeCommentInput } from "src/features/comments/episodes/hooks/useEpisodeCommentInput";
 
 type Props = {
   episode_id: string;

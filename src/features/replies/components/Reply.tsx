@@ -8,7 +8,7 @@ import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Image } from "src/components/Elements/Image";
 import { Text } from "src/components/Elements/Text";
-import { Reply as TypeReply } from "src/features/comments/types";
+import { Reply as TypeReply } from "src/features/comments/common/types";
 import { Like } from "src/features/likes/components/Like";
 import { useReply } from "src/features/replies/hooks/useReply";
 import { formatTimeDistance } from "src/features/timer/utils/timeProcessing";

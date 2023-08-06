@@ -3,8 +3,8 @@ import {
   likesWorkCommentsDocument,
   workCommentsDocument,
 } from "src/documents/comments";
-import { CommentsFilter } from "src/features/comments/types";
-import { getInitialPageParam } from "src/features/comments/utils";
+import { CommentsFilter } from "src/features/comments/common/types";
+import { getInitialPageParam } from "src/features/comments/common/utils";
 import { Order_By } from "src/gql/graphql";
 import { client } from "src/libs/graphqlClient";
 import { useUserState } from "src/store/user/userState";

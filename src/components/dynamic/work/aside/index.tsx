@@ -4,7 +4,7 @@ import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Timer } from "src/components/dynamic/common/timer";
 import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
-import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
+import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
 
 import { WorkMenu } from "src/features/works/components/WorkMenu";
 import { GetWorkQuery } from "src/gql/graphql";

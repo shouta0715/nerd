@@ -7,7 +7,7 @@ import {
   workCommentData,
   workCommentDataOrderByLike,
   workMutateData,
-} from "src/features/comments/mocks/fixture";
+} from "src/features/comments/common/mocks/fixture";
 import {
   GetRepliesQuery,
   MutateEpisodeCommentMutation,

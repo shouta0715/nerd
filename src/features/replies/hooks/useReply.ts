@@ -1,4 +1,7 @@
-import { useInputCommentState, useRefState } from "src/features/comments/store";
+import {
+  useInputCommentState,
+  useRefState,
+} from "src/features/comments/common/store";
 
 type HandleClick = {
   reply_to: string;

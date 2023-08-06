@@ -1,14 +1,14 @@
 import React, { FC } from "react";
-import { Comments } from "src/features/comments/components/Comments";
-import { useCommentsEpisode } from "src/features/comments/hooks/useCommentsEpisode";
+import { Comments } from "src/features/comments/common/components/Comments";
+import { useCommentsWork } from "src/features/comments/works/hooks/useCommentsWork";
 
 type Props = {
-  episode_id: string;
+  work_id: number;
 };
 
-export const EpisodeComments: FC<Props> = ({ episode_id }) => {
+export const WorkComments: FC<Props> = ({ work_id }) => {
   const { data, ref, hasNextPage, isLoading, refetchHandler, order } =
-    useCommentsEpisode(episode_id);
+    useCommentsWork(work_id);
 
   return (
     <Comments
@@ -19,7 +19,7 @@ export const EpisodeComments: FC<Props> = ({ episode_id }) => {
       mutateKey={[
         "comments",
         {
-          episode_id,
+          work_id,
           order,
         },
       ]}

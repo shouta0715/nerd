@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { CommentInput } from "src/features/comments/components/CommentInput";
-import { useWorkCommentInput } from "src/features/comments/hooks/useWorkCommentInput";
+import { CommentInput } from "src/features/comments/common/components/CommentInput";
+import { useWorkCommentInput } from "src/features/comments/works/hooks/useWorkCommentInput";
 
 type Props = {
   work_id: number;

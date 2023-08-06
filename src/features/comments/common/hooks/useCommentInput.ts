@@ -1,6 +1,6 @@
 import { useMutateComment } from "src/features/comments/api/useMutateComment";
 
-import { useInputCommentState } from "src/features/comments/store";
+import { useInputCommentState } from "src/features/comments/common/store";
 import { useUserState } from "src/store/user/userState";
 
 export const useCommentInput = (id: string | number) => {

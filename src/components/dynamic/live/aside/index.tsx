@@ -4,7 +4,7 @@ import { Menu } from "src/components/dynamic/common/menu";
 import { Header } from "src/components/dynamic/live/header";
 import { Nav } from "src/components/dynamic/live/nav";
 
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";

@@ -2,7 +2,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { FC, useEffect, useRef } from "react";
 import { TalkForm } from "src/components/Form/Talk";
-import { useInputCommentState, useRefState } from "src/features/comments/store";
+import {
+  useInputCommentState,
+  useRefState,
+} from "src/features/comments/common/store";
 
 type Props = {
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;

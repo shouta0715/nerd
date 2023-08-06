@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
-import { useCommentInput } from "src/features/comments/hooks/useCommentInput";
+import { useCommentInput } from "src/features/comments/common/hooks/useCommentInput";
 import { useGlobalState } from "src/store/global/globalStore";
 import { getIp } from "src/utils/client/getIp";
 

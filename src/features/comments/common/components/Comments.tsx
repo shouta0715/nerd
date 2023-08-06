@@ -8,12 +8,12 @@ import {
   ListBoxOption,
 } from "src/components/Elements/Listbox/Listbox";
 import { Loader } from "src/components/Elements/Loader";
-import { Comment } from "src/features/comments/components/Comment";
-import { Optimistic } from "src/features/comments/components/Optimistic";
+import { Comment } from "src/features/comments/common/components/Comment";
+import { Optimistic } from "src/features/comments/common/components/Optimistic";
 import {
   CommentsFilter,
   OptimisticMutateVariables,
-} from "src/features/comments/types";
+} from "src/features/comments/common/types";
 import { GetCommentsEpisodeQuery, GetCommentsWorkQuery } from "src/gql/graphql";
 import { useOptimisticState } from "src/hooks/useOptimisticState";
 import { useUserState } from "src/store/user/userState";

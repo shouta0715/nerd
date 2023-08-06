@@ -8,7 +8,7 @@ import {
 import {
   InfiniteCommentEpisode,
   InfiniteCommentWork,
-} from "src/features/comments/types";
+} from "src/features/comments/common/types";
 import {
   MutateEpisodeCommentMutation,
   MutateEpisodeCommentMutationVariables,
