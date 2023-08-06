@@ -1,12 +1,10 @@
 /* eslint-disable no-promise-executor-return */
 
-import {
-  useGetEpisodeQuery,
-  useGetLiveIdsQuery,
-} from "src/graphql/episode/episodeQuery.generated";
-import { Episodes_Bool_Exp } from "src/types/graphql";
-import { getClient } from "src/utils/getClient";
-import { parseXml } from "src/utils/parseXml";
+import { episodeDocument } from "src/documents/episodes";
+import { liveIdsDocument } from "src/documents/routers";
+import { Episodes_Bool_Exp, GetLiveIdsQuery } from "src/gql/graphql";
+import { getClient } from "src/utils/server/getClient";
+import { parseXml } from "src/utils/server/parseXml";
 
 export const getTodayData = async () => {
   const URL = process.env.NEXT_PUBLIC_SHOBOI_ENDOPOINT as string;
@@ -37,8 +35,8 @@ export const getTodayData = async () => {
 
 export const getLiveIdsPaths = async () => {
   const query = await getTodayData();
-  const { request } = getClient();
-  const fetcher = useGetLiveIdsQuery.fetcher(request, {
+  const { client } = getClient();
+  const data = await client.request<GetLiveIdsQuery>(liveIdsDocument, {
     where: {
       _or: [
         query,
@@ -51,8 +49,6 @@ export const getLiveIdsPaths = async () => {
     },
   });
 
-  const data = await fetcher();
-
   const paths = data.episodes.map((item) => ({
     params: {
       slug: item.id,
@@ -63,12 +59,11 @@ export const getLiveIdsPaths = async () => {
 };
 
 export const getEpisode = async (id: string) => {
-  const { request } = getClient();
-  const fetcher = useGetEpisodeQuery.fetcher(request, {
+  const { client } = getClient();
+
+  const data = await client.request(episodeDocument, {
     id,
   });
-
-  const data = await fetcher();
 
   return data;
 };

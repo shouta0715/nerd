@@ -3,7 +3,7 @@ import { Menu } from "src/components/dynamic/common/menu";
 import { HeaderSkeleton } from "src/components/Elements/Skeleton/live/header";
 import { InputSkeleton } from "src/components/Elements/Skeleton/live/input";
 import { NextMenu } from "src/features/episodes/components/NextMenu";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
   episode?: GetEpisodeQuery["episodes_by_pk"];

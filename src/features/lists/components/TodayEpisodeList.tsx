@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { SeriesError } from "src/components/Elements/Error/items/SeriesError";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { SeriesError } from "src/components/Error/items/SeriesError";
 
 import { useTodayEpisodes } from "src/features/episodes/hooks/useTodayEpisodes";
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetTodayEpisodesQuery } from "src/gql/graphql";
 
 type Props = {
   data: GetTodayEpisodesQuery;

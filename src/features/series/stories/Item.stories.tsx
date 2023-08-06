@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
-import { workItemData } from "src/features/works/mocks/fixture";
+import { workItemData } from "src/features/works/common/mocks/fixture";
 
 export default {
   title: "Features/Series/Item",

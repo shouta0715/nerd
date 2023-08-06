@@ -4,34 +4,27 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Aside } from "src/components/dynamic/live/aside";
 import { Header } from "src/components/dynamic/live/header";
 import { Nav } from "src/components/dynamic/live/nav";
-import { ErrorMessage } from "src/components/Elements/Error/items/ErrorMessage";
 import { Loader } from "src/components/Elements/Loader";
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
-import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
+import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
+import { EpisodeComments } from "src/features/comments/episodes/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/Finish";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveComment } from "src/features/live/components/LiveComment";
 import { useLive } from "src/features/live/hooks/useLive";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
   data: GetEpisodeQuery;
 };
 
 export const Live: FC<Props> = ({ data }) => {
-  const { isChat, time, mode, isAlreadyFinished, filter, setFilter } =
-    useLive(data);
+  const { isChat, time, mode, isAlreadyFinished } = useLive(data);
 
   return (
     <>
-      <Aside
-        data={data}
-        filter={filter}
-        isChat={isChat}
-        mode={mode}
-        time={time}
-      />
+      <Aside data={data} isChat={isChat} mode={mode} time={time} />
 
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
         <div className="block w-full bg-white/80 py-4 lg:hidden">
@@ -57,10 +50,7 @@ export const Live: FC<Props> = ({ data }) => {
             />
           ) : (
             mode === "finish" && (
-              <EpisodeCommentInput
-                episode_id={data?.episodes_by_pk?.id}
-                filter={filter}
-              />
+              <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
             )
           )}
         </div>
@@ -99,11 +89,7 @@ export const Live: FC<Props> = ({ data }) => {
                 }
               >
                 {mode === "finish" ? (
-                  <EpisodeComments
-                    episode_id={data?.episodes_by_pk?.id}
-                    filter={filter}
-                    setFilter={setFilter}
-                  />
+                  <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
                 ) : (
                   <LiveComment />
                 )}

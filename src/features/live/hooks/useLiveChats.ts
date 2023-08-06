@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useQueryLiveChat } from "src/features/live/api/useQueryLiveChat";
 import { useSubscription } from "src/features/live/hooks/useSubscription";
 import { LiveTimer, Time } from "src/features/timer/types";
-import { GetChatsQuery } from "src/graphql/chat/chatQuery.generated";
+import { GetChatsQuery } from "src/gql/graphql";
+
 import { useAutoScroll } from "src/hooks/useAutoScroll";
 
 type Props = {
@@ -61,8 +62,6 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
     const newChats = refetchData.chats.filter(
       (chat) => !prevData.chats.some((prevChat) => prevChat.id === chat.id)
     );
-
-    // TODO 順番がおかしくなる。 refetchDataの秒数を見て、prevDataの最後よりも大きい場合は、最後に追加するようにする。小さい場合は一番近い秒数の次に追加するようにする。
 
     queryClient.setQueryData<GetChatsQuery>(["GetChats", { episode_id }], {
       chats: [...prevData.chats, ...newChats],

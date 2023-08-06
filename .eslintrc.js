@@ -28,7 +28,6 @@ module.exports = {
     "import",
     "jsx-a11y",
     "react",
-    "react-hooks",
     "unused-imports",
     "@typescript-eslint",
     "jest-dom",

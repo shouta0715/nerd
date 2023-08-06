@@ -2,21 +2,18 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
+import { episodeChatsDocument } from "src/documents/chats";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
-import { SUBSCRIPTION_CHATS } from "src/graphql/chat/chatQuery";
-import {
-  GetChatsQuery,
-  SubscriptionChatsSubscription,
-  useGetChatsEpisodeQuery,
-} from "src/graphql/chat/chatQuery.generated";
+import { GetChatsQuery, SubscriptionChatsSubscription } from "src/gql/graphql";
 
-import { client as gqlClient } from "src/libs/graphqlClient";
-import { getWsClient } from "src/libs/wsClient";
+import { client } from "src/libs/client/graphql";
+import { getWsClient } from "src/libs/client/ws";
+import { SUBSCRIPTION_CHATS } from "src/schema/chat/chatQuery";
 
 import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
-import { getToken } from "src/utils/getToken";
+import { getToken } from "src/utils/client/getToken";
 
 type Props = {
   episode_id: string;
@@ -183,15 +180,12 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       _lt: number + 1,
       _gte: prevPageNation?._lt || 1,
     };
-    const fetcher = useGetChatsEpisodeQuery.fetcher(gqlClient, {
-      episode_id,
-      get_limit: 100,
-      ...newPageNation,
-    });
+
+    const variables = { episode_id, get_limit: 100, ...newPageNation };
 
     try {
       setIsLoadingWsRefetch(true);
-      const refetchData = await fetcher();
+      const refetchData = await client.request(episodeChatsDocument, variables);
       const prevData = queryClient.getQueryData<GetChatsQuery>(key);
 
       if (!refetchData || !prevData) return;

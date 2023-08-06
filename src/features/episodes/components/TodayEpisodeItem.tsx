@@ -9,8 +9,15 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { TodayEpisode } from "src/features/episodes/types";
 import { genEpisodePlaceholder } from "src/features/episodes/utils";
+import {
+  getEpisodeQuery,
+  getTodayEpisodeLink,
+} from "src/features/episodes/utils/link";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
-import { getIsAlreadyFinished } from "src/features/timer/utils/getAlreadyFinished";
+import {
+  getWorksLink,
+  getWorksQuery,
+} from "src/features/works/common/utils/link";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),
@@ -48,29 +55,25 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
         >
           <ModeBadge mode={mode} start_time={episode.start_time} />
           <Link
-            as={
-              getIsAlreadyFinished(episode.end_time)
-                ? `/episodes/${episode.id}?mode=chat`
-                : `/episodes/live/${episode.id}?mode=chat`
-            }
+            as={getTodayEpisodeLink({
+              as: true,
+              id: episode.id,
+              end_time: episode.end_time,
+            })}
             className="group flex w-full flex-1 flex-col items-center gap-1"
             href={{
-              pathname: getIsAlreadyFinished(episode.end_time)
-                ? `/episodes/${episode.id}`
-                : `/episodes/live/${episode.id}`,
-              query: getIsAlreadyFinished(episode.end_time)
-                ? {
-                    episode: genEpisodePlaceholder({
-                      episode,
-                      title: episode.work.series_title,
-                      work_id: episode.work.id,
-                      series_id: episode.work.series_id,
-                    }),
-                    mode: "chat",
-                  }
-                : {
-                    mode: "chat",
-                  },
+              pathname: getTodayEpisodeLink({
+                as: false,
+                id: episode.id,
+                end_time: episode.end_time,
+              }),
+              query: getEpisodeQuery({
+                episode,
+                title: episode.work.series_title,
+                work_id: episode.work.id,
+                series_id: episode.work.series_id,
+                today: true,
+              }),
             }}
           >
             <Text
@@ -152,18 +155,22 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               アーカイブで参加する
             </ButtonLink>
             <ButtonLink
-              as={
-                episode.work.series_id
-                  ? `/works/${episode.work.id}?series=${episode.work.series_id}`
-                  : `/works/${episode.work.id}`
-              }
+              as={getWorksLink({
+                id: episode?.work.id,
+                series_id: episode?.work.series_id,
+                as: true,
+              })}
               className="py-2"
               href={{
-                pathname: `${`/works/${episode.work.id}`}`,
-                query: {
-                  series: episode.work.series_id ?? undefined,
-                  work: [episode.work.title, episode.work.series_title],
-                },
+                pathname: getWorksLink({
+                  id: episode?.work.id,
+                  as: false,
+                }),
+                query: getWorksQuery({
+                  series_id: episode?.work.series_id,
+                  title: episode?.work.title,
+                  series_title: episode?.work.series_title,
+                }),
               }}
               leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
               size="xs"

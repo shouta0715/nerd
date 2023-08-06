@@ -8,7 +8,7 @@ export const handleSeries = ({
   status?: number;
   empty?: boolean;
 }) => {
-  return graphql.query("GetSeries", (req, res, ctx) => {
+  return graphql.query("GetSeries", (_, res, ctx) => {
     if (status) {
       return res(ctx.status(status));
     }

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Weekly } from "src/features/pages/weekly";
 import { weeklyData } from "src/tests/mocks/fixture";
 import { BasicLayoutDecorator } from "src/tests/storybook";
-import { genBuildData } from "src/utils/genBuildData";
+import { genBuildData } from "src/utils/server/genBuildData";
 
 export default {
   title: "Pages/Weekly",

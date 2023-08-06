@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNotificationState } from "src/components/Elements/Notification/store";
 import { Username, usernameSchema } from "src/components/Form/Menu/types";
+import { useNotificationState } from "src/components/Notification/store";
 import { useUserState } from "src/store/user/userState";
 
 export const useMenuForm = () => {

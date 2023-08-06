@@ -3,21 +3,18 @@ import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Timer } from "src/components/dynamic/common/timer";
-import { WorkChatInput } from "src/features/chats/components/WorkChatInput";
-import { WorkCommentInput } from "src/features/comments/components/WorkCommentInput";
-import { CommentsFilter } from "src/features/comments/types";
+import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
+import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
 
-import { WorkMenu } from "src/features/works/components/WorkMenu";
-import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { WorkMenu } from "src/features/works/play/components/WorkMenu";
+import { GetWorkQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
-
   data?: GetWorkQuery;
-  filter: CommentsFilter;
 };
 
-export const Aside: FC<Props> = ({ isChat, data, filter }) => {
+export const Aside: FC<Props> = ({ isChat, data }) => {
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -43,10 +40,7 @@ export const Aside: FC<Props> = ({ isChat, data, filter }) => {
         {isChat ? (
           <WorkChatInput work_id={data?.works_by_pk?.id ?? 0} />
         ) : (
-          <WorkCommentInput
-            filter={filter}
-            work_id={data?.works_by_pk?.id ?? 0}
-          />
+          <WorkCommentInput work_id={data?.works_by_pk?.id ?? 0} />
         )}
       </div>
     </aside>

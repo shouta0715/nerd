@@ -1,8 +1,8 @@
 import {
   GetEpisodeQuery,
+  GetSeasonWorksQuery,
   GetTodayEpisodesQuery,
-} from "src/graphql/episode/episodeQuery.generated";
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+} from "src/gql/graphql";
 
 export type Episode = GetEpisodeQuery["episodes_by_pk"];
 
@@ -17,4 +17,11 @@ export type AutoCompleteData = {
   number?: number;
   start_time?: string;
   end_time?: string;
+};
+
+export type GenEpisodePlaceholder = {
+  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"];
+  title?: string;
+  work_id?: number;
+  series_id?: string | null;
 };

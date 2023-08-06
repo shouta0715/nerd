@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useNotificationState } from "src/components/Elements/Notification/store";
+import { useNotificationState } from "src/components/Notification/store";
 import { useMutateLiveChat } from "src/features/live/api/useMutateLiveChat";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
-import { getIp } from "src/utils/getIp";
+import { getIp } from "src/utils/client/getIp";
 
 type Props = {
   time: Time;
@@ -54,6 +54,6 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
     value,
     setValue,
     onSubmitHandler,
-    isLoading: insetChat.isLoading || ipLoading,
+    isLoading: insetChat.isPending || ipLoading,
   };
 };

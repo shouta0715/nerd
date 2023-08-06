@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
 import { Aside } from "src/components/Layouts/Aside";
-import { handleSearchWorks, handlers } from "src/features/works/mocks/msw";
+import {
+  handleSearchWorks,
+  handlers,
+} from "src/features/works/common/mocks/msw";
 import { ProvidersDecorator } from "src/tests/storybook";
 
 export default {

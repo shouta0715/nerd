@@ -1,6 +1,18 @@
-import { useInsertRequestMutation } from "src/graphql/request/requestQuery.generated";
-import { client } from "src/libs/graphqlClient";
+import { useMutation } from "@tanstack/react-query";
+import { requestDocument } from "src/documents/request";
+import {
+  InsertRequestMutation,
+  InsertRequestMutationVariables,
+} from "src/gql/graphql";
+import { client } from "src/libs/client/graphql";
+import { Error } from "src/libs/error";
 
 export const useMutateRequest = () => {
-  return useInsertRequestMutation(client);
+  return useMutation<
+    InsertRequestMutation,
+    Error,
+    InsertRequestMutationVariables
+  >({
+    mutationFn: (object) => client.request(requestDocument, object),
+  });
 };

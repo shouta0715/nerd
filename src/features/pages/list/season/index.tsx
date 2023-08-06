@@ -1,7 +1,7 @@
 import React from "react";
 import { ListTitle } from "src/features/lists/components/ListTitle";
 import { SeasonWorksList } from "src/features/lists/components/SeasonWorks";
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 import { ListPage } from "src/libs/next/types";
 
 export const Season = ({

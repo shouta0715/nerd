@@ -4,23 +4,21 @@ import { Menu } from "src/components/dynamic/common/menu";
 import { Header } from "src/components/dynamic/live/header";
 import { Nav } from "src/components/dynamic/live/nav";
 
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
-import { CommentsFilter } from "src/features/comments/types";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
 import { LiveTimer, Time } from "src/features/timer/types";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
   data?: GetEpisodeQuery;
-  filter: CommentsFilter;
   mode: LiveTimer["mode"];
   time: Time;
 };
 
-export const Aside: FC<Props> = ({ isChat, data, filter, mode, time }) => {
+export const Aside: FC<Props> = ({ isChat, data, mode, time }) => {
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -62,10 +60,7 @@ export const Aside: FC<Props> = ({ isChat, data, filter, mode, time }) => {
           />
         ) : (
           mode === "finish" && (
-            <EpisodeCommentInput
-              episode_id={data?.episodes_by_pk?.id}
-              filter={filter}
-            />
+            <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
           )
         )}
       </div>

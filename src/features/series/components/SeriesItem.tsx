@@ -1,8 +1,12 @@
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { WorkItem } from "src/features/works/components/WorkItem";
-import { GetSeriesQuery } from "src/graphql/work/workQuery.generated";
+import {
+  getSlugWorkLink,
+  getSlugWorkQuery,
+} from "src/features/works/common/utils/link";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
+import { GetSeriesQuery } from "src/gql/graphql";
 
 type Props = {
   series_work: GetSeriesQuery["works"][0];
@@ -25,17 +29,21 @@ export const SeriesItem: FC<Props> = ({
         {series_work.series_title}
       </span>
       <ButtonLink
-        as={`/works/play/${series_work.id}`}
+        as={getSlugWorkLink({
+          id: series_work.id,
+          as: true,
+        })}
         className="h-max border-white bg-indigo-500 font-bold text-white hover:bg-indigo-600"
         href={{
-          pathname: `${`/works/play/${series_work.id}`}`,
-          query: {
-            work: [
-              series_work.title,
-              series_work.series_title,
-              series_work.series_id ?? "",
-            ],
-          },
+          pathname: getSlugWorkLink({
+            id: series_work.id,
+            as: false,
+          }),
+          query: getSlugWorkQuery({
+            title: series_work.title,
+            series_id: series_work.series_id,
+            series_title: series_work.series_title,
+          }),
         }}
         leftIcon={<ChevronDoubleRightIcon className="h-5 w-5" />}
         size="sm"

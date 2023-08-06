@@ -1,4 +1,4 @@
-import { GetSeriesQuery } from "src/graphql/work/workQuery.generated";
+import { GetSeriesQuery } from "src/gql/graphql";
 import { createWorkItems } from "src/tests/mocks";
 
 export const seriesData: GetSeriesQuery = {

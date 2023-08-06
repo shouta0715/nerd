@@ -3,21 +3,18 @@ import { Header } from "src/components/dynamic/common/header";
 import { Menu } from "src/components/dynamic/common/menu";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Timer } from "src/components/dynamic/common/timer";
-import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
-import { CommentsFilter } from "src/features/comments/types";
+import { EpisodeChatInput } from "src/features/chats/episodes/components/EpisodeChatInput";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
 
 import { NextMenu } from "src/features/episodes/components/NextMenu";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {
   isChat: boolean;
-
   data?: GetEpisodeQuery;
-  filter: CommentsFilter;
 };
 
-export const Aside: FC<Props> = ({ isChat, data, filter }) => {
+export const Aside: FC<Props> = ({ isChat, data }) => {
   return (
     <aside className="sticky top-8 hidden h-[calc(100dvh-65px)] w-[28rem] shrink-0 flex-col gap-4 overflow-y-auto bg-white/20 pt-10 lg:flex">
       {/* PC Design */}
@@ -31,24 +28,21 @@ export const Aside: FC<Props> = ({ isChat, data, filter }) => {
         />
         <Nav isChat={isChat} response="lg" />
       </div>
-      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Menu />
-      </div>
+
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <NextMenu episode={data?.episodes_by_pk} />
       </div>
-
+      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
+        <Menu />
+      </div>
       <div className=" sticky bottom-0 h-max w-full rounded-t-2xl bg-white/90 p-4 shadow-lg ring-1  ring-gray-900/5 ">
         {isChat ? (
           <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
         ) : (
-          <EpisodeCommentInput
-            episode_id={data?.episodes_by_pk?.id}
-            filter={filter}
-          />
+          <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
         )}
       </div>
     </aside>

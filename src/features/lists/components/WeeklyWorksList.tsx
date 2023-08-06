@@ -1,16 +1,16 @@
 import dynamic from "next/dynamic";
 import React, { FC } from "react";
-import { SeriesError } from "src/components/Elements/Error/items/SeriesError";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { SeriesError } from "src/components/Error/items/SeriesError";
 
 import { useWeeklyWorks } from "src/features/lists/hooks/useWeeklyWorks";
-import { GetWeeklyWorksQuery } from "src/graphql/work/workQuery.generated";
+import { GetWeeklyWorksQuery } from "src/gql/graphql";
 
 type Props = { data: GetWeeklyWorksQuery };
 
 const DynamicWorkItem = dynamic(
   () =>
-    import("src/features/works/components/WorkItem").then(
+    import("src/features/works/slug/components/WorkItem").then(
       (mod) => mod.WorkItem
     ),
   {

@@ -4,7 +4,8 @@ import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { ShareButton } from "src/components/Elements/Share";
 import { Text } from "src/components/Elements/Text";
 import { useOpenState } from "src/features/episodes/store";
-import { GetWorkQuery } from "src/graphql/work/workQuery.generated";
+import { getSeriesLink, getSeriesQuery } from "src/features/series/utils/link";
+import { GetWorkQuery } from "src/gql/graphql";
 import { genTitle } from "src/libs/meta/OnlyTitle";
 
 type Props = {
@@ -80,8 +81,12 @@ export const WorkMenuModal: FC<Props> = ({ data }) => {
                           as={`/series/${data?.works_by_pk?.series_id}`}
                           className="mx-auto flex w-full max-w-max items-center justify-center rounded-md border border-solid bg-gray-800 px-2 py-2 text-center text-xs font-bold text-white md:px-4 md:text-sm"
                           href={{
-                            pathname: `/series/${data?.works_by_pk?.series_id}`,
-                            query: { series_title: data?.works_by_pk?.title },
+                            pathname: getSeriesLink({
+                              series_id: data?.works_by_pk?.series_id,
+                            }),
+                            query: getSeriesQuery({
+                              title: data?.works_by_pk?.title,
+                            }),
                           }}
                           size="xs"
                         >

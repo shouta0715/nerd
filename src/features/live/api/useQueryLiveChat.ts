@@ -1,5 +1,6 @@
-import { useGetChatsQuery } from "src/graphql/chat/chatQuery.generated";
-import { client } from "src/libs/graphqlClient";
+import { chatsDocument } from "src/documents/chats";
+import { GetChatsQuery, GetChatsQueryVariables } from "src/gql/graphql";
+import { useGraphQL } from "src/hooks/useGraphQL";
 
 export const useQueryLiveChat = ({
   episode_id,
@@ -8,13 +9,13 @@ export const useQueryLiveChat = ({
   episode_id: string;
   enabled: boolean;
 }) => {
-  return useGetChatsQuery(
-    client,
-    {
+  return useGraphQL<GetChatsQuery, GetChatsQueryVariables>({
+    document: chatsDocument,
+    options: {
+      enabled,
+    },
+    variables: {
       episode_id,
     },
-    {
-      enabled: enabled && !!episode_id,
-    }
-  );
+  });
 };

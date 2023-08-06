@@ -1,5 +1,5 @@
 import { WorkEpisode } from "src/features/episodes/types";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 export const episodeData: GetEpisodeQuery = {
   __typename: "query_root",

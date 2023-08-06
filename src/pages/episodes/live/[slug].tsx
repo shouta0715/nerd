@@ -5,7 +5,8 @@ import React from "react";
 
 import { BasicLayoutOnlyHeader } from "src/components/Layouts/BasicLayout";
 import { Skeleton } from "src/features/live/components/Skeleton";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
+
 import { getEpisode, getLiveIdsPaths } from "src/hooks/router/dynamicPaths";
 import { Meta } from "src/libs/meta";
 import { genTitle } from "src/libs/meta/OnlyTitle";

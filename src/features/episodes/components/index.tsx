@@ -1,31 +1,26 @@
-import React, { FC, Suspense } from "react";
+import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Header } from "src/components/dynamic/common/header";
 import { Nav } from "src/components/dynamic/common/nav";
 import { Aside } from "src/components/dynamic/episode/aside";
-import { ErrorMessage } from "src/components/Elements/Error/items/ErrorMessage";
 import { Loader } from "src/components/Elements/Loader";
 import { Skeleton } from "src/components/Elements/Skeleton";
+import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { TimerModal } from "src/components/Modal/Timer";
-
-import { EpisodeChatInput } from "src/features/chats/components/EpisodeChatInput";
-
-import { EpisodeChats } from "src/features/chats/components/EpisodeChats";
-
-import { EpisodeCommentInput } from "src/features/comments/components/EpisodeCommentInput";
-import { EpisodeComments } from "src/features/comments/components/EpisodeComments";
-
+import { EpisodeChatInput } from "src/features/chats/episodes/components/EpisodeChatInput";
+import { EpisodeChats } from "src/features/chats/episodes/components/EpisodeChats";
+import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
+import { EpisodeComments } from "src/features/comments/episodes/components/EpisodeComments";
 import { useEpisode } from "src/features/episodes/hooks/useEpisode";
 import { getIsStatus } from "src/features/timer/utils/getIsStatus";
-
 import { GraphQLError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
-import { validateData } from "src/utils/validateData";
+import { validateData } from "src/utils/client/validateData";
 
-export const Episode: FC = () => {
-  const { data, isLoading, isChat, filter, setFilter } = useEpisode();
+export const Episode = () => {
+  const { data, isPending, isChat } = useEpisode();
 
-  if (isLoading) {
+  if (isPending) {
     return <Skeleton theme="episode" />;
   }
 
@@ -46,11 +41,10 @@ export const Episode: FC = () => {
         subtitle={data?.episodes_by_pk?.title}
         title={data?.episodes_by_pk?.work.series_title}
       />
-      <Aside data={data} filter={filter} isChat={isChat} />
+      <Aside data={data} isChat={isChat} />
 
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
-        <div className="block w-full bg-white/80 py-4 lg:hidden">
-          {/* Mobile Design */}
+        <div className="w-full bg-white/80 py-4 lg:hidden">
           <Header
             id={data?.episodes_by_pk?.id}
             number={data?.episodes_by_pk?.number}
@@ -61,10 +55,7 @@ export const Episode: FC = () => {
           {isChat ? (
             <EpisodeChatInput episode_id={data?.episodes_by_pk?.id} />
           ) : (
-            <EpisodeCommentInput
-              episode_id={data?.episodes_by_pk?.id}
-              filter={filter}
-            />
+            <EpisodeCommentInput episode_id={data?.episodes_by_pk?.id} />
           )}
         </div>
         <Nav isChat={isChat} response="sp" />
@@ -92,11 +83,7 @@ export const Episode: FC = () => {
                   <Loader className="m-auto" size="xl" variant="dots" />
                 }
               >
-                <EpisodeComments
-                  episode_id={data?.episodes_by_pk?.id}
-                  filter={filter}
-                  setFilter={setFilter}
-                />
+                <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
               </Suspense>
             </ErrorBoundary>
           )}

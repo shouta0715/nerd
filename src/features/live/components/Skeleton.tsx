@@ -5,7 +5,7 @@ import { Loader } from "src/components/Elements/Loader";
 import { AsideSkeleton } from "src/components/Elements/Skeleton/live/aisde";
 import { HeaderSkeleton } from "src/components/Elements/Skeleton/live/header";
 import { InputSkeleton } from "src/components/Elements/Skeleton/live/input";
-import { GetEpisodeQuery } from "src/graphql/episode/episodeQuery.generated";
+import { GetEpisodeQuery } from "src/gql/graphql";
 
 export const Skeleton = () => {
   const router = useRouter();

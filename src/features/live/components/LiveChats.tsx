@@ -3,7 +3,7 @@ import clsx from "clsx";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader";
-import { Chat } from "src/features/chats/components/Chat";
+import { Chat } from "src/features/chats/common/components/Chat";
 import { useLiveChats } from "src/features/live/hooks/useLiveChats";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { useUserState } from "src/store/user/userState";

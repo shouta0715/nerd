@@ -29,9 +29,7 @@ export const useLike = ({ comment_id, like_count, is_like }: Props) => {
     setIsLike((prev) => !prev);
     setLikeCount((prev) => (isLike ? prev - 1 : prev + 1));
 
-    if (isLoading) {
-      return;
-    }
+    if (isLoading) return;
 
     if (isLike) {
       debounce(async () => {

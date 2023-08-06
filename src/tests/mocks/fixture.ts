@@ -1,8 +1,8 @@
-import { GetTodayEpisodesQuery } from "src/graphql/episode/episodeQuery.generated";
 import {
   GetSeasonWorksQuery,
+  GetTodayEpisodesQuery,
   GetWeeklyWorksQuery,
-} from "src/graphql/work/workQuery.generated";
+} from "src/gql/graphql";
 import { createWorkItems, todayEpisodeData } from "src/tests/mocks";
 import { User } from "src/types/userType";
 

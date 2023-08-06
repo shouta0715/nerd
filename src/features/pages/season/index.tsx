@@ -2,11 +2,11 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import React from "react";
-import { SeriesError } from "src/components/Elements/Error/items/SeriesError";
 import { Text } from "src/components/Elements/Text";
 import { TopTitle } from "src/components/Elements/TopTitle";
-import { WorkItem } from "src/features/works/components/WorkItem";
-import { GetSeasonWorksQuery } from "src/graphql/work/workQuery.generated";
+import { SeriesError } from "src/components/Error/items/SeriesError";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
+import { GetSeasonWorksQuery } from "src/gql/graphql";
 import { TopPageList } from "src/libs/next/types";
 
 export const Season = ({

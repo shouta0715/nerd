@@ -1,3 +1,4 @@
+// import million from 'million/compiler';
 /** @type {import('next').NextConfig} */
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -6,7 +7,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-
   experimental: {
     scrollRestoration: true,
   },
