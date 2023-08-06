@@ -1,8 +1,7 @@
 import { act, render, renderHook } from "@testing-library/react";
 import useEvent from "@testing-library/user-event";
-
-import { NotificationProvider } from "src/components/Notification/NotificationProvider";
 import { MenuForm } from "src/components/Form/Menu";
+import { Notification } from "src/components/Notification";
 import { useUserState } from "src/store/user/userState";
 import { userData } from "src/tests/mocks/fixture";
 
@@ -10,9 +9,10 @@ const user = useEvent.setup();
 
 const TestComponents = () => {
   return (
-    <NotificationProvider>
+    <>
+      <Notification />
       <MenuForm />
-    </NotificationProvider>
+    </>
   );
 };
 
