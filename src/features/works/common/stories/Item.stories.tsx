@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { WorkItem } from "src/features/works/components/WorkItem";
-import { workItemData } from "src/features/works/mocks/fixture";
+import { workItemData } from "src/features/works/common/mocks/fixture";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
 import { ListDecorator } from "src/tests/storybook";
 
 export default {

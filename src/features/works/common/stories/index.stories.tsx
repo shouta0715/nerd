@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Work } from "src/features/works/components/Work";
-import { handlers } from "src/features/works/mocks/msw";
+import { handlers } from "src/features/works/common/mocks/msw";
+import { Work } from "src/features/works/slug/components/Work";
 import { BasicLayoutDecorator } from "src/tests/storybook";
 
 export default {

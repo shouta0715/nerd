@@ -5,7 +5,7 @@ import {
   searchWorksData,
   workData,
   workWithSeriesData,
-} from "src/features/works/mocks/fixture";
+} from "src/features/works/common/mocks/fixture";
 
 export const handleWork = (status?: number) => {
   return graphql.query("GetWork", (req, res, ctx) => {

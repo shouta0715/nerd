@@ -10,7 +10,7 @@ type Props = { data: GetWeeklyWorksQuery };
 
 const DynamicWorkItem = dynamic(
   () =>
-    import("src/features/works/components/WorkItem").then(
+    import("src/features/works/slug/components/WorkItem").then(
       (mod) => mod.WorkItem
     ),
   {

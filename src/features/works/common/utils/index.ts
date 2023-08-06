@@ -1,7 +1,7 @@
 import {
   GenSeriesWorkPlaceholder,
   GenWorkPlaceholder,
-} from "src/features/works/types";
+} from "src/features/works/common/types";
 import { GetWorkQuery, GetWorkSeriesQuery } from "src/gql/graphql";
 
 export const genWorkPlaceholder = ({

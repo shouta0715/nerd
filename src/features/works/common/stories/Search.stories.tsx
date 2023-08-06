@@ -1,6 +1,9 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { SearchWorks } from "src/features/works/components/SearchWorks";
-import { handleSearchWorks, handlers } from "src/features/works/mocks/msw";
+import {
+  handleSearchWorks,
+  handlers,
+} from "src/features/works/common/mocks/msw";
+import { SearchWorks } from "src/features/works/search/components/SearchWorks";
 import { SearchDecorator } from "src/tests/storybook";
 
 export default {

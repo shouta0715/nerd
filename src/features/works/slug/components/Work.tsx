@@ -5,7 +5,7 @@ import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { SeriesItem } from "src/features/series/components/SeriesItem";
-import { useQuerySeriesWork } from "src/features/works/api/useQuerySeriesWork";
+import { useQuerySeriesWork } from "src/features/works/slug/api/useQuerySeriesWork";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/client/validateData";

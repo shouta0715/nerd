@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { PlayWork } from "src/features/works/components/PlayWork";
-import { handlers } from "src/features/works/mocks/msw";
+import { handlers } from "src/features/works/common/mocks/msw";
+import { PlayWork } from "src/features/works/play/components/PlayWork";
 import { BasicLayoutOnlyHeaderDecorator } from "src/tests/storybook";
 
 export default {

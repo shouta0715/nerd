@@ -3,8 +3,11 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { WorkEpisodeItem } from "src/features/episodes/components/WorkEpisodeItem";
 import { getSeriesLink, getSeriesQuery } from "src/features/series/utils/link";
-import { Work } from "src/features/works/types";
-import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
+import { Work } from "src/features/works/common/types";
+import {
+  getWorksLink,
+  getWorksQuery,
+} from "src/features/works/common/utils/link";
 
 type Props = {
   work: Work;

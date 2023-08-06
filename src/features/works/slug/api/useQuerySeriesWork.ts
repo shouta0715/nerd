@@ -1,5 +1,5 @@
 import { workSiresDocument } from "src/documents/works";
-import { genSeriesWorkPlaceholder } from "src/features/works/utils";
+import { genSeriesWorkPlaceholder } from "src/features/works/common/utils";
 import {
   GetWorkSeriesQuery,
   GetWorkSeriesQueryVariables,

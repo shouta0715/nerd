@@ -6,7 +6,7 @@ import { Timer } from "src/components/dynamic/common/timer";
 import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput";
 import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
 
-import { WorkMenu } from "src/features/works/components/WorkMenu";
+import { WorkMenu } from "src/features/works/play/components/WorkMenu";
 import { GetWorkQuery } from "src/gql/graphql";
 
 type Props = {

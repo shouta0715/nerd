@@ -2,7 +2,7 @@ import {
   GetSlugWorkLink,
   GetWorksLink,
   GetWorksQuery,
-} from "src/features/works/types";
+} from "src/features/works/common/types";
 
 export const getWorksLink = ({ as, series_id, id }: GetWorksLink) => {
   if (as) {

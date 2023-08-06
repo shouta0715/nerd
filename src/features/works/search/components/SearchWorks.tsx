@@ -6,12 +6,12 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Skeleton } from "src/components/Elements/Skeleton";
-import { useQuerySearchWorks } from "src/features/works/api/useQuerySearchWorks";
-import { WorkItem } from "src/features/works/components/WorkItem";
 import {
   getSlugWorkLink,
   getSlugWorkQuery,
-} from "src/features/works/utils/link";
+} from "src/features/works/common/utils/link";
+import { useQuerySearchWorks } from "src/features/works/search/api/useQuerySearchWorks";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 
 export const SearchWorks = () => {

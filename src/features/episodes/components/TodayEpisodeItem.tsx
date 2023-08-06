@@ -14,7 +14,10 @@ import {
   getTodayEpisodeLink,
 } from "src/features/episodes/utils/link";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
-import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
+import {
+  getWorksLink,
+  getWorksQuery,
+} from "src/features/works/common/utils/link";
 
 const DynamicTimer = dynamic(
   () => import("src/features/timer/components/Timer").then((mod) => mod.Timer),

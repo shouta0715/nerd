@@ -1,11 +1,11 @@
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
-import { WorkItem } from "src/features/works/components/WorkItem";
 import {
   getSlugWorkLink,
   getSlugWorkQuery,
-} from "src/features/works/utils/link";
+} from "src/features/works/common/utils/link";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
 import { GetSeriesQuery } from "src/gql/graphql";
 
 type Props = {

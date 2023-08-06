@@ -1,4 +1,4 @@
-import { Work } from "src/features/works/types";
+import { Work } from "src/features/works/common/types";
 import {
   GetWorkQuery,
   GetWorkSeriesQuery,

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useTimerState } from "src/features/timer/store";
-import { useQueryWork } from "src/features/works/api/useQueryWork";
+import { useQueryWork } from "src/features/works/play/api/useQueryWork";
 
 export const usePlayWork = () => {
   const router = useRouter();

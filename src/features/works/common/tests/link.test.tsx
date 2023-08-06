@@ -8,7 +8,7 @@ import {
   getSlugWorkQuery,
   getWorksLink,
   getWorksQuery,
-} from "src/features/works/utils/link";
+} from "src/features/works/common/utils/link";
 
 const user = userEvent.setup();
 

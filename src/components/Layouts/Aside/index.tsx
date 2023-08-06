@@ -3,7 +3,7 @@ import React from "react";
 import { Nav } from "src/components/Layouts/Nav";
 
 const DynamicSearchWorksForm = dynamic(() =>
-  import("src/features/works/components/SearchWorksForm").then(
+  import("src/features/works/search/components/SearchWorksForm").then(
     (mod) => mod.SearchWorksForm
   )
 );

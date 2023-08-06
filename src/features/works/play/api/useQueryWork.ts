@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { workDocument } from "src/documents/works";
-import { genWorkPlaceholder } from "src/features/works/utils";
+import { genWorkPlaceholder } from "src/features/works/common/utils";
 import { GetWorkQuery, GetWorkQueryVariables } from "src/gql/graphql";
 import { useGraphQL } from "src/hooks/useGraphQL";
 

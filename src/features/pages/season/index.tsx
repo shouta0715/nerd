@@ -5,7 +5,7 @@ import React from "react";
 import { Text } from "src/components/Elements/Text";
 import { TopTitle } from "src/components/Elements/TopTitle";
 import { SeriesError } from "src/components/Error/items/SeriesError";
-import { WorkItem } from "src/features/works/components/WorkItem";
+import { WorkItem } from "src/features/works/slug/components/WorkItem";
 import { GetSeasonWorksQuery } from "src/gql/graphql";
 import { TopPageList } from "src/libs/next/types";
 

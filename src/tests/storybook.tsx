@@ -6,7 +6,7 @@ import {
   BasicListLayout,
   LayoutProvider,
 } from "src/components/Layouts/BasicLayout";
-import { SearchWorksForm } from "src/features/works/components/SearchWorksForm";
+import { SearchWorksForm } from "src/features/works/search/components/SearchWorksForm";
 
 export const BasicLayoutDecorator = (
   Story: PartialStoryFn<ReactRenderer, Args>

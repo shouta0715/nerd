@@ -7,7 +7,10 @@ import React, { FC } from "react";
 import { ButtonLink } from "src/components/Elements/ButtonLink";
 import { Text } from "src/components/Elements/Text";
 import { genEpisodePlaceholder } from "src/features/episodes/utils";
-import { getWorksLink, getWorksQuery } from "src/features/works/utils/link";
+import {
+  getWorksLink,
+  getWorksQuery,
+} from "src/features/works/common/utils/link";
 import { GetEpisodeQuery } from "src/gql/graphql";
 
 type Props = {

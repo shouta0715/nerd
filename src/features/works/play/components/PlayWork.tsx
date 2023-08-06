@@ -11,7 +11,7 @@ import { WorkChatInput } from "src/features/chats/works/components/WorkChatInput
 import { WorkChats } from "src/features/chats/works/components/WorkChats";
 import { WorkCommentInput } from "src/features/comments/works/components/WorkCommentInput";
 import { WorkComments } from "src/features/comments/works/components/WorkComments";
-import { usePlayWork } from "src/features/works/hooks/usePlayWork";
+import { usePlayWork } from "src/features/works/play/hooks/usePlayWork";
 import { NotFoundError } from "src/libs/error";
 import { DetailTitle } from "src/libs/meta/OnlyTitle";
 import { validateData } from "src/utils/client/validateData";
