@@ -9,7 +9,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Error } from "src/components/Error";
 import { NotificationProvider } from "src/components/Notification/NotificationProvider";
 import dynamic from "next/dynamic";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import queryClient from "src/libs/client/query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
