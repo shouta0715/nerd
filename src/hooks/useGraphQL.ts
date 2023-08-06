@@ -1,6 +1,6 @@
 import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import {
-  UseQueryOptions,
+  UseBaseQueryOptions,
   UseQueryResult,
   useQuery,
 } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ export function useGraphQL<TResult, TVariables>({
   variables,
 }: {
   document: TypedDocumentNode<TResult, TVariables>;
-  options?: Omit<UseQueryOptions<TResult>, "queryKey">;
+  options?: Omit<UseBaseQueryOptions<TResult>, "queryKey">;
   variables: TVariables extends Record<string, never> ? undefined : TVariables;
 }): UseQueryResult<TResult> {
   return useQuery({

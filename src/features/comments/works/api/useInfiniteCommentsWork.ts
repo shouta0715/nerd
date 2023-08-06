@@ -5,7 +5,7 @@ import {
 } from "src/documents/comments";
 import { CommentsFilter } from "src/features/comments/common/types";
 import { getInitialPageParam } from "src/features/comments/common/utils";
-import { Order_By } from "src/gql/graphql";
+import { GetCommentsWorkQuery, Order_By } from "src/gql/graphql";
 import { client } from "src/libs/client/graphql";
 import { useUserState } from "src/store/user/userState";
 
@@ -77,7 +77,7 @@ export const useInfiniteCommentsWork = (
         order,
       });
     },
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: GetCommentsWorkQuery) => {
       const lastComments = lastPage.comments.at(-1);
       if (!lastComments || lastPage.comments.length < 100) return undefined;
 
@@ -87,7 +87,6 @@ export const useInfiniteCommentsWork = (
       };
     },
     defaultPageParam: getInitialPageParam(),
-    suspense: true,
     enabled: !!work_id && !!user,
   });
 };

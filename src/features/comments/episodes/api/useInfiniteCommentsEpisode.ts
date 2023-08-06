@@ -5,7 +5,7 @@ import {
 } from "src/documents/comments";
 import { CommentsFilter } from "src/features/comments/common/types";
 import { getInitialPageParam } from "src/features/comments/common/utils";
-import { Order_By } from "src/gql/graphql";
+import { GetCommentsEpisodeQuery, Order_By } from "src/gql/graphql";
 import { client } from "src/libs/client/graphql";
 import { useUserState } from "src/store/user/userState";
 
@@ -71,7 +71,7 @@ export const useInfiniteCommentsEpisode = (
   return useInfiniteQuery({
     queryKey: ["comments", { episode_id, order }],
     queryFn: ({ pageParam }) => getComments({ episode_id, pageParam, order }),
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: GetCommentsEpisodeQuery) => {
       const lastComments = lastPage.comments.at(-1);
       if (!lastComments || lastPage.comments.length < 100) return undefined;
 
@@ -82,7 +82,6 @@ export const useInfiniteCommentsEpisode = (
     },
     defaultPageParam: getInitialPageParam(),
     gcTime: 0,
-    suspense: true,
     enabled: !!episode_id && !!user,
   });
 };

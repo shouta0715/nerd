@@ -1,5 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { replyDocument } from "src/documents/reply";
+import { GetRepliesQuery } from "src/gql/graphql";
 
 import { client } from "src/libs/client/graphql";
 
@@ -37,7 +38,7 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) => {
         pageParam,
       });
     },
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: GetRepliesQuery) => {
       const lastReply = lastPage.replies.at(-1);
 
       if (!lastReply || lastPage.replies.length < 10) return undefined;
@@ -47,7 +48,6 @@ export const useInfiniteQueryReplies = (reply_to: string, isOpen: boolean) => {
       };
     },
     defaultPageParam: InitialPageParam,
-    suspense: true,
     enabled: isOpen && !!reply_to,
     staleTime: 1000 * 60 * 5,
   });
