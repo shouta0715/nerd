@@ -23,6 +23,8 @@ const DynamicFirebaseAuth = dynamic(() =>
   )
 );
 
+const DynamicNextNProgress = dynamic(() => import("nextjs-progressbar"));
+
 export const Provider = ({ children }: Props) => {
   const [client] = useState(() => queryClient);
 
@@ -37,7 +39,7 @@ export const Provider = ({ children }: Props) => {
       <ErrorBoundary FallbackComponent={Error}>
         <NotificationProvider>
           <DynamicFirebaseAuth />
-          <NextNProgress
+          <DynamicNextNProgress
             color="#6366f1"
             height={3}
             options={{ showSpinner: false }}
