@@ -9,8 +9,15 @@ type Props = {
   minutes: string;
   seconds: string;
   id: string;
+  big?: boolean;
 };
-export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
+export const Timer: FC<Props> = ({
+  hours,
+  minutes,
+  seconds,
+  id,
+  big = false,
+}) => {
   if (!id) return <Skeleton theme="timer" />;
 
   return (
@@ -18,7 +25,11 @@ export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
       <div className="flex flex-col items-center justify-center">
         <div className="mb-2 flex space-x-2">
           {hours.split("").map((character, index) => (
-            <Panel key={`hours-${index}-${id}`} character={character} />
+            <Panel
+              key={`hours-${index}-${id}`}
+              big={big}
+              character={character}
+            />
           ))}
         </div>
         <span className="text-xs font-bold ">時間</span>
@@ -26,7 +37,11 @@ export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
       <div className="flex flex-col items-center justify-center">
         <div className="mb-2 flex space-x-2">
           {minutes.split("").map((character, index) => (
-            <Panel key={`minutes-${index}-${id}`} character={character} />
+            <Panel
+              key={`minutes-${index}-${id}`}
+              big={big}
+              character={character}
+            />
           ))}
         </div>
         <span className="text-xs font-bold ">分</span>
@@ -34,7 +49,11 @@ export const Timer: FC<Props> = ({ hours, minutes, seconds, id }) => {
       <div className="flex flex-col items-center justify-center">
         <div className="mb-2 flex space-x-2">
           {seconds.split("").map((character, index) => (
-            <Panel key={`seconds-${index}-${id}`} character={character} />
+            <Panel
+              key={`seconds-${index}-${id}`}
+              big={big}
+              character={character}
+            />
           ))}
         </div>
         <span className="text-xs font-bold">秒</span>
