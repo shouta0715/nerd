@@ -38,6 +38,7 @@ export const PinInput: FC<Props> = ({
           ref={(node) => {
             if (node) pinInputs.current[index] = node;
           }}
+          aria-label={`${index + 1}桁目の数字`}
           className="inline-block h-8 w-8 rounded-md border border-gray-300 p-0 text-center font-futura text-[16px] selection:bg-transparent first:!ml-0 odd:ml-5 odd:mr-2"
           id={`${uuid}-${index + 1}`}
           inputMode="numeric"

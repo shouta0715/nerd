@@ -23,12 +23,7 @@ export const Work: FC = () => {
   );
 
   if (isPending) {
-    return (
-      <div className="flex h-full flex-col">
-        <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
-        <Skeleton theme="work" />
-      </div>
-    );
+    return <Skeleton theme="withSeries" />;
   }
 
   validateData({

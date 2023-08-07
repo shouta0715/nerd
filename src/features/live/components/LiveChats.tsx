@@ -42,7 +42,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
   return (
     <>
       <ul className="flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
-        <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+        <li className="flex max-w-full justify-center break-words text-sm text-dimmed">
           {isSubscription && "リアルタイムで更新されます"}
           {mode === "finish" && "終了しました"}
           {(mode === "down" ||
@@ -51,13 +51,14 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
             isSocketError) &&
             mode !== "finish" &&
             "右下のボタンを押すと、最新のコメントを読み込めます"}
-        </p>
+        </li>
         {data?.map((chats) => (
           <Chat key={chats.id} chat={chats} />
         ))}
       </ul>
       <div className="sticky bottom-20 flex w-full justify-between px-2 lg:px-3">
         <button
+          aria-label={isBottom ? "最下部です" : "最下部に移動"}
           className={clsx(
             "flex h-9 w-9  cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
             isBottom ? "pointer-events-none opacity-0" : " opacity-100"
@@ -94,6 +95,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
             <Loader size="xl" theme="white" />
           ) : (
             <button
+              aria-label="更新"
               className="grid h-full w-full place-items-center text-white "
               onClick={
                 isWsError || isSocketError ? wsErrorRefetch : handleRefetch

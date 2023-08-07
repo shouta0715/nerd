@@ -104,7 +104,7 @@ export const SearchWorks = () => {
                         id: work.id,
                         as: true,
                       })}
-                      className="h-max border-white bg-indigo-500 font-bold text-white hover:bg-indigo-600"
+                      className="h-max border-white bg-indigo-600 font-bold text-white hover:bg-indigo-500"
                       href={{
                         pathname: getSlugWorkLink({
                           id: work.id,

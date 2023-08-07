@@ -63,12 +63,7 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           show={time === 0 && !interval.active}
         >
           {isPending || authLoading ? (
-            <>
-              <Loader size="xl" theme="white" />
-              <span className="sr-only">
-                {isPending ? "読み込み中" : "認証中"}
-              </span>
-            </>
+            <Loader size="xl" theme="white" />
           ) : (
             <>
               <PlayIcon className="h-10 w-10 fill-white" />
@@ -83,6 +78,11 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
       </ul>
       <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
         <button
+          aria-label={
+            isSelfScroll
+              ? "最新のコメントまでスクロール済み"
+              : "最新のコメントまでスクロールする"
+          }
           className={clsx(
             "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
             isSelfScroll && chats.length
@@ -97,7 +97,6 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           }
         >
           <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
-          <span className="sr-only">最新のコメントまでスクロールする</span>
         </button>
       </div>
     </>
