@@ -8,14 +8,7 @@ import { NextPageWithLayout } from "src/libs/next/types";
 
 const Page: NextPageWithLayout = () => (
   <section className="flex-1">
-    <Suspense
-      fallback={
-        <div className="flex flex-col">
-          <div className="mx-auto  mb-4 h-2  w-full max-w-md  animate-pulse bg-slate-200" />
-          <Skeleton theme="work" />
-        </div>
-      }
-    >
+    <Suspense fallback={<Skeleton theme="withSeries" />}>
       <Work />
     </Suspense>
   </section>

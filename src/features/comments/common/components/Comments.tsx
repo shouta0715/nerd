@@ -118,6 +118,7 @@ export const Comments = forwardRef<any, Props>(
               <Loader size="xl" theme="white" />
             ) : (
               <button
+                aria-label="最新のコメントを読み込む"
                 className="grid h-full w-full place-items-center text-white "
                 onClick={refetchHandler}
               >
