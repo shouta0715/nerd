@@ -108,6 +108,7 @@ const TodayEpisodeItem: FC<Props> = memo(({ episode }) => {
               {mode === "down" ? "開始まで" : "開始から"}
             </Text>
             <DynamicTimer
+              big
               hours={time.hours.toString().padStart(2, "0")}
               id={episode.id}
               minutes={time.minutes.toString().padStart(2, "0")}
