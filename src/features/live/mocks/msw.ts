@@ -1,9 +1,8 @@
 import { graphql } from "msw";
-import { episodeChatData } from "src/features/chats/common/mocks/fixture";
-import { liveData } from "src/features/live/mocks/fixture";
+import { liveChatsData, liveData } from "src/features/live/mocks/fixture";
 import {
-  GetChatsEpisodeQuery,
-  GetChatsEpisodeQueryVariables,
+  GetChatsQuery,
+  GetChatsQueryVariables,
   GetEpisodeQuery,
   GetEpisodeQueryVariables,
 } from "src/gql/graphql";
@@ -29,14 +28,14 @@ export const handleLive = ({
 };
 
 export const handleLiveChats = (status?: number) => {
-  return graphql.query<GetChatsEpisodeQuery, GetChatsEpisodeQueryVariables>(
+  return graphql.query<GetChatsQuery, GetChatsQueryVariables>(
     "GetChats",
     (_, res, ctx) => {
       if (status) {
         return res(ctx.status(status));
       }
 
-      return res(ctx.data(episodeChatData()));
+      return res(ctx.data(liveChatsData()));
     }
   );
 };

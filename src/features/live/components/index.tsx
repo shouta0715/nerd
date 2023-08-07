@@ -27,7 +27,7 @@ export const Live: FC<Props> = ({ data }) => {
       <Aside data={data} isChat={isChat} mode={mode} time={time} />
 
       <div className="flex w-full flex-1 flex-col  bg-white/20 lg:min-h-[calc(100dvh-65px)] lg:py-10">
-        <div className="block w-full bg-white/80 py-4 lg:hidden">
+        <div className="w-full bg-white/80 pt-2 lg:hidden">
           {/* Mobile Design */}
           <Header
             id={data?.episodes_by_pk?.id}

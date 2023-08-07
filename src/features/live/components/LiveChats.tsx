@@ -18,7 +18,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
   const {
     data,
     handleRefetch,
-    isLoading,
+    isPending,
     isBottom,
     isRefetching,
     wsErrorRefetch,
@@ -35,14 +35,14 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
   });
   const user = useUserState((state) => state.user);
 
-  if (!user || isLoading) {
+  if (!user || isPending) {
     return <Loader className="m-auto" size="xl" variant="dots" />;
   }
 
   return (
     <>
-      <ul className="flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
-        <li className="flex max-w-full justify-center break-words text-sm text-dimmed">
+      <div className="flex w-full flex-1 flex-col gap-y-1.5 p-2 md:p-4">
+        <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
           {isSubscription && "リアルタイムで更新されます"}
           {mode === "finish" && "終了しました"}
           {(mode === "down" ||
@@ -51,11 +51,13 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
             isSocketError) &&
             mode !== "finish" &&
             "右下のボタンを押すと、最新のコメントを読み込めます"}
-        </li>
-        {data?.map((chats) => (
-          <Chat key={chats.id} chat={chats} />
-        ))}
-      </ul>
+        </p>
+        <ul>
+          {data?.map((chats) => (
+            <Chat key={chats.id} chat={chats} />
+          ))}
+        </ul>
+      </div>
       <div className="sticky bottom-20 flex w-full justify-between px-2 lg:px-3">
         <button
           aria-label={isBottom ? "最下部です" : "最下部に移動"}

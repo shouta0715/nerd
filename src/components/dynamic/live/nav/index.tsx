@@ -24,7 +24,7 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
   return (
     <nav
       className={clsx(
-        `flex items-center`,
+        `flex items-center py-1.5`,
         response === "lg" && "hidden flex-1 justify-around lg:flex",
 
         response === "sp"
@@ -34,8 +34,8 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
     >
       <Text
         className={clsx(
-          "inline-block cursor-pointer rounded-none text-base  font-bold text-indigo-500 transition-colors duration-300 ",
-          mode === "up" ? " text-orange-500" : " text-indigo-500",
+          "inline-block rounded-none text-sm font-bold  text-indigo-600 transition-colors duration-300 md:text-base ",
+          mode === "up" ? " text-orange-600" : " text-indigo-600",
           !isChat && "opacity-50"
         )}
         component="button"
@@ -52,9 +52,9 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
       </Text>
       <Text
         className={clsx(
-          "inline-block cursor-pointer rounded-none py-2 text-sm font-bold text-indigo-500 transition-colors duration-300 md:text-base ",
+          "inline-block  text-sm font-bold text-indigo-600 transition-colors duration-300 md:text-base ",
           isChat && "opacity-50",
-          mode === "up" ? " text-orange-500" : " text-indigo-500"
+          mode === "up" ? " text-orange-600" : " text-indigo-600"
         )}
         component="button"
         onClick={() => {
@@ -71,6 +71,7 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
       </Text>
       {response === "sp" && (
         <button
+          aria-label="エピソードメニューを開く"
           className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
           onClick={() => setIsNextOpen(!isNextOpen)}
         >

@@ -23,10 +23,10 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
 
   return (
     <>
-      <ul className="relative flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
+      <div className="relative flex w-full flex-1 flex-col gap-y-1.5 p-2 md:p-4">
         <div className="flex max-w-full flex-col items-center justify-center gap-y-1 break-words text-xs text-dimmed md:text-sm">
           <div>
-            コメントへ移動するには
+            コメントは
             <button
               className="text-indigo-600 hover:underline"
               onClick={() =>
@@ -41,7 +41,6 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
             >
               こちら
             </button>
-            かコメントタブをクリックしてください。
           </div>
           <span>
             {interval.active
@@ -72,10 +71,12 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           )}
         </Transition>
 
-        {chats?.map((comment) => (
-          <Chat key={comment.id} chat={comment} />
-        ))}
-      </ul>
+        <ul>
+          {chats?.map((comment) => (
+            <Chat key={comment.id} chat={comment} />
+          ))}
+        </ul>
+      </div>
       <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
         <button
           aria-label={

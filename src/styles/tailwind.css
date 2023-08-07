@@ -7,10 +7,6 @@
     @apply min-h-[100dvh];
   }
 
-  .btn-primary {
-    @apply border-indigo-500 bg-indigo-500 font-bold text-white hover:bg-indigo-600;
-  }
-
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
