@@ -48,12 +48,12 @@ export const Comments = forwardRef<any, Props>(
 
     return (
       <>
-        <ul className="flex w-full flex-1 flex-col space-y-3 px-2  pb-2 pt-4 md:px-4">
+        <div className="flex w-full flex-1 flex-col gap-y-1.5 p-2 md:p-4">
           <div className="flex max-w-full flex-col items-center justify-center gap-y-1 break-words text-xs text-dimmed md:text-sm">
             <div>
-              チャットへ移動するには
+              チャットは
               <button
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-600 underline hover:text-indigo-500"
                 onClick={() =>
                   router.replace({
                     query: {
@@ -65,7 +65,6 @@ export const Comments = forwardRef<any, Props>(
               >
                 こちら
               </button>
-              かチャットタブをクリックしてください。
             </div>
             <span>右下のボタンを押すと、最新のコメントを読み込めます</span>
           </div>
@@ -89,19 +88,20 @@ export const Comments = forwardRef<any, Props>(
               まだコメントはありません
             </p>
           )}
-          {mutate.length !== 0 &&
-            mutate?.map((comment) => {
-              return comment.variables.reply_to ? null : (
-                <Optimistic
-                  key={comment.submittedAt}
-                  comment={comment.variables}
-                />
-              );
-            })}
-
-          {data?.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
-          ))}
+          <ul>
+            {mutate.length !== 0 &&
+              mutate?.map((comment) => {
+                return comment.variables.reply_to ? null : (
+                  <Optimistic
+                    key={comment.submittedAt}
+                    comment={comment.variables}
+                  />
+                );
+              })}
+            {data?.map((comment) => (
+              <Comment key={comment.id} comment={comment} />
+            ))}
+          </ul>
           <div
             ref={ref}
             className={`flex h-20 items-center justify-center text-center  ${
@@ -110,7 +110,7 @@ export const Comments = forwardRef<any, Props>(
           >
             <Loader size="xl" variant="dots" />
           </div>
-        </ul>
+        </div>
 
         <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
           <div className="grid h-10 w-10 place-items-center  rounded-full  bg-indigo-600  shadow-md shadow-indigo-400 transition-transform active:translate-y-1 lg:right-14">

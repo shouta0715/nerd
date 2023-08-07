@@ -36,14 +36,15 @@ export const Aside: FC<Props> = ({ isChat, data }) => {
         />
         <Nav isChat={isChat} response="lg" />
       </div>
-      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
-        <Menu />
-      </div>
+
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <Timer />
       </div>
       <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
         <DynamicWorkMenu data={data} />
+      </div>
+      <div className="rounded-2xl bg-white/60 p-4 shadow-lg ring-1 ring-gray-900/5 ">
+        <Menu />
       </div>
       <div
         className={clsx(

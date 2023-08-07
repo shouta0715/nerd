@@ -1,4 +1,4 @@
-import { GetEpisodeQuery } from "src/gql/graphql";
+import { GetChatsQuery, GetEpisodeQuery } from "src/gql/graphql";
 import { Mode, createTime } from "src/tests/storybook";
 
 export const liveData = (mode: Mode): GetEpisodeQuery => {
@@ -23,5 +23,23 @@ export const liveData = (mode: Mode): GetEpisodeQuery => {
         has_episodes: true,
       },
     },
+  };
+};
+
+export const liveChatsData = (length = 100): GetChatsQuery => {
+  return {
+    chats: Array.from({ length }).map((_, i) => ({
+      id: `${i}`,
+      user_id: `${i}`,
+      episode_id: "1",
+      comment_time: 0,
+      commenter_name: "コメントユーザー",
+      content: "コメント",
+      created_at: "2021-05-01T00:00:00.000000+00:00",
+      user: {
+        id: `${i}`,
+        anonymous: false,
+      },
+    })),
   };
 };

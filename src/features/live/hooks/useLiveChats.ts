@@ -30,7 +30,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
   });
   const queryClient = useQueryClient();
   const { isSelfScroll, isBottom, prevScrollTop } = useAutoScroll();
-  const { data, isLoading, refetch, isRefetching } = useQueryLiveChat({
+  const { data, isPending, refetch, isRefetching } = useQueryLiveChat({
     episode_id,
     enabled: mode !== "finish",
   });
@@ -42,7 +42,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
       top: document.documentElement.scrollHeight,
       behavior: "smooth",
     });
-  }, [data?.chats.length, isBottom, prevScrollTop]);
+  }, [data?.chats?.length, isBottom, prevScrollTop]);
 
   const handleRefetch = async () => {
     if (mode !== "down" && mode !== "notRegister") return;
@@ -71,7 +71,7 @@ export const useLiveChats = ({ episode_id, mode, time }: Props) => {
   return {
     data: data?.chats,
     handleRefetch,
-    isLoading,
+    isPending,
     isBottom: !isSelfScroll,
     isRefetching,
     wsErrorRefetch,

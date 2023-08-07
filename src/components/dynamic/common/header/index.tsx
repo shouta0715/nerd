@@ -16,22 +16,22 @@ export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
   return (
     <header className="flex flex-col px-4 lg:px-0">
       <div
-        className={`flex w-full flex-1 flex-col items-center gap-1 lg:rounded-t-2xl lg:px-4 lg:py-6 lg:text-white
+        className={`flex w-full flex-1 flex-col items-center gap-y-1 lg:rounded-t-2xl lg:px-4 lg:py-6 lg:text-white
       ${mode === "up" ? "lg:bg-orange-600" : "lg:bg-indigo-600"}`}
       >
         <Text
-          className="line-clamp-2 text-base font-bold  md:text-lg"
+          className="line-clamp-1 text-sm font-bold md:line-clamp-2  md:text-lg"
           component="h4"
         >
           {title}
         </Text>
         {sub_title && (
           <Text className="flex" component="div">
-            <Text className="mr-2 text-sm md:text-base" component="p">
+            <Text className="mr-2 text-xs md:text-base" component="p">
               第{number}話
             </Text>
             <Text
-              className="line-clamp-2 flex-1 text-sm md:text-base"
+              className="line-clamp-1 flex-1 text-xs md:text-base"
               component="p"
             >
               {sub_title}
