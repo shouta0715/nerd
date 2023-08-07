@@ -2,9 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { FC } from "react";
 import { TalkForm } from "src/components/Form/Talk";
-import { useTimerState } from "src/features/timer/store";
-import { timeToSecond } from "src/features/timer/utils/timeProcessing";
-import { useGlobalState } from "src/store/global/globalStore";
+import { useChatInput } from "src/features/chats/common/hooks/useChatInput";
 
 type Props = {
   onSubmitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -19,27 +17,9 @@ export const ChatInput: FC<Props> = ({
   value,
   setContent,
 }) => {
-  const authLoading = useGlobalState((state) => state.authLoading);
-  const [timeObj, downInitialTime] = useTimerState((state) => [
-    state.time,
-    state.downInitialTime,
-  ]);
-  const time = timeToSecond(timeObj);
-  const downTime = timeToSecond(downInitialTime);
-
-  const timeDisabled = time === 0 || time === downTime;
-
-  const getPlaceholder = () => {
-    if (authLoading) return "ロード中です";
-
-    if (timeDisabled) return "再生してください";
-
-    return "コメントを入力";
-  };
-
-  const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (e.currentTarget.value.length <= 100) setContent(e.currentTarget.value);
-  };
+  const { onChangeHandler, timeDisabled, getPlaceholder } = useChatInput({
+    setContent,
+  });
 
   return (
     <div className="fixed bottom-0 left-0 z-[1] w-full border-t border-solid border-slate-200 bg-white p-2 lg:relative lg:border-0 lg:bg-transparent lg:p-0 ">
