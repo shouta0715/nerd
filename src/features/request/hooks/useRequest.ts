@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
 import { useNotificationState } from "src/components/Notification/store";
 import { useMutateRequest } from "src/features/request/api/useMutateRequest";
@@ -13,7 +13,7 @@ export const useRequest = () => {
     formState: { errors },
     reset,
   } = useForm<Request>({
-    resolver: zodResolver(RequestSchema),
+    resolver: valibotResolver(RequestSchema),
   });
 
   const onSubmitHandler = handleSubmit(async (data) => {

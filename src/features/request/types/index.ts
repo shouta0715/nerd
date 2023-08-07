@@ -1,18 +1,28 @@
-import { z } from "zod";
+import {
+  Input,
+  maxLength,
+  minLength,
+  nullable,
+  object,
+  string,
+  url,
+} from "valibot";
 
-export const RequestSchema = z.object({
-  work_title: z
-    .string()
-    .nonempty({ message: "作品名を入力してください" })
-    .min(1, {
-      message: "作品名を入力してください",
-    })
-    .max(100),
+export const RequestSchema = object({
+  work_title: string([
+    minLength(1, "作品名を入力してください"),
+    maxLength(100),
+  ]),
+  work_url: nullable(
+    string([
+      (input, info) => {
+        if (!input) return input;
 
-  work_url: z.nullable(
-    z.string().url({ message: "正しいURLを入力してください。" })
+        return url("正しいURLを入力してください。")(input, info);
+      },
+    ])
   ),
-  work_description: z.nullable(z.string().min(0).max(1000)),
+  work_description: nullable(string([maxLength(1000)])),
 });
 
-export type Request = z.infer<typeof RequestSchema>;
+export type Request = Input<typeof RequestSchema>;
