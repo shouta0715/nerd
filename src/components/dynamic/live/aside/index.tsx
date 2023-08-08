@@ -45,17 +45,13 @@ export const Aside: FC<Props> = ({ isChat, data, mode, time }) => {
       </div>
       <div
         className={clsx(
-          "sticky bottom-0 h-max w-full rounded-2xl border-4 bg-white/90 p-4 shadow-lg  ring-1 ring-gray-900/5 ",
+          "sticky bottom-0 h-max w-full rounded-2xl border-2 bg-white/90 p-4 shadow-lg  ring-1 ring-gray-900/5 ",
           mode !== "finish" && !isChat && "hidden",
           mode === "down" && "border-indigo-600",
           mode === "up" && "border-orange-600",
           mode === "notRegister" && "border-gray-600"
         )}
       >
-        <p className="mb-2 text-sm">
-          {isChat ? "チャット" : "コメント"}
-          投稿欄
-        </p>
         {isChat ? (
           <LiveChatInput
             episode_id={data?.episodes_by_pk?.id}
