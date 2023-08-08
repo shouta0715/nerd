@@ -37,7 +37,7 @@ export const Header: FC<Props> = ({
       }`}
     >
       <Text
-        className="line-clamp-1 text-base font-bold md:line-clamp-2 md:text-lg "
+        className="line-clamp-1 text-sm font-bold md:line-clamp-2 md:text-lg "
         component="h4"
       >
         {title}
