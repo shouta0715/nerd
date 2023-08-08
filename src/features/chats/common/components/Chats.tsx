@@ -28,7 +28,7 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           <div>
             コメントは
             <button
-              className="text-indigo-600 hover:underline"
+              className="text-indigo-600 underline hover:text-indigo-500"
               onClick={() =>
                 router.replace({
                   query: {
