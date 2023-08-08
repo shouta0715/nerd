@@ -52,6 +52,8 @@ export const useInfiniteQueryChatsWork = ({ work_id, enabled }: Args) => {
     getNextPageParam: (_, __, lastPageParam) => {
       const { _lt } = lastPageParam;
 
+      if (time > 14400) return undefined;
+
       return {
         _gte: _lt,
         _lt: multipleOf300(time),

@@ -42,7 +42,7 @@ export const useChatsEpisode = (episode_id: string) => {
   useEffect(() => {
     if (
       isFetchingNextPage ||
-      time < 300 ||
+      time < 270 ||
       !data?.pageParams ||
       data.pageParams.length > 36
     )

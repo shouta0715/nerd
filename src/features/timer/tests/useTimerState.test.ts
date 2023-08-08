@@ -12,6 +12,7 @@ const setup = (ms = 0) => {
     jest.advanceTimersByTime(ms);
     clearInterval(intervalId);
   });
+
   return result.current;
 };
 
@@ -696,7 +697,7 @@ describe("useTimerState state", () => {
       changeMode();
     });
 
-    const { interval: i2, mode } = setup();
+    const { mode } = setup();
 
     expect(mode).toEqual("down");
 
