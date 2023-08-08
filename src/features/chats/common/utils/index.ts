@@ -7,7 +7,7 @@ export const isAvoidFetchNext = (time: number, pageParams: PageParams) => {
 
   if (_gte > time) return true;
 
-  return time >= _gte && time < _lt;
+  return time >= _gte && time < _lt - 30;
 };
 
 export const multipleOf300 = (time: number) => {

@@ -1,8 +1,8 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import Link from "next/link";
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
-import Link from "next/link";
 import {
   getSlugWorkLink,
   getSlugWorkQuery,
@@ -50,7 +50,7 @@ const createMockLink = () => {
 };
 
 describe("works/utils/link", () => {
-  test("asがtrueでseries_idがない場合/works/${id}がhrefになる", async () => {
+  test("asがtrueでseries_idがない場合/works/{id}がhrefになる", async () => {
     const { id } = createMockLink();
     mockRouter.setCurrentUrl("/");
     const as = getWorksLink({
@@ -79,7 +79,7 @@ describe("works/utils/link", () => {
     expect(mockRouter.asPath).toBe(noSeriesAsPath);
   });
 
-  test("asがtrueでseries_idがある場合/works/${id}?series_id=${series_id}がhrefになる", async () => {
+  test("asがtrueでseries_idがある場合/works/{id}?series_id={series_id}がhrefになる", async () => {
     const { id, series_id } = createMockLink();
     mockRouter.setCurrentUrl("/");
     const as = getWorksLink({

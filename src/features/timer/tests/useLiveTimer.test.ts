@@ -1,7 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 import { LiveTimerProps } from "src/features/timer/types";
-import { getMaxCountUpTime } from "src/features/timer/utils/getMaxCountUpTime";
 
 type DifTime = {
   difHours: number;

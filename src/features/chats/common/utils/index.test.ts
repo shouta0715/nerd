@@ -53,9 +53,9 @@ describe("chat/utils", () => {
       ).toBe(true);
     });
 
-    test("pageParamsの間にtimeがいない場合はfalse", () => {
+    test("30秒前になったらfalse", () => {
       expect(
-        isAvoidFetchNext(600, {
+        isAvoidFetchNext(570, {
           _gte: 300,
           _lt: 600,
         })
@@ -71,18 +71,27 @@ describe("chat/utils", () => {
       ).toBe(false);
     });
 
-    test("pageParamsの_ltがtimeより大きい場合はtrue", () => {
+    test("_ltとの差が30秒より小さくなったらfalse", () => {
       expect(
-        isAvoidFetchNext(300, {
-          _gte: 600,
-          _lt: 900,
+        isAvoidFetchNext(570, {
+          _gte: 300,
+          _lt: 600,
         })
-      ).toBe(true);
+      ).toBe(false);
 
       expect(
-        isAvoidFetchNext(899, {
-          _gte: 600,
-          _lt: 900,
+        isAvoidFetchNext(271, {
+          _gte: 1,
+          _lt: 300,
+        })
+      ).toBe(false);
+    });
+
+    test("_ltとの差が30秒より大きい場合はtrue", () => {
+      expect(
+        isAvoidFetchNext(569, {
+          _gte: 300,
+          _lt: 600,
         })
       ).toBe(true);
     });
