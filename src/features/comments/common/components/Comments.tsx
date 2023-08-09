@@ -79,6 +79,7 @@ export const Comments = forwardRef<any, Props>(
                   query: {
                     mode: "comment",
                     order: value,
+                    slug: router.query.slug,
                   },
                 });
               }}
