@@ -25,6 +25,10 @@ describe("chat/utils", () => {
       expect(multipleOf300(299)).toBe(600);
       expect(multipleOf300(301)).toBe(600);
     });
+
+    test("14400を超えた場合は14400を返す", () => {
+      expect(multipleOf300(14400)).toBe(14400);
+    });
   });
 
   describe("isAvoidFetchNext", () => {

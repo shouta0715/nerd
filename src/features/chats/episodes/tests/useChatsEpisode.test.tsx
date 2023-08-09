@@ -80,7 +80,7 @@ describe("useChatsEpisode.test.tsx", () => {
 
     await waitFor(() => result.current.data.length);
 
-    expect(result.current.data.length).toBe(14400);
+    expect(result.current.data.length).toBe(14399);
 
     const isEverySecond = result.current.data.every(
       (chat, i) => chat.comment_time === i + 1
@@ -102,7 +102,7 @@ describe("useChatsEpisode.test.tsx", () => {
 
     await waitFor(() => result.current.data.length);
 
-    expect(result.current.data.length).toBe(14400);
+    expect(result.current.data.length).toBe(14399);
 
     const isEverySecond = result.current.data.every(
       (chat, i) => chat.comment_time === i + 1

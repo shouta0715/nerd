@@ -1,6 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { isPageParams } from "src/features/chats/common/types";
-import { isAvoidFetchNext } from "src/features/chats/common/utils";
+import { fetchInfiniteNextPage } from "src/features/chats/common/utils/infinite";
 import { useInfiniteQueryChatsWork } from "src/features/chats/works/api/useInfiniteQueryChatsWork";
 import { useTimerState } from "src/features/timer/store";
 import { useAutoScroll } from "src/hooks/useAutoScroll";
@@ -40,20 +39,12 @@ export const useChatsWork = (work_id: number) => {
   }, [isBottom, chats.length, prevScrollTop]);
 
   useEffect(() => {
-    if (
-      isFetchingNextPage ||
-      time < 300 ||
-      !data?.pageParams ||
-      data.pageParams.length > 36
-    )
-      return;
-
-    const lastPageParam = data?.pageParams.at(-1);
-
-    if (!isPageParams(lastPageParam) || isAvoidFetchNext(time, lastPageParam))
-      return;
-
-    fetchNextPage();
+    fetchInfiniteNextPage({
+      pageParams: data?.pageParams,
+      isFetchingNextPage,
+      time,
+      fetchNextPage,
+    });
   }, [data?.pageParams, fetchNextPage, isFetchingNextPage, time]);
 
   return { data: chats, isSelfScroll, time, isPending };
