@@ -11,7 +11,7 @@ export const isAvoidFetchNext = (time: number, pageParams: PageParams) => {
 };
 
 export const multipleOf300 = (time: number) => {
-  if (time > timeToSecond(MaxTime)) return timeToSecond(MaxTime);
+  if (time >= timeToSecond(MaxTime)) return timeToSecond(MaxTime);
 
   const next = Math.ceil((time + 1) / 300) * 300;
 
