@@ -76,7 +76,10 @@ export const Comments = forwardRef<any, Props>(
               isLoading={isLoading}
               onChange={(value) => {
                 router.push({
-                  query: { ...router.query, order: value },
+                  query: {
+                    mode: "comment",
+                    order: value,
+                  },
                 });
               }}
               options={options}
