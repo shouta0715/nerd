@@ -14,6 +14,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 type Props = {
   children: React.ReactNode;
+  authDisabled?: boolean;
 };
 
 const DynamicFirebaseAuth = dynamic(() =>
@@ -28,7 +29,7 @@ const DynamicNotification = dynamic(() =>
   import("src/components/Notification").then((mod) => mod.Notification)
 );
 
-export const Provider = ({ children }: Props) => {
+export const Provider = ({ children, authDisabled = false }: Props) => {
   const [client] = useState(() => queryClient);
 
   return (
@@ -41,7 +42,7 @@ export const Provider = ({ children }: Props) => {
       </Head>
       <ErrorBoundary FallbackComponent={Error}>
         <DynamicNotification />
-        <DynamicFirebaseAuth />
+        {authDisabled ? null : <DynamicFirebaseAuth />}
         <DynamicNextNProgress
           color="#6366f1"
           height={3}

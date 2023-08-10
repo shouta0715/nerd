@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { ReactElement } from "react";
 import { Background } from "src/components/Elements/Background";
 import { Aside } from "src/components/Layouts/Aside";
@@ -74,3 +75,42 @@ export const BasicListLayout = (page: ReactElement) => (
 export const OnlyProviderLayout = (page: ReactElement) => (
   <LayoutProvider>{page}</LayoutProvider>
 );
+
+export const DisableAuthLayout = (page: ReactElement) => {
+  return (
+    <Provider authDisabled>
+      <div className="flex w-full">
+        <div className="flex min-h-screen max-w-full flex-1 flex-col">
+          <header className="shrink-0 border-b border-gray-200 bg-white">
+            <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+              <Link className=" text-3xl font-black sm:text-4xl" href="/">
+                <span className="inline-block bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">
+                  Nerd
+                </span>
+              </Link>
+              <div className="flex items-center gap-x-8">
+                <p>
+                  <Link
+                    className="text-sm font-medium text-indigo-600 underline hover:text-indigo-500"
+                    href="/usage"
+                  >
+                    使い方
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </header>
+          <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
+            <Background />
+            <Aside />
+            <main className="flex w-full flex-1 flex-col pt-10 md:pt-0">
+              {page}
+              <DynamicSearchButton />
+            </main>
+          </div>
+          <Footer />
+        </div>
+      </div>
+    </Provider>
+  );
+};

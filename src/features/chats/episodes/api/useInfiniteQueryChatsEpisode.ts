@@ -20,7 +20,7 @@ export type GetChatsEpisodeArgs = {
   pageParam: PageParams;
 };
 
-export const InitialPageParam: PageParams = {
+const InitialPageParam: PageParams = {
   _gte: 1,
   _lt: 300,
 };
@@ -55,7 +55,7 @@ export const useInfiniteQueryChatsEpisode = ({ episode_id, enabled }: Args) => {
     getNextPageParam: (_, __, lastPageParam) => {
       const { _lt } = lastPageParam;
 
-      if (time > 14400) return undefined;
+      if (time > 14400 || _lt === 14400) return undefined;
 
       return {
         _gte: _lt,

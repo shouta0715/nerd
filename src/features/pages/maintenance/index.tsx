@@ -23,7 +23,7 @@ const faqs = [
 export const Maintenance = () => {
   return (
     <div className="bg-white">
-      <main className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
         <div className="mx-auto mt-20 max-w-2xl text-center sm:mt-24">
           <p className="text-base font-semibold leading-8 text-red-600">
             メンテナンスモード
@@ -72,7 +72,7 @@ export const Maintenance = () => {
             </a>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

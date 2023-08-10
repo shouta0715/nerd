@@ -15,7 +15,11 @@ export const multipleOf300 = (time: number) => {
 
   const next = Math.ceil((time + 1) / 300) * 300;
 
-  if (next - time < 120) return next + 300;
+  if (next - time < 120) {
+    return next + 300 > timeToSecond(MaxTime)
+      ? timeToSecond(MaxTime)
+      : next + 300;
+  }
 
   return next;
 };
