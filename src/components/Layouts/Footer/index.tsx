@@ -4,7 +4,7 @@ import React, { FC } from "react";
 export const Footer: FC = () => (
   <footer className="bg-white">
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-      <div className="mb-4 flex justify-around lg:justify-between">
+      <div className="mb-4 grid grid-cols-3 gap-y-4 md:grid-cols-4">
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
             className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
@@ -31,6 +31,14 @@ export const Footer: FC = () => (
             お問い合わせへ
           </a>
         </p>
+        <p className="text-center text-xs leading-5 text-gray-500">
+          <Link
+            className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
+            href="/data"
+          >
+            データについて
+          </Link>
+        </p>
       </div>
       <div className=" md:items-center md:justify-between lg:flex">
         <p className="text-center text-xs leading-5 text-gray-500">
@@ -38,7 +46,14 @@ export const Footer: FC = () => (
         </p>
         <div className="mt-8 lg:order-1 lg:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
-            &copy; {new Date().getFullYear()} Nerd All rights reserved.
+            &copy; {new Date().getFullYear()}
+            <a
+              className="inline-block px-1 text-sm text-blue-600 underline hover:text-blue-500"
+              href="https://twitter.com/shoutapu0715"
+            >
+              shouta
+            </a>{" "}
+            All rights reserved.
           </p>
         </div>
       </div>
