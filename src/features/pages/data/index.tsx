@@ -36,7 +36,7 @@ export const DataPage = () => {
               </p>
               <p>
                 <a
-                  className="flex items-center gap-x-2 text-indigo-600 underline hover:text-indigo-500"
+                  className="inline-flex items-center gap-x-2 text-indigo-600 underline hover:text-indigo-500"
                   href="https://developers.annict.com/"
                   target="_blank"
                 >
@@ -58,7 +58,7 @@ export const DataPage = () => {
               </p>
               <p>
                 <a
-                  className="flex items-center gap-x-2 text-indigo-600 underline hover:text-indigo-500"
+                  className="inline-flex items-center gap-x-2 text-indigo-600 underline hover:text-indigo-500"
                   href="https://cal.syoboi.jp/"
                   target="_blank"
                 >
