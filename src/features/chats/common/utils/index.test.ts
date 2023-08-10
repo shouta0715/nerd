@@ -29,6 +29,18 @@ describe("chat/utils", () => {
     test("14400を超えた場合は14400を返す", () => {
       expect(multipleOf300(14400)).toBe(14400);
     });
+
+    test("14400 - 120 以上なら14400を返す", () => {
+      expect(multipleOf300(14380)).toBe(14400);
+
+      expect(multipleOf300(14381)).toBe(14400);
+
+      expect(multipleOf300(14379)).toBe(14400);
+
+      expect(multipleOf300(13980)).toBe(14100);
+      expect(multipleOf300(13981)).not.toBe(14100);
+      expect(multipleOf300(13981)).toBe(14400);
+    });
   });
 
   describe("isAvoidFetchNext", () => {

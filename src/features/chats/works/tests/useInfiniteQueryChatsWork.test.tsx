@@ -1,8 +1,8 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { PageParams } from "src/features/chats/common/types";
-import { useInfiniteQueryChatsEpisode } from "src/features/chats/episodes/api/useInfiniteQueryChatsEpisode";
-import { mswInfiniteChats } from "src/features/chats/episodes/mocks/msw";
+import { useInfiniteQueryChatsWork } from "src/features/chats/works/api/useInfiniteQueryChatsWork";
+import { mswInfiniteChats } from "src/features/chats/works/mocks/msw";
 import { useTimerState } from "src/features/timer/store";
 import { QueryClientWrapper } from "src/tests/provider";
 import { setupMsw } from "src/tests/setup";
@@ -21,8 +21,8 @@ const setup = async () => {
 
   const { result } = renderHook(
     () =>
-      useInfiniteQueryChatsEpisode({
-        episode_id: "1",
+      useInfiniteQueryChatsWork({
+        work_id: 1,
         enabled: true,
       }),
     {
@@ -34,7 +34,7 @@ const setup = async () => {
   return { result, timerState };
 };
 
-describe("useInfiniteQueryChatsEpisodes", () => {
+describe("useInfiniteQueryChatsWork", () => {
   test("ロード中ならisPendingがtrue", async () => {
     const { result } = await setup();
 
