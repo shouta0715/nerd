@@ -2,12 +2,12 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 export const Footer: FC = () => (
-  <footer className="bg-white">
+  <footer className="border-t bg-white">
     <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
-      <div className="mb-4 grid grid-cols-3 gap-y-4 md:grid-cols-4">
+      <div className="mb-4 grid grid-cols-3 gap-y-8">
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
-            className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
             href="/terms"
           >
             利用規約
@@ -15,7 +15,7 @@ export const Footer: FC = () => (
         </p>
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
-            className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
             href="/privacy"
           >
             プライバシーポリシー
@@ -23,7 +23,7 @@ export const Footer: FC = () => (
         </p>
         <p className="text-center text-xs leading-5 text-gray-500">
           <a
-            className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
             href="https://forms.gle/GMzgLTw6FA8S6jjS9"
             rel="noreferrer"
             target="_blank"
@@ -33,18 +33,37 @@ export const Footer: FC = () => (
         </p>
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
-            className="inline-block text-sm text-gray-600 underline hover:text-gray-500"
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
             href="/data"
           >
             データについて
           </Link>
         </p>
-      </div>
-      <div className=" md:items-center md:justify-between lg:flex">
         <p className="text-center text-xs leading-5 text-gray-500">
-          当サイトは個人が運営している非公式のものであり、当サイトに掲載されているアニメ会社の企業様とは一切関係ありません。
+          <Link
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
+            href="/about"
+          >
+            サイトについて
+          </Link>
         </p>
-        <div className="mt-8 lg:order-1 lg:mt-0">
+        <p className="text-center text-xs leading-5 text-gray-500">
+          <Link
+            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
+            href="/recommend"
+          >
+            おすすめのアニメ
+          </Link>
+        </p>
+      </div>
+      <div className="md:items-center md:justify-between">
+        <p className="text-center text-xs leading-5 text-gray-500">
+          当サイトは個人のアニメファンが運営している非公式のものであり、当サイトに掲載されているアニメ、アニメ会社の企業様及び他の関係各社様とは一切関係ありません。
+        </p>
+        <p className="mt-1 text-center text-xs leading-5 text-gray-500">
+          下記はサイト独自の内容に関する著作権を示すものです。
+        </p>
+        <div className="mt-6">
           <p className="text-center text-xs leading-5 text-gray-500">
             &copy; {new Date().getFullYear()}
             <a
@@ -52,7 +71,7 @@ export const Footer: FC = () => (
               href="https://twitter.com/shoutapu0715"
             >
               shouta
-            </a>{" "}
+            </a>
             All rights reserved.
           </p>
         </div>
