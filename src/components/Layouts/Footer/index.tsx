@@ -3,7 +3,7 @@ import React, { FC } from "react";
 
 export const Footer: FC = () => (
   <footer className="border-t bg-white">
-    <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-6 lg:px-6">
       <div className="mb-4 grid grid-cols-3 gap-y-8">
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
