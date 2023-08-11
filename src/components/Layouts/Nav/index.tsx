@@ -1,67 +1,31 @@
-import {
-  ChevronRightIcon,
-  LightBulbIcon,
-  RocketLaunchIcon,
-  RssIcon,
-  ViewfinderCircleIcon,
-  WindowIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import clsx from "clsx";
 
-import Link from "next/link";
-import BeginnerIcon from "public/icons/BeginnerIcon.svg";
+import { ActiveLink } from "src/components/Elements/ActiveLink";
+import { navigation } from "src/utils/client/navData";
 
-const mockNavigation = [
-  {
-    name: "今日放送",
-    href: "/list/today",
-    icon: RssIcon,
-    color: " stroke-blue-500",
-  },
-  {
-    name: "今期のアニメ",
-    href: "/list/season",
-    icon: RocketLaunchIcon,
-    color: " stroke-red-500",
-  },
-  {
-    name: "今週のアニメ",
-    href: "/list/weekly",
-    icon: WindowIcon,
-    color: " stroke-purple-500",
-  },
-  {
-    name: "作品要望",
-    href: "/request",
-    icon: ViewfinderCircleIcon,
-    color: "stroke-pink-500",
-  },
-  {
-    name: "使い方",
-    href: "/usage",
-    icon: BeginnerIcon,
-    color: "fill-teal-600",
-  },
-  {
-    name: "よくある質問",
-    href: "/faq",
-    icon: LightBulbIcon,
-    color: "stroke-amber-500",
-  },
-];
-
-const navList = mockNavigation.map((item) => (
-  <Link
+const navList = navigation.map((item) => (
+  <ActiveLink
     key={item.name}
-    className=" group relative flex  items-center justify-center rounded-md py-1.5 text-xs hover:text-indigo-500 md:py-2 md:text-sm"
+    activeClassName="text-indigo-600"
+    className="group relative flex items-center justify-center rounded-md py-1.5 text-xs hover:text-indigo-600 md:py-2 md:text-sm"
     href={`${item.href}`}
   >
-    <div className="absolute bottom-0 left-0 h-[1px] w-0" />
-    <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
-    <div className="flex h-full flex-1 items-center">
-      <span className="inline-block flex-1">{item.name}</span>
-      <ChevronRightIcon className=" h-4 w-4 stroke-slate-300 group-hover:stroke-indigo-500 md:h-6 md:w-6" />
-    </div>
-  </Link>
+    {({ isActive }) => (
+      <>
+        <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
+        <div className="flex h-full flex-1 items-center">
+          <span className="inline-block flex-1">{item.name}</span>
+          <ChevronRightIcon
+            className={clsx(
+              isActive ? "stroke-indigo-600" : "stroke-slate-300",
+              "h-4 w-4  group-hover:stroke-indigo-600"
+            )}
+          />
+        </div>
+      </>
+    )}
+  </ActiveLink>
 ));
 
 export const Nav = () => (

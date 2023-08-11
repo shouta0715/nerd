@@ -7,7 +7,7 @@ export const SearchWorksForm = () => {
   const { submitHandler, search, setSearch } = useSearch();
 
   return (
-    <form className="hidden w-full space-x-4 md:flex" onSubmit={submitHandler}>
+    <form className="w-full space-x-4 md:flex" onSubmit={submitHandler}>
       <div className="relative flex-1">
         <MagnifyingGlassIcon className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
         <Input
