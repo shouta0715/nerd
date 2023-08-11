@@ -20,19 +20,19 @@ export const navigation = [
     name: "今日放送",
     href: "/list/today",
     icon: RssIcon,
-    color: " stroke-blue-600",
+    color: "stroke-blue-600",
   },
   {
     name: "今期のアニメ",
     href: "/list/season",
     icon: RocketLaunchIcon,
-    color: " stroke-red-600",
+    color: "stroke-red-600",
   },
   {
     name: "今週のアニメ",
     href: "/list/weekly",
     icon: WindowIcon,
-    color: " stroke-purple-600",
+    color: "stroke-purple-600",
   },
   {
     name: "ランキング",
