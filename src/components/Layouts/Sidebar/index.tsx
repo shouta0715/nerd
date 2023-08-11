@@ -4,9 +4,10 @@ import clsx from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { Fragment } from "react";
+import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
+import { navigation } from "src/components/Layouts/Nav";
 import { useGlobalState } from "src/store/global/globalStore";
-import { navigation } from "src/utils/client/navData";
 
 const DynamicSearchWorksForm = dynamic(() =>
   import("src/features/works/search/components/SearchWorksForm").then(
@@ -95,16 +96,11 @@ export const Sidebar = () => {
                             href={item.href}
                             onTransitionComplete={() => setSidebarOpen(false)}
                           >
-                            {({ isActive }) => (
+                            {() => (
                               <>
                                 <item.icon
-                                  aria-hidden="true"
-                                  className={clsx(
-                                    "h-6 w-6 shrink-0",
-                                    isActive
-                                      ? "text-indigo-600"
-                                      : "text-gray-400 group-hover:text-indigo-600",
-                                    item.color
+                                  className={twMerge(
+                                    clsx("mr-2 h-full w-6", item.color)
                                   )}
                                 />
                                 {item.name}
