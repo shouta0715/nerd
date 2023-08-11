@@ -35,11 +35,14 @@ const documents = {
     "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n": types.EpisodeFragmentFragmentDoc,
     "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
     "\n  fragment RankingEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n    comments_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.RankingEpisodeFragmentFragmentDoc,
+    "\n  fragment DailyEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n  }\n": types.DailyEpisodeFragmentFragmentDoc,
     "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
     "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n": types.FragmentEpisodeFragmentDoc,
     "\n  mutation InsertLike($object: likes_insert_input!) {\n    insert_likes_one(\n      object: $object\n      on_conflict: { constraint: likes_user_id_comment_id_key }\n    ) {\n      id\n      user_id\n      comment_id\n    }\n  }\n": types.InsertLikeDocument,
     "\n  mutation DeleteLike($user_id: String!, $comment_id: uuid!) {\n    delete_likes(\n      where: { user_id: { _eq: $user_id }, comment_id: { _eq: $comment_id } }\n    ) {\n      returning {\n        id\n      }\n    }\n  }\n": types.DeleteLikeDocument,
     "\n  query GetRanking {\n    works_all_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate {\n        aggregate {\n          count\n        }\n      }\n      episodes(limit: 1, order_by: { comments_aggregate: { count: desc } }) {\n        ...RankingEpisodeFragment\n      }\n    }\n  }\n": types.GetRankingDocument,
+    "\n  query GetDailyEpisodeRanking($_gte: timestamptz!) {\n    daily_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetDailyEpisodeRankingDocument,
+    "\n  query GetDailyWorkRanking($_gte: timestamptz!) {\n    daily_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetDailyWorkRankingDocument,
     "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      id\n    }\n  }\n": types.InsertRequestDocument,
     "\n  query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {\n    works(\n      where: {\n        _and: {\n          season_year: { _eq: $year }\n          season_name: { _eq: $season }\n          tid: { _is_null: false }\n        }\n      }\n      limit: $limit\n    ) {\n      ...WorkFragment\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.GetSeasonWorksDocument,
     "\n  query SearchWorks($search: String!, $limit: Int) {\n    search_works(\n      args: { search: $search, _limit: $limit }\n      order_by: { series_title: asc }\n    ) {\n      ...WorkFragment\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.SearchWorksDocument,
@@ -154,6 +157,10 @@ export function graphql(source: "\n  fragment RankingEpisodeFragment on episodes
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment DailyEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n  }\n"): (typeof documents)["\n  fragment DailyEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"): (typeof documents)["\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -171,6 +178,14 @@ export function graphql(source: "\n  mutation DeleteLike($user_id: String!, $com
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetRanking {\n    works_all_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate {\n        aggregate {\n          count\n        }\n      }\n      episodes(limit: 1, order_by: { comments_aggregate: { count: desc } }) {\n        ...RankingEpisodeFragment\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetRanking {\n    works_all_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate {\n        aggregate {\n          count\n        }\n      }\n      episodes(limit: 1, order_by: { comments_aggregate: { count: desc } }) {\n        ...RankingEpisodeFragment\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetDailyEpisodeRanking($_gte: timestamptz!) {\n    daily_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDailyEpisodeRanking($_gte: timestamptz!) {\n    daily_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetDailyWorkRanking($_gte: timestamptz!) {\n    daily_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetDailyWorkRanking($_gte: timestamptz!) {\n    daily_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

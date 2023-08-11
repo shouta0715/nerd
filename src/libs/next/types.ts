@@ -5,6 +5,8 @@ import { ReactElement, ReactNode } from "react";
 
 import { AutoCompleteData } from "src/features/episodes/types";
 import {
+  GetDailyEpisodeRankingQuery,
+  GetDailyWorkRankingQuery,
   GetRankingQuery,
   GetSeasonWorksQuery,
   GetTodayEpisodesQuery,
@@ -46,6 +48,8 @@ export type ListPage<T> = {
 
 export type RankingPage = {
   ranking: GetRankingQuery;
+  dailyEpisode: GetDailyEpisodeRankingQuery;
+  dailyWork: GetDailyWorkRankingQuery;
   buildDate: string;
   totallingDate: string;
 };

@@ -15,6 +15,6 @@ type Story = StoryObj<typeof Season>;
 export const Default: Story = {
   args: {
     data: seasonData,
-    buildDate: genBuildDate(),
+    buildDate: genBuildDate().buildDate,
   },
 };

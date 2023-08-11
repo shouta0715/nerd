@@ -15,6 +15,6 @@ type Story = StoryObj<typeof Weekly>;
 export const Default: Story = {
   args: {
     data: weeklyData,
-    buildDate: genBuildDate(),
+    buildDate: genBuildDate().buildDate,
   },
 };

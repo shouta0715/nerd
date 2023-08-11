@@ -24,7 +24,7 @@ export const getStaticProps: NextSSG<TopPage> = async () => {
   const todayData = await getTodayEpisodes();
   const seasonData = await getSeasonWorks(12);
   const weeklyData = await getWeeklyWorks(12);
-  const buildDate = genBuildDate();
+  const { buildDate } = genBuildDate();
 
   const isNotRegistered = todayData.episodes.some(
     (episode) => episode.start_time === null

@@ -56,3 +56,15 @@ export const RankingEpisodeFragment = gql`
     }
   }
 `;
+
+export const DailyEpisodeFragment = gql`
+  fragment DailyEpisodeFragment on episodes {
+    id
+    title
+    start_time
+    number
+    end_time
+    has_next_episode
+    next_episode_id
+  }
+`;

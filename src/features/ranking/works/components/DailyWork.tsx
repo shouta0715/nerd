@@ -8,15 +8,15 @@ import {
   getSlugWorkLink,
   getSlugWorkQuery,
 } from "src/features/works/common/utils/link";
-import { GetRankingQuery } from "src/gql/graphql";
+import { GetDailyWorkRankingQuery } from "src/gql/graphql";
 
 type Props = {
-  work: GetRankingQuery["works_all_ranking"][0];
+  work: GetDailyWorkRankingQuery["daily_works_ranking"][0];
   top: boolean;
   index: number;
 };
 
-export const RankingWork: FC<Props> = ({ work, top, index }) => {
+export const DailyWork: FC<Props> = ({ work, top, index }) => {
   return (
     <li className="flex flex-col gap-y-8">
       <p className="flex items-center gap-x-2 font-semibold">
@@ -37,8 +37,7 @@ export const RankingWork: FC<Props> = ({ work, top, index }) => {
         </div>
         <div
           className={clsx(
-            "flex flex-1 flex-col items-center  gap-x-2 gap-y-6 bg-white/10 p-6",
-            work.series_id ? "justify-between" : "justify-end"
+            "flex flex-1 flex-col items-center  gap-x-2 gap-y-6 bg-white/10 p-6 "
           )}
         >
           <p>

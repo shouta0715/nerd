@@ -15,6 +15,6 @@ type Story = StoryObj<typeof Today>;
 export const Default: Story = {
   args: {
     data: todayData,
-    buildDate: genBuildDate(),
+    buildDate: genBuildDate().buildDate,
   },
 };

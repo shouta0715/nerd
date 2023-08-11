@@ -17,6 +17,6 @@ export const Default: Story = {
     todayData,
     seasonData,
     weeklyData,
-    buildDate: genBuildDate(),
+    buildDate: genBuildDate().buildDate,
   },
 };

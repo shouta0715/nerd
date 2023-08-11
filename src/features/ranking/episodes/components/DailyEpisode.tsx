@@ -12,23 +12,21 @@ import {
   getWorksLink,
   getWorksQuery,
 } from "src/features/works/common/utils/link";
-import { GetRankingQuery } from "src/gql/graphql";
+import { GetDailyEpisodeRankingQuery } from "src/gql/graphql";
 
 type Props = {
-  work: GetRankingQuery["works_all_ranking"][0];
   index: number;
   top: boolean;
+  episode: GetDailyEpisodeRankingQuery["daily_episodes_ranking"][0];
 };
 
-export const RankingEpisode: FC<Props> = ({ work, top, index }) => {
-  const episode = work.episodes[0];
-
+export const DailyEpisode: FC<Props> = ({ episode, top, index }) => {
   return (
     <li className="flex flex-col gap-y-8">
       <p className="flex items-center gap-x-2 font-semibold">
         <span className="block h-6 w-1.5 bg-gray-900" />第{index + 1}位
       </p>
-      <div className="border-slate-20 xl:row-end-10 relative w-full flex-1  animate-fadeUp rounded-2xl border shadow-lg ring-1 ring-gray-900/5">
+      <div className="border-slate-20 xl:row-end-10 relative flex w-full  flex-1 animate-fadeUp flex-col rounded-2xl border shadow-lg ring-1 ring-gray-900/5">
         {top && (
           <Image
             alt="1番"
@@ -39,9 +37,11 @@ export const RankingEpisode: FC<Props> = ({ work, top, index }) => {
           />
         )}
         <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl bg-gray-800 p-6 text-white ">
-          <h4 className="line-clamp-2 font-bold">{work.series_title}</h4>
+          <h4 className="line-clamp-2 font-bold">
+            {episode.work.series_title}
+          </h4>
         </div>
-        <div className="flex flex-col gap-y-6 bg-white/10 p-6 leading-7">
+        <div className="flex flex-1 flex-col justify-between gap-y-6 bg-white/10 p-6 leading-7">
           <div className="flex flex-col items-center justify-center gap-x-2">
             <p className="min-w-max">第{episode.number}話</p>
             <Link
@@ -59,9 +59,9 @@ export const RankingEpisode: FC<Props> = ({ work, top, index }) => {
                 }),
                 query: getEpisodeQuery({
                   episode,
-                  title: work.title,
-                  work_id: work.id,
-                  series_id: work.series_id,
+                  title: episode.work.title,
+                  work_id: episode.work.id,
+                  series_id: episode.work.series_id,
                   today: false,
                 }),
               }}
@@ -77,18 +77,18 @@ export const RankingEpisode: FC<Props> = ({ work, top, index }) => {
             件
           </p>
           <div className="grid justify-center gap-2">
-            {work.series_id && (
+            {episode.work.series_id && (
               <ButtonLink
                 as={getSeriesLink({
-                  series_id: work.series_id,
+                  series_id: episode.work.series_id,
                 })}
                 className="mx-auto flex max-w-max flex-col items-center justify-center py-2"
                 href={{
                   pathname: getSeriesLink({
-                    series_id: work.series_id,
+                    series_id: episode.work.series_id,
                   }),
                   query: getSeriesQuery({
-                    title: work.title,
+                    title: episode.work.title,
                   }),
                 }}
                 size="xs"
@@ -99,20 +99,20 @@ export const RankingEpisode: FC<Props> = ({ work, top, index }) => {
             )}
             <ButtonLink
               as={getWorksLink({
-                id: work.id,
-                series_id: work.series_id,
+                id: episode.work.id,
+                series_id: episode.work.series_id,
                 as: true,
               })}
               className="mx-auto flex w-full max-w-max items-center justify-center py-2"
               href={{
                 pathname: getWorksLink({
-                  id: work.id,
+                  id: episode.work.id,
                   as: false,
                 }),
                 query: getWorksQuery({
-                  series_id: work.series_id,
-                  title: work.title,
-                  series_title: work.series_title,
+                  series_id: episode.work.series_id,
+                  title: episode.work.title,
+                  series_title: episode.work.series_title,
                 }),
               }}
               leftIcon={<Square3Stack3DIcon className="h-5 w-5" />}
