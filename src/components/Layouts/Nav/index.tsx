@@ -12,13 +12,7 @@ import clsx from "clsx";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
 
-export const navigation = [
-  {
-    name: "ホーム",
-    href: "/",
-    icon: HomeIcon,
-    color: "stroke-gray-600",
-  },
+export const episodeNavigation = [
   {
     name: "今日放送",
     href: "/list/today",
@@ -37,6 +31,9 @@ export const navigation = [
     icon: WindowIcon,
     color: "stroke-purple-600",
   },
+];
+
+export const worksNavigation = [
   {
     name: "ランキング",
     href: "/ranking",
@@ -49,6 +46,9 @@ export const navigation = [
     icon: ViewfinderCircleIcon,
     color: "stroke-pink-600",
   },
+];
+
+export const systemNavigation = [
   {
     name: "使い方",
     href: "/usage",
@@ -63,32 +63,61 @@ export const navigation = [
   },
 ];
 
-const navList = navigation.map((item) => (
-  <ActiveLink
-    key={item.name}
-    activeClassName="text-indigo-600"
-    className="group relative flex items-center justify-center rounded-md py-1.5 text-xs hover:text-indigo-600 md:py-2 md:text-sm"
-    href={`${item.href}`}
-  >
-    {({ isActive }) => (
-      <>
-        <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
-        <div className="flex h-full flex-1 items-center">
-          <span className="inline-block flex-1">{item.name}</span>
-          <ChevronRightIcon
-            className={clsx(
-              isActive ? "stroke-indigo-600" : "stroke-slate-300",
-              "h-4 w-4  group-hover:stroke-indigo-600"
-            )}
-          />
-        </div>
-      </>
-    )}
-  </ActiveLink>
-));
+const generateNavList = <T extends typeof episodeNavigation>(
+  item: T extends (infer U)[] ? U : never
+) => {
+  return (
+    <ActiveLink
+      key={item.name}
+      activeClassName="text-indigo-600"
+      className="group relative flex items-center justify-center rounded-md py-1.5 text-xs hover:text-indigo-600 md:py-2 md:text-sm"
+      href={`${item.href}`}
+    >
+      {({ isActive }) => (
+        <>
+          <item.icon className={`mr-2 h-full w-6 ${item.color}`} />
+          <div className="flex h-full flex-1 items-center">
+            <span className="inline-block flex-1">{item.name}</span>
+            <ChevronRightIcon
+              className={clsx(
+                isActive ? "stroke-indigo-600" : "stroke-slate-300",
+                "h-4 w-4  group-hover:stroke-indigo-600"
+              )}
+            />
+          </div>
+        </>
+      )}
+    </ActiveLink>
+  );
+};
+
+export const home = generateNavList({
+  name: "ホーム",
+  href: "/",
+  icon: HomeIcon,
+  color: "stroke-gray-600",
+});
+
+const episodeNavList = episodeNavigation.map((item) => generateNavList(item));
+
+const worksNavList = worksNavigation.map((item) => generateNavList(item));
+
+const systemNavList = systemNavigation.map((item) => generateNavList(item));
 
 export const Nav = () => (
-  <nav>
-    <div className="grid grid-cols-2 gap-2 md:grid-cols-1">{navList}</div>
+  <nav className="grid gap-y-8">
+    <div className="mt-3">{home}</div>
+    <div>
+      <p className="mb-1 text-sm text-gray-500">エピソード</p>
+      <div className="grid gap-2">{episodeNavList}</div>
+    </div>
+    <div>
+      <p className="mb-1 text-sm text-gray-500">作品</p>
+      <div className="grid gap-2">{worksNavList}</div>
+    </div>
+    <div>
+      <p className="mb-1 text-sm text-gray-500">システム</p>
+      <div className="grid gap-2">{systemNavList}</div>
+    </div>
   </nav>
 );

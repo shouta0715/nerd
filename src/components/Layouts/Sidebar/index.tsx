@@ -1,12 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { Fragment } from "react";
 import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
-import { navigation } from "src/components/Layouts/Nav";
+import {
+  episodeNavigation,
+  systemNavigation,
+  worksNavigation,
+} from "src/components/Layouts/Nav";
 import { useGlobalState } from "src/store/global/globalStore";
 
 const DynamicSearchWorksForm = dynamic(() =>
@@ -87,28 +91,112 @@ export const Sidebar = () => {
                   </div>
                   <DynamicSearchWorksForm />
                   <nav className="flex flex-1 flex-col">
-                    <ul className="-mx-2 space-y-3">
-                      {navigation.map((item) => (
-                        <li key={item.name}>
-                          <ActiveLink
-                            activeClassName="bg-gray-50 text-indigo-600"
-                            className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                            href={item.href}
-                            onTransitionComplete={() => setSidebarOpen(false)}
-                          >
-                            {() => (
-                              <>
-                                <item.icon
-                                  className={twMerge(
-                                    clsx("mr-2 h-full w-6", item.color)
-                                  )}
-                                />
-                                {item.name}
-                              </>
-                            )}
-                          </ActiveLink>
-                        </li>
-                      ))}
+                    <ul className="grid gap-y-8">
+                      <li className="-mx-2">
+                        <ActiveLink
+                          activeClassName="bg-gray-50 text-indigo-600"
+                          className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                          href="/"
+                          onTransitionComplete={() => setSidebarOpen(false)}
+                        >
+                          {() => (
+                            <>
+                              <HomeIcon className="mr-2 h-full w-6 stroke-gray-600" />
+                              ホーム
+                            </>
+                          )}
+                        </ActiveLink>
+                      </li>
+                      <li>
+                        <ul className="-mx-2">
+                          <p className="mb-1 px-2 text-sm text-gray-500">
+                            エピソード
+                          </p>
+                          {episodeNavigation.map((item) => (
+                            <li key={item.name}>
+                              <ActiveLink
+                                activeClassName="bg-gray-50 text-indigo-600"
+                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                href={item.href}
+                                onTransitionComplete={() =>
+                                  setSidebarOpen(false)
+                                }
+                              >
+                                {() => (
+                                  <>
+                                    <item.icon
+                                      className={twMerge(
+                                        clsx("mr-2 h-full w-6", item.color)
+                                      )}
+                                    />
+                                    {item.name}
+                                  </>
+                                )}
+                              </ActiveLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                      <li>
+                        <ul className="-mx-2 ">
+                          <p className="mb-1 px-2 text-sm text-gray-500">
+                            エピソード
+                          </p>
+                          {worksNavigation.map((item) => (
+                            <li key={item.name}>
+                              <ActiveLink
+                                activeClassName="bg-gray-50 text-indigo-600"
+                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                href={item.href}
+                                onTransitionComplete={() =>
+                                  setSidebarOpen(false)
+                                }
+                              >
+                                {() => (
+                                  <>
+                                    <item.icon
+                                      className={twMerge(
+                                        clsx("mr-2 h-full w-6", item.color)
+                                      )}
+                                    />
+                                    {item.name}
+                                  </>
+                                )}
+                              </ActiveLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                      <li>
+                        <ul className="-mx-2 ">
+                          <p className="mb-1 px-2 text-sm text-gray-500">
+                            エピソード
+                          </p>
+                          {systemNavigation.map((item) => (
+                            <li key={item.name}>
+                              <ActiveLink
+                                activeClassName="bg-gray-50 text-indigo-600"
+                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                href={item.href}
+                                onTransitionComplete={() =>
+                                  setSidebarOpen(false)
+                                }
+                              >
+                                {() => (
+                                  <>
+                                    <item.icon
+                                      className={twMerge(
+                                        clsx("mr-2 h-full w-6", item.color)
+                                      )}
+                                    />
+                                    {item.name}
+                                  </>
+                                )}
+                              </ActiveLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
                     </ul>
                   </nav>
                 </div>
