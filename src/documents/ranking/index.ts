@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
+import { graphql } from "src/gql/gql";
 
-export const GET_RANKING = gql`
+export const rankingDocument = graphql(`
   query GetRanking {
     works_all_ranking(args: { _limit: 5 }) {
       ...WorkFragment
@@ -14,4 +14,4 @@ export const GET_RANKING = gql`
       }
     }
   }
-`;
+`);

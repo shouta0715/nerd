@@ -39,3 +39,20 @@ export const TodayFragment = gql`
     }
   }
 `;
+
+export const RankingEpisodeFragment = gql`
+  fragment RankingEpisodeFragment on episodes {
+    id
+    title
+    start_time
+    number
+    end_time
+    has_next_episode
+    next_episode_id
+    comments_aggregate {
+      aggregate {
+        count
+      }
+    }
+  }
+`;

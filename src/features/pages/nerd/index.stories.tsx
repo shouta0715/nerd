@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Nerd } from "src/features/pages/nerd";
 import { seasonData, todayData, weeklyData } from "src/tests/mocks/fixture";
 import { BasicLayoutDecorator } from "src/tests/storybook";
-import { genBuildData } from "src/utils/server/genBuildData";
+import { genBuildDate } from "src/utils/server/genBuildData";
 
 export default {
   title: "Pages/Nerd",
@@ -17,6 +17,6 @@ export const Default: Story = {
     todayData,
     seasonData,
     weeklyData,
-    buildDate: genBuildData(),
+    buildDate: genBuildDate(),
   },
 };
