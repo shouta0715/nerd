@@ -6,7 +6,7 @@ export const seriesDocument = graphql(`
       where: { series_id: { _eq: $series_id } }
       order_by: [{ has_episodes: desc }]
     ) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         ...FragmentEpisode
       }

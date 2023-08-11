@@ -3,7 +3,7 @@ import { graphql } from "src/gql/gql";
 export const workDocument = graphql(`
   query GetWork($id: Int!) {
     works_by_pk(id: $id) {
-      ...FragmentWork
+      ...WorkFragment
     }
   }
 `);
@@ -14,7 +14,7 @@ export const searchWorksDocument = graphql(`
       args: { search: $search, _limit: $limit }
       order_by: { series_title: asc }
     ) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         ...FragmentEpisode
       }
@@ -24,7 +24,7 @@ export const searchWorksDocument = graphql(`
 export const workSiresDocument = graphql(`
   query GetWorkSeries($id: Int!, $series_id: String!) {
     works_by_pk(id: $id) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }) {
         ...FragmentEpisode
       }
@@ -33,7 +33,7 @@ export const workSiresDocument = graphql(`
       where: { _and: { id: { _neq: $id }, series_id: { _eq: $series_id } } }
       order_by: [{ has_episodes: desc }]
     ) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         ...FragmentEpisode
       }

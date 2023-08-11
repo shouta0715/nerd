@@ -1,11 +1,11 @@
 import { gql } from "graphql-request";
 
-export const FragmentWork = gql`
-  fragment FragmentWork on works {
+export const WorkFragment = gql`
+  fragment WorkFragment on works {
+    id
     title
     series_title
     series_id
-    id
     has_episodes
   }
 `;
