@@ -29,17 +29,17 @@ const documents = {
     "\n  query GetReplies(\n    $_reply_to: uuid!\n    $cursor: timestamptz!\n    $reply_limit: Int!\n  ) {\n    replies(\n      args: {\n        _reply_to: $_reply_to\n        cursor: $cursor\n        reply_limit: $reply_limit\n      }\n    ) {\n      content\n      work_id\n      user_id\n      id\n      episode_id\n      created_at\n      commenter_name\n      reply_to\n      replied_to_commenter_name\n      user {\n        anonymous\n        id\n      }\n      is_like\n      likes_aggregate {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetRepliesDocument,
     "\n  mutation MutateEpisodeComment(\n    $episode_id: uuid!\n    $content: String!\n    $reply_to: uuid\n    $replied_to_commenter_name: String\n    $commenter_name: String!\n    $ip: String\n  ) {\n    insert_comments_one(\n      object: {\n        episode_id: $episode_id\n        content: $content\n        reply_to: $reply_to\n        replied_to_commenter_name: $replied_to_commenter_name\n        commenter_name: $commenter_name\n        ip: $ip\n      }\n    ) {\n      ...CommentFragment\n    }\n  }\n": types.MutateEpisodeCommentDocument,
     "\n  mutation MutateWorkComment(\n    $work_id: Int!\n    $content: String!\n    $reply_to: uuid\n    $replied_to_commenter_name: String\n    $commenter_name: String!\n    $ip: String\n  ) {\n    insert_comments_one(\n      object: {\n        work_id: $work_id\n        content: $content\n        reply_to: $reply_to\n        replied_to_commenter_name: $replied_to_commenter_name\n        commenter_name: $commenter_name\n        ip: $ip\n      }\n    ) {\n      ...CommentFragment\n    }\n  }\n": types.MutateWorkCommentDocument,
-    "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
-    "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n": types.EpisodeFragmentFragmentDoc,
-    "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
     "\n  query GetTodayEpisodes($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      ...TodayFragment\n    }\n  }\n": types.GetTodayEpisodesDocument,
     "\n  query GetEpisode($id: uuid!) {\n    episodes_by_pk(id: $id) {\n      ...EpisodeFragment\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetEpisodeDocument,
     "\n  query GetLiveIds($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      id\n    }\n  }\n": types.GetLiveIdsDocument,
+    "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
+    "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n": types.EpisodeFragmentFragmentDoc,
+    "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
+    "\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n": types.FragmentWorkFragmentDoc,
+    "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n": types.FragmentEpisodeFragmentDoc,
     "\n  mutation InsertLike($object: likes_insert_input!) {\n    insert_likes_one(\n      object: $object\n      on_conflict: { constraint: likes_user_id_comment_id_key }\n    ) {\n      id\n      user_id\n      comment_id\n    }\n  }\n": types.InsertLikeDocument,
     "\n  mutation DeleteLike($user_id: String!, $comment_id: uuid!) {\n    delete_likes(\n      where: { user_id: { _eq: $user_id }, comment_id: { _eq: $comment_id } }\n    ) {\n      returning {\n        id\n      }\n    }\n  }\n": types.DeleteLikeDocument,
     "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      id\n    }\n  }\n": types.InsertRequestDocument,
-    "\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n": types.FragmentWorkFragmentDoc,
-    "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n": types.FragmentEpisodeFragmentDoc,
     "\n  query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {\n    works(\n      where: {\n        _and: {\n          season_year: { _eq: $year }\n          season_name: { _eq: $season }\n          tid: { _is_null: false }\n        }\n      }\n      limit: $limit\n    ) {\n      ...FragmentWork\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.GetSeasonWorksDocument,
     "\n  query SearchWorks($search: String!, $limit: Int) {\n    search_works(\n      args: { search: $search, _limit: $limit }\n      order_by: { series_title: asc }\n    ) {\n      ...FragmentWork\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.SearchWorksDocument,
     "\n  query GetWorkSeries($id: Int!, $series_id: String!) {\n    works_by_pk(id: $id) {\n      ...FragmentWork\n      episodes(order_by: { number: desc_nulls_last }) {\n        ...FragmentEpisode\n      }\n    }\n    works(\n      where: { _and: { id: { _neq: $id }, series_id: { _eq: $series_id } } }\n      order_by: [{ has_episodes: desc }]\n    ) {\n      ...FragmentWork\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.GetWorkSeriesDocument,
@@ -129,18 +129,6 @@ export function graphql(source: "\n  mutation MutateWorkComment(\n    $work_id: 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"): (typeof documents)["\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n"): (typeof documents)["\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n"): (typeof documents)["\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function graphql(source: "\n  query GetTodayEpisodes($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      ...TodayFragment\n    }\n  }\n"): (typeof documents)["\n  query GetTodayEpisodes($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      ...TodayFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -153,6 +141,26 @@ export function graphql(source: "\n  query GetLiveIds($where: episodes_bool_exp!
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"): (typeof documents)["\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n"): (typeof documents)["\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n"): (typeof documents)["\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n"): (typeof documents)["\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n"): (typeof documents)["\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  mutation InsertLike($object: likes_insert_input!) {\n    insert_likes_one(\n      object: $object\n      on_conflict: { constraint: likes_user_id_comment_id_key }\n    ) {\n      id\n      user_id\n      comment_id\n    }\n  }\n"): (typeof documents)["\n  mutation InsertLike($object: likes_insert_input!) {\n    insert_likes_one(\n      object: $object\n      on_conflict: { constraint: likes_user_id_comment_id_key }\n    ) {\n      id\n      user_id\n      comment_id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -162,14 +170,6 @@ export function graphql(source: "\n  mutation DeleteLike($user_id: String!, $com
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      id\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n"): (typeof documents)["\n  fragment FragmentWork on works {\n    title\n    series_title\n    series_id\n    id\n    has_episodes\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n"): (typeof documents)["\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

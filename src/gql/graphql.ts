@@ -1011,6 +1011,14 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
+export type Daily_Episodes_Ranking_Args = {
+  _limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Daily_Works_Ranking_Args = {
+  _limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
 /** columns and relationships of "episodes" */
 export type Episodes = {
   __typename?: 'episodes';
@@ -2623,6 +2631,14 @@ export type Query_Root = {
   comments_aggregate: Comments_Aggregate;
   /** fetch data from the table: "comments" using primary key columns */
   comments_by_pk?: Maybe<Comments>;
+  /** execute function "daily_episodes_ranking" which returns "episodes" */
+  daily_episodes_ranking: Array<Episodes>;
+  /** execute function "daily_episodes_ranking" and query aggregates on result of table type "episodes" */
+  daily_episodes_ranking_aggregate: Episodes_Aggregate;
+  /** execute function "daily_works_ranking" which returns "works" */
+  daily_works_ranking: Array<Works>;
+  /** execute function "daily_works_ranking" and query aggregates on result of table type "works" */
+  daily_works_ranking_aggregate: Works_Aggregate;
   /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
@@ -2669,6 +2685,10 @@ export type Query_Root = {
   works: Array<Works>;
   /** An aggregate relationship */
   works_aggregate: Works_Aggregate;
+  /** execute function "works_all_ranking" which returns "works" */
+  works_all_ranking: Array<Works>;
+  /** execute function "works_all_ranking" and query aggregates on result of table type "works" */
+  works_all_ranking_aggregate: Works_Aggregate;
   /** fetch data from the table: "works" using primary key columns */
   works_by_pk?: Maybe<Works>;
 };
@@ -2757,6 +2777,46 @@ export type Query_RootComments_AggregateArgs = {
 
 export type Query_RootComments_By_PkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootDaily_Episodes_RankingArgs = {
+  args: Daily_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Query_RootDaily_Episodes_Ranking_AggregateArgs = {
+  args: Daily_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Query_RootDaily_Works_RankingArgs = {
+  args: Daily_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootDaily_Works_Ranking_AggregateArgs = {
+  args: Daily_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
 };
 
 
@@ -2945,6 +3005,26 @@ export type Query_RootWorksArgs = {
 
 
 export type Query_RootWorks_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootWorks_All_RankingArgs = {
+  args: Works_All_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootWorks_All_Ranking_AggregateArgs = {
+  args: Works_All_Ranking_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -3337,6 +3417,14 @@ export type Subscription_Root = {
   comments_by_pk?: Maybe<Comments>;
   /** fetch data from the table in a streaming manner: "comments" */
   comments_stream: Array<Comments>;
+  /** execute function "daily_episodes_ranking" which returns "episodes" */
+  daily_episodes_ranking: Array<Episodes>;
+  /** execute function "daily_episodes_ranking" and query aggregates on result of table type "episodes" */
+  daily_episodes_ranking_aggregate: Episodes_Aggregate;
+  /** execute function "daily_works_ranking" which returns "works" */
+  daily_works_ranking: Array<Works>;
+  /** execute function "daily_works_ranking" and query aggregates on result of table type "works" */
+  daily_works_ranking_aggregate: Works_Aggregate;
   /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
@@ -3393,6 +3481,10 @@ export type Subscription_Root = {
   works: Array<Works>;
   /** An aggregate relationship */
   works_aggregate: Works_Aggregate;
+  /** execute function "works_all_ranking" which returns "works" */
+  works_all_ranking: Array<Works>;
+  /** execute function "works_all_ranking" and query aggregates on result of table type "works" */
+  works_all_ranking_aggregate: Works_Aggregate;
   /** fetch data from the table: "works" using primary key columns */
   works_by_pk?: Maybe<Works>;
   /** fetch data from the table in a streaming manner: "works" */
@@ -3497,6 +3589,46 @@ export type Subscription_RootComments_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Comments_Stream_Cursor_Input>>;
   where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+export type Subscription_RootDaily_Episodes_RankingArgs = {
+  args: Daily_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootDaily_Episodes_Ranking_AggregateArgs = {
+  args: Daily_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootDaily_Works_RankingArgs = {
+  args: Daily_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootDaily_Works_Ranking_AggregateArgs = {
+  args: Daily_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
 };
 
 
@@ -3720,6 +3852,26 @@ export type Subscription_RootWorksArgs = {
 
 
 export type Subscription_RootWorks_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootWorks_All_RankingArgs = {
+  args: Works_All_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootWorks_All_Ranking_AggregateArgs = {
+  args: Works_All_Ranking_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -4216,6 +4368,10 @@ export type Works_Aggregate_Order_By = {
   var_pop?: InputMaybe<Works_Var_Pop_Order_By>;
   var_samp?: InputMaybe<Works_Var_Samp_Order_By>;
   variance?: InputMaybe<Works_Variance_Order_By>;
+};
+
+export type Works_All_Ranking_Args = {
+  _limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** input type for inserting array relation for remote table "works" */
@@ -4765,12 +4921,6 @@ export type MutateWorkCommentMutationVariables = Exact<{
 
 export type MutateWorkCommentMutation = { __typename?: 'mutation_root', insert_comments_one?: { __typename?: 'comments', content: string, work_id?: number | null, user_id?: string | null, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user?: { __typename?: 'users', anonymous: boolean, id: string } | null, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } } | null };
 
-export type WorkFragmentFragment = { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null };
-
-export type EpisodeFragmentFragment = { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } };
-
-export type TodayFragmentFragment = { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, tid?: number | null } };
-
 export type GetTodayEpisodesQueryVariables = Exact<{
   where: Episodes_Bool_Exp;
 }>;
@@ -4791,6 +4941,16 @@ export type GetLiveIdsQueryVariables = Exact<{
 
 
 export type GetLiveIdsQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any }> };
+
+export type WorkFragmentFragment = { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null };
+
+export type EpisodeFragmentFragment = { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } };
+
+export type TodayFragmentFragment = { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, has_prev_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, tid?: number | null } };
+
+export type FragmentWorkFragment = { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null };
+
+export type FragmentEpisodeFragment = { __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null };
 
 export type InsertLikeMutationVariables = Exact<{
   object: Likes_Insert_Input;
@@ -4813,10 +4973,6 @@ export type InsertRequestMutationVariables = Exact<{
 
 
 export type InsertRequestMutation = { __typename?: 'mutation_root', insert_request_works_one?: { __typename?: 'request_works', id: number } | null };
-
-export type FragmentWorkFragment = { __typename?: 'works', title: string, series_title: string, series_id?: string | null, id: number, has_episodes?: boolean | null };
-
-export type FragmentEpisodeFragment = { __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null };
 
 export type GetSeasonWorksQueryVariables = Exact<{
   season: Scalars['String']['input'];
