@@ -13,13 +13,11 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n": types.ChatFragmentFragmentDoc,
     "\n  query GetChatsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    chats_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n      order_by: { comment_time: asc }\n    ) {\n      ...ChatFragment\n    }\n  }\n": types.GetChatsEpisodeDocument,
     "\n  query GetChatsWork(\n    $work_id: Int!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    chats_by_work_id(\n      args: {\n        _work_id: $work_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n      order_by: { comment_time: asc }\n    ) {\n      ...ChatFragment\n    }\n  }\n": types.GetChatsWorkDocument,
     "\n  mutation InsertChat($object: chats_insert_input!) {\n    insert_chats_one(object: $object) {\n      ...ChatFragment\n    }\n  }\n": types.InsertChatDocument,
     "\n  subscription SubscriptionChats(\n    $episode_id: uuid!\n    $initial_created_at: timestamptz!\n  ) {\n    chats_stream(\n      cursor: {\n        initial_value: { created_at: $initial_created_at }\n        ordering: ASC\n      }\n      batch_size: 100\n      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }\n    ) {\n      content\n      work_id\n      user_id\n      comment_time\n      id\n      episode_id\n      created_at\n      commenter_name\n      user {\n        anonymous\n        id\n      }\n    }\n  }\n": types.SubscriptionChatsDocument,
     "\n  query GetChats($episode_id: uuid!) {\n    chats(\n      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }\n      order_by: { comment_time: asc }\n      limit: 100\n    ) {\n      ...ChatFragment\n    }\n  }\n": types.GetChatsDocument,
-    "\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.CommentFragmentFragmentDoc,
     "\n  query GetCommentsEpisode(\n    $episode_id: uuid!\n    $cursor: timestamptz\n    $limit: Int!\n    $order_by: [comments_order_by!]\n  ) {\n    comments(\n      where: {\n        episode_id: { _eq: $episode_id }\n        created_at: { _lt: $cursor }\n        reply_to: { _is_null: true }\n      }\n      order_by: $order_by\n      limit: $limit\n    ) {\n      ...CommentFragment\n    }\n  }\n": types.GetCommentsEpisodeDocument,
     "\n  query GetCommentsEpisodeByLikes(\n    $episode_id: uuid!\n    $cursor: timestamptz\n    $likes_cursor: Int\n    $limit: Int!\n    $order_by: [comments_order_by!]\n  ) {\n    comments(\n      where: {\n        episode_id: { _eq: $episode_id }\n        _and: {\n          created_at: { _lt: $cursor }\n          likes_aggregate: { count: { predicate: { _lte: $likes_cursor } } }\n        }\n        reply_to: { _is_null: true }\n      }\n      order_by: $order_by\n      limit: $limit\n    ) {\n      ...CommentFragment\n    }\n  }\n": types.GetCommentsEpisodeByLikesDocument,
     "\n  query GetLatestEpisodeComment(\n    $episode_id: uuid!\n    $cursor: timestamptz\n    $limit: Int!\n    $order_by: [comments_order_by!]\n  ) {\n    comments(\n      where: {\n        episode_id: { _eq: $episode_id }\n        created_at: { _gt: $cursor }\n        reply_to: { _is_null: true }\n      }\n      order_by: $order_by\n      limit: $limit\n    ) {\n      ...CommentFragment\n    }\n  }\n": types.GetLatestEpisodeCommentDocument,
@@ -32,6 +30,8 @@ const documents = {
     "\n  query GetTodayEpisodes($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      ...TodayFragment\n    }\n  }\n": types.GetTodayEpisodesDocument,
     "\n  query GetEpisode($id: uuid!) {\n    episodes_by_pk(id: $id) {\n      ...EpisodeFragment\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetEpisodeDocument,
     "\n  query GetLiveIds($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      id\n    }\n  }\n": types.GetLiveIdsDocument,
+    "\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n": types.ChatFragmentFragmentDoc,
+    "\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.CommentFragmentFragmentDoc,
     "\n  fragment EpisodeFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n    }\n  }\n": types.EpisodeFragmentFragmentDoc,
     "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
     "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
@@ -64,10 +64,6 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n"): (typeof documents)["\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
 export function graphql(source: "\n  query GetChatsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    chats_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n      order_by: { comment_time: asc }\n    ) {\n      ...ChatFragment\n    }\n  }\n"): (typeof documents)["\n  query GetChatsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    chats_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n      order_by: { comment_time: asc }\n    ) {\n      ...ChatFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -85,10 +81,6 @@ export function graphql(source: "\n  subscription SubscriptionChats(\n    $episo
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetChats($episode_id: uuid!) {\n    chats(\n      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }\n      order_by: { comment_time: asc }\n      limit: 100\n    ) {\n      ...ChatFragment\n    }\n  }\n"): (typeof documents)["\n  query GetChats($episode_id: uuid!) {\n    chats(\n      where: { episode_id: { _eq: $episode_id }, comment_time: { _gte: 0 } }\n      order_by: { comment_time: asc }\n      limit: 100\n    ) {\n      ...ChatFragment\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -137,6 +129,14 @@ export function graphql(source: "\n  query GetEpisode($id: uuid!) {\n    episode
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetLiveIds($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      id\n    }\n  }\n"): (typeof documents)["\n  query GetLiveIds($where: episodes_bool_exp!) {\n    episodes(where: $where, order_by: { start_time: asc }) {\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n"): (typeof documents)["\n  fragment ChatFragment on chats {\n    content\n    work_id\n    user_id\n    comment_time\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment CommentFragment on comments {\n    content\n    work_id\n    user_id\n    id\n    episode_id\n    created_at\n    commenter_name\n    user {\n      anonymous\n      id\n    }\n    reply_count\n    is_like\n    likes_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

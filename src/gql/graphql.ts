@@ -4780,8 +4780,6 @@ export type Works_Variance_Order_By = {
   tid?: InputMaybe<Order_By>;
 };
 
-export type ChatFragmentFragment = { __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null };
-
 export type GetChatsEpisodeQueryVariables = Exact<{
   episode_id: Scalars['uuid']['input'];
   get_limit: Scalars['Int']['input'];
@@ -4823,8 +4821,6 @@ export type GetChatsQueryVariables = Exact<{
 
 
 export type GetChatsQuery = { __typename?: 'query_root', chats: Array<{ __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null }> };
-
-export type CommentFragmentFragment = { __typename?: 'comments', content: string, work_id?: number | null, user_id?: string | null, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user?: { __typename?: 'users', anonymous: boolean, id: string } | null, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } };
 
 export type GetCommentsEpisodeQueryVariables = Exact<{
   episode_id: Scalars['uuid']['input'];
@@ -4941,6 +4937,10 @@ export type GetLiveIdsQueryVariables = Exact<{
 
 
 export type GetLiveIdsQuery = { __typename?: 'query_root', episodes: Array<{ __typename?: 'episodes', id: any }> };
+
+export type ChatFragmentFragment = { __typename?: 'chats', content: string, work_id?: number | null, user_id?: string | null, comment_time: number, id: any, episode_id?: any | null, created_at: any, commenter_name: string, user?: { __typename?: 'users', anonymous: boolean, id: string } | null };
+
+export type CommentFragmentFragment = { __typename?: 'comments', content: string, work_id?: number | null, user_id?: string | null, id: any, episode_id?: any | null, created_at: any, commenter_name: string, reply_count?: any | null, is_like?: boolean | null, user?: { __typename?: 'users', anonymous: boolean, id: string } | null, likes_aggregate: { __typename?: 'likes_aggregate', aggregate?: { __typename?: 'likes_aggregate_fields', count: number } | null } };
 
 export type EpisodeFragmentFragment = { __typename?: 'episodes', id: any, title: string, end_time?: any | null, start_time?: any | null, number: number, has_next_episode: boolean, next_episode_id?: any | null, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } };
 
