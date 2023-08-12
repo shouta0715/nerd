@@ -17,7 +17,7 @@ import { ActiveLink } from "src/components/Elements/ActiveLink";
 
 export const episodeNavigation = [
   {
-    name: "今日放送",
+    name: "今日のアニメ",
     href: "/list/today",
     icon: RssIcon,
     color: "stroke-blue-600",

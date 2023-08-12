@@ -29,6 +29,7 @@ export const AuthModal = () => {
         <Button
           className="mx-auto my-6 shadow-md"
           leftIcon={<GoogleIcon />}
+          loaderClassName="stroke-indigo-600"
           loading={authLoading}
           onClick={async () => {
             setOpen(false);
