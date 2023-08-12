@@ -9,6 +9,8 @@ type GlobalState = {
   setAuthLoading: (authLoading: boolean) => void;
   isDeleteConfirmationOpen: boolean;
   setIsDeleteConfirmationOpen: (flag: boolean) => void;
+  sidebarOpen: boolean;
+  setSidebarOpen: (flag: boolean) => void;
 };
 
 export const useGlobalState = create<GlobalState>((set) => ({
@@ -19,6 +21,8 @@ export const useGlobalState = create<GlobalState>((set) => ({
   isDeleteConfirmationOpen: false,
   setIsDeleteConfirmationOpen: (flag) =>
     set(() => ({ isDeleteConfirmationOpen: flag })),
+  sidebarOpen: false,
+  setSidebarOpen: (flag) => set(() => ({ sidebarOpen: flag })),
 }));
 
 export type CountDownModal = {

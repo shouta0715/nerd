@@ -21,7 +21,7 @@ export const WorkItem: FC<Props> = ({ work, isSeriesPage }) => (
   >
     <div className="mx-auto flex h-full min-h-full flex-col items-center justify-around">
       <div className="flex h-20 w-full items-center justify-center overflow-hidden rounded-t-xl  bg-gray-800 p-3 text-white  md:p-4">
-        <h3 className=" line-clamp-2 text-base font-bold">
+        <h3 className="line-clamp-2 text-base font-bold">
           {work.series_title}
         </h3>
       </div>

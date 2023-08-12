@@ -10,7 +10,7 @@ import { Nerd } from "src/features/pages/nerd";
 import { InternalServerError } from "src/libs/error";
 import { Meta } from "src/libs/meta";
 import { NextSSG, NextSSGPage, TopPage } from "src/libs/next/types";
-import { genBuildData } from "src/utils/server/genBuildData";
+import { genBuildDate } from "src/utils/server/genBuildData";
 
 const Page: NextSSGPage<TopPage> = ({ data, error }) =>
   error ? <SsgError /> : <Nerd {...data} />;
@@ -24,7 +24,7 @@ export const getStaticProps: NextSSG<TopPage> = async () => {
   const todayData = await getTodayEpisodes();
   const seasonData = await getSeasonWorks(12);
   const weeklyData = await getWeeklyWorks(12);
-  const buildDate = genBuildData();
+  const { buildDate } = genBuildDate();
 
   const isNotRegistered = todayData.episodes.some(
     (episode) => episode.start_time === null

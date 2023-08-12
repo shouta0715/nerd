@@ -5,6 +5,9 @@ import { ReactElement, ReactNode } from "react";
 
 import { AutoCompleteData } from "src/features/episodes/types";
 import {
+  GetDailyEpisodeRankingQuery,
+  GetDailyWorkRankingQuery,
+  GetRankingQuery,
   GetSeasonWorksQuery,
   GetTodayEpisodesQuery,
   GetWeeklyWorksQuery,
@@ -41,6 +44,14 @@ export type TopPage = {
 export type ListPage<T> = {
   data: T;
   autoCompleteData: AutoCompleteData[];
+};
+
+export type RankingPage = {
+  ranking: GetRankingQuery;
+  dailyEpisode: GetDailyEpisodeRankingQuery;
+  dailyWork: GetDailyWorkRankingQuery;
+  buildDate: string;
+  totallingDate: string;
 };
 
 export type NextSSG<T> = GetStaticProps<NextSSGResult<T>>;

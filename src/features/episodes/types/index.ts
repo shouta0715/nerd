@@ -1,5 +1,6 @@
 import {
   GetEpisodeQuery,
+  GetRankingQuery,
   GetSeasonWorksQuery,
   GetTodayEpisodesQuery,
 } from "src/gql/graphql";
@@ -20,7 +21,10 @@ export type AutoCompleteData = {
 };
 
 export type GenEpisodePlaceholder = {
-  episode: WorkEpisode | GetEpisodeQuery["episodes_by_pk"];
+  episode:
+    | WorkEpisode
+    | GetEpisodeQuery["episodes_by_pk"]
+    | GetRankingQuery["works_all_ranking"][0]["episodes"][0];
   title?: string;
   work_id?: number;
   series_id?: string | null;

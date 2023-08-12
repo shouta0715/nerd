@@ -28,7 +28,7 @@ export const seasonEpisodesDocument = graphql(`
       }
       limit: $limit
     ) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         ...FragmentEpisode
       }
@@ -39,7 +39,7 @@ export const seasonEpisodesDocument = graphql(`
 export const weeklyWorksDocument = graphql(`
   query GetWeeklyWorks($limit: Int) {
     weekly_works(args: { limit_num: $limit }) {
-      ...FragmentWork
+      ...WorkFragment
       episodes(order_by: { number: desc_nulls_last }, limit: 8) {
         ...FragmentEpisode
       }

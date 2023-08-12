@@ -2,9 +2,9 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 export const Footer: FC = () => (
-  <footer className="border-t bg-white">
+  <footer className="mt-10 border-t bg-white">
     <div className="mx-auto max-w-7xl px-4 py-6 lg:px-6">
-      <div className="mb-4 grid grid-cols-3 gap-y-8">
+      <div className="mb-8 grid grid-cols-2 gap-y-8 md:grid-cols-3">
         <p className="text-center text-xs leading-5 text-gray-500">
           <Link
             className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
