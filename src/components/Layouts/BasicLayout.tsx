@@ -88,16 +88,6 @@ export const DisableAuthLayout = (page: ReactElement) => {
                   Nerd
                 </span>
               </Link>
-              <div className="flex items-center gap-x-8">
-                <p>
-                  <Link
-                    className="text-sm font-medium text-indigo-600 underline hover:text-indigo-500"
-                    href="/usage"
-                  >
-                    使い方
-                  </Link>
-                </p>
-              </div>
             </div>
           </header>
           <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">

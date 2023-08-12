@@ -1,16 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { Fragment } from "react";
-import { twMerge } from "tailwind-merge";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
 import {
   episodeNavigation,
+  generateSliderNavigation,
+  otherNavigation,
   systemNavigation,
   worksNavigation,
-} from "src/components/Layouts/Nav";
+} from "src/components/Layouts/Nav/gengerate";
 import { useGlobalState } from "src/store/global/globalStore";
 
 const DynamicSearchWorksForm = dynamic(() =>
@@ -91,7 +91,7 @@ export const Sidebar = () => {
                   </div>
                   <DynamicSearchWorksForm />
                   <nav className="flex flex-1 flex-col">
-                    <ul className="grid gap-y-8">
+                    <ul className="flex flex-1 flex-col gap-y-7">
                       <li className="-mx-2">
                         <ActiveLink
                           activeClassName="bg-gray-50 text-indigo-600"
@@ -112,89 +112,51 @@ export const Sidebar = () => {
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             エピソード
                           </p>
-                          {episodeNavigation.map((item) => (
-                            <li key={item.name}>
-                              <ActiveLink
-                                activeClassName="bg-gray-50 text-indigo-600"
-                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                                href={item.href}
-                                onTransitionComplete={() =>
-                                  setSidebarOpen(false)
-                                }
-                              >
-                                {() => (
-                                  <>
-                                    <item.icon
-                                      className={twMerge(
-                                        clsx("mr-2 h-full w-6", item.color)
-                                      )}
-                                    />
-                                    {item.name}
-                                  </>
-                                )}
-                              </ActiveLink>
-                            </li>
-                          ))}
+                          {episodeNavigation.map((item) =>
+                            generateSliderNavigation({
+                              item,
+                              onTransitionComplete: () => setSidebarOpen(false),
+                            })
+                          )}
                         </ul>
                       </li>
                       <li>
                         <ul className="-mx-2 ">
                           <p className="mb-1 px-2 text-sm text-gray-500">
-                            エピソード
+                            作品
                           </p>
-                          {worksNavigation.map((item) => (
-                            <li key={item.name}>
-                              <ActiveLink
-                                activeClassName="bg-gray-50 text-indigo-600"
-                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                                href={item.href}
-                                onTransitionComplete={() =>
-                                  setSidebarOpen(false)
-                                }
-                              >
-                                {() => (
-                                  <>
-                                    <item.icon
-                                      className={twMerge(
-                                        clsx("mr-2 h-full w-6", item.color)
-                                      )}
-                                    />
-                                    {item.name}
-                                  </>
-                                )}
-                              </ActiveLink>
-                            </li>
-                          ))}
+                          {worksNavigation.map((item) =>
+                            generateSliderNavigation({
+                              item,
+                              onTransitionComplete: () => setSidebarOpen(false),
+                            })
+                          )}
                         </ul>
                       </li>
                       <li>
                         <ul className="-mx-2 ">
                           <p className="mb-1 px-2 text-sm text-gray-500">
-                            エピソード
+                            システム
                           </p>
-                          {systemNavigation.map((item) => (
-                            <li key={item.name}>
-                              <ActiveLink
-                                activeClassName="bg-gray-50 text-indigo-600"
-                                className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                                href={item.href}
-                                onTransitionComplete={() =>
-                                  setSidebarOpen(false)
-                                }
-                              >
-                                {() => (
-                                  <>
-                                    <item.icon
-                                      className={twMerge(
-                                        clsx("mr-2 h-full w-6", item.color)
-                                      )}
-                                    />
-                                    {item.name}
-                                  </>
-                                )}
-                              </ActiveLink>
-                            </li>
-                          ))}
+                          {systemNavigation.map((item) =>
+                            generateSliderNavigation({
+                              item,
+                              onTransitionComplete: () => setSidebarOpen(false),
+                            })
+                          )}
+                        </ul>
+                      </li>
+                      <li className="mb-6 mt-auto">
+                        <ul className="-mx-2">
+                          <p className="mb-1 px-2 text-sm text-gray-500">
+                            その他
+                          </p>
+                          {otherNavigation.map((item) =>
+                            generateSliderNavigation({
+                              item,
+                              onTransitionComplete: () => setSidebarOpen(false),
+                            })
+                          )}
                         </ul>
                       </li>
                     </ul>
