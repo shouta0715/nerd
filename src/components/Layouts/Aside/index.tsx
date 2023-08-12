@@ -54,7 +54,7 @@ const navList = mockNavigation.map((item) => (
 
 export const Aside = () => (
   <aside className="w-full border-b border-b-slate-200 pb-4 md:w-56 md:border-b-0">
-    <div className="sticky top-8 mx-auto  md:max-h-screen md:overflow-y-auto">
+    <div className="sticky top-8 mx-auto md:max-h-screen md:overflow-y-auto">
       <div className="grid grid-cols-2 gap-x-2 md:hidden">{navList}</div>
       <div className="sticky top-8 mx-auto hidden md:block md:max-h-screen md:space-y-4 md:overflow-y-auto">
         <DynamicSearchWorksForm />
