@@ -53,13 +53,15 @@ const navList = mockNavigation.map((item) => (
 ));
 
 export const Aside = () => (
-  <aside className="w-full border-b border-b-slate-200 pb-4 md:w-56 md:border-b-0">
-    <div className="sticky top-8 mx-auto md:max-h-screen md:overflow-y-auto">
-      <div className="grid grid-cols-2 gap-x-2 md:hidden">{navList}</div>
-      <div className="sticky top-8 mx-auto hidden md:block md:max-h-screen md:space-y-4 md:overflow-y-auto">
+  <>
+    <aside className="grid grid-cols-2 gap-x-2 border-b pb-4 md:hidden">
+      {navList}
+    </aside>
+    <aside className="sticky top-8 hidden h-[calc(80vh-2rem)] w-56 overflow-y-auto md:block">
+      <div className="gap-y-8">
         <DynamicSearchWorksForm />
         <Nav />
       </div>
-    </div>
-  </aside>
+    </aside>
+  </>
 );
