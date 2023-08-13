@@ -37,7 +37,7 @@ export const SearchWorks = () => {
   if (isPending) {
     return (
       <div className="flex flex-col">
-        <div className="mx-auto  mb-4 grid  w-full max-w-md  place-items-center font-bold">
+        <div className="mx-auto  mb-4 grid w-full max-w-md place-items-center text-lg  font-bold md:text-xl">
           {q ? `${q}で検索中...` : "検索中..."}
         </div>
         <Skeleton theme="work" />
