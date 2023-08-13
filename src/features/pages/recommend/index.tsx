@@ -76,9 +76,9 @@ export const RecommendPage = () => {
               </h4>
               <div className="grid gap-y-4">
                 <p className="leading-8 text-gray-700">{item.description}</p>
-                <p className="">
+                <p className="flex items-start">
                   <a
-                    className="inline-flex items-center gap-x-1 text-gray-600  underline hover:text-gray-500"
+                    className="inline-flex min-w-max items-center gap-x-1 text-gray-600  underline hover:text-gray-500"
                     href={item.official_url}
                     rel="noreferrer"
                     target="_blank"

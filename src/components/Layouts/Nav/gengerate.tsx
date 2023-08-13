@@ -63,7 +63,7 @@ export const systemNavigation = [
     name: "使い方",
     href: "/usage",
     icon: BeginnerIcon,
-    color: "fill-teal-600",
+    color: "fill-teal-600 mr-3 ml-0.5",
   },
   {
     name: "よくある質問",
