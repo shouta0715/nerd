@@ -8,7 +8,6 @@ import {
   ChevronRightIcon,
   KeyIcon,
   NewspaperIcon,
-  AcademicCapIcon,
   HeartIcon,
   CircleStackIcon,
 } from "@heroicons/react/24/outline";
@@ -63,7 +62,7 @@ export const systemNavigation = [
     name: "使い方",
     href: "/usage",
     icon: BeginnerIcon,
-    color: "fill-teal-600 mr-3 ml-0.5",
+    color: "fill-teal-600 ml-0.5 mr-1",
   },
   {
     name: "よくある質問",
@@ -86,12 +85,12 @@ export const otherNavigation = [
     icon: NewspaperIcon,
     color: "stroke-gray-600",
   },
-  {
-    name: "サイトについて",
-    href: "/about",
-    icon: AcademicCapIcon,
-    color: "stroke-gray-600",
-  },
+  // {
+  //   name: "サイトについて",
+  //   href: "/about",
+  //   icon: AcademicCapIcon,
+  //   color: "stroke-gray-600",
+  // },
   {
     name: "データについて",
     href: "/data",
@@ -116,10 +115,10 @@ export const generateSliderNavigation = <T extends typeof episodeNavigation>({
         onTransitionComplete={onTransitionComplete}
       >
         {() => (
-          <>
-            <item.icon className={clsx("mr-2 h-full w-6", item.color)} />
+          <div className="flex items-center gap-x-2">
+            <item.icon className={clsx("h-full w-6", item.color)} />
             {item.name}
-          </>
+          </div>
         )}
       </ActiveLink>
     </li>
