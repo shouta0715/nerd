@@ -10,6 +10,7 @@ import {
   NewspaperIcon,
   AcademicCapIcon,
   HeartIcon,
+  CircleStackIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
@@ -89,6 +90,12 @@ export const otherNavigation = [
     name: "サイトについて",
     href: "/about",
     icon: AcademicCapIcon,
+    color: "stroke-gray-600",
+  },
+  {
+    name: "データについて",
+    href: "/data",
+    icon: CircleStackIcon,
     color: "stroke-gray-600",
   },
 ];
