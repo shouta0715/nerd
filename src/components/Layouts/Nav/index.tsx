@@ -23,7 +23,7 @@ const otherNavList = otherNavigation.map((item) => generateNavList(item));
 
 export const Nav = () => (
   <nav className="flex h-full flex-col gap-y-7">
-    <div className="mt-3">{home}</div>
+    <div className="mt-7">{home}</div>
     <div>
       <p className="mb-1 text-sm text-gray-500">エピソード</p>
       <div className="grid gap-y-2">{episodeNavList}</div>
