@@ -94,7 +94,7 @@ export const SearchWorks = () => {
                 {noEpisodesData?.map((work) => (
                   <li
                     key={work.id}
-                    className="group relative flex animate-fadeUp flex-col items-center space-x-2 rounded-2xl  border border-solid  border-slate-200 bg-white bg-white/70 p-3  shadow-lg ring-1 ring-gray-900/5 md:p-4"
+                    className="group relative flex animate-fadeUp flex-col items-center space-x-2 rounded-2xl  border border-solid  border-slate-200 p-3  shadow-lg ring-1 ring-gray-900/5 md:p-4"
                   >
                     <span className="mb-2.5 inline-block flex-1 font-bold">
                       {work.series_title}
