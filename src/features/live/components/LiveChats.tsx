@@ -42,7 +42,7 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
   return (
     <>
       <div className="flex w-full flex-1 flex-col gap-y-1.5 p-2 md:p-4">
-        <p className="flex max-w-full justify-center break-words text-sm text-dimmed">
+        <p className="flex max-w-full justify-center break-words text-xs text-dimmed md:text-sm">
           {isSubscription && "リアルタイムで更新されます"}
           {mode === "finish" && "終了しました"}
           {(mode === "down" ||

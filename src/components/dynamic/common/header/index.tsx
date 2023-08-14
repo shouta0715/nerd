@@ -41,7 +41,7 @@ export const Header: FC<Props> = ({ title, sub_title, number, id }) => {
       </div>
       <div className="mx-auto mt-1.5 flex max-w-max flex-col md:mt-3">
         <Text
-          className={`mx-auto mb-1.5 px-10 text-sm font-bold text-indigo-600 transition-colors duration-300 md:text-base ${
+          className={`mx-auto mb-1.5 px-10 text-xs font-bold text-indigo-600 transition-colors duration-300 md:text-base ${
             mode === "up" ? "text-orange-600" : "text-indigo-600"
           }`}
         >

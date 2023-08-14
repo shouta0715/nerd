@@ -25,7 +25,7 @@ export const LiveChatInput: FC<Props> = ({ mode, episode_id, time }) => {
   const genPlaceholder = () => {
     if (mode === "finish") return "終了しました";
 
-    return `コメントを入力してください`;
+    return `コメントを入力`;
   };
 
   return (

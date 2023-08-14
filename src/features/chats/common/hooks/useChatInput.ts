@@ -19,7 +19,7 @@ export const useChatInput = ({ setContent }: Props) => {
   const timeDisabled = time === 0 || time === downTime;
 
   const getPlaceholder = () => {
-    if (authLoading) return "ロード中です";
+    if (authLoading) return "ロード中...";
 
     if (timeDisabled) return "再生してください";
 

@@ -43,7 +43,7 @@ export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
       {response === "sp" && (
         <button
           aria-label="タイマーを開く"
-          className="h-6 w-6 transition-transform active:translate-y-0.5 lg:hidden"
+          className="h-4 w-4 transition-transform active:translate-y-0.5 md:h-6 md:w-6 lg:hidden"
           onClick={() => setIsTimerOpen(!isTimerOpen)}
         >
           <TimerIcon />
@@ -51,7 +51,7 @@ export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
       )}
       <Text
         className={clsx(
-          "inline-block text-sm font-bold transition-colors duration-300 md:text-base",
+          "inline-block text-xs font-bold transition-colors duration-300 md:text-base",
           mode === "up" ? " text-orange-600" : " text-indigo-600",
           !isChat && "opacity-50"
         )}
@@ -69,7 +69,7 @@ export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
       </Text>
       <Text
         className={clsx(
-          "inline-block text-sm font-bold transition-colors duration-300 md:text-base ",
+          "inline-block text-xs font-bold transition-colors duration-300 md:text-base ",
           isChat && "opacity-50",
           mode === "up" ? " text-orange-600" : " text-indigo-600"
         )}
@@ -90,7 +90,7 @@ export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
       {response === "sp" && showNext && (
         <button
           aria-label="エピソードメニューを開く"
-          className="h-7 w-7 transition-transform active:translate-y-0.5 lg:hidden"
+          className="h-5 w-5 transition-transform active:translate-y-0.5 md:h-6 md:w-6 lg:hidden"
           onClick={() => setIsNextOpen(!isNextOpen)}
         >
           <ListBulletIcon />

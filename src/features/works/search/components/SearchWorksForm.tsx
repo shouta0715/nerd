@@ -7,7 +7,7 @@ export const SearchWorksForm = () => {
   const { submitHandler, search, setSearch } = useSearch();
 
   return (
-    <form className="w-full space-x-4 md:flex" onSubmit={submitHandler}>
+    <form className="w-full md:flex" onSubmit={submitHandler}>
       <div className="relative flex-1">
         <MagnifyingGlassIcon className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 stroke-indigo-500" />
         <Input
@@ -22,7 +22,7 @@ export const SearchWorksForm = () => {
           onClick={() => setSearch("")}
           type="button"
         >
-          <XMarkIcon className=" h-3 w-3  cursor-pointer fill-white stroke-indigo-500 stroke-2" />
+          <XMarkIcon className="h-3 w-3  cursor-pointer stroke-indigo-500 stroke-2" />
         </button>
       </div>
     </form>

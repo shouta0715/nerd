@@ -1,5 +1,7 @@
 import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { CheckIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import clsx from "clsx";
 import React, { Fragment } from "react";
 import { Loader } from "src/components/Elements/Loader";
 
@@ -26,7 +28,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
   return (
     <Listbox disabled={isLoading} onChange={onChange} value={value}>
       <div>
-        <Listbox.Button className="relative cursor-pointer  rounded-lg bg-indigo-600  py-2 pl-3 pr-12 text-left text-sm font-semibold text-white shadow-md">
+        <Listbox.Button className="relative cursor-pointer  rounded-lg bg-indigo-600  py-2  pl-3 pr-8 text-left text-xs font-semibold text-white shadow-md md:pr-12 md:text-sm">
           <span className="block truncate">{buttonLabel(value)}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             {isLoading ? (
@@ -39,7 +41,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
             ) : (
               <ChevronDownIcon
                 aria-hidden="true"
-                className="h-5 w-5 text-white"
+                className="h-4 w-4 text-white md:h-5 md:w-5"
               />
             )}
           </span>
@@ -55,24 +57,28 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
               <Listbox.Option
                 key={option.id}
                 className={({ active }) =>
-                  `relative cursor-pointer select-none py-2 pl-10 pr-4 ${
+                  clsx(
+                    "relative cursor-pointer select-none py-2 pl-7 pr-4 md:pl-10",
                     active ? "bg-indigo-100 text-indigo-900" : "text-gray-900"
-                  }`
+                  )
                 }
                 value={option.id}
               >
                 {({ selected }) => (
                   <>
                     <span
-                      className={`block truncate ${
+                      className={`block truncate text-xs md:text-base ${
                         selected ? "font-medium" : "font-normal"
                       }`}
                     >
                       {option.name}
                     </span>
                     {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
-                        <CheckIcon aria-hidden="true" className="h-5 w-5" />
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-2 text-indigo-600">
+                        <CheckIcon
+                          aria-hidden="true"
+                          className="h-4 w-4 md:h-5 md:w-5"
+                        />
                       </span>
                     ) : null}
                   </>

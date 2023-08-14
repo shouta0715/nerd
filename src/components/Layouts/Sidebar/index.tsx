@@ -80,7 +80,6 @@ export const Sidebar = () => {
                     </button>
                   </div>
                 </Transition.Child>
-                {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white px-6 pb-2">
                   <div className="flex h-16 shrink-0 items-center">
                     <Link className="text-3xl font-black" href="/">
@@ -101,7 +100,7 @@ export const Sidebar = () => {
                         >
                           {() => (
                             <>
-                              <HomeIcon className="mr-2 h-full w-6 stroke-gray-600" />
+                              <HomeIcon className="h-full w-6 stroke-gray-600" />
                               ホーム
                             </>
                           )}
