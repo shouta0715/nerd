@@ -36,14 +36,14 @@ export const Nav: FC<Props> = ({ isChat, response, showNext = true }) => {
           ? "sticky top-0 z-20 justify-between border-b bg-white/80 px-2 lg:hidden"
           : "",
         response === "sp" && !showNext
-          ? "after:h-7 after:w-7 after:content-['']"
+          ? "after:h-5 after:w-5 after:content-[''] after:md:h-5 after:md:w-5"
           : ""
       )}
     >
       {response === "sp" && (
         <button
           aria-label="タイマーを開く"
-          className="h-4 w-4 transition-transform active:translate-y-0.5 md:h-6 md:w-6 lg:hidden"
+          className="h-5 w-5 transition-transform active:translate-y-0.5 md:h-6 md:w-6 lg:hidden"
           onClick={() => setIsTimerOpen(!isTimerOpen)}
         >
           <TimerIcon />
