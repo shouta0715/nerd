@@ -45,7 +45,7 @@ export const Work: FC = () => {
         {isPlaceholderData ? (
           <Skeleton theme="work" />
         ) : (
-          <ul className="grid grid-cols-2  rounded-2xl border border-solid  border-slate-200 bg-white/70  p-3 shadow-lg ring-1 ring-gray-900/5 md:grid-cols-3  md:p-4  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ">
+          <ul className="grid grid-cols-2  rounded-2xl border border-solid  border-slate-200 p-3 shadow-lg ring-1 ring-gray-900/5 md:grid-cols-3  md:p-4  lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 ">
             {data?.works_by_pk?.episodes.map((episode) => (
               <WorkEpisodeItem
                 key={episode.id}
