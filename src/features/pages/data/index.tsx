@@ -37,6 +37,7 @@ const mocks = [
         <a
           className="inline-block px-2 text-indigo-600 underline hover:text-indigo-500"
           href="https://mediaarts-db.bunka.go.jp/"
+          target="_blank"
         >
           （https://mediaarts-db.bunka.go.jp/）
         </a>
@@ -45,6 +46,7 @@ const mocks = [
         <a
           className="inline-block px-2 text-indigo-600 underline hover:text-indigo-500"
           href="https://mediaarts-db.bunka.go.jp/"
+          target="_blank"
         >
           （https://mediaarts-db.bunka.go.jp/）
         </a>
