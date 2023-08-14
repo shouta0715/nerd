@@ -31,6 +31,10 @@
   animation: spinner_YpZS 1.5s ease-in-out infinite;
 }
 
+/* * {
+  outline: red solid 1px;
+} */
+
 @keyframes spinner_zKoa {
   100% {
     transform: rotate(360deg);
