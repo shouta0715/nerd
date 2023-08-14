@@ -28,7 +28,7 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
         response === "lg" && "hidden flex-1 justify-around lg:flex",
 
         response === "sp"
-          ? "before:content-['' before:h-5] sticky top-0 z-20 justify-between border-b bg-white/80 px-2 before:w-5 before:md:h-7 before:md:w-7 lg:hidden"
+          ? "sticky top-0 z-20 justify-between border-b bg-white/80 px-2 before:h-5 before:w-5 before:content-[''] before:md:h-6 before:md:w-6 lg:hidden"
           : ""
       )}
     >
@@ -72,7 +72,7 @@ export const Nav: FC<Props> = ({ isChat, response, mode }) => {
       {response === "sp" && (
         <button
           aria-label="エピソードメニューを開く"
-          className="h-5 w-5 transition-transform active:translate-y-0.5 md:h-7 md:w-7 lg:hidden"
+          className="h-5 w-5 transition-transform active:translate-y-0.5 md:h-6 md:w-6 lg:hidden"
           onClick={() => setIsNextOpen(!isNextOpen)}
         >
           <ListBulletIcon />
