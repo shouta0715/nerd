@@ -81,17 +81,18 @@ export const DataPage = () => {
           </a>
           からお願いします。
         </p>
-        <ol className="mt-10 grid list-inside list-decimal gap-y-10 leading-7 text-gray-900">
-          {mocks.map((mock) => (
+        <ol className="mt-10 grid gap-y-10 leading-7 text-gray-900">
+          {mocks.map((mock, i) => (
             <li key={mock.id}>
-              <span className="mb-2 inline-block font-semibold">
-                {mock.title}
-              </span>
+              <p className="mb-2 flex">
+                <span>{i + 1}.</span>
+                <span className="font-semibold">{mock.title}</span>
+              </p>
               <div className="grid gap-y-2 pl-5">
                 <p>{mock.description}</p>
-                <p>
+                <p className="">
                   <a
-                    className="inline-flex items-center gap-x-2 text-indigo-600 underline hover:text-indigo-500"
+                    className="inline-flex items-start gap-x-2 text-indigo-600 underline hover:text-indigo-500"
                     href={mock.link}
                     target="_blank"
                   >
