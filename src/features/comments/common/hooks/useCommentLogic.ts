@@ -37,7 +37,7 @@ export const useCommentLogic = () => {
     if (inputState.replied_to_commenter_name)
       return `${inputState.replied_to_commenter_name}さんに返信`;
 
-    return `コメントを入力してください`;
+    return `コメントを入力`;
   };
 
   return {
