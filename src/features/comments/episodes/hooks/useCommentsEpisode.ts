@@ -39,6 +39,13 @@ export const useCommentsEpisode = (episode_id: string) => {
 
     const { cursor } = prevData.pageParams[0];
 
+    await queryClient.invalidateQueries({
+      queryKey: ["comments", { episode_id, order }],
+    });
+    await queryClient.invalidateQueries({
+      queryKey: ["replies"],
+    });
+
     const latestData =
       await queryClient.fetchQuery<GetLatestEpisodeCommentQuery>({
         queryFn: () =>
