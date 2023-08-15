@@ -1,4 +1,4 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
 import { Username, usernameSchema } from "src/components/Form/Menu/types";
 import { useNotificationState } from "src/components/Notification/store";
@@ -8,14 +8,8 @@ export const useMenuForm = () => {
   const [user, setUser] = useUserState((state) => [state.user, state.setUser]);
   const onNotification = useNotificationState((state) => state.onShow);
 
-  const {
-    register,
-    handleSubmit,
-
-    reset,
-    watch,
-  } = useForm<Username>({
-    resolver: zodResolver(usernameSchema),
+  const { register, handleSubmit, reset, watch } = useForm<Username>({
+    resolver: valibotResolver(usernameSchema),
   });
 
   const onInValid = () => {

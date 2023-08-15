@@ -28,6 +28,13 @@ export const getTimeButton = ({
   active,
   time,
 }: Props): Result => {
+  if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
+    return {
+      color: "bg-gray-600",
+      text: "もう一度見る",
+    };
+  }
+
   if (isChangeTime) {
     return {
       color: "bg-green-600",
@@ -53,13 +60,6 @@ export const getTimeButton = ({
     return {
       color: "bg-blue-600",
       text: "開始",
-    };
-  }
-
-  if (time === timeToSecond(mode === "up" ? MaxTime : downInitialTime)) {
-    return {
-      color: "bg-gray-600",
-      text: "もう一度見る",
     };
   }
 

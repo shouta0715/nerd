@@ -79,8 +79,14 @@ export const resetTime = (set: Set) => {
 };
 
 export const oneMore = (set: Set, get: Get) => {
-  return () =>
-    set({ time: InitialTimerCount, downInitialTime: get().downInitialTime });
+  return () => {
+    const { mode, downInitialTime } = get();
+
+    set({
+      time: mode === "up" ? InitialTimerCount : downInitialTime,
+      downInitialTime,
+    });
+  };
 };
 
 export const getTime = (get: Get) => {
