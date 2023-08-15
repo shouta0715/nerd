@@ -44,6 +44,13 @@ export const useCommentsWork = (work_id: number) => {
 
     const { cursor } = prevData.pageParams[0];
 
+    await queryClient.invalidateQueries({
+      queryKey: ["comments", { work_id, order }],
+    });
+    await queryClient.invalidateQueries({
+      queryKey: ["replies"],
+    });
+
     const latestData =
       await queryClient.fetchQuery<GetLatestEpisodeCommentQuery>({
         queryFn: () =>
