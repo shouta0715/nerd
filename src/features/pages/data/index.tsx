@@ -90,14 +90,14 @@ export const DataPage = () => {
               </p>
               <div className="grid gap-y-2 pl-5">
                 <p>{mock.description}</p>
-                <p className="">
+                <p>
                   <a
-                    className="inline-flex items-start gap-x-2 text-indigo-600 underline hover:text-indigo-500"
+                    className="inline-flex gap-x-2 text-indigo-600 underline hover:text-indigo-500"
                     href={mock.link}
                     target="_blank"
                   >
                     {mock.title}
-                    <ArrowTopRightOnSquareIcon className="h-5 w-5" />
+                    <ArrowTopRightOnSquareIcon className="mt-1 h-5 w-5" />
                   </a>
                 </p>
               </div>
