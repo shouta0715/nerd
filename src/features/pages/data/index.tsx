@@ -85,7 +85,7 @@ export const DataPage = () => {
           {mocks.map((mock, i) => (
             <li key={mock.id}>
               <p className="mb-2 flex">
-                <span>{i + 1}.</span>
+                <span className="mr-1.5">{i + 1}.</span>
                 <span className="font-semibold">{mock.title}</span>
               </p>
               <div className="grid gap-y-2 pl-5">
