@@ -19,11 +19,11 @@ export const LayoutProvider = ({ children }: { children: React.ReactNode }) => (
   <Provider>{children}</Provider>
 );
 
-export const BasicLayout = (page: ReactElement) => (
+export const BasicLayout = (page: ReactElement, notice = false) => (
   <LayoutProvider>
     <div className="flex w-full">
       <div className="flex min-h-screen max-w-full flex-1 flex-col">
-        <Header />
+        <Header notice={notice} />
         <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
           <Background />
           <Aside />
@@ -39,10 +39,10 @@ export const BasicLayout = (page: ReactElement) => (
   </LayoutProvider>
 );
 
-export const BasicLayoutOnlyHeader = (page: ReactElement) => (
+export const BasicLayoutOnlyHeader = (page: ReactElement, notice = false) => (
   <LayoutProvider>
     <div className="flex min-h-screen max-w-full flex-1 flex-col">
-      <Header />
+      <Header notice={notice} />
       <div className="mx-auto flex h-full w-full max-w-7xl flex-1  flex-col items-start gap-x-8  px-0   lg:flex-row lg:px-8">
         <Background />
         {page}
@@ -52,11 +52,11 @@ export const BasicLayoutOnlyHeader = (page: ReactElement) => (
   </LayoutProvider>
 );
 
-export const BasicListLayout = (page: ReactElement) => (
+export const BasicListLayout = (page: ReactElement, notice = false) => (
   <LayoutProvider>
     <div className="flex w-full">
       <div className="flex min-h-screen max-w-full flex-1 flex-col">
-        <Header />
+        <Header notice={notice} />
         <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
           <Background />
           <Aside />

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { GetStaticProps, NextPage } from "next";
 import { AppProps } from "next/app";
-import { ReactElement, ReactNode } from "react";
+import { ReactNode, ReactElement } from "react";
 
 import { AutoCompleteData } from "src/features/episodes/types";
 import {
@@ -15,7 +15,7 @@ import {
 import { Error } from "src/libs/error";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout: (page: ReactElement) => ReactNode;
+  getLayout: (page: ReactElement, notice?: boolean) => ReactNode;
   getTitle?: (page: ReactElement, pageProps: P) => ReactElement;
 };
 
@@ -52,6 +52,11 @@ export type RankingPage = {
   dailyWork: GetDailyWorkRankingQuery;
   buildDate: string;
   totallingDate: string;
+};
+
+export type NoticePage = {
+  markdowns: string[];
+  buildDate: string;
 };
 
 export type NextSSG<T> = GetStaticProps<NextSSGResult<T>>;
