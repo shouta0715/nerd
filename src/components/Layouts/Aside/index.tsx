@@ -1,7 +1,7 @@
 import { ChevronRightIcon, LightBulbIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { FC } from "react";
 
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
@@ -52,7 +52,11 @@ const navList = mockNavigation.map((item) => (
   </ActiveLink>
 ));
 
-export const Aside = () => (
+type Props = {
+  notice?: boolean;
+};
+
+export const Aside: FC<Props> = ({ notice }) => (
   <>
     <aside className="grid grid-cols-2 gap-x-2 border-b pb-4 md:hidden">
       {navList}
@@ -60,7 +64,7 @@ export const Aside = () => (
     <aside className="sticky top-8 hidden h-[calc(80vh-2rem)] w-56 overflow-y-auto md:block">
       <div className="gap-y-8">
         <DynamicSearchWorksForm />
-        <Nav />
+        <Nav notice={notice} />
       </div>
     </aside>
   </>

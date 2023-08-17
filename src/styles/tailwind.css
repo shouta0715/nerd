@@ -56,3 +56,9 @@
     stroke-dashoffset: -59;
   }
 }
+
+@layer components {
+  .markdown a {
+    @apply text-indigo-600 hover:text-indigo-500 hover:underline;
+  }
+}

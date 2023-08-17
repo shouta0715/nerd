@@ -1,14 +1,18 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { useGlobalState } from "src/store/global/globalStore";
 
 const DynamicSidebar = dynamic(() =>
   import("src/components/Layouts/Sidebar").then((mod) => mod.Sidebar)
 );
 
-export const DisableAuthHeader = () => {
+type Props = {
+  notice?: boolean;
+};
+
+export const DisableAuthHeader: FC<Props> = ({ notice }) => {
   const setSidebarOpen = useGlobalState((state) => state.setSidebarOpen);
 
   return (
@@ -32,7 +36,7 @@ export const DisableAuthHeader = () => {
           </div>
         </div>
       </header>
-      <DynamicSidebar />
+      <DynamicSidebar notice={notice} />
     </>
   );
 };

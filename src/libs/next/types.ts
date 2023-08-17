@@ -55,7 +55,13 @@ export type RankingPage = {
 };
 
 export type NoticePage = {
-  markdowns: string[];
+  markdowns: {
+    title: string;
+    content: string;
+    date: string;
+    category: string;
+    importance: "high" | "middle" | "low";
+  }[];
   buildDate: string;
 };
 

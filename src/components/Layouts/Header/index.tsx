@@ -28,7 +28,6 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ notice }) => {
-  console.log("notice", notice);
   const user = useUserState((state) => state.user);
   const authLoading = useGlobalState((state) => state.authLoading);
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
@@ -89,7 +88,7 @@ export const Header: FC<Props> = ({ notice }) => {
           </div>
         </div>
       </header>
-      <DynamicSidebar />
+      <DynamicSidebar notice={notice} />
     </>
   );
 };

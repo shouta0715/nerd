@@ -26,7 +26,7 @@ export const BasicLayout = (page: ReactElement, notice = false) => (
         <Header notice={notice} />
         <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
           <Background />
-          <Aside />
+          <Aside notice={notice} />
           <main className="flex w-full flex-1 flex-col pt-10 md:pt-0">
             {page}
             <DynamicSearchButton />
@@ -59,7 +59,7 @@ export const BasicListLayout = (page: ReactElement, notice = false) => (
         <Header notice={notice} />
         <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
           <Background />
-          <Aside />
+          <Aside notice={notice} />
           <main className="flex w-full flex-1 flex-col pt-10 md:pt-0">
             {page}
             <DynamicSearchButton />
@@ -76,15 +76,15 @@ export const OnlyProviderLayout = (page: ReactElement) => (
   <LayoutProvider>{page}</LayoutProvider>
 );
 
-export const DisableAuthLayout = (page: ReactElement) => {
+export const DisableAuthLayout = (page: ReactElement, notice = false) => {
   return (
     <Provider authDisabled>
       <div className="flex w-full">
         <div className="flex min-h-screen max-w-full flex-1 flex-col">
-          <DisableAuthHeader />
+          <DisableAuthHeader notice={notice} />
           <div className="mx-auto flex w-full max-w-7xl flex-1  flex-col gap-x-8 bg-white/20 px-4 py-4 sm:px-6  md:flex-row md:py-10 lg:px-8">
             <Background />
-            <Aside />
+            <Aside notice={notice} />
             <main className="flex w-full flex-1 flex-col pt-10 md:pt-0">
               {page}
               <DynamicSearchButton />
