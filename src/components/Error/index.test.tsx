@@ -6,6 +6,7 @@ import {
   GraphQLError,
   InternalServerError,
   NotFoundError,
+  SomeThingWentWrongError,
   UnauthorizedError,
 } from "src/libs/error";
 
@@ -69,6 +70,14 @@ describe("Error Page", () => {
     const { getByText } = setup(GraphQLError);
 
     const linkElement = getByText("404");
+
+    expect(linkElement).toBeInTheDocument();
+  });
+
+  test("その他のエラーの場合は、Something went wrongが表示される", () => {
+    const { getByText } = setup(SomeThingWentWrongError);
+
+    const linkElement = getByText("Something went wrong");
 
     expect(linkElement).toBeInTheDocument();
   });

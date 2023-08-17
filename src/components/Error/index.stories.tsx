@@ -6,6 +6,7 @@ import {
   GraphQLError,
   InternalServerError,
   NotFoundError,
+  SomeThingWentWrongError,
   UnauthorizedError,
 } from "src/libs/error";
 
@@ -54,5 +55,11 @@ export const UnAuthorized: Story = {
 export const BadRequest: Story = {
   args: {
     error: new BadRequestError(),
+  },
+};
+
+export const SomethingWentWrong: Story = {
+  args: {
+    error: new SomeThingWentWrongError(),
   },
 };
