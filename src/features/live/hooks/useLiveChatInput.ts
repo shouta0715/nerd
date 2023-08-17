@@ -5,7 +5,6 @@ import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
-import { getIp } from "src/utils/client/getIp";
 
 type Props = {
   time: Time;
@@ -16,7 +15,7 @@ type Props = {
 export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
   const [value, setValue] = useState<string>("");
   const user = useUserState((state) => state.user);
-  const { insetChat } = useMutateLiveChat();
+  const { insetChat, getIpAddress } = useMutateLiveChat();
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
   const [ipLoading, setIpLoading] = useState(false);
@@ -27,7 +26,7 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
       if (!value.trim() || authLoading) return;
 
       setIpLoading(true);
-      const ip = await getIp();
+      const ip = await getIpAddress();
       const object = {
         episode_id,
         content: value,

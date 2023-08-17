@@ -5,12 +5,14 @@ import {
   InsertChatMutation,
   InsertChatMutationVariables,
 } from "src/gql/graphql";
+import { useIp } from "src/hooks/useIp";
 import { client } from "src/libs/client/graphql";
 import { Error } from "src/libs/error";
 import { getQueryKey } from "src/utils/client/getQueryKey";
 
 export const useMutateLiveChat = () => {
   const queryClient = useQueryClient();
+  const { getIpAddress } = useIp();
 
   const insetChat = useMutation<
     InsertChatMutation,
@@ -57,5 +59,6 @@ export const useMutateLiveChat = () => {
 
   return {
     insetChat,
+    getIpAddress,
   };
 };

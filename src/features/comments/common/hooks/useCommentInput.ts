@@ -1,6 +1,7 @@
 import { useMutateComment } from "src/features/comments/common/api/useMutateComment";
 
 import { useInputCommentState } from "src/features/comments/common/store";
+import { useIp } from "src/hooks/useIp";
 import { useUserState } from "src/store/user/userState";
 
 export const useCommentInput = (id: string | number) => {
@@ -12,6 +13,7 @@ export const useCommentInput = (id: string | number) => {
     ]);
   const user = useUserState((state) => state.user);
   const { insertEpisodeComment, insertWorkComment } = useMutateComment(id);
+  const { getIpAddress } = useIp();
 
   return {
     content,
@@ -21,5 +23,6 @@ export const useCommentInput = (id: string | number) => {
     reset,
     insertEpisodeComment,
     insertWorkComment,
+    getIpAddress,
   };
 };

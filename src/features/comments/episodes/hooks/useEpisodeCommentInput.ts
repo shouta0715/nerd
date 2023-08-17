@@ -3,7 +3,6 @@ import { useNotificationState } from "src/components/Notification/store";
 import { useCommentInput } from "src/features/comments/common/hooks/useCommentInput";
 
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/client/getIp";
 
 export const useEpisodeCommentInput = (episode_id: string) => {
   const {
@@ -13,6 +12,7 @@ export const useEpisodeCommentInput = (episode_id: string) => {
     user,
     reset,
     insertEpisodeComment,
+    getIpAddress,
   } = useCommentInput(episode_id);
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
@@ -24,7 +24,7 @@ export const useEpisodeCommentInput = (episode_id: string) => {
       if (!content.trim() || authLoading) return;
 
       setIpLoading(true);
-      const ip = await getIp();
+      const ip = await getIpAddress();
 
       await insertEpisodeComment.mutateAsync({
         episode_id,
