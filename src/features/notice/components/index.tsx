@@ -38,7 +38,7 @@ export const Notice: FC<NoticePage> = ({ markdowns, buildDate }) => {
                 <h3 className="mt-3 font-semibold leading-6 text-gray-900">
                   <p>{markdown.title}</p>
                 </h3>
-                <div className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                <div className="mt-5 text-sm leading-6 text-gray-600">
                   <ReactMarkdown
                     className="markdown"
                     remarkPlugins={[remarkGfm]}
