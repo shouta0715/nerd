@@ -61,6 +61,7 @@ export type NoticePage = {
     date: string;
     category: string;
     importance: "high" | "middle" | "low";
+    draft: boolean;
   }[];
   buildDate: string;
 };

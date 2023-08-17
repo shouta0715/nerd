@@ -28,9 +28,12 @@ export const getMarkdowns = () => {
         date: parsed.data.date,
         category: parsed.data.category,
         importance: parsed.data.importance,
+        draft: parsed.data.draft,
       };
     });
   });
 
-  return markdowns;
+  const filtered = markdowns.filter((markdown) => !markdown.draft);
+
+  return filtered;
 };
