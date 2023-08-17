@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { useCommentInput } from "src/features/comments/common/hooks/useCommentInput";
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/client/getIp";
 
 export const useWorkCommentInput = (work_id: number) => {
   const {
@@ -12,6 +11,7 @@ export const useWorkCommentInput = (work_id: number) => {
     user,
     reset,
     insertWorkComment,
+    getIpAddress,
   } = useCommentInput(work_id);
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
@@ -24,7 +24,7 @@ export const useWorkCommentInput = (work_id: number) => {
       if (!content.trim() || authLoading) return;
 
       setIpLoading(true);
-      const ip = await getIp();
+      const ip = await getIpAddress();
 
       await insertWorkComment.mutateAsync({
         work_id,

@@ -5,7 +5,6 @@ import { useNotificationState } from "src/components/Notification/store";
 import { useSubmitChat } from "src/features/chats/common/hooks/useSubmitChat";
 import { useMutateChatEpisode } from "src/features/chats/episodes/api/useMutateChatEpisode";
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/client/getIp";
 
 type Args = {
   episode_id: string;
@@ -13,7 +12,7 @@ type Args = {
 
 export const useSubmitChatEpisode = ({ episode_id }: Args) => {
   const { insertChat } = useMutateChatEpisode();
-  const { setValue, user, getTime, value } = useSubmitChat();
+  const { setValue, user, getTime, value, getIpAddress } = useSubmitChat();
   const onNotification = useNotificationState((state) => state.onShow);
   const authLoading = useGlobalState((state) => state.authLoading);
   const [ipLoading, setIpLoading] = useState(false);
@@ -24,7 +23,7 @@ export const useSubmitChatEpisode = ({ episode_id }: Args) => {
       if (!value.trim() || authLoading) return;
       setIpLoading(true);
 
-      const ip = await getIp();
+      const ip = await getIpAddress();
 
       const object = {
         episode_id,

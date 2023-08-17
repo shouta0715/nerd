@@ -3,7 +3,6 @@ import { useNotificationState } from "src/components/Notification/store";
 import { useSubmitChat } from "src/features/chats/common/hooks/useSubmitChat";
 import { useMutateChatWork } from "src/features/chats/works/api/useMutateChatWork";
 import { useGlobalState } from "src/store/global/globalStore";
-import { getIp } from "src/utils/client/getIp";
 
 type Args = {
   work_id: number;
@@ -11,7 +10,7 @@ type Args = {
 
 export const useSubmitWork = ({ work_id }: Args) => {
   const { insertChat } = useMutateChatWork();
-  const { setValue, user, getTime, value } = useSubmitChat();
+  const { setValue, user, getTime, value, getIpAddress } = useSubmitChat();
   const authLoading = useGlobalState((state) => state.authLoading);
   const onNotification = useNotificationState((state) => state.onShow);
   const [ipLoading, setIpLoading] = useState(false);
@@ -21,7 +20,7 @@ export const useSubmitWork = ({ work_id }: Args) => {
     try {
       if (!value.trim() || authLoading) return;
       setIpLoading(true);
-      const ip = await getIp();
+      const ip = await getIpAddress();
 
       const object = {
         work_id,
