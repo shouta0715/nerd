@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { BellIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React, { FC, Fragment } from "react";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
 import {
   episodeNavigation,
@@ -19,7 +19,11 @@ const DynamicSearchWorksForm = dynamic(() =>
   )
 );
 
-export const Sidebar = () => {
+type Props = {
+  notice?: boolean;
+};
+
+export const Sidebar: FC<Props> = ({ notice }) => {
   const [sidebarOpen, setSidebarOpen] = useGlobalState((state) => [
     state.sidebarOpen,
     state.setSidebarOpen,
@@ -91,20 +95,38 @@ export const Sidebar = () => {
                   <DynamicSearchWorksForm />
                   <nav className="flex flex-1 flex-col">
                     <ul className="flex flex-1 flex-col gap-y-7">
-                      <li className="-mx-2">
-                        <ActiveLink
-                          activeClassName="bg-gray-50 text-indigo-600"
-                          className="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                          href="/"
-                          onTransitionComplete={() => setSidebarOpen(false)}
-                        >
-                          {() => (
-                            <>
-                              <HomeIcon className="h-full w-6 stroke-gray-600" />
-                              ホーム
-                            </>
-                          )}
-                        </ActiveLink>
+                      <li>
+                        <ul className="-mx-2 gap-y-1">
+                          {generateSliderNavigation({
+                            item: {
+                              name: "ホーム",
+                              href: "/",
+                              icon: HomeIcon,
+                              color: "stroke-gray-600",
+                            },
+                            onTransitionComplete: () => setSidebarOpen(false),
+                          })}
+                          <li>
+                            <ActiveLink
+                              activeClassName="bg-gray-50 text-indigo-600"
+                              className="group relative flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                              href="/notice"
+                              onTransitionComplete={() => setSidebarOpen(false)}
+                            >
+                              {() => (
+                                <>
+                                  <span className="relative">
+                                    <BellIcon className="h-full w-6 stroke-gray-600" />
+                                    {notice && (
+                                      <span className="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-600 ring-2 ring-white" />
+                                    )}
+                                  </span>
+                                  お知らせ
+                                </>
+                              )}
+                            </ActiveLink>
+                          </li>
+                        </ul>
                       </li>
                       <li>
                         <ul className="-mx-2">
@@ -133,7 +155,7 @@ export const Sidebar = () => {
                         </ul>
                       </li>
                       <li>
-                        <ul className="-mx-2 ">
+                        <ul className="-mx-2">
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             システム
                           </p>

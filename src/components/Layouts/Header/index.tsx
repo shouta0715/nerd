@@ -1,7 +1,7 @@
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { Avatar } from "src/components/Elements/Avatar";
 import { Button } from "src/components/Elements/Button";
 import { Image } from "src/components/Elements/Image";
@@ -23,8 +23,11 @@ const DynamicPopoverButton = dynamic(() =>
 const DynamicSidebar = dynamic(() =>
   import("src/components/Layouts/Sidebar").then((mod) => mod.Sidebar)
 );
+type Props = {
+  notice?: boolean;
+};
 
-export const Header = () => {
+export const Header: FC<Props> = ({ notice }) => {
   const user = useUserState((state) => state.user);
   const authLoading = useGlobalState((state) => state.authLoading);
   const changeIsOpenModal = useGlobalState((state) => state.setIsOpenModal);
@@ -85,7 +88,7 @@ export const Header = () => {
           </div>
         </div>
       </header>
-      <DynamicSidebar />
+      <DynamicSidebar notice={notice} />
     </>
   );
 };
