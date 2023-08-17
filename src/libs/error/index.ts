@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 export const errors = {
+  0: { message: "Some Thing Went Wrong" },
   200: { message: "GraphQL Error" },
   400: { message: "Bad Request" },
   401: { message: "Unauthorized" },
@@ -19,6 +20,16 @@ export type Error = {
   status: ErrorType;
   message: ErrorsMessage;
 };
+
+export class SomeThingWentWrongError extends Error {
+  message: ErrorsMessage;
+  status: ErrorType;
+  constructor() {
+    super();
+    this.message = errors[0].message;
+    this.status = 0;
+  }
+}
 
 export class HttpError extends Error {
   message: ErrorsMessage;

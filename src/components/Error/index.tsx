@@ -7,6 +7,7 @@ import {
   GraphQLError,
   InternalServerError,
   NotFoundError,
+  SomeThingWentWrongError,
   UnauthorizedError,
 } from "src/libs/error";
 
@@ -38,7 +39,7 @@ const errorHandle = (error: Error) => {
     return <ErrorPage {...error} />;
   }
 
-  return <ErrorPage {...new BadRequestError()} />;
+  return <ErrorPage {...new SomeThingWentWrongError()} />;
 };
 
 export const Error = ({ error }: FallbackProps) => {

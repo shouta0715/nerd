@@ -10,6 +10,10 @@ import { Footer } from "src/components/Layouts/Footer";
 import { Error } from "src/libs/error";
 
 const messages = {
+  0: {
+    title: "Something went wrong",
+    message: "何か問題が発生しました。ページをリロードしてみてください。",
+  },
   400: {
     title: "Bad Request",
     message:
@@ -80,9 +84,16 @@ export const ErrorPage = ({ status }: Error) => (
   <div className="bg-white">
     <main className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
       <div className="mx-auto mt-20 max-w-2xl text-center sm:mt-24">
-        <p className="text-base font-semibold leading-8 text-red-600">
-          {status === 200 ? 404 : status}
-        </p>
+        {status === 0 ? (
+          <p className="text-base font-semibold leading-8 text-red-600">
+            何かがうまくいかなかったようです。
+          </p>
+        ) : (
+          <p className="text-base font-semibold leading-8 text-red-600">
+            {status === 200 ? 404 : status}
+          </p>
+        )}
+
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
           {messages[status].title}
         </h1>
