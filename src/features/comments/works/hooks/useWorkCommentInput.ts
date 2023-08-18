@@ -37,7 +37,7 @@ export const useWorkCommentInput = (work_id: number) => {
       reset();
     } catch (error) {
       onNotification({
-        title: "コメントの投稿に失敗しました",
+        title: "コメントの投稿できませんでした。",
         type: "error",
         message: "再度お試しください",
       });

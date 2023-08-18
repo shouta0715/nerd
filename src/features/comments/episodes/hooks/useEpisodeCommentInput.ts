@@ -37,7 +37,7 @@ export const useEpisodeCommentInput = (episode_id: string) => {
       reset();
     } catch (error) {
       onNotification({
-        title: "コメントの投稿に失敗しました",
+        title: "コメントの投稿できませんでした。",
         type: "error",
         message: "再度お試しください",
       });
