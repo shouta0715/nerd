@@ -69,7 +69,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
         if (errorTimeout.current) clearTimeout(errorTimeout.current);
         errorTimeout.current = setTimeout(() => {
           onNotification({
-            title: "リアルタイム接続に失敗しました",
+            title: "リアルタイム接続できませんでした。",
             message: "右下のボタンを押すと、最新のコメントを読み込めます",
             type: "error",
           });
@@ -145,7 +145,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           errorTimeout.current = setTimeout(() => {
             if (isWsError) return;
             onNotification({
-              title: "リアルタイム接続に失敗しました",
+              title: "リアルタイム接続できませんでした。",
               message: "右下のボタンを押すと、最新のコメントを読み込めます",
               type: "error",
             });
@@ -210,7 +210,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       setPrevPageNation(newPageNation);
     } catch (_) {
       onNotification({
-        title: "データ取得に失敗しました。",
+        title: "データ取得できませんでした。",
         message: "通信環境の良いところで再度お試しください。",
         type: "error",
       });

@@ -40,7 +40,7 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
       setValue("");
     } catch (error) {
       onNotification({
-        title: "コメントの投稿に失敗しました",
+        title: "コメントの投稿できませんでした。",
         type: "error",
         message: "再度お試しください",
       });

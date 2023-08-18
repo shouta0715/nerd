@@ -36,7 +36,7 @@ export const useRequest = () => {
       reset();
     } catch (error) {
       onShow({
-        title: "エラーが発生しました。",
+        title: "送信できませんでした。",
         type: "error",
         message: "時間をおいて再度リクエストをお願いします。",
       });
