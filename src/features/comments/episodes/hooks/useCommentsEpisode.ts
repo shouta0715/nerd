@@ -21,7 +21,7 @@ export const useCommentsEpisode = (episode_id: string) => {
   const { ref } = useInView({
     root: null,
     onChange: (inView) => {
-      if (isFetchingNextPage || !inView) return;
+      if (isFetchingNextPage || !inView || !hasNextPage) return;
 
       fetchNextPage();
     },

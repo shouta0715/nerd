@@ -26,7 +26,7 @@ export const useCommentsWork = (work_id: number) => {
   const { ref } = useInView({
     root: null,
     onChange: (inView) => {
-      if (isFetchingNextPage || !inView) return;
+      if (isFetchingNextPage || !inView || !hasNextPage) return;
       fetchNextPage();
     },
     threshold: 1.0,
