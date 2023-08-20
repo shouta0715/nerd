@@ -1,8 +1,8 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
 import { useNotificationState } from "src/components/Notification/store";
-import { useMutateRequest } from "src/features/request/api/useMutateRequest";
-import { Request, RequestSchema } from "src/features/request/types";
+import { useMutateRequest } from "src/features/request/common/api/useMutateRequest";
+import { Request, RequestSchema } from "src/features/request/common/types";
 
 export const useRequestForm = () => {
   const { mutateAsync, isPending } = useMutateRequest();

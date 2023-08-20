@@ -3,7 +3,7 @@ import useEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { RequestForm } from "src/components/Form/Request";
 import { Notification } from "src/components/Notification";
-import { handleRequest } from "src/features/request/mocks/msw";
+import { handleRequest } from "src/features/request/common/mocks/msw";
 import { useUserState } from "src/store/user/userState";
 import { userData } from "src/tests/mocks/fixture";
 import { QueryClientWrapper } from "src/tests/provider";
