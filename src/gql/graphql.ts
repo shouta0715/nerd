@@ -2121,6 +2121,10 @@ export type Mutation_Root = {
   delete_request_works?: Maybe<Request_Works_Mutation_Response>;
   /** delete single row from the table: "request_works" */
   delete_request_works_by_pk?: Maybe<Request_Works>;
+  /** delete data from the table: "status" */
+  delete_status?: Maybe<Status_Mutation_Response>;
+  /** delete single row from the table: "status" */
+  delete_status_by_pk?: Maybe<Status>;
   /** delete data from the table: "users" */
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
@@ -2153,6 +2157,10 @@ export type Mutation_Root = {
   insert_request_works?: Maybe<Request_Works_Mutation_Response>;
   /** insert a single row into the table: "request_works" */
   insert_request_works_one?: Maybe<Request_Works>;
+  /** insert data into the table: "status" */
+  insert_status?: Maybe<Status_Mutation_Response>;
+  /** insert a single row into the table: "status" */
+  insert_status_one?: Maybe<Status>;
   /** insert data into the table: "users" */
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
@@ -2197,6 +2205,12 @@ export type Mutation_Root = {
   update_request_works_by_pk?: Maybe<Request_Works>;
   /** update multiples rows of table: "request_works" */
   update_request_works_many?: Maybe<Array<Maybe<Request_Works_Mutation_Response>>>;
+  /** update data of the table: "status" */
+  update_status?: Maybe<Status_Mutation_Response>;
+  /** update single row of the table: "status" */
+  update_status_by_pk?: Maybe<Status>;
+  /** update multiples rows of table: "status" */
+  update_status_many?: Maybe<Array<Maybe<Status_Mutation_Response>>>;
   /** update data of the table: "users" */
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
@@ -2281,6 +2295,18 @@ export type Mutation_RootDelete_Request_WorksArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Request_Works_By_PkArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_StatusArgs = {
+  where: Status_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Status_By_PkArgs = {
+  value: Scalars['String']['input'];
 };
 
 
@@ -2389,6 +2415,20 @@ export type Mutation_RootInsert_Request_WorksArgs = {
 export type Mutation_RootInsert_Request_Works_OneArgs = {
   object: Request_Works_Insert_Input;
   on_conflict?: InputMaybe<Request_Works_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_StatusArgs = {
+  objects: Array<Status_Insert_Input>;
+  on_conflict?: InputMaybe<Status_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Status_OneArgs = {
+  object: Status_Insert_Input;
+  on_conflict?: InputMaybe<Status_On_Conflict>;
 };
 
 
@@ -2553,6 +2593,26 @@ export type Mutation_RootUpdate_Request_Works_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_StatusArgs = {
+  _set?: InputMaybe<Status_Set_Input>;
+  where: Status_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Status_By_PkArgs = {
+  _set?: InputMaybe<Status_Set_Input>;
+  pk_columns: Status_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Status_ManyArgs = {
+  updates: Array<Status_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_UsersArgs = {
   _set?: InputMaybe<Users_Set_Input>;
   where: Users_Bool_Exp;
@@ -2671,6 +2731,12 @@ export type Query_Root = {
   search_works: Array<Works>;
   /** execute function "search_works" and query aggregates on result of table type "works" */
   search_works_aggregate: Works_Aggregate;
+  /** fetch data from the table: "status" */
+  status: Array<Status>;
+  /** fetch aggregated fields from the table: "status" */
+  status_aggregate: Status_Aggregate;
+  /** fetch data from the table: "status" using primary key columns */
+  status_by_pk?: Maybe<Status>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -2952,6 +3018,29 @@ export type Query_RootSearch_Works_AggregateArgs = {
 };
 
 
+export type Query_RootStatusArgs = {
+  distinct_on?: InputMaybe<Array<Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Status_Order_By>>;
+  where?: InputMaybe<Status_Bool_Exp>;
+};
+
+
+export type Query_RootStatus_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Status_Order_By>>;
+  where?: InputMaybe<Status_Bool_Exp>;
+};
+
+
+export type Query_RootStatus_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
 export type Query_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -3046,10 +3135,13 @@ export type Replies_Args = {
 /** columns and relationships of "request_works" */
 export type Request_Works = {
   __typename?: 'request_works';
+  approval_status: Status_Enum;
   created_at: Scalars['timestamptz']['output'];
   detail?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   official_url?: Maybe<Scalars['String']['output']>;
+  /** An object relationship */
+  statusByStatus: Status;
   /** An object relationship */
   user?: Maybe<Users>;
   user_id?: Maybe<Scalars['String']['output']>;
@@ -3135,10 +3227,12 @@ export type Request_Works_Bool_Exp = {
   _and?: InputMaybe<Array<Request_Works_Bool_Exp>>;
   _not?: InputMaybe<Request_Works_Bool_Exp>;
   _or?: InputMaybe<Array<Request_Works_Bool_Exp>>;
+  approval_status?: InputMaybe<Status_Enum_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   detail?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   official_url?: InputMaybe<String_Comparison_Exp>;
+  statusByStatus?: InputMaybe<Status_Bool_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   user_id?: InputMaybe<String_Comparison_Exp>;
   work_title?: InputMaybe<String_Comparison_Exp>;
@@ -3157,10 +3251,12 @@ export type Request_Works_Inc_Input = {
 
 /** input type for inserting data into table "request_works" */
 export type Request_Works_Insert_Input = {
+  approval_status?: InputMaybe<Status_Enum>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   official_url?: InputMaybe<Scalars['String']['input']>;
+  statusByStatus?: InputMaybe<Status_Obj_Rel_Insert_Input>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   user_id?: InputMaybe<Scalars['String']['input']>;
   work_title?: InputMaybe<Scalars['String']['input']>;
@@ -3226,10 +3322,12 @@ export type Request_Works_On_Conflict = {
 
 /** Ordering options when selecting data from "request_works". */
 export type Request_Works_Order_By = {
+  approval_status?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   detail?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   official_url?: InputMaybe<Order_By>;
+  statusByStatus?: InputMaybe<Status_Order_By>;
   user?: InputMaybe<Users_Order_By>;
   user_id?: InputMaybe<Order_By>;
   work_title?: InputMaybe<Order_By>;
@@ -3242,6 +3340,8 @@ export type Request_Works_Pk_Columns_Input = {
 
 /** select columns of table "request_works" */
 export enum Request_Works_Select_Column {
+  /** column name */
+  ApprovalStatus = 'approval_status',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -3258,6 +3358,7 @@ export enum Request_Works_Select_Column {
 
 /** input type for updating data in table "request_works" */
 export type Request_Works_Set_Input = {
+  approval_status?: InputMaybe<Status_Enum>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -3309,6 +3410,7 @@ export type Request_Works_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Request_Works_Stream_Cursor_Value_Input = {
+  approval_status?: InputMaybe<Status_Enum>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   detail?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
@@ -3330,6 +3432,8 @@ export type Request_Works_Sum_Order_By = {
 
 /** update columns of table "request_works" */
 export enum Request_Works_Update_Column {
+  /** column name */
+  ApprovalStatus = 'approval_status',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -3389,6 +3493,178 @@ export type Request_Works_Variance_Order_By = {
 export type Search_Works_Args = {
   _limit?: InputMaybe<Scalars['Int']['input']>;
   search?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** columns and relationships of "status" */
+export type Status = {
+  __typename?: 'status';
+  /** An array relationship */
+  request_works: Array<Request_Works>;
+  /** An aggregate relationship */
+  request_works_aggregate: Request_Works_Aggregate;
+  value: Scalars['String']['output'];
+};
+
+
+/** columns and relationships of "status" */
+export type StatusRequest_WorksArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+
+/** columns and relationships of "status" */
+export type StatusRequest_Works_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Request_Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Request_Works_Order_By>>;
+  where?: InputMaybe<Request_Works_Bool_Exp>;
+};
+
+/** aggregated selection of "status" */
+export type Status_Aggregate = {
+  __typename?: 'status_aggregate';
+  aggregate?: Maybe<Status_Aggregate_Fields>;
+  nodes: Array<Status>;
+};
+
+/** aggregate fields of "status" */
+export type Status_Aggregate_Fields = {
+  __typename?: 'status_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Status_Max_Fields>;
+  min?: Maybe<Status_Min_Fields>;
+};
+
+
+/** aggregate fields of "status" */
+export type Status_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Status_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "status". All fields are combined with a logical 'AND'. */
+export type Status_Bool_Exp = {
+  _and?: InputMaybe<Array<Status_Bool_Exp>>;
+  _not?: InputMaybe<Status_Bool_Exp>;
+  _or?: InputMaybe<Array<Status_Bool_Exp>>;
+  request_works?: InputMaybe<Request_Works_Bool_Exp>;
+  request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Bool_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "status" */
+export enum Status_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  StatusPkey = 'status_pkey'
+}
+
+export enum Status_Enum {
+  Approved = 'APPROVED',
+  Pending = 'PENDING',
+  Rejected = 'REJECTED'
+}
+
+/** Boolean expression to compare columns of type "status_enum". All fields are combined with logical 'AND'. */
+export type Status_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Status_Enum>;
+  _in?: InputMaybe<Array<Status_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Status_Enum>;
+  _nin?: InputMaybe<Array<Status_Enum>>;
+};
+
+/** input type for inserting data into table "status" */
+export type Status_Insert_Input = {
+  request_works?: InputMaybe<Request_Works_Arr_Rel_Insert_Input>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Status_Max_Fields = {
+  __typename?: 'status_max_fields';
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Status_Min_Fields = {
+  __typename?: 'status_min_fields';
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "status" */
+export type Status_Mutation_Response = {
+  __typename?: 'status_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Status>;
+};
+
+/** input type for inserting object relation for remote table "status" */
+export type Status_Obj_Rel_Insert_Input = {
+  data: Status_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Status_On_Conflict>;
+};
+
+/** on_conflict condition type for table "status" */
+export type Status_On_Conflict = {
+  constraint: Status_Constraint;
+  update_columns?: Array<Status_Update_Column>;
+  where?: InputMaybe<Status_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "status". */
+export type Status_Order_By = {
+  request_works_aggregate?: InputMaybe<Request_Works_Aggregate_Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: status */
+export type Status_Pk_Columns_Input = {
+  value: Scalars['String']['input'];
+};
+
+/** select columns of table "status" */
+export enum Status_Select_Column {
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "status" */
+export type Status_Set_Input = {
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "status" */
+export type Status_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Status_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Status_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "status" */
+export enum Status_Update_Column {
+  /** column name */
+  Value = 'value'
+}
+
+export type Status_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Status_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Status_Bool_Exp;
 };
 
 export type Subscription_Root = {
@@ -3465,6 +3741,14 @@ export type Subscription_Root = {
   search_works: Array<Works>;
   /** execute function "search_works" and query aggregates on result of table type "works" */
   search_works_aggregate: Works_Aggregate;
+  /** fetch data from the table: "status" */
+  status: Array<Status>;
+  /** fetch aggregated fields from the table: "status" */
+  status_aggregate: Status_Aggregate;
+  /** fetch data from the table: "status" using primary key columns */
+  status_by_pk?: Maybe<Status>;
+  /** fetch data from the table in a streaming manner: "status" */
+  status_stream: Array<Status>;
   /** fetch data from the table: "users" */
   users: Array<Users>;
   /** fetch aggregated fields from the table: "users" */
@@ -3789,6 +4073,36 @@ export type Subscription_RootSearch_Works_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Works_Order_By>>;
   where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootStatusArgs = {
+  distinct_on?: InputMaybe<Array<Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Status_Order_By>>;
+  where?: InputMaybe<Status_Bool_Exp>;
+};
+
+
+export type Subscription_RootStatus_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Status_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Status_Order_By>>;
+  where?: InputMaybe<Status_Bool_Exp>;
+};
+
+
+export type Subscription_RootStatus_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootStatus_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Status_Stream_Cursor_Input>>;
+  where?: InputMaybe<Status_Bool_Exp>;
 };
 
 
@@ -4950,6 +5264,8 @@ export type RankingEpisodeFragmentFragment = { __typename?: 'episodes', id: any,
 
 export type DailyEpisodeFragmentFragment = { __typename?: 'episodes', id: any, title: string, start_time?: any | null, number: number, end_time?: any | null, has_next_episode: boolean, next_episode_id?: any | null };
 
+export type RequestFragmentFragment = { __typename?: 'request_works', id: number, approval_status: Status_Enum, detail?: string | null, official_url?: string | null, user_id?: string | null, work_title: string };
+
 export type WorkFragmentFragment = { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null };
 
 export type FragmentEpisodeFragment = { __typename?: 'episodes', title: string, start_time?: any | null, number: number, id: any, has_next_episode: boolean, next_episode_id?: any | null, end_time?: any | null };
@@ -4993,7 +5309,26 @@ export type InsertRequestMutationVariables = Exact<{
 }>;
 
 
-export type InsertRequestMutation = { __typename?: 'mutation_root', insert_request_works_one?: { __typename?: 'request_works', id: number } | null };
+export type InsertRequestMutation = { __typename?: 'mutation_root', insert_request_works_one?: { __typename?: 'request_works', id: number, approval_status: Status_Enum, detail?: string | null, official_url?: string | null, user_id?: string | null, work_title: string } | null };
+
+export type GetRequestsQueryVariables = Exact<{
+  user_id: Scalars['String']['input'];
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+}>;
+
+
+export type GetRequestsQuery = { __typename?: 'query_root', request_works: Array<{ __typename?: 'request_works', id: number, approval_status: Status_Enum, detail?: string | null, official_url?: string | null, user_id?: string | null, work_title: string }>, request_works_aggregate: { __typename?: 'request_works_aggregate', aggregate?: { __typename?: 'request_works_aggregate_fields', count: number } | null } };
+
+export type GetRequestByStatusQueryVariables = Exact<{
+  status: Status_Enum;
+  user_id: Scalars['String']['input'];
+  limit: Scalars['Int']['input'];
+  offset: Scalars['Int']['input'];
+}>;
+
+
+export type GetRequestByStatusQuery = { __typename?: 'query_root', request_works: Array<{ __typename?: 'request_works', id: number, approval_status: Status_Enum, detail?: string | null, official_url?: string | null, user_id?: string | null, work_title: string }>, request_works_aggregate: { __typename?: 'request_works_aggregate', aggregate?: { __typename?: 'request_works_aggregate_fields', count: number } | null } };
 
 export type GetSeasonWorksQueryVariables = Exact<{
   season: Scalars['String']['input'];
@@ -5047,6 +5382,7 @@ export const EpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"ki
 export const TodayFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TodayFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"has_prev_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}},{"kind":"Field","name":{"kind":"Name","value":"tid"}}]}}]}}]} as unknown as DocumentNode<TodayFragmentFragment, unknown>;
 export const RankingEpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RankingEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<RankingEpisodeFragmentFragment, unknown>;
 export const DailyEpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}}]} as unknown as DocumentNode<DailyEpisodeFragmentFragment, unknown>;
+export const RequestFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}}]}}]} as unknown as DocumentNode<RequestFragmentFragment, unknown>;
 export const WorkFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<WorkFragmentFragment, unknown>;
 export const FragmentEpisodeFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FragmentEpisode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}}]}}]} as unknown as DocumentNode<FragmentEpisodeFragment, unknown>;
 export const GetChatsEpisodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetChatsEpisode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"chats_by_episode_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_episode_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"get_limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"comment_time"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChatFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ChatFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"chats"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"work_id"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"comment_time"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"commenter_name"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anonymous"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<GetChatsEpisodeQuery, GetChatsEpisodeQueryVariables>;
@@ -5071,7 +5407,9 @@ export const DeleteLikeDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const GetRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRanking"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"works_all_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"comments_aggregate"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"count"},"value":{"kind":"EnumValue","value":"desc"}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RankingEpisodeFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RankingEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetRankingQuery, GetRankingQueryVariables>;
 export const GetDailyEpisodeRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyEpisodeRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"daily_episodes_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DailyEpisodeFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetDailyEpisodeRankingQuery, GetDailyEpisodeRankingQueryVariables>;
 export const GetDailyWorkRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyWorkRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"daily_works_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetDailyWorkRankingQuery, GetDailyWorkRankingQueryVariables>;
-export const InsertRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"request_works_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_request_works_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<InsertRequestMutation, InsertRequestMutationVariables>;
+export const InsertRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"request_works_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_request_works_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}}]}}]} as unknown as DocumentNode<InsertRequestMutation, InsertRequestMutationVariables>;
+export const GetRequestsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRequests"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"request_works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"request_works_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}}]}}]} as unknown as DocumentNode<GetRequestsQuery, GetRequestsQueryVariables>;
+export const GetRequestByStatusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRequestByStatus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"status"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"status_enum"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"request_works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"approval_status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"request_works_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"approval_status"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"status"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}}]}}]} as unknown as DocumentNode<GetRequestByStatusQuery, GetRequestByStatusQueryVariables>;
 export const GetSeasonWorksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSeasonWorks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"season"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"year"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_and"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"season_year"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"year"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"season_name"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"season"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"tid"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_is_null"},"value":{"kind":"BooleanValue","value":false}}]}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"number"},"value":{"kind":"EnumValue","value":"desc_nulls_last"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"8"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FragmentEpisode"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FragmentEpisode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}}]}}]} as unknown as DocumentNode<GetSeasonWorksQuery, GetSeasonWorksQueryVariables>;
 export const SearchWorksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"SearchWorks"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"search"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"search_works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"search"},"value":{"kind":"Variable","name":{"kind":"Name","value":"search"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"series_title"},"value":{"kind":"EnumValue","value":"asc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"number"},"value":{"kind":"EnumValue","value":"desc_nulls_last"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"8"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FragmentEpisode"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FragmentEpisode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}}]}}]} as unknown as DocumentNode<SearchWorksQuery, SearchWorksQueryVariables>;
 export const GetWorkSeriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWorkSeries"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"series_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"works_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"number"},"value":{"kind":"EnumValue","value":"desc_nulls_last"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FragmentEpisode"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_and"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_neq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"series_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"series_id"}}}]}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"has_episodes"},"value":{"kind":"EnumValue","value":"desc"}}]}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"number"},"value":{"kind":"EnumValue","value":"desc_nulls_last"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"8"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FragmentEpisode"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FragmentEpisode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}}]}}]} as unknown as DocumentNode<GetWorkSeriesQuery, GetWorkSeriesQueryVariables>;
