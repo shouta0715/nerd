@@ -47,7 +47,7 @@ export const Pagination: FC<Props> = ({ baseUrl, total }) => {
               <Link
                 key={page}
                 className={clsx(
-                  "relative inline-flex items-center rounded-md px-4 py-2 text-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+                  "relative inline-flex items-center rounded-md px-4 py-2 text-sm ring-1 ring-inset ring-gray-300  focus:outline-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
                   currentPage === page
                     ? "bg-indigo-600 text-white"
                     : "hover:bg-gray-50"
@@ -76,16 +76,18 @@ export const Pagination: FC<Props> = ({ baseUrl, total }) => {
             </button>
           </nav>
         </div>
-        <div className="flex text-sm text-gray-700">
-          <p>
-            計<span className="px-2 font-futura">1</span>〜
-            <span className="px-2 font-futura">{max}</span>
-            ページ
-          </p>
-          <p className="pl-2">
-            <span className="px-2 font-futura">10</span>件ずつ表示中
-          </p>
-        </div>
+        {max > 1 && (
+          <div className="flex text-sm text-gray-700">
+            <p>
+              計<span className="px-2 font-futura">1</span>〜
+              <span className="px-2 font-futura">{max}</span>
+              ページ
+            </p>
+            <p className="pl-2">
+              <span className="px-2 font-futura">10</span>件ずつ表示中
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

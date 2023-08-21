@@ -9,7 +9,7 @@ export const RequestForm = () => {
   const user = useUserState((state) => state.user);
 
   return (
-    <form className="mt-10 space-y-4" onSubmit={onSubmitHandler}>
+    <form className="grid gap-y-8" onSubmit={onSubmitHandler}>
       <div>
         <label
           className="mb-1 inline-block text-sm md:text-base"
