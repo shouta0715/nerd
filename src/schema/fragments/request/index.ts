@@ -8,5 +8,6 @@ export const RequestFragment = gql`
     official_url
     user_id
     work_title
+    created_at
   }
 `;
