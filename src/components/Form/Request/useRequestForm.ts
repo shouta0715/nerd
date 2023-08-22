@@ -5,7 +5,9 @@ import { useMutateRequest } from "src/features/request/common/api/useMutateReque
 import { Request, RequestSchema } from "src/features/request/common/types";
 
 export const useRequestForm = () => {
-  const { mutateAsync, isPending } = useMutateRequest();
+  const {
+    insertRequest: { mutateAsync, isPending },
+  } = useMutateRequest();
   const onShow = useNotificationState((state) => state.onShow);
   const {
     register,

@@ -8,6 +8,14 @@ export const requestInsertDocument = graphql(`
   }
 `);
 
+export const requestDeleteDocument = graphql(`
+  mutation DeleteRequest($id: Int!) {
+    delete_request_works_by_pk(id: $id) {
+      id
+    }
+  }
+`);
+
 export const requestGetDocument = graphql(`
   query GetRequests($user_id: String!, $limit: Int!, $offset: Int!) {
     request_works(
