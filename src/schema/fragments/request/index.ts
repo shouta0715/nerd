@@ -9,5 +9,6 @@ export const RequestFragment = gql`
     user_id
     work_title
     created_at
+    updated_at
   }
 `;

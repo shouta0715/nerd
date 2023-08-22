@@ -36,7 +36,7 @@ const documents = {
     "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
     "\n  fragment RankingEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n    comments_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.RankingEpisodeFragmentFragmentDoc,
     "\n  fragment DailyEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n  }\n": types.DailyEpisodeFragmentFragmentDoc,
-    "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n  }\n": types.RequestFragmentFragmentDoc,
+    "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n": types.RequestFragmentFragmentDoc,
     "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
     "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n": types.FragmentEpisodeFragmentDoc,
     "\n  mutation InsertLike($object: likes_insert_input!) {\n    insert_likes_one(\n      object: $object\n      on_conflict: { constraint: likes_user_id_comment_id_key }\n    ) {\n      id\n      user_id\n      comment_id\n    }\n  }\n": types.InsertLikeDocument,
@@ -164,7 +164,7 @@ export function graphql(source: "\n  fragment DailyEpisodeFragment on episodes {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n  }\n"): (typeof documents)["\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n  }\n"];
+export function graphql(source: "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n"): (typeof documents)["\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
