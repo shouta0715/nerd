@@ -11,13 +11,13 @@ const sizes = {
 };
 
 const themes = {
-  primary: "stroke-indigo-600",
-  secondary: "stroke-pink-600",
-  success: "stroke-green-600",
-  danger: "stroke-red-600",
-  warning: "stroke-yellow-600",
-  transparent: "stroke-transparent",
-  white: "stroke-white",
+  primary: "stroke-indigo-600 fill-indigo-600",
+  secondary: "stroke-pink-600 fill-pink-600",
+  success: "stroke-green-600 fill-green-600",
+  danger: "stroke-red-600 fill-red-600",
+  warning: "stroke-yellow-600 fill-yellow-600",
+  transparent: "stroke-transparent fill-transparent",
+  white: "stroke-white fill-white",
 };
 
 type Variants = "oval" | "dots";

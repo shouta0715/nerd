@@ -32,7 +32,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
           {buttonLabel(typeof value === "function" ? value() : value)}
 
           {isLoading ? (
-            <Loader className="m-auto" size="sm" theme="white" variant="dots" />
+            <Loader className="m-auto" size="md" theme="white" variant="dots" />
           ) : (
             <ChevronDownIcon
               aria-hidden="true"
