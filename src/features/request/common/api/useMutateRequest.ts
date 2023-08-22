@@ -45,6 +45,8 @@ export const useMutateRequest = () => {
       ];
 
       if (allPrevData) {
+        const count = allPrevData.request_works_aggregate.aggregate?.count;
+
         queryClient.setQueryData<GetRequestsQuery>(
           getInitialPagePrevDataKey(true, user.id),
           {
@@ -54,9 +56,7 @@ export const useMutateRequest = () => {
             ],
             request_works_aggregate: {
               aggregate: {
-                count: allPrevData.request_works_aggregate.aggregate?.count
-                  ? allPrevData.request_works_aggregate.aggregate.count + 1
-                  : 0,
+                count: count !== undefined && count >= 0 ? count + 1 : 0,
               },
             },
           }
@@ -65,6 +65,7 @@ export const useMutateRequest = () => {
 
       if (!pendingPrevData) return;
 
+      const count = pendingPrevData.request_works_aggregate.aggregate?.count;
       queryClient.setQueryData<GetRequestByStatusQuery>(
         getInitialPagePrevDataKey(false, user.id),
         {
@@ -74,9 +75,7 @@ export const useMutateRequest = () => {
           ],
           request_works_aggregate: {
             aggregate: {
-              count: pendingPrevData.request_works_aggregate.aggregate?.count
-                ? pendingPrevData.request_works_aggregate.aggregate.count + 1
-                : 0,
+              count: count !== undefined && count >= 0 ? count + 1 : 0,
             },
           },
         }
