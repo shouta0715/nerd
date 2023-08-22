@@ -18,12 +18,7 @@ import { GetCommentsEpisodeQuery, GetCommentsWorkQuery } from "src/gql/graphql";
 import { useOptimisticState } from "src/hooks/useOptimisticState";
 import { useUserState } from "src/store/user/userState";
 
-interface OptionProps extends ListBoxOption {
-  id: string;
-  name: string;
-}
-
-const options: OptionProps[] = [
+const options: ListBoxOption[] = [
   { id: "new", name: "新しい順" },
   { id: "popular", name: "いいね順" },
 ];
@@ -69,7 +64,7 @@ export const Comments = forwardRef<any, Props>(
             <span>右下のボタンを押すと、最新のコメントを読み込めます</span>
           </div>
           <div className="flex items-center justify-end space-x-4 px-2">
-            <ListBox<CommentsFilter, OptionProps>
+            <ListBox<CommentsFilter, ListBoxOption>
               buttonLabel={(value) =>
                 value === "new" ? "新しい順" : "いいね順"
               }

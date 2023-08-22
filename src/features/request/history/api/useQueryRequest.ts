@@ -66,5 +66,6 @@ export const useQueryRequest = ({ page, status }: Props) => {
 
     staleTime: 1000 * 60 * 30,
     enabled: !!user && !!user?.id && !!status && !!page,
+    placeholderData: (data) => data,
   });
 };

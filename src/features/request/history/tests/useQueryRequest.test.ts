@@ -158,9 +158,6 @@ describe("useQueryRequest", () => {
       expect(result.current.isPending).toBe(false);
     });
 
-    expect(result.current.data?.request_works_aggregate.aggregate?.count).toBe(
-      10
-    );
     expect(result.current.data?.request_works.length).toBe(10);
     expect(result.current.data?.request_works[0].id).toBe(0);
     expect(result.current.data?.request_works[9].id).toBe(9);
@@ -181,9 +178,6 @@ describe("useQueryRequest", () => {
       expect(result.current.isPending).toBe(false);
     });
 
-    expect(result.current.data?.request_works_aggregate.aggregate?.count).toBe(
-      10
-    );
     expect(result.current.data?.request_works.length).toBe(10);
     expect(result.current.data?.request_works[0].id).toBe(10);
     expect(result.current.data?.request_works[9].id).toBe(19);

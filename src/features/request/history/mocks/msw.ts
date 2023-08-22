@@ -7,7 +7,7 @@ import {
   GetRequestsQueryVariables,
 } from "src/gql/graphql";
 
-export const requestQueryHandler = (status?: number) => {
+export const requestQueryHandler = (status?: number, delay?: number) => {
   if (status) {
     return graphql.query<GetRequestsQuery, GetRequestsQueryVariables>(
       "GetRequests",
@@ -20,12 +20,17 @@ export const requestQueryHandler = (status?: number) => {
   return graphql.query<GetRequestsQuery, GetRequestsQueryVariables>(
     "GetRequests",
     (req, res, ctx) => {
-      return res(ctx.data(mswRequestHistory(req.variables)));
+      return delay
+        ? res(ctx.delay(delay), ctx.data(mswRequestHistory(req.variables)))
+        : res(ctx.data(mswRequestHistory(req.variables)));
     }
   );
 };
 
-export const requestByStatusQueryHandler = (status?: number) => {
+export const requestByStatusQueryHandler = (
+  status?: number,
+  delay?: number
+) => {
   if (status) {
     return graphql.query<
       GetRequestByStatusQuery,
@@ -39,11 +44,13 @@ export const requestByStatusQueryHandler = (status?: number) => {
     GetRequestByStatusQuery,
     GetRequestByStatusQueryVariables
   >("GetRequestByStatus", (req, res, ctx) => {
-    return res(ctx.data(mswRequestHistory(req.variables)));
+    return delay
+      ? res(ctx.delay(delay), ctx.data(mswRequestHistory(req.variables)))
+      : res(ctx.data(mswRequestHistory(req.variables)));
   });
 };
 
-export const requestHistoryHandlers = (status?: number) => [
-  requestQueryHandler(status),
-  requestByStatusQueryHandler(status),
+export const requestHistoryHandlers = (delay?: number, status?: number) => [
+  requestQueryHandler(status, delay),
+  requestByStatusQueryHandler(status, delay),
 ];

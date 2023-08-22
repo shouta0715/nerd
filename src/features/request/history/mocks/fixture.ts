@@ -32,10 +32,11 @@ export const mswRequestHistory = ({
       created_at: new Date(
         new Date().setDate(new Date().getDate() - i - offset)
       ).toISOString(),
+      updated_at: new Date().toISOString(),
     })),
     request_works_aggregate: {
       aggregate: {
-        count: limit,
+        count: 32,
       },
     },
   };

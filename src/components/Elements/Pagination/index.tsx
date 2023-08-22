@@ -14,6 +14,7 @@ export const Pagination: FC<Props> = ({ baseUrl, total }) => {
   const { query, push } = useRouter();
 
   const currentPage = Number(query.page);
+
   const max = Math.ceil(total / 10);
 
   if (!currentPage) return null;
@@ -52,7 +53,13 @@ export const Pagination: FC<Props> = ({ baseUrl, total }) => {
                     ? "bg-indigo-600 text-white"
                     : "hover:bg-gray-50"
                 )}
-                href={`${baseUrl}?page=${page}`}
+                href={{
+                  pathname: `${baseUrl}`,
+                  query: {
+                    ...query,
+                    page,
+                  },
+                }}
               >
                 {page}
               </Link>

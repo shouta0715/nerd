@@ -14,7 +14,7 @@ export const Ranking = ({
   totallingDate,
 }: RankingPage) => {
   return (
-    <section className="grid flex-1 animate-fadeUp gap-y-8 pb-8">
+    <div className="grid flex-1 animate-fadeUp gap-y-8 pb-8">
       <TopTitle buildDate={buildDate} title="ランキング" />
       <div className="grid gap-y-32">
         <section className="grid gap-y-4">
@@ -79,6 +79,6 @@ export const Ranking = ({
           </ul>
         </section>
       </div>
-    </section>
+    </div>
   );
 };

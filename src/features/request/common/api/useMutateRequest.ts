@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { requestDocument } from "src/documents/request";
+import { requestInsertDocument } from "src/documents/request";
 import {
   InsertRequestMutation,
   InsertRequestMutationVariables,
@@ -13,6 +13,6 @@ export const useMutateRequest = () => {
     Error,
     InsertRequestMutationVariables
   >({
-    mutationFn: (object) => client.request(requestDocument, object),
+    mutationFn: (object) => client.request(requestInsertDocument, object),
   });
 };

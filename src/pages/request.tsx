@@ -1,6 +1,6 @@
 import React from "react";
 import { BasicLayout } from "src/components/Layouts/BasicLayout";
-import { Request } from "src/features/request/components/Request";
+import { Request } from "src/features/request/common/components/Request";
 import { Meta } from "src/libs/meta";
 
 import { NextPageWithLayout } from "src/libs/next/types";
