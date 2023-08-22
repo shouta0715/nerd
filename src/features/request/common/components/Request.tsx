@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
@@ -5,8 +6,17 @@ import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { RequestForm } from "src/components/Form/Request";
 import { RequestHeader } from "src/features/request/common/components/Header";
 import { RequestLoading } from "src/features/request/common/components/Loading";
-import { RequestHistory } from "src/features/request/history/components/RequestHistory";
 import { useUserState } from "src/store/user/userState";
+
+const DynamicRequestHistory = dynamic(
+  () =>
+    import("src/features/request/history/components/RequestHistory").then(
+      (mod) => mod.RequestHistory
+    ),
+  {
+    loading: () => <RequestLoading />,
+  }
+);
 
 export const Request = () => {
   const user = useUserState((state) => state.user);
@@ -38,7 +48,7 @@ export const Request = () => {
               }}
             >
               <Suspense fallback={<RequestLoading />}>
-                <RequestHistory />
+                <DynamicRequestHistory />
               </Suspense>
             </ErrorBoundary>
           ) : (
