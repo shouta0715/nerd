@@ -15,7 +15,7 @@ type Props<T, P> = {
   onChange: (value: T) => void;
   isLoading: boolean;
   options: P[];
-  buttonLabel: (value: T | (() => T)) => string;
+  buttonLabel: (value: T) => string;
 };
 
 export const ListBox = <T extends string, P extends ListBoxOption>({
@@ -27,38 +27,35 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
 }: Props<T, P>) => {
   return (
     <Listbox disabled={isLoading} onChange={onChange} value={value}>
-      <div>
-        <Listbox.Button className="relative cursor-pointer  rounded-lg bg-indigo-600  py-2  pl-3 pr-8 text-left text-xs font-semibold text-white shadow-md md:pr-12 md:text-sm">
-          <span className="block truncate">{buttonLabel(value)}</span>
-          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            {isLoading ? (
-              <Loader
-                className="m-auto"
-                size="sm"
-                theme="white"
-                variant="dots"
-              />
-            ) : (
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="h-4 w-4 text-white md:h-5 md:w-5"
-              />
-            )}
-          </span>
+      <div className="relative inline-block text-left">
+        <Listbox.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-500">
+          {buttonLabel(typeof value === "function" ? value() : value)}
+
+          {isLoading ? (
+            <Loader className="m-auto" size="md" theme="white" variant="dots" />
+          ) : (
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="-mr-1 h-5 w-5 text-white"
+            />
+          )}
         </Listbox.Button>
         <Transition
           as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
         >
-          <Listbox.Options className=" absolute mt-1 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             {options.map((option) => (
               <Listbox.Option
                 key={option.id}
                 className={({ active }) =>
                   clsx(
-                    "relative cursor-pointer select-none py-2 pl-7 pr-4 md:pl-10",
+                    "relative cursor-pointer select-none py-2 pl-7 pr-4 md:pl-8",
                     active ? "bg-indigo-100 text-indigo-900" : "text-gray-900"
                   )
                 }
@@ -67,7 +64,7 @@ export const ListBox = <T extends string, P extends ListBoxOption>({
                 {({ selected }) => (
                   <>
                     <span
-                      className={`block truncate text-xs md:text-base ${
+                      className={`block truncate text-sm ${
                         selected ? "font-medium" : "font-normal"
                       }`}
                     >

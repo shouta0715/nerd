@@ -1,11 +1,13 @@
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm } from "react-hook-form";
 import { useNotificationState } from "src/components/Notification/store";
-import { useMutateRequest } from "src/features/request/api/useMutateRequest";
-import { Request, RequestSchema } from "src/features/request/types";
+import { useMutateRequest } from "src/features/request/common/api/useMutateRequest";
+import { Request, RequestSchema } from "src/features/request/common/types";
 
-export const useRequest = () => {
-  const insertRequest = useMutateRequest();
+export const useRequestForm = () => {
+  const {
+    insertRequest: { mutateAsync, isPending },
+  } = useMutateRequest();
   const onShow = useNotificationState((state) => state.onShow);
   const {
     register,
@@ -20,7 +22,7 @@ export const useRequest = () => {
     try {
       const { work_description, work_title, work_url } = data;
 
-      await insertRequest.mutateAsync({
+      await mutateAsync({
         object: {
           work_title,
           detail: !work_description?.trim() ? null : work_description,
@@ -47,6 +49,6 @@ export const useRequest = () => {
     onSubmitHandler,
     register,
     errors,
-    ...insertRequest,
+    isPending,
   };
 };

@@ -45,7 +45,7 @@ export const worksNavigation = [
   },
   {
     name: "作品要望",
-    href: "/request",
+    href: "/request?page=1&status=all",
     icon: ViewfinderCircleIcon,
     color: "stroke-pink-600",
   },

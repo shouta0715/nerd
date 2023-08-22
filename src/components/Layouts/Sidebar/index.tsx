@@ -96,7 +96,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                   <nav className="flex flex-1 flex-col">
                     <ul className="flex flex-1 flex-col gap-y-7">
                       <li>
-                        <ul className="-mx-2 gap-y-1">
+                        <ul className="-mx-2 grid gap-y-1">
                           {generateSliderNavigation({
                             item: {
                               name: "ホーム",
@@ -129,7 +129,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                         </ul>
                       </li>
                       <li>
-                        <ul className="-mx-2">
+                        <ul className="-mx-2 grid gap-y-1">
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             エピソード
                           </p>
@@ -142,7 +142,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                         </ul>
                       </li>
                       <li>
-                        <ul className="-mx-2 ">
+                        <ul className="-mx-2 grid gap-y-1">
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             作品
                           </p>
@@ -155,7 +155,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                         </ul>
                       </li>
                       <li>
-                        <ul className="-mx-2">
+                        <ul className="-mx-2 grid gap-y-1">
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             システム
                           </p>
@@ -168,7 +168,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                         </ul>
                       </li>
                       <li className="mb-6 mt-auto">
-                        <ul className="-mx-2">
+                        <ul className="-mx-2 grid gap-y-1">
                           <p className="mb-1 px-2 text-sm text-gray-500">
                             その他
                           </p>

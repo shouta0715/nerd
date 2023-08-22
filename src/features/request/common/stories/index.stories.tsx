@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Request } from "src/features/request/components/Request";
-import { handleRequest } from "src/features/request/mocks/msw";
+import { Request } from "src/features/request/common/components/Request";
+import { handleRequest } from "src/features/request/common/mocks/msw";
 import { BasicLayoutDecorator } from "src/tests/storybook";
 
 export default {

@@ -131,6 +131,9 @@ export const FirebaseAuth = () => {
           queryClient.invalidateQueries({
             queryKey: ["replies"],
           });
+          queryClient.invalidateQueries({
+            queryKey: ["ip"],
+          });
 
           setAuthLoading(false);
         } catch (error: any) {
