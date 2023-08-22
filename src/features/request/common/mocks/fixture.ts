@@ -1,4 +1,8 @@
-import { InsertRequestMutation, Status_Enum } from "src/gql/graphql";
+import {
+  DeleteRequestMutation,
+  InsertRequestMutation,
+  Status_Enum,
+} from "src/gql/graphql";
 
 export const requestData: InsertRequestMutation = {
   insert_request_works_one: {
@@ -10,5 +14,11 @@ export const requestData: InsertRequestMutation = {
     work_title: "work_title",
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
+  },
+};
+
+export const deleteRequestData: DeleteRequestMutation = {
+  delete_request_works_by_pk: {
+    id: 1,
   },
 };

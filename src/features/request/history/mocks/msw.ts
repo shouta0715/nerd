@@ -7,12 +7,15 @@ import {
   GetRequestsQueryVariables,
 } from "src/gql/graphql";
 
-export const requestQueryHandler = (status?: number, delay?: number) => {
+export const requestQueryHandler = (
+  status?: number,
+  delay?: number | "infinite"
+) => {
   if (status) {
     return graphql.query<GetRequestsQuery, GetRequestsQueryVariables>(
       "GetRequests",
-      (req, res, ctx) => {
-        return res(ctx.data(mswRequestHistory(req.variables)));
+      (_, res, ctx) => {
+        return res(ctx.delay(delay), ctx.status(status));
       }
     );
   }
@@ -29,14 +32,14 @@ export const requestQueryHandler = (status?: number, delay?: number) => {
 
 export const requestByStatusQueryHandler = (
   status?: number,
-  delay?: number
+  delay?: number | "infinite"
 ) => {
   if (status) {
     return graphql.query<
       GetRequestByStatusQuery,
       GetRequestByStatusQueryVariables
-    >("GetRequestByStatus", (req, res, ctx) => {
-      return res(ctx.data(mswRequestHistory(req.variables)));
+    >("GetRequestByStatus", (_, res, ctx) => {
+      return res(ctx.delay(delay), ctx.status(status));
     });
   }
 
@@ -50,7 +53,10 @@ export const requestByStatusQueryHandler = (
   });
 };
 
-export const requestHistoryHandlers = (delay?: number, status?: number) => [
+export const requestHistoryHandlers = (
+  delay?: number | "infinite",
+  status?: number
+) => [
   requestQueryHandler(status, delay),
   requestByStatusQueryHandler(status, delay),
 ];

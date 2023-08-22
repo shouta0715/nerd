@@ -1,8 +1,10 @@
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
+
 import { RequestForm } from "src/components/Form/Request";
+import { RequestHeader } from "src/features/request/common/components/Header";
+import { RequestLoading } from "src/features/request/common/components/Loading";
 import { RequestHistory } from "src/features/request/history/components/RequestHistory";
 import { useUserState } from "src/store/user/userState";
 
@@ -23,12 +25,24 @@ export const Request = () => {
         </section>
 
         <section className="grid gap-y-4">
-          {user && (
-            <ErrorBoundary FallbackComponent={ErrorMessage}>
-              <Suspense fallback={<div>Loading...</div>}>
+          {user ? (
+            <ErrorBoundary
+              // eslint-disable-next-line react/no-unstable-nested-components
+              FallbackComponent={(fallback) => {
+                return (
+                  <>
+                    <RequestHeader hasData={false} isFetching={false} />
+                    <ErrorMessage {...fallback} />
+                  </>
+                );
+              }}
+            >
+              <Suspense fallback={<RequestLoading />}>
                 <RequestHistory />
               </Suspense>
             </ErrorBoundary>
+          ) : (
+            <RequestLoading />
           )}
         </section>
       </div>

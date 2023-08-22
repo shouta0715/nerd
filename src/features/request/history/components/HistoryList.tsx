@@ -1,7 +1,9 @@
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
+import { EllipsisHorizontalIcon, TrashIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import React, { FC, Fragment } from "react";
+import { Loader } from "src/components/Elements/Loader";
+import { useDeleteRequest } from "src/features/request/history/api/useDeleteRequest";
 import {
   getStatusColor,
   getStatusIcon,
@@ -18,6 +20,7 @@ type Props = {
 
 export const HistoryList: FC<Props> = ({ request }) => {
   const Icon = getStatusIcon()[request.approval_status];
+  const { onDeleteRequest, isPending } = useDeleteRequest(request.id);
 
   return (
     <li className="overflow-hidden rounded-xl border border-gray-200 bg-white">
@@ -30,13 +33,22 @@ export const HistoryList: FC<Props> = ({ request }) => {
             )}
           />
         </div>
-        <div className="text-sm font-medium leading-6 text-gray-900">
+        <div className="text-sm font-semibold leading-6 text-gray-900">
           {request.work_title}
         </div>
         <Menu as="div" className="relative ml-auto">
-          <Menu.Button className="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500">
-            <span className="sr-only">Open options</span>
-            <EllipsisHorizontalIcon aria-hidden="true" className="h-5 w-5" />
+          <Menu.Button
+            className="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500"
+            disabled={isPending}
+          >
+            <span className="sr-only">
+              {isPending ? "削除中..." : "メニューを開く"}
+            </span>
+            {isPending ? (
+              <Loader size="md" variant="dots" />
+            ) : (
+              <EllipsisHorizontalIcon aria-hidden="true" className="h-6 w-6" />
+            )}
           </Menu.Button>
           <Transition
             as={Fragment}
@@ -52,11 +64,19 @@ export const HistoryList: FC<Props> = ({ request }) => {
                 {({ active }) => (
                   <button
                     className={clsx(
-                      active ? "bg-gray-50" : "",
-                      "block px-3 py-1 text-sm leading-6 text-gray-900"
+                      active ? "bg-gray-100" : "",
+                      "flex w-full items-center px-3 py-1 text-sm leading-6 text-gray-900"
                     )}
+                    disabled={isPending}
+                    onClick={() => onDeleteRequest()}
                   >
-                    消去<span className="sr-only">, {request.work_title}</span>
+                    {isPending ? (
+                      <Loader size="sm" variant="dots" />
+                    ) : (
+                      <TrashIcon className="h-6 w-6 text-red-600" />
+                    )}
+
+                    <span className="flex-1">削除</span>
                   </button>
                 )}
               </Menu.Item>
@@ -84,6 +104,33 @@ export const HistoryList: FC<Props> = ({ request }) => {
             >
               {getStatusListLabel(request.approval_status)}
             </div>
+          </dd>
+        </div>
+        <div className="flex justify-between gap-x-4 py-3">
+          <dt className="min-w-max text-gray-500">作品の説明</dt>
+          <dd className="flex items-start gap-x-2">
+            <div className="rounded-md px-2 py-1 text-xs font-medium">
+              {request.detail ?? "なし"}
+            </div>
+          </dd>
+        </div>
+        <div className="flex justify-between gap-x-4 py-3">
+          <dt className="min-w-max text-gray-500">公式URL</dt>
+          <dd className="flex items-start gap-x-2">
+            {request.official_url ? (
+              <a
+                className="rounded-md px-2 py-1 text-xs font-medium text-indigo-600 hover:text-indigo-500 hover:underline"
+                href={request.official_url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {request.work_title}
+              </a>
+            ) : (
+              <div className="rounded-md px-2 py-1 text-xs font-medium">
+                なし
+              </div>
+            )}
           </dd>
         </div>
       </dl>
