@@ -8,6 +8,14 @@ export const INSERT_REQUEST = gql`
   }
 `;
 
+export const DELETE_REQUEST = gql`
+  mutation DeleteRequest($id: Int!) {
+    delete_request_works_by_pk(id: $id) {
+      id
+    }
+  }
+`;
+
 export const GET_REQUESTS = gql`
   query GetRequests($user_id: String!, $limit: Int!, $offset: Int!) {
     request_works(

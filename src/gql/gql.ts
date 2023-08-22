@@ -45,6 +45,7 @@ const documents = {
     "\n  query GetDailyEpisodeRanking($_gte: timestamptz!) {\n    daily_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetDailyEpisodeRankingDocument,
     "\n  query GetDailyWorkRanking($_gte: timestamptz!) {\n    daily_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetDailyWorkRankingDocument,
     "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      ...RequestFragment\n    }\n  }\n": types.InsertRequestDocument,
+    "\n  mutation DeleteRequest($id: Int!) {\n    delete_request_works_by_pk(id: $id) {\n      id\n    }\n  }\n": types.DeleteRequestDocument,
     "\n  query GetRequests($user_id: String!, $limit: Int!, $offset: Int!) {\n    request_works(\n      where: { user_id: { _eq: $user_id } }\n      limit: $limit\n      offset: $offset\n      order_by: { created_at: desc }\n    ) {\n      ...RequestFragment\n    }\n    request_works_aggregate(where: { user_id: { _eq: $user_id } }) {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.GetRequestsDocument,
     "\n  query GetRequestByStatus(\n    $status: status_enum!\n    $user_id: String!\n    $limit: Int!\n    $offset: Int!\n  ) {\n    request_works(\n      where: { user_id: { _eq: $user_id }, approval_status: { _eq: $status } }\n      order_by: { created_at: desc }\n      limit: $limit\n      offset: $offset\n    ) {\n      ...RequestFragment\n    }\n    request_works_aggregate(\n      where: { user_id: { _eq: $user_id }, approval_status: { _eq: $status } }\n    ) {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.GetRequestByStatusDocument,
     "\n  query GetSeasonWorks($season: String!, $year: Int!, $limit: Int) {\n    works(\n      where: {\n        _and: {\n          season_year: { _eq: $year }\n          season_name: { _eq: $season }\n          tid: { _is_null: false }\n        }\n      }\n      limit: $limit\n    ) {\n      ...WorkFragment\n      episodes(order_by: { number: desc_nulls_last }, limit: 8) {\n        ...FragmentEpisode\n      }\n    }\n  }\n": types.GetSeasonWorksDocument,
@@ -197,6 +198,10 @@ export function graphql(source: "\n  query GetDailyWorkRanking($_gte: timestampt
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      ...RequestFragment\n    }\n  }\n"): (typeof documents)["\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      ...RequestFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation DeleteRequest($id: Int!) {\n    delete_request_works_by_pk(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteRequest($id: Int!) {\n    delete_request_works_by_pk(id: $id) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
