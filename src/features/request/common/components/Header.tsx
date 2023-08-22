@@ -49,12 +49,16 @@ export const RequestHeader: FC<Props> = ({
         }}
         isLoading={isFetching}
         onChange={(value) => {
-          push({
-            query: {
-              ...query,
-              status: getStatusQuery(value),
+          push(
+            {
+              query: {
+                ...query,
+                status: getStatusQuery(value),
+              },
             },
-          });
+            undefined,
+            { scroll: false }
+          );
         }}
         options={options}
         value={parseStatus(query.status) || "all"}
