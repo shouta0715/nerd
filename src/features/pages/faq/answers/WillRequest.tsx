@@ -8,7 +8,13 @@ export const WillRequest = () => (
     </p>
     <Link
       className="mt-2 inline-block  text-blue-500 underline"
-      href="/request"
+      href={{
+        pathname: "/request",
+        query: {
+          page: 1,
+          status: "all",
+        },
+      }}
     >
       リクエストフォームはこちら
     </Link>

@@ -40,7 +40,7 @@ const BestRankings: BestRanking[] = [
     key: "dr_stone",
     official_url: "https://dr-stone.jp/",
     description:
-      "面白いです。めっちゃワクワクします。科学の力で文明を作り上げていく物語です。科学の勉強にもなります。話数が進むに連れて身近なものが出てくるのでもっと面白いです。ぜひ見てください！",
+      "人類全員が石化しちゃう話です。めっちゃワクワクします。科学の力で文明を作り上げていく物語です。科学の勉強にもなります。話数が進むに連れて身近なものが出てくるのでもっと面白いです。科学を駆使した戦闘シーンも結構あります。ただ科学製品作っているアニメじゃないです！偶にお笑い要素も入っていて意外と面白いです。よかったら見てください！",
     links: {
       netflix_url: "https://www.netflix.com/jp/title/81046193",
       u_next_url: "https://video.unext.jp/browse/character/KDG0000063",
@@ -49,6 +49,22 @@ const BestRankings: BestRanking[] = [
     },
     data: ["Dr.STONE", "Dr.STONE", "U2VyaWVzLTkwOA=="],
     slug: 6317,
+  },
+  {
+    title: "呪術廻戦",
+    key: "jujutsu_kaisen",
+    official_url: "https://jujutsukaisen.jp/",
+    description:
+      "呪術廻戦です。呪いを払う物語です。怒られるかもしれないけどHunter x Hunterにすこし似てますね。戦闘シーンとか迫力あって面白いです。アニメ制作会社のMAPPAさんの作画がすごくいいです！あの作画でさらに迫力が増しています。",
+    links: {
+      netflix_url: "https://www.netflix.com/jp/title/81278456",
+      u_next_url: "https://video.unext.jp/title/SID0050925",
+      amazon_prime_url:
+        "https://www.amazon.co.jp/%E5%91%AA%E8%A1%93%E5%BB%BB%E6%88%A6/dp/B0BX3Z1WLP",
+    },
+
+    data: ["呪術廻戦", "呪術廻戦", "U2VyaWVzLTEzOTE="],
+    slug: 6987,
   },
 ];
 
