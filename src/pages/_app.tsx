@@ -20,7 +20,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       </HydrationBoundary>,
       pageProps
     ),
-    false
+    true
   );
 };
 
