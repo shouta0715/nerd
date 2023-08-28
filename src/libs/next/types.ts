@@ -10,6 +10,8 @@ import {
   GetRankingQuery,
   GetSeasonWorksQuery,
   GetTodayEpisodesQuery,
+  GetWeeklyEpisodeRankingQuery,
+  GetWeeklyWorkRankingQuery,
   GetWeeklyWorksQuery,
 } from "src/gql/graphql";
 import { Error } from "src/libs/error";
@@ -46,10 +48,41 @@ export type ListPage<T> = {
   autoCompleteData: AutoCompleteData[];
 };
 
-export type RankingPage = {
+export type RankingEpisodes =
+  GetDailyEpisodeRankingQuery["daily_episodes_ranking"][0];
+
+export type RankingWorks = GetDailyWorkRankingQuery["daily_works_ranking"][0];
+
+export type RankingPage<
+  TEpisodes = GetDailyEpisodeRankingQuery["daily_episodes_ranking"],
+  TWorks = GetDailyWorkRankingQuery["daily_works_ranking"]
+> = {
+  episodes: TEpisodes extends (infer R)[]
+    ? R extends RankingEpisodes
+      ? R[]
+      : never
+    : never;
+  works: TWorks extends (infer R)[]
+    ? R extends RankingWorks
+      ? R[]
+      : never
+    : never;
+  buildDate: string;
+  totallingDate: string;
+  interval: "daily" | "weekly";
+};
+
+export type DailyRankingPage = {
   ranking: GetRankingQuery;
   dailyEpisode: GetDailyEpisodeRankingQuery;
   dailyWork: GetDailyWorkRankingQuery;
+  buildDate: string;
+  totallingDate: string;
+};
+
+export type WeeklyRankingPage = {
+  weeklyEpisode: GetWeeklyEpisodeRankingQuery;
+  weeklyWork: GetWeeklyWorkRankingQuery;
   buildDate: string;
   totallingDate: string;
 };
