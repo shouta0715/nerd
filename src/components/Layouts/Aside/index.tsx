@@ -61,7 +61,7 @@ export const Aside: FC<Props> = ({ notice }) => (
     <aside className="grid grid-cols-2 gap-x-2 border-b pb-4 md:hidden">
       {navList}
     </aside>
-    <aside className="sticky top-8 hidden h-[calc(80vh-2rem)] w-56 overflow-y-auto md:block">
+    <aside className="sticky top-8 hidden h-[calc(90dvh-2rem)] w-56 overflow-y-auto md:block">
       <div className="gap-y-8">
         <DynamicSearchWorksForm />
         <Nav notice={notice} />

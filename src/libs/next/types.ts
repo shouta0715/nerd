@@ -72,6 +72,11 @@ export type RankingPage<
   interval: "daily" | "weekly";
 };
 
+export type AllRankingPage = {
+  ranking: GetRankingQuery;
+  buildDate: string;
+};
+
 export type DailyRankingPage = {
   ranking: GetRankingQuery;
   dailyEpisode: GetDailyEpisodeRankingQuery;

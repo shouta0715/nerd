@@ -1,7 +1,7 @@
 import {
-  BellIcon,
   ChevronRightIcon,
   HomeIcon,
+  MegaphoneIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import { FC } from "react";
@@ -10,6 +10,7 @@ import {
   episodeNavigation,
   generateNavList,
   otherNavigation,
+  rankingNavigation,
   systemNavigation,
   worksNavigation,
 } from "src/components/Layouts/Nav/gengerate";
@@ -28,6 +29,8 @@ const systemNavList = systemNavigation.map((item) => generateNavList(item));
 
 const otherNavList = otherNavigation.map((item) => generateNavList(item));
 
+const rankingNavList = rankingNavigation.map((item) => generateNavList(item));
+
 type Props = {
   notice?: boolean;
 };
@@ -45,7 +48,7 @@ export const Nav: FC<Props> = ({ notice }) => (
         {({ isActive }) => (
           <>
             <span className="relative mr-2">
-              <BellIcon className="h-full w-6 stroke-gray-600" />
+              <MegaphoneIcon className="h-full w-6 stroke-gray-600" />
               {notice && (
                 <span className="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-600 ring-2 ring-white" />
               )}
@@ -68,9 +71,14 @@ export const Nav: FC<Props> = ({ notice }) => (
       <div className="grid gap-y-2">{episodeNavList}</div>
     </div>
     <div>
+      <p className="mb-1 text-sm text-gray-500">ランキング</p>
+      <div className="grid gap-y-2">{rankingNavList}</div>
+    </div>
+    <div>
       <p className="mb-1 text-sm text-gray-500">作品</p>
       <div className="grid gap-y-2">{worksNavList}</div>
     </div>
+
     <div>
       <p className="mb-1 text-sm text-gray-500">システム</p>
       <div className="grid gap-y-2">{systemNavList}</div>

@@ -21,7 +21,7 @@ const Page: NextSSGPage<WeeklyRankingPage> = ({ data }) => (
 );
 
 Page.getLayout = BasicLayout;
-Page.getTitle = Meta(() => "ランキング - Nerd");
+Page.getTitle = Meta(() => "1週間のランキング - Nerd");
 
 export default Page;
 

@@ -2,7 +2,6 @@ import {
   LightBulbIcon,
   RocketLaunchIcon,
   RssIcon,
-  TrophyIcon,
   ViewfinderCircleIcon,
   WindowIcon,
   ChevronRightIcon,
@@ -10,6 +9,9 @@ import {
   NewspaperIcon,
   HeartIcon,
   CircleStackIcon,
+  BoltIcon,
+  ChartBarIcon,
+  CalendarDaysIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
@@ -38,12 +40,6 @@ export const episodeNavigation = [
 
 export const worksNavigation = [
   {
-    name: "ランキング",
-    href: "/ranking",
-    icon: TrophyIcon,
-    color: "stroke-amber-600",
-  },
-  {
     name: "作品要望",
     href: "/request?page=1&status=all",
     icon: ViewfinderCircleIcon,
@@ -54,6 +50,27 @@ export const worksNavigation = [
     href: "/recommend",
     icon: HeartIcon,
     color: "stroke-pink-600",
+  },
+];
+
+export const rankingNavigation = [
+  {
+    name: "１日のコメント",
+    href: "/ranking/daily",
+    icon: CalendarDaysIcon,
+    color: "stroke-blue-600",
+  },
+  {
+    name: "１週間のコメント",
+    href: "/ranking/weekly",
+    icon: ChartBarIcon,
+    color: "stroke-teal-600",
+  },
+  {
+    name: "歴代のコメント",
+    href: "/ranking/all",
+    icon: BoltIcon,
+    color: "stroke-amber-600",
   },
 ];
 
@@ -85,12 +102,6 @@ export const otherNavigation = [
     icon: NewspaperIcon,
     color: "stroke-gray-600",
   },
-  // {
-  //   name: "サイトについて",
-  //   href: "/about",
-  //   icon: AcademicCapIcon,
-  //   color: "stroke-gray-600",
-  // },
   {
     name: "データについて",
     href: "/data",
