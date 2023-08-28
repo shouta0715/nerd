@@ -109,7 +109,7 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                           <li>
                             <ActiveLink
                               activeClassName="bg-gray-50 text-indigo-600"
-                              className="group relative flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                              className="group relative flex gap-x-2 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                               href="/notice"
                               onTransitionComplete={() => setSidebarOpen(false)}
                             >
