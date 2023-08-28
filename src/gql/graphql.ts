@@ -2743,10 +2743,18 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+  /** execute function "weekly_episodes_ranking" which returns "episodes" */
+  weekly_episodes_ranking: Array<Episodes>;
+  /** execute function "weekly_episodes_ranking" and query aggregates on result of table type "episodes" */
+  weekly_episodes_ranking_aggregate: Episodes_Aggregate;
   /** execute function "weekly_works" which returns "works" */
   weekly_works: Array<Works>;
   /** execute function "weekly_works" and query aggregates on result of table type "works" */
   weekly_works_aggregate: Works_Aggregate;
+  /** execute function "weekly_works_ranking" which returns "works" */
+  weekly_works_ranking: Array<Works>;
+  /** execute function "weekly_works_ranking" and query aggregates on result of table type "works" */
+  weekly_works_ranking_aggregate: Works_Aggregate;
   /** An array relationship */
   works: Array<Works>;
   /** An aggregate relationship */
@@ -3064,6 +3072,26 @@ export type Query_RootUsers_By_PkArgs = {
 };
 
 
+export type Query_RootWeekly_Episodes_RankingArgs = {
+  args: Weekly_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Query_RootWeekly_Episodes_Ranking_AggregateArgs = {
+  args: Weekly_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
 export type Query_RootWeekly_WorksArgs = {
   args: Weekly_Works_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
@@ -3076,6 +3104,26 @@ export type Query_RootWeekly_WorksArgs = {
 
 export type Query_RootWeekly_Works_AggregateArgs = {
   args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootWeekly_Works_RankingArgs = {
+  args: Weekly_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Query_RootWeekly_Works_Ranking_AggregateArgs = {
+  args: Weekly_Works_Ranking_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -3771,10 +3819,18 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+  /** execute function "weekly_episodes_ranking" which returns "episodes" */
+  weekly_episodes_ranking: Array<Episodes>;
+  /** execute function "weekly_episodes_ranking" and query aggregates on result of table type "episodes" */
+  weekly_episodes_ranking_aggregate: Episodes_Aggregate;
   /** execute function "weekly_works" which returns "works" */
   weekly_works: Array<Works>;
   /** execute function "weekly_works" and query aggregates on result of table type "works" */
   weekly_works_aggregate: Works_Aggregate;
+  /** execute function "weekly_works_ranking" which returns "works" */
+  weekly_works_ranking: Array<Works>;
+  /** execute function "weekly_works_ranking" and query aggregates on result of table type "works" */
+  weekly_works_ranking_aggregate: Works_Aggregate;
   /** An array relationship */
   works: Array<Works>;
   /** An aggregate relationship */
@@ -4150,6 +4206,26 @@ export type Subscription_RootUsers_StreamArgs = {
 };
 
 
+export type Subscription_RootWeekly_Episodes_RankingArgs = {
+  args: Weekly_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_Episodes_Ranking_AggregateArgs = {
+  args: Weekly_Episodes_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Episodes_Order_By>>;
+  where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
 export type Subscription_RootWeekly_WorksArgs = {
   args: Weekly_Works_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
@@ -4162,6 +4238,26 @@ export type Subscription_RootWeekly_WorksArgs = {
 
 export type Subscription_RootWeekly_Works_AggregateArgs = {
   args: Weekly_Works_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_Works_RankingArgs = {
+  args: Weekly_Works_Ranking_Args;
+  distinct_on?: InputMaybe<Array<Works_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Works_Order_By>>;
+  where?: InputMaybe<Works_Bool_Exp>;
+};
+
+
+export type Subscription_RootWeekly_Works_Ranking_AggregateArgs = {
+  args: Weekly_Works_Ranking_Args;
   distinct_on?: InputMaybe<Array<Works_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -4533,8 +4629,16 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
+export type Weekly_Episodes_Ranking_Args = {
+  _limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
 export type Weekly_Works_Args = {
   limit_num?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Weekly_Works_Ranking_Args = {
+  _limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** columns and relationships of "works" */
@@ -5318,6 +5422,20 @@ export type GetDailyWorkRankingQueryVariables = Exact<{
 
 export type GetDailyWorkRankingQuery = { __typename?: 'query_root', daily_works_ranking: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, comments_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null } }> };
 
+export type GetWeeklyWorkRankingQueryVariables = Exact<{
+  _gte: Scalars['timestamptz']['input'];
+}>;
+
+
+export type GetWeeklyWorkRankingQuery = { __typename?: 'query_root', weekly_works_ranking: Array<{ __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null, comments_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null } }> };
+
+export type GetWeeklyEpisodeRankingQueryVariables = Exact<{
+  _gte: Scalars['timestamptz']['input'];
+}>;
+
+
+export type GetWeeklyEpisodeRankingQuery = { __typename?: 'query_root', weekly_episodes_ranking: Array<{ __typename?: 'episodes', id: any, title: string, start_time?: any | null, number: number, end_time?: any | null, has_next_episode: boolean, next_episode_id?: any | null, comments_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null }, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } }> };
+
 export type InsertRequestMutationVariables = Exact<{
   object: Request_Works_Insert_Input;
 }>;
@@ -5428,6 +5546,8 @@ export const DeleteLikeDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const GetRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRanking"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"works_all_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"episodes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"comments_aggregate"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"count"},"value":{"kind":"EnumValue","value":"desc"}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RankingEpisodeFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RankingEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<GetRankingQuery, GetRankingQueryVariables>;
 export const GetDailyEpisodeRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyEpisodeRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"daily_episodes_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DailyEpisodeFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetDailyEpisodeRankingQuery, GetDailyEpisodeRankingQueryVariables>;
 export const GetDailyWorkRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyWorkRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"daily_works_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetDailyWorkRankingQuery, GetDailyWorkRankingQueryVariables>;
+export const GetWeeklyWorkRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWeeklyWorkRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weekly_works_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetWeeklyWorkRankingQuery, GetWeeklyWorkRankingQueryVariables>;
+export const GetWeeklyEpisodeRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWeeklyEpisodeRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weekly_episodes_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DailyEpisodeFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetWeeklyEpisodeRankingQuery, GetWeeklyEpisodeRankingQueryVariables>;
 export const InsertRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"request_works_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_request_works_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]} as unknown as DocumentNode<InsertRequestMutation, InsertRequestMutationVariables>;
 export const DeleteRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_request_works_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteRequestMutation, DeleteRequestMutationVariables>;
 export const GetRequestsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRequests"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"request_works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"request_works_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]} as unknown as DocumentNode<GetRequestsQuery, GetRequestsQueryVariables>;

@@ -44,3 +44,32 @@ export const dailyWorkRankingDocument = graphql(`
     }
   }
 `);
+
+export const weeklyEpisodeRankingDocument = graphql(`
+  query GetWeeklyEpisodeRanking($_gte: timestamptz!) {
+    weekly_episodes_ranking(args: { _limit: 5 }) {
+      ...DailyEpisodeFragment
+      comments_aggregate(where: { created_at: { _gte: $_gte } }) {
+        aggregate {
+          count
+        }
+      }
+      work {
+        ...WorkFragment
+      }
+    }
+  }
+`);
+
+export const weeklyWorkRankingDocument = graphql(`
+  query GetWeeklyWorkRanking($_gte: timestamptz!) {
+    weekly_works_ranking(args: { _limit: 5 }) {
+      ...WorkFragment
+      comments_aggregate(where: { created_at: { _gte: $_gte } }) {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+`);

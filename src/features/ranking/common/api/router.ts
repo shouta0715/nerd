@@ -2,6 +2,8 @@ import {
   dailyEpisodeRankingDocument,
   dailyWorkRankingDocument,
   rankingDocument,
+  weeklyEpisodeRankingDocument,
+  weeklyWorkRankingDocument,
 } from "src/documents/ranking";
 import {
   GetDailyEpisodeRankingQuery,
@@ -10,6 +12,10 @@ import {
   GetDailyWorkRankingQueryVariables,
   GetRankingQuery,
   GetRankingQueryVariables,
+  GetWeeklyEpisodeRankingQuery,
+  GetWeeklyEpisodeRankingQueryVariables,
+  GetWeeklyWorkRankingQuery,
+  GetWeeklyWorkRankingQueryVariables,
 } from "src/gql/graphql";
 import { getClient } from "src/utils/server/getClient";
 
@@ -40,6 +46,30 @@ export const getDailyWork = async (_gte: Date) => {
     GetDailyWorkRankingQuery,
     GetDailyWorkRankingQueryVariables
   >(dailyWorkRankingDocument, {
+    _gte,
+  });
+
+  return data;
+};
+
+export const getWeeklyEpisode = async (_gte: Date) => {
+  const { client } = getClient();
+  const data = await client.request<
+    GetWeeklyEpisodeRankingQuery,
+    GetWeeklyEpisodeRankingQueryVariables
+  >(weeklyEpisodeRankingDocument, {
+    _gte,
+  });
+
+  return data;
+};
+
+export const getWeeklyWork = async (_gte: Date) => {
+  const { client } = getClient();
+  const data = await client.request<
+    GetWeeklyWorkRankingQuery,
+    GetWeeklyWorkRankingQueryVariables
+  >(weeklyWorkRankingDocument, {
     _gte,
   });
 

@@ -1,5 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { BellIcon, HomeIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  MegaphoneIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { FC, Fragment } from "react";
@@ -8,6 +12,7 @@ import {
   episodeNavigation,
   generateSliderNavigation,
   otherNavigation,
+  rankingNavigation,
   systemNavigation,
   worksNavigation,
 } from "src/components/Layouts/Nav/gengerate";
@@ -109,14 +114,14 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                           <li>
                             <ActiveLink
                               activeClassName="bg-gray-50 text-indigo-600"
-                              className="group relative flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                              className="group relative flex gap-x-2 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
                               href="/notice"
                               onTransitionComplete={() => setSidebarOpen(false)}
                             >
                               {() => (
                                 <>
                                   <span className="relative">
-                                    <BellIcon className="h-full w-6 stroke-gray-600" />
+                                    <MegaphoneIcon className="h-full w-6 stroke-gray-600" />
                                     {notice && (
                                       <span className="absolute right-0 top-0 block h-2 w-2 rounded-full bg-red-600 ring-2 ring-white" />
                                     )}
@@ -134,6 +139,19 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                             エピソード
                           </p>
                           {episodeNavigation.map((item) =>
+                            generateSliderNavigation({
+                              item,
+                              onTransitionComplete: () => setSidebarOpen(false),
+                            })
+                          )}
+                        </ul>
+                      </li>
+                      <li>
+                        <ul className="-mx-2 grid gap-y-1">
+                          <p className="mb-1 px-2 text-sm text-gray-500">
+                            ランキング
+                          </p>
+                          {rankingNavigation.map((item) =>
                             generateSliderNavigation({
                               item,
                               onTransitionComplete: () => setSidebarOpen(false),
