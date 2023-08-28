@@ -1,9 +1,11 @@
 ---
-title: "<!-- title -->"
-date: "<!-- date -->"
-category: "<!-- category -->"
-importance: "<!-- importance -->" # low, middle, high
-draft: true # true, false
+title: "新機能のお知らせ"
+date: "2023-08-27"
+category: "新機能"
+importance: "low" # low, middle, high
+draft: false # true, false
 ---
 
-<!-- content -->
+<!-- 例文 コメントも消去してね -->
+
+匿名アカウントの場合 30 日ログインしていないかキャッシュが消去された場合は、作品要望履歴は表示されません。
