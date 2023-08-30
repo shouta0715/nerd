@@ -5,7 +5,7 @@ import { GetTrendQuery, GetTrendQueryVariables } from "src/gql/graphql";
 import { client } from "src/libs/client/graphql";
 
 const getTrends = async (variables: GetTrendQueryVariables) => {
-  const data = await client.request<GetTrendQuery, GetTrendQueryVariables>(
+  const data = client.request<GetTrendQuery, GetTrendQueryVariables>(
     trendDocument,
     variables
   );
