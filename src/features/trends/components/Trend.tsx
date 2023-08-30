@@ -12,7 +12,9 @@ import {
   getEpisodeQuery,
 } from "src/features/episodes/utils/link";
 import { getSeriesLink, getSeriesQuery } from "src/features/series/utils/link";
+import { useLiveTimer } from "src/features/timer/hooks/useLiveTimer";
 import { Trends } from "src/features/trends/types";
+import { getTrendTags, getTrendsBadge } from "src/features/trends/utils";
 import {
   getWorksLink,
   getWorksQuery,
@@ -24,15 +26,26 @@ type Props = {
 };
 
 export const Trend: FC<Props> = ({ trend, index }) => {
+  const { mode } = useLiveTimer({
+    start_time: trend.start_time,
+    end_time: trend.end_time,
+  });
+
+  const { isBadge, badge, color } = getTrendsBadge({
+    mode,
+    start_time: trend.start_time,
+    end_time: trend.end_time,
+  });
+
   return (
-    <li className="flex justify-between gap-x-6">
+    <li className="flex flex-wrap justify-between gap-x-6">
       <Link
         as={getEpisodeLink({
           as: true,
           id: trend.id,
           end_time: trend.end_time,
         })}
-        className="flex min-w-0 flex-1 gap-x-4"
+        className="flex flex-1 gap-x-4"
         href={{
           pathname: getEpisodeLink({
             as: false,
@@ -48,24 +61,43 @@ export const Trend: FC<Props> = ({ trend, index }) => {
           }),
         }}
       >
-        <div className="min-w-0 flex-auto">
+        <div className="flex-1 ">
           <div className="flex text-xs font-semibold leading-5 text-gray-500">
-            <p className="truncate">
-              {index + 1}. トレンド {trend.work.title}
+            <p className="line-clamp-1">
+              {index + 1}.{" "}
+              {getTrendTags({
+                weighted_count: trend.weighted_count,
+              }).map((tag) => (
+                <Fragment key={tag}>{tag}・</Fragment>
+              ))}
+              {trend.work.title}
             </p>
           </div>
           <div className="mt-1 text-sm font-semibold leading-6 text-gray-900">
-            <p>{trend.title}</p>
+            {isBadge && (
+              <p>
+                <span
+                  className={clsx(
+                    "my-1 -ml-1 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ",
+                    color
+                  )}
+                >
+                  {badge}
+                </span>
+              </p>
+            )}
+
+            <p className="line-clamp-2">{trend.title}</p>
           </div>
           <div className="mt-1 flex text-xs leading-5 text-gray-500">
-            <p className="truncate">
+            <p>
               <span className="pr-2">{trend.total_count.toLocaleString()}</span>
               件の投稿
             </p>
           </div>
         </div>
       </Link>
-      <div className="flex shrink-0">
+      <div className="flex w-5">
         <Menu as="div" className="relative flex-none">
           <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
             <span className="sr-only">Open options</span>

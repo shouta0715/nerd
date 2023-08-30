@@ -22,3 +22,9 @@ export type TrendResult = Omit<
 export type Trends = {
   trending_chat_episodes: TrendResult[];
 };
+
+export type GetTrendsBadge = {
+  badge: string | null;
+  color: string | null;
+  isBadge: boolean;
+};

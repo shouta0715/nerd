@@ -1,4 +1,8 @@
-import { getTrendsTime, getWeightedCount } from "src/features/trends/utils";
+import {
+  getTrendTags,
+  getTrendsTime,
+  getWeightedCount,
+} from "src/features/trends/utils";
 
 describe("trends/utils", () => {
   describe("getTrendsTime", () => {
@@ -104,6 +108,36 @@ describe("trends/utils", () => {
       expect(getWeightedCount({ short_count, mid_count, long_count })).toBe(
         expects
       );
+    });
+  });
+
+  describe("getTrendTags", () => {
+    test("weighted_countが100以上の場合は['トレンド', '急上昇']を返す", () => {
+      const weighted_count = 100;
+      const expects = ["トレンド", "急上昇"];
+
+      expect(getTrendTags({ weighted_count })).toEqual(expects);
+    });
+
+    test("weighted_countが50以上の場合は['トレンド', '話題']を返す", () => {
+      const weighted_count = 50;
+      const expects = ["トレンド", "話題"];
+
+      expect(getTrendTags({ weighted_count })).toEqual(expects);
+    });
+
+    test("weighted_countが1以上の場合は['トレンド']を返す", () => {
+      const weighted_count = 1;
+      const expects = ["トレンド"];
+
+      expect(getTrendTags({ weighted_count })).toEqual(expects);
+    });
+
+    test("weighted_countが0の場合は['トレンド']を返す", () => {
+      const weighted_count = 0;
+      const expects = ["おすすめ"];
+
+      expect(getTrendTags({ weighted_count })).toEqual(expects);
     });
   });
 });

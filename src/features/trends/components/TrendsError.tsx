@@ -25,7 +25,6 @@ export const TrendsError = (error: FallbackProps) => {
           </span>
         </p>
       </div>
-
       <ErrorMessage {...error} />
     </div>
   );
