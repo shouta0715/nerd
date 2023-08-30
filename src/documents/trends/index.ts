@@ -1,7 +1,7 @@
 import { graphql } from "src/gql/gql";
 
-export const trendingChatsEpisodesDocument = graphql(`
-  query GetTrendingChatsEpisodes(
+export const trendDocument = graphql(`
+  query GetTrend(
     $limit: Int!
     $short_term_from: timestamptz!
     $short_term_to: timestamptz!

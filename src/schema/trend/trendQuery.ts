@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
-export const GET_TRENDING_CHATS_EPISODES = gql`
-  query GetTrendingChatsEpisodes(
+export const GET_TRENDING = gql`
+  query GetTrend(
     $limit: Int!
     $short_term_from: timestamptz!
     $short_term_to: timestamptz!
