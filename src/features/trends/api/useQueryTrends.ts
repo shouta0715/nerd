@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { trendDocument } from "src/documents/trends";
+import { trendsDocument } from "src/documents/trends";
 import { getTrendsVariables } from "src/features/trends/utils";
-import { GetTrendQuery, GetTrendQueryVariables } from "src/gql/graphql";
+import { GetTrendsQuery, GetTrendsQueryVariables } from "src/gql/graphql";
 import { client } from "src/libs/client/graphql";
 
-const getTrends = async (variables: GetTrendQueryVariables) => {
-  const data = client.request<GetTrendQuery, GetTrendQueryVariables>(
-    trendDocument,
+const getTrends = async (variables: GetTrendsQueryVariables) => {
+  const data = client.request<GetTrendsQuery, GetTrendsQueryVariables>(
+    trendsDocument,
     variables
   );
 

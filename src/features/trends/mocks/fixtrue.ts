@@ -1,8 +1,8 @@
-import { GetTrendQuery, GetTrendQueryVariables } from "src/gql/graphql";
+import { GetTrendsQuery, GetTrendsQueryVariables } from "src/gql/graphql";
 
 export const mswTrendsData = ({
   limit,
-}: GetTrendQueryVariables): GetTrendQuery => {
+}: GetTrendsQueryVariables): GetTrendsQuery => {
   return {
     trending_chat_episodes: Array.from({ length: limit }, (_, i) => ({
       id: i.toString(),

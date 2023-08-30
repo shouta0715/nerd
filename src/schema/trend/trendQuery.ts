@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
-export const GET_TREND = gql`
-  query GetTrend(
+export const GET_TRENDS = gql`
+  query GetTrends(
     $limit: Int!
     $short_term_from: timestamptz!
     $short_term_to: timestamptz!

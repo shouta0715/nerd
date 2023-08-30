@@ -1,5 +1,5 @@
 import { Term, TrendingTime } from "src/features/trends/types";
-import { GetTrendQueryVariables } from "src/gql/graphql";
+import { GetTrendsQueryVariables } from "src/gql/graphql";
 
 export const getTrendsTime = (): TrendingTime => {
   const now = new Date();
@@ -29,7 +29,7 @@ export const getTrendsTime = (): TrendingTime => {
   };
 };
 
-export const getTrendsVariables = (): GetTrendQueryVariables => {
+export const getTrendsVariables = (): GetTrendsQueryVariables => {
   const { shortTerm, midTerm, longTerm } = getTrendsTime();
 
   return {
