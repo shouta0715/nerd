@@ -13,9 +13,12 @@ import { setupMsw } from "src/tests/setup";
 setupMsw(...requestHistoryHandlers());
 
 const setup = (status: Status_Enum | "all" = "all", page = 1) => {
-  mockRouter.setCurrentUrl(
-    `/request?status=${getStatusQuery(status) ?? "all"}&page=${page}`
-  );
+  act(() => {
+    mockRouter.setCurrentUrl(
+      `/request?status=${getStatusQuery(status) ?? "all"}&page=${page}`
+    );
+  });
+
   const wrapper = QueryClientWrapper;
 
   const { result } = renderHook(() => useRequestHistory(), { wrapper });
