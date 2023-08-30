@@ -33,7 +33,7 @@ export const getTrendsVariables = (): GetTrendsQueryVariables => {
   const { shortTerm, midTerm, longTerm } = getTrendsTime();
 
   return {
-    limit: 10,
+    limit: 30,
     short_term_from: shortTerm.from,
     short_term_to: shortTerm.to,
     mid_term_from: midTerm.from,
@@ -41,4 +41,18 @@ export const getTrendsVariables = (): GetTrendsQueryVariables => {
     long_term_from: longTerm.from,
     long_term_to: longTerm.to,
   };
+};
+
+export const getWeightedCount = ({
+  short_count,
+  mid_count,
+  long_count,
+}: {
+  short_count?: number;
+  mid_count?: number;
+  long_count?: number;
+}): number => {
+  return Math.floor(
+    (short_count ?? 0) + 0.5 * (mid_count ?? 0) + 0.1 * (long_count ?? 0)
+  );
 };

@@ -10,7 +10,7 @@ export const ErrorMessage = ({ resetErrorBoundary }: FallbackProps) => {
 
   React.useEffect(() => {
     onNotification({
-      title: "データの取得に失敗しました。",
+      title: "データの取得できませんでした。",
       message: "通信環境の良い場所で再度お試しください。",
       type: "error",
     });
@@ -19,7 +19,7 @@ export const ErrorMessage = ({ resetErrorBoundary }: FallbackProps) => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-10">
       <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
-        データの取得に失敗しました。
+        データの取得ができませんでした。
       </p>
       <Button
         onClick={() => {
