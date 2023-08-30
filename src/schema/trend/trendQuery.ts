@@ -11,6 +11,7 @@ export const GET_TRENDING_CHATS_EPISODES = gql`
     $long_term_to: timestamptz!
   ) {
     trending_chat_episodes(args: { _limit: $limit }) {
+      ...EpisodeFragment
       short_term_chats: chats_aggregate(
         where: { created_at: { _gte: $short_term_from, _lte: $short_term_to } }
       ) {
