@@ -1,4 +1,5 @@
 import {
+  ArrowTrendingUpIcon,
   ChevronRightIcon,
   HomeIcon,
   MegaphoneIcon,
@@ -21,6 +22,12 @@ export const home = generateNavList({
   icon: HomeIcon,
   color: "stroke-gray-600",
 });
+export const trends = generateNavList({
+  name: "トレンド",
+  href: "/trends",
+  icon: ArrowTrendingUpIcon,
+  color: "stroke-gray-600",
+});
 const episodeNavList = episodeNavigation.map((item) => generateNavList(item));
 
 const worksNavList = worksNavigation.map((item) => generateNavList(item));
@@ -39,6 +46,7 @@ export const Nav: FC<Props> = ({ notice }) => (
   <nav className="flex h-full flex-col gap-y-7">
     <div className="mt-7 grid gap-y-2">
       {home}
+      {trends}
       <ActiveLink
         key="お知らせ"
         activeClassName="text-indigo-600"
