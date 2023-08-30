@@ -4,13 +4,13 @@ import { GetTrendsQuery, GetTrendsQueryVariables } from "src/gql/graphql";
 
 export const mswTrendsHandler = (delay?: number, status?: number) => {
   if (status) {
-    return graphql.query("GetTrend", (_, res, ctx) => {
+    return graphql.query("GetTrends", (_, res, ctx) => {
       return res(ctx.delay(delay), ctx.status(status));
     });
   }
 
   return graphql.query<GetTrendsQuery, GetTrendsQueryVariables>(
-    "GetTrend",
+    "GetTrends",
     (req, res, ctx) => {
       return delay
         ? res(ctx.delay(delay), ctx.data(mswTrendsData(req.variables)))
