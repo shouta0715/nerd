@@ -1,8 +1,8 @@
-import { getTrendingTime } from "src/features/trends/utils";
+import { getTrendsTime } from "src/features/trends/utils";
 
-describe("getTrendingTime", () => {
+describe("getTrendsTime", () => {
   test("string型を返す", () => {
-    const trendingTime = getTrendingTime();
+    const trendingTime = getTrendsTime();
 
     expect(typeof trendingTime.shortTerm.from).toBe("string");
     expect(typeof trendingTime.shortTerm.to).toBe("string");
@@ -13,7 +13,7 @@ describe("getTrendingTime", () => {
   });
 
   test("shortTermの差は5分", () => {
-    const trendingTime = getTrendingTime();
+    const trendingTime = getTrendsTime();
     const shortTimeFrom = new Date(trendingTime.shortTerm.from);
     const shortTimeTo = new Date(trendingTime.shortTerm.to);
     const diff = shortTimeTo.getTime() - shortTimeFrom.getTime();
@@ -22,7 +22,7 @@ describe("getTrendingTime", () => {
   });
 
   test("midTermの差は30分", () => {
-    const trendingTime = getTrendingTime();
+    const trendingTime = getTrendsTime();
     const midTermFrom = new Date(trendingTime.midTerm.from);
     const midTermTo = new Date(trendingTime.midTerm.to);
     const diff = midTermTo.getTime() - midTermFrom.getTime();
@@ -31,7 +31,7 @@ describe("getTrendingTime", () => {
   });
 
   test("longTermの差は24時間", () => {
-    const trendingTime = getTrendingTime();
+    const trendingTime = getTrendsTime();
     const longTermFrom = new Date(trendingTime.longTerm.from);
     const longTermTo = new Date(trendingTime.longTerm.to);
     const diff = longTermTo.getTime() - longTermFrom.getTime();

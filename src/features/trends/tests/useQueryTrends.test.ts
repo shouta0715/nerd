@@ -1,10 +1,10 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { useQueryTrends } from "src/features/trends/api/useQueryEpisodeTrends";
-import { trendingChatsEpisodesHandler } from "src/features/trends/mocks/msw";
+import { useQueryTrends } from "src/features/trends/api/useQueryTrends";
+import { mswTrendsHandler } from "src/features/trends/mocks/msw";
 import { QueryClientWrapper } from "src/tests/provider";
 import { setupMsw } from "src/tests/setup";
 
-setupMsw(trendingChatsEpisodesHandler());
+setupMsw(mswTrendsHandler());
 
 const setup = async () => {
   const wrapper = QueryClientWrapper;

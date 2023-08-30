@@ -1,6 +1,6 @@
 import { GetTrendQuery, GetTrendQueryVariables } from "src/gql/graphql";
 
-export const mswTrendingChatsEpisodeData = ({
+export const mswTrendsData = ({
   limit,
 }: GetTrendQueryVariables): GetTrendQuery => {
   return {
