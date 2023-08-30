@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import {
+  ArrowTrendingUpIcon,
   HomeIcon,
   MegaphoneIcon,
   XMarkIcon,
@@ -107,6 +108,15 @@ export const Sidebar: FC<Props> = ({ notice }) => {
                               name: "ホーム",
                               href: "/",
                               icon: HomeIcon,
+                              color: "stroke-gray-600",
+                            },
+                            onTransitionComplete: () => setSidebarOpen(false),
+                          })}
+                          {generateSliderNavigation({
+                            item: {
+                              name: "トレンド",
+                              href: "/trends",
+                              icon: ArrowTrendingUpIcon,
                               color: "stroke-gray-600",
                             },
                             onTransitionComplete: () => setSidebarOpen(false),
