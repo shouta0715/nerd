@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader } from "src/components/Elements/Loader";
+import { Skeleton } from "src/components/Elements/Skeleton";
 import { Text } from "src/components/Elements/Text";
 
 export const Loading = () => {
@@ -25,9 +25,9 @@ export const Loading = () => {
         </p>
       </div>
 
-      <p className="flex justify-center">
-        <Loader size="xl" variant="dots" />
-      </p>
+      <div className="">
+        <Skeleton theme="trends" />
+      </div>
     </div>
   );
 };
