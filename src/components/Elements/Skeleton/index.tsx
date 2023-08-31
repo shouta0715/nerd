@@ -4,6 +4,7 @@ import { NextButtonSkelton } from "src/components/Elements/Skeleton/items/NextBu
 import { SearchSkelton } from "src/components/Elements/Skeleton/items/SearchSkelton";
 import { TimerSkeleton } from "src/components/Elements/Skeleton/items/TimerSkeleton";
 import { TodaySkeleton } from "src/components/Elements/Skeleton/items/TodaySkeleton";
+import { TrendsSkelton } from "src/components/Elements/Skeleton/items/TrendsSkelton";
 import { WithSeries } from "src/components/Elements/Skeleton/items/WithSeries";
 import { WorkEpisodeSkeleton } from "src/components/Elements/Skeleton/items/WorkEpisodeSkeleton";
 import { WorkSkeleton } from "src/components/Elements/Skeleton/items/WorkSkeleton";
@@ -17,7 +18,8 @@ type Themes =
   | "today"
   | "nextButton"
   | "search"
-  | "withSeries";
+  | "withSeries"
+  | "trends";
 
 type ThemeProps = {
   episodeMenu: never;
@@ -36,6 +38,7 @@ type ThemeProps = {
   today: never;
   search: never;
   withSeries: never;
+  trends: never;
 };
 const ThemeComponents = {
   episodeMenu: EpisodeMenuSkeleton,
@@ -49,6 +52,7 @@ const ThemeComponents = {
   nextButton: NextButtonSkelton,
   search: SearchSkelton,
   withSeries: WithSeries,
+  trends: TrendsSkelton,
 };
 
 const Accessibility = {
@@ -61,6 +65,7 @@ const Accessibility = {
   nextButton: "次のエピソードをロード中...",
   search: "検索中...",
   withSeries: "作品とシリーズをロード中...",
+  trends: "トレンドをロード中...",
 };
 
 const selectTheme = (theme: Themes) => {
