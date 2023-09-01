@@ -24,6 +24,7 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
     onSubmitHandler,
   });
   const isActive = useTimerState((state) => state.interval.active);
+  const time = useTimerState((state) => state.getTime);
 
   return (
     <div className="sticky bottom-20 flex w-full justify-end">
@@ -66,7 +67,7 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
       <Button
         aria-label={isShow ? "リアクションを閉じる" : "リアクションを開く"}
         className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-white shadow-lg ring-1 ring-gray-900/5 lg:h-12 lg:w-12"
-        disabled={!isActive}
+        disabled={!isActive || time() === 0}
         onClick={() => setIsShow((prev) => !prev)}
       >
         {isShow ? (
