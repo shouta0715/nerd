@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import React, { FC, Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -7,13 +8,31 @@ import { Nav } from "src/components/dynamic/live/nav";
 import { Loader } from "src/components/Elements/Loader";
 import { ErrorMessage } from "src/components/Error/items/ErrorMessage";
 import { EpisodeCommentInput } from "src/features/comments/episodes/components/EpisodeCommentInput";
-import { EpisodeComments } from "src/features/comments/episodes/components/EpisodeComments";
 import { FinishLive } from "src/features/live/components/Finish";
 import { LiveChatInput } from "src/features/live/components/LiveChatInput";
-import { LiveChats } from "src/features/live/components/LiveChats";
 import { LiveComment } from "src/features/live/components/LiveComment";
 import { useLive } from "src/features/live/hooks/useLive";
 import { GetEpisodeQuery } from "src/gql/graphql";
+
+const DynamicChats = dynamic(
+  () =>
+    import("src/features/live/components/LiveChats").then(
+      (mod) => mod.LiveChats
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
+
+const DynamicComments = dynamic(
+  () =>
+    import("src/features/comments/episodes/components/EpisodeComments").then(
+      (mod) => mod.EpisodeComments
+    ),
+  {
+    loading: () => <Loader className="m-auto" size="xl" variant="dots" />,
+  }
+);
 
 type Props = {
   data: GetEpisodeQuery;
@@ -56,7 +75,7 @@ export const Live: FC<Props> = ({ data }) => {
         </div>
         <Nav isChat={isChat} mode={mode} response="sp" />
 
-        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="relative flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <ErrorBoundary
               key={`${data?.episodes_by_pk?.id}-chats`}
@@ -70,7 +89,7 @@ export const Live: FC<Props> = ({ data }) => {
                 {isAlreadyFinished ? (
                   <FinishLive episode={data?.episodes_by_pk} />
                 ) : (
-                  <LiveChats
+                  <DynamicChats
                     episode_id={data?.episodes_by_pk?.id}
                     mode={mode}
                     time={time}
@@ -89,7 +108,7 @@ export const Live: FC<Props> = ({ data }) => {
                 }
               >
                 {mode === "finish" ? (
-                  <EpisodeComments episode_id={data?.episodes_by_pk?.id} />
+                  <DynamicComments episode_id={data?.episodes_by_pk?.id} />
                 ) : (
                   <LiveComment />
                 )}

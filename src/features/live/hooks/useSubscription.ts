@@ -1,23 +1,26 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { episodeChatsDocument } from "src/documents/chats";
+import { useSubscriptionsHandler } from "src/features/live/hooks/useSubscriptionsHandler";
+import { ViewReactionsData } from "src/features/reactions/common/types";
+import { getReactionsData } from "src/features/reactions/common/utils";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import {
   GetChatsQuery,
   SubscriptionChatsSubscription,
   SubscriptionChatsSubscriptionVariables,
+  SubscriptionReactionsSubscription,
 } from "src/gql/graphql";
 
 import { client } from "src/libs/client/graphql";
-import { getWsClient } from "src/libs/client/ws";
 import { SUBSCRIPTION_CHATS } from "src/schema/chat/chatQuery";
+import { SUBSCRIPTION_REACTIONS } from "src/schema/reactions/reactionsQuery";
 
-import { useGlobalState, useWsClientState } from "src/store/global/globalStore";
-import { getToken } from "src/utils/client/getToken";
+import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
   episode_id: string;
@@ -34,69 +37,26 @@ const getKey = (episode_id: string) => ["GetChats", { episode_id }];
 
 export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const onNotification = useNotificationState((state) => state.onShow);
-  const [isWsError, setIsWsError] = useState(false);
+  const {
+    wsClient,
+    errorTimeout,
+    isWsError,
+    reConnectionCount,
+    handleAutoReconnect,
+    handlerError,
+    isSocketError,
+    cleanup,
+  } = useSubscriptionsHandler();
   const authLoading = useGlobalState((state) => state.authLoading);
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
   const [isLoadingWsRefetch, setIsLoadingWsRefetch] = useState(false);
-  const [wsClient, setWsClient, isSocketError, setIsSocketError] =
-    useWsClientState((state) => [
-      state.wsClient,
-      state.setWsClient,
-      state.isWsError,
-      state.setIsWsError,
-    ]);
-  const [reConnectionCount, setReConnectionCount] = useState(0);
-  const errorTimeout = useRef<NodeJS.Timeout | null>(null);
-
-  const handleAutoReconnect = useCallback(async () => {
-    const token = await getToken();
-
-    if (!token) return;
-
-    const newClient = getWsClient({
-      token,
-      onConnected: () => {
-        if (errorTimeout.current) clearTimeout(errorTimeout.current);
-        setIsSocketError(false);
-        onNotification({
-          title: "リアルタイムで更新中です。",
-          message: "自動で最新のコメントを読み込みます",
-          type: "success",
-        });
-      },
-      onError: () => {
-        if (errorTimeout.current) clearTimeout(errorTimeout.current);
-        errorTimeout.current = setTimeout(() => {
-          onNotification({
-            title: "リアルタイム接続できませんでした。",
-            message: "右下のボタンを押すと、最新のコメントを読み込めます",
-            type: "error",
-          });
-          setIsSocketError(true);
-        }, 10000);
-      },
-    });
-
-    setWsClient(newClient);
-    setIsWsError(false);
-    setReConnectionCount((prev) => prev + 1);
-  }, [onNotification, setIsSocketError, setWsClient]);
 
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
 
-    if (mode !== "up")
-      return () => {
-        wsClient.dispose();
-
-        if (errorTimeout.current) {
-          clearTimeout(errorTimeout.current);
-          errorTimeout.current = null;
-        }
-      };
-
-    if (isWsError || reConnectionCount > 7) return () => {};
+    if (mode !== "up") return cleanup;
+    if (isWsError || reConnectionCount > 7) return cleanup;
 
     wsClient.on("closed", (event: unknown) => {
       if (!(event instanceof CloseEvent) || mode !== "up") return;
@@ -111,16 +71,14 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     });
 
     const initial_created_at = new Date().toISOString();
+    const variables = { episode_id, initial_created_at };
     wsClient.subscribe<
       SubscriptionChatsSubscription,
       SubscriptionChatsSubscriptionVariables
     >(
       {
         query: SUBSCRIPTION_CHATS,
-        variables: {
-          episode_id,
-          initial_created_at,
-        },
+        variables,
       },
       {
         next: ({ data }) => {
@@ -140,37 +98,59 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
             chats: [...prevData.chats, ...newChats],
           });
         },
-        error: () => {
-          if (errorTimeout.current) clearTimeout(errorTimeout.current);
-          errorTimeout.current = setTimeout(() => {
-            if (isWsError) return;
-            onNotification({
-              title: "リアルタイム接続できませんでした。",
-              message: "右下のボタンを押すと、最新のコメントを読み込めます",
-              type: "error",
-            });
-            setIsWsError(true);
-          }, 10000);
-        },
+        error: handlerError,
         complete: () => console.log("complete"),
       }
     );
 
-    return () => {
-      wsClient.dispose();
+    wsClient.subscribe<
+      SubscriptionReactionsSubscription,
+      SubscriptionChatsSubscriptionVariables
+    >(
+      {
+        query: SUBSCRIPTION_REACTIONS,
+        variables,
+      },
+      {
+        next: ({ data }) => {
+          queryClient.setQueryData<ViewReactionsData>(
+            ["reactions", { episode_id }],
+            (prev) => {
+              const reactions = data?.reactions_stream
+                .map((reaction) => {
+                  return getReactionsData({
+                    count: reaction.push_count,
+                    type: reaction.emoji_type,
+                    id: reaction.id,
+                    maxCount: 10,
+                    reactions_time: reaction.reactions_time,
+                  });
+                })
+                .flat();
 
-      if (errorTimeout.current) {
-        clearTimeout(errorTimeout.current);
-        errorTimeout.current = null;
+              if (!prev) return reactions || [];
+
+              if (!reactions) return prev;
+
+              return [...prev, ...reactions];
+            }
+          );
+        },
+        error: handlerError,
+        complete: () => console.log("complete reactions"),
       }
-    };
+    );
+
+    return cleanup;
   }, [
     authLoading,
+    cleanup,
     episode_id,
+    errorTimeout,
     handleAutoReconnect,
+    handlerError,
     isWsError,
     mode,
-    onNotification,
     queryClient,
     reConnectionCount,
     wsClient,

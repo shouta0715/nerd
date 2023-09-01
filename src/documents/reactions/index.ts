@@ -49,3 +49,24 @@ export const ReactionsWorkDocument = graphql(`
     }
   }
 `);
+
+export const SubscriptionReactionsDocument = graphql(`
+  subscription SubscriptionReactions(
+    $episode_id: uuid!
+    $initial_created_at: timestamptz!
+  ) {
+    reactions_stream(
+      cursor: {
+        initial_value: { created_at: $initial_created_at }
+        ordering: ASC
+      }
+      batch_size: 5
+      where: { episode_id: { _eq: $episode_id }, reactions_time: { _gte: 0 } }
+    ) {
+      id
+      push_count
+      emoji_type
+      reactions_time
+    }
+  }
+`);

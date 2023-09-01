@@ -2,8 +2,8 @@ import React, { FC, useState } from "react";
 import { Reaction } from "src/features/reactions/common/components/Reaction";
 import { ReactionButton } from "src/features/reactions/common/components/ReactionButton";
 import {
-  ReactionData,
   ReactionType,
+  ViewReactionsData,
   defaultReaction,
 } from "src/features/reactions/common/types";
 import { Emoji_Types_Enum } from "src/gql/graphql";
@@ -13,10 +13,15 @@ type Props = {
     value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum },
     reactions: ReactionType
   ) => Promise<void>;
-  data: (ReactionData & { id: string | number })[];
+  data: ViewReactionsData;
+  disabledAction?: boolean;
 };
 
-export const Reactions: FC<Props> = ({ onSubmitHandler, data }) => {
+export const Reactions: FC<Props> = ({
+  onSubmitHandler,
+  data,
+  disabledAction,
+}) => {
   const [reactions, setReactions] = useState<ReactionType>(defaultReaction);
 
   return (
@@ -32,6 +37,7 @@ export const Reactions: FC<Props> = ({ onSubmitHandler, data }) => {
             ))}
           </div>
           <ReactionButton
+            disabledAction={disabledAction}
             onSubmitHandler={onSubmitHandler}
             reactions={reactions}
             setReactions={setReactions}

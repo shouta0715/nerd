@@ -15,6 +15,11 @@ export type ReactionType = {
   };
 } & { values: (ReactionData & { id: string })[] };
 
+export type ViewReactionsData = (ReactionData & {
+  id: string | number;
+  delay?: number;
+})[];
+
 export const reactionsData: {
   [k in Emoji_Types_Enum]: ReactionData;
 } = {

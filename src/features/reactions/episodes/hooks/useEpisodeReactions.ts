@@ -56,6 +56,7 @@ export const useEpisodeReactions = (episode_id: string) => {
         count: reaction.push_count,
         type: reaction.emoji_type,
         id: reaction.id,
+        reactions_time: reaction.reactions_time,
       })
     );
 

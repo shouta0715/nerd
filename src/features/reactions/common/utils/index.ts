@@ -1,6 +1,6 @@
 import {
-  ReactionData,
   ReactionType,
+  ViewReactionsData,
   reactionsData,
 } from "src/features/reactions/common/types";
 import { Emoji_Types_Enum, Reactions_Insert_Input } from "src/gql/graphql";
@@ -52,18 +52,22 @@ export const getReactionsData = ({
   count,
   type,
   id,
-}: Omit<ReactionType[Emoji_Types_Enum], "reactions_time"> & {
+  maxCount = 3,
+  reactions_time,
+}: ReactionType[Emoji_Types_Enum] & {
   type: Emoji_Types_Enum;
   id: number;
-}): (ReactionData & { id: string; delay: number })[] => {
+  maxCount?: number;
+}): ViewReactionsData => {
   const result = Array.from(
     {
-      length: count > 3 ? 3 : count,
+      length: count > maxCount ? maxCount : count,
     },
     (_, index) => {
       return {
         id: `${id}-${type}-${index}`,
         delay: index * 0.5,
+        reaction_time: reactions_time || 0,
         ...reactionsData[type],
       };
     }

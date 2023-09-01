@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import React, { FC, memo, useRef } from "react";
-import { ReactionData } from "src/features/reactions/common/types";
+import { ViewReactionsData } from "src/features/reactions/common/types";
 
 type Props = {
-  reaction: ReactionData & { id: string | number; delay?: number };
+  reaction: ViewReactionsData[number];
 };
 
 export const Reaction: FC<Props> = memo(({ reaction }) => {

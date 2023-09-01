@@ -12,7 +12,7 @@ export const useLive = (data: GetEpisodeQuery) => {
   });
 
   return {
-    isChat: chatMode === "chat",
+    isChat: (chatMode ?? "chat") === "chat",
     mode,
     time,
     isAlreadyFinished,

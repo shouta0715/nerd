@@ -18,12 +18,14 @@ type Props = {
     value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum },
     reactions: ReactionType
   ) => Promise<void>;
+  disabledAction?: boolean;
 };
 
 export const ReactionButton: FC<Props> = ({
   reactions,
   onSubmitHandler,
   setReactions,
+  disabledAction,
 }) => {
   const { isShow, handleClick, setIsShow } = useReactionButton({
     onSubmitHandler,
@@ -32,6 +34,10 @@ export const ReactionButton: FC<Props> = ({
   });
   const isActive = useTimerState((state) => state.interval.active);
   const time = useTimerState((state) => state.getTime);
+  const disabled =
+    typeof disabledAction === "boolean"
+      ? disabledAction
+      : !isActive || time() === 0;
 
   return (
     <>
@@ -49,7 +55,7 @@ export const ReactionButton: FC<Props> = ({
               key={reaction.value}
               aria-label={`${reaction.label}ボタン`}
               className="h-10 w-10 rounded-full border-none lg:h-12 lg:w-12"
-              disabled={!isActive}
+              disabled={disabled}
               onClick={(e) => handleClick(e, reaction)}
             >
               {typeof reaction.icon === "string" ? (
@@ -68,7 +74,7 @@ export const ReactionButton: FC<Props> = ({
       <Button
         aria-label={isShow ? "リアクションを閉じる" : "リアクションを開く"}
         className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-white shadow-lg ring-1 ring-gray-900/5 lg:h-12 lg:w-12"
-        disabled={!isActive || time() === 0}
+        disabled={disabled}
         onClick={() => setIsShow((prev) => !prev)}
       >
         {isShow ? (
