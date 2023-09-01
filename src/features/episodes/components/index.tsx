@@ -78,7 +78,7 @@ export const Episode = () => {
           )}
         </div>
         <Nav isChat={isChat} response="sp" />
-        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="relative flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <ErrorBoundary
               key={`${data?.episodes_by_pk?.id}-chats`}

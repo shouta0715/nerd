@@ -33,6 +33,7 @@ export const Chats: FC<Props> = ({
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
   const router = useRouter();
+  const isShowStartButton = time === 0 && !interval.active;
 
   return (
     <>
@@ -72,7 +73,7 @@ export const Chats: FC<Props> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
           onClick={interval.start}
-          show={time === 0 && !interval.active}
+          show={isShowStartButton}
         >
           {isPending || authLoading ? (
             <Loader size="xl" theme="white" />
@@ -114,10 +115,14 @@ export const Chats: FC<Props> = ({
             <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
           </button>
         </div>
-        <div>
-          <ReactionButton onSubmitHandler={onSubmitHandler} />
-        </div>
       </div>
+      {!isShowStartButton && (
+        <div className="pointer-events-none absolute inset-0 px-2 lg:px-3">
+          <div className="pointer-events-none flex h-full w-full items-end">
+            <ReactionButton onSubmitHandler={onSubmitHandler} />
+          </div>
+        </div>
+      )}
     </>
   );
 };

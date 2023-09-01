@@ -9,6 +9,7 @@ import {
   ReactionType,
   reactionsData,
 } from "src/features/reactions/common/types";
+import { useTimerState } from "src/features/timer/store";
 import { Emoji_Types_Enum } from "src/gql/graphql";
 
 type Props = {
@@ -22,17 +23,18 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
   const { isShow, handleClick, setIsShow, reactions } = useReactionButton({
     onSubmitHandler,
   });
+  const isActive = useTimerState((state) => state.interval.active);
 
   return (
-    <>
-      <div className="absolute left-1/2 -translate-x-1/2">
+    <div className="sticky bottom-20 flex w-full justify-end">
+      <div className="absolute left-1/2 -translate-x-1/2  ">
         {reactions.map((reaction) => (
           <Reaction key={reaction.id} reaction={reaction} />
         ))}
       </div>
       <div
         className={clsx(
-          "absolute bottom-14 grid origin-top gap-y-4 rounded-full  transition-[grid-template-rows] duration-300 ease-in-out lg:bottom-16",
+          "pointer-events-auto absolute bottom-14 grid origin-top gap-y-4 rounded-full  transition-[grid-template-rows] duration-300 ease-in-out lg:bottom-16",
           isShow
             ? "grid-rows-[1fr] bg-white py-2 shadow-lg ring-1 ring-gray-900/5"
             : "grid-rows-[0fr]"
@@ -44,6 +46,7 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
               key={reaction.value}
               aria-label={`${reaction.label}ボタン`}
               className="h-10 w-10 rounded-full border-none lg:h-12 lg:w-12"
+              disabled={!isActive}
               onClick={(e) => handleClick(e, reaction)}
             >
               {typeof reaction.icon === "string" ? (
@@ -61,7 +64,9 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
       </div>
 
       <Button
-        className="grid h-10  w-10 place-items-center rounded-full bg-white shadow-lg ring-1 ring-gray-900/5 lg:h-12 lg:w-12"
+        aria-label={isShow ? "リアクションを閉じる" : "リアクションを開く"}
+        className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-white shadow-lg ring-1 ring-gray-900/5 lg:h-12 lg:w-12"
+        disabled={!isActive}
         onClick={() => setIsShow((prev) => !prev)}
       >
         {isShow ? (
@@ -70,6 +75,6 @@ export const ReactionButton: FC<Props> = ({ onSubmitHandler }) => {
           <HeartIcon className="h-6 w-6 text-pink-600 lg:h-8 lg:w-8" />
         )}
       </Button>
-    </>
+    </div>
   );
 };

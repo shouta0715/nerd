@@ -70,7 +70,7 @@ export const PlayWork: FC = () => {
           response="sp"
           showNext={!!data?.works_by_pk?.series_id}
         />
-        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="relative flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <ErrorBoundary
               key={`${data?.works_by_pk?.id}-chats`}

@@ -66,7 +66,7 @@ module.exports = {
         bubble: {
           "0%": {
             transform: "translateY(0px)",
-            bottom: "-60px",
+            bottom: "-30px",
             opacity: "0",
           }, 
           "25%": {
