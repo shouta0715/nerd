@@ -21,6 +21,7 @@ import { SUBSCRIPTION_CHATS } from "src/schema/chat/chatQuery";
 import { SUBSCRIPTION_REACTIONS } from "src/schema/reactions/reactionsQuery";
 
 import { useGlobalState } from "src/store/global/globalStore";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   episode_id: string;
@@ -51,6 +52,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
   const queryClient = useQueryClient();
   const [prevPageNation, setPrevPageNation] = useState<PageNation | null>(null);
   const [isLoadingWsRefetch, setIsLoadingWsRefetch] = useState(false);
+  const user = useUserState((state) => state.user);
 
   useEffect(() => {
     if (!wsClient || !episode_id || authLoading) return () => {};
@@ -113,10 +115,18 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
       },
       {
         next: ({ data }) => {
+          if (!user) return;
+
+          const filteredSelfReaction = data?.reactions_stream.filter(
+            (reaction) => reaction.user_id !== user.id
+          );
+
+          if (!filteredSelfReaction) return;
+
           queryClient.setQueryData<ViewReactionsData>(
             ["reactions", { episode_id }],
             (prev) => {
-              const reactions = data?.reactions_stream
+              const reactions = filteredSelfReaction
                 .map((reaction) => {
                   return getReactionsData({
                     count: reaction.push_count,
@@ -153,6 +163,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
     mode,
     queryClient,
     reConnectionCount,
+    user,
     wsClient,
   ]);
 

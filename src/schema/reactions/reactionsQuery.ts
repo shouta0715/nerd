@@ -67,6 +67,7 @@ export const SUBSCRIPTION_REACTIONS = gql`
       push_count
       emoji_type
       reactions_time
+      user_id
     }
   }
 `;

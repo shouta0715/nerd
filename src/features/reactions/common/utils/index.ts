@@ -66,7 +66,7 @@ export const getReactionsData = ({
     (_, index) => {
       return {
         id: `${id}-${type}-${index}`,
-        delay: index * 0.5,
+        delay: index * 0.2,
         reaction_time: reactions_time || 0,
         ...reactionsData[type],
       };

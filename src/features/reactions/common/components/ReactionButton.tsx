@@ -3,6 +3,7 @@ import { HeartIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import React, { FC } from "react";
 import { Button } from "src/components/Elements/Button";
+import { Loader } from "src/components/Elements/Loader";
 import { useReactionButton } from "src/features/reactions/common/hooks/useReactionButton";
 import {
   ReactionType,
@@ -10,6 +11,7 @@ import {
 } from "src/features/reactions/common/types";
 import { useTimerState } from "src/features/timer/store";
 import { Emoji_Types_Enum } from "src/gql/graphql";
+import { useUserState } from "src/store/user/userState";
 
 type Props = {
   setReactions: React.Dispatch<React.SetStateAction<ReactionType>>;
@@ -34,6 +36,7 @@ export const ReactionButton: FC<Props> = ({
   });
   const isActive = useTimerState((state) => state.interval.active);
   const time = useTimerState((state) => state.getTime);
+  const user = useUserState((state) => state.user);
   const disabled =
     typeof disabledAction === "boolean"
       ? disabledAction
@@ -55,7 +58,7 @@ export const ReactionButton: FC<Props> = ({
               key={reaction.value}
               aria-label={`${reaction.label}ボタン`}
               className="h-10 w-10 rounded-full border-none lg:h-12 lg:w-12"
-              disabled={disabled}
+              disabled={disabled || !user}
               onClick={(e) => handleClick(e, reaction)}
             >
               {typeof reaction.icon === "string" ? (
@@ -74,13 +77,17 @@ export const ReactionButton: FC<Props> = ({
       <Button
         aria-label={isShow ? "リアクションを閉じる" : "リアクションを開く"}
         className="pointer-events-auto grid h-10 w-10 place-items-center rounded-full bg-white shadow-lg ring-1 ring-gray-900/5 lg:h-12 lg:w-12"
-        disabled={disabled}
+        disabled={disabled || !user}
         onClick={() => setIsShow((prev) => !prev)}
       >
-        {isShow ? (
-          <ChevronDoubleDownIcon className="h-6 w-6 text-indigo-600" />
+        {user ? (
+          isShow ? (
+            <ChevronDoubleDownIcon className="h-6 w-6 text-indigo-600" />
+          ) : (
+            <HeartIcon className="h-6 w-6 text-pink-600 lg:h-8 lg:w-8" />
+          )
         ) : (
-          <HeartIcon className="h-6 w-6 text-pink-600 lg:h-8 lg:w-8" />
+          <Loader size="xl" />
         )}
       </Button>
     </>
