@@ -36,6 +36,7 @@ const documents = {
     "\n  fragment TodayFragment on episodes {\n    id\n    title\n    end_time\n    start_time\n    number\n    has_next_episode\n    has_prev_episode\n    next_episode_id\n    work {\n      id\n      title\n      series_title\n      series_id\n      has_episodes\n      tid\n    }\n  }\n": types.TodayFragmentFragmentDoc,
     "\n  fragment RankingEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n    comments_aggregate {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.RankingEpisodeFragmentFragmentDoc,
     "\n  fragment DailyEpisodeFragment on episodes {\n    id\n    title\n    start_time\n    number\n    end_time\n    has_next_episode\n    next_episode_id\n  }\n": types.DailyEpisodeFragmentFragmentDoc,
+    "\n  fragment ReactionFragment on reactions {\n    id\n    push_count\n    emoji_type\n    reactions_time\n  }\n": types.ReactionFragmentFragmentDoc,
     "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n": types.RequestFragmentFragmentDoc,
     "\n  fragment WorkFragment on works {\n    id\n    title\n    series_title\n    series_id\n    has_episodes\n  }\n": types.WorkFragmentFragmentDoc,
     "\n  fragment FragmentEpisode on episodes {\n    title\n    start_time\n    number\n    id\n    has_next_episode\n    next_episode_id\n    end_time\n  }\n": types.FragmentEpisodeFragmentDoc,
@@ -47,6 +48,8 @@ const documents = {
     "\n  query GetWeeklyWorkRanking($_gte: timestamptz!) {\n    weekly_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetWeeklyWorkRankingDocument,
     "\n  query GetWeeklyEpisodeRanking($_gte: timestamptz!) {\n    weekly_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetWeeklyEpisodeRankingDocument,
     "\n  mutation InsertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n": types.InsertReactionsDocument,
+    "\n  query GetReactionsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n": types.GetReactionsEpisodeDocument,
+    "\n  query GetReactionsWork(\n    $work_id: Int!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_work_id(\n      args: {\n        _work_id: $work_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n": types.GetReactionsWorkDocument,
     "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      ...RequestFragment\n    }\n  }\n": types.InsertRequestDocument,
     "\n  mutation DeleteRequest($id: Int!) {\n    delete_request_works_by_pk(id: $id) {\n      id\n    }\n  }\n": types.DeleteRequestDocument,
     "\n  query GetRequests($user_id: String!, $limit: Int!, $offset: Int!) {\n    request_works(\n      where: { user_id: { _eq: $user_id } }\n      limit: $limit\n      offset: $offset\n      order_by: { created_at: desc }\n    ) {\n      ...RequestFragment\n    }\n    request_works_aggregate(where: { user_id: { _eq: $user_id } }) {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.GetRequestsDocument,
@@ -169,6 +172,10 @@ export function graphql(source: "\n  fragment DailyEpisodeFragment on episodes {
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n  fragment ReactionFragment on reactions {\n    id\n    push_count\n    emoji_type\n    reactions_time\n  }\n"): (typeof documents)["\n  fragment ReactionFragment on reactions {\n    id\n    push_count\n    emoji_type\n    reactions_time\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n"): (typeof documents)["\n  fragment RequestFragment on request_works {\n    id\n    approval_status\n    detail\n    official_url\n    user_id\n    work_title\n    created_at\n    updated_at\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -210,6 +217,14 @@ export function graphql(source: "\n  query GetWeeklyEpisodeRanking($_gte: timest
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  mutation InsertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation InsertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetReactionsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n"): (typeof documents)["\n  query GetReactionsEpisode(\n    $episode_id: uuid!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_episode_id(\n      args: {\n        _episode_id: $episode_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query GetReactionsWork(\n    $work_id: Int!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_work_id(\n      args: {\n        _work_id: $work_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n"): (typeof documents)["\n  query GetReactionsWork(\n    $work_id: Int!\n    $get_limit: Int!\n    $_lt: Int!\n    $_gte: Int!\n  ) {\n    reactions_by_work_id(\n      args: {\n        _work_id: $work_id\n        get_limit: $get_limit\n        _gte: $_gte\n        _lt: $_lt\n      }\n    ) {\n      ...ReactionFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
