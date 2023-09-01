@@ -46,6 +46,7 @@ const documents = {
     "\n  query GetDailyWorkRanking($_gte: timestamptz!) {\n    daily_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetDailyWorkRankingDocument,
     "\n  query GetWeeklyWorkRanking($_gte: timestamptz!) {\n    weekly_works_ranking(args: { _limit: 5 }) {\n      ...WorkFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n    }\n  }\n": types.GetWeeklyWorkRankingDocument,
     "\n  query GetWeeklyEpisodeRanking($_gte: timestamptz!) {\n    weekly_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n": types.GetWeeklyEpisodeRankingDocument,
+    "\n  mutation insertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n": types.InsertReactionsDocument,
     "\n  mutation InsertRequest($object: request_works_insert_input!) {\n    insert_request_works_one(object: $object) {\n      ...RequestFragment\n    }\n  }\n": types.InsertRequestDocument,
     "\n  mutation DeleteRequest($id: Int!) {\n    delete_request_works_by_pk(id: $id) {\n      id\n    }\n  }\n": types.DeleteRequestDocument,
     "\n  query GetRequests($user_id: String!, $limit: Int!, $offset: Int!) {\n    request_works(\n      where: { user_id: { _eq: $user_id } }\n      limit: $limit\n      offset: $offset\n      order_by: { created_at: desc }\n    ) {\n      ...RequestFragment\n    }\n    request_works_aggregate(where: { user_id: { _eq: $user_id } }) {\n      aggregate {\n        count\n      }\n    }\n  }\n": types.GetRequestsDocument,
@@ -205,6 +206,10 @@ export function graphql(source: "\n  query GetWeeklyWorkRanking($_gte: timestamp
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetWeeklyEpisodeRanking($_gte: timestamptz!) {\n    weekly_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetWeeklyEpisodeRanking($_gte: timestamptz!) {\n    weekly_episodes_ranking(args: { _limit: 5 }) {\n      ...DailyEpisodeFragment\n      comments_aggregate(where: { created_at: { _gte: $_gte } }) {\n        aggregate {\n          count\n        }\n      }\n      work {\n        ...WorkFragment\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  mutation insertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation insertReactions($objects: [reactions_insert_input!]!) {\n    insert_reactions(objects: $objects) {\n      returning {\n        id\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
