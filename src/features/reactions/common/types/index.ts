@@ -15,35 +15,37 @@ export type ReactionType = {
   };
 } & { values: (ReactionData & { id: string })[] };
 
-export const reactionsData: ReactionData[] = [
-  {
+export const reactionsData: {
+  [k in Emoji_Types_Enum]: ReactionData;
+} = {
+  [Emoji_Types_Enum.Heart]: {
     value: Emoji_Types_Enum.Heart,
     icon: HeartIcon,
     color: "text-pink-600",
     label: "いいね！",
   },
-  {
+  [Emoji_Types_Enum.Bad]: {
     value: Emoji_Types_Enum.Bad,
     icon: HandThumbDownIcon,
     color: "text-gray-600",
     label: "バッド！",
   },
-  {
+  [Emoji_Types_Enum.Laugh]: {
     value: Emoji_Types_Enum.Laugh,
     icon: "😂",
     label: "おもしろい！",
   },
-  {
+  [Emoji_Types_Enum.Surprise]: {
     value: Emoji_Types_Enum.Surprise,
     icon: "😮",
     label: "びっくり！",
   },
-  {
+  [Emoji_Types_Enum.Tear]: {
     value: Emoji_Types_Enum.Tear,
     icon: "😭",
     label: "かなしい",
   },
-];
+};
 
 const initialData = {
   count: 0,

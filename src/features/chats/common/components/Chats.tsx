@@ -6,10 +6,7 @@ import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/common/components/Chat";
 import { Chat as TypeChat } from "src/features/chats/common/types";
-import { ReactionButton } from "src/features/reactions/common/components/ReactionButton";
-import { ReactionType } from "src/features/reactions/common/types";
 import { useTimerState } from "src/features/timer/store";
-import { Emoji_Types_Enum } from "src/gql/graphql";
 import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
@@ -17,19 +14,9 @@ type Props = {
   time: number;
   isPending: boolean;
   isSelfScroll: boolean;
-  onSubmitHandler: (
-    value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum },
-    reactions: ReactionType
-  ) => Promise<void>;
 };
 
-export const Chats: FC<Props> = ({
-  chats,
-  time,
-  isPending,
-  isSelfScroll,
-  onSubmitHandler,
-}) => {
+export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
   const router = useRouter();
@@ -116,13 +103,6 @@ export const Chats: FC<Props> = ({
           </button>
         </div>
       </div>
-      {!isShowStartButton && (
-        <div className="pointer-events-none absolute inset-0 px-2 lg:px-3">
-          <div className="pointer-events-none flex h-full w-full items-end">
-            <ReactionButton onSubmitHandler={onSubmitHandler} />
-          </div>
-        </div>
-      )}
     </>
   );
 };

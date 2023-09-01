@@ -19,10 +19,15 @@ type Props = {
     value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum },
     reactions: ReactionType
   ) => Promise<void>;
+  setReactions: React.Dispatch<React.SetStateAction<ReactionType>>;
+  reactions: ReactionType;
 };
 
-export const useReactionButton = ({ onSubmitHandler }: Props) => {
-  const [reactions, setReactions] = useState<ReactionType>(defaultReaction);
+export const useReactionButton = ({
+  onSubmitHandler,
+  reactions,
+  setReactions,
+}: Props) => {
   const [isShow, setIsShow] = useState(false);
   const showToast = useNotificationState((state) => state.onShow);
   const getTime = useTimerState((state) => state.getTime);
@@ -72,7 +77,6 @@ export const useReactionButton = ({ onSubmitHandler }: Props) => {
   };
 
   return {
-    reactions: reactions.values,
     isShow,
     handleClick,
     setIsShow,

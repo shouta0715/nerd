@@ -1,22 +1,27 @@
 import clsx from "clsx";
-import React, { FC, memo } from "react";
+import React, { FC, memo, useRef } from "react";
 import { ReactionData } from "src/features/reactions/common/types";
 
 type Props = {
-  reaction: ReactionData & { id: string };
+  reaction: ReactionData & { id: string | number; delay?: number };
 };
 
 export const Reaction: FC<Props> = memo(({ reaction }) => {
+  const randomTranslateXRefs = useRef<number[]>([
+    Math.floor(Math.random() * 100) - 50,
+    Math.floor(Math.random() * 100) - 50,
+  ]);
+
   return (
     <div
       className={clsx(
-        "absolute flex h-6 w-6 animate-bubble flex-col gap-y-2 overflow-hidden"
+        "absolute flex h-6 w-6 animate-bubble flex-col gap-y-2 overflow-hidden opacity-0"
       )}
       style={
         {
-          "--random-translate-x-25": `${Math.random() * 20}px`,
-          "--random-translate-x-50": `${Math.random() * -15}px`,
-          "--random-translate-x-75": `${Math.random() * 20}px`,
+          "--random-translate-x-0": `${randomTranslateXRefs.current[0]}px`,
+          "--random-translate-x-1": `${randomTranslateXRefs.current[1]}px`,
+          animationDelay: `${reaction.delay || 0}s`,
         } as React.CSSProperties
       }
     >

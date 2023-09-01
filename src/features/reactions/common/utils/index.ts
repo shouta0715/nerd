@@ -1,4 +1,8 @@
-import { ReactionType } from "src/features/reactions/common/types";
+import {
+  ReactionData,
+  ReactionType,
+  reactionsData,
+} from "src/features/reactions/common/types";
 import { Emoji_Types_Enum, Reactions_Insert_Input } from "src/gql/graphql";
 
 export const parseReactionsData = (
@@ -42,4 +46,28 @@ export const parseReactionsData = (
   });
 
   return mergeData;
+};
+
+export const getReactionsData = ({
+  count,
+  type,
+  id,
+}: Omit<ReactionType[Emoji_Types_Enum], "reactions_time"> & {
+  type: Emoji_Types_Enum;
+  id: number;
+}): (ReactionData & { id: string; delay: number })[] => {
+  const result = Array.from(
+    {
+      length: count > 3 ? 3 : count,
+    },
+    (_, index) => {
+      return {
+        id: `${id}-${type}-${index}`,
+        delay: index * 0.5,
+        ...reactionsData[type],
+      };
+    }
+  );
+
+  return result;
 };
