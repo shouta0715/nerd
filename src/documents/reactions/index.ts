@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
+import { graphql } from "src/gql";
 
-export const INSERT_REACTIONS = gql`
+export const insertReactionsDocument = graphql(`
   mutation InsertReactions($objects: [reactions_insert_input!]!) {
     insert_reactions(objects: $objects) {
       returning {
@@ -8,4 +8,4 @@ export const INSERT_REACTIONS = gql`
       }
     }
   }
-`;
+`);
