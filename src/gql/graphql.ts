@@ -3555,7 +3555,6 @@ export type Query_RootWorks_By_PkArgs = {
 /** columns and relationships of "reactions" */
 export type Reactions = {
   __typename?: 'reactions';
-  comment_time: Scalars['Int']['output'];
   created_at: Scalars['timestamptz']['output'];
   emoji_type: Emoji_Types_Enum;
   episode_id?: Maybe<Scalars['uuid']['output']>;
@@ -3565,6 +3564,7 @@ export type Reactions = {
   reactions_emoji_type: Emoji_Types;
   /** An object relationship */
   reactions_episode?: Maybe<Episodes>;
+  reactions_time: Scalars['Int']['output'];
   /** An object relationship */
   reactions_work?: Maybe<Works>;
   work_id?: Maybe<Scalars['Int']['output']>;
@@ -3636,17 +3636,17 @@ export type Reactions_Arr_Rel_Insert_Input = {
 /** aggregate avg on columns */
 export type Reactions_Avg_Fields = {
   __typename?: 'reactions_avg_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by avg() on columns of table "reactions" */
 export type Reactions_Avg_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -3655,7 +3655,6 @@ export type Reactions_Bool_Exp = {
   _and?: InputMaybe<Array<Reactions_Bool_Exp>>;
   _not?: InputMaybe<Reactions_Bool_Exp>;
   _or?: InputMaybe<Array<Reactions_Bool_Exp>>;
-  comment_time?: InputMaybe<Int_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   emoji_type?: InputMaybe<Emoji_Types_Enum_Comparison_Exp>;
   episode_id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -3663,6 +3662,7 @@ export type Reactions_Bool_Exp = {
   push_count?: InputMaybe<Int_Comparison_Exp>;
   reactions_emoji_type?: InputMaybe<Emoji_Types_Bool_Exp>;
   reactions_episode?: InputMaybe<Episodes_Bool_Exp>;
+  reactions_time?: InputMaybe<Int_Comparison_Exp>;
   reactions_work?: InputMaybe<Works_Bool_Exp>;
   work_id?: InputMaybe<Int_Comparison_Exp>;
 };
@@ -3675,15 +3675,14 @@ export enum Reactions_Constraint {
 
 /** input type for incrementing numeric columns in table "reactions" */
 export type Reactions_Inc_Input = {
-  comment_time?: InputMaybe<Scalars['Int']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** input type for inserting data into table "reactions" */
 export type Reactions_Insert_Input = {
-  comment_time?: InputMaybe<Scalars['Int']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   emoji_type?: InputMaybe<Emoji_Types_Enum>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
@@ -3691,6 +3690,7 @@ export type Reactions_Insert_Input = {
   push_count?: InputMaybe<Scalars['Int']['input']>;
   reactions_emoji_type?: InputMaybe<Emoji_Types_Obj_Rel_Insert_Input>;
   reactions_episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
   reactions_work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
@@ -3698,42 +3698,42 @@ export type Reactions_Insert_Input = {
 /** aggregate max on columns */
 export type Reactions_Max_Fields = {
   __typename?: 'reactions_max_fields';
-  comment_time?: Maybe<Scalars['Int']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
 
 /** order by max() on columns of table "reactions" */
 export type Reactions_Max_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Reactions_Min_Fields = {
   __typename?: 'reactions_min_fields';
-  comment_time?: Maybe<Scalars['Int']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   episode_id?: Maybe<Scalars['uuid']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
 
 /** order by min() on columns of table "reactions" */
 export type Reactions_Min_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -3755,7 +3755,6 @@ export type Reactions_On_Conflict = {
 
 /** Ordering options when selecting data from "reactions". */
 export type Reactions_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   emoji_type?: InputMaybe<Order_By>;
   episode_id?: InputMaybe<Order_By>;
@@ -3763,6 +3762,7 @@ export type Reactions_Order_By = {
   push_count?: InputMaybe<Order_By>;
   reactions_emoji_type?: InputMaybe<Emoji_Types_Order_By>;
   reactions_episode?: InputMaybe<Episodes_Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   reactions_work?: InputMaybe<Works_Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
@@ -3775,8 +3775,6 @@ export type Reactions_Pk_Columns_Input = {
 /** select columns of table "reactions" */
 export enum Reactions_Select_Column {
   /** column name */
-  CommentTime = 'comment_time',
-  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   EmojiType = 'emoji_type',
@@ -3787,68 +3785,70 @@ export enum Reactions_Select_Column {
   /** column name */
   PushCount = 'push_count',
   /** column name */
+  ReactionsTime = 'reactions_time',
+  /** column name */
   WorkId = 'work_id'
 }
 
 /** input type for updating data in table "reactions" */
 export type Reactions_Set_Input = {
-  comment_time?: InputMaybe<Scalars['Int']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   emoji_type?: InputMaybe<Emoji_Types_Enum>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** aggregate stddev on columns */
 export type Reactions_Stddev_Fields = {
   __typename?: 'reactions_stddev_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev() on columns of table "reactions" */
 export type Reactions_Stddev_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Reactions_Stddev_Pop_Fields = {
   __typename?: 'reactions_stddev_pop_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_pop() on columns of table "reactions" */
 export type Reactions_Stddev_Pop_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Reactions_Stddev_Samp_Fields = {
   __typename?: 'reactions_stddev_samp_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by stddev_samp() on columns of table "reactions" */
 export type Reactions_Stddev_Samp_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
@@ -3862,36 +3862,34 @@ export type Reactions_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Reactions_Stream_Cursor_Value_Input = {
-  comment_time?: InputMaybe<Scalars['Int']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   emoji_type?: InputMaybe<Emoji_Types_Enum>;
   episode_id?: InputMaybe<Scalars['uuid']['input']>;
   id?: InputMaybe<Scalars['Int']['input']>;
   push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
   work_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 /** aggregate sum on columns */
 export type Reactions_Sum_Fields = {
   __typename?: 'reactions_sum_fields';
-  comment_time?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
   work_id?: Maybe<Scalars['Int']['output']>;
 };
 
 /** order by sum() on columns of table "reactions" */
 export type Reactions_Sum_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "reactions" */
 export enum Reactions_Update_Column {
-  /** column name */
-  CommentTime = 'comment_time',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -3902,6 +3900,8 @@ export enum Reactions_Update_Column {
   Id = 'id',
   /** column name */
   PushCount = 'push_count',
+  /** column name */
+  ReactionsTime = 'reactions_time',
   /** column name */
   WorkId = 'work_id'
 }
@@ -3918,51 +3918,51 @@ export type Reactions_Updates = {
 /** aggregate var_pop on columns */
 export type Reactions_Var_Pop_Fields = {
   __typename?: 'reactions_var_pop_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_pop() on columns of table "reactions" */
 export type Reactions_Var_Pop_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Reactions_Var_Samp_Fields = {
   __typename?: 'reactions_var_samp_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by var_samp() on columns of table "reactions" */
 export type Reactions_Var_Samp_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Reactions_Variance_Fields = {
   __typename?: 'reactions_variance_fields';
-  comment_time?: Maybe<Scalars['Float']['output']>;
   id?: Maybe<Scalars['Float']['output']>;
   push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
   work_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** order by variance() on columns of table "reactions" */
 export type Reactions_Variance_Order_By = {
-  comment_time?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
   work_id?: InputMaybe<Order_By>;
 };
 

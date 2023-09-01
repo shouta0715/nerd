@@ -6,7 +6,10 @@ import React, { FC } from "react";
 import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/common/components/Chat";
 import { Chat as TypeChat } from "src/features/chats/common/types";
+import { ReactionButton } from "src/features/reactions/common/components/ReactionButton";
+import { ReactionType } from "src/features/reactions/common/types";
 import { useTimerState } from "src/features/timer/store";
+import { Emoji_Types_Enum } from "src/gql/graphql";
 import { useGlobalState } from "src/store/global/globalStore";
 
 type Props = {
@@ -14,9 +17,19 @@ type Props = {
   time: number;
   isPending: boolean;
   isSelfScroll: boolean;
+  onSubmitHandler: (
+    value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum },
+    reactions: ReactionType
+  ) => Promise<void>;
 };
 
-export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
+export const Chats: FC<Props> = ({
+  chats,
+  time,
+  isPending,
+  isSelfScroll,
+  onSubmitHandler,
+}) => {
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
   const router = useRouter();
@@ -77,28 +90,33 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           ))}
         </ul>
       </div>
-      <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
-        <button
-          aria-label={
-            isSelfScroll
-              ? "最新のコメントまでスクロール済み"
-              : "最新のコメントまでスクロールする"
-          }
-          className={clsx(
-            "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
-            isSelfScroll && chats.length
-              ? "opacity-100"
-              : "pointer-events-none opacity-0"
-          )}
-          onClick={() =>
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: "smooth",
-            })
-          }
-        >
-          <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
-        </button>
+      <div className="sticky bottom-20 flex items-center justify-between px-2 lg:px-3">
+        <div className="">
+          <button
+            aria-label={
+              isSelfScroll
+                ? "最新のコメントまでスクロール済み"
+                : "最新のコメントまでスクロールする"
+            }
+            className={clsx(
+              "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
+              isSelfScroll && chats.length
+                ? "opacity-100"
+                : "pointer-events-none opacity-0"
+            )}
+            onClick={() =>
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              })
+            }
+          >
+            <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
+          </button>
+        </div>
+        <div>
+          <ReactionButton onSubmitHandler={onSubmitHandler} />
+        </div>
       </div>
     </>
   );
