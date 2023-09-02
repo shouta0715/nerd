@@ -31,7 +31,7 @@ export const useReactionButton = ({
   const [isShow, setIsShow] = useState(false);
   const showToast = useNotificationState((state) => state.onShow);
   const getTime = useTimerState((state) => state.getTime);
-  const debounce = useDebounce(1000 * 5);
+  const debounce = useDebounce(1000 * 2);
 
   const submitHandlers = async (
     value: ReactionType[Emoji_Types_Enum] & { type: Emoji_Types_Enum }
