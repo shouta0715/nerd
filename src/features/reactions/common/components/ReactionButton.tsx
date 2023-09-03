@@ -52,12 +52,12 @@ export const ReactionButton: FC<Props> = ({
             : "grid-rows-[0fr]"
         )}
       >
-        <div className="flex flex-col gap-y-2 overflow-hidden">
+        <div className="flex flex-col gap-y-0.5 overflow-hidden lg:gap-y-1">
           {Object.values(reactionsData).map((reaction) => (
             <Button
               key={reaction.value}
               aria-label={`${reaction.label}ボタン`}
-              className="h-10 w-10 rounded-full border-none lg:h-12 lg:w-12"
+              className="h-10 w-10 rounded-full border-none py-0 lg:h-12 lg:w-12"
               disabled={disabled || !user}
               onClick={(e) => handleClick(e, reaction)}
             >

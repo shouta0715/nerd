@@ -2,6 +2,7 @@ import { graphql } from "msw";
 import { handleEpisodeChat } from "src/features/chats/common/mocks/msw";
 import { handlers as commentHandlers } from "src/features/comments/common/mocks/msw";
 import { episodeData } from "src/features/episodes/mocks/fixture";
+import { mswInfiniteReactionsEpisodeHandlers } from "src/features/reactions/episodes/mocks/msw";
 
 export const handleEpisode = (status?: number) => {
   return graphql.query("GetEpisode", (_, res, ctx) => {
@@ -16,5 +17,6 @@ export const handleEpisode = (status?: number) => {
 export const handlers = [
   handleEpisode(),
   handleEpisodeChat(),
+  mswInfiniteReactionsEpisodeHandlers(),
   ...commentHandlers,
 ];

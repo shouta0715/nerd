@@ -30,3 +30,22 @@ export const Default: Story = {
     },
   },
 };
+
+export const Chat: Story = {
+  parameters: {
+    msw: {
+      handlers: {
+        episodes: [...handlers],
+      },
+    },
+    nextjs: {
+      router: {
+        basePath: "/episodes/1",
+        query: {
+          slug: "1",
+          mode: "chat",
+        },
+      },
+    },
+  },
+};
