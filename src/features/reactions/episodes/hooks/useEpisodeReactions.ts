@@ -26,9 +26,13 @@ export const useEpisodeReactions = (episode_id: string) => {
     ) => {
       const objects = parseReactionsData(value, reactions, episode_id);
 
-      mutateAsync({
-        objects,
-      });
+      try {
+        await mutateAsync({
+          objects,
+        });
+      } catch (error) {
+        throw new Error();
+      }
     },
     [episode_id, mutateAsync]
   );
