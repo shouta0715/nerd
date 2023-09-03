@@ -23,6 +23,7 @@ module.exports = {
         border: "border 0.25s ease-out forwards",
         like: "like 1s ease-out forwards",
         gradient: "gradient 3s ease infinite",
+        bubble: "bubble 1.5s ease-out forwards",
       },
       keyframes: {
         comment: {
@@ -59,6 +60,23 @@ module.exports = {
           "50%": {
             backgroundPosition: "100% 50%",
           }
+        },
+
+        // 泡のアニメーション　一回だけ
+        bubble: {
+          "0%": {
+            transform: "translateX(var(--random-translate-x-0))",
+            bottom: "-30px",
+            opacity: "0",
+          }, 
+          "25%": {
+            opacity: "1",
+          },
+          "100%": {
+            bottom: "200px",
+            transform: "translateX(var(--random-translate-x-1))",
+            opacity: "0",
+          },
         },
       },
       height: {

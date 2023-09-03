@@ -36,6 +36,12 @@ const DynamicComments = dynamic(
   }
 );
 
+const DynamicReactions = dynamic(() =>
+  import("src/features/reactions/episodes/components").then(
+    (mod) => mod.EpisodeReactions
+  )
+);
+
 export const Episode = () => {
   const { data, isPending, isChat } = useEpisode();
 
@@ -78,7 +84,7 @@ export const Episode = () => {
           )}
         </div>
         <Nav isChat={isChat} response="sp" />
-        <main className="flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
+        <main className="relative flex flex-1 flex-col pb-[59px] lg:rounded-lg lg:shadow-lg">
           {isChat ? (
             <ErrorBoundary
               key={`${data?.episodes_by_pk?.id}-chats`}
@@ -90,6 +96,9 @@ export const Episode = () => {
                 }
               >
                 <DynamicChats episode_id={data?.episodes_by_pk?.id} />
+              </Suspense>
+              <Suspense fallback={null}>
+                <DynamicReactions episode_id={data?.episodes_by_pk?.id} />
               </Suspense>
             </ErrorBoundary>
           ) : (

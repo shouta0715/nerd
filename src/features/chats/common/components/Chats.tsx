@@ -20,6 +20,7 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
   const interval = useTimerState((state) => state.interval);
   const authLoading = useGlobalState((state) => state.authLoading);
   const router = useRouter();
+  const isShowStartButton = time === 0 && !interval.active;
 
   return (
     <>
@@ -59,7 +60,7 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
           onClick={interval.start}
-          show={time === 0 && !interval.active}
+          show={isShowStartButton}
         >
           {isPending || authLoading ? (
             <Loader size="xl" theme="white" />
@@ -77,28 +78,30 @@ export const Chats: FC<Props> = ({ chats, time, isPending, isSelfScroll }) => {
           ))}
         </ul>
       </div>
-      <div className="sticky bottom-20 flex w-full justify-end px-2 lg:px-3">
-        <button
-          aria-label={
-            isSelfScroll
-              ? "最新のコメントまでスクロール済み"
-              : "最新のコメントまでスクロールする"
-          }
-          className={clsx(
-            "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
-            isSelfScroll && chats.length
-              ? "opacity-100"
-              : "pointer-events-none opacity-0"
-          )}
-          onClick={() =>
-            window.scrollTo({
-              top: document.body.scrollHeight,
-              behavior: "smooth",
-            })
-          }
-        >
-          <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
-        </button>
+      <div className="sticky bottom-20 flex items-center justify-between px-2 lg:px-3">
+        <div className="">
+          <button
+            aria-label={
+              isSelfScroll
+                ? "最新のコメントまでスクロール済み"
+                : "最新のコメントまでスクロールする"
+            }
+            className={clsx(
+              "flex h-9 w-9 cursor-pointer items-center justify-center  rounded-full border-none bg-indigo-600 shadow-md shadow-indigo-400 transition-all active:translate-y-1",
+              isSelfScroll && chats.length
+                ? "opacity-100"
+                : "pointer-events-none opacity-0"
+            )}
+            onClick={() =>
+              window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth",
+              })
+            }
+          >
+            <ArrowSmallDownIcon className="h-5 w-5 fill-white stroke-white stroke-2 text-white" />
+          </button>
+        </div>
       </div>
     </>
   );

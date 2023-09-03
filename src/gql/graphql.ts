@@ -1019,6 +1019,180 @@ export type Daily_Works_Ranking_Args = {
   _limit?: InputMaybe<Scalars['Int']['input']>;
 };
 
+/** columns and relationships of "emoji_types" */
+export type Emoji_Types = {
+  __typename?: 'emoji_types';
+  /** An array relationship */
+  reactions: Array<Reactions>;
+  /** An aggregate relationship */
+  reactions_aggregate: Reactions_Aggregate;
+  value: Scalars['String']['output'];
+};
+
+
+/** columns and relationships of "emoji_types" */
+export type Emoji_TypesReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "emoji_types" */
+export type Emoji_TypesReactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+/** aggregated selection of "emoji_types" */
+export type Emoji_Types_Aggregate = {
+  __typename?: 'emoji_types_aggregate';
+  aggregate?: Maybe<Emoji_Types_Aggregate_Fields>;
+  nodes: Array<Emoji_Types>;
+};
+
+/** aggregate fields of "emoji_types" */
+export type Emoji_Types_Aggregate_Fields = {
+  __typename?: 'emoji_types_aggregate_fields';
+  count: Scalars['Int']['output'];
+  max?: Maybe<Emoji_Types_Max_Fields>;
+  min?: Maybe<Emoji_Types_Min_Fields>;
+};
+
+
+/** aggregate fields of "emoji_types" */
+export type Emoji_Types_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Emoji_Types_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "emoji_types". All fields are combined with a logical 'AND'. */
+export type Emoji_Types_Bool_Exp = {
+  _and?: InputMaybe<Array<Emoji_Types_Bool_Exp>>;
+  _not?: InputMaybe<Emoji_Types_Bool_Exp>;
+  _or?: InputMaybe<Array<Emoji_Types_Bool_Exp>>;
+  reactions?: InputMaybe<Reactions_Bool_Exp>;
+  reactions_aggregate?: InputMaybe<Reactions_Aggregate_Bool_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "emoji_types" */
+export enum Emoji_Types_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  EmojiTypesPkey = 'emoji_types_pkey'
+}
+
+export enum Emoji_Types_Enum {
+  Bad = 'BAD',
+  Heart = 'HEART',
+  Laugh = 'LAUGH',
+  Surprise = 'SURPRISE',
+  Tear = 'TEAR'
+}
+
+/** Boolean expression to compare columns of type "emoji_types_enum". All fields are combined with logical 'AND'. */
+export type Emoji_Types_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<Emoji_Types_Enum>;
+  _in?: InputMaybe<Array<Emoji_Types_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Emoji_Types_Enum>;
+  _nin?: InputMaybe<Array<Emoji_Types_Enum>>;
+};
+
+/** input type for inserting data into table "emoji_types" */
+export type Emoji_Types_Insert_Input = {
+  reactions?: InputMaybe<Reactions_Arr_Rel_Insert_Input>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type Emoji_Types_Max_Fields = {
+  __typename?: 'emoji_types_max_fields';
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type Emoji_Types_Min_Fields = {
+  __typename?: 'emoji_types_min_fields';
+  value?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "emoji_types" */
+export type Emoji_Types_Mutation_Response = {
+  __typename?: 'emoji_types_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Emoji_Types>;
+};
+
+/** input type for inserting object relation for remote table "emoji_types" */
+export type Emoji_Types_Obj_Rel_Insert_Input = {
+  data: Emoji_Types_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Emoji_Types_On_Conflict>;
+};
+
+/** on_conflict condition type for table "emoji_types" */
+export type Emoji_Types_On_Conflict = {
+  constraint: Emoji_Types_Constraint;
+  update_columns?: Array<Emoji_Types_Update_Column>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "emoji_types". */
+export type Emoji_Types_Order_By = {
+  reactions_aggregate?: InputMaybe<Reactions_Aggregate_Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: emoji_types */
+export type Emoji_Types_Pk_Columns_Input = {
+  value: Scalars['String']['input'];
+};
+
+/** select columns of table "emoji_types" */
+export enum Emoji_Types_Select_Column {
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "emoji_types" */
+export type Emoji_Types_Set_Input = {
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "emoji_types" */
+export type Emoji_Types_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Emoji_Types_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Emoji_Types_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "emoji_types" */
+export enum Emoji_Types_Update_Column {
+  /** column name */
+  Value = 'value'
+}
+
+export type Emoji_Types_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Emoji_Types_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Emoji_Types_Bool_Exp;
+};
+
 /** columns and relationships of "episodes" */
 export type Episodes = {
   __typename?: 'episodes';
@@ -1032,6 +1206,10 @@ export type Episodes = {
   comments_aggregate: Comments_Aggregate;
   created_at: Scalars['timestamptz']['output'];
   end_time?: Maybe<Scalars['timestamp']['output']>;
+  /** An array relationship */
+  episodes_reactions: Array<Reactions>;
+  /** An aggregate relationship */
+  episodes_reactions_aggregate: Reactions_Aggregate;
   has_next_episode: Scalars['Boolean']['output'];
   has_prev_episode: Scalars['Boolean']['output'];
   id: Scalars['uuid']['output'];
@@ -1084,6 +1262,26 @@ export type EpisodesComments_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Comments_Order_By>>;
   where?: InputMaybe<Comments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesEpisodes_ReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "episodes" */
+export type EpisodesEpisodes_Reactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
 };
 
 /** aggregated selection of "episodes" */
@@ -1189,6 +1387,8 @@ export type Episodes_Bool_Exp = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   end_time?: InputMaybe<Timestamp_Comparison_Exp>;
+  episodes_reactions?: InputMaybe<Reactions_Bool_Exp>;
+  episodes_reactions_aggregate?: InputMaybe<Reactions_Aggregate_Bool_Exp>;
   has_next_episode?: InputMaybe<Boolean_Comparison_Exp>;
   has_prev_episode?: InputMaybe<Boolean_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1222,6 +1422,7 @@ export type Episodes_Insert_Input = {
   comments?: InputMaybe<Comments_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   end_time?: InputMaybe<Scalars['timestamp']['input']>;
+  episodes_reactions?: InputMaybe<Reactions_Arr_Rel_Insert_Input>;
   has_next_episode?: InputMaybe<Scalars['Boolean']['input']>;
   has_prev_episode?: InputMaybe<Scalars['Boolean']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
@@ -1322,6 +1523,7 @@ export type Episodes_Order_By = {
   comments_aggregate?: InputMaybe<Comments_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   end_time?: InputMaybe<Order_By>;
+  episodes_reactions_aggregate?: InputMaybe<Reactions_Aggregate_Order_By>;
   has_next_episode?: InputMaybe<Order_By>;
   has_prev_episode?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2105,6 +2307,10 @@ export type Mutation_Root = {
   delete_comments?: Maybe<Comments_Mutation_Response>;
   /** delete single row from the table: "comments" */
   delete_comments_by_pk?: Maybe<Comments>;
+  /** delete data from the table: "emoji_types" */
+  delete_emoji_types?: Maybe<Emoji_Types_Mutation_Response>;
+  /** delete single row from the table: "emoji_types" */
+  delete_emoji_types_by_pk?: Maybe<Emoji_Types>;
   /** delete data from the table: "episodes" */
   delete_episodes?: Maybe<Episodes_Mutation_Response>;
   /** delete single row from the table: "episodes" */
@@ -2117,6 +2323,10 @@ export type Mutation_Root = {
   delete_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** delete single row from the table: "media_types" */
   delete_media_types_by_pk?: Maybe<Media_Types>;
+  /** delete data from the table: "reactions" */
+  delete_reactions?: Maybe<Reactions_Mutation_Response>;
+  /** delete single row from the table: "reactions" */
+  delete_reactions_by_pk?: Maybe<Reactions>;
   /** delete data from the table: "request_works" */
   delete_request_works?: Maybe<Request_Works_Mutation_Response>;
   /** delete single row from the table: "request_works" */
@@ -2141,6 +2351,10 @@ export type Mutation_Root = {
   insert_comments?: Maybe<Comments_Mutation_Response>;
   /** insert a single row into the table: "comments" */
   insert_comments_one?: Maybe<Comments>;
+  /** insert data into the table: "emoji_types" */
+  insert_emoji_types?: Maybe<Emoji_Types_Mutation_Response>;
+  /** insert a single row into the table: "emoji_types" */
+  insert_emoji_types_one?: Maybe<Emoji_Types>;
   /** insert data into the table: "episodes" */
   insert_episodes?: Maybe<Episodes_Mutation_Response>;
   /** insert a single row into the table: "episodes" */
@@ -2153,6 +2367,10 @@ export type Mutation_Root = {
   insert_media_types?: Maybe<Media_Types_Mutation_Response>;
   /** insert a single row into the table: "media_types" */
   insert_media_types_one?: Maybe<Media_Types>;
+  /** insert data into the table: "reactions" */
+  insert_reactions?: Maybe<Reactions_Mutation_Response>;
+  /** insert a single row into the table: "reactions" */
+  insert_reactions_one?: Maybe<Reactions>;
   /** insert data into the table: "request_works" */
   insert_request_works?: Maybe<Request_Works_Mutation_Response>;
   /** insert a single row into the table: "request_works" */
@@ -2181,6 +2399,12 @@ export type Mutation_Root = {
   update_comments_by_pk?: Maybe<Comments>;
   /** update multiples rows of table: "comments" */
   update_comments_many?: Maybe<Array<Maybe<Comments_Mutation_Response>>>;
+  /** update data of the table: "emoji_types" */
+  update_emoji_types?: Maybe<Emoji_Types_Mutation_Response>;
+  /** update single row of the table: "emoji_types" */
+  update_emoji_types_by_pk?: Maybe<Emoji_Types>;
+  /** update multiples rows of table: "emoji_types" */
+  update_emoji_types_many?: Maybe<Array<Maybe<Emoji_Types_Mutation_Response>>>;
   /** update data of the table: "episodes" */
   update_episodes?: Maybe<Episodes_Mutation_Response>;
   /** update single row of the table: "episodes" */
@@ -2199,6 +2423,12 @@ export type Mutation_Root = {
   update_media_types_by_pk?: Maybe<Media_Types>;
   /** update multiples rows of table: "media_types" */
   update_media_types_many?: Maybe<Array<Maybe<Media_Types_Mutation_Response>>>;
+  /** update data of the table: "reactions" */
+  update_reactions?: Maybe<Reactions_Mutation_Response>;
+  /** update single row of the table: "reactions" */
+  update_reactions_by_pk?: Maybe<Reactions>;
+  /** update multiples rows of table: "reactions" */
+  update_reactions_many?: Maybe<Array<Maybe<Reactions_Mutation_Response>>>;
   /** update data of the table: "request_works" */
   update_request_works?: Maybe<Request_Works_Mutation_Response>;
   /** update single row of the table: "request_works" */
@@ -2251,6 +2481,18 @@ export type Mutation_RootDelete_Comments_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Emoji_TypesArgs = {
+  where: Emoji_Types_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Emoji_Types_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_EpisodesArgs = {
   where: Episodes_Bool_Exp;
 };
@@ -2282,6 +2524,18 @@ export type Mutation_RootDelete_Media_TypesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Media_Types_By_PkArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_ReactionsArgs = {
+  where: Reactions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Reactions_By_PkArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -2363,6 +2617,20 @@ export type Mutation_RootInsert_Comments_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Emoji_TypesArgs = {
+  objects: Array<Emoji_Types_Insert_Input>;
+  on_conflict?: InputMaybe<Emoji_Types_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Emoji_Types_OneArgs = {
+  object: Emoji_Types_Insert_Input;
+  on_conflict?: InputMaybe<Emoji_Types_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_EpisodesArgs = {
   objects: Array<Episodes_Insert_Input>;
   on_conflict?: InputMaybe<Episodes_On_Conflict>;
@@ -2401,6 +2669,20 @@ export type Mutation_RootInsert_Media_TypesArgs = {
 export type Mutation_RootInsert_Media_Types_OneArgs = {
   object: Media_Types_Insert_Input;
   on_conflict?: InputMaybe<Media_Types_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_ReactionsArgs = {
+  objects: Array<Reactions_Insert_Input>;
+  on_conflict?: InputMaybe<Reactions_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Reactions_OneArgs = {
+  object: Reactions_Insert_Input;
+  on_conflict?: InputMaybe<Reactions_On_Conflict>;
 };
 
 
@@ -2505,6 +2787,26 @@ export type Mutation_RootUpdate_Comments_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Emoji_TypesArgs = {
+  _set?: InputMaybe<Emoji_Types_Set_Input>;
+  where: Emoji_Types_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Emoji_Types_By_PkArgs = {
+  _set?: InputMaybe<Emoji_Types_Set_Input>;
+  pk_columns: Emoji_Types_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Emoji_Types_ManyArgs = {
+  updates: Array<Emoji_Types_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_EpisodesArgs = {
   _inc?: InputMaybe<Episodes_Inc_Input>;
   _set?: InputMaybe<Episodes_Set_Input>;
@@ -2567,6 +2869,28 @@ export type Mutation_RootUpdate_Media_Types_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_Media_Types_ManyArgs = {
   updates: Array<Media_Types_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_ReactionsArgs = {
+  _inc?: InputMaybe<Reactions_Inc_Input>;
+  _set?: InputMaybe<Reactions_Set_Input>;
+  where: Reactions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Reactions_By_PkArgs = {
+  _inc?: InputMaybe<Reactions_Inc_Input>;
+  _set?: InputMaybe<Reactions_Set_Input>;
+  pk_columns: Reactions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Reactions_ManyArgs = {
+  updates: Array<Reactions_Updates>;
 };
 
 
@@ -2699,6 +3023,12 @@ export type Query_Root = {
   daily_works_ranking: Array<Works>;
   /** execute function "daily_works_ranking" and query aggregates on result of table type "works" */
   daily_works_ranking_aggregate: Works_Aggregate;
+  /** fetch data from the table: "emoji_types" */
+  emoji_types: Array<Emoji_Types>;
+  /** fetch aggregated fields from the table: "emoji_types" */
+  emoji_types_aggregate: Emoji_Types_Aggregate;
+  /** fetch data from the table: "emoji_types" using primary key columns */
+  emoji_types_by_pk?: Maybe<Emoji_Types>;
   /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
@@ -2717,6 +3047,20 @@ export type Query_Root = {
   media_types_aggregate: Media_Types_Aggregate;
   /** fetch data from the table: "media_types" using primary key columns */
   media_types_by_pk?: Maybe<Media_Types>;
+  /** An array relationship */
+  reactions: Array<Reactions>;
+  /** An aggregate relationship */
+  reactions_aggregate: Reactions_Aggregate;
+  /** execute function "reactions_by_episode_id" which returns "reactions" */
+  reactions_by_episode_id: Array<Reactions>;
+  /** execute function "reactions_by_episode_id" and query aggregates on result of table type "reactions" */
+  reactions_by_episode_id_aggregate: Reactions_Aggregate;
+  /** fetch data from the table: "reactions" using primary key columns */
+  reactions_by_pk?: Maybe<Reactions>;
+  /** execute function "reactions_by_work_id" which returns "reactions" */
+  reactions_by_work_id: Array<Reactions>;
+  /** execute function "reactions_by_work_id" and query aggregates on result of table type "reactions" */
+  reactions_by_work_id_aggregate: Reactions_Aggregate;
   /** execute function "replies" which returns "comments" */
   replies: Array<Comments>;
   /** execute function "replies" and query aggregates on result of table type "comments" */
@@ -2898,6 +3242,29 @@ export type Query_RootDaily_Works_Ranking_AggregateArgs = {
 };
 
 
+export type Query_RootEmoji_TypesArgs = {
+  distinct_on?: InputMaybe<Array<Emoji_Types_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Emoji_Types_Order_By>>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+
+export type Query_RootEmoji_Types_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Emoji_Types_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Emoji_Types_Order_By>>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+
+export type Query_RootEmoji_Types_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
 export type Query_RootEpisodesArgs = {
   distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2964,6 +3331,69 @@ export type Query_RootMedia_Types_AggregateArgs = {
 
 export type Query_RootMedia_Types_By_PkArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type Query_RootReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Query_RootReactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Query_RootReactions_By_Episode_IdArgs = {
+  args: Reactions_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Query_RootReactions_By_Episode_Id_AggregateArgs = {
+  args: Reactions_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Query_RootReactions_By_PkArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type Query_RootReactions_By_Work_IdArgs = {
+  args: Reactions_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Query_RootReactions_By_Work_Id_AggregateArgs = {
+  args: Reactions_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
 };
 
 
@@ -3196,6 +3626,453 @@ export type Query_RootWorks_All_Ranking_AggregateArgs = {
 
 export type Query_RootWorks_By_PkArgs = {
   id: Scalars['Int']['input'];
+};
+
+/** columns and relationships of "reactions" */
+export type Reactions = {
+  __typename?: 'reactions';
+  created_at: Scalars['timestamptz']['output'];
+  emoji_type: Emoji_Types_Enum;
+  episode_id?: Maybe<Scalars['uuid']['output']>;
+  id: Scalars['Int']['output'];
+  push_count: Scalars['Int']['output'];
+  /** An object relationship */
+  reactions_emoji_type: Emoji_Types;
+  /** An object relationship */
+  reactions_episode?: Maybe<Episodes>;
+  reactions_time: Scalars['Int']['output'];
+  /** An object relationship */
+  reactions_user?: Maybe<Users>;
+  /** An object relationship */
+  reactions_work?: Maybe<Works>;
+  user_id?: Maybe<Scalars['String']['output']>;
+  work_id?: Maybe<Scalars['Int']['output']>;
+};
+
+/** aggregated selection of "reactions" */
+export type Reactions_Aggregate = {
+  __typename?: 'reactions_aggregate';
+  aggregate?: Maybe<Reactions_Aggregate_Fields>;
+  nodes: Array<Reactions>;
+};
+
+export type Reactions_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Reactions_Aggregate_Bool_Exp_Count>;
+};
+
+export type Reactions_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Reactions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Reactions_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
+/** aggregate fields of "reactions" */
+export type Reactions_Aggregate_Fields = {
+  __typename?: 'reactions_aggregate_fields';
+  avg?: Maybe<Reactions_Avg_Fields>;
+  count: Scalars['Int']['output'];
+  max?: Maybe<Reactions_Max_Fields>;
+  min?: Maybe<Reactions_Min_Fields>;
+  stddev?: Maybe<Reactions_Stddev_Fields>;
+  stddev_pop?: Maybe<Reactions_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Reactions_Stddev_Samp_Fields>;
+  sum?: Maybe<Reactions_Sum_Fields>;
+  var_pop?: Maybe<Reactions_Var_Pop_Fields>;
+  var_samp?: Maybe<Reactions_Var_Samp_Fields>;
+  variance?: Maybe<Reactions_Variance_Fields>;
+};
+
+
+/** aggregate fields of "reactions" */
+export type Reactions_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Reactions_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** order by aggregate values of table "reactions" */
+export type Reactions_Aggregate_Order_By = {
+  avg?: InputMaybe<Reactions_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Reactions_Max_Order_By>;
+  min?: InputMaybe<Reactions_Min_Order_By>;
+  stddev?: InputMaybe<Reactions_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Reactions_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Reactions_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Reactions_Sum_Order_By>;
+  var_pop?: InputMaybe<Reactions_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Reactions_Var_Samp_Order_By>;
+  variance?: InputMaybe<Reactions_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "reactions" */
+export type Reactions_Arr_Rel_Insert_Input = {
+  data: Array<Reactions_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Reactions_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Reactions_Avg_Fields = {
+  __typename?: 'reactions_avg_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "reactions" */
+export type Reactions_Avg_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "reactions". All fields are combined with a logical 'AND'. */
+export type Reactions_Bool_Exp = {
+  _and?: InputMaybe<Array<Reactions_Bool_Exp>>;
+  _not?: InputMaybe<Reactions_Bool_Exp>;
+  _or?: InputMaybe<Array<Reactions_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  emoji_type?: InputMaybe<Emoji_Types_Enum_Comparison_Exp>;
+  episode_id?: InputMaybe<Uuid_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  push_count?: InputMaybe<Int_Comparison_Exp>;
+  reactions_emoji_type?: InputMaybe<Emoji_Types_Bool_Exp>;
+  reactions_episode?: InputMaybe<Episodes_Bool_Exp>;
+  reactions_time?: InputMaybe<Int_Comparison_Exp>;
+  reactions_user?: InputMaybe<Users_Bool_Exp>;
+  reactions_work?: InputMaybe<Works_Bool_Exp>;
+  user_id?: InputMaybe<String_Comparison_Exp>;
+  work_id?: InputMaybe<Int_Comparison_Exp>;
+};
+
+export type Reactions_By_Episode_Id_Args = {
+  _episode_id?: InputMaybe<Scalars['uuid']['input']>;
+  _gte?: InputMaybe<Scalars['Int']['input']>;
+  _lt?: InputMaybe<Scalars['Int']['input']>;
+  get_limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type Reactions_By_Work_Id_Args = {
+  _gte?: InputMaybe<Scalars['Int']['input']>;
+  _lt?: InputMaybe<Scalars['Int']['input']>;
+  _work_id?: InputMaybe<Scalars['Int']['input']>;
+  get_limit?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** unique or primary key constraints on table "reactions" */
+export enum Reactions_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  ReactionsPkey = 'reactions_pkey'
+}
+
+/** input type for incrementing numeric columns in table "reactions" */
+export type Reactions_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']['input']>;
+  push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
+  work_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** input type for inserting data into table "reactions" */
+export type Reactions_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  emoji_type?: InputMaybe<Emoji_Types_Enum>;
+  episode_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_emoji_type?: InputMaybe<Emoji_Types_Obj_Rel_Insert_Input>;
+  reactions_episode?: InputMaybe<Episodes_Obj_Rel_Insert_Input>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
+  reactions_user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  reactions_work?: InputMaybe<Works_Obj_Rel_Insert_Input>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+  work_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate max on columns */
+export type Reactions_Max_Fields = {
+  __typename?: 'reactions_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  episode_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+  work_id?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by max() on columns of table "reactions" */
+export type Reactions_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Reactions_Min_Fields = {
+  __typename?: 'reactions_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']['output']>;
+  episode_id?: Maybe<Scalars['uuid']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
+  user_id?: Maybe<Scalars['String']['output']>;
+  work_id?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by min() on columns of table "reactions" */
+export type Reactions_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "reactions" */
+export type Reactions_Mutation_Response = {
+  __typename?: 'reactions_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Reactions>;
+};
+
+/** on_conflict condition type for table "reactions" */
+export type Reactions_On_Conflict = {
+  constraint: Reactions_Constraint;
+  update_columns?: Array<Reactions_Update_Column>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "reactions". */
+export type Reactions_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  emoji_type?: InputMaybe<Order_By>;
+  episode_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_emoji_type?: InputMaybe<Emoji_Types_Order_By>;
+  reactions_episode?: InputMaybe<Episodes_Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  reactions_user?: InputMaybe<Users_Order_By>;
+  reactions_work?: InputMaybe<Works_Order_By>;
+  user_id?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: reactions */
+export type Reactions_Pk_Columns_Input = {
+  id: Scalars['Int']['input'];
+};
+
+/** select columns of table "reactions" */
+export enum Reactions_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EmojiType = 'emoji_type',
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PushCount = 'push_count',
+  /** column name */
+  ReactionsTime = 'reactions_time',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+/** input type for updating data in table "reactions" */
+export type Reactions_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  emoji_type?: InputMaybe<Emoji_Types_Enum>;
+  episode_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+  work_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate stddev on columns */
+export type Reactions_Stddev_Fields = {
+  __typename?: 'reactions_stddev_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "reactions" */
+export type Reactions_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Reactions_Stddev_Pop_Fields = {
+  __typename?: 'reactions_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_pop() on columns of table "reactions" */
+export type Reactions_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Reactions_Stddev_Samp_Fields = {
+  __typename?: 'reactions_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "reactions" */
+export type Reactions_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** Streaming cursor of the table "reactions" */
+export type Reactions_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Reactions_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Reactions_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
+  emoji_type?: InputMaybe<Emoji_Types_Enum>;
+  episode_id?: InputMaybe<Scalars['uuid']['input']>;
+  id?: InputMaybe<Scalars['Int']['input']>;
+  push_count?: InputMaybe<Scalars['Int']['input']>;
+  reactions_time?: InputMaybe<Scalars['Int']['input']>;
+  user_id?: InputMaybe<Scalars['String']['input']>;
+  work_id?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** aggregate sum on columns */
+export type Reactions_Sum_Fields = {
+  __typename?: 'reactions_sum_fields';
+  id?: Maybe<Scalars['Int']['output']>;
+  push_count?: Maybe<Scalars['Int']['output']>;
+  reactions_time?: Maybe<Scalars['Int']['output']>;
+  work_id?: Maybe<Scalars['Int']['output']>;
+};
+
+/** order by sum() on columns of table "reactions" */
+export type Reactions_Sum_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "reactions" */
+export enum Reactions_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  EmojiType = 'emoji_type',
+  /** column name */
+  EpisodeId = 'episode_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  PushCount = 'push_count',
+  /** column name */
+  ReactionsTime = 'reactions_time',
+  /** column name */
+  UserId = 'user_id',
+  /** column name */
+  WorkId = 'work_id'
+}
+
+export type Reactions_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Reactions_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Reactions_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: Reactions_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Reactions_Var_Pop_Fields = {
+  __typename?: 'reactions_var_pop_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "reactions" */
+export type Reactions_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Reactions_Var_Samp_Fields = {
+  __typename?: 'reactions_var_samp_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "reactions" */
+export type Reactions_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Reactions_Variance_Fields = {
+  __typename?: 'reactions_variance_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+  push_count?: Maybe<Scalars['Float']['output']>;
+  reactions_time?: Maybe<Scalars['Float']['output']>;
+  work_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "reactions" */
+export type Reactions_Variance_Order_By = {
+  id?: InputMaybe<Order_By>;
+  push_count?: InputMaybe<Order_By>;
+  reactions_time?: InputMaybe<Order_By>;
+  work_id?: InputMaybe<Order_By>;
 };
 
 export type Replies_Args = {
@@ -3787,6 +4664,14 @@ export type Subscription_Root = {
   daily_works_ranking: Array<Works>;
   /** execute function "daily_works_ranking" and query aggregates on result of table type "works" */
   daily_works_ranking_aggregate: Works_Aggregate;
+  /** fetch data from the table: "emoji_types" */
+  emoji_types: Array<Emoji_Types>;
+  /** fetch aggregated fields from the table: "emoji_types" */
+  emoji_types_aggregate: Emoji_Types_Aggregate;
+  /** fetch data from the table: "emoji_types" using primary key columns */
+  emoji_types_by_pk?: Maybe<Emoji_Types>;
+  /** fetch data from the table in a streaming manner: "emoji_types" */
+  emoji_types_stream: Array<Emoji_Types>;
   /** An array relationship */
   episodes: Array<Episodes>;
   /** An aggregate relationship */
@@ -3811,6 +4696,22 @@ export type Subscription_Root = {
   media_types_by_pk?: Maybe<Media_Types>;
   /** fetch data from the table in a streaming manner: "media_types" */
   media_types_stream: Array<Media_Types>;
+  /** An array relationship */
+  reactions: Array<Reactions>;
+  /** An aggregate relationship */
+  reactions_aggregate: Reactions_Aggregate;
+  /** execute function "reactions_by_episode_id" which returns "reactions" */
+  reactions_by_episode_id: Array<Reactions>;
+  /** execute function "reactions_by_episode_id" and query aggregates on result of table type "reactions" */
+  reactions_by_episode_id_aggregate: Reactions_Aggregate;
+  /** fetch data from the table: "reactions" using primary key columns */
+  reactions_by_pk?: Maybe<Reactions>;
+  /** execute function "reactions_by_work_id" which returns "reactions" */
+  reactions_by_work_id: Array<Reactions>;
+  /** execute function "reactions_by_work_id" and query aggregates on result of table type "reactions" */
+  reactions_by_work_id_aggregate: Reactions_Aggregate;
+  /** fetch data from the table in a streaming manner: "reactions" */
+  reactions_stream: Array<Reactions>;
   /** execute function "replies" which returns "comments" */
   replies: Array<Comments>;
   /** execute function "replies" and query aggregates on result of table type "comments" */
@@ -4014,6 +4915,36 @@ export type Subscription_RootDaily_Works_Ranking_AggregateArgs = {
 };
 
 
+export type Subscription_RootEmoji_TypesArgs = {
+  distinct_on?: InputMaybe<Array<Emoji_Types_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Emoji_Types_Order_By>>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootEmoji_Types_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Emoji_Types_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Emoji_Types_Order_By>>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootEmoji_Types_By_PkArgs = {
+  value: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootEmoji_Types_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Emoji_Types_Stream_Cursor_Input>>;
+  where?: InputMaybe<Emoji_Types_Bool_Exp>;
+};
+
+
 export type Subscription_RootEpisodesArgs = {
   distinct_on?: InputMaybe<Array<Episodes_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -4101,6 +5032,76 @@ export type Subscription_RootMedia_Types_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<Media_Types_Stream_Cursor_Input>>;
   where?: InputMaybe<Media_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_By_Episode_IdArgs = {
+  args: Reactions_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_By_Episode_Id_AggregateArgs = {
+  args: Reactions_By_Episode_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_By_PkArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type Subscription_RootReactions_By_Work_IdArgs = {
+  args: Reactions_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_By_Work_Id_AggregateArgs = {
+  args: Reactions_By_Work_Id_Args;
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+export type Subscription_RootReactions_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<Reactions_Stream_Cursor_Input>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
 };
 
 
@@ -4720,6 +5721,10 @@ export type Works = {
   series_title: Scalars['String']['output'];
   tid?: Maybe<Scalars['Int']['output']>;
   title: Scalars['String']['output'];
+  /** An array relationship */
+  works_reactions: Array<Reactions>;
+  /** An aggregate relationship */
+  works_reactions_aggregate: Reactions_Aggregate;
 };
 
 
@@ -4780,6 +5785,26 @@ export type WorksEpisodes_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   order_by?: InputMaybe<Array<Episodes_Order_By>>;
   where?: InputMaybe<Episodes_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksWorks_ReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "works" */
+export type WorksWorks_Reactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Reactions_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Reactions_Order_By>>;
+  where?: InputMaybe<Reactions_Bool_Exp>;
 };
 
 /** aggregated selection of "works" */
@@ -4904,6 +5929,8 @@ export type Works_Bool_Exp = {
   series_title?: InputMaybe<String_Comparison_Exp>;
   tid?: InputMaybe<Int_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
+  works_reactions?: InputMaybe<Reactions_Bool_Exp>;
+  works_reactions_aggregate?: InputMaybe<Reactions_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "works" */
@@ -4938,6 +5965,7 @@ export type Works_Insert_Input = {
   series_title?: InputMaybe<Scalars['String']['input']>;
   tid?: InputMaybe<Scalars['Int']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
+  works_reactions?: InputMaybe<Reactions_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -5033,6 +6061,7 @@ export type Works_Order_By = {
   series_title?: InputMaybe<Order_By>;
   tid?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
+  works_reactions_aggregate?: InputMaybe<Reactions_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: works */
@@ -5434,6 +6463,8 @@ export type RankingEpisodeFragmentFragment = { __typename?: 'episodes', id: any,
 
 export type DailyEpisodeFragmentFragment = { __typename?: 'episodes', id: any, title: string, start_time?: any | null, number: number, end_time?: any | null, has_next_episode: boolean, next_episode_id?: any | null };
 
+export type ReactionFragmentFragment = { __typename?: 'reactions', id: number, push_count: number, emoji_type: Emoji_Types_Enum, reactions_time: number };
+
 export type RequestFragmentFragment = { __typename?: 'request_works', id: number, approval_status: Status_Enum, detail?: string | null, official_url?: string | null, user_id?: string | null, work_title: string, created_at: any, updated_at: any };
 
 export type WorkFragmentFragment = { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null };
@@ -5487,6 +6518,41 @@ export type GetWeeklyEpisodeRankingQueryVariables = Exact<{
 
 
 export type GetWeeklyEpisodeRankingQuery = { __typename?: 'query_root', weekly_episodes_ranking: Array<{ __typename?: 'episodes', id: any, title: string, start_time?: any | null, number: number, end_time?: any | null, has_next_episode: boolean, next_episode_id?: any | null, comments_aggregate: { __typename?: 'comments_aggregate', aggregate?: { __typename?: 'comments_aggregate_fields', count: number } | null }, work: { __typename?: 'works', id: number, title: string, series_title: string, series_id?: string | null, has_episodes?: boolean | null } }> };
+
+export type InsertReactionsMutationVariables = Exact<{
+  objects: Array<Reactions_Insert_Input> | Reactions_Insert_Input;
+}>;
+
+
+export type InsertReactionsMutation = { __typename?: 'mutation_root', insert_reactions?: { __typename?: 'reactions_mutation_response', returning: Array<{ __typename?: 'reactions', id: number }> } | null };
+
+export type GetReactionsEpisodeQueryVariables = Exact<{
+  episode_id: Scalars['uuid']['input'];
+  get_limit: Scalars['Int']['input'];
+  _lt: Scalars['Int']['input'];
+  _gte: Scalars['Int']['input'];
+}>;
+
+
+export type GetReactionsEpisodeQuery = { __typename?: 'query_root', reactions_by_episode_id: Array<{ __typename?: 'reactions', id: number, push_count: number, emoji_type: Emoji_Types_Enum, reactions_time: number }> };
+
+export type GetReactionsWorkQueryVariables = Exact<{
+  work_id: Scalars['Int']['input'];
+  get_limit: Scalars['Int']['input'];
+  _lt: Scalars['Int']['input'];
+  _gte: Scalars['Int']['input'];
+}>;
+
+
+export type GetReactionsWorkQuery = { __typename?: 'query_root', reactions_by_work_id: Array<{ __typename?: 'reactions', id: number, push_count: number, emoji_type: Emoji_Types_Enum, reactions_time: number }> };
+
+export type SubscriptionReactionsSubscriptionVariables = Exact<{
+  episode_id: Scalars['uuid']['input'];
+  initial_created_at: Scalars['timestamptz']['input'];
+}>;
+
+
+export type SubscriptionReactionsSubscription = { __typename?: 'subscription_root', reactions_stream: Array<{ __typename?: 'reactions', id: number, push_count: number, emoji_type: Emoji_Types_Enum, reactions_time: number, user_id?: string | null }> };
 
 export type InsertRequestMutationVariables = Exact<{
   object: Request_Works_Insert_Input;
@@ -5586,6 +6652,7 @@ export const EpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"ki
 export const TodayFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TodayFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"has_prev_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}},{"kind":"Field","name":{"kind":"Name","value":"tid"}}]}}]}}]} as unknown as DocumentNode<TodayFragmentFragment, unknown>;
 export const RankingEpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RankingEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]} as unknown as DocumentNode<RankingEpisodeFragmentFragment, unknown>;
 export const DailyEpisodeFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}}]} as unknown as DocumentNode<DailyEpisodeFragmentFragment, unknown>;
+export const ReactionFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ReactionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"reactions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"push_count"}},{"kind":"Field","name":{"kind":"Name","value":"emoji_type"}},{"kind":"Field","name":{"kind":"Name","value":"reactions_time"}}]}}]} as unknown as DocumentNode<ReactionFragmentFragment, unknown>;
 export const RequestFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]} as unknown as DocumentNode<RequestFragmentFragment, unknown>;
 export const WorkFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<WorkFragmentFragment, unknown>;
 export const FragmentEpisodeFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FragmentEpisode"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}}]}}]} as unknown as DocumentNode<FragmentEpisodeFragment, unknown>;
@@ -5613,6 +6680,10 @@ export const GetDailyEpisodeRankingDocument = {"kind":"Document","definitions":[
 export const GetDailyWorkRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetDailyWorkRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"daily_works_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetDailyWorkRankingQuery, GetDailyWorkRankingQueryVariables>;
 export const GetWeeklyWorkRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWeeklyWorkRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weekly_works_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetWeeklyWorkRankingQuery, GetWeeklyWorkRankingQueryVariables>;
 export const GetWeeklyEpisodeRankingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetWeeklyEpisodeRanking"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"weekly_episodes_ranking"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_limit"},"value":{"kind":"IntValue","value":"5"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DailyEpisodeFragment"}},{"kind":"Field","name":{"kind":"Name","value":"comments_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"work"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DailyEpisodeFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"episodes"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"start_time"}},{"kind":"Field","name":{"kind":"Name","value":"number"}},{"kind":"Field","name":{"kind":"Name","value":"end_time"}},{"kind":"Field","name":{"kind":"Name","value":"has_next_episode"}},{"kind":"Field","name":{"kind":"Name","value":"next_episode_id"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"series_title"}},{"kind":"Field","name":{"kind":"Name","value":"series_id"}},{"kind":"Field","name":{"kind":"Name","value":"has_episodes"}}]}}]} as unknown as DocumentNode<GetWeeklyEpisodeRankingQuery, GetWeeklyEpisodeRankingQueryVariables>;
+export const InsertReactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertReactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"objects"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"reactions_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_reactions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"objects"},"value":{"kind":"Variable","name":{"kind":"Name","value":"objects"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"returning"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertReactionsMutation, InsertReactionsMutationVariables>;
+export const GetReactionsEpisodeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetReactionsEpisode"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reactions_by_episode_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_episode_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"get_limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ReactionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ReactionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"reactions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"push_count"}},{"kind":"Field","name":{"kind":"Name","value":"emoji_type"}},{"kind":"Field","name":{"kind":"Name","value":"reactions_time"}}]}}]} as unknown as DocumentNode<GetReactionsEpisodeQuery, GetReactionsEpisodeQueryVariables>;
+export const GetReactionsWorkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetReactionsWork"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"work_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reactions_by_work_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"args"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_work_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"work_id"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"get_limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"get_limit"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_gte"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"_lt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"_lt"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ReactionFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ReactionFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"reactions"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"push_count"}},{"kind":"Field","name":{"kind":"Name","value":"emoji_type"}},{"kind":"Field","name":{"kind":"Name","value":"reactions_time"}}]}}]} as unknown as DocumentNode<GetReactionsWorkQuery, GetReactionsWorkQueryVariables>;
+export const SubscriptionReactionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"SubscriptionReactions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"initial_created_at"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"timestamptz"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reactions_stream"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"cursor"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"initial_value"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"Variable","name":{"kind":"Name","value":"initial_created_at"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"ordering"},"value":{"kind":"EnumValue","value":"ASC"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"batch_size"},"value":{"kind":"IntValue","value":"5"}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"episode_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"episode_id"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"reactions_time"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_gte"},"value":{"kind":"IntValue","value":"0"}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"push_count"}},{"kind":"Field","name":{"kind":"Name","value":"emoji_type"}},{"kind":"Field","name":{"kind":"Name","value":"reactions_time"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}}]}}]}}]} as unknown as DocumentNode<SubscriptionReactionsSubscription, SubscriptionReactionsSubscriptionVariables>;
 export const InsertRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"InsertRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"object"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"request_works_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_request_works_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"object"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]} as unknown as DocumentNode<InsertRequestMutation, InsertRequestMutationVariables>;
 export const DeleteRequestDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteRequest"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"delete_request_works_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<DeleteRequestMutation, DeleteRequestMutationVariables>;
 export const GetRequestsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRequests"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"request_works"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"created_at"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"RequestFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"request_works_aggregate"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"user_id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user_id"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aggregate"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"count"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RequestFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"request_works"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"approval_status"}},{"kind":"Field","name":{"kind":"Name","value":"detail"}},{"kind":"Field","name":{"kind":"Name","value":"official_url"}},{"kind":"Field","name":{"kind":"Name","value":"user_id"}},{"kind":"Field","name":{"kind":"Name","value":"work_title"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}}]}}]} as unknown as DocumentNode<GetRequestsQuery, GetRequestsQueryVariables>;
