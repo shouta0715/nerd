@@ -10,7 +10,7 @@ export const insertReactionsDocument = graphql(`
   }
 `);
 
-export const ReactionsEpisodeDocument = graphql(`
+export const reactionsEpisodeDocument = graphql(`
   query GetReactionsEpisode(
     $episode_id: uuid!
     $get_limit: Int!
@@ -30,7 +30,7 @@ export const ReactionsEpisodeDocument = graphql(`
   }
 `);
 
-export const ReactionsWorkDocument = graphql(`
+export const reactionsWorkDocument = graphql(`
   query GetReactionsWork(
     $work_id: Int!
     $get_limit: Int!

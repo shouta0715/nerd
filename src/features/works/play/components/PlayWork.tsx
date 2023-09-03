@@ -35,6 +35,12 @@ const DynamicComments = dynamic(
   }
 );
 
+const DynamicReactions = dynamic(() =>
+  import("src/features/reactions/works/components").then(
+    (mod) => mod.WorkReactions
+  )
+);
+
 export const PlayWork: FC = () => {
   const { isChat, isPending, data } = usePlayWork();
 
@@ -82,6 +88,9 @@ export const PlayWork: FC = () => {
                 }
               >
                 <DynamicChats work_id={data?.works_by_pk?.id ?? 0} />
+              </Suspense>
+              <Suspense fallback={null}>
+                <DynamicReactions work_id={data?.works_by_pk?.id ?? 0} />
               </Suspense>
             </ErrorBoundary>
           ) : (

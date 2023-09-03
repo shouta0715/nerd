@@ -52,7 +52,7 @@ export const getReactionsData = ({
   count,
   type,
   id,
-  maxCount = 3,
+  maxCount = 10,
   reactions_time,
 }: ReactionType[Emoji_Types_Enum] & {
   type: Emoji_Types_Enum;

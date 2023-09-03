@@ -1,21 +1,21 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { reactionsEpisodeDocument } from "src/documents/reactions";
+import { reactionsWorkDocument } from "src/documents/reactions";
 import { PageParams } from "src/features/chats/common/types";
 import { multipleOf300 } from "src/features/chats/common/utils";
 import { useTimerState } from "src/features/timer/store";
 import {
-  GetReactionsEpisodeQuery,
-  GetReactionsEpisodeQueryVariables,
+  GetReactionsWorkQuery,
+  GetReactionsWorkQueryVariables,
 } from "src/gql/graphql";
 import { client } from "src/libs/client/graphql";
 
 type Args = {
-  episode_id: string;
+  work_id: number;
   enabled: boolean;
 };
 
-export type GetReactionsEpisodeArgs = {
-  episode_id: string;
+export type GetReactionsWorkArgs = {
+  work_id: number;
   pageParam: PageParams;
 };
 
@@ -24,17 +24,14 @@ const InitialPageParam: PageParams = {
   _lt: 300,
 };
 
-const getReactions = async ({
-  episode_id,
-  pageParam,
-}: GetReactionsEpisodeArgs) => {
+const getReactions = async ({ work_id, pageParam }: GetReactionsWorkArgs) => {
   const { _gte, _lt } = pageParam;
 
   const data = await client.request<
-    GetReactionsEpisodeQuery,
-    GetReactionsEpisodeQueryVariables
-  >(reactionsEpisodeDocument, {
-    episode_id,
+    GetReactionsWorkQuery,
+    GetReactionsWorkQueryVariables
+  >(reactionsWorkDocument, {
+    work_id,
     get_limit: 5,
     _gte,
     _lt,
@@ -43,14 +40,14 @@ const getReactions = async ({
   return data;
 };
 
-export const useInfiniteEpisodeReactions = ({ enabled, episode_id }: Args) => {
+export const useInfiniteWorkReactions = ({ enabled, work_id }: Args) => {
   const time = useTimerState((state) => state.getTime());
 
   return useInfiniteQuery({
-    queryKey: ["reactions", { episode_id }],
+    queryKey: ["reactions", { work_id }],
     queryFn: ({ pageParam }) => {
       return getReactions({
-        episode_id,
+        work_id,
         pageParam,
       });
     },
