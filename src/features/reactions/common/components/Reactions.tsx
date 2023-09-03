@@ -25,7 +25,7 @@ export const Reactions: FC<Props> = ({
   const [reactions, setReactions] = useState<ReactionType>(defaultReaction);
 
   return (
-    <div className="pointer-events-none absolute inset-0 px-2 lg:px-3">
+    <div className="pointer-events-none absolute inset-0 px-2 py-2 lg:px-3">
       <div className="pointer-events-none flex h-full w-full items-end">
         <div className="sticky bottom-20 flex w-full justify-end">
           <div className="absolute left-1/2 -translate-x-1/2  ">
