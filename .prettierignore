@@ -5,7 +5,6 @@ yarn.lock
 package-lock.json
 public
 generated
-*.config.*
 *.generated.ts
 graphql.ts
 __reports__

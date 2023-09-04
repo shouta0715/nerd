@@ -21,7 +21,8 @@
     "**/*.ts",
     "**/*.tsx",
     "codegen.ts",
-    "jest.config.ts"
+    "jest.config.ts",
+    "e2e/**/*.ts"
   ],
   "exclude": ["node_modules"]
 }

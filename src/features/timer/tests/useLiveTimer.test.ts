@@ -230,4 +230,54 @@ describe("useLiveTimer", () => {
       seconds: 58,
     });
   });
+
+  test('4時間以上のとき"0時間 0分 0秒"となるmode=finishになる', () => {
+    const difTime: Timer = {
+      start_dif: { difHours: 0, difMinutes: 0, difSeconds: 0 },
+      end_dif: { difHours: 4, difMinutes: 0, difSeconds: 0 },
+    };
+    const { start_time, end_time } = createDifTime(difTime);
+
+    const { mode } = setup({ start_time, end_time });
+
+    expect(mode).toBe("up");
+
+    jest.useFakeTimers();
+
+    jest.advanceTimersByTime(1000 * 60 * 60 * 4);
+
+    const { time: t } = setup({ start_time, end_time });
+
+    expect(t).toEqual({
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    });
+
+    jest.advanceTimersByTime(1000);
+
+    const { mode: m } = setup({ start_time, end_time });
+
+    expect(m).toBe("finish");
+  });
+
+  test("mode=downのときにhours === 0 && minutes === 0 && seconds === 0になるとmode=upになる", () => {
+    const difTime: Timer = {
+      start_dif: { difHours: 0, difMinutes: -1, difSeconds: 0 },
+      end_dif: { difHours: 1, difMinutes: 1, difSeconds: 0 },
+    };
+    const { start_time, end_time } = createDifTime(difTime);
+
+    const { mode } = setup({ start_time, end_time });
+
+    expect(mode).toBe("down");
+
+    jest.useFakeTimers();
+
+    jest.advanceTimersByTime(1000 * 60);
+
+    const { mode: m } = setup({ start_time, end_time });
+
+    expect(m).toBe("up");
+  });
 });

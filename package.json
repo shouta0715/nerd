@@ -17,7 +17,11 @@
     "analyze": "ANALYZE=true next build",
     "sb": "storybook dev -p 6006",
     "sb:build": "storybook build",
-    "test:sb": "test-storybook"
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "npx playwright show-report",
+    "codegen:e2e": "playwright codegen 'http://localhost:3000'"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
@@ -61,6 +65,7 @@
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/client-preset": "4.1.0",
     "@graphql-codegen/introspection": "4.0.0",
+    "@playwright/test": "^1.37.1",
     "@storybook/addon-a11y": "^7.0.9",
     "@storybook/addon-essentials": "^7.0.9",
     "@storybook/addon-interactions": "^7.0.9",
