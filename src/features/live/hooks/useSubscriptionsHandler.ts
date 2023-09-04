@@ -1,4 +1,3 @@
-import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useRef, useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { getWsClient } from "src/libs/client/ws";
@@ -9,7 +8,6 @@ export const useSubscriptionsHandler = () => {
   const onNotification = useNotificationState((state) => state.onShow);
   const [isWsError, setIsWsError] = useState(false);
   const [reConnectionCount, setReConnectionCount] = useState(0);
-  const queryClient = useQueryClient();
   const [wsClient, setWsClient, isSocketError, setIsSocketError] =
     useWsClientState((state) => [
       state.wsClient,
@@ -72,14 +70,11 @@ export const useSubscriptionsHandler = () => {
   // クリーンアップ関数
   const cleanup = useCallback(() => {
     wsClient?.dispose();
-    queryClient.removeQueries({
-      queryKey: ["reactions"],
-    });
     if (errorTimeout.current) {
       clearTimeout(errorTimeout.current);
       errorTimeout.current = null;
     }
-  }, [queryClient, wsClient]);
+  }, [wsClient]);
 
   return {
     handleAutoReconnect,

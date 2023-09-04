@@ -5,20 +5,16 @@ import { useEffect, useState } from "react";
 import { useNotificationState } from "src/components/Notification/store";
 import { episodeChatsDocument } from "src/documents/chats";
 import { useSubscriptionsHandler } from "src/features/live/hooks/useSubscriptionsHandler";
-import { ViewReactionsData } from "src/features/reactions/common/types";
-import { getReactionsData } from "src/features/reactions/common/utils";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import {
   GetChatsQuery,
   SubscriptionChatsSubscription,
   SubscriptionChatsSubscriptionVariables,
-  SubscriptionReactionsSubscription,
 } from "src/gql/graphql";
 
 import { client } from "src/libs/client/graphql";
 import { SUBSCRIPTION_CHATS } from "src/schema/chat/chatQuery";
-import { SUBSCRIPTION_REACTIONS } from "src/schema/reactions/reactionsQuery";
 
 import { useGlobalState } from "src/store/global/globalStore";
 import { useUserState } from "src/store/user/userState";
@@ -102,52 +98,6 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
         },
         error: handlerError,
         complete: () => console.log("complete"),
-      }
-    );
-
-    wsClient.subscribe<
-      SubscriptionReactionsSubscription,
-      SubscriptionChatsSubscriptionVariables
-    >(
-      {
-        query: SUBSCRIPTION_REACTIONS,
-        variables,
-      },
-      {
-        next: ({ data }) => {
-          if (!user) return;
-
-          const filteredSelfReaction = data?.reactions_stream.filter(
-            (reaction) => reaction.user_id !== user.id
-          );
-
-          if (!filteredSelfReaction) return;
-
-          queryClient.setQueryData<ViewReactionsData>(
-            ["reactions", { episode_id }],
-            (prev) => {
-              const reactions = filteredSelfReaction
-                .map((reaction) => {
-                  return getReactionsData({
-                    count: reaction.push_count,
-                    type: reaction.emoji_type,
-                    id: reaction.id,
-                    maxCount: 10,
-                    reactions_time: reaction.reactions_time,
-                  });
-                })
-                .flat();
-
-              if (!prev) return reactions || [];
-
-              if (!reactions) return prev;
-
-              return [...prev, ...reactions];
-            }
-          );
-        },
-        error: handlerError,
-        complete: () => console.log("complete reactions"),
       }
     );
 
