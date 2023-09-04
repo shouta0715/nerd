@@ -4,8 +4,9 @@ import { PlaywrightTestConfig, defineConfig, devices } from "@playwright/test";
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-// require('dotenv').config();
+import dotenv from "dotenv";
 
+dotenv.config({ path: "./.env.development.local" });
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -17,19 +18,29 @@ const config: PlaywrightTestConfig = {
 
   forbidOnly: !!process.env.CI,
 
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 2,
 
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: "html",
+  reporter: [
+    [
+      "html",
+      {
+        outputFolder: "./e2e/coverage",
+        filename: "index.html",
+        open: "on-failure",
+      },
+    ],
+  ],
 
   use: {
     baseURL: "http://localhost:3000/",
 
+    screenshot: "only-on-failure",
     trace: "on-first-retry",
+    video: "on-first-retry",
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: "chromium",
@@ -44,6 +55,10 @@ const config: PlaywrightTestConfig = {
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "Google Chrome",
+      use: { ...devices["Desktop Chrome"], channel: "chrome" },
     },
 
     /* Test against mobile viewports. */
@@ -61,18 +76,14 @@ const config: PlaywrightTestConfig = {
     //   name: 'Microsoft Edge',
     //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
     // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    command: "yarn build && yarn start",
+    url: "http://localhost:3000/",
+    reuseExistingServer: !process.env.CI,
+  },
 };
 
 export default defineConfig(config);
