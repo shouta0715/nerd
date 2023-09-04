@@ -36,12 +36,6 @@ const DynamicComments = dynamic(
   }
 );
 
-const DynamicReactions = dynamic(() =>
-  import("src/features/reactions/episodes/components").then(
-    (mod) => mod.EpisodeReactions
-  )
-);
-
 export const Episode = () => {
   const { data, isPending, isChat } = useEpisode();
 
@@ -96,9 +90,6 @@ export const Episode = () => {
                 }
               >
                 <DynamicChats episode_id={data?.episodes_by_pk?.id} />
-              </Suspense>
-              <Suspense fallback={null}>
-                <DynamicReactions episode_id={data?.episodes_by_pk?.id} />
               </Suspense>
             </ErrorBoundary>
           ) : (

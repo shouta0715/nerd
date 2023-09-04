@@ -5,7 +5,6 @@ import { Button } from "src/components/Elements/Button";
 import { Loader } from "src/components/Elements/Loader";
 import { Chat } from "src/features/chats/common/components/Chat";
 import { useLiveChats } from "src/features/live/hooks/useLiveChats";
-import { LiveReactions } from "src/features/reactions/live/components";
 import { LiveTimer, Time } from "src/features/timer/types";
 import { useUserState } from "src/store/user/userState";
 
@@ -109,9 +108,6 @@ export const LiveChats: FC<Props> = ({ episode_id, mode, time }) => {
           )}
         </div>
       </div>
-      {mode === "up" && isSubscription && (
-        <LiveReactions disabledAction={mode !== "up"} episode_id={episode_id} />
-      )}
     </>
   );
 };
