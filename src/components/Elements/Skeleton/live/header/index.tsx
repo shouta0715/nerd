@@ -11,7 +11,7 @@ type Props = {
 export const HeaderSkeleton: FC<Props> = ({ title, number, sub_title }) => {
   return (
     <header className="flex flex-col px-4 lg:px-0">
-      <div className="flex w-full flex-1 flex-col items-center gap-y-1 lg:animate-gradient lg:rounded-t-2xl lg:bg-gradient-to-r lg:from-indigo-400  lg:to-orange-400 lg:bg-[length:400%] lg:px-4 lg:py-6 lg:text-white">
+      <div className="lg:animate-gradient flex w-full flex-1 flex-col items-center gap-y-1 lg:rounded-t-2xl lg:bg-gradient-to-r lg:from-indigo-400  lg:to-orange-400 lg:bg-[length:400%] lg:px-4 lg:py-6 lg:text-white">
         <Text
           className="line-clamp-1 text-sm font-bold md:line-clamp-2 md:text-lg "
           component="h4"
