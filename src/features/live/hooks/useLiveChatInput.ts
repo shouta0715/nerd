@@ -27,10 +27,11 @@ export const useLiveChatInput = ({ episode_id, mode, time }: Props) => {
 
       setIpLoading(true);
       const ip = await getIpAddress();
+
       const object = {
         episode_id,
         content: value,
-        comment_time: mode === "down" ? 0 : timeToSecond(time),
+        comment_time: mode === "up" ? timeToSecond(time) : 0,
         commenter_name: user?.user_name || "匿名",
         ip: ip || null,
       };
