@@ -54,7 +54,7 @@ export const Trend: FC<Props> = ({ trend, index }) => {
           }),
           query: getEpisodeQuery({
             episode: trend,
-            title: trend.work.title,
+            title: trend.work.series_title,
             work_id: trend.work.id,
             series_id: trend.work.series_id,
             today: false,
