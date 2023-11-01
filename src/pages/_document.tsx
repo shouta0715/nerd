@@ -13,7 +13,7 @@ const Document = () => (
       <meta content="website" property="og:type" />
       <meta content="https://nerd-plus.com/" property="og:url" />
       <meta content="https://nerd-plus.com/og.png" property="og:image" />
-      <meta content="summary" name="twitter:card" />
+      <meta content="summary_large_image" name="twitter:card" />
       <meta content="Nerd" name="twitter:title" />
       <meta content="https://nerd-plus.com/og.png" name="twitter:image" />
       <meta
