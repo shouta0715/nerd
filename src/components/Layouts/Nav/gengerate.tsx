@@ -14,8 +14,16 @@ import {
   CalendarDaysIcon,
 } from "@heroicons/react/24/outline";
 import clsx from "clsx";
+import type { ElementType } from "react";
 import BeginnerIcon from "public/icons/BeginnerIcon.svg";
 import { ActiveLink } from "src/components/Elements/ActiveLink";
+
+export type NavIconItem = {
+  name: string;
+  href: string;
+  icon: ElementType;
+  color: string;
+};
 
 export const episodeNavigation = [
   {
@@ -110,11 +118,11 @@ export const otherNavigation = [
   },
 ];
 
-export const generateSliderNavigation = <T extends typeof episodeNavigation>({
+export const generateSliderNavigation = ({
   item,
   onTransitionComplete,
 }: {
-  item: T extends (infer R)[] ? R : never;
+  item: NavIconItem;
   onTransitionComplete: () => void;
 }) => {
   return (
@@ -136,9 +144,7 @@ export const generateSliderNavigation = <T extends typeof episodeNavigation>({
   );
 };
 
-export const generateNavList = <T extends typeof episodeNavigation>(
-  item: T extends (infer U)[] ? U : never
-) => {
+export const generateNavList = (item: NavIconItem) => {
   return (
     <ActiveLink
       key={item.name}
