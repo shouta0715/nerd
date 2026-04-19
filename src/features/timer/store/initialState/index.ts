@@ -29,8 +29,9 @@ const start = (get: Get, set: Set) => {
 const stop = (get: Get, set: Set) => {
   return () => {
     if (get().interval.active) {
+      const { intervalId } = get().interval;
       set({ interval: { ...get().interval, active: false } });
-      clearInterval(get().interval.intervalId);
+      if (intervalId !== undefined) clearInterval(intervalId);
     }
   };
 };

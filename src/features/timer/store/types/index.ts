@@ -8,7 +8,8 @@ export type TimerCount = {
 
 export type Interval = {
   active: boolean;
-  intervalId?: NodeJS.Timer;
+  /** `setInterval` / `clearInterval` と同じ型（Timer / Timeout の差異を避ける） */
+  intervalId?: ReturnType<typeof setInterval>;
   start: () => void;
   stop: () => void;
   toggle: () => void;
