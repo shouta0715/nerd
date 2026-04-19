@@ -1,8 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn test
-yarn test-all
+pnpm test
+pnpm test-all
 
 
 
