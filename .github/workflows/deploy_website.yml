@@ -54,7 +54,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: npx @cloudflare/next-on-pages
+        run: npx @cloudflare/next-on-pages@1.13.15
 
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@1
