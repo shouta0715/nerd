@@ -67,7 +67,7 @@
     "zustand": "^4.1.5"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.12.1",
+    "@cloudflare/next-on-pages": "^1.13.15",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/client-preset": "4.1.0",
     "@graphql-codegen/introspection": "4.0.0",

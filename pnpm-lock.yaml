@@ -121,8 +121,8 @@ importers:
         version: 4.4.0(@types/react@18.0.26)(react@18.2.0)
     devDependencies:
       '@cloudflare/next-on-pages':
-        specifier: ^1.12.1
-        version: 1.12.1(vercel@51.7.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(typescript@4.9.4))(wrangler@3.114.17)
+        specifier: ^1.13.15
+        version: 1.13.15(vercel@51.7.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(typescript@4.9.4))(wrangler@3.114.17)
       '@graphql-codegen/cli':
         specifier: 5.0.0
         version: 5.0.0(@types/node@22.19.17)(graphql@16.7.1)
@@ -1034,14 +1034,14 @@ packages:
     resolution: {integrity: sha512-YLPHc8yASwjNkmcDMQMY35yiWjoKAKnhUbPRszBRS0YgH+IXtsMp61j+yTcnCE3oO2DgP0U3iejLC8FTtKDC8Q==}
     engines: {node: '>=16.13'}
 
-  '@cloudflare/next-on-pages@1.12.1':
-    resolution: {integrity: sha512-Kx19dKNwe0FgBuBA3h8hnEfJqFLQR7tK787pN7huv6191g7185VWc5n1eSYJdCBvPEoS3D2Lk6ogjSMOgFQhBA==}
+  '@cloudflare/next-on-pages@1.13.15':
+    resolution: {integrity: sha512-HTLgU4S6ESRz79E6a5iTKLk7J/i0/5DL+3q8WfG47muH/dQpSl98ZpZh4R3qPf77HGghZUX934Mt5zwHle8uDw==}
     deprecated: 'Please use the OpenNext adapter instead: https://opennext.js.org/cloudflare'
     hasBin: true
     peerDependencies:
       '@cloudflare/workers-types': ^4.20240208.0
       vercel: '>=30.0.0'
-      wrangler: ^3.28.2
+      wrangler: ^3.28.2 || ^4.0.0
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -11344,7 +11344,7 @@ snapshots:
     dependencies:
       mime: 3.0.0
 
-  '@cloudflare/next-on-pages@1.12.1(vercel@51.7.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(typescript@4.9.4))(wrangler@3.114.17)':
+  '@cloudflare/next-on-pages@1.13.15(vercel@51.7.0(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)(typescript@4.9.4))(wrangler@3.114.17)':
     dependencies:
       acorn: 8.14.0
       ast-types: 0.14.2
@@ -11353,7 +11353,7 @@ snapshots:
       commander: 11.1.0
       cookie: 0.5.0
       esbuild: 0.15.18
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       miniflare: 3.20250718.3
       package-manager-manager: 0.2.0
       pcre-to-regexp: 1.1.0
@@ -20634,7 +20634,7 @@ snapshots:
 
   package-manager-manager@0.2.0:
     dependencies:
-      js-yaml: 4.1.0
+      js-yaml: 4.1.1
       shellac: 0.8.0
 
   pako@0.2.9: {}
