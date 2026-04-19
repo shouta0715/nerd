@@ -8,6 +8,8 @@ import { useSubscriptionsHandler } from "src/features/live/hooks/useSubscription
 import { LiveTimer, Time } from "src/features/timer/types";
 import { timeToSecond } from "src/features/timer/utils/timeProcessing";
 import {
+  GetChatsEpisodeQuery,
+  GetChatsEpisodeQueryVariables,
   GetChatsQuery,
   SubscriptionChatsSubscription,
   SubscriptionChatsSubscriptionVariables,
@@ -131,7 +133,10 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
 
     try {
       setIsLoadingWsRefetch(true);
-      const refetchData = await client.request(episodeChatsDocument, variables);
+      const refetchData = await client.request<
+        GetChatsEpisodeQuery,
+        GetChatsEpisodeQueryVariables
+      >(episodeChatsDocument, variables);
       const prevData = queryClient.getQueryData<GetChatsQuery>(key);
 
       if (!refetchData || !prevData) return;
