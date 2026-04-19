@@ -7,7 +7,6 @@ import {
   ChevronRightIcon,
   KeyIcon,
   NewspaperIcon,
-  HeartIcon,
   CircleStackIcon,
   BoltIcon,
   ChartBarIcon,
@@ -51,12 +50,6 @@ export const worksNavigation = [
     name: "作品要望",
     href: "/request?page=1&status=all",
     icon: ViewfinderCircleIcon,
-    color: "stroke-pink-600",
-  },
-  {
-    name: "おすすめのアニメ",
-    href: "/recommend",
-    icon: HeartIcon,
     color: "stroke-pink-600",
   },
 ];

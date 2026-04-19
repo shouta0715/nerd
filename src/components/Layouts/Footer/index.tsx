@@ -39,14 +39,6 @@ export const Footer: FC = () => (
             データについて
           </Link>
         </p>
-        <p className="text-center text-xs leading-5 text-gray-500">
-          <Link
-            className="inline-block text-xs text-gray-600 underline hover:text-gray-500"
-            href="/recommend"
-          >
-            おすすめのアニメ
-          </Link>
-        </p>
       </div>
       <div className="md:items-center md:justify-between">
         <p className="text-center text-xs leading-5 text-gray-500">
