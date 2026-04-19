@@ -99,6 +99,7 @@ export const useSubscription = ({ episode_id, mode, time }: Props) => {
           });
         },
         error: handlerError,
+        // eslint-disable-next-line no-console
         complete: () => console.log("complete"),
       }
     );
