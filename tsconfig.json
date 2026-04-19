@@ -20,9 +20,22 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "codegen.ts",
-    "jest.config.ts",
-    "e2e/**/*.ts"
+    "codegen.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "jest.config.ts",
+    "jest.setup.ts",
+    "playwright.config.ts",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "__mocks__",
+    "e2e",
+    ".next",
+    "storybook-static"
+  ]
 }
